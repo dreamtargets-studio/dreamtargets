@@ -21,7 +21,7 @@ body {
 .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; width: 100%; }
 img { max-width: 100%; height: auto; display: block; }
 
-/* NAVIGATION (GLOBAL) */
+/* NAVIGATION (GLOBAL) - CLEANED V1.3 */
 #main-nav { background: var(--brand-blue); padding: 15px 0; position: relative; z-index: 1000; width: 100%; }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; }
 .logo img { height: 40px; }
@@ -30,27 +30,28 @@ img { max-width: 100%; height: auto; display: block; }
 .hamburger span { width: 28px; height: 3px; background: #fff; }
 .nav-links { display: flex; align-items: center; gap: 20px; }
 
-/* Clean Base Link: No bold, no underline */
-.nav-links a { 
+/* Base Link Style: Forced Minimalist */
+#main-nav .nav-links a { 
     color: var(--eggshell); 
     text-decoration: none !important; 
     font-size: 0.9rem; 
     transition: 0.3s; 
     font-weight: 400 !important; 
-    border-bottom: none !important;
+    border-bottom: none !important; /* Kills the underline */
+    padding-bottom: 0;
 }
 
-/* Active State: Color shift only */
-.nav-links a.active { 
+/* Active State: Orange Color Only */
+#main-nav .nav-links a.active { 
     color: #ff8c00 !important; 
-    text-decoration: none !important;
-    border-bottom: none !important;
     font-weight: 400 !important;
+    text-decoration: none !important;
+    border-bottom: none !important; /* Kills the orange underline */
 }
 
 /* Hover State */
-.nav-links a:hover { 
-    color: #ff8c00; 
+#main-nav .nav-links a:hover { 
+    color: #ff8c00 !important; 
     text-decoration: none !important;
 }
 
