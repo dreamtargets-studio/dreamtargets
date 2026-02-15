@@ -559,3 +559,9 @@ img { max-width: 100%; height: auto; display: block; }
     transform: rotate(-135deg);
 }
       
+/* The Active State */
+.nav-links a.active {
+    color: #ff8c00 !important; /* A vibrant studio orange */
+    font-weight: bold;
+    border-bottom: 2px solid #ff8c00;
+}
