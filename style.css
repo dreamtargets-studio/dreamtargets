@@ -40,15 +40,35 @@ img { max-width: 100%; height: auto; display: block; }
     padding-bottom: 4px;
 }
 
-/* New Active State */
+/* NAVIGATION (GLOBAL) */
+#main-nav { background: var(--brand-blue); padding: 15px 0; position: relative; z-index: 1000; width: 100%; }
+.nav-flex { display: flex; justify-content: space-between; align-items: center; }
+.logo img { height: 40px; }
+.menu-toggle { display: none; }
+.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { width: 28px; height: 3px; background: #fff; }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+
+/* Base Link Style: No bold, no underline */
+.nav-links a { 
+    color: var(--eggshell); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    transition: 0.3s; 
+    font-weight: normal; /* Ensures no emboldening */
+}
+
+/* New Active State: Color change only */
 .nav-links a.active { 
     color: #ff8c00 !important; 
-    border-bottom: 2px solid #ff8c00 !important; 
+    text-decoration: none !important;
+    border: none !important;
 }
 
 /* Hover State */
 .nav-links a:hover { 
     color: #ff8c00; 
+    text-decoration: none;
 }
 
 /* BRANDING INTRO BAR (HOME PAGE ONLY) */
