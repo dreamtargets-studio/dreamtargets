@@ -29,7 +29,27 @@ img { max-width: 100%; height: auto; display: block; }
 .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
 .hamburger span { width: 28px; height: 3px; background: #fff; }
 .nav-links { display: flex; align-items: center; gap: 20px; }
-.nav-links a { color: var(--eggshell); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+
+/* Base Link Style */
+.nav-links a { 
+    color: var(--eggshell); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    transition: 0.3s; 
+    border-bottom: 2px solid transparent; /* Invisible placeholder to prevent layout shifting */
+    padding-bottom: 4px;
+}
+
+/* New Active State */
+.nav-links a.active { 
+    color: #ff8c00 !important; 
+    border-bottom: 2px solid #ff8c00 !important; 
+}
+
+/* Hover State */
+.nav-links a:hover { 
+    color: #ff8c00; 
+}
 
 /* BRANDING INTRO BAR (HOME PAGE ONLY) */
 .branding-intro-bar { background: var(--brand-blue); padding: 35px 0; border-top: 0px solid rgba(255,255,255,0.1); }
@@ -149,10 +169,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 
-
-
-
-
 /* FOOTER (GLOBAL) */
 #main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; }
 .footer-branding-top { text-align: center; margin-bottom: 60px; }
@@ -217,9 +233,6 @@ img { max-width: 100%; height: auto; display: block; }
     transition: all 0.4s ease; /* Smooth fade for the glow effect */
     filter: drop-shadow(0 0 0px rgba(0, 84, 220, 0)); /* Transparent shadow base */
 }
-
-
-
 
 .footer-cta { text-align: center; margin-bottom: 60px; }
 .btn-pill { 
@@ -300,7 +313,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 
-* --- THE FEATURED CARD "WELD" FIX --- */
+* --- THE FEATURED CARD FIX --- */
 
 /* 1. Kill the 'ghost gap' at the bottom of the image */
 .featured-card img {
