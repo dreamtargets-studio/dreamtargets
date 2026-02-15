@@ -9,12 +9,20 @@ async function loadComponent(elementId, filePath) {
 }
 
 function highlightActiveLink() {
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    // Get the current page filename (e.g., 'digital-stories.html')
+    const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-links a');
 
     navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href');
-        if (linkPath === currentPath) {
+        const linkHref = link.getAttribute('href');
+        
+        // If the URL contains the link's href, light it up!
+        if (currentPath.includes(linkHref) && linkHref !== "") {
+            link.classList.add('active');
+        }
+        
+        // Special case for Home page
+        if (currentPath.endsWith('/dreamtargets/') && linkHref === 'index.html') {
             link.classList.add('active');
         }
     });
