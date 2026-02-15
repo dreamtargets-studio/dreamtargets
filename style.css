@@ -506,5 +506,37 @@ img { max-width: 100%; height: auto; display: block; }
     }
 }
 
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.4); /* That semi-opaque look */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0; /* Hidden at start */
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
 
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* The White Chevron */
+.chevron-up::before {
+    content: '';
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(-135deg);
+}
       
