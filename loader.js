@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
     const btn = document.getElementById("backToTop");
     if (btn) {
-        if (window.scrollY > 400) { // Appears after 400px of scrolling
+        if (window.scrollY > 40) { // Appears after 400px of scrolling
             btn.classList.add("show");
         } else {
             btn.classList.remove("show");
