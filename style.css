@@ -501,9 +501,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 
-/* 1. Hide mobile-only items on desktop */
-.mobile-only {
-    display: none !important;
+/* Only hide this on screens wider than mobile */
+@media (min-width: 769px) {
+    .mobile-only {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
