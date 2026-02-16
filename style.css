@@ -576,3 +576,8 @@ img { max-width: 100%; height: auto; display: block; }
     transform: rotate(-135deg);
 }
       
+.mobile-only {
+    display: block !important;
+    background: red !important;
+    color: white !important;
+}
