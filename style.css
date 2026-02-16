@@ -519,6 +519,9 @@ img { max-width: 100%; height: auto; display: block; }
     .nav-links a.mobile-only {
         font-style: normal !important;
         border-left: none !important;
+        display: block !important; /* This forces the Contact link to appear in the list */
+        visibility: visible !important;
+        opacity: 1 !important;
         /* No need for extra padding here as it inherits from the rule above */
     }
 }
