@@ -698,3 +698,28 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail p { font-size: 1.1rem; } 
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
+
+/* ADD TO THE VERY BOTTOM - DO NOT MODIFY ABOVE THIS LINE */
+
+/* Kills the 60px white gap on the container */
+.paper-sheet.cinematic-dock {
+    padding-top: 0 !important;
+}
+
+/* Forces the hero image container to have zero internal height gaps */
+.story-hero-wrapper {
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the wide-screen image with the 1px white top border */
+.panoramic-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top: 1px solid #ffffff !important; /* Top edge only */
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
