@@ -724,12 +724,13 @@ img { max-width: 100%; height: auto; display: block; }
     border-right: none !important;
 }
 
-/* THE GAP KILLER - ADD TO BOTTOM */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
 /* 1. Kills the 60px gap on the parent */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
+    background-color: #ffffff !important; /* Restores the white sheet background */
 }
 
 /* 2. Ensures the image wrapper has no internal spacing */
@@ -745,4 +746,11 @@ img { max-width: 100%; height: auto; display: block; }
     height: auto;
     display: block;
     border-top: 1px solid #ffffff !important;
+}
+
+/* 4. Restores the Grey/Tan page background behind the paper */
+.editorial-post {
+    background-color: #e7e6df !important; 
+    width: 100%;
+    min-height: 100vh;
 }
