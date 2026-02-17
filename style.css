@@ -575,4 +575,108 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 5px;
     transform: rotate(-135deg);
 }
-      
+
+/* Dreamtargets Layout Firewall */
+.editorial-post, .editorial-post * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.editorial-post {
+    background: #e7e6df; 
+    width: 100%;
+    margin-top: -10px; /* Flush join to Nav */
+    padding: 0;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif; 
+    color: #444; 
+}
+
+.paper {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+    min-height: 100vh;
+    padding-top: 60px; 
+}
+
+.hero-rail { 
+    width: 92%;
+    max-width: 960px;
+    margin: 0 auto; 
+}
+
+.text-rail { 
+    width: 88%;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+.editorial-post img { 
+    width: 100%; 
+    display: block; 
+    height: auto; 
+    border: 1px solid #444; 
+}
+
+.caption {
+    background: #e7e6df;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+}
+
+.caption p, figcaption.caption p {
+    margin: 0 !important;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    color: #444;
+}
+
+.orange-rule {
+    height: 2px;
+    background: #f26522;
+    margin: 25px 0;
+}
+
+.text-rail h1 { 
+    margin: 40px 0 10px; 
+    font-weight: 900; 
+    line-height: 1.1;
+    color: #444; 
+}
+
+.text-rail h3 { 
+    margin: 3rem 0 0.5rem; 
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.text-rail p { 
+    margin-bottom: 1.5rem;   
+    font-size: 1.2rem;       
+    line-height: 1.6;
+    color: #444;        
+}
+
+.text-rail blockquote {
+    margin: 40px 0;
+    border-left: 3px solid #0056b3; 
+    padding: 2px 0 2px 40px; 
+    font-weight: 300; 
+    font-style: italic; 
+    font-size: 1.25rem; 
+    line-height: 1.4; 
+    color: #555; 
+}
+
+@media (max-width: 768px) {
+    .paper { padding-top: 30px; }
+    .text-rail h1 { font-size: 1.8rem; }
+    .text-rail h3 { margin: 2rem 0 0.5rem; }
+    .text-rail p { font-size: 1.1rem; } 
+    .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
+}
