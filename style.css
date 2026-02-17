@@ -451,38 +451,50 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 
-/* AWARDS LOGO BAR */
+/* RESTORES THE AWARDS ROW */
 .awards-full-width-wrapper {
-    background-color: var(--eggshell); /* Uses your updated #e7e6df */
-    padding: 60px 0;
-    border-top: 1px solid rgba(0,0,0,0.05); /* Subtle separation from the tan blog section */
+    background-color: var(--eggshell); /* Or whichever background you had */
+    padding: 30px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
 }
 
-
 .awards-grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr); /* Changed to 8 */
-    gap: 20px; /* Reduced gap to allow more room for logos */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
+    gap: 30px; /* Adjust the spacing between logos here */
+    padding: 20px 0;
+}
+
+.award-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .award-item img {
-    max-width: 120px; /* Reduced from 150px to fit 8 items comfortably */
-    height: auto;
-    filter: grayscale(100%);
-    opacity: 0.4; /* Your preferred editorial transparency */
-    transition: 0.3s ease;
+    height: 50px; /* Adjust this to make your logos bigger or smaller */
+    width: auto;
+    filter: grayscale(100%); /* Optional: keep them subtle until hover */
+    opacity: 0.7;
+    transition: all 0.3s ease;
 }
 
-.awards-flex {
-    display: flex;          /* This forces them into a row */
-    justify-content: center; /* This centers the row */
-    align-items: center;     /* This aligns them vertically */
-    gap: 40px;               /* This creates the space between them */
-    flex-wrap: wrap;         /* This allows them to stack ONLY on mobile */
+.award-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
+/* MOBILE FIX: Ensure they don't look cramped on phones */
+@media (max-width: 768px) {
+    .awards-grid {
+        gap: 20px;
+    }
+    .award-item img {
+        height: 40px; 
+    }
+}
 
 /* Responsive: Stack logos or show 3-wide on mobile */
 @media (max-width: 768px) {
