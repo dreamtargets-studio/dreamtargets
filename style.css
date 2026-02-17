@@ -376,6 +376,31 @@ img { max-width: 100%; height: auto; display: block; }
     overflow: hidden;
 }
 
+/* --- HERO DOCKING SYSTEM --- */
+
+/* Modifier to remove the 60px padding when a hero image is present */
+.paper.hero-flush {
+    padding-top: 0 !important;
+}
+
+/* Specific reset for the hero wrapper to ensure zero-gap docking */
+.story-hero-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0;
+    width: 100%;
+}
+
+/* Architectural separation for the panoramic hero */
+.panoramic-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top: none !important; /* Removes the 1px white border to ensure flush dock */
+}
+
+
+
 /* KILL BORDERS ON MOBILE */
 @media (max-width: 768px) {
     .paper-sheet {
