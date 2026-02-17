@@ -726,11 +726,16 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
-/* 1. Kills the 60px gap on the parent */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (FINAL CENTERING FIX) --- */
+
+/* 1. Kills the 60px gap AND centers the white page */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
-    background-color: #ffffff !important; /* Restores the white sheet background */
+    margin-left: auto !important;   /* Force centering */
+    margin-right: auto !important;  /* Force centering */
+    background-color: #ffffff !important; 
+    max-width: 1200px;              /* Ensures it matches your original width */
 }
 
 /* 2. Ensures the image wrapper has no internal spacing */
