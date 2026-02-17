@@ -2,7 +2,7 @@
 
 :root {
     --brand-blue: #0054dc;
-    --footer-bg: #05162a;
+    --footer-bg: #0a254a;
     --white: #ffffff;
     --eggshell: #f7f7f7;
     --section-tan: #e3dcd2;
@@ -111,11 +111,14 @@ img { max-width: 100%; height: auto; display: block; }
     border-top-left-radius: 6px; 
     border-top-right-radius: 6px; 
     margin-bottom: 0 !important; /* Forces the image flush against the text */
+
 }
 
 .card-content { 
     padding: 5px 12px 12px 12px; /* Reduced the first value (top) from 12px to 5px */
 }
+
+
 
 /* 1. Reset the heading margin inside cards */
 .card-content h3, 
@@ -124,7 +127,9 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 5px; 
     line-height: 1.2; /* Tightens the space above the letters themselves */
     color: #555555;        /* Softens the black to a dark grey */
+
 }
+
 
 /* 1. Tighten the H3 bottom margin and refined typography */
 .card-content h3 { 
@@ -138,13 +143,16 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: 1.1rem;     /* Optional: subtle size tweak */
 }
 
+
 /* 2. Kill the top margin of the paragraph below it */
 .card-content p {
     margin-top: 0 !important; /* Prevents the paragraph from pushing away */
     line-height: 1.4; /* Standard readability for body text */
         font-size: 0.95rem;     /* Optional: subtle size tweak */
     color: #555555;        /* Softens the black to a dark grey */
+
 }
+
 
 /* Card Link Reset: Removes underlines and blue color */
 .service-card a, 
@@ -163,6 +171,8 @@ img { max-width: 100%; height: auto; display: block; }
     border-bottom: none !important;
 }
 
+
+
 /* FOOTER (GLOBAL) */
 #main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; }
 .footer-branding-top { text-align: center; margin-bottom: 60px; }
@@ -172,10 +182,17 @@ img { max-width: 100%; height: auto; display: block; }
 .footer-nav-col a { color: var(--eggshell); text-decoration: none; transition: 0.3s; }
 .footer-nav-col a:hover { color: #fff; }
 
+
+
+
 /* Desktop: Align footer link lists to the left */
 .footer-nav-col {
     text-align: left; /* Forces text to the left on desktop */
 }
+
+
+
+
 
 /* FOOTER BRANDING FIX */
 /* Center the brand logo within its column */
@@ -200,6 +217,8 @@ img { max-width: 100%; height: auto; display: block; }
     transform: scale(1.02); /* Slight scale to lift the logo visually */
 }
 
+
+
 /* Ensure it remains centered when the grid stacks on mobile */
 @media (max-width: 768px) {
     .footer-visual-col {
@@ -208,9 +227,20 @@ img { max-width: 100%; height: auto; display: block; }
     }
 }
 
+
+
+/* Footer Logo Hover Glow - Exclusive to Logo */
+.footer-brand-mark {
+    width: 180px;
+    height: auto;
+    display: block;
+    transition: all 0.4s ease; /* Smooth fade for the glow effect */
+    filter: drop-shadow(0 0 0px rgba(0, 84, 220, 0)); /* Transparent shadow base */
+}
+
 .footer-cta { text-align: center; margin-bottom: 60px; }
 .btn-pill { 
-    border: 4px solid #fff; padding: 10px 40px; border-radius: 30px; margin-right: 20px !important;
+    border: 4px solid #fff; padding: 10px 40px; border-radius: 30px; argin-right: 20px !important;
     color: #fff; text-decoration: none; display: inline-block; 
     transition: 0.3s; background: transparent; 
 }
@@ -233,6 +263,7 @@ img { max-width: 100%; height: auto; display: block; }
         display: none !important; 
     }
 }
+
 
 /* SOCIAL STRIP */
 .social-strip { display: flex; justify-content: center; gap: 80px; }
@@ -282,11 +313,62 @@ img { max-width: 100%; height: auto; display: block; }
     .story-layout-centered { margin: 30px auto; }
 }
 
-/* EDITORIAL SYSTEM V1.21 */
+
+
+
+
+* --- THE FEATURED CARD FIX --- */
+
+/* 1. Kill the 'ghost gap' at the bottom of the image */
+.featured-card img {
+    display: block !important;
+    vertical-align: bottom !important;
+    margin-bottom: 0 !important;
+} /* Added missing closing bracket here */
+
+/* 2. Target the H2 specifically to pull it up */
+.featured-card h2 {
+    margin-top: 8px !important; /* Aggressive pull to counteract font leading */
+    padding-top: 0 !important;
+    font-size: 1.2rem; 
+    line-height: 1.0 !important; 
+    letter-spacing: -0.02em; 
+    font-weight: 600; /* Increased weight for H2 presence */
+	color: #666666;        /* Slightly lighter grey for the sub-head */
+
+}
+
+/* 3. Tighten the space for the H3 and P below it */
+.featured-card h3 {
+    margin-top: 0 !important;
+    font-size: 1rem;
+    font-weight: 200;
+    color: #666666;        /* Slightly lighter grey for the sub-head */
+
+}
+
+
+.featured-card p {
+    margin-top: 4px !important;
+}
+
+.featured-card .card-content {
+    padding-top: 0 !important;
+}
+
+
+
+
+
+
+
+/* --- EDITORIAL SYSTEM V1.21 --- */
+
 .paper-sheet {
     max-width: 1200px;
     margin: 0 auto;
     background-color: #ffffff;
+    /* Desktop Borders */
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     margin-bottom: 0;
@@ -294,22 +376,55 @@ img { max-width: 100%; height: auto; display: block; }
     overflow: hidden;
 }
 
+/* KILL BORDERS ON MOBILE */
 @media (max-width: 768px) {
     .paper-sheet {
         border-left: none !important;
         border-right: none !important;
     }
+    
+    /* Ensure the Hero image has no forced borders from global img tags */
+    .panoramic-hero {
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
 }
 
+/* 2. Rule Spacing & Colors */
 .rule-orange {
     width: 100%;
     height: 1px;
-    background-color: #ff6600;
+    background-color: #ff6600; /* Tweak for brand orange */
     margin-bottom: 25px;
 }
 
+.rule-grey-full {
+    width: 100%;
+    height: 1px;
+    background-color: #dddddd; /* Tweak for divider color */
+    margin: 60px 0 30px 0;
+}
+
+
+/* Specific 800px Column for Editorial Content */
+.content-column-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px; /* Essential for mobile breathing room */
+    box-sizing: border-box;
+}
+/* 3. Typography & Captions */
+.links-section-title {
+    font-size: 1.2rem;
+    color: #666666; /* Tweak for dark grey title */
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
 .editorial-caption {
-    background-color: #f0ead6;
+    background-color: #f0ead6; /* Tweak for eggshell background */
     padding: 10px 18px;
     margin: 0;
     font-size: 0.85rem;
@@ -318,4 +433,250 @@ img { max-width: 100%; height: auto; display: block; }
 
 .image-border {
     border: 1px solid #333333;
+}
+
+/* 4. Footer Reset (Add this to your existing footer styles) */
+#main-footer {
+    margin-top: 0 !important;
+}
+
+
+.rule-grey-full {
+    width: 100%;
+    max-width: 100%; /* Safety for mobile overflow */
+    height: 1px;
+    background-color: #dddddd;
+    margin: 60px 0 30px 0;
+}
+
+
+
+/* AWARDS LOGO BAR */
+.awards-full-width-wrapper {
+    background-color: var(--eggshell); /* Uses your updated #e7e6df */
+    padding: 60px 0;
+    border-top: 1px solid rgba(0,0,0,0.05); /* Subtle separation from the tan blog section */
+}
+
+
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* Changed to 8 */
+    gap: 20px; /* Reduced gap to allow more room for logos */
+    align-items: center;
+    justify-items: center;
+}
+
+.award-item img {
+    max-width: 120px; /* Reduced from 150px to fit 8 items comfortably */
+    height: auto;
+    filter: grayscale(100%);
+    opacity: 0.4; /* Your preferred editorial transparency */
+    transition: 0.3s ease;
+}
+
+
+
+
+/* Responsive: Stack logos or show 3-wide on mobile */
+@media (max-width: 768px) {
+    .awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .awards-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for tablets */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .awards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for phones */
+    }
+}
+
+
+
+/* Only hide this on screens wider than mobile */
+@media (min-width: 769px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    /* This targets EVERY link in the mobile menu */
+    .nav-links a {
+        padding: 5px 0 5px 30px !important; /* Tightens top and bottom for all items */
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        width: 100%;
+        display: block;
+    }
+
+.nav-links a.mobile-only {
+        display: block;
+        padding: 15px 0 15px 30px !important;
+    }
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.4); /* That semi-opaque look */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0; /* Hidden at start */
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.4); /* That semi-opaque look */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0; /* Hidden at start */
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* The White Chevron */
+.chevron-up::before {
+    content: '';
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(-135deg);
+}
+
+/* Dreamtargets Layout Firewall */
+.editorial-post, .editorial-post * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.editorial-post {
+    background: #e7e6df; 
+    width: 100%;
+    margin-top: -10px; /* Flush join to Nav */
+    padding: 0;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif; 
+    color: #444; 
+}
+
+.paper {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+    min-height: 100vh;
+    padding-top: 60px; 
+}
+
+.hero-rail { 
+    width: 92%;
+    max-width: 960px;
+    margin: 0 auto; 
+}
+
+.text-rail { 
+    width: 88%;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+.editorial-post img { 
+    width: 100%; 
+    display: block; 
+    height: auto; 
+    border: 1px solid #444; 
+}
+
+.caption {
+    background: #e7e6df;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+}
+
+.caption p, figcaption.caption p {
+    margin: 0 !important;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    color: #444;
+}
+
+.orange-rule {
+    height: 2px;
+    background: #f26522;
+    margin: 25px 0;
+}
+
+.text-rail h1 { 
+    margin: 40px 0 10px; 
+    font-weight: 900; 
+    line-height: 1.1;
+    color: #444; 
+}
+
+.text-rail h3 { 
+    margin: 3rem 0 0.5rem; 
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.text-rail p { 
+    margin-bottom: 1.5rem;   
+    font-size: 1.2rem;       
+    line-height: 1.6;
+    color: #444;        
+}
+
+.text-rail blockquote {
+    margin: 40px 0;
+    border-left: 3px solid #0056b3; 
+    padding: 2px 0 2px 40px; 
+    font-weight: 300; 
+    font-style: italic; 
+    font-size: 1.25rem; 
+    line-height: 1.4; 
+    color: #555; 
+}
+
+@media (max-width: 768px) {
+    .paper { padding-top: 30px; }
+    .text-rail h1 { font-size: 1.8rem; }
+    .text-rail h3 { margin: 2rem 0 0.5rem; }
+    .text-rail p { font-size: 1.1rem; } 
+    .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
