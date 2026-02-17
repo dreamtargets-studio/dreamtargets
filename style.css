@@ -723,3 +723,26 @@ img { max-width: 100%; height: auto; display: block; }
     border-left: none !important;
     border-right: none !important;
 }
+
+/* THE GAP KILLER - ADD TO BOTTOM */
+
+/* 1. Kills the 60px gap on the parent */
+.paper-sheet.cinematic-dock {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* 2. Ensures the image wrapper has no internal spacing */
+.story-hero-wrapper {
+    line-height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. The 1px white border and cinematic width */
+.panoramic-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top: 1px solid #ffffff !important;
+}
