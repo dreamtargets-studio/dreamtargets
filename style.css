@@ -475,7 +475,13 @@ img { max-width: 100%; height: auto; display: block; }
     transition: 0.3s ease;
 }
 
-
+.awards-flex {
+    display: flex;          /* This forces them into a row */
+    justify-content: center; /* This centers the row */
+    align-items: center;     /* This aligns them vertically */
+    gap: 40px;               /* This creates the space between them */
+    flex-wrap: wrap;         /* This allows them to stack ONLY on mobile */
+}
 
 
 /* Responsive: Stack logos or show 3-wide on mobile */
