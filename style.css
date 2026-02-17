@@ -1,4 +1,4 @@
-/* --- THINKAMIGO MASTER STYLESHEET v1.23 --- */
+/* --- THINKAMIGO MASTER STYLESHEET v1.24 --- */
 
 :root {
     --brand-blue: #0054dc;
@@ -12,88 +12,56 @@
 /* GLOBAL RESET & BASE */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
-body { 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
-    background: #fff; 
-    color: #333; 
-    line-height: 1.5; 
-}
-
-/* CENTERING SYSTEM - RESTORED */
-.container { 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 15px; 
-    width: 100%; 
-}
-
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fff; color: #333; line-height: 1.5; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 15px; width: 100%; }
 img { max-width: 100%; height: auto; display: block; }
 
-/* NAVIGATION (RESTORED FROM v1.21) */
+/* NAVIGATION (GLOBAL) */
 #main-nav { background: var(--brand-blue); padding: 15px 0; position: relative; z-index: 1000; width: 100%; }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 .logo img { height: 40px; }
 .nav-links { display: flex; align-items: center; gap: 20px; }
-.nav-links a { color: var(--eggshell); text-decoration: none; font-size: 0.9rem; }
-.nav-links a.active { color: #ff8c00 !important; }
+.nav-links a { color: var(--eggshell); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+.nav-links a.active, .nav-links a:hover { color: #ff8c00 !important; }
 
-/* LAYOUT FIREWALL - EDITORIAL PAGES */
-.editorial-post {
-    background: #e7e6df; 
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
+/* BRANDING INTRO BAR (HOME PAGE ONLY) */
+.branding-intro-bar { background: var(--brand-blue); padding: 35px 0; }
+.branding-flex { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+.branding-logo { height: 48px; width: auto; }
+.branding-text { color: var(--white); font-size: 1.2rem; margin: 0; }
 
-.paper {
-    width: 100%;
-    max-width: 1140px;
-    margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.05);
-    padding-top: 60px; /* Default for Blogs */
-    padding-bottom: 80px; 
-}
+/* GRID SYSTEM (HOME) - THIS FIXES THE INDEX PAGE */
+.hero-full-width-wrapper { background-color: var(--eggshell); padding: 40px 0; }
+.blog-full-width-wrapper { background-color: var(--section-tan); padding: 60px 0; }
+.home-hero-grid, .blog-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gutter); }
 
-/* THE HERO DOCKING MODIFIER */
-.paper.hero-docked {
-    padding-top: 0 !important;
-}
+/* CARD & IMAGE SYSTEM */
+.featured-card, .service-card, .blog-card { background: #fff; display: flex; flex-direction: column; overflow: hidden; border-radius: 6px 6px 0 0; }
+.featured-card { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+.card-content { padding: 5px 12px 12px 12px; }
+.card-content h3 { margin-top: 0; margin-bottom: 2px; color: #555; font-size: 1.1rem; }
 
-.story-hero-wrapper {
-    line-height: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
+/* EDITORIAL SYSTEM (BLOG & DIGITAL STORIES) */
+.editorial-post { background: #e7e6df; width: 100%; margin: 0; padding: 0; }
+.paper { width: 100%; max-width: 1140px; margin: 0 auto; background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); padding-top: 60px; padding-bottom: 80px; position: relative; }
 
-.panoramic-hero {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: none !important;
-}
+/* THE SURGICAL DOCKING FIX */
+.paper.hero-docked { padding-top: 0 !important; }
+.story-hero-wrapper { line-height: 0; margin: 0; padding: 0; width: 100%; }
+.panoramic-hero { width: 100%; height: auto; display: block; border: none !important; }
 
-/* TEXT COLUMN CENTERING */
-.story-layout-centered { 
-    max-width: 800px; 
-    margin: 60px auto; 
-}
+/* TEXT RAILS */
+.text-rail, .story-layout-centered { max-width: 800px; margin: 60px auto; padding: 0 20px; }
+.rule-orange { width: 100%; height: 1px; background-color: #ff6600; margin-bottom: 25px; }
 
-/* FOOTER (RESTORED FROM v1.21) */
-#main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; margin-top: 0; }
-.footer-body-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
-.footer-nav-col ul { list-style: none; padding: 0; }
-.footer-nav-col a { color: var(--eggshell); text-decoration: none; }
+/* FOOTER (GLOBAL) */
+#main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; }
+.footer-body-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
-/* GRID SYSTEM */
-.gallery-grid, .gallery-grid-3 { display: grid !important; gap: 20px; margin: 40px 0; }
-.gallery-grid { grid-template-columns: 1fr 1fr; }
-.gallery-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-
-/* MOBILE RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* Standard Hamburger logic would go here */
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr 1fr; }
+    .featured-card { grid-column: span 2; }
     .paper { padding-top: 30px; }
-    .gallery-grid, .gallery-grid-3 { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
 }
