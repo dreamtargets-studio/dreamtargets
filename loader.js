@@ -64,3 +64,70 @@ document.addEventListener('click', (e) => {
 });
 
 
+/* Simple Lightbox Logic */
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.expandable');
+    if (link) {
+        e.preventDefault();
+        const fullImgSrc = link.getAttribute('href');
+        
+        // Create Overlay
+        const overlay = document.createElement('div');
+        overlay.style = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: flex; align-items: center;
+            justify-content: center; z-index: 2000; cursor: zoom-out;
+        `;
+        
+        const img = document.createElement('img');
+        img.src = fullImgSrc;
+        img.style = "max-width: 90%; max-height: 90%; border: 2px solid #fff;";
+        
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+        
+        overlay.onclick = () => overlay.remove();
+    }
+});
+
+/* --- Append to the bottom of loader.js --- */
+
+// LIGHTBOX LOGIC: Expands thumbnails to full screen
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.expandable');
+    if (link) {
+        // Essential: Prevents the browser from leaving the page to open the image file
+        e.preventDefault(); 
+        
+        const fullImgSrc = link.getAttribute('href');
+        
+        // Create the Overlay container
+        const overlay = document.createElement('div');
+        overlay.id = 'lightbox-overlay';
+        overlay.style = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: flex; align-items: center;
+            justify-content: center; z-index: 9999; cursor: zoom-out;
+        `;
+        
+        // Create the Image element
+        const img = document.createElement('img');
+        img.src = fullImgSrc;
+        img.style = "max-width: 90%; max-height: 90%; border: 2px solid #fff; background: #222; box-shadow: 0 0 50px rgba(0,0,0,0.5);";
+        
+        // Local testing fallback: if image is missing, show a styled "missing" box
+        img.onerror = () => { 
+            img.alt = "Image not found locally"; 
+            img.style.padding = "40px";
+            img.style.color = "#fff";
+            img.style.fontFamily = "Arial, sans-serif";
+        };
+
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+        
+        // Remove the overlay (close lightbox) when the user clicks anywhere
+        overlay.onclick = () => overlay.remove();
+    }
+});
+
