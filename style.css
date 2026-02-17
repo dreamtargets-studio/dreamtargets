@@ -1,4 +1,4 @@
-/* --- THINKAMIGO MASTER STYLESHEET v1.29 (FULL RESTORATION) --- */
+/* --- THINKAMIGO MASTER STYLESHEET v1.30 (COMPLETE GLOBAL RESTORE) --- */
 
 :root {
     --brand-blue: #0054dc;
@@ -9,14 +9,14 @@
     --gutter: 8px;
 }
 
-/* 1. GLOBAL RESET & CENTERING */
+/* GLOBAL RESET & CENTERING */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
 body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fff; color: #333; line-height: 1.5; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; width: 100%; }
 img { max-width: 100%; height: auto; display: block; }
 
-/* 2. NAVIGATION (CRITICAL FOR LOADER.JS) */
+/* NAVIGATION (GLOBAL) - RESTORES STABLE HEADER */
 #main-nav { background: var(--brand-blue); padding: 15px 0; position: relative; z-index: 1000; width: 100%; }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 .logo img { height: 40px; }
@@ -24,51 +24,39 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-links a { color: var(--eggshell); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
 .nav-links a.active { color: #ff8c00 !important; }
 
-/* 3. BRANDING BAR & INDEX GRIDS (RESTORED) */
+/* BRANDING BAR (HOME PAGE ONLY) */
 .branding-intro-bar { background: var(--brand-blue); padding: 35px 0; }
 .branding-flex { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 .branding-logo { height: 48px; width: auto; }
 .branding-text { color: var(--white); font-size: 1.2rem; margin: 0; }
 
+/* INDEX GRID SYSTEM (RESTORES 5-COLUMN LAYOUT) */
 .hero-full-width-wrapper { background-color: var(--eggshell); padding: 40px 0; }
 .blog-full-width-wrapper { background-color: var(--section-tan); padding: 60px 0; }
+.home-hero-grid, .blog-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gutter); }
 
-/* The 5-Column Engine */
-.home-hero-grid, .blog-grid { 
-    display: grid; 
-    grid-template-columns: repeat(5, 1fr); 
-    gap: var(--gutter); 
-}
-
-/* 4. CARD SYSTEM (RESTORED) */
+/* CARD SYSTEM */
 .featured-card, .service-card, .blog-card { background: #fff; display: flex; flex-direction: column; border-radius: 6px 6px 0 0; overflow: hidden; }
 .featured-card { grid-column: 1 / span 2; grid-row: 1 / span 2; }
 .card-content { padding: 5px 12px 12px 12px; }
 
-/* 5. EDITORIAL SYSTEM (BLOG & STORIES) */
+/* EDITORIAL SYSTEM (BLOG & STORY PAGES) */
 .editorial-post { background: #e7e6df; width: 100%; margin: 0; padding: 0; }
-.paper-sheet, .paper { 
-    width: 100%; 
-    max-width: 1140px; 
-    margin: 0 auto; 
-    background: #fff; 
-    box-shadow: 0 5px 30px rgba(0,0,0,0.05); 
-    padding-top: 60px; 
-    padding-bottom: 80px; 
-    position: relative; 
-}
+.paper-sheet { width: 100%; max-width: 1140px; margin: 0 auto; background: #fff; box-shadow: 0 5px 30px rgba(0,0,0,0.05); padding-top: 60px; padding-bottom: 80px; position: relative; }
 .story-layout-centered { max-width: 800px; margin: 60px auto; padding: 0 20px; }
 
-/* 6. FOOTER (RESTORED) */
+/* FOOTER (GLOBAL) - RESTORES STABLE FOOTER */
 #main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; }
 .footer-body-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+.footer-nav-col ul { list-style: none; padding: 0; }
+.footer-nav-col a { color: var(--eggshell); text-decoration: none; }
 
-/* --- THE ISOLATED HERO GAP FIX --- */
+/* --- ISOLATED HERO FIX: ONLY APPLIES TO DIGITAL STORIES PAGE --- */
 .hero-docked { padding-top: 0 !important; }
-.story-hero-wrapper { line-height: 0; margin: 0; padding: 0; }
-.panoramic-hero { width: 100%; display: block; border: none !important; }
+.story-hero-wrapper { line-height: 0; margin: 0; padding: 0; width: 100%; }
+.panoramic-hero { width: 100%; height: auto; display: block; border: none !important; }
 
-/* 7. RESPONSIVE (RESTORED) */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .home-hero-grid, .blog-grid { grid-template-columns: 1fr 1fr; }
     .featured-card { grid-column: span 2; }
