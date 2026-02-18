@@ -699,68 +699,53 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC HEADER & GALLERY RESTORATION --- */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
-/* 1. Page Background & Centering */
+/* 1. THE BACKGROUND: Horizontal centering using Flexbox */
 .editorial-post {
-    background-color: #e7e6df !important;
+    background-color: #e7e6df !important; 
     width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
     margin: 0 !important;
     padding: 0 !important;
-    display: block !important;
 }
 
-/* 2. The Paper Sheet: Docked & Centered */
+/* 2. THE PAPER: Centered container with top-gap removal */
 .paper-sheet.cinematic-dock {
-    margin: 0 auto !important;
     padding-top: 0 !important;
-    max-width: 1200px !important;
+    margin-top: 0 !important;
     background-color: #ffffff !important;
+    width: 100% !important; 
+    max-width: 1200px !important; 
+    border-top: 1px solid #ffffff !important; /* Visual separator from navigation */
+    box-shadow: none !important;
     display: block !important;
-    /* This ensures the white line is visible and the paper stays centered */
-    border-top: 1px solid #ffffff !important;
-    position: relative;
 }
 
-/* 3. The Hero: Re-Docked */
+/* 3. THE HERO: Flush-to-top image docking */
 .story-hero-wrapper {
-    display: block !important;
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
+    display: block !important;
+    clear: both; /* Ensures subsequent content begins after the hero */
 }
 
 .panoramic-hero {
     width: 100% !important;
     height: auto !important;
     display: block !important;
+    border: none !important;
 }
 
-/* 4. The Grid Fix: Restore 2x, 3x, and Stacked Thumbnails */
-.paper-sheet.cinematic-dock .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    margin-right: -15px !important;
-    margin-left: -15px !important;
-    clear: both; /* Ensures thumbnails don't vanish under the hero */
-}
-
-/* Forces columns to maintain their width logic */
-.paper-sheet.cinematic-dock [class*="col-"] {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    flex: 0 0 auto; /* Prevents thumbnails from shrinking to zero */
-}
-
-/* Specific fix for 3-column (col-md-4) */
-.paper-sheet.cinematic-dock .col-md-4 {
-    width: 33.33333333% !important;
-}
-
-/* Specific fix for 2-column (col-md-6) */
-.paper-sheet.cinematic-dock .col-md-6 {
-    width: 50% !important;
+/* 4. THE CONTENT: Grid restoration for 2x and 3x columns */
+.paper-sheet.cinematic-dock .container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 1140px !important; /* Permits 3-column expansion */
+    margin: 0 auto !important;
+    padding: 40px 15px !important;
 }
