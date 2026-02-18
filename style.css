@@ -699,52 +699,56 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC HERO SYSTEM --- */
+/* --- CINEMATIC SYSTEM (STABLE VERSION 1.25) --- */
 
-/* 1. Layout Container: Forces horizontal centering on the page */
+/* 1. THE BACKGROUND: Centering the paper without affecting internal content */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: flex !important;      
-    justify-content: center !important; 
     margin: 0 !important;
     padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centers the paper-sheet only */
 }
 
-/* 2. Paper Sheet: Removes top gaps and resets container borders */
+/* 2. THE PAPER: Restores internal alignment for galleries and text */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    border-top: none !important; 
+    border-top: 1px solid #ffffff !important; /* The White Line */
+    border-left: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
     box-shadow: none !important;
-    position: relative !important;
+    
+    /* Ensure internal content (galleries) can use their own grids */
+    display: block !important; 
+    text-align: left; 
 }
 
-/* 3. Hero Wrapper: Ensures no internal spacing and handles layering */
+/* 3. THE HERO: Keeps the cinematic image flush */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    position: relative;
-    z-index: 10; /* Lifts the hero to ensure the border isn't hidden by the nav */
+    z-index: 10;
 }
 
-/* 4. Panoramic Image: Applies 1px white top border and removes all others */
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
-    
-    /* Removes all default borders */
     border: none !important;
-    
-    /* Applies the requested white top border only */
-    border-top: 1px solid #ffffff !important;
-    
-    /* Slight nudge to ensure it clears the nav bar's edge */
-    margin-top: 0px !important; 
+}
+
+/* 4. GALLERY RESTORATION: Ensures the grid snaps back */
+.gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 40px 0;
 }
