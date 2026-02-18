@@ -699,37 +699,37 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC SYSTEM (STABLE VERSION 1.26) --- */
+/* --- CINEMATIC SYSTEM (STABLE VERSION 1.27) --- */
 
-/* 1. THE BACKGROUND: Centers the paper sheet only */
+/* 1. THE BACKGROUND: Centering the paper only */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important; /* Centers the paper-sheet horizontally */
+    align-items: center !important; 
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 2. THE PAPER: Restores internal alignment for all columns */
+/* 2. THE PAPER: Restores the white sheet and internal flow */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    border-top: 1px solid #ffffff !important; /* The White Line */
+    border-top: 1px solid #ffffff !important;
     border-left: 1px solid #ddd !important;
     border-right: 1px solid #ddd !important;
     box-shadow: none !important;
     
-    /* RE-ENABLES COLUMN LOGIC: Allows your 2x and 3x grids to work */
+    /* Forces the sheet to act as a standard container for all columns */
     display: block !important; 
-    text-align: left !important;
+    overflow: hidden; /* Cleans up floated columns */
 }
 
-/* 3. THE HERO: Stays flush */
+/* 3. THE HERO: Remains flush */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
@@ -744,7 +744,16 @@ img { max-width: 100%; height: auto; display: block; }
     border: none !important;
 }
 
-/* 4. COLUMN PROTECTION: Prevents global stacking */
-.container, .row, .gallery-grid, [class*="col-"] {
-    display: revert !important; /* Forces columns to obey their original rules */
+/* 4. GRID REPAIR: Forces 3-column and Stacked grids to expand */
+.container {
+    width: 100% !important;
+    max-width: 800px; /* Or your preferred reading width */
+    margin: 0 auto !important;
+}
+
+/* This ensures any div with 'column' or 'grid' in the class name behaves */
+[class*="grid"], [class*="col-"], .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
 }
