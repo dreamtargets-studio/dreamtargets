@@ -699,37 +699,34 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC SYSTEM (STABLE VERSION 1.28) --- */
+/* --- CINEMATIC SYSTEM (STABLE VERSION 1.29) --- */
 
-/* 1. THE BACKGROUND: Minimalist centering */
+/* 1. THE BACKGROUND: Centering via standard block logic */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: block !important; /* Back to block to stop interfering with children */
+    display: block !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 2. THE PAPER: Centered via margin, allowing internal grids to work */
+/* 2. THE PAPER: The 1200px wide canvas */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    
-    /* Standard Centering: This is the safest way to center without affecting columns */
     margin-left: auto !important;
     margin-right: auto !important;
     display: block !important; 
-    
     border-top: 1px solid #ffffff !important;
     border-left: 1px solid #ddd !important;
     border-right: 1px solid #ddd !important;
     box-shadow: none !important;
 }
 
-/* 3. THE HERO: Remains flush */
+/* 3. THE HERO: Flush to top */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
@@ -744,7 +741,18 @@ img { max-width: 100%; height: auto; display: block; }
     border: none !important;
 }
 
-/* 4. INTERNAL RESET: Prevents any "center" inheritance on your grids */
-.paper-sheet.cinematic-dock * {
-    text-align: initial;
+/* 4. THE 3-COLUMN FIX: Allows grids to expand past the reading-width */
+.paper-sheet.cinematic-dock .container, 
+.paper-sheet.cinematic-dock .row,
+.paper-sheet.cinematic-dock .gallery-grid {
+    width: 100% !important;
+    max-width: 1120px !important; /* Gives 3 columns room to breathe */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Forces the grid items to stay side-by-side */
+.paper-sheet.cinematic-dock .row {
+    display: flex !important;
+    flex-wrap: nowrap !important; /* Prevents 3rd column from dropping down */
 }
