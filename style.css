@@ -699,61 +699,39 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* ADD TO THE VERY BOTTOM - DO NOT MODIFY ABOVE THIS LINE */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (FINAL ATTEMPT) --- */
 
-/* Kills the 60px white gap on the container */
-.paper-sheet.cinematic-dock {
-    padding-top: 0 !important;
-}
-
-/* Forces the hero image container to have zero internal height gaps */
-.story-hero-wrapper {
-    line-height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* Style for the wide-screen image with the 1px white top border */
-.panoramic-hero {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-top: 1px solid #ffffff !important; /* Top edge only */
-    border-bottom: none !important;
-    border-left: none !important;
-    border-right: none !important;
-}
-
-/* --- THE CINEMATIC SYSTEM & GAP KILLER (IRONCLAD CENTERING) --- */
-
-/* 1. The Parent: Forces everything inside it to center horizontally */
+/* 1. The Background: Clears any constraints */
 .editorial-post {
     background-color: #e7e6df !important; 
-    width: 100%;
-    min-height: 100vh;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; /* This is the ultimate centering command */
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    display: block !important;
 }
 
-/* 2. The Paper: Kills the gap and maintains width */
+/* 2. The Paper: Forces it to the middle using the width math */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
-    width: 100% !important;
-    max-width: 1200px !important; /* Keeps it from stretching too wide */
     background-color: #ffffff !important;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    
+    /* THE FIX: Define width and force auto-centering */
+    width: 95% !important;         /* Responsive width */
+    max-width: 1200px !important;  /* Limits expansion */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;     /* Ensures it behaves like a centered block */
+    
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
-/* 3. The Hero: Flush to top with 1px white line */
+/* 3. The Hero: Remains flush */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100%;
 }
 
 .panoramic-hero {
