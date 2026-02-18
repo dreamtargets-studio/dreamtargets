@@ -699,50 +699,52 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- THE COMPLETE CINEMATIC SYSTEM (FINAL STRIKE) --- */
+/* --- CINEMATIC HERO SYSTEM --- */
 
-/* 1. THE BACKGROUND: Stays Centered */
+/* 1. Layout Container: Forces horizontal centering on the page */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: grid !important;      
-    place-items: start center !important; 
+    display: flex !important;      
+    justify-content: center !important; 
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 2. THE PAPER: Kills all top gaps and black borders */
+/* 2. Paper Sheet: Removes top gaps and resets container borders */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    
-    /* THE FIX: Remove all default borders at the top edge */
-    border-top: 1px solid #ffffff !important; /* THE WHITE LINE LIVES HERE */
-    border-left: 1px solid #ddd !important;   /* Keeps side borders grey */
-    border-right: 1px solid #ddd !important;
-    
-    /* Kills any shadow that might look like a black border */
-    box-shadow: none !important; 
+    border-top: none !important; 
+    box-shadow: none !important;
+    position: relative !important;
 }
 
-/* 3. THE WRAPPER: No gaps */
+/* 3. Hero Wrapper: Ensures no internal spacing and handles layering */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    border: none !important;
+    position: relative;
+    z-index: 10; /* Lifts the hero to ensure the border isn't hidden by the nav */
 }
 
-/* 4. THE IMAGE: Zeroed out so it can't clip the line */
+/* 4. Panoramic Image: Applies 1px white top border and removes all others */
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important; /* Kills the black border on the image itself */
+    
+    /* Removes all default borders */
+    border: none !important;
+    
+    /* Applies the requested white top border only */
+    border-top: 1px solid #ffffff !important;
+    
+    /* Slight nudge to ensure it clears the nav bar's edge */
+    margin-top: 0px !important; 
 }
