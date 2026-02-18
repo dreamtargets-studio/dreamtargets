@@ -699,20 +699,20 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC SYSTEM (STABLE VERSION 1.25) --- */
+/* --- CINEMATIC SYSTEM (STABLE VERSION 1.26) --- */
 
-/* 1. THE BACKGROUND: Centering the paper without affecting internal content */
+/* 1. THE BACKGROUND: Centers the paper sheet only */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important; /* Centers the paper-sheet only */
+    align-items: center !important; /* Centers the paper-sheet horizontally */
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* 2. THE PAPER: Restores internal alignment for galleries and text */
+/* 2. THE PAPER: Restores internal alignment for all columns */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
@@ -724,18 +724,17 @@ img { max-width: 100%; height: auto; display: block; }
     border-right: 1px solid #ddd !important;
     box-shadow: none !important;
     
-    /* Ensure internal content (galleries) can use their own grids */
+    /* RE-ENABLES COLUMN LOGIC: Allows your 2x and 3x grids to work */
     display: block !important; 
-    text-align: left; 
+    text-align: left !important;
 }
 
-/* 3. THE HERO: Keeps the cinematic image flush */
+/* 3. THE HERO: Stays flush */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    z-index: 10;
 }
 
 .panoramic-hero {
@@ -745,10 +744,7 @@ img { max-width: 100%; height: auto; display: block; }
     border: none !important;
 }
 
-/* 4. GALLERY RESTORATION: Ensures the grid snaps back */
-.gallery-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
-    gap: 20px !important;
-    padding: 40px 0;
+/* 4. COLUMN PROTECTION: Prevents global stacking */
+.container, .row, .gallery-grid, [class*="col-"] {
+    display: revert !important; /* Forces columns to obey their original rules */
 }
