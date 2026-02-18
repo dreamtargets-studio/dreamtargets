@@ -699,42 +699,40 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (GRID-FORCE) --- */
 
-/* 1. The Parent: Ensure it spans the entire browser window */
+/* 1. THE BACKGROUND: Becomes a centering engine */
 .editorial-post {
     background-color: #e7e6df !important; 
-    width: 100vw !important;         /* Force it to 100% of the Viewport Width */
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    width: 100% !important;
+    display: grid !important;      /* Changes the layout logic */
+    place-items: start center !important; /* Forces children to the Top-Center */
+    margin: 0 !important;
     padding: 0 !important;
-    display: block !important;
 }
 
-/* 2. The Paper: Center it using the standard Margin Auto method */
+/* 2. THE PAPER: Kills the gap and follows the center command */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     
-    /* Centering logic */
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: 100% !important; 
+    max-width: 1200px !important; 
     
-    /* Constraint logic */
-    width: 100% !important;          /* Fits container up to max-width */
-    max-width: 1200px !important;    /* Standard site width */
-    
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    /* Clears any old logic that might be pinning it left */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none !important;
+    position: relative !important;
 }
 
-/* 3. The Hero: Remains flush to top */
+/* 3. THE HERO: Remains flush to top */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100%;
 }
 
 .panoramic-hero {
