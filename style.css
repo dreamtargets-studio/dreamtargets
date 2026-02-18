@@ -699,45 +699,31 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- THE CINEMATIC SYSTEM & GAP KILLER (GRID-FORCE) --- */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (BORDER TWEAK) --- */
 
-/* 1. THE BACKGROUND: Becomes a centering engine */
-.editorial-post {
-    background-color: #e7e6df !important; 
-    width: 100% !important;
-    display: grid !important;      /* Changes the layout logic */
-    place-items: start center !important; /* Forces children to the Top-Center */
-    margin: 0 !important;
-    padding: 0 !important;
-}
+/* ... (Keep sections 1 and 2 exactly as they are) ... */
 
-/* 2. THE PAPER: Kills the gap and follows the center command */
-.paper-sheet.cinematic-dock {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-    background-color: #ffffff !important;
-    
-    width: 100% !important; 
-    max-width: 1200px !important; 
-    
-    /* Clears any old logic that might be pinning it left */
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    float: none !important;
-    position: relative !important;
-}
-
-/* 3. THE HERO: Remains flush to top */
+/* 3. THE HERO: Flush to top with a defined 1px white border */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
+    /* Ensures the border stays inside the container */
+    overflow: hidden; 
 }
 
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
+    /* This creates the crisp 1px line at the top */
     border-top: 1px solid #ffffff !important;
+    /* Optional: If the white line is too subtle, try #ffffff80 for slight transparency 
+       or keep it solid #ffffff as requested */
+    
+    /* Ensure no other borders are interfering */
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
 }
