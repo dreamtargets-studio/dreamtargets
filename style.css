@@ -699,31 +699,36 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC HEADER SYSTEM --- */
+/* --- CINEMATIC HEADER & GALLERY RESTORATION --- */
 
-/* 1. Center the page without touching internal grids */
+/* 1. Page Background & Centering */
 .editorial-post {
     background-color: #e7e6df !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    display: block !important;
 }
 
-/* 2. Remove the 60px gap and maintain centering */
+/* 2. The Paper Sheet: Docked & Centered */
 .paper-sheet.cinematic-dock {
-    margin: 0 auto !important; /* This is the standard centering you use elsewhere */
-    padding-top: 0 !important;  /* Kills the gap */
+    margin: 0 auto !important;
+    padding-top: 0 !important;
     max-width: 1200px !important;
     background-color: #ffffff !important;
-    border-top: 1px solid #ffffff !important; /* The 1px white line */
+    display: block !important;
+    /* This ensures the white line is visible and the paper stays centered */
+    border-top: 1px solid #ffffff !important;
+    position: relative;
 }
 
-/* 3. Flush the Hero Image */
+/* 3. The Hero: Re-Docked */
 .story-hero-wrapper {
+    display: block !important;
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
-    display: block !important;
+    width: 100%;
 }
 
 .panoramic-hero {
@@ -732,9 +737,30 @@ img { max-width: 100%; height: auto; display: block; }
     display: block !important;
 }
 
-/* 4. Restore Grid Integrity */
-/* This ensures the 'row' stays a flex container for your 2x and 3x columns */
+/* 4. The Grid Fix: Restore 2x, 3x, and Stacked Thumbnails */
 .paper-sheet.cinematic-dock .row {
     display: flex !important;
     flex-wrap: wrap !important;
+    margin-right: -15px !important;
+    margin-left: -15px !important;
+    clear: both; /* Ensures thumbnails don't vanish under the hero */
+}
+
+/* Forces columns to maintain their width logic */
+.paper-sheet.cinematic-dock [class*="col-"] {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 auto; /* Prevents thumbnails from shrinking to zero */
+}
+
+/* Specific fix for 3-column (col-md-4) */
+.paper-sheet.cinematic-dock .col-md-4 {
+    width: 33.33333333% !important;
+}
+
+/* Specific fix for 2-column (col-md-6) */
+.paper-sheet.cinematic-dock .col-md-6 {
+    width: 50% !important;
 }
