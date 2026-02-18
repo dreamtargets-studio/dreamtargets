@@ -701,7 +701,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
-/* 1. THE BACKGROUND: Standard block display for maximum grid compatibility */
+/* 1. THE BACKGROUND: Standard layout to prevent grid interference */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
@@ -710,26 +710,24 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 0 !important;
 }
 
-/* 2. THE PAPER: Centered container with top-gap removal */
+/* 2. THE PAPER: Docked flush to top and centered */
 .paper-sheet.cinematic-dock {
     display: block !important;
-    margin: 0 auto !important; /* Standard horizontal centering */
-    padding-top: 0 !important;
+    margin: 0 auto !important; /* Centering the white page */
+    padding-top: 0 !important;  /* Kills the 60px gap */
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    border-top: 1px solid #ffffff !important;
-    box-shadow: none !important;
+    border-top: 1px solid #ffffff !important; /* The 1px white separator */
 }
 
-/* 3. THE HERO: Flush-to-top image docking */
+/* 3. THE HERO: Panoramic docking style */
 .story-hero-wrapper {
     display: block !important;
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    clear: both !important; /* Forces the grid below to start after the image */
 }
 
 .panoramic-hero {
@@ -739,23 +737,20 @@ img { max-width: 100%; height: auto; display: block; }
     border: none !important;
 }
 
-/* 4. THE CONTENT: Grid restoration for 2x and 3x columns */
+/* 4. THE CONTENT: Grid restoration for gallery thumbnails */
 .paper-sheet.cinematic-dock .container {
     display: block !important;
     width: 100% !important;
-    max-width: 1140px !important; /* Required width for 3-column layouts */
+    max-width: 1140px !important; /* Necessary width for 3-column rows */
     margin: 0 auto !important;
     padding: 40px 15px !important;
 }
 
-/* Ensures rows within the cinematic page maintain horizontal flow */
+/* Forces rows to maintain horizontal flow and clears the hero image */
 .paper-sheet.cinematic-dock .row {
-    display: block !important;
-    clear: both !important;
-}
-
-.paper-sheet.cinematic-dock .row:after {
-    content: "" !important;
-    display: table !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin-right: -15px !important;
+    margin-left: -15px !important;
     clear: both !important;
 }
