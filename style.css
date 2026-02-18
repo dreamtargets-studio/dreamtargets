@@ -699,31 +699,38 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* 3. THE HERO: Kills the black border and forces the 1px white top edge */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (NO BORDERS) --- */
+
+.paper-sheet.cinematic-dock {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    background-color: #ffffff !important;
+    width: 100% !important; 
+    max-width: 1200px !important;
+    
+    /* 1. KILL THE BLACK BORDERS AT THE TOP */
+    border-top: none !important; 
+    border-left: 1px solid #ddd; /* Keep sides only */
+    border-right: 1px solid #ddd;
+    box-shadow: none !important; /* Kills any black shadow 'halo' */
+}
+
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    border: none !important; /* Kills any black border on the wrapper */
-    outline: none !important;
-    overflow: visible; /* Prevents clipping of the top border */
+    /* 2. THE WHITE DIVIDER LINE */
+    border-top: 1px solid #ffffff !important; 
+    border-bottom: none !important;
 }
 
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
-    
-    /* KILL ALL SIDES FIRST */
-    border: none !important; 
-    
-    /* APPLY WHITE TOP ONLY */
-    border-top: 1px solid #ffffff !important; 
-    
-    /* Ensure no black shadow or outline exists */
-    box-shadow: none !important;
-    
-    /* Slight nudge: If it's still clipping, this ensures it sits below the nav */
-    margin-top: 0; 
+    /* 3. CLEAN THE IMAGE */
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
