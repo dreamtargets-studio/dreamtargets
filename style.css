@@ -701,56 +701,42 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
-/* 1. THE BACKGROUND: Standard layout to prevent grid interference */
+/* 1. THE BACKGROUND: Simple centering without grid interference */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: block !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
 /* 2. THE PAPER: Docked flush to top and centered */
 .paper-sheet.cinematic-dock {
-    display: block !important;
-    margin: 0 auto !important; /* Centering the white page */
-    padding-top: 0 !important;  /* Kills the 60px gap */
+    margin: 0 auto !important; /* Standard horizontal centering */
+    padding-top: 0 !important;  /* Restores the cinematic flush look */
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
     border-top: 1px solid #ffffff !important; /* The 1px white separator */
 }
 
-/* 3. THE HERO: Panoramic docking style */
+/* 3. THE HERO: Cinematic image docking */
 .story-hero-wrapper {
-    display: block !important;
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100%;
 }
 
 .panoramic-hero {
     width: 100% !important;
     height: auto !important;
     display: block !important;
-    border: none !important;
 }
 
-/* 4. THE CONTENT: Grid restoration for gallery thumbnails */
+/* 4. THE CONTENT: Hands-off approach to restore grids */
+/* By removing all 'flex' and 'align' commands here, your 
+   original 2x and 3x gallery code will take over again. */
 .paper-sheet.cinematic-dock .container {
-    display: block !important;
     width: 100% !important;
-    max-width: 1140px !important; /* Necessary width for 3-column rows */
+    max-width: 1140px !important; /* Standard width for 3-column rows */
     margin: 0 auto !important;
-    padding: 40px 15px !important;
-}
-
-/* Forces rows to maintain horizontal flow and clears the hero image */
-.paper-sheet.cinematic-dock .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    margin-right: -15px !important;
-    margin-left: -15px !important;
-    clear: both !important;
 }
