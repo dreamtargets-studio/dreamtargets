@@ -699,32 +699,31 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC SYSTEM (STABLE VERSION 1.30) --- */
+/* --- CINEMATIC HEADER SYSTEM --- */
 
-/* 1. CENTER THE PAGE */
+/* 1. Center the page without touching internal grids */
 .editorial-post {
     background-color: #e7e6df !important;
-    display: block !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
+/* 2. Remove the 60px gap and maintain centering */
 .paper-sheet.cinematic-dock {
-    width: 100% !important;
+    margin: 0 auto !important; /* This is the standard centering you use elsewhere */
+    padding-top: 0 !important;  /* Kills the gap */
     max-width: 1200px !important;
-    margin: 0 auto !important; /* The simple centering fix */
-    padding-top: 0 !important;
     background-color: #ffffff !important;
-    border-top: 1px solid #ffffff !important;
-    display: block !important;
+    border-top: 1px solid #ffffff !important; /* The 1px white line */
 }
 
-/* 2. DOCK THE HERO */
+/* 3. Flush the Hero Image */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
+    display: block !important;
 }
 
 .panoramic-hero {
@@ -733,17 +732,9 @@ img { max-width: 100%; height: auto; display: block; }
     display: block !important;
 }
 
-/* 3. RESTORE 3-COLUMN GRID */
-/* This targets the specific 'row' logic that is likely being crushed */
+/* 4. Restore Grid Integrity */
+/* This ensures the 'row' stays a flex container for your 2x and 3x columns */
 .paper-sheet.cinematic-dock .row {
     display: flex !important;
-    flex-direction: row !important;
     flex-wrap: wrap !important;
-    margin-left: -15px !important; /* Standard grid gutter reset */
-    margin-right: -15px !important;
-}
-
-.paper-sheet.cinematic-dock [class*="col-"] {
-    display: block !important; /* Prevents columns from becoming flex-items themselves */
-    float: left !important;    /* Fallback for older grid systems */
 }
