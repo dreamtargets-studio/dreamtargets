@@ -699,38 +699,50 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- THE CINEMATIC SYSTEM & GAP KILLER (NO BORDERS) --- */
+/* --- THE COMPLETE CINEMATIC SYSTEM (FINAL STRIKE) --- */
 
+/* 1. THE BACKGROUND: Stays Centered */
+.editorial-post {
+    background-color: #e7e6df !important; 
+    width: 100% !important;
+    display: grid !important;      
+    place-items: start center !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 2. THE PAPER: Kills all top gaps and black borders */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
-    max-width: 1200px !important;
+    max-width: 1200px !important; 
     
-    /* 1. KILL THE BLACK BORDERS AT THE TOP */
-    border-top: none !important; 
-    border-left: 1px solid #ddd; /* Keep sides only */
-    border-right: 1px solid #ddd;
-    box-shadow: none !important; /* Kills any black shadow 'halo' */
+    /* THE FIX: Remove all default borders at the top edge */
+    border-top: 1px solid #ffffff !important; /* THE WHITE LINE LIVES HERE */
+    border-left: 1px solid #ddd !important;   /* Keeps side borders grey */
+    border-right: 1px solid #ddd !important;
+    
+    /* Kills any shadow that might look like a black border */
+    box-shadow: none !important; 
 }
 
+/* 3. THE WRAPPER: No gaps */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    /* 2. THE WHITE DIVIDER LINE */
-    border-top: 1px solid #ffffff !important; 
-    border-bottom: none !important;
+    border: none !important;
 }
 
+/* 4. THE IMAGE: Zeroed out so it can't clip the line */
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
-    /* 3. CLEAN THE IMAGE */
-    border: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    border: none !important; /* Kills the black border on the image itself */
 }
