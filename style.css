@@ -724,38 +724,41 @@ img { max-width: 100%; height: auto; display: block; }
     border-right: none !important;
 }
 
-/* --- THE CINEMATIC SYSTEM & GAP KILLER (FORCED CENTERING) --- */
+/* --- THE CINEMATIC SYSTEM & GAP KILLER (IRONCLAD CENTERING) --- */
 
-/* 1. Kills the 60px gap AND forces centering */
-.paper-sheet.cinematic-dock {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block !important;     /* Essential for margin auto to work */
-    max-width: 1200px !important;  /* Matches your index and blog width */
-    background-color: #ffffff !important; 
-    float: none !important;        /* Prevents any accidental left-float */
-}
-
-/* 2. Ensures the image wrapper has no internal spacing */
-.story-hero-wrapper {
-    line-height: 0;
+/* 1. The Parent: Forces everything inside it to center horizontally */
+.editorial-post {
+    background-color: #e7e6df !important; 
+    width: 100%;
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* This is the ultimate centering command */
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 3. The 1px white border and cinematic width */
+/* 2. The Paper: Kills the gap and maintains width */
+.paper-sheet.cinematic-dock {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+    max-width: 1200px !important; /* Keeps it from stretching too wide */
+    background-color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* 3. The Hero: Flush to top with 1px white line */
+.story-hero-wrapper {
+    line-height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+}
+
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
     border-top: 1px solid #ffffff !important;
-}
-
-/* 4. Restores the Grey/Tan page background behind the paper */
-.editorial-post {
-    background-color: #e7e6df !important; 
-    width: 100%;
-    min-height: 100vh;
 }
