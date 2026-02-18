@@ -699,31 +699,31 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- THE CINEMATIC SYSTEM & GAP KILLER (BORDER TWEAK) --- */
-
-/* ... (Keep sections 1 and 2 exactly as they are) ... */
-
-/* 3. THE HERO: Flush to top with a defined 1px white border */
+/* 3. THE HERO: Kills the black border and forces the 1px white top edge */
 .story-hero-wrapper {
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    /* Ensures the border stays inside the container */
-    overflow: hidden; 
+    border: none !important; /* Kills any black border on the wrapper */
+    outline: none !important;
+    overflow: visible; /* Prevents clipping of the top border */
 }
 
 .panoramic-hero {
     width: 100%;
     height: auto;
     display: block;
-    /* This creates the crisp 1px line at the top */
-    border-top: 1px solid #ffffff !important;
-    /* Optional: If the white line is too subtle, try #ffffff80 for slight transparency 
-       or keep it solid #ffffff as requested */
     
-    /* Ensure no other borders are interfering */
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: none !important;
+    /* KILL ALL SIDES FIRST */
+    border: none !important; 
+    
+    /* APPLY WHITE TOP ONLY */
+    border-top: 1px solid #ffffff !important; 
+    
+    /* Ensure no black shadow or outline exists */
+    box-shadow: none !important;
+    
+    /* Slight nudge: If it's still clipping, this ensures it sits below the nav */
+    margin-top: 0; 
 }
