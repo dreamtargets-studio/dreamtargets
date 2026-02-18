@@ -699,34 +699,34 @@ img { max-width: 100%; height: auto; display: block; }
     .text-rail blockquote { font-size: 1.1rem; padding-left: 25px; }
 }
 
-/* --- CINEMATIC SYSTEM (STABLE VERSION 1.27) --- */
+/* --- CINEMATIC SYSTEM (STABLE VERSION 1.28) --- */
 
-/* 1. THE BACKGROUND: Centering the paper only */
+/* 1. THE BACKGROUND: Minimalist centering */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; 
+    display: block !important; /* Back to block to stop interfering with children */
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 2. THE PAPER: Restores the white sheet and internal flow */
+/* 2. THE PAPER: Centered via margin, allowing internal grids to work */
 .paper-sheet.cinematic-dock {
     padding-top: 0 !important;
     margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
+    
+    /* Standard Centering: This is the safest way to center without affecting columns */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important; 
+    
     border-top: 1px solid #ffffff !important;
     border-left: 1px solid #ddd !important;
     border-right: 1px solid #ddd !important;
     box-shadow: none !important;
-    
-    /* Forces the sheet to act as a standard container for all columns */
-    display: block !important; 
-    overflow: hidden; /* Cleans up floated columns */
 }
 
 /* 3. THE HERO: Remains flush */
@@ -744,16 +744,7 @@ img { max-width: 100%; height: auto; display: block; }
     border: none !important;
 }
 
-/* 4. GRID REPAIR: Forces 3-column and Stacked grids to expand */
-.container {
-    width: 100% !important;
-    max-width: 800px; /* Or your preferred reading width */
-    margin: 0 auto !important;
-}
-
-/* This ensures any div with 'column' or 'grid' in the class name behaves */
-[class*="grid"], [class*="col-"], .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
+/* 4. INTERNAL RESET: Prevents any "center" inheritance on your grids */
+.paper-sheet.cinematic-dock * {
+    text-align: initial;
 }
