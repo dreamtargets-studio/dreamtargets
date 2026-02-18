@@ -701,37 +701,35 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- THE CINEMATIC SYSTEM & GAP KILLER --- */
 
-/* 1. THE BACKGROUND: Horizontal centering using Flexbox */
+/* 1. THE BACKGROUND: Standard block display for maximum grid compatibility */
 .editorial-post {
     background-color: #e7e6df !important; 
     width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; 
+    display: block !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
 /* 2. THE PAPER: Centered container with top-gap removal */
 .paper-sheet.cinematic-dock {
+    display: block !important;
+    margin: 0 auto !important; /* Standard horizontal centering */
     padding-top: 0 !important;
-    margin-top: 0 !important;
     background-color: #ffffff !important;
     width: 100% !important; 
     max-width: 1200px !important; 
-    border-top: 1px solid #ffffff !important; /* Visual separator from navigation */
+    border-top: 1px solid #ffffff !important;
     box-shadow: none !important;
-    display: block !important;
 }
 
 /* 3. THE HERO: Flush-to-top image docking */
 .story-hero-wrapper {
+    display: block !important;
     line-height: 0;
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    display: block !important;
-    clear: both; /* Ensures subsequent content begins after the hero */
+    clear: both !important; /* Forces the grid below to start after the image */
 }
 
 .panoramic-hero {
@@ -745,7 +743,19 @@ img { max-width: 100%; height: auto; display: block; }
 .paper-sheet.cinematic-dock .container {
     display: block !important;
     width: 100% !important;
-    max-width: 1140px !important; /* Permits 3-column expansion */
+    max-width: 1140px !important; /* Required width for 3-column layouts */
     margin: 0 auto !important;
     padding: 40px 15px !important;
+}
+
+/* Ensures rows within the cinematic page maintain horizontal flow */
+.paper-sheet.cinematic-dock .row {
+    display: block !important;
+    clear: both !important;
+}
+
+.paper-sheet.cinematic-dock .row:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
 }
