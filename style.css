@@ -740,3 +740,49 @@ img { max-width: 100%; height: auto; display: block; }
     max-width: 1140px !important; /* Standard width for 3-column rows */
     margin: 0 auto !important;
 }
+/* --- GALLERY SYSTEM V1.21 --- */
+
+/* 1. FLEX CONTAINER: Centers and gaps the gallery blocks */
+.gallery-grid, .gallery-grid-3 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    gap: 15px !important;
+    margin: 30px 0 !important;
+    width: 100% !important;
+}
+
+/* 2. DESKTOP COLUMN MATH */
+/* Top Gallery: 2-Columns */
+.gallery-grid figure {
+    flex: 0 0 calc(50% - 8px) !important;
+    margin: 0 !important;
+}
+
+/* Bottom Gallery: 3-Columns */
+.gallery-grid-3 figure {
+    flex: 0 0 calc(33.333% - 10px) !important;
+    margin: 0 !important;
+}
+
+/* Ensure images within galleries behave */
+.gallery-grid img, .gallery-grid-3 img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border: 1px solid #444 !important; /* Matches your editorial image style */
+}
+
+/* 3. MOBILE RESPONSIVE LOGIC */
+@media (max-width: 768px) {
+    /* Collapse the 2-column gallery into a vertical stack */
+    .gallery-grid figure {
+        flex: 0 0 100% !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Collapse the 3-column gallery into a clean 2-column wrap */
+    .gallery-grid-3 figure {
+        flex: 0 0 calc(50% - 8px) !important;
+    }
+}
