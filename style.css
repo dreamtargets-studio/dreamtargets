@@ -790,26 +790,22 @@ img { max-width: 100%; height: auto; display: block; }
 /* --- ARCHIVE GRID SYSTEM --- */
 
 .archive-section {
-    width: 100%;
-    padding: 60px 0;
-    box-sizing: border-box;
+    width: 100% !important;
+    max-width: none !important;
+    display: block;
 }
 
-/* This allows the grid to match the width of your cinematic hero */
 .archive-container-full {
     width: 100%;
-    max-width: 1400px; /* Adjust this to match your cinematic-hero's max-width */
+    max-width: 1400px; /* Adjust to match the width of your panoramic-hero */
     margin: 0 auto;
-    padding: 0 40px;
-    box-sizing: border-box;
 }
 
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3-up desktop */
-    gap: 50px 30px;
-    align-items: stretch; /* Required for the "Bottom Shelf" alignment */
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px 40px;
+    align-items: stretch; /* Vital for aligning the links at the bottom */
 }
 
 .archive-item {
@@ -822,7 +818,7 @@ img { max-width: 100%; height: auto; display: block; }
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #000; /* Frames the spreads */
+    background: #000;
     margin-bottom: 24px;
 }
 
@@ -832,41 +828,21 @@ img { max-width: 100%; height: auto; display: block; }
     object-fit: cover;
 }
 
-/* Typography & The Bottom Shelf */
-
-.item-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    color: #000;
-}
-
 .item-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #444;
-    flex-grow: 1; /* This acts as the 'spring' pushing the link down */
-    margin-bottom: 24px;
+    flex-grow: 1; /* Pushes the blue link to the bottom shelf */
+    margin-bottom: 30px;
 }
 
 .archive-link {
-    display: inline-block;
-    color: #0054dc; /* Branding Blue */
+    color: #0054dc; /* Your Branding Blue */
     text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border-bottom: 1px solid #0054dc; /* 1px blue rule */
-    align-self: flex-start; /* Keeps link left-aligned */
+    border-bottom: 1px solid #0054dc;
+    align-self: flex-start;
     padding-bottom: 2px;
 }
 
-/* Mobile: Single Column cinematic scroll */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .archive-grid {
         grid-template-columns: 1fr;
-    }
-    .archive-container-full {
-        padding: 0 20px;
     }
 }
