@@ -789,19 +789,23 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- ARCHIVE GRID SYSTEM --- */
 
-/* The wrapper provides the consistent margins (gutters) for the grid */
 .archive-section-wrap {
     width: 100%;
-    padding: 0 60px 100px; /* 60px left/right margins for the desktop 'stage' */
+    /* This creates the 5% margin/gutter on both sides of the grid */
+    padding-left: 5%; 
+    padding-right: 5%;
+    padding-bottom: 100px;
     box-sizing: border-box;
+    display: block;
 }
 
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3-up Desktop */
-    gap: 60px 40px; /* Vertical gap 60px, Horizontal gap 40px */
-    align-items: stretch; /* Required to make all boxes in a row the same height */
-    margin-top: 40px;
+    /* 3 Columns for Desktop */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 60px 40px; 
+    align-items: stretch;
+    width: 100%;
 }
 
 .archive-item {
@@ -822,22 +826,12 @@ img { max-width: 100%; height: auto; display: block; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.item-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    line-height: 1.2;
-    color: #000;
+    display: block;
 }
 
 .item-description {
-    flex-grow: 1; /* This is the 'spring' - it pushes the link to the bottom shelf */
+    flex-grow: 1; /* Aligns links to the bottom shelf */
     margin-bottom: 30px;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #333;
 }
 
 .archive-link {
@@ -846,23 +840,21 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: 0.95rem;
     font-weight: 500;
     border-bottom: 1px solid #0054dc;
-    align-self: flex-start; /* Keeps the link left-aligned to its column */
+    align-self: flex-start;
     padding-bottom: 2px;
-    transition: opacity 0.2s;
 }
 
-.archive-link:hover {
-    opacity: 0.7;
-}
+/* --- MOBILE VIEW: The Stack --- */
 
-/* MOBILE VIEW: Stacks the grid items into a single column */
-@media (max-width: 1024px) {
-    .archive-section-wrap {
-        padding: 0 30px 60px; /* Reduced margins for tablet/mobile */
+/* At 1024px and below, we force the grid to 1 column */
+@media screen and (max-width: 1024px) {
+    .archive-grid {
+        grid-template-columns: 1fr;
+        gap: 80px 0; /* More vertical space when stacked */
     }
     
-    .archive-grid {
-        grid-template-columns: 1fr; /* 1-up Mobile Stack */
-        gap: 80px 0; /* Significant vertical gap between stacked items */
+    .archive-section-wrap {
+        padding-left: 20px; /* Tighter margins for small screens */
+        padding-right: 20px;
     }
 }
