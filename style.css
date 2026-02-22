@@ -791,20 +791,21 @@ img { max-width: 100%; height: auto; display: block; }
 
 .archive-section-wrap {
     width: 100%;
-    /* This creates the 5% margin/gutter on both sides of the grid */
-    padding-left: 5%; 
-    padding-right: 5%;
-    padding-bottom: 100px;
+    padding: 0 5% 100px 5%; /* 5% left/right margins for grid and header */
     box-sizing: border-box;
     display: block;
 }
 
+.archive-header-align {
+    padding-top: 60px;
+    margin-bottom: 40px;
+}
+
 .archive-grid {
     display: grid;
-    /* 3 Columns for Desktop */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 60px 40px; 
-    align-items: stretch;
+    grid-template-columns: repeat(3, 1fr); /* 3-up Desktop */
+    gap: 60px 40px; /* Vertical and horizontal spacing */
+    align-items: stretch; /* Ensures all items in a row have identical height */
     width: 100%;
 }
 
@@ -829,32 +830,49 @@ img { max-width: 100%; height: auto; display: block; }
     display: block;
 }
 
+.item-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    color: #000;
+}
+
 .item-description {
-    flex-grow: 1; /* Aligns links to the bottom shelf */
-    margin-bottom: 30px;
+    flex-grow: 1; /* Pushes the blue link to the bottom baseline */
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
 }
 
 .archive-link {
-    color: #0054dc; /* Your Branding Blue */
+    color: #0054dc; /* Branding Blue */
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
     padding-bottom: 2px;
+    transition: opacity 0.2s ease;
 }
 
-/* --- MOBILE VIEW: The Stack --- */
+.archive-link:hover {
+    opacity: 0.7;
+}
 
-/* At 1024px and below, we force the grid to 1 column */
+/* MOBILE VIEW: Grid Stacking Logic */
 @media screen and (max-width: 1024px) {
     .archive-grid {
-        grid-template-columns: 1fr;
-        gap: 80px 0; /* More vertical space when stacked */
+        grid-template-columns: 1fr; /* Force 1 column stack */
+        gap: 80px 0; /* Significant vertical breathing room between items */
     }
     
     .archive-section-wrap {
-        padding-left: 20px; /* Tighter margins for small screens */
-        padding-right: 20px;
+        padding: 0 30px 60px 30px; /* Tighter margins for mobile screens */
+    }
+
+    .archive-header-align {
+        padding-top: 40px;
     }
 }
