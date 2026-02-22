@@ -878,13 +878,13 @@ img { max-width: 100%; height: auto; display: block; }
 /* --- ARCHIVE VIDEO VIEWER SYSTEM --- */
 
 .viewer-cinema-body {
-    background-color: #000000; /* Pure black stage from your visual */
+    background-color: #000000;
     width: 100%;
-    padding: 100px 0; /* Clear space between blue nav and footer */
+    padding: 100px 0;
 }
 
 .viewer-layout-container {
-    max-width: 1280px; /* Matching your player page width */
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 40px;
     box-sizing: border-box;
@@ -892,40 +892,60 @@ img { max-width: 100%; height: auto; display: block; }
 
 .video-viewer-grid {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: flex-start;
     gap: 40px;
+    align-items: flex-start;
 }
 
-/* --- THE PLAYER --- */
+/* --- THE PLAYER FRAME --- */
 .video-broadcast-stage {
-    flex: 0 0 960px; /* Forces 960px width precisely */
+    flex: 0 0 960px;
 }
 
 .video-white-frame {
-    width: 960px;
-    height: 540px;
-    border: 1px solid #ffffff; /* The defining white border from visual */
-    background: #111;
+    width: 100%;
+    /* Subtle 4px radius for refinement */
+    border-radius: 4px; 
+    /* Pure white border correctly contained */
+    border: 1px solid #ffffff; 
+    background: #000;
     box-sizing: border-box;
+    /* Essential to clip the iframe corners to the border-radius */
+    overflow: hidden; 
+}
+
+.vimeo-responsive-wrapper {
+    padding: 56.25% 0 0 0;
+    position: relative;
+    width: 100%;
+}
+
+.vimeo-responsive-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ensures no browser-default borders interfere */
+    border: none; 
 }
 
 /* --- THE MUTED SIDEBAR --- */
 .archival-metadata-rail {
-    flex: 1; /* Occupies the remaining space (~320px) */
+    flex: 1;
 }
 
 .viewer-h2 {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #dddddd; /* Muted off-white to prevent halation */
+    color: #dddddd;
     margin-bottom: 25px;
     letter-spacing: -0.01em;
 }
 
 .provenance-stats p {
     font-size: 0.95rem;
-    color: #999999; /* Deeply muted for secondary stats */
+    color: #888888;
     margin-bottom: 5px;
 }
 
@@ -936,21 +956,27 @@ img { max-width: 100%; height: auto; display: block; }
 .archival-narrative p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #bbbbbb; /* Subdued reading tone for the long-form copy */
+    color: #aaaaaa;
     margin-bottom: 20px;
 }
 
-/* --- RESPONSIVE LOGIC --- */
-@media (max-width: 1100px) {
+/* --- MOBILE VIEW --- */
+@media screen and (max-width: 1100px) {
+    .viewer-layout-container {
+        padding: 0 20px;
+    }
+
     .video-viewer-grid {
         flex-direction: column;
-        align-items: center;
+        gap: 30px;
     }
-    .video-broadcast-stage, .video-white-frame {
-        width: 100%;
-        max-width: 960px;
-        height: auto;
-        aspect-ratio: 16 / 9;
+
+    .video-broadcast-stage {
         flex: none;
+        width: 100%;
+    }
+
+    .archival-metadata-rail {
+        width: 100%;
     }
 }
