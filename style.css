@@ -789,18 +789,27 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- ARCHIVE GRID SYSTEM --- */
 
+.archive-section {
+    width: 100%;
+    padding: 60px 0;
+    box-sizing: border-box;
+}
+
+/* This allows the grid to match the width of your cinematic hero */
+.archive-container-full {
+    width: 100%;
+    max-width: 1400px; /* Adjust this to match your cinematic-hero's max-width */
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3-up desktop */
-    gap: 60px 40px;
-    align-items: stretch; /* Forces all items in a row to equal height */
-    margin-top: 40px;
-}
-
-@media (max-width: 768px) {
-    .archive-grid {
-        grid-template-columns: 1fr; /* Mobile stack */
-    }
+    gap: 50px 30px;
+    align-items: stretch; /* Required for the "Bottom Shelf" alignment */
+    width: 100%;
 }
 
 .archive-item {
@@ -813,9 +822,8 @@ img { max-width: 100%; height: auto; display: block; }
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #f0f0f0;
+    background: #000; /* Frames the spreads */
     margin-bottom: 24px;
-    border: 1px solid #eee;
 }
 
 .frame-16-9 img {
@@ -824,13 +832,13 @@ img { max-width: 100%; height: auto; display: block; }
     object-fit: cover;
 }
 
-/* Typography Hierarchy */
+/* Typography & The Bottom Shelf */
 
 .item-title {
     font-size: 1.1rem;
     font-weight: 700;
     line-height: 1.3;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: #000;
 }
 
@@ -838,23 +846,27 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: 0.95rem;
     line-height: 1.5;
     color: #444;
-    flex-grow: 1; /* Pushes the link to the bottom */
+    flex-grow: 1; /* This acts as the 'spring' pushing the link down */
     margin-bottom: 24px;
 }
 
-/* The Precision Text Link */
 .archive-link {
     display: inline-block;
-    color: #0054dc; /* Your Branding Blue */
+    color: #0054dc; /* Branding Blue */
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
-    border-bottom: 1px solid #0054dc; /* 1px rule anchor */
-    align-self: flex-start; /* Keeps it left-aligned */
+    border-bottom: 1px solid #0054dc; /* 1px blue rule */
+    align-self: flex-start; /* Keeps link left-aligned */
     padding-bottom: 2px;
-    transition: opacity 0.2s ease;
 }
 
-.archive-link:hover {
-    opacity: 0.7;
+/* Mobile: Single Column cinematic scroll */
+@media (max-width: 900px) {
+    .archive-grid {
+        grid-template-columns: 1fr;
+    }
+    .archive-container-full {
+        padding: 0 20px;
+    }
 }
