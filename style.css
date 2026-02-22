@@ -791,19 +791,17 @@ img { max-width: 100%; height: auto; display: block; }
 
 .archive-section-wrap {
     width: 100%;
-    /* 80px Top padding creates the gap between Hero and Title */
-    padding: 80px 5% 100px 5%; 
+    padding: 80px 5% 100px 5%; /* 80px gap from Hero, 5% side margins */
     box-sizing: border-box;
     display: block;
 }
 
 .archive-header-align {
-    /* No padding-top needed here as the wrap handles it */
-    margin-bottom: 50px; 
+    margin-bottom: 40px; 
 }
 
 .archive-header-align h1 {
-    font-size: 1rem; /* Adjust size to your preference */
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 700;
@@ -814,7 +812,8 @@ img { max-width: 100%; height: auto; display: block; }
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 60px 40px;
+    /* Tighter gaps: 50px vertical, 25px horizontal */
+    gap: 50px 25px; 
     align-items: stretch;
     width: 100%;
 }
@@ -830,7 +829,7 @@ img { max-width: 100%; height: auto; display: block; }
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #000;
-    margin-bottom: 24px;
+    margin-bottom: 20px; /* Tightened space between image and title */
 }
 
 .frame-16-9 img {
@@ -841,24 +840,25 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .item-title {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     line-height: 1.2;
+    color: #000;
 }
 
 .item-description {
-    flex-grow: 1;
-    margin-bottom: 24px;
+    flex-grow: 1; /* Aligns links to bottom shelf */
+    margin-bottom: 20px;
     font-size: 0.95rem;
     line-height: 1.5;
     color: #333;
 }
 
 .archive-link {
-    color: #0054dc;
+    color: #0054dc; /* Branding Blue */
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
@@ -869,7 +869,7 @@ img { max-width: 100%; height: auto; display: block; }
 @media screen and (max-width: 1024px) {
     .archive-grid {
         grid-template-columns: 1fr;
-        gap: 80px 0;
+        gap: 60px 0;
     }
     .archive-section-wrap {
         padding: 60px 30px 60px 30px;
