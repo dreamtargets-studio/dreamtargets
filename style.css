@@ -791,21 +791,31 @@ img { max-width: 100%; height: auto; display: block; }
 
 .archive-section-wrap {
     width: 100%;
-    padding: 0 5% 100px 5%; /* 5% left/right margins for grid and header */
+    /* 80px Top padding creates the gap between Hero and Title */
+    padding: 80px 5% 100px 5%; 
     box-sizing: border-box;
     display: block;
 }
 
 .archive-header-align {
-    padding-top: 60px;
-    margin-bottom: 40px;
+    /* No padding-top needed here as the wrap handles it */
+    margin-bottom: 50px; 
+}
+
+.archive-header-align h1 {
+    font-size: 1rem; /* Adjust size to your preference */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
 }
 
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3-up Desktop */
-    gap: 60px 40px; /* Vertical and horizontal spacing */
-    align-items: stretch; /* Ensures all items in a row have identical height */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px 40px;
+    align-items: stretch;
     width: 100%;
 }
 
@@ -835,11 +845,10 @@ img { max-width: 100%; height: auto; display: block; }
     font-weight: 700;
     margin-bottom: 12px;
     line-height: 1.2;
-    color: #000;
 }
 
 .item-description {
-    flex-grow: 1; /* Pushes the blue link to the bottom baseline */
+    flex-grow: 1;
     margin-bottom: 24px;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -847,32 +856,22 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .archive-link {
-    color: #0054dc; /* Branding Blue */
+    color: #0054dc;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
     padding-bottom: 2px;
-    transition: opacity 0.2s ease;
 }
 
-.archive-link:hover {
-    opacity: 0.7;
-}
-
-/* MOBILE VIEW: Grid Stacking Logic */
+/* MOBILE VIEW */
 @media screen and (max-width: 1024px) {
     .archive-grid {
-        grid-template-columns: 1fr; /* Force 1 column stack */
-        gap: 80px 0; /* Significant vertical breathing room between items */
+        grid-template-columns: 1fr;
+        gap: 80px 0;
     }
-    
     .archive-section-wrap {
-        padding: 0 30px 60px 30px; /* Tighter margins for mobile screens */
-    }
-
-    .archive-header-align {
-        padding-top: 40px;
+        padding: 60px 30px 60px 30px;
     }
 }
