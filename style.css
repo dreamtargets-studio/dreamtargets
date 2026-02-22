@@ -789,60 +789,39 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- ARCHIVE GRID SYSTEM --- */
 
-.archive-section {
-    width: 100% !important;
-    max-width: none !important;
-    display: block;
-}
-
-.archive-container-full {
-    width: 100%;
-    max-width: 1400px; /* Adjust to match the width of your panoramic-hero */
-    margin: 0 auto;
+.cinematic-grid-wrap {
+    max-width: 1200px; /* Adjust to match your panoramic-hero's natural width */
+    margin: 60px auto;
+    padding: 0 20px;
 }
 
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 60px 40px;
-    align-items: stretch; /* Vital for aligning the links at the bottom */
+    gap: 50px 30px;
+    align-items: stretch; /* Forces all columns to same height */
 }
 
 .archive-item {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
+.item-description {
+    flex-grow: 1; /* Pushes blue links to bottom shelf */
+    margin-bottom: 24px;
+}
+
+/* 16:9 Frame Alignment */
 .frame-16-9 {
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #000;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .frame-16-9 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.item-description {
-    flex-grow: 1; /* Pushes the blue link to the bottom shelf */
-    margin-bottom: 30px;
-}
-
-.archive-link {
-    color: #0054dc; /* Your Branding Blue */
-    text-decoration: none;
-    border-bottom: 1px solid #0054dc;
-    align-self: flex-start;
-    padding-bottom: 2px;
-}
-
-@media (max-width: 1024px) {
-    .archive-grid {
-        grid-template-columns: 1fr;
-    }
 }
