@@ -791,29 +791,27 @@ img { max-width: 100%; height: auto; display: block; }
 
 .archive-section-wrap {
     width: 100%;
-    padding: 80px 5% 100px 5%; /* 80px top gap from Hero, 5% side margins */
+    padding: 80px 5% 100px 5%;
     box-sizing: border-box;
     display: block;
 }
 
 .archive-header-align {
-    margin-bottom: 35px; /* Tightened space before the grid starts */
+    margin-bottom: 35px;
 }
 
 .archive-header-align h1 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 1.5rem; /* Larger, natural sentence case */
     font-weight: 700;
     margin: 0;
     color: #000;
+    letter-spacing: -0.01em; /* Tighter for a modern look */
 }
 
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* High-density gaps: 40px vertical, 15px horizontal */
-    gap: 40px 15px; 
+    gap: 40px 15px; /* High-density tight horizontal gap */
     align-items: stretch;
     width: 100%;
 }
@@ -829,7 +827,7 @@ img { max-width: 100%; height: auto; display: block; }
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #000;
-    margin-bottom: 15px; /* Tightest visual bond between image and text */
+    margin-bottom: 15px;
 }
 
 .frame-16-9 img {
@@ -840,7 +838,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .item-title {
-    font-size: 1.05rem; /* Slightly smaller to match higher density */
+    font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 8px;
     line-height: 1.2;
@@ -848,24 +846,24 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .item-description {
-    flex-grow: 1; /* Aligns links to bottom shelf */
+    flex-grow: 1;
     margin-bottom: 15px;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: #333;
 }
 
 .archive-link {
     color: #0054dc; /* Branding Blue */
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 600;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
     padding-bottom: 1px;
 }
 
-/* MOBILE VIEW: Maintain clarity while stacking */
+/* MOBILE VIEW */
 @media screen and (max-width: 1024px) {
     .archive-grid {
         grid-template-columns: 1fr;
