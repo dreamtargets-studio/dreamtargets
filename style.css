@@ -791,13 +791,13 @@ img { max-width: 100%; height: auto; display: block; }
 
 .archive-section-wrap {
     width: 100%;
-    padding: 80px 5% 100px 5%; /* 80px gap from Hero, 5% side margins */
+    padding: 80px 5% 100px 5%; /* 80px top gap from Hero, 5% side margins */
     box-sizing: border-box;
     display: block;
 }
 
 .archive-header-align {
-    margin-bottom: 40px; 
+    margin-bottom: 35px; /* Tightened space before the grid starts */
 }
 
 .archive-header-align h1 {
@@ -812,8 +812,8 @@ img { max-width: 100%; height: auto; display: block; }
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* Tighter gaps: 50px vertical, 25px horizontal */
-    gap: 50px 25px; 
+    /* High-density gaps: 40px vertical, 15px horizontal */
+    gap: 40px 15px; 
     align-items: stretch;
     width: 100%;
 }
@@ -829,7 +829,7 @@ img { max-width: 100%; height: auto; display: block; }
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #000;
-    margin-bottom: 20px; /* Tightened space between image and title */
+    margin-bottom: 15px; /* Tightest visual bond between image and text */
 }
 
 .frame-16-9 img {
@@ -840,38 +840,38 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .item-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem; /* Slightly smaller to match higher density */
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     line-height: 1.2;
     color: #000;
 }
 
 .item-description {
     flex-grow: 1; /* Aligns links to bottom shelf */
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
     color: #333;
 }
 
 .archive-link {
     color: #0054dc; /* Branding Blue */
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
 }
 
-/* MOBILE VIEW */
+/* MOBILE VIEW: Maintain clarity while stacking */
 @media screen and (max-width: 1024px) {
     .archive-grid {
         grid-template-columns: 1fr;
-        gap: 60px 0;
+        gap: 50px 0;
     }
     .archive-section-wrap {
-        padding: 60px 30px 60px 30px;
+        padding: 60px 25px 60px 25px;
     }
 }
