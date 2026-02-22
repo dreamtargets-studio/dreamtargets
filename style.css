@@ -983,3 +983,77 @@ img { max-width: 100%; height: auto; display: block; }
         width: 100%;
     }
 }
+
+/* --- CINEMA ARCHIVE SYSTEM --- */
+
+.archive-cinema-body {
+    background-color: #000000; /* Pure black stage */
+    min-height: 100vh;
+    padding: 60px 0 100px 0;
+    width: 100%;
+}
+
+.viewer-container-1280 {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* Typography echoing the Video Player Sidebar */
+.cinema-h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dddddd; /* Muted off-white */
+    margin: 0 0 5px 0;
+}
+
+.cinema-text {
+    color: #dddddd !important;
+}
+
+.cinema-muted {
+    color: #888888 !important; /* Muted archival gray */
+    font-size: 0.9rem !important;
+}
+
+.cinema-blue {
+    color: #0054dc !important;
+    border-bottom: 1px solid #0054dc !important;
+}
+
+/* Grid Specifics */
+.archive-grid.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4-up Desktop Grid */
+    gap: 40px 15px;
+    width: 100%;
+}
+
+/* The Thumbnail Refinement */
+.cinematic-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px; /* Subtle radius requested */
+    border: 1px solid #333; /* Dark border to define edges in the black */
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.cinematic-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile: Switch to 1-column stack */
+@media screen and (max-width: 1024px) {
+    .archive-grid.video-grid {
+        grid-template-columns: 1fr;
+        gap: 50px 0;
+    }
+    
+    .viewer-container-1280 {
+        padding: 0 20px;
+    }
+}
