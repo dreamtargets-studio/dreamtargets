@@ -1060,7 +1060,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* --- UNIVERSAL ACCENT RULE v1.22 --- */
 .rule-orange, .orange-rule {
     display: block !important;
-    width: 60px !important;    /* Truncated for finesse */
+    width: 250px !important;    /* Truncated for finesse */
     height: 1px !important;    /* Hairline thickness */
     background-color: #f26522 !important; 
     margin: 12px 0 35px 0 !important; /* Space above/below */
