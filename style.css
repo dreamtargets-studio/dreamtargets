@@ -786,3 +786,75 @@ img { max-width: 100%; height: auto; display: block; }
         flex: 0 0 calc(50% - 8px) !important;
     }
 }
+
+/* --- ARCHIVE GRID SYSTEM --- */
+
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3-up desktop */
+    gap: 60px 40px;
+    align-items: stretch; /* Forces all items in a row to equal height */
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .archive-grid {
+        grid-template-columns: 1fr; /* Mobile stack */
+    }
+}
+
+.archive-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.frame-16-9 {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #f0f0f0;
+    margin-bottom: 24px;
+    border: 1px solid #eee;
+}
+
+.frame-16-9 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Typography Hierarchy */
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.item-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    flex-grow: 1; /* Pushes the link to the bottom */
+    margin-bottom: 24px;
+}
+
+/* The Precision Text Link */
+.archive-link {
+    display: inline-block;
+    color: #0054dc; /* Your Branding Blue */
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-bottom: 1px solid #0054dc; /* 1px rule anchor */
+    align-self: flex-start; /* Keeps it left-aligned */
+    padding-bottom: 2px;
+    transition: opacity 0.2s ease;
+}
+
+.archive-link:hover {
+    opacity: 0.7;
+}
