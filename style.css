@@ -875,85 +875,84 @@ img { max-width: 100%; height: auto; display: block; }
     }
 }
 
-/* --- VIDEO VIEWER SYSTEM --- */
+/* --- ARCHIVE VIDEO VIEWER SYSTEM --- */
 
-.viewer-dark-mode {
-    padding: 80px 40px !important;
-    min-height: 100vh;
+.viewer-cinema-environment {
+    background-color: #000000; /* Deep black for cinema effect */
+    width: 100%;
+    padding: 100px 0; /* Vertical spacing between nav and footer */
 }
 
-.video-viewer-layout {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-/* Fixed 960x540 Stage */
-.video-stage-fixed {
-    width: 960px;
-    flex-shrink: 0;
-}
-
-.video-frame-bordered {
-    width: 960px;
-    height: 540px;
-    background: #000;
-    border: 1px solid #ffffff; /* Crisp white border per your spec */
+.viewer-container-1280 {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px; /* Framing margins */
     box-sizing: border-box;
 }
 
+.video-viewer-split {
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px; /* Horizontal gutter between player and text */
+    align-items: flex-start;
+}
+
+/* --- THE PLAYER STAGE --- */
+.video-stage {
+    flex: 0 0 960px; /* Locked to 960px to match visual proportion */
+}
+
+.video-frame-white-border {
+    width: 960px;
+    height: 540px;
+    border: 1px solid #ffffff; /* Crisp white border from visual evidence */
+    background: #000;
+}
+
+/* --- THE MUTED METADATA --- */
 .video-metadata-sidebar {
-    flex-grow: 1;
+    flex: 1; /* Sidebar takes the remaining 280px */
 }
 
-/* Muted Sidebar Typography */
-.viewer-sidebar-title {
-    font-size: 1.4rem;
+.sidebar-headline {
+    font-size: 1.5rem;
     font-weight: 700;
+    color: #dddddd; /* Muted off-white heading */
     margin-bottom: 20px;
-    color: #dddddd; /* Muted off-white */
 }
 
-.metadata-archival-stats {
-    margin-bottom: 25px;
-}
-
-.stats-line {
-    font-size: 0.9rem;
-    color: #999999; /* Muted gray to sit back */
+.sidebar-archival-stats p {
+    font-size: 0.95rem;
+    color: #888888; /* Muted gray for secondary provenance stats */
     margin-bottom: 4px;
 }
 
-.viewer-description p {
+.sidebar-description {
+    margin-top: 25px;
+}
+
+.sidebar-description p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #bbbbbb; /* Subdued gray for reading comfort */
+    color: #aaaaaa; /* Subdued gray for long-form description */
     margin-bottom: 20px;
 }
 
-.back-to-archive-link {
-    display: inline-block;
-    margin-top: 30px;
-    color: #0054dc;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-bottom: 1px solid transparent;
-}
-
-.back-to-archive-link:hover {
-    border-bottom: 1px solid #0054dc;
-}
-
-@media (max-width: 1300px) {
-    .video-viewer-layout {
+/* MOBILE STACK: Ensures the 960px width is not forced on small screens */
+@media screen and (max-width: 1024px) {
+    .video-viewer-split {
         flex-direction: column;
         align-items: center;
     }
-    .video-stage-fixed, .video-frame-bordered {
+    .video-stage, .video-frame-white-border {
         width: 100%;
         max-width: 960px;
         height: auto;
         aspect-ratio: 16 / 9;
+        flex: none;
+    }
+    .video-metadata-sidebar {
+        width: 100%;
+        margin-top: 40px;
     }
 }
