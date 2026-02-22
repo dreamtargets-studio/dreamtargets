@@ -874,3 +874,86 @@ img { max-width: 100%; height: auto; display: block; }
         gap: 60px 0;
     }
 }
+
+/* --- VIDEO VIEWER SYSTEM --- */
+
+.viewer-dark-mode {
+    padding: 80px 40px !important;
+    min-height: 100vh;
+}
+
+.video-viewer-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Fixed 960x540 Stage */
+.video-stage-fixed {
+    width: 960px;
+    flex-shrink: 0;
+}
+
+.video-frame-bordered {
+    width: 960px;
+    height: 540px;
+    background: #000;
+    border: 1px solid #ffffff; /* Crisp white border per your spec */
+    box-sizing: border-box;
+}
+
+.video-metadata-sidebar {
+    flex-grow: 1;
+}
+
+/* Muted Sidebar Typography */
+.viewer-sidebar-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #dddddd; /* Muted off-white */
+}
+
+.metadata-archival-stats {
+    margin-bottom: 25px;
+}
+
+.stats-line {
+    font-size: 0.9rem;
+    color: #999999; /* Muted gray to sit back */
+    margin-bottom: 4px;
+}
+
+.viewer-description p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #bbbbbb; /* Subdued gray for reading comfort */
+    margin-bottom: 20px;
+}
+
+.back-to-archive-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: #0054dc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+}
+
+.back-to-archive-link:hover {
+    border-bottom: 1px solid #0054dc;
+}
+
+@media (max-width: 1300px) {
+    .video-viewer-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .video-stage-fixed, .video-frame-bordered {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+}
