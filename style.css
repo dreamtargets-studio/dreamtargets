@@ -877,82 +877,80 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- ARCHIVE VIDEO VIEWER SYSTEM --- */
 
-.viewer-cinema-environment {
-    background-color: #000000; /* Deep black for cinema effect */
+.viewer-cinema-body {
+    background-color: #000000; /* Pure black stage from your visual */
     width: 100%;
-    padding: 100px 0; /* Vertical spacing between nav and footer */
+    padding: 100px 0; /* Clear space between blue nav and footer */
 }
 
-.viewer-container-1280 {
-    max-width: 1280px;
+.viewer-layout-container {
+    max-width: 1280px; /* Matching your player page width */
     margin: 0 auto;
-    padding: 0 40px; /* Framing margins */
+    padding: 0 40px;
     box-sizing: border-box;
 }
 
-.video-viewer-split {
+.video-viewer-grid {
     display: flex;
-    justify-content: flex-start;
-    gap: 40px; /* Horizontal gutter between player and text */
+    justify-content: space-between;
     align-items: flex-start;
+    gap: 40px;
 }
 
-/* --- THE PLAYER STAGE --- */
-.video-stage {
-    flex: 0 0 960px; /* Locked to 960px to match visual proportion */
+/* --- THE PLAYER --- */
+.video-broadcast-stage {
+    flex: 0 0 960px; /* Forces 960px width precisely */
 }
 
-.video-frame-white-border {
+.video-white-frame {
     width: 960px;
     height: 540px;
-    border: 1px solid #ffffff; /* Crisp white border from visual evidence */
-    background: #000;
+    border: 1px solid #ffffff; /* The defining white border from visual */
+    background: #111;
+    box-sizing: border-box;
 }
 
-/* --- THE MUTED METADATA --- */
-.video-metadata-sidebar {
-    flex: 1; /* Sidebar takes the remaining 280px */
+/* --- THE MUTED SIDEBAR --- */
+.archival-metadata-rail {
+    flex: 1; /* Occupies the remaining space (~320px) */
 }
 
-.sidebar-headline {
-    font-size: 1.5rem;
+.viewer-h2 {
+    font-size: 1.6rem;
     font-weight: 700;
-    color: #dddddd; /* Muted off-white heading */
-    margin-bottom: 20px;
+    color: #dddddd; /* Muted off-white to prevent halation */
+    margin-bottom: 25px;
+    letter-spacing: -0.01em;
 }
 
-.sidebar-archival-stats p {
+.provenance-stats p {
     font-size: 0.95rem;
-    color: #888888; /* Muted gray for secondary provenance stats */
-    margin-bottom: 4px;
+    color: #999999; /* Deeply muted for secondary stats */
+    margin-bottom: 5px;
 }
 
-.sidebar-description {
-    margin-top: 25px;
+.archival-narrative {
+    margin-top: 30px;
 }
 
-.sidebar-description p {
+.archival-narrative p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #aaaaaa; /* Subdued gray for long-form description */
+    color: #bbbbbb; /* Subdued reading tone for the long-form copy */
     margin-bottom: 20px;
 }
 
-/* MOBILE STACK: Ensures the 960px width is not forced on small screens */
-@media screen and (max-width: 1024px) {
-    .video-viewer-split {
+/* --- RESPONSIVE LOGIC --- */
+@media (max-width: 1100px) {
+    .video-viewer-grid {
         flex-direction: column;
         align-items: center;
     }
-    .video-stage, .video-frame-white-border {
+    .video-broadcast-stage, .video-white-frame {
         width: 100%;
         max-width: 960px;
         height: auto;
         aspect-ratio: 16 / 9;
         flex: none;
-    }
-    .video-metadata-sidebar {
-        width: 100%;
-        margin-top: 40px;
     }
 }
