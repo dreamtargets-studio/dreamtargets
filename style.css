@@ -789,17 +789,18 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- ARCHIVE GRID SYSTEM --- */
 
+/* The wrapper provides the consistent margins (gutters) for the grid */
 .archive-section-wrap {
     width: 100%;
-    padding: 0 40px 80px; /* Aligns with hero side padding */
+    padding: 0 60px 100px; /* 60px left/right margins for the desktop 'stage' */
     box-sizing: border-box;
 }
 
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px 40px;
-    align-items: stretch; /* Required for uniform row height */
+    grid-template-columns: repeat(3, 1fr); /* 3-up Desktop */
+    gap: 60px 40px; /* Vertical gap 60px, Horizontal gap 40px */
+    align-items: stretch; /* Required to make all boxes in a row the same height */
     margin-top: 40px;
 }
 
@@ -828,22 +829,24 @@ img { max-width: 100%; height: auto; display: block; }
     font-weight: 700;
     margin-bottom: 12px;
     line-height: 1.2;
+    color: #000;
 }
 
 .item-description {
-    flex-grow: 1; /* Pushes the blue link to the bottom shelf */
-    margin-bottom: 24px;
+    flex-grow: 1; /* This is the 'spring' - it pushes the link to the bottom shelf */
+    margin-bottom: 30px;
     font-size: 0.95rem;
     line-height: 1.5;
+    color: #333;
 }
 
 .archive-link {
     color: #0054dc; /* Your Branding Blue */
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     border-bottom: 1px solid #0054dc;
-    align-self: flex-start;
+    align-self: flex-start; /* Keeps the link left-aligned to its column */
     padding-bottom: 2px;
     transition: opacity 0.2s;
 }
@@ -852,12 +855,14 @@ img { max-width: 100%; height: auto; display: block; }
     opacity: 0.7;
 }
 
-/* Mobile: Single Column cinematic stack */
-@media (max-width: 900px) {
-    .archive-grid {
-        grid-template-columns: 1fr;
-    }
+/* MOBILE VIEW: Stacks the grid items into a single column */
+@media (max-width: 1024px) {
     .archive-section-wrap {
-        padding: 0 20px 60px;
+        padding: 0 30px 60px; /* Reduced margins for tablet/mobile */
+    }
+    
+    .archive-grid {
+        grid-template-columns: 1fr; /* 1-up Mobile Stack */
+        gap: 80px 0; /* Significant vertical gap between stacked items */
     }
 }
