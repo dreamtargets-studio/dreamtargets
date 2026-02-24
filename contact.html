@@ -10,35 +10,42 @@
 
     <div id="main-nav"></div>
 
-    <main class="story-layout-centered">
-        <section class="story-intro">
-            <h1>Contact</h1>
-            
-            <p class="branding-text" style="color: #333; margin-bottom: 30px; line-height: 1.7;">
-                I am an experienced digital researcher and designer currently focused on the transformation of government services. 
-                Alongside this work, I collaborate on community heritage projects in partnership with leading universities.
-            </p>
+    <main class="editorial-post">
+    <div class="paper-sheet cinematic-dock">
+        <div class="container">
+            <article class="text-rail" style="padding: 80px 0;">
+                
+                <h1>Contact</h1>
+                <div class="orange-rule"></div> <p>Professional inquiries are best sent to my <strong>LinkedIn</strong> profile. To follow my writing subscribe to <strong>Substack</strong> (it's free). And for graphics and snapshots it's <strong>Instagram</strong>.</p>
+                
+                <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
 
-            <p class="branding-text" style="color: #333; margin-bottom: 40px; line-height: 1.7;">
-                <strong>Dreamtargets</strong> serves as the home for my professional and personal creative practice. 
-                Whether you are looking to discuss a research collaboration, a design challenge, or a creative project, 
-                please use the form below to get in touch.
-            </p>
-        </section>
+                <form action="contact-engine.php" method="POST" class="contact-form-refined">
+                    
+                    <div style="display:none;">
+                        <label>Keep this field blank</label>
+                        <input type="text" name="honeypot">
+                    </div>
 
-        <div class="rule-orange"></div>
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
+                        <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
 
-        <div class="contact-form-wrapper">
-            <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
-                    width="100%" 
-                    height="900" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0">
-                    Loading…
-            </iframe>
+                    <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                        Send Message
+                    </button>
+                </form>
+
+            </article>
         </div>
-    </main>
+    </div>
+</main>
 
     <div id="main-footer"></div>
 
