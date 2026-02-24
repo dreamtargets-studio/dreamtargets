@@ -56,15 +56,16 @@
         </div>
     </main>
 
+<footer id="footer-simple"></footer>
 
-    <script src="loader.js"></script>
-    <script>
-    // Overriding the default footer for this specific page
+<script>
+    // Manually load the version without the button
     fetch('footer-simple.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        });
+        .then(res => res.text())
+        .then(data => document.getElementById('footer-simple').innerHTML = data);
+</script>
+
+<script src="loader.js"></script>
 </script>
 </body>
 </html>
