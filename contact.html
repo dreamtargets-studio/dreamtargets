@@ -6,15 +6,15 @@
     <title>Contact | Thinkamigo</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="cinematic-dock">
+<body>
 
     <header id="main-nav"></header>
 
-    <div class="paper-sheet">
-        
-        <main class="editorial-post">
+    <main class="editorial-post">
+        <div class="paper-sheet cinematic-dock">
             <div class="container">
                 <article class="text-rail" style="padding: 80px 0;">
+                    
                     <h1>Contact</h1>
                     <div class="orange-rule"></div> 
                     
@@ -23,6 +23,7 @@
                     <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
 
                     <form action="contact-engine.php" method="POST" class="contact-form-refined">
+                        
                         <div style="display:none;">
                             <label>Keep this field blank</label>
                             <input type="text" name="honeypot">
@@ -42,16 +43,19 @@
                             Send Message
                         </button>
                     </form>
+
                 </article>
             </div>
-        </main>
+        </div>
+    </main>
 
-        <footer id="footer" style="padding-bottom: 60px;">
+    <footer id="main-footer">
+        <div class="paper-sheet cinematic-dock">
             <div class="container">
-                <article class="text-rail">
+                <article class="text-rail" style="padding-bottom: 80px;">
                     <div class="orange-rule" style="margin-bottom: 40px;"></div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <p style="font-size: 0.85rem; color: #666; margin: 0;">&copy; 2026 Thinkamigo. All rights reserved.</p>
+                        <p style="font-size: 0.85rem; color: #888; margin: 0;">&copy; 2026 Thinkamigo. All rights reserved.</p>
                         <div class="social-links">
                             <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">LinkedIn</a>
                             <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">Instagram</a>
@@ -60,9 +64,8 @@
                     </div>
                 </article>
             </div>
-        </footer>
-
-    </div>
+        </div>
+    </footer>
 
     <script src="loader.js"></script>
 </body>
