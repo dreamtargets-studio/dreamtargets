@@ -6,11 +6,29 @@
     <title>Contact | Thinkamigo</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    /* Hides the contact button div injected via loader.js */
-    .footer-cta { 
-        display: none !important; 
-    }
-</style>
+        /* 1. Hides the contact button in the global footer */
+        .footer-cta { display: none !important; }
+
+        /* 2. Refines the contact form button to be a thin-bordered pill */
+        .btn-pill.refine-btn {
+            border: 1px solid #ddd !important; 
+            border-radius: 50px !important; /* The extreme radius you're looking for */
+            background: transparent;
+            color: #444;
+            font-size: 0.9rem;
+            font-family: inherit;
+            font-weight: 400;
+            padding: 12px 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-pill.refine-btn:hover {
+            border-color: #666 !important;
+            background: #fcfcfc;
+        }
+    </style>
 </head>
 <body>
 
@@ -45,7 +63,7 @@
                         <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
                     </div>
 
-                    <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                    <button type="submit" class="btn-pill refine-btn">
                         Send Message
                     </button>
                 </form>
