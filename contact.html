@@ -8,64 +8,48 @@
 </head>
 <body>
 
-    <header id="main-nav"></header>
+   <header id="main-nav"></header>
 
     <main class="editorial-post">
-        <div class="paper-sheet cinematic-dock">
-            <div class="container">
-                <article class="text-rail" style="padding: 80px 0;">
+    <div class="paper-sheet cinematic-dock">
+        <div class="container">
+            <article class="text-rail" style="padding: 80px 0;">
+                
+                <h1>Contact</h1>
+                <div class="orange-rule"></div> 
+                
+                <p>Professional inquiries are best sent to my <strong>LinkedIn</strong> profile. To follow my writing subscribe to <strong>Substack</strong> (it's free). And for graphics and snapshots it's <strong>Instagram</strong>.</p>
+                
+                <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
+
+                <form action="contact-engine.php" method="POST" class="contact-form-refined">
                     
-                    <h1>Contact</h1>
-                    <div class="orange-rule"></div> 
-                    
-                    <p>Professional inquiries are best sent to my <strong>LinkedIn</strong> profile. To follow my writing subscribe to <strong>Substack</strong> (it's free). And for graphics and snapshots it's <strong>Instagram</strong>.</p>
-                    
-                    <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
-
-                    <form action="contact-engine.php" method="POST" class="contact-form-refined">
-                        
-                        <div style="display:none;">
-                            <label>Keep this field blank</label>
-                            <input type="text" name="honeypot">
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 25px;">
-                            <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
-                            <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
-                        </div>
-                        
-                        <div class="form-group" style="margin-bottom: 30px;">
-                            <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
-                            <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
-                        </div>
-
-                        <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
-                            Send Message
-                        </button>
-                    </form>
-
-                </article>
-            </div>
-        </div>
-    </main>
-
-    <footer id="main-footer">
-        <div class="paper-sheet cinematic-dock">
-            <div class="container">
-                <article class="text-rail" style="padding-bottom: 80px;">
-                    <div class="orange-rule" style="margin-bottom: 40px;"></div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <p style="font-size: 0.85rem; color: #888; margin: 0;">&copy; 2026 Thinkamigo. All rights reserved.</p>
-                        <div class="social-links">
-                            <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">LinkedIn</a>
-                            <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">Instagram</a>
-                            <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">Substack</a>
-                        </div>
+                    <div style="display:none;">
+                        <label>Keep this field blank</label>
+                        <input type="text" name="honeypot">
                     </div>
-                </article>
-            </div>
+
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
+                        <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                        Send Message
+                    </button>
+                </form>
+
+            </article>
         </div>
-    </footer>
+    </div>
+</main>
+
+   <footer id="main-footer"></footer>
 
     <script src="loader.js"></script>
 </body>
