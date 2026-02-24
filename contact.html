@@ -3,52 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Dreamtargets</title>
+    <title>Contact | Thinkamigo</title>
     <link rel="stylesheet" href="style.css?v=1.1">
+    
+    <style>
+        /* Usability Fix: Hide the footer contact button on this page only */
+        #main-footer .pill-contact-btn { 
+            display: none !important; 
+        }
+    </style>
 </head>
 <body>
 
-<header id="main-nav"></header>
+    <header id="main-nav"></header>
 
     <main class="editorial-post">
-    <div class="paper-sheet cinematic-dock">
-        <div class="container">
-            <article class="text-rail" style="padding: 80px 0;">
-                
-                <h1>Contact</h1>
-                <div class="orange-rule"></div> <p>Professional inquiries are best sent to my <strong>LinkedIn</strong> profile. To follow my writing subscribe to <strong>Substack</strong> (it's free). And for graphics and snapshots it's <strong>Instagram</strong>.</p>
-                
-                <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
-
-                <form action="contact-engine.php" method="POST" class="contact-form-refined">
+        <div class="paper-sheet cinematic-dock">
+            <div class="container">
+                <article class="text-rail" style="padding: 80px 0;">
                     
-                    <div style="display:none;">
-                        <label>Keep this field blank</label>
-                        <input type="text" name="honeypot">
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
-                        <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
-                    </div>
+                    <h1>Contact</h1>
+                    <div class="orange-rule"></div> 
                     
-                    <div class="form-group" style="margin-bottom: 30px;">
-                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
-                        <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
-                    </div>
+                    <p>Professional inquiries are best sent to my <strong>LinkedIn</strong> profile. To follow my writing subscribe to <strong>Substack</strong> (it's free). And for graphics and snapshots it's <strong>Instagram</strong>.</p>
+                    
+                    <p style="margin-bottom: 40px;">Otherwise, use the form below for specific requirements.</p>
 
-                    <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
-                        Send Message
-                    </button>
-                </form>
+                    <form action="contact-engine.php" method="POST" class="contact-form-refined">
+                        
+                        <div style="display:none;">
+                            <label>Keep this field blank</label>
+                            <input type="text" name="honeypot">
+                        </div>
 
-            </article>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
+                            <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                        </div>
+                        
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
+                            <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                        </div>
+
+                        <button type="submit" class="pill-contact-btn" style="background: var(--brand-blue); border: none; padding: 12px 40px; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                            Send Message
+                        </button>
+                    </form>
+
+                </article>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<footer id="main-footer"></footer>
+    <footer id="main-footer"></footer>
 
-    <script src="assets/js/loader.js"></script>
+    <script src="loader.js"></script>
 </body>
 </html>
