@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Thinkamigo</title>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* Usability Fix: Hide the footer contact button on this page only */
-        #main-footer .pill-contact-btn { 
-            display: none !important; 
-        }
-    </style>
 </head>
 <body>
 
@@ -56,16 +49,18 @@
         </div>
     </main>
 
-<footer id="footer-simple"></footer>
+    <footer id="main-footer" style="padding: 60px 0; border-top: 1px solid #eee; background: #fff;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-size: 0.85rem; color: #888;">&copy; 2026 Thinkamigo. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">LinkedIn</a>
+                    <a href="#" style="margin-left: 20px; color: #666; text-decoration: none; font-size: 0.85rem;">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<script>
-    // Manually load the version without the button
-    fetch('footer-simple.html')
-        .then(res => res.text())
-        .then(data => document.getElementById('footer-simple').innerHTML = data);
-</script>
-
-<script src="loader.js"></script>
-</script>
+    <script src="loader.js"></script>
 </body>
 </html>
