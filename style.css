@@ -503,11 +503,12 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .awards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid !important; /* Changed from flex to grid */
+    grid-template-columns: repeat(8, 1fr) !important; /* 8 equal columns */
+    gap: 20px; 
+    max-width: 1200px;
+    margin: 0 auto;
     align-items: center;
-    gap: 30px; /* Adjust the spacing between logos here */
     padding: 20px 0;
 }
 
