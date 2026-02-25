@@ -1161,7 +1161,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 @media (max-width: 768px) {
     .branding-logo {
         height: auto !important; /* Releases the height restriction */
-        width: 250px !important;  /* Adjust this number to your liking */
+        width: 400 !important;  /* Adjust this number to your liking */
         max-width: 80% !important; /* Safety to ensure it doesn't bleed off screen */
     }
 }
