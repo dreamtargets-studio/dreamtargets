@@ -9,9 +9,10 @@
         /* 1. Hides the contact button in the global footer */
         .footer-cta { display: none !important; }
 
-        /* 2. Refined Brand Blue Pill Button */
+/* 2. Refined Nav-Blue Pill Button */
         .btn-pill.refine-btn {
-            background-color: var(--brand-blue) !important;
+            /* Using the precise Nav-Bar Blue Hex to eliminate optical illusions */
+            background-color: #1a4b8c !important; 
             color: #ffffff !important;
             border-radius: 50px !important;
             padding: 12px 40px;
@@ -23,6 +24,8 @@
             cursor: pointer;
             transition: opacity 0.3s ease;
             border: none;
+            -webkit-appearance: none; /* Removes mobile-specific shading */
+            box-shadow: none;         /* Ensures a flat, clean color match */
         }
 
         .btn-pill.refine-btn:hover {
