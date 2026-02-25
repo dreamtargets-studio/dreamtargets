@@ -1158,3 +1158,10 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin-top: 0 !important;       /* Removes extra gap between H2 and H3 */
     color: #666 !important;         /* Slightly softer color for the subtitle */
 }
+@media (max-width: 768px) {
+    .branding-logo {
+        height: auto !important; /* Releases the height restriction */
+        width: 180px !important;  /* Adjust this number to your liking */
+        max-width: 80% !important; /* Safety to ensure it doesn't bleed off screen */
+    }
+}
