@@ -1125,19 +1125,19 @@ font-family: Arial, Helvetica, sans-serif !important;
     line-height: 1 !important; 
 }
 
-/* Syncing H3 across Featured and Service cards */
+/* SYNCING H3 AND FIXING THE LIGHTER LOOK */
 .featured-card h3,
 .service-card h3 {
     font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
     font-weight: 500 !important;
     font-size: 20px !important;
     color: #333 !important;
-    letter-spacing: -0.02em !important; /* Tightened as requested */
-    line-height: 1.4em !important;
+    letter-spacing: -0.02em !important;
     
-    /* THE SPACING TWEAK */
-    margin-top: 10px !important;    /* Keeps it close to the heading/image above */
-    margin-bottom: 25px !important; /* Increased gap below for a wider look */
+    /* THE FIX FOR THE "LIGHTER" LOOK */
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: subpixel-antialiased !important;
     
-    text-decoration: none !important;
+    /* THE SPACING FIX */
+    margin-bottom: 25px !important;
 }
