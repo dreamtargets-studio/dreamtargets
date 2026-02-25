@@ -317,7 +317,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 .icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
-.social-item a { color: var(--eggshell); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; }
+.social-item a { color: var(--eggshell); text-decoration: none; font-size: 0.8rem; text-transform; }
 
 .footer-address { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 30px; text-align: center; }
 
