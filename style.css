@@ -711,9 +711,10 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .text-rail h2 {
-    margin: 0.2rem 0 3.5rem; /* 3.5rem Top (Space Above) | 1.5rem Bottom (Space Below) */
-    font-size: 1.2rem;
-    font-weight: 500;
+    /* Top | Right | Bottom | Left */
+    margin: 60px 0 20px 0; 
+    font-size: 26px;      /* Clear, readable size */
+    font-weight: 600;    /* Semi-bold */
     line-height: 1.2;
     color: #444;
 }
