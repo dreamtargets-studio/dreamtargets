@@ -20,6 +20,7 @@ h2 {
     line-height: 1.4em;
     margin: 30px 0 10px 0;
     -webkit-font-smoothing: antialiased;
+
 }
 
 h3 {
@@ -30,6 +31,8 @@ h3 {
     line-height: 1.4em;
     margin: 25px 0 8px 0;
     -webkit-font-smoothing: antialiased;
+        /* THE TWEAK: Negative value tightens the spacing */
+    letter-spacing: -0.01em;
 }
 
 /* Sync the Orange Rule with the H1 margin */
