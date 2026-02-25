@@ -1125,19 +1125,23 @@ font-family: Arial, Helvetica, sans-serif !important;
     line-height: 1 !important; 
 }
 
-/* SYNCING H3 AND FIXING THE LIGHTER LOOK */
-.featured-card h3,
-.service-card h3 {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-    font-weight: 500 !important;
+/* 1. DELETE all specific .service-card h3, .blog-card h4, etc. */
+
+/* 2. REPLACE with this single "Global Card Heading" block */
+.card-content h2, 
+.card-content h3, 
+.card-content h4 {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
     font-size: 20px !important;
     color: #333 !important;
-    letter-spacing: -0.02em !important;
-    
-    /* THE FIX FOR THE "LIGHTER" LOOK */
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: subpixel-antialiased !important;
-    
-    /* THE SPACING FIX */
-    margin-bottom: 25px !important;
+    letter-spacing: -0.01em !important;
+    margin: 10px 0 16px 0 !important;
+    line-height: 1.3;
+}
+
+/* 3. HANDLE the "Legend" H2 separately since it's a unique lead-in */
+.featured-card h2 {
+    font-size: 24px !important; /* Slightly larger main title */
+    margin-bottom: 4px !important;
 }
