@@ -711,9 +711,9 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .text-rail h2 {
-    margin: 1.5rem 0 3.5rem; /* 3.5rem Top (Space Above) | 1.5rem Bottom (Space Below) */
-    font-size: 2rem;
-    font-weight: 700;
+    margin: 0.5rem 0 3.5rem; /* 3.5rem Top (Space Above) | 1.5rem Bottom (Space Below) */
+    font-size: 1.5rem;
+    font-weight: 500;
     line-height: 1.2;
     color: #444;
 }
