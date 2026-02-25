@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 /* --- Global Headings --- */
 
 h1 {
@@ -7,7 +9,7 @@ h1 {
     font-weight: 600;
     font-size: 38px;
     line-height: 1.2em;
-    color: #1a1a1a; /* Using a clean charcoal for editorial depth */
+    color: #1a1a1a;
     margin: 0 0 12px 0;
     -webkit-font-smoothing: antialiased;
 }
@@ -18,7 +20,17 @@ h2 {
     font-size: 26px;
     color: black;
     line-height: 1.4em;
-    margin: 30px 0 10px 0; /* 30px top margin to separate from previous sections */
+    margin: 30px 0 10px 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+h3 {
+    font-family: 'Poppins', Helvetica, Arial, Lucida, sans-serif;
+    font-weight: 500; 
+    font-size: 20px;   /* Distinctly smaller than H2 (26px) */
+    color: #333;
+    line-height: 1.4em;
+    margin: 25px 0 8px 0;
     -webkit-font-smoothing: antialiased;
 }
 
