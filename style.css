@@ -1109,3 +1109,17 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin: 12px 0 35px 0 !important; /* Space above/below */
     border: none !important;
 }
+
+/* --- SURGICAL BUTTON SYNC: 16px Arial --- */
+
+/* Targets the Header Branded Button AND the Footer Button */
+.branding-intro-bar .pill-contact-btn,
+.footer-cta .btn-pill {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 400 !important;      /* Consistent light weight */
+    font-size: 16px !important;        /* Unified size */
+    letter-spacing: 0.02em !important; /* Unified character spacing */
+    
+    /* Ensures the text is perfectly centered vertically */
+    line-height: 1 !important; 
+}
