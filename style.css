@@ -505,13 +505,12 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* --- AWARDS GRID: STATIC & IMPACTFUL --- */
 .awards-grid {
     display: grid !important;
-    /* 4 columns creates much larger logos than 8 columns */
-grid-template-columns: repeat(8, 1fr) !important;
-    gap: 10px 0; /* 40px vertical gap between the two rows */
-    max-width: 1200px; /* Tucked slightly inside the 1200px blog width for better 'flow' */
-    margin: 0 auto;
-    align-items: center;
-    padding: 50px 0;
+    grid-template-columns: repeat(8, 1fr) !important;
+    gap: 0 !important;
+    max-width: 1280px;
+    margin: 0 auto !important;
+    /* This ensures the grid itself has no internal padding pushing the logos */
+    padding: 0 !important; 
 }
 
 .award-item {
