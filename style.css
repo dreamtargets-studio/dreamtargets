@@ -534,11 +534,11 @@ font-family: Arial, Helvetica, sans-serif !important;
 @media (max-width: 768px) {
     .awards-grid {
         grid-template-columns: repeat(4, 1fr) !important;
-        gap: 20px 10px;
-        padding: 20px;
+        gap: 0px 0px;
+        padding: 10px;
     }
     .award-item img {
-        height: 40px !important; /* Scaled for mobile screens */
+        height: 60px !important; /* Scaled for mobile screens */
     }
 }
 
