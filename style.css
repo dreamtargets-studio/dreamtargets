@@ -525,7 +525,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     max-width: 100%;
     object-fit: contain;
     filter: none !important;
-    opacity: 0.2;
+    opacity: 0.5;
 }
 
 /* MOBILE FIX (Maintains the 4x2 look) */
