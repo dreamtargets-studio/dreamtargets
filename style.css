@@ -527,7 +527,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     
     /* REMOVED: filters, opacity, and transitions */
     filter: none !important;
-    opacity: 1 !important;
+    opacity: 0.7;
 }
 
 /* MOBILE FIX (Maintains the 4x2 look) */
