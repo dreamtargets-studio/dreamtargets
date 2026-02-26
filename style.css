@@ -527,7 +527,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     
     /* REMOVED: filters, opacity, and transitions */
     filter: none !important;
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 /* MOBILE FIX (Maintains the 4x2 look) */
@@ -535,7 +535,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     .awards-grid {
         grid-template-columns: repeat(4, 1fr) !important;
         gap: 0px 0px;
-        padding: 10px;
+        padding: 0 !important;
     }
     .award-item img {
         height: 60px !important; /* Scaled for mobile screens */
