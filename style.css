@@ -1216,3 +1216,22 @@ font-family: Arial, Helvetica, sans-serif !important;
         max-width: 80% !important; /* Safety to ensure it doesn't bleed off screen */
     }
 }
+
+/* --- GLOBAL SANS-SERIF ENFORCEMENT --- */
+
+/* This specifically targets the paragraph and list items to strip the Segoe UI 'I' serifs */
+.text-rail p, 
+.text-rail ul, 
+.text-rail li,
+.editorial-post p {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 1.2rem !important;
+    line-height: 1.6 !important;
+}
+
+/* Ensure the Business Transformation list keeps its 10px indent */
+.text-rail ul li {
+    padding-left: 10px !important;
+    margin-bottom: 12px !important;
+    list-style-position: outside !important;
+}
