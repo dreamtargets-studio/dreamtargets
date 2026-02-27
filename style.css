@@ -236,8 +236,6 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 
 
-
-
 /* FOOTER BRANDING FIX */
 /* Center the brand logo within its column */
 .footer-visual-col {
@@ -351,18 +349,7 @@ font-family: Arial, Helvetica, sans-serif !important;
         text-align: center; 
     }
 
-/* 1. The Hover State */
-.footer-nav-col a:hover { 
-    color: #ff8c00 !important; 
-    text-decoration: none !important;
-}
 
-/* 2. The Active State (For the current page) */
-.footer-nav-col a.active { 
-    color: #ff8c00 !important; 
-    font-weight: 400 !important;
-    text-decoration: none !important;
-}
 
 
 
