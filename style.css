@@ -35,6 +35,42 @@ h3 {
     letter-spacing: -0.01em;
 }
 
+p {
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Your choice of font here */
+    font-size: 1.1rem;      /* Standard readable size */
+    line-height: 1.65;     /* Professional spacing */
+    color: #444;           /* Soft black for better reading */
+    margin-top: 0;
+    margin-bottom: 1.5rem; /* Consistent gap between paragraphs */
+}
+
+/* THE LIST CONTROL */
+ul {
+    padding-left: 20px;    /* Moves bullets in from the edge */
+    margin-bottom: 1.5rem;
+    list-style-type: disc;
+}
+
+ul li {
+    padding-left: 10px;    /* Your specific 10px indent from bullet to text */
+    margin-bottom: 8px;    /* Space between items */
+    font-size: 1.1rem;     /* Matches the paragraph size */
+}
+
+/* The Accent Rule */
+.orange-rule {
+    margin-top: 0;
+    margin-bottom: 30px;
+    height: 2px;
+    background-color: #f26522;
+    width: 250px;
+}
+
+
+
+
+
+
 /* Sync the Orange Rule with the H1 margin */
 .orange-rule {
     margin-top: 0;
