@@ -696,6 +696,29 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin: 0 auto; 
 }
 
+
+.text-rail ul {
+    list-style-type: disc !important;
+    margin: 20px 0 30px 25px !important; /* 25px pushes the bullets into view */
+    padding: 0 !important;
+}
+
+/* 2. Create the specific 10px indent from bullet to text */
+.text-rail ul li {
+    padding-left: 10px !important; 
+    margin-bottom: 12px !important;
+    display: list-item !important; /* Forces the bullet to reappear */
+    line-height: 1.6;
+}
+
+/* 3. Keep your bottom 'Links' section clean (no bullets) */
+.text-rail h3 + ul[style*="list-style: none"] li {
+    padding-left: 0 !important;
+    display: block !important;
+}
+
+
+
 .editorial-post img { 
     width: 100%; 
     display: block; 
