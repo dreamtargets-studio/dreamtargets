@@ -217,16 +217,16 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 
 
-/* FOOTER (GLOBAL) */
 #main-footer { background: var(--footer-bg); color: #fff; padding: 80px 0 40px; }
 .footer-branding-top { text-align: center; margin-bottom: 60px; }
 .footer-body-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; }
 .footer-nav-col ul { list-style: none; padding: 0; }
 .footer-nav-col li { margin-bottom: 10px; }
 .footer-nav-col a { color: var(--eggshell); text-decoration: none; transition: 0.3s; }
-.footer-nav-col a:hover { color: #fff; }
 
-
+/* THE CHANGE: Swap #fff for #ff8c00 and add the .active state */
+.footer-nav-col a:hover,
+.footer-nav-col a.active { color: #ff8c00 !important; }
 
 
 /* Desktop: Align footer link lists to the left */
