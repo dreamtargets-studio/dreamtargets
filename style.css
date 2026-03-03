@@ -981,7 +981,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 .item-description {
     flex-grow: 1;
     margin-bottom: 15px;
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1.5;
     color: #333;
 }
@@ -989,7 +989,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 .archive-link {
     color: #0054dc;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     border-bottom: 1px solid #0054dc;
     align-self: flex-start;
 }
