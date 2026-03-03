@@ -345,13 +345,34 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* SOCIAL STRIP */
 .social-strip { display: flex; justify-content: center; gap: 80px; }
-.social-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+
+
+.social-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important;
+    color: var(--eggshell) !important;
+    font-size: 0.8rem;
+}
+
+/* Hover effect on the whole block */
+.social-item a:hover .social-icon {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+.social-item a:hover span {
+    color: #ff8c00 !important; /* Matches your orange sync */
+}
+
+
 .social-icon { width: 32px; height: 32px; background-repeat: no-repeat; background-position: center bottom; background-size: contain; opacity: 0.8; transition: 0.3s; }
-.social-item:hover .social-icon { transform: translateY(-3px); opacity: 1; }
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 .icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
-.social-item a { color: var(--eggshell); text-decoration: none; font-size: 0.8rem; text-transform; }
 
 .footer-address { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 30px; text-align: center; }
 
