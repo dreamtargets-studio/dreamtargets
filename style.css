@@ -1251,18 +1251,27 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* --- GLOBAL SANS-SERIF ENFORCEMENT --- */
 
-/* This specifically targets the paragraph and list items to strip the Segoe UI 'I' serifs */
+/* 1. Force the color and font across the entire article body */
+.editorial-post,
+.text-rail,
 .text-rail p, 
 .text-rail ul, 
 .text-rail li,
 .editorial-post p {
     font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 1.1rem !important;
-    line-height: 1.6 !important;
-    color: #363636 !important;
+    font-size: 1.15rem !important; /* Slightly increased for readability */
+    line-height: 1.65 !important;
+    color: #555555 !important; /* Soft dark grey - kills the "too black" look */
 }
 
-/* Ensure the Business Transformation list keeps its 10px indent */
+/* 2. Fix the Heading colors (H1, H2, H3) within the editorial post */
+.text-rail h1, 
+.text-rail h2, 
+.text-rail h3 {
+    color: #222222 !important; /* Headings stay dark for hierarchy */
+}
+
+/* 3. Maintain your specific 10px list indent */
 .text-rail ul li {
     padding-left: 10px !important;
     margin-bottom: 12px !important;
