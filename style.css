@@ -367,6 +367,18 @@ font-family: Arial, Helvetica, sans-serif !important;
     width: 100%; /* Ensures the link fills the item for a better hit-target */
 }
 
+/* Hover effect on the whole block */
+.social-item a:hover .social-icon {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+.social-item a:hover span {
+    color: #ff8c00 !important; /* Matches your orange sync */
+}
+
+
+
 
 .social-icon { width: 32px; height: 32px; background-repeat: no-repeat; background-position: center bottom; background-size: contain; opacity: 0.8; transition: 0.3s; }
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
