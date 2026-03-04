@@ -92,78 +92,31 @@ document.addEventListener('click', (e) => {
 
 /* --- Append to the bottom of loader.js --- */
 
-// LIGHTBOX LOGIC: Expands thumbnails to full screen
+/* --- UNIFIED GRID LIGHTBOX --- */
 document.addEventListener('click', (e) => {
-    const link = e.target.closest('.expandable');
-    if (link) {
-        // Essential: Prevents the browser from leaving the page to open the image file
-        e.preventDefault(); 
+    // This targets images in BOTH the Editorial Galleries and the Archive Grid
+    const clickedImg = e.target.closest('.gallery-grid img, .gallery-grid-3 img, .frame-16-9 img');
+    
+    if (clickedImg) {
+        const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
         
-        const fullImgSrc = link.getAttribute('href');
+        // Use the high-res data-full if it exists (Archive), 
+        // otherwise use the standard src (Editorial Gallery)
+        const targetImage = clickedImg.getAttribute('data-full') || clickedImg.src;
         
-        // Create the Overlay container
-        const overlay = document.createElement('div');
-        overlay.id = 'lightbox-overlay';
-        overlay.style = `
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: flex; align-items: center;
-            justify-content: center; z-index: 9999; cursor: zoom-out;
-        `;
-        
-        // Create the Image element
-        const img = document.createElement('img');
-        img.src = fullImgSrc;
-        img.style = "max-width: 90%; max-height: 90%; border: 2px solid #fff; background: #222; box-shadow: 0 0 50px rgba(0,0,0,0.5);";
-        
-        // Local testing fallback: if image is missing, show a styled "missing" box
-        img.onerror = () => { 
-            img.alt = "Image not found locally"; 
-            img.style.padding = "40px";
-            img.style.color = "#fff";
-            img.style.fontFamily = "Arial, sans-serif";
-        };
-
-        overlay.appendChild(img);
-        document.body.appendChild(overlay);
-        
-        // Remove the overlay (close lightbox) when the user clicks anywhere
-        overlay.onclick = () => overlay.remove();
-    }
-});
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = document.getElementById('lightbox-overlay');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const archiveImages = document.querySelectorAll('.frame-16-9 img');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-// Open Lightbox with High-Res Switch
-archiveImages.forEach(img => {
-    img.onclick = function() {
-        const fullResSource = this.getAttribute('data-full');
-        
-        lightbox.style.display = "flex";
-        
-        // If there's a high-res version, use it. Otherwise, fallback to the thumb.
-        if (fullResSource) {
-            lightboxImg.src = fullResSource;
-        } else {
-            lightboxImg.src = this.src;
+        if (lightbox && lightboxImg) {
+            lightbox.style.display = "flex";
+            lightboxImg.src = targetImage;
         }
     }
-});
 
-    // Close Lightbox (on X, on background click, or on Esc key)
-    const closeLightbox = () => lightbox.style.display = "none";
-    
-    closeBtn.onclick = closeLightbox;
-    lightbox.onclick = closeLightbox;
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") closeLightbox();
-    });
+    // CLOSE LOGIC: Background or 'X' click
+    if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
+        const lightbox = document.getElementById('lightbox-overlay');
+        if (lightbox) {
+            lightbox.style.display = "none";
+            document.getElementById('lightbox-img').src = "";
+        }
+    }
 });
