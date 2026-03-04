@@ -131,3 +131,18 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Open Lightbox with High-Res Switch
+archiveImages.forEach(img => {
+    img.onclick = function() {
+        const fullResSource = this.getAttribute('data-full');
+        
+        lightbox.style.display = "flex";
+        
+        // If there's a high-res version, use it. Otherwise, fallback to the thumb.
+        if (fullResSource) {
+            lightboxImg.src = fullResSource;
+        } else {
+            lightboxImg.src = this.src;
+        }
+    }
+});
