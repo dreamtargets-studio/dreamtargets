@@ -131,6 +131,16 @@ document.addEventListener('click', (e) => {
     }
 });
 
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const archiveImages = document.querySelectorAll('.frame-16-9 img');
+    const closeBtn = document.querySelector('.lightbox-close');
+
 // Open Lightbox with High-Res Switch
 archiveImages.forEach(img => {
     img.onclick = function() {
@@ -145,4 +155,15 @@ archiveImages.forEach(img => {
             lightboxImg.src = this.src;
         }
     }
+});
+
+    // Close Lightbox (on X, on background click, or on Esc key)
+    const closeLightbox = () => lightbox.style.display = "none";
+    
+    closeBtn.onclick = closeLightbox;
+    lightbox.onclick = closeLightbox;
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") closeLightbox();
+    });
 });
