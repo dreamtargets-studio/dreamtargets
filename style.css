@@ -1259,7 +1259,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 .text-rail li,
 .editorial-post p {
     font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 1.00rem !important; 
+    font-size: 1.05rem !important; 
     line-height: 1.40 !important;
     color: #555555 !important; /* Soft dark grey - kills the "too black" look */
 }
