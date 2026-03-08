@@ -1,46 +1,65 @@
+/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.5 --- */
+
+/**
+ * 1. COMPONENT LOADER
+ * Fetches HTML files (header/footer) and injects them into the DOM
+ */
 async function loadComponent(elementId, filePath) {
     try {
         const response = await fetch(filePath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const content = await response.text();
-        document.getElementById(elementId).innerHTML = content;
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.innerHTML = content;
+        }
     } catch (error) {
         console.error('Error loading ' + filePath, error);
     }
 }
 
+/**
+ * 2. NAVIGATION SYNC
+ * Highlights the active menu item based on the current URL
+ */
 function highlightActiveLink() {
-    // Get the current page filename (e.g., 'digital-stories.html')
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-links a');
 
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
-        
-        // If the URL contains the link's href, light it up!
-        if (currentPath.includes(linkHref) && linkHref !== "") {
+        // Check if current path includes the link href (excluding empty links)
+        if (linkHref && currentPath.includes(linkHref) && linkHref !== "") {
             link.classList.add('active');
         }
-        
-        // Special case for Home page
+        // Fallback for root/index
         if (currentPath.endsWith('/dreamtargets/') && linkHref === 'index.html') {
             link.classList.add('active');
         }
     });
 }
 
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-    loadComponent('main-nav', 'header.html');
-    loadComponent('main-footer', 'footer.html');
+/**
+ * 3. INITIALIZATION
+ * Runs when the page is ready
+ */
+window.addEventListener('DOMContentLoaded', async () => {
+    // Load components first so we can manipulate them
+    await loadComponent('main-nav', 'header.html');
+    await loadComponent('main-footer', 'footer.html');
+    
+    // Once components are loaded, run sync tasks
+    highlightActiveLink();
 });
 
-
+/**
+ * 4. SCROLL WATCHER
+ * Handles the visibility of the "Back to Top" button
+ */
 window.addEventListener('scroll', () => {
     const btn = document.getElementById("backToTop");
     if (btn) {
-        if (window.scrollY > 40) { // Appears after 400px of scrolling
+        if (window.scrollY > 40) {
             btn.classList.add("show");
         } else {
             btn.classList.remove("show");
@@ -48,84 +67,64 @@ window.addEventListener('scroll', () => {
     }
 });
 
-window.addEventListener('DOMContentLoaded', async () => {
-    await loadComponent('main-nav', 'header.html');
-    await loadComponent('main-footer', 'footer.html');
-    
-    highlightActiveLink(); // The new step
-    initBackToTop();
-});
-
-// The Jump-to-Top Logic
+/**
+ * 5. GLOBAL CLICK MANAGER (Unified)
+ * One listener to rule them all: Back to Top and Unified Lightbox
+ */
 document.addEventListener('click', (e) => {
+    
+    // A. Back to Top Logic
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
     }
-});
 
-
-/* Simple Lightbox Logic */
-document.addEventListener('click', (e) => {
-    const link = e.target.closest('.expandable');
-    if (link) {
-        e.preventDefault();
-        const fullImgSrc = link.getAttribute('href');
-        
-        // Create Overlay
-        const overlay = document.createElement('div');
-        overlay.style = `
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: flex; align-items: center;
-            justify-content: center; z-index: 2000; cursor: zoom-out;
-        `;
-        
-        const img = document.createElement('img');
-        img.src = fullImgSrc;
-        img.style = "max-width: 90%; max-height: 90%; border: 2px solid #fff;";
-        
-        overlay.appendChild(img);
-        document.body.appendChild(overlay);
-        
-        overlay.onclick = () => overlay.remove();
-    }
-});
-
-/* --- Append to the bottom of loader.js --- */
-
-/* --- UNIFIED GRID LIGHTBOX v1.3 --- */
-document.addEventListener('click', (e) => {
-    // 1. SELECTOR: Target images in Editorial Galleries OR Archive Frames
-    const clickedImg = e.target.closest('.gallery-grid img, .gallery-grid-3 img, .frame-16-9 img, .panoramic-hero');
+    // B. UNIFIED LIGHTBOX OPEN LOGIC
+    // Targets images in .gallery-grid, .gallery-grid-3, .frame-16-9, or .expandable links
+    const galleryImg = e.target.closest('.gallery-grid img, .gallery-grid-3 img, .frame-16-9 img, .expandable img, .panoramic-hero');
     
-    if (clickedImg) {
+    if (galleryImg) {
+        // Prevent default behavior (stops <a> links from opening the raw image file)
+        e.preventDefault(); 
+
         const lightbox = document.getElementById('lightbox-overlay');
         const lightboxImg = document.getElementById('lightbox-img');
         
         if (lightbox && lightboxImg) {
-            // 2. LOGIC: Use high-res 'data-full' if available, otherwise use standard 'src'
-            const targetImage = clickedImg.getAttribute('data-full') || clickedImg.src;
+            // Resolve high-res source: 
+            // 1. Check data-full attribute (Archive Grid)
+            // 2. Check if wrapped in an <a> tag with an href (Blog Gallery)
+            // 3. Fallback to the current img src
+            const parentLink = galleryImg.closest('a');
+            const highRes = galleryImg.getAttribute('data-full') || 
+                            (parentLink ? parentLink.getAttribute('href') : null) || 
+                            galleryImg.src;
             
             lightbox.style.display = "flex";
-            lightboxImg.src = targetImage;
+            lightboxImg.src = highRes;
             
-            // Optional: Prevent background scrolling while viewing
-            document.body.style.overflow = 'hidden';
+            // Lock body scroll to prevent "shifting" behind the lightbox
+            document.body.style.overflow = 'hidden'; 
         }
+        return;
     }
 
-    // 3. CLOSE LOGIC: If clicking the Close 'X' or the dark background
+    // C. LIGHTBOX CLOSE LOGIC
+    // Closes if user clicks the X or the dark background overlay
     if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
         const lightbox = document.getElementById('lightbox-overlay');
         const lightboxImg = document.getElementById('lightbox-img');
         if (lightbox) {
             lightbox.style.display = "none";
-            lightboxImg.src = ""; // Clear image to prevent "ghosting" on next open
+            lightboxImg.src = ""; // Flush the image to prevent ghosting on next open
             document.body.style.overflow = 'auto'; // Restore scrolling
         }
     }
 });
 
-// 4. KEYBOARD SUPPORT (Escape to close)
+/**
+ * 6. ACCESSIBILITY / KEYBOARD SUPPORT
+ */
 document.addEventListener('keydown', (e) => {
     if (e.key === "Escape") {
         const lightbox = document.getElementById('lightbox-overlay');
