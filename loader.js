@@ -92,31 +92,47 @@ document.addEventListener('click', (e) => {
 
 /* --- Append to the bottom of loader.js --- */
 
-/* --- UNIFIED GRID LIGHTBOX --- */
+/* --- UNIFIED GRID LIGHTBOX v1.3 --- */
 document.addEventListener('click', (e) => {
-    // This targets images in BOTH the Editorial Galleries and the Archive Grid
-    const clickedImg = e.target.closest('.gallery-grid img, .gallery-grid-3 img, .frame-16-9 img');
+    // 1. SELECTOR: Target images in Editorial Galleries OR Archive Frames
+    const clickedImg = e.target.closest('.gallery-grid img, .gallery-grid-3 img, .frame-16-9 img, .panoramic-hero');
     
     if (clickedImg) {
         const lightbox = document.getElementById('lightbox-overlay');
         const lightboxImg = document.getElementById('lightbox-img');
         
-        // Use the high-res data-full if it exists (Archive), 
-        // otherwise use the standard src (Editorial Gallery)
-        const targetImage = clickedImg.getAttribute('data-full') || clickedImg.src;
-        
         if (lightbox && lightboxImg) {
+            // 2. LOGIC: Use high-res 'data-full' if available, otherwise use standard 'src'
+            const targetImage = clickedImg.getAttribute('data-full') || clickedImg.src;
+            
             lightbox.style.display = "flex";
             lightboxImg.src = targetImage;
+            
+            // Optional: Prevent background scrolling while viewing
+            document.body.style.overflow = 'hidden';
         }
     }
 
-    // CLOSE LOGIC: Background or 'X' click
+    // 3. CLOSE LOGIC: If clicking the Close 'X' or the dark background
     if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
         const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
         if (lightbox) {
             lightbox.style.display = "none";
+            lightboxImg.src = ""; // Clear image to prevent "ghosting" on next open
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+    }
+});
+
+// 4. KEYBOARD SUPPORT (Escape to close)
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+        const lightbox = document.getElementById('lightbox-overlay');
+        if (lightbox && lightbox.style.display === "flex") {
+            lightbox.style.display = "none";
             document.getElementById('lightbox-img').src = "";
+            document.body.style.overflow = 'auto';
         }
     }
 });
