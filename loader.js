@@ -75,7 +75,7 @@ document.addEventListener('click', (e) => {
 
     // B. UNIFIED LIGHTBOX OPEN LOGIC
     // Targets images in the text rail, editorial galleries, or archive frames
-    const galleryImg = e.target.closest('.text-rail img, .gallery-grid img, .gallery-grid-3 img, .frame-16-9 img, .panoramic-hero');
+    const galleryImg = e.target.closest('.text-rail img, .gallery-grid img, .gallery-grid-3 img, .frame-16-9 img');
     
     if (galleryImg) {
         const lightbox = document.getElementById('lightbox-overlay');
