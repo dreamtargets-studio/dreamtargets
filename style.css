@@ -1304,11 +1304,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     transition: transform 0.3s ease;
     /* Combined loading properties here */
-    background: #111 url('assets/img/loading-spinner.gif') no-repeat center;
-    background-size: 40px 40px; /* Optional: keeps your GIF from being huge */
+    background-image: url('assets/img/loading-spinner.gif');
+    background-size: 60px 60px; /* Match this to your GIF's actual size */
+    background-repeat: no-repeat;
+    background-position: center;
     min-width: 300px;
     min-height: 200px;
 }
+
 
 /* Close Button */
 .lightbox-close {
