@@ -1317,6 +1317,20 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 
+/* Hide the 'broken' border when the src is empty */
+.lightbox-content:not([src]), 
+.lightbox-content[src=""] {
+    opacity: 0;
+}
+
+/* Once the image has a real source, fade it in */
+.lightbox-content[src^="assets"] {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+
+
 
 /* Close Button */
 .lightbox-close {
