@@ -82,16 +82,21 @@ document.addEventListener('click', (e) => {
         const lightboxImg = document.getElementById('lightbox-img');
         
         if (lightbox && lightboxImg) {
-            // Priority: data-full attribute -> fallback to current src
             const fullImage = galleryImg.getAttribute('data-full') || galleryImg.src;
             
+            // 1. Reset the image src first (this shows the spinner background)
+            lightboxImg.src = ""; 
+            
+            // 2. Open the theater
             lightbox.style.display = "flex";
+            
+            // 3. Start loading the new image
             lightboxImg.src = fullImage;
             
-            // Prevent background page from scrolling
             document.body.style.overflow = 'hidden'; 
         }
     }
+
 
     // C. LIGHTBOX CLOSE LOGIC
     // Closes if clicking the 'X' button or the dark background
@@ -105,6 +110,16 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+
+
+
+
+
+
+
+
+
 
 /**
  * 6. ACCESSIBILITY
