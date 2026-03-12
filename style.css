@@ -1354,19 +1354,19 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.8;
 }
 
-/* --- CURATED LINKS HOVER EFFECT --- */
+/* --- THE STEALTH HIGHLIGHTER --- */
 
-/* 1. Target the links inside your specific section */
-.text-rail section[style*="80px"] ul li a {
-    transition: background-color 0.2s ease, color 0.2s ease;
-    padding: 2px 4px;
-    margin-left: -4px; /* Keeps text aligned while adding padding */
+/* 1. Target the links inside that specific section without changing their layout */
+.text-rail section[style*="80px"] li a {
+    transition: background-color 0.2s ease;
+    /* This adds the highlight 'box' space without shifting the text */
+    padding: 0 4px;
+    margin: 0 -4px;
 }
 
-/* 2. The Hover State: High-contrast highlight */
-.text-rail section[style*="80px"] ul li a:hover {
+/* 2. The Hover State: Only activates when the mouse is over the link */
+.text-rail section[style*="80px"] li a:hover {
     background-color: #ffdd00 !important; /* GOV.UK Yellow */
-    color: #000000 !important;            /* High-contrast Black */
-    border-bottom-color: transparent !important; /* Hides the grey line on hover */
-    text-decoration: none !important;
+    color: #000000 !important;            /* Force Black for contrast */
+    border-bottom-color: transparent !important; /* Hides the grey line */
 }
