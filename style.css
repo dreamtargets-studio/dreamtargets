@@ -1354,22 +1354,3 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.8;
 }
 
-/* --- THE INDENT-SAFE HIGHLIGHTER --- */
-
-/* 1. Target the link itself without touching the <li> or <ul> layout */
-.text-rail section[style*="80px"] li a {
-    transition: background-color 0.2s ease, color 0.2s ease;
-    
-    /* We add padding to the box, but use a negative margin to 
-       keep the text exactly where it is now. No indent shift! */
-    padding: 2px 6px;
-    margin-left: -6px; 
-}
-
-/* 2. The Hover: We use !important to break through your inline HTML styles */
-.text-rail section[style*="80px"] li a:hover {
-    background-color: #ffdd00 !important; /* The Yellow Highlight */
-    color: #000000 !important;            /* Forces text to Black */
-    border-bottom-color: transparent !important; /* Hides the grey line */
-    text-decoration: none !important;
-}
