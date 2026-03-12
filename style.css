@@ -1354,30 +1354,31 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.8;
 }
 
-/* --- CURATED LINKS HIGHLIGHTER --- */
+/* --- CURATED LINKS HIGHLIGHTER (STABILIZED) --- */
 
 .curated-links {
-    list-style: none;
-    padding: 0;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 20px 0 !important;
 }
 
 .curated-links li {
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
+    list-style-type: none !important; /* Forces bullets to stay away */
 }
 
 .curated-links a {
-    color: #0056b3;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    padding: 2px 4px;
-    margin-left: -4px; /* Aligns text perfectly with the rest of the rail */
-    transition: all 0.2s ease;
-    display: inline-block;
+    color: #0056b3 !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid #ccc !important;
+    padding: 2px 6px !important; /* Increased for better highlight shape */
+    margin-left: -6px !important; 
+    transition: all 0.2s ease !important;
+    display: inline-block !important;
 }
 
 .curated-links a:hover {
-    background-color: #ffdd00; /* GOV.UK Yellow */
-    color: #000;
-    border-bottom-color: transparent;
-    text-decoration: none;
+    background-color: #ffdd00 !important; /* GOV.UK Yellow */
+    color: #000000 !important;
+    border-bottom-color: transparent !important;
 }
