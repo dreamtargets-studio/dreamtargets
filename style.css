@@ -1354,3 +1354,30 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.8;
 }
 
+/* --- CURATED LINKS HIGHLIGHTER --- */
+
+.curated-links {
+    list-style: none;
+    padding: 0;
+}
+
+.curated-links li {
+    margin-bottom: 15px;
+}
+
+.curated-links a {
+    color: #0056b3;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 4px;
+    margin-left: -4px; /* Aligns text perfectly with the rest of the rail */
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.curated-links a:hover {
+    background-color: #ffdd00; /* GOV.UK Yellow */
+    color: #000;
+    border-bottom-color: transparent;
+    text-decoration: none;
+}
