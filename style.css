@@ -1354,23 +1354,25 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.8;
 }
 
-/* --- EDITORIAL HOVER HIGHLIGHT --- */
-
-/* Base state for links in the body text */
-.text-rail a, 
-.editorial-post a {
-    color: #0054dc; /* Brand Blue */
-    text-decoration: none; /* Clean look until hover */
-    padding: 0 2px; /* Slight horizontal breathing room for the highlight */
-    transition: background-color 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid rgba(0, 84, 220, 0.3); /* Subtle blue underline as a hint */
+.curated-links {
+    list-style: none;
+    padding: 0;
 }
 
-/* Hover state: The "Highlighter" effect */
-.text-rail a:hover, 
-.editorial-post a:hover {
-    background-color: #ffdd00; /* GOV.UK Yellow */
-    color: #000; /* Black text for maximum readability on yellow */
-    border-bottom-color: transparent; /* Hide the thin underline while highlighted */
-    cursor: pointer;
+.curated-links li {
+    margin-bottom: 15px;
+}
+
+.curated-links a {
+    color: #0056b3;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 4px;
+    transition: all 0.2s ease;
+}
+
+.curated-links a:hover {
+    background-color: #ffdd00;
+    color: #000;
+    border-bottom-color: transparent;
 }
