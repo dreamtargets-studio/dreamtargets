@@ -29,7 +29,7 @@ h3 {
     font-size: 20px;   /* Distinctly smaller than H2 (26px) */
     color: #333;
     line-height: 1.4em;
-    margin: 25px 0 12px 0;
+    margin: 25px 12px 12px 0;
     -webkit-font-smoothing: antialiased;
         /* THE TWEAK: Negative value tightens the spacing */
     letter-spacing: -0.01em;
