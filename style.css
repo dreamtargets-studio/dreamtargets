@@ -42,7 +42,7 @@ h4 {
     font-weight: 600; 
     font-size: 18px;   /* Distinctly smaller than H3 (20px) */
     color: #333;
-    line-height: 1.4em;
+    line-height: 1.6em;
     margin: 25px 12px 12px 0;
     -webkit-font-smoothing: antialiased;
         /* THE TWEAK: Negative value tightens the spacing */
