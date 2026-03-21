@@ -1479,9 +1479,33 @@ font-family: Arial, Helvetica, sans-serif !important;
     }
 }
 
-/* Enforces consistent archive image border to 1px */
-.frame-portrait img {
-    border: 1px solid #444 !important; /* Force 1px globally */
-    box-sizing: border-box !important;   /* Keeps border inside the frame */
-    outline: none !important;           /* Removes potential focus rings */
+/* --- UNIVERSAL ARCHIVE BORDER RESET --- */
+
+/* 1. Target all images within any archive or portrait grid */
+.archive-grid img, 
+.portrait-gallery-grid-3 img, 
+.portrait-gallery-grid-4 img, 
+.portrait-5 img {
+    border: 1px solid #444 !important; /* Forces uniform color and width */
+    outline: none !important;           /* Removes browser focus rings */
+    box-sizing: border-box !important;   /* Keeps border inside the container */
+    margin: 0 !important;               /* Prevents alignment shifts */
+    padding: 0 !important;
+    max-width: 100% !important;
+    display: block !important;
+}
+
+/* 2. Remove any "First-Child" or "Featured" overrides that might exist */
+.archive-grid article:first-child img,
+.archive-grid .archive-item:first-of-type img,
+.portrait-5 figure:first-child img {
+    border-width: 1px !important;
+}
+
+/* 3. Ensure the container (the frame) isn't adding a double border */
+.frame-16-9, 
+.frame-portrait {
+    border: none !important; 
+    overflow: hidden !important;
+    background-color: transparent !important;
 }
