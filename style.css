@@ -1478,3 +1478,10 @@ font-family: Arial, Helvetica, sans-serif !important;
         font-size: 0.9rem !important;
     }
 }
+
+/* Enforces consistent archive image border to 1px */
+.frame-portrait img {
+    border: 1px solid #444 !important; /* Force 1px globally */
+    box-sizing: border-box !important;   /* Keeps border inside the frame */
+    outline: none !important;           /* Removes potential focus rings */
+}
