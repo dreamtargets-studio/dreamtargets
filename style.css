@@ -929,6 +929,60 @@ font-family: Arial, Helvetica, sans-serif !important;
     }
 }
 
+
+/* --- PORTRAIT GALLERY GRID SYSTEM --- */
+
+.portrait-gallery-grid-3, 
+.portrait-gallery-grid-4 {
+    display: grid !important;
+    gap: 15px !important;
+    margin: 30px 0 !important;
+}
+
+/* Desktop: 3 Columns */
+.portrait-gallery-grid-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* Desktop: 4 Columns */
+.portrait-gallery-grid-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.portrait-gallery-grid-3 figure, 
+.portrait-gallery-grid-4 figure {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.portrait-gallery-grid-3 img, 
+.portrait-gallery-grid-4 img {
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important; /* Portrait Ratio */
+    object-fit: cover !important;
+    display: block !important;
+    border: 1px solid #444 !important;
+    transition: opacity 0.3s ease;
+}
+
+.portrait-gallery-grid-3 img:hover, 
+.portrait-gallery-grid-4 img:hover {
+    opacity: 0.9;
+}
+
+/* MOBILE VIEW: 2-Column Grid for both styles */
+@media (max-width: 768px) {
+    .portrait-gallery-grid-3, 
+    .portrait-gallery-grid-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+
+
+
+
+
 /* --- ARCHIVE GRID SYSTEM (1280px Impact) --- */
 
 /* 1. Update the parent container to allow for the extra 80px */
