@@ -780,7 +780,27 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin-bottom: 10px !important;
 }
 
+/* This ensures the wrapper for the wide sections is consistent */
+.wide-layout {
+    max-width: 1200px !important; /* Adjust this to your preferred maximum spread */
+    margin: 0 auto !important;
+    padding: 0 40px !important; /* This creates the "gutter" on the far left/right */
+    width: 100%;
+    box-sizing: border-box;
+}
 
+/* Remove internal margins from the text-rail so it hugs the container edge */
+.text-rail.wide {
+    max-width: 100% !important;
+    margin: 0 0 30px 0 !important;
+    padding: 0 !important;
+}
+
+/* Ensure the grid doesn't have its own separate margin fighting the container */
+.archive-section-wrap {
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
 
 
