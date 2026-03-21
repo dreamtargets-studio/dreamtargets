@@ -766,6 +766,25 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 
 
+/* --- WIDE TEXT RAIL VARIANT --- */
+.text-rail.wide {
+    max-width: 1200px !important; /* Matches the width of your gallery grids */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Ensuring the H1 and H2 scale nicely in the wider space */
+.text-rail.wide h1 {
+    margin-bottom: 10px !important;
+}
+
+
+
+
+
+
 .editorial-post img { 
     width: 100%; 
     display: block; 
