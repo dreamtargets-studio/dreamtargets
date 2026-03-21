@@ -73,9 +73,17 @@ document.addEventListener('click', (e) => {
         return;
     }
 
+
+
+
+
     // B. UNIFIED LIGHTBOX OPEN LOGIC
     // Targets images in the text rail, editorial galleries, or archive frames
-    const galleryImg = e.target.closest('.text-rail img, .gallery-grid img, .gallery-grid-3 img, .frame-16-9 img');
+    // Updated to include portrait-5, portrait-gallery-grid, and frame-portrait
+    const galleryImg = e.target.closest('.text-rail img, .gallery-grid img, .gallery-grid-3 img, .gallery-grid-4 img, .portrait-gallery-grid-3 img, .portrait-gallery-grid-4 img, .frame-16-9 img, .frame-portrait img');
+
+
+
     
     if (galleryImg) {
         const lightbox = document.getElementById('lightbox-overlay');
