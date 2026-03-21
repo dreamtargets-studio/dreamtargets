@@ -1374,7 +1374,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
     font-size: 1.35rem !important;    /* Smaller than H1 (2.5rem), larger than H3 (1.1rem) */
     font-weight: 700 !important;      /* Extra bold for distinction */
-    text-transform: uppercase;        /* Makes it look like a definitive tag */
     letter-spacing: 0.05em;           /* Professional editorial spacing */
     color: #222 !important;           /* Deep black for punch */
     margin: 0 0 20px 0 !important;    /* Tight gap to the text below */
