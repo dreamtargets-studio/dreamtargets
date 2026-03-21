@@ -1378,6 +1378,4 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #222 !important;           /* Deep black for punch */
     margin: 0 0 20px 0 !important;    /* Tight gap to the text below */
     line-height: 1.2 !important;
-    border-left: 4px #0054dc;  /* Optional: Thin orange accent to tie into your branding */
-    padding-left: 15px;               /* Space between the orange bar and text */
 }
