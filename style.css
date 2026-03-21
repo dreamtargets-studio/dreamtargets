@@ -1433,3 +1433,48 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin: 0 0 20px 0 !important;    /* Tight gap to the text below */
     line-height: 1.2 !important;
 }
+
+/* --- DIGITAL DESIGN PORTRAIT GRID (5-UP) --- */
+
+.archive-grid.portrait-5 {
+    display: grid !important;
+    /* Creates 5 equal columns on desktop */
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+}
+
+/* Define the Portrait Frame (2:3 Ratio) */
+.frame-portrait {
+    width: 100%;
+    aspect-ratio: 2 / 3 !important; 
+    overflow: hidden;
+    background: #333;
+    border: 1px solid #444;
+}
+
+.frame-portrait img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
+    cursor: zoom-in;
+}
+
+/* MOBILE RESPONSIVE: 2 Columns */
+@media (max-width: 1024px) {
+    .archive-grid.portrait-5 {
+        grid-template-columns: repeat(3, 1fr) !important; /* 3-up for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .archive-grid.portrait-5 {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2-up for mobile */
+        gap: 15px !important;
+    }
+    
+    /* Optional: Shrink the text size slightly for tight 5-column grids */
+    .archive-grid.portrait-5 .item-title {
+        font-size: 0.9rem !important;
+    }
+}
