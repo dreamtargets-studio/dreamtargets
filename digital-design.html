@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Design | Thinkamigo</title>
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Adding this here as well to ensure it works immediately */
+        /* Essential inline styles for layout consistency */
         .content-column-narrow {
             max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        /* Ensure the wide container matches the grid width */
+        .wide-layout {
+            max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             padding: 0 20px;
@@ -19,280 +26,151 @@
 </head>
 <body class="content-page" style="background-color: #f0ead6; margin: 0; padding: 0;">
 
-   <header id="main-nav"></header>
+    <header id="main-nav"></header>
 
-<main class="editorial-post">
-    <div class="paper-sheet cinematic-dock">
-        
-        <section class="story-hero-wrapper">
-            <img src="assets/img/page-planning.jpg" alt="Digital Design Hero" class="panoramic-hero">
-        </section>
-
-<div class="container">
-            <article class="text-rail">
-                <header>
-                    <h1>Design</h1>
-                    <div class="orange-rule"></div>
-                    <h2>Print, downloads and physical media</h2>
-                </header>                
-            </article>
-        </div> 
-
-       <section class="archive-section-wrap">
-        
-            <div class="archive-grid">
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-friends30-640x360.jpg" 
-                        data-full="assets/img/print-friends30-1280x720.jpg" alt="Heritage booklet"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Friends of Pleasley Pit 30th Anniversary</h3>
-                        <p class="item-description">Photographs and timeline of the 30 year restoration of the Pleasley Pit site by volunteers.</p>
-                        <p>44 pages, A5, booklet</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-pleasleytour-640x360.jpg" 
-                     data-full="assets/img/print-pleasleytour-1280x720.jpg" alt="Heritage booklet"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Pleasley Pit Mining Museum Tour Guide</h3>
-                        <p class="item-description">Print companion to the Pleasley Pit Mining Museum Mobile Tour Guide. Part of the <i> MyTrail </i> heritage platform</p>
-                        <p>20 pages, A5, booklet</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/interpret-mytrail-blid-640-360.jpg"
-                        data-full="assets/img/interpret-mytrail-blid-1280x720.jpg" alt="Heritage graphics"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Blidworth Tour Guide interpretation signage</h3>
-                        <p class="item-description">Artwork for the Robin Hood's Blidworth and Colliery Village Mobile Tour Guide interpretation signage. Part of the <i> MyTrail </i> heritage platform</p>
-                        <p>AO sized panel</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-minecraft-v2-640x360.jpg"
-                         data-full="assets/img/print-minecraft-v2-1280x720.jpg" alt="Research booklet"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Mine-craft the Prequel (The workshops) </h3>
-                        <p class="item-description">Documents the Nottingham Trent University heritage workshops attended by former East Midlands mineworkers to identify errors and update gaps in picture library metadata.</p>
-                         <p>54 pages, A5, book</p>
-
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-minecraft-v1-640x360.jpg"
-                        data-full="assets/img/print-minecraft-v1-1280x720.jpg" alt="Heritage publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Mine-craft the Prequel (The archives)</h3>
-                        <p class="item-description">Nottingham Trent University research project. 100 years of archive photography depicts a highly mechanised industry which contrasts with popular myths and iconography associated with coal mining. </p>
-                        <p>60 page 210x280mm, book</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-bannersbeyond-640x360.jpg" 
-                        data-full="assets/img/print-bannersbeyond-1280x720.jpg" alt="Heritage booklet"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Banners and Beyond</h3>
-                        <p class="item-description">Illustrated, key Stage 4 education booklet, documenting the history of the iconic Mining Union Banner in Nottinghamshire <i>Mine2Minds </i>research project.</p>
-                        <p>28 pages, A5, booklet</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/interpret-coal-comm-change-640-360.jpg"
-                        data-full="assets/img/interpret-coal-comm-change-1280-720.jpg" alt="Heritage exhibition "></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Coal Community and Change Exhibition </h3>
-                        <p class="item-description">Co-curation and exhibition design for Nottingham Trent University heritage project. Touring photographic exhibition documenting 50 years of East Midlands Coal from 1965 to 2015. A collaboration with Professor Natalie Braber and Dr David Amos. </p>
-                        <p>Exhibition panels and touchscreen audio app.</p>
-                       <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                 <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-rhymes-640x360.jpg" 
-                        data-full="assets/img/print-rhymes-1280x720.jpg" alt="Publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Songs and Rhymes from the Mines</h3>
-                        <p class="item-description">Illustrated booklet with CD insert and audio downloads. Featuring children's illustrations and the work of poets and musicians from the East Midlands coalfield.</p>
-                        <p>36 pages, A5, booklet and CD insert</p>
-    
-                       <P><a href="https://songsrhymesfromthemines.bandcamp.com/album/singing-the-seam" target="_blank" class="archive-link">Listen on Bandcamp</a></P> 
-                    </div>
-                </article>               
-
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-dotu-unesco-640x360.jpg" 
-                        data-full="assets/img/print-dotu-unesco-1280x720.jpg" alt="Digital comicbook anthology"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Dawn of the Unread</h3>
-                        <p class="item-description">Zombie genre graphic novel anthology based on <i>The Guardian</i> Award-winning digital platform. Supported by UNESCO.</p>
-                        <p>98 pages, A4, book</p>
-
-                        <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-forestfolk-640x360.jpg" 
-                        data-full="assets/img/print-forestfolk-1280x720.jpg" alt="Publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Forest Folk</h3>
-                        <p class="item-description">I worked with Spokesman Press and UNESCO to champion and reprint James Prior's 1901 novel about my home village, Blidworth. Admired by D.H. Lawrence, Prior's 'Forest Folk' depicts life in Sherwood Forest during the time of the Napoleonic wars and Luddite uprisings.</p>
-                        <p>366 pages, 130x19mm book</p>
-
-                        <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-coalx10-640x360.jpg" 
-                        data-full="assets/img/print-coalx10-1280x720.jpg" alt="Publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">A History of Coal Mining in 10 Objects</h3>
-                        <p class="item-description">Print companion to the research project which included a website, events and video. <i>Archive into Assets</i></Archive> was an Arts and Humanities Research Council (AHRC) project for the University of Nottingham and the first Fillingham and Amos heritage collaboration. 
-                        </p>
-                        <p>28 pages, 210x210mm booklet</p>
-
-                        <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-factory-handbook-640x360.jpg" 
-                        data-full="assets/img/print-factory-handbook-1280x720.jpg" alt="Publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Sillitoe Trail Factory Handbook</h3>
-                        <p class="item-description">Print companion for <i>The Space</i> on-demand arts platform. Featuring Nottingham-themed essays from creative practitioners. Supported by Arts Council England and BBC and the first Fillingham and Walker literary collaboration.</p>
-                        <p>28 pages, 210x210mm booklet</p>
-                        <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-
-                    </div>
-                </article>
-
-                <article class="archive-item">
-                    <div class="frame-16-9"><img src="assets/img/print-nottm1980s-640x360.jpg" 
-                        data-full="assets/img/print-nottm1980s-1280x720.jpg" alt="Publication"></div>
-                    <div class="archive-content">
-                        <h3 class="item-title">Nottingham in the 1980s</h3>
-                        <p class="item-description">Student photographs and ephemera from the Fillingham and Richards archives. Tempus Publishing.</p>
-                        <p>128 pages, 210x210mm book</p>
-
-                        <!-- comment link <a href="#" class="archive-link">Download PDF</a> -->
-                    </div>
-                </article>
-
-
-            </div>
-        </section>
-
-                        <!-- PORTRAIT TEST -->
-
-
-<div class="container"> <article class="text-rail wide">
-        <header>
-            <h1>Hello</h1>
-            <div class="orange-rule"></div>
-            <h2>Portrait variant</h2>
-        </header>                
-    </article>
-</div>
-
-
-
-<section class="archive-section-wrap">
-    <div class="archive-grid portrait-5">
-        
-        <article class="archive-item">
-            <div class="frame-portrait">
-                <div class="frame-portrait"><img src="assets/img/placeholder-portrait-300x425.jpg" 
-                     data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                     alt="Description"></div>
-            </div>
-              <!-- Caption block 
-            <div class="archive-content">
-              
-                <h3 class="item-title">Project Title</h3>
-                <p class="item-description">Description text here.</p>
-                <p>Format details</p>
-            </div> end caption block -->
-        </article>
-
-
-        <article class="archive-item">
-            <div class="frame-portrait">
-                <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                     data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                     alt="Description">
-            </div>
-              <!-- Caption block 
-            <div class="archive-content">
-              
-                <h3 class="item-title">Project Title</h3>
-                <p class="item-description">Description text here.</p>
-                <p>Format details</p> 
-            </div> end caption block -->
-        </article>
-
-
-
-        <article class="archive-item">
-            <div class="frame-portrait">
-                <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                     data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                     alt="Description">
-            </div>
-              <!-- Caption block 
-            <div class="archive-content">
-              
-                <h3 class="item-title">Project Title</h3>
-                <p class="item-description">Description text here.</p>
-                <p>Format details</p> 
-            </div> end caption block -->
-        </article>
-
-
-
-    </div>
-</section>
-
-
-
-
-
-        <div class="rule-grey-full"></div>
-
-        <div class="container">
-            <section class="text-rail" style="padding-bottom: 80px;">
-                <h3>Links</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px;"><a href="https://sillitoetrail.com/" target="_blank" style="color: #0056b3; text-decoration: none; border-bottom: 1px solid #ccc;">The Sillitoe Trail website</a></li>
-                </ul>
+    <main class="editorial-post">
+        <div class="paper-sheet cinematic-dock">
+            
+            <section class="story-hero-wrapper">
+                <img src="assets/img/page-planning.jpg" alt="Digital Design Hero" class="panoramic-hero">
             </section>
-        </div>
-        </div>
-</main>
 
+            <div class="container">
+                <article class="text-rail">
+                    <header>
+                        <h1>Design</h1>
+                        <div class="orange-rule"></div>
+                        <h2>Print, downloads and physical media</h2>
+                    </header>                
+                </article>
+            </div> 
 
+            <section class="archive-section-wrap">
+                <div class="archive-grid">
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/print-friends30-640x360.jpg" data-full="assets/img/print-friends30-1280x720.jpg" alt="Heritage booklet" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Friends of Pleasley Pit 30th Anniversary</h3>
+                            <p class="item-description">Photographs and timeline of the 30 year restoration of the Pleasley Pit site by volunteers.</p>
+                            <p>44 pages, A5, booklet</p>
+                        </div>
+                    </article>
 
-   <footer id="main-footer"></footer>
-   
-<div id="lightbox-overlay" class="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-</div>
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/print-pleasleytour-640x360.jpg" data-full="assets/img/print-pleasleytour-1280x720.jpg" alt="Heritage booklet" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Pleasley Pit Mining Museum Tour Guide</h3>
+                            <p class="item-description">Print companion to the Pleasley Pit Mining Museum Mobile Tour Guide.</p>
+                            <p>20 pages, A5, booklet</p>
+                        </div>
+                    </article>
 
-<script src="loader.js"></script>
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/interpret-mytrail-blid-640-360.jpg" data-full="assets/img/interpret-mytrail-blid-1280x720.jpg" alt="Heritage graphics" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Blidworth Tour Guide signage</h3>
+                            <p class="item-description">Artwork for the Robin Hood's Blidworth and Colliery Village Mobile Tour Guide.</p>
+                            <p>AO sized panel</p>
+                        </div>
+                    </article>
+
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/print-minecraft-v2-640x360.jpg" data-full="assets/img/print-minecraft-v2-1280x720.jpg" alt="Research booklet" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Mine-craft the Prequel (Workshops)</h3>
+                            <p class="item-description">Documents the NTU heritage workshops identifying errors in picture library metadata.</p>
+                            <p>54 pages, A5, book</p>
+                        </div>
+                    </article>
+
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/print-minecraft-v1-640x360.jpg" data-full="assets/img/print-minecraft-v1-1280x720.jpg" alt="Heritage publication" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Mine-craft the Prequel (Archives)</h3>
+                            <p class="item-description">NTU research project. 100 years of archive photography depicts a highly mechanised industry.</p>
+                            <p>60 page 210x280mm, book</p>
+                        </div>
+                    </article>
+
+                    <article class="archive-item">
+                        <div class="frame-16-9"><img src="assets/img/print-bannersbeyond-640x360.jpg" data-full="assets/img/print-bannersbeyond-1280x720.jpg" alt="Heritage booklet" style="cursor: zoom-in"></div>
+                        <div class="archive-content">
+                            <h3 class="item-title">Banners and Beyond</h3>
+                            <p class="item-description">Illustrated education booklet documenting the history of Mining Union Banners.</p>
+                            <p>28 pages, A5, booklet</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="rule-grey-full"></div>
+
+            <div class="wide-layout"> 
+                <article class="text-rail wide">
+                    <header>
+                        <h1>Hello</h1>
+                        <div class="orange-rule"></div>
+                        <h2>Portrait variant</h2>
+                    </header>                
+                </article>
+
+                <section class="archive-section-wrap">
+                    <div class="archive-grid portrait-5">
+                        
+                        <article class="archive-item">
+                            <div class="frame-portrait">
+                                <img src="assets/img/placeholder-portrait-300x425.jpg" data-full="assets/img/placeholder-portrait-1190x1684.jpg" alt="Portrait 1" style="cursor: zoom-in">
+                            </div>
+                        </article>
+
+                        <article class="archive-item">
+                            <div class="frame-portrait">
+                                <img src="assets/img/placeholder-portrait-300x425.jpg" data-full="assets/img/placeholder-portrait-1190x1684.jpg" alt="Portrait 2" style="cursor: zoom-in">
+                            </div>
+                        </article>
+
+                        <article class="archive-item">
+                            <div class="frame-portrait">
+                                <img src="assets/img/placeholder-portrait-300x425.jpg" data-full="assets/img/placeholder-portrait-1190x1684.jpg" alt="Portrait 3" style="cursor: zoom-in">
+                            </div>
+                        </article>
+
+                        <article class="archive-item">
+                            <div class="frame-portrait">
+                                <img src="assets/img/placeholder-portrait-300x425.jpg" data-full="assets/img/placeholder-portrait-1190x1684.jpg" alt="Portrait 4" style="cursor: zoom-in">
+                            </div>
+                        </article>
+
+                        <article class="archive-item">
+                            <div class="frame-portrait">
+                                <img src="assets/img/placeholder-portrait-300x425.jpg" data-full="assets/img/placeholder-portrait-1190x1684.jpg" alt="Portrait 5" style="cursor: zoom-in">
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+            </div> <div class="rule-grey-full"></div>
+
+            <div class="container">
+                <section class="text-rail" style="padding-bottom: 80px;">
+                    <h3>Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 15px;">
+                            <a href="https://sillitoetrail.com/" target="_blank" style="color: #0056b3; text-decoration: none; border-bottom: 1px solid #ccc;">The Sillitoe Trail website</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+        </div> </main>
+
+    <footer id="main-footer"></footer>
+    
+    <div id="lightbox-overlay" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="loader.js"></script>
 </body>
 </html>
