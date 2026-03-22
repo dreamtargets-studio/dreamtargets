@@ -1478,3 +1478,10 @@ font-family: Arial, Helvetica, sans-serif !important;
         font-size: 0.9rem !important;
     }
 }
+
+/* --- ALIGNED HEADER VARIANT --- */
+.text-rail.full-width {
+    max-width: 100% !important; /* Removes the 800px restriction */
+    width: 100% !important;     /* Matches the container width */
+    margin-left: 0 !important;  /* Ensures it hugs the left gutter */
+}
