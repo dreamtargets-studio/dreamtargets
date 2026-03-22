@@ -766,45 +766,6 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 
 
-/* --- WIDE TEXT RAIL VARIANT --- */
-.text-rail.wide {
-    max-width: 1200px !important; /* Matches the width of your gallery grids */
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-/* Ensuring the H1 and H2 scale nicely in the wider space */
-.text-rail.wide h1 {
-    margin-bottom: 10px !important;
-}
-
-/* This ensures the wrapper for the wide sections is consistent */
-.wide-layout {
-    max-width: 1200px !important; /* Adjust this to your preferred maximum spread */
-    margin: 0 auto !important;
-    padding: 0 40px !important; /* This creates the "gutter" on the far left/right */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Remove internal margins from the text-rail so it hugs the container edge */
-.text-rail.wide {
-    max-width: 100% !important;
-    margin: 0 0 30px 0 !important;
-    padding: 0 !important;
-}
-
-/* Ensure the grid doesn't have its own separate margin fighting the container */
-.archive-section-wrap {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-
-
 .editorial-post img { 
     width: 100%; 
     display: block; 
@@ -1516,35 +1477,4 @@ font-family: Arial, Helvetica, sans-serif !important;
     .archive-grid.portrait-5 .item-title {
         font-size: 0.9rem !important;
     }
-}
-
-/* --- UNIVERSAL ARCHIVE BORDER RESET --- */
-
-/* 1. Target all images within any archive or portrait grid */
-.archive-grid img, 
-.portrait-gallery-grid-3 img, 
-.portrait-gallery-grid-4 img, 
-.portrait-5 img {
-    border: 1px solid #444 !important; /* Forces uniform color and width */
-    outline: none !important;           /* Removes browser focus rings */
-    box-sizing: border-box !important;   /* Keeps border inside the container */
-    margin: 0 !important;               /* Prevents alignment shifts */
-    padding: 0 !important;
-    max-width: 100% !important;
-    display: block !important;
-}
-
-/* 2. Remove any "First-Child" or "Featured" overrides that might exist */
-.archive-grid article:first-child img,
-.archive-grid .archive-item:first-of-type img,
-.portrait-5 figure:first-child img {
-    border-width: 1px !important;
-}
-
-/* 3. Ensure the container (the frame) isn't adding a double border */
-.frame-16-9, 
-.frame-portrait {
-    border: none !important; 
-    overflow: hidden !important;
-    background-color: transparent !important;
 }
