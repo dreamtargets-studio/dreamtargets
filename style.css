@@ -1484,4 +1484,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     max-width: 100% !important; /* Removes the 800px restriction */
     width: 100% !important;     /* Matches the container width */
     margin-left: 0 !important;  /* Ensures it hugs the left gutter */
+    /* This creates the 'little space' you're looking for */
+    padding-left: 20px !important;
 }
