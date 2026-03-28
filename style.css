@@ -1487,143 +1487,115 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   REFINED MEDIUM-WEIGHT LIGHTBOX UI (1.5px)
+   THINKAMIGO LIGHTBOX v2.0 (DOCKED NAVIGATION & MAX REAL ESTATE)
    ============================================================ */
 
-/* 1. The Lightbox Background Stage */
-
 #lightbox-overlay {
-    /* THE LOCK: This must be none by default */
     display: none !important; 
     position: fixed;
     z-index: 100000; 
     left: 0; top: 0;
     width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.95); 
-    
-    /* These layout rules only apply when the JS changes display to 'flex' */
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding-top: 60px; 
-    cursor: zoom-out;
+    padding-top: 40px; 
+    cursor: default; /* Prevents confusion about clicking background */
 }
 
-
-/* 2. The Close 'X' (Surgical 1.5px Lines) */
+/* Close 'X' - 1.5px Hairline */
 .lightbox-close {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 30px;
+    right: 30px;
     width: 32px;
     height: 32px;
     cursor: pointer;
     z-index: 100002;
     opacity: 0.7;
     transition: opacity 0.3s ease;
-    /* This line kills any thick text characters (like &times;) inside the span */
     font-size: 0 !important; 
 }
 
 .lightbox-close::before, .lightbox-close::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1.5px; /* Medium weight for visibility */
+    top: 50%; left: 0; width: 100%; height: 1.5px;
     background-color: #ffffff;
     transform: rotate(45deg);
 }
+.lightbox-close::after { transform: rotate(-45deg); }
+.lightbox-close:hover { opacity: 1; }
 
-.lightbox-close::after {
-    transform: rotate(-45deg);
-}
-
-.lightbox-close:hover { 
-    opacity: 1; 
-}
-
-/* 3. The Chevron Navigation (1.5px Borders) */
-.lightbox-prev, .lightbox-next {
-    position: absolute;
-    top: 50%;
-    width: 26px;
-    height: 26px;
-    border-top: 1.5px solid #ffffff;
-    border-right: 1.5px solid #ffffff;
-    cursor: pointer;
-    z-index: 100001;
-    /* This line kills any thick text characters (like &#10094;) inside the span */
-    font-size: 0 !important; 
-    opacity: 0.6;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.lightbox-prev {
-    left: 50px;
-    transform: translateY(-50%) rotate(-135deg);
-}
-
-.lightbox-next {
-    right: 50px;
-    transform: translateY(-50%) rotate(45deg);
-}
-
-.lightbox-prev:hover, .lightbox-next:hover {
-    opacity: 1;
-}
-
-/* 4. The Image Content Stage */
+/* The Image Stage - Maximized for Portrait */
 .lightbox-content {
-    /* Reclaiming the height */
-    max-width: 90%;
+    max-width: 95%; /* Hugs the screen edges on mobile */
     max-height: 78%; 
     object-fit: contain;
     border: 1px solid rgba(255, 255, 255, 0.1); 
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
     background-size: 40px 40px;
-    
-    /* Ensure the image sits above the caption in the column flow */
     margin-bottom: 25px; 
 }
 
-
-/* 5. Minimalist Info Bar (Caption + Counter) */
+/* The "Docked" Info Bar (Arrow - Text - Arrow) */
 .lightbox-info {
-    position: relative; /* Changed from absolute to follow the image */
-    bottom: auto;
-    left: auto;
-    transform: none;
-    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Air between arrows and text */
     width: 100%;
-    pointer-events: none;
+    max-width: 600px;
+    margin: 0 auto;
+    pointer-events: auto; /* Allows clicks on child arrows */
 }
 
+.text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Docked Navigation Chevrons */
+.lightbox-prev, .lightbox-next {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-top: 1.5px solid #ffffff;
+    border-right: 1.5px solid #ffffff;
+    cursor: pointer;
+    z-index: 100001;
+    font-size: 0 !important;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-prev { transform: rotate(-135deg); }
+.lightbox-next { transform: rotate(45deg); }
+.lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
 
 .lightbox-caption {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px; /* Gap between title and "1 / 13" */
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
 }
 
-
 .lightbox-counter {
-    display: inline-block;
     color: rgba(255, 255, 255, 0.4);
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
-/* 6. Mobile Adjustments */
+/* Mobile Tweak: More thumb room */
 @media (max-width: 768px) {
-    .lightbox-prev { left: 25px; }
-    .lightbox-next { right: 25px; }
-    .lightbox-close { top: 25px; right: 25px; }
-    .lightbox-content { max-width: 95%; max-height: 60%; }
+    .lightbox-info { gap: 35px; }
+    .lightbox-content { max-height: 70%; }
+    .lightbox-close { top: 20px; right: 20px; }
 }
