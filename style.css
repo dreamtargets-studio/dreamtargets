@@ -1503,8 +1503,12 @@ font-family: Arial, Helvetica, sans-serif !important;
     align-items: center;
     /* Reduced top padding from 60px to 40px */
     padding-top: 40px; 
+    padding-bottom: 20px !important; /* Add this to pull the dock toward the bottom */
     cursor: default; 
 }
+
+
+
 
 /* Close 'X' - Surgical 1.5px Hairline */
 .lightbox-close {
@@ -1557,8 +1561,9 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin: 0 auto !important; 
     pointer-events: auto !important;
     /* Reduced min-height from 80px to 50px */
-    min-height: 50px !important; 
+    min-height: 30px !important; /* Reduced from 50px */
 }
+
 
 /* THE ANCHOR: 500px for Desktop */
 .text-group {
