@@ -1487,7 +1487,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX v2.2 (FIXED-AXIS NAVIGATION & DOCKED UI)
+   THINKAMIGO LIGHTBOX v2.3 (VERTICAL & HORIZONTAL AXIS LOCK)
    ============================================================ */
 
 #lightbox-overlay {
@@ -1549,33 +1549,36 @@ font-family: Arial, Helvetica, sans-serif !important;
     position: relative !important;
     display: flex !important;
     flex-direction: row !important;
-    align-items: center !important;
+    /* TOP ALIGN: This is the secret to stopping the vertical jump */
+    align-items: flex-start !important; 
     justify-content: center !important;
     width: 100% !important;
-    max-width: 800px !important;
+    max-width: 900px !important;
     margin: 10px auto 0 auto !important;
     pointer-events: auto !important;
-    /* Removed gap to prevent jumping */
+    /* Ensure room for multi-line text without moving the whole bar */
+    min-height: 80px !important; 
 }
 
-/* THE ANCHOR: This fixed width prevents arrows from moving */
+/* THE ANCHOR: Increased to 500px for Desktop to prevent early wrapping */
 .text-group {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    width: 320px !important; /* FIXED GUTTER */
-    margin: 0 20px !important; 
+    width: 500px !important; 
+    margin: 0 30px !important; 
     flex-shrink: 0 !important;
+    /* Aligns the first line of text with the top of the chevrons */
+    padding-top: 2px !important; 
 }
 
-/* Docked Navigation Chevrons - Surgical Reset */
+/* Docked Navigation Chevrons - Vertical & Horizontal Lock */
 .lightbox-prev, .lightbox-next {
     position: relative !important; 
-    top: auto !important;
+    top: 0 !important;
     left: auto !important;
     right: auto !important;
-    transform: none !important;
     
     display: inline-block !important;
     width: 24px !important;
@@ -1588,9 +1591,12 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 0.6;
     transition: opacity 0.3s ease;
     flex-shrink: 0 !important;
+    
+    /* Locks the chevrons to a fixed top margin */
+    margin-top: 5px !important; 
 }
 
-/* Points left/right */
+/* Rotation Fixes */
 .lightbox-prev { transform: rotate(-135deg) !important; }
 .lightbox-next { transform: rotate(45deg) !important; }
 
@@ -1616,6 +1622,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* Mobile Tweak: Reduce fixed gutter for narrow screens */
 @media (max-width: 768px) {
     .text-group { width: 220px !important; margin: 0 10px !important; }
+    .lightbox-info { gap: 0 !important; } /* Gaps handled by margins */
     .lightbox-content { max-height: 70% !important; }
     .lightbox-close { top: 20px !important; right: 20px !important; }
 }
