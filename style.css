@@ -1623,3 +1623,13 @@ font-family: Arial, Helvetica, sans-serif !important;
     .lightbox-content { max-height: 78% !important; }
     #lightbox-overlay { padding-top: 30px; }
 }
+
+/* GLOBAL MAGNIFIER: Automatically applies to any gallery image */
+img[data-gallery] {
+    cursor: zoom-in !important;
+    transition: opacity 0.3s ease;
+}
+
+img[data-gallery]:hover {
+    opacity: 0.9;
+}
