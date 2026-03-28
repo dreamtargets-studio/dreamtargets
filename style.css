@@ -1487,149 +1487,132 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX v2.4 (MAX REAL ESTATE & VERTICAL LOCK)
+   THINKAMIGO LIGHTBOX v3.0 (COMPLETE PRODUCTION BLOCK)
    ============================================================ */
 
+/* 1. THE STAGE (The Blackout) */
 #lightbox-overlay {
-    display: none !important; 
+    display: none !important; /* Controlled by JS */
     position: fixed;
-    z-index: 100000; 
+    z-index: 100000;
     left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.95); 
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.98);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
+    justify-content: center; 
     align-items: center;
-    /* Reduced top padding from 60px to 40px */
-    padding-top: 40px; 
-    padding-bottom: 20px !important; /* Add this to pull the dock toward the bottom */
-    cursor: default; 
+    overflow: hidden;
 }
 
-
-
-
-/* Close 'X' - Surgical 1.5px Hairline */
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    z-index: 100002;
-    opacity: 0.7;
+/* 2. THE IMAGE (The Hero) */
+.lightbox-content {
+    max-width: 90vw !important;
+    max-height: 82vh !important; 
+    object-fit: contain !important;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    z-index: 100001;
+    /* Loading Spinner Placeholder */
+    background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
+    background-size: 40px 40px;
     transition: opacity 0.3s ease;
-    font-size: 0 !important; 
 }
 
+/* 3. THE GHOST SUITE (Unified Square Controls) */
+.lightbox-prev, .lightbox-next, .lightbox-close {
+    position: absolute !important;
+    width: 48px !important;
+    height: 48px !important;
+    background: rgba(0, 0, 0, 0.5) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px !important;
+    z-index: 100010 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer !important;
+    transition: all 0.2s ease;
+}
+
+.lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Navigation Chevrons (Hairline Style) */
+.lightbox-prev::after, .lightbox-next::after {
+    content: '';
+    display: block;
+    width: 10px; height: 10px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+/* Close 'X' Graphic */
 .lightbox-close::before, .lightbox-close::after {
     content: '';
     position: absolute;
-    top: 50%; left: 0; width: 100%; height: 1.5px;
+    width: 18px; height: 2px;
     background-color: #ffffff;
-    transform: rotate(45deg);
 }
+.lightbox-close::before { transform: rotate(45deg); }
 .lightbox-close::after { transform: rotate(-45deg); }
-.lightbox-close:hover { opacity: 1; }
 
-/* The Image Stage - INCREASED from 75% to 82% */
-.lightbox-content {
-    max-width: 95% !important;
-    max-height: 82% !important; 
-    object-fit: contain !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
-    background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
-    background-size: 40px 40px;
-    /* Reduced bottom margin from 25px to 15px */
-    margin-bottom: 15px !important; 
-    cursor: default !important;
-}
+/* Control Positions */
+.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-prev::after { transform: rotate(-135deg); margin-left: 4px; }
 
-/* The DOCKED Navigation & Info Bar (Tightened) */
+.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-next::after { transform: rotate(45deg); margin-right: 4px; }
+
+.lightbox-close { top: 25px !important; right: 25px !important; }
+
+/* 4. THE CAPTION (The Cinematic Overlay) */
 .lightbox-info {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important; 
-    justify-content: center !important;
+    position: absolute !important;
+    bottom: 0 !important;
     width: 100% !important;
-    max-width: 900px !important;
-    /* Reduced margin-top from 10px to 0 */
-    margin: 0 auto !important; 
-    pointer-events: auto !important;
-    /* Reduced min-height from 80px to 50px */
-    min-height: 30px !important; /* Reduced from 50px */
+    background: linear-gradient(transparent, rgba(0,0,0,0.9) 50%);
+    padding: 60px 20px 30px 20px !important;
+    text-align: center;
+    z-index: 100002;
+    pointer-events: none; /* Let clicks pass through to nav if they overlap */
 }
 
-
-/* THE ANCHOR: 500px for Desktop */
 .text-group {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 500px !important; 
-    margin: 0 30px !important; 
-    flex-shrink: 0 !important;
-    padding-top: 2px !important; 
+    max-width: 600px;
+    margin: 0 auto;
 }
-
-/* Docked Navigation Chevrons - Vertical & Horizontal Lock */
-.lightbox-prev, .lightbox-next {
-    position: relative !important; 
-    top: 0 !important;
-    left: auto !important;
-    right: auto !important;
-    display: inline-block !important;
-    width: 24px !important;
-    height: 24px !important;
-    border-top: 1.5px solid #ffffff !important;
-    border-right: 1.5px solid #ffffff !important;
-    cursor: pointer !important;
-    z-index: 100001 !important;
-    font-size: 0 !important;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-    flex-shrink: 0 !important;
-    margin-top: 5px !important; 
-}
-
-.lightbox-prev { transform: rotate(-135deg) !important; }
-.lightbox-next { transform: rotate(45deg) !important; }
 
 .lightbox-caption {
-    font-family: Arial, sans-serif !important;
-    color: rgba(255, 255, 255, 0.9) !important;
+    font-family: 'Inter', Arial, sans-serif !important;
+    color: #ffffff !important;
     font-size: 14px !important;
-    letter-spacing: 0.05em !important;
-    margin-bottom: 3px !important; /* Tightened */
-    width: 100% !important;
-    line-height: 1.3 !important; /* Tighter line height */
+    letter-spacing: 0.03em !important;
+    margin-bottom: 8px !important;
+    line-height: 1.4 !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .lightbox-counter {
-    color: rgba(255, 255, 255, 0.4) !important;
-    font-size: 10px !important;
-    letter-spacing: 0.2em !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
 }
 
-/* Mobile Tweak: Maximize height on small screens */
+/* 5. MOBILE OVERRIDES */
 @media (max-width: 768px) {
-    .text-group { width: 220px !important; margin: 0 10px !important; }
-    .lightbox-content { max-height: 78% !important; }
-    #lightbox-overlay { padding-top: 30px; }
-}
+    .lightbox-prev { left: 10px !important; }
+    .lightbox-next { right: 10px !important; }
+    .lightbox-close { top: 15px !important; right: 15px !important; }
+    
+    .lightbox-content {
+        max-height: 85vh !important;
+        max-width: 100vw !important;
+    }
 
-/* GLOBAL MAGNIFIER: Automatically applies to any gallery image */
-img[data-gallery] {
-    cursor: zoom-in !important;
-    transition: opacity 0.3s ease;
-}
-
-img[data-gallery]:hover {
-    opacity: 0.9;
+    .lightbox-info {
+        padding: 40px 15px 20px 15px !important;
+    }
 }
