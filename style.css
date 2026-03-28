@@ -1491,6 +1491,7 @@ font-family: Arial, Helvetica, sans-serif !important;
    ============================================================ */
 
 /* 1. The Lightbox Background Stage */
+
 #lightbox-overlay {
     display: none; 
     position: fixed;
@@ -1498,10 +1499,20 @@ font-family: Arial, Helvetica, sans-serif !important;
     left: 0; top: 0;
     width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.95); 
-    justify-content: center;
+    
+    /* CHANGE: Move items to the top instead of the center */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
     align-items: center;
+    
+    /* This creates the "Sky" gap above the image */
+    padding-top: 60px; 
     cursor: zoom-out;
 }
+
+
+
 
 /* 2. The Close 'X' (Surgical 1.5px Lines) */
 .lightbox-close {
@@ -1569,28 +1580,30 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* 4. The Image Content Stage */
 .lightbox-content {
-    max-width: 85%;
-    max-height: 70%;
+    /* Reclaiming the height */
+    max-width: 90%;
+    max-height: 78%; 
     object-fit: contain;
     border: 1px solid rgba(255, 255, 255, 0.1); 
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
     background-size: 40px 40px;
+    
+    /* Ensure the image sits above the caption in the column flow */
+    margin-bottom: 25px; 
 }
 
 
 /* 5. Minimalist Info Bar (Caption + Counter) */
 .lightbox-info {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative; /* Changed from absolute to follow the image */
+    bottom: auto;
+    left: auto;
+    transform: none;
     text-align: center;
     width: 100%;
     pointer-events: none;
-    padding-top: 20px; 
 }
-
 
 
 .lightbox-caption {
