@@ -1487,10 +1487,10 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   UNIFIED LIGHTBOX & MONOCHROMATIC NAVIGATION (HAIRLINE 1px)
+   REFINED MEDIUM-WEIGHT LIGHTBOX UI (1.5px)
    ============================================================ */
 
-/* 1. The Lightbox Stage (95% Black) */
+/* 1. The Lightbox Background Stage */
 #lightbox-overlay {
     display: none; 
     position: fixed;
@@ -1503,17 +1503,19 @@ font-family: Arial, Helvetica, sans-serif !important;
     cursor: zoom-out;
 }
 
-/* 2. The Ultra-Thin Close 'X' (CSS Drawn) */
+/* 2. The Close 'X' (Surgical 1.5px Lines) */
 .lightbox-close {
     position: absolute;
     top: 40px;
     right: 40px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     z-index: 100002;
-    opacity: 0.4;
+    opacity: 0.7;
     transition: opacity 0.3s ease;
+    /* This line kills any thick text characters (like &times;) inside the span */
+    font-size: 0 !important; 
 }
 
 .lightbox-close::before, .lightbox-close::after {
@@ -1522,7 +1524,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     top: 50%;
     left: 0;
     width: 100%;
-    height: 1px; /* 1px Hairline */
+    height: 1.5px; /* Medium weight for visibility */
     background-color: #ffffff;
     transform: rotate(45deg);
 }
@@ -1535,28 +1537,29 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 1; 
 }
 
-/* 3. The Tonal Chevron Arrows (1px Border) */
+/* 3. The Chevron Navigation (1.5px Borders) */
 .lightbox-prev, .lightbox-next {
     position: absolute;
     top: 50%;
-    width: 22px;
-    height: 22px;
-    border-top: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
+    width: 26px;
+    height: 26px;
+    border-top: 1.5px solid #ffffff;
+    border-right: 1.5px solid #ffffff;
     cursor: pointer;
     z-index: 100001;
-    font-size: 0; /* Hides any text characters from HTML */
-    opacity: 0.3; /* Recedes into background */
+    /* This line kills any thick text characters (like &#10094;) inside the span */
+    font-size: 0 !important; 
+    opacity: 0.6;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .lightbox-prev {
-    left: 60px;
+    left: 50px;
     transform: translateY(-50%) rotate(-135deg);
 }
 
 .lightbox-next {
-    right: 60px;
+    right: 50px;
     transform: translateY(-50%) rotate(45deg);
 }
 
@@ -1564,14 +1567,13 @@ font-family: Arial, Helvetica, sans-serif !important;
     opacity: 1;
 }
 
-/* 4. The Image Stage */
+/* 4. The Image Content Stage */
 .lightbox-content {
     max-width: 85%;
     max-height: 75%;
     object-fit: contain;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle definition */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    /* Spinner background */
     background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
     background-size: 40px 40px;
 }
@@ -1589,27 +1591,25 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 .lightbox-caption {
     font-family: Arial, Helvetica, sans-serif;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
     font-weight: 300;
     letter-spacing: 0.08em;
     margin-bottom: 12px;
-    text-transform: none; /* Keeps the case you wrote in the Alt tag */
 }
 
 .lightbox-counter {
     display: inline-block;
-    color: rgba(255, 255, 255, 0.3); /* Low contrast to avoid distraction */
+    color: rgba(255, 255, 255, 0.4);
     font-size: 10px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
-/* 6. Mobile Refinement */
+/* 6. Mobile Adjustments */
 @media (max-width: 768px) {
-    .lightbox-prev { left: 20px; }
-    .lightbox-next { right: 20px; }
-    .lightbox-close { top: 20px; right: 20px; }
-    .lightbox-content { max-width: 95%; max-height: 65%; }
-    .lightbox-caption { font-size: 12px; width: 80%; margin: 0 auto 10px; }
+    .lightbox-prev { left: 25px; }
+    .lightbox-next { right: 25px; }
+    .lightbox-close { top: 25px; right: 25px; }
+    .lightbox-content { max-width: 95%; max-height: 60%; }
 }
