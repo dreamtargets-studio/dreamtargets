@@ -1,4 +1,4 @@
-/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.9 --- */
+/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v2.0 --- */
 
 /**
  * 1. COMPONENT LOADER
@@ -99,7 +99,7 @@ function closeLightbox() {
     }
 }
 
-// Global Click Manager (Final Hardened Version)
+// Global Click Manager (Intentional Close Only)
 document.addEventListener('click', (e) => {
     
     // A. Back to Top Logic
@@ -114,7 +114,7 @@ document.addEventListener('click', (e) => {
     if (galleryImg) {
         const galleryName = galleryImg.getAttribute('data-gallery');
 
-        // If the image isn't part of a gallery folder, do absolutely nothing.
+        // If the image isn't part of a gallery folder, do nothing.
         if (!galleryName) return;
 
         const lightbox = document.getElementById('lightbox-overlay');
@@ -131,14 +131,16 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-    // C. Lightbox Navigation & Close
+    // C. Lightbox Internal Navigation & Close
     if (e.target.classList.contains('lightbox-next')) {
         updateLightbox(currentIndex + 1);
     } 
     else if (e.target.classList.contains('lightbox-prev')) {
         updateLightbox(currentIndex - 1);
     }
-    else if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
+    // MODIFIED: We no longer check for the overlay ID here.
+    // This prevents accidental closing when clicking the background.
+    else if (e.target.classList.contains('lightbox-close')) {
         closeLightbox();
     }
 });
