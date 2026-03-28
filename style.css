@@ -1493,25 +1493,22 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* 1. The Lightbox Background Stage */
 
 #lightbox-overlay {
-    display: none; 
+    /* THE LOCK: This must be none by default */
+    display: none !important; 
+    
     position: fixed;
     z-index: 100000; 
     left: 0; top: 0;
     width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.95); 
     
-    /* CHANGE: Move items to the top instead of the center */
-    display: flex;
+    /* These layout rules only apply when the JS changes display to 'flex' */
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    
-    /* This creates the "Sky" gap above the image */
     padding-top: 60px; 
     cursor: zoom-out;
 }
-
-
 
 
 /* 2. The Close 'X' (Surgical 1.5px Lines) */
