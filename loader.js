@@ -1,4 +1,4 @@
-/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.8 --- */
+/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.9 --- */
 
 /**
  * 1. COMPONENT LOADER
@@ -92,13 +92,14 @@ function closeLightbox() {
     const lightbox = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     if (lightbox) {
-        lightbox.style.display = "none";
+        // Remove the style attribute to let CSS "display: none !important" take back control
+        lightbox.removeAttribute('style'); 
         if (lightboxImg) lightboxImg.src = ""; 
         document.body.style.overflow = 'auto';
     }
 }
 
-// Global Click Manager (Harden Version)
+// Global Click Manager (Final Hardened Version)
 document.addEventListener('click', (e) => {
     
     // A. Back to Top Logic
@@ -113,18 +114,17 @@ document.addEventListener('click', (e) => {
     if (galleryImg) {
         const galleryName = galleryImg.getAttribute('data-gallery');
 
-        // SAFETY CATCH: If the image isn't part of a gallery folder, do nothing.
-        // This prevents the Hero Image from auto-triggering the lightbox.
+        // If the image isn't part of a gallery folder, do absolutely nothing.
         if (!galleryName) return;
 
         const lightbox = document.getElementById('lightbox-overlay');
         
-        // Group images by the specific gallery folder name
         currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
         currentIndex = currentGallery.indexOf(galleryImg);
         
         if (lightbox) {
-            lightbox.style.display = "flex";
+            // Overrides the CSS "none" only when a valid gallery click occurs
+            lightbox.setAttribute('style', 'display: flex !important'); 
             document.body.style.overflow = 'hidden'; 
             updateLightbox(currentIndex);
         }
@@ -148,7 +148,8 @@ document.addEventListener('click', (e) => {
  */
 document.addEventListener('keydown', (e) => {
     const lightbox = document.getElementById('lightbox-overlay');
-    if (lightbox && lightbox.style.display === "flex") {
+    // Check if the lightbox is actually visible via the style attribute
+    if (lightbox && lightbox.getAttribute('style')?.includes('flex')) {
         if (e.key === "ArrowRight") updateLightbox(currentIndex + 1);
         if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1);
         if (e.key === "Escape") closeLightbox();
