@@ -1487,7 +1487,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX v2.1 (DOCKED NAVIGATION & MAX REAL ESTATE)
+   THINKAMIGO LIGHTBOX v2.2 (FIXED-AXIS NAVIGATION & DOCKED UI)
    ============================================================ */
 
 #lightbox-overlay {
@@ -1534,7 +1534,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* The Image Stage - Maximized for Portrait breathing room */
 .lightbox-content {
     max-width: 95% !important;
-    max-height: 78% !important; 
+    max-height: 75% !important; 
     object-fit: contain !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important; 
     box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
@@ -1544,34 +1544,33 @@ font-family: Arial, Helvetica, sans-serif !important;
     cursor: default !important;
 }
 
-/* The DOCKED Navigation & Info Bar */
+/* The DOCKED Navigation & Info Bar (Fixed-Axis Layout) */
 .lightbox-info {
     position: relative !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 60px !important; 
     width: 100% !important;
     max-width: 800px !important;
     margin: 10px auto 0 auto !important;
     pointer-events: auto !important;
-    transform: none !important;
-    left: auto !important;
-    bottom: auto !important;
+    /* Removed gap to prevent jumping */
 }
 
+/* THE ANCHOR: This fixed width prevents arrows from moving */
 .text-group {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    flex: 0 1 auto !important;
+    width: 320px !important; /* FIXED GUTTER */
+    margin: 0 20px !important; 
+    flex-shrink: 0 !important;
 }
 
-/* Docked Navigation Chevrons - Hairline Reset */
+/* Docked Navigation Chevrons - Surgical Reset */
 .lightbox-prev, .lightbox-next {
-    /* These resets kill any 'top: 50%' rules from higher up the file */
     position: relative !important; 
     top: auto !important;
     left: auto !important;
@@ -1579,8 +1578,8 @@ font-family: Arial, Helvetica, sans-serif !important;
     transform: none !important;
     
     display: inline-block !important;
-    width: 22px !important;
-    height: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
     border-top: 1.5px solid #ffffff !important;
     border-right: 1.5px solid #ffffff !important;
     cursor: pointer !important;
@@ -1588,9 +1587,10 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-size: 0 !important;
     opacity: 0.6;
     transition: opacity 0.3s ease;
+    flex-shrink: 0 !important;
 }
 
-/* Pointing directions */
+/* Points left/right */
 .lightbox-prev { transform: rotate(-135deg) !important; }
 .lightbox-next { transform: rotate(45deg) !important; }
 
@@ -1602,6 +1602,8 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-size: 14px !important;
     letter-spacing: 0.05em !important;
     margin-bottom: 5px !important;
+    width: 100% !important;
+    line-height: 1.4 !important;
 }
 
 .lightbox-counter {
@@ -1611,9 +1613,9 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-transform: uppercase !important;
 }
 
-/* Mobile Tweak: Tighten the gap for smaller screens */
+/* Mobile Tweak: Reduce fixed gutter for narrow screens */
 @media (max-width: 768px) {
-    .lightbox-info { gap: 30px !important; }
+    .text-group { width: 220px !important; margin: 0 10px !important; }
     .lightbox-content { max-height: 70% !important; }
     .lightbox-close { top: 20px !important; right: 20px !important; }
 }
