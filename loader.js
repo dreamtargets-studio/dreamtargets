@@ -1,8 +1,7 @@
-/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.6 --- */
+/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.7 --- */
 
 /**
  * 1. COMPONENT LOADER
- * Injects header.html and footer.html into the page
  */
 async function loadComponent(elementId, filePath) {
     try {
@@ -20,7 +19,6 @@ async function loadComponent(elementId, filePath) {
 
 /**
  * 2. NAVIGATION SYNC
- * Highlights the active menu item based on the URL
  */
 function highlightActiveLink() {
     const currentPath = window.location.pathname;
@@ -38,20 +36,15 @@ function highlightActiveLink() {
 
 /**
  * 3. INITIALIZATION
- * Runs when the page is first loaded
  */
 window.addEventListener('DOMContentLoaded', async () => {
-    // Load components first
     await loadComponent('main-nav', 'header.html');
     await loadComponent('main-footer', 'footer.html');
-    
-    // Run sync tasks after components exist in the DOM
     highlightActiveLink();
 });
 
 /**
  * 4. SCROLL WATCHER
- * Toggles the "Back to Top" button visibility
  */
 window.addEventListener('scroll', () => {
     const btn = document.getElementById("backToTop");
@@ -62,9 +55,48 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. GLOBAL CLICK MANAGER
- * Handles Lightbox opening/closing and Back to Top clicks
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE
  */
+
+let currentGallery = []; 
+let currentIndex = 0;
+
+function updateLightbox(index) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const caption = document.getElementById('lightbox-caption');
+    const counter = document.getElementById('lightbox-counter');
+
+    if (index < 0) index = currentGallery.length - 1;
+    if (index >= currentGallery.length) index = 0;
+    
+    currentIndex = index;
+    const targetImage = currentGallery[currentIndex];
+    
+    // Smooth transition
+    lightboxImg.style.opacity = '0';
+    
+    setTimeout(() => {
+        const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
+        lightboxImg.src = fullSrc;
+        
+        if (caption) caption.textContent = targetImage.getAttribute('alt') || "";
+        if (counter) counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+        
+        lightboxImg.style.opacity = '1';
+    }, 150);
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightbox) {
+        lightbox.style.display = "none";
+        if (lightboxImg) lightboxImg.src = ""; 
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Global Click Manager (Upgraded)
 document.addEventListener('click', (e) => {
     
     // A. Back to Top Logic
@@ -73,73 +105,46 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-
-
-
-
-    // B. UNIFIED LIGHTBOX OPEN LOGIC
-    // Targets images in the text rail, editorial galleries, or archive frames
-    // Updated to include portrait-5, portrait-gallery-grid, and frame-portrait
-    const galleryImg = e.target.closest('.text-rail img, .gallery-grid img, .gallery-grid-3 img, .gallery-grid-4 img, .portrait-gallery-grid-3 img, .portrait-gallery-grid-4 img, .frame-16-9 img, .frame-portrait img');
-
-
-
+    // B. Lightbox Open Logic
+    // We target any image that has a data-full attribute
+    const galleryImg = e.target.closest('img[data-full]');
     
     if (galleryImg) {
         const lightbox = document.getElementById('lightbox-overlay');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryName = galleryImg.getAttribute('data-gallery') || 'default';
         
-        if (lightbox && lightboxImg) {
-            const fullImage = galleryImg.getAttribute('data-full') || galleryImg.src;
-            
-            // 1. Reset the image src first (this shows the spinner background)
-            lightboxImg.src = ""; 
-            
-            // 2. Open the theater
+        // Find all images that share this specific gallery name
+        currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
+        currentIndex = currentGallery.indexOf(galleryImg);
+        
+        if (lightbox) {
             lightbox.style.display = "flex";
-            
-            // 3. Start loading the new image
-            lightboxImg.src = fullImage;
-            
             document.body.style.overflow = 'hidden'; 
+            updateLightbox(currentIndex);
         }
+        return;
     }
 
-
-    // C. LIGHTBOX CLOSE LOGIC
-    // Closes if clicking the 'X' button or the dark background
-    if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
-        const lightbox = document.getElementById('lightbox-overlay');
-        const lightboxImg = document.getElementById('lightbox-img');
-        if (lightbox) {
-            lightbox.style.display = "none";
-            lightboxImg.src = ""; // Clear source to prevent "ghosting"
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
+    // C. Lightbox Navigation & Close
+    if (e.target.classList.contains('lightbox-next')) {
+        updateLightbox(currentIndex + 1);
+    } 
+    else if (e.target.classList.contains('lightbox-prev')) {
+        updateLightbox(currentIndex - 1);
+    }
+    else if (e.target.id === 'lightbox-overlay' || e.target.classList.contains('lightbox-close')) {
+        closeLightbox();
     }
 });
 
-
-
-
-
-
-
-
-
-
-
 /**
- * 6. ACCESSIBILITY
- * Allows closing the lightbox with the Escape key
+ * 6. ACCESSIBILITY (Keyboard Nav)
  */
 document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        const lightbox = document.getElementById('lightbox-overlay');
-        if (lightbox && lightbox.style.display === "flex") {
-            lightbox.style.display = "none";
-            document.getElementById('lightbox-img').src = "";
-            document.body.style.overflow = 'auto';
-        }
+    const lightbox = document.getElementById('lightbox-overlay');
+    if (lightbox && lightbox.style.display === "flex") {
+        if (e.key === "ArrowRight") updateLightbox(currentIndex + 1);
+        if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1);
+        if (e.key === "Escape") closeLightbox();
     }
 });
