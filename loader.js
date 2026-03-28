@@ -1,4 +1,4 @@
-/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.7 --- */
+/* --- THINKAMIGO MASTER LOADER & LIGHTBOX v1.8 --- */
 
 /**
  * 1. COMPONENT LOADER
@@ -66,6 +66,8 @@ function updateLightbox(index) {
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
 
+    if (!lightboxImg) return;
+
     if (index < 0) index = currentGallery.length - 1;
     if (index >= currentGallery.length) index = 0;
     
@@ -96,7 +98,7 @@ function closeLightbox() {
     }
 }
 
-// Global Click Manager (Upgraded)
+// Global Click Manager (Harden Version)
 document.addEventListener('click', (e) => {
     
     // A. Back to Top Logic
@@ -106,14 +108,18 @@ document.addEventListener('click', (e) => {
     }
 
     // B. Lightbox Open Logic
-    // We target any image that has a data-full attribute
     const galleryImg = e.target.closest('img[data-full]');
     
     if (galleryImg) {
+        const galleryName = galleryImg.getAttribute('data-gallery');
+
+        // SAFETY CATCH: If the image isn't part of a gallery folder, do nothing.
+        // This prevents the Hero Image from auto-triggering the lightbox.
+        if (!galleryName) return;
+
         const lightbox = document.getElementById('lightbox-overlay');
-        const galleryName = galleryImg.getAttribute('data-gallery') || 'default';
         
-        // Find all images that share this specific gallery name
+        // Group images by the specific gallery folder name
         currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
         currentIndex = currentGallery.indexOf(galleryImg);
         
