@@ -1495,7 +1495,6 @@ font-family: Arial, Helvetica, sans-serif !important;
 #lightbox-overlay {
     /* THE LOCK: This must be none by default */
     display: none !important; 
-    
     position: fixed;
     z-index: 100000; 
     left: 0; top: 0;
