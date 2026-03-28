@@ -1485,3 +1485,84 @@ font-family: Arial, Helvetica, sans-serif !important;
     width: 100% !important;     /* Matches the container width */
     margin-left: 0 !important;  /* Ensures it hugs the left gutter */
 }
+
+/* ============================================================
+   LIGHTBOX & GALLERY NAVIGATION (ADDITION ONLY)
+   This code only affects the pop-up and does not touch your site.
+   ============================================================ */
+
+/* The Lightbox Stage */
+#lightbox-overlay {
+    display: none; 
+    position: fixed;
+    z-index: 100000; /* Extremely high to stay on top */
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); 
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+/* The Navigation Arrows */
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff !important;
+    font-size: 60px !important;
+    font-weight: bold;
+    padding: 30px;
+    cursor: pointer;
+    z-index: 100001;
+    user-select: none;
+    text-decoration: none !important;
+}
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
+.lightbox-prev:hover, .lightbox-next:hover { color: #f26522 !important; }
+
+/* Close Button */
+.lightbox-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: #fff;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+/* Caption and Counter */
+.lightbox-info {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80%;
+    pointer-events: none; /* Allows clicking "through" to the background */
+}
+
+.lightbox-caption {
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.lightbox-counter {
+    display: inline-block;
+    color: #999;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 15px;
+    border-radius: 20px;
+}
+
+/* Ensure images fit the screen */
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border: 1px solid #444;
+}
