@@ -1517,7 +1517,13 @@ font-family: Arial, Helvetica, sans-serif !important;
     object-fit: contain !important;
     margin-bottom: 10px !important; /* Tightened gap to the caption */
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    transition: opacity 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s;
+    position: relative;
+    /* Classes to trigger the slide animations */
+    .slide-out-left { transform: translateX(-100vw); opacity: 0; }
+    .slide-out-right { transform: translateX(100vw); opacity: 0; }
+    .slide-in-from-right { transform: translateX(100vw); }
+    .slide-in-from-left { transform: translateX(-100vw); }
 }
 
 
