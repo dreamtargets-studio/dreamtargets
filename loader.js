@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v3.6 (FORCE-SYNC)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.0 (MOTION EDITION)
    ============================================================ */
 
 /**
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * 4. SCROLL WATCHER (Back-to-Top Square)
+ * 4. SCROLL WATCHER
  */
 window.addEventListener('scroll', () => {
     const btn = document.getElementById("backToTop");
@@ -54,53 +54,69 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.6 Unified)
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v4.0 - Motion Physics)
  */
 let currentGallery = []; 
 let currentIndex = 0;
+let isAnimating = false; // Prevents animation overlap glitches
 
-function updateLightbox(index) {
+function updateLightbox(index, direction = 'next') {
+    if (isAnimating) return;
+    
     const lightboxImg = document.getElementById('lightbox-img');
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
-    
-    // Explicitly target the nav squares
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
 
     if (!lightboxImg) return;
 
-    // Loop logic
-    if (index < 0) index = currentGallery.length - 1;
-    if (index >= currentGallery.length) index = 0;
-    
-    currentIndex = index;
-    const targetImage = currentGallery[currentIndex];
-    
-    // Static fade transition
+    isAnimating = true;
+
+    // A. SLIDE OUT: Move current image in the direction of travel
+    lightboxImg.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s';
     lightboxImg.style.opacity = '0';
-    
+    // If 'next', fly left (-100px). If 'prev', fly right (100px).
+    lightboxImg.style.transform = direction === 'next' ? 'translateX(-100px)' : 'translateX(100px)';
+
     setTimeout(() => {
+        // B. INDEX LOGIC
+        if (index < 0) index = currentGallery.length - 1;
+        if (index >= currentGallery.length) index = 0;
+        currentIndex = index;
+        
+        const targetImage = currentGallery[currentIndex];
+        const isGallery = currentGallery.length > 1;
+
+        // C. PREP NEW IMAGE: Teleport it to the opposite side while invisible
+        lightboxImg.style.transition = 'none';
+        lightboxImg.style.transform = direction === 'next' ? 'translateX(100px)' : 'translateX(-100px)';
+        
+        // D. UPDATE CONTENT
         const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
         lightboxImg.src = fullSrc;
         
-        const altText = targetImage.getAttribute('alt');
-        if (caption) caption.innerHTML = altText || "";
-
-        // UI SYNC: Hide nav and counter if it's a single image (length <= 1)
-        const isGallery = currentGallery.length > 1;
-
+        if (caption) caption.innerHTML = targetImage.getAttribute('alt') || "";
+        
         if (counter) {
             counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
             counter.style.setProperty('display', isGallery ? 'block' : 'none', 'important');
         }
 
-        // Force hide the chevrons using !important override
         if (prevBtn) prevBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
         if (nextBtn) nextBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
-        
-        lightboxImg.style.opacity = '1';
-    }, 150);
+
+        // E. SLIDE IN: Bring it back to center
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                lightboxImg.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s';
+                lightboxImg.style.opacity = '1';
+                lightboxImg.style.transform = 'translateX(0)';
+                isAnimating = false;
+            }, 50);
+        });
+
+    }, 250);
 }
 
 function closeLightbox() {
@@ -108,56 +124,66 @@ function closeLightbox() {
     const lightboxImg = document.getElementById('lightbox-img');
     if (lightbox) {
         lightbox.setAttribute('style', 'display: none !important');
-        if (lightboxImg) lightboxImg.src = ""; 
+        if (lightboxImg) {
+            lightboxImg.src = ""; 
+            lightboxImg.style.transform = 'translateX(0)';
+        }
         document.body.style.overflow = 'auto';
     }
 }
 
 /**
- * 6. GLOBAL CLICK MANAGER
+ * 6. GLOBAL CLICK & GESTURE MANAGER
  */
-document.addEventListener('click', (e) => {
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Swipe Listeners
+document.addEventListener('touchstart', e => { 
+    touchStartX = e.changedTouches[0].screenX; 
+}, {passive: true});
+
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const threshold = 70; // Slightly higher for iPad stability
+    const lightbox = document.getElementById('lightbox-overlay');
     
+    if (lightbox && lightbox.getAttribute('style')?.includes('flex') && currentGallery.length > 1) {
+        if (touchEndX < touchStartX - threshold) updateLightbox(currentIndex + 1, 'next');
+        if (touchEndX > touchStartX + threshold) updateLightbox(currentIndex - 1, 'prev');
+    }
+}, false);
+
+// Click Logic
+document.addEventListener('click', (e) => {
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
 
-    // LIGHTBOX TRIGGER
     const galleryImg = e.target.closest('img[data-full]');
-    
     if (galleryImg) {
         const galleryName = galleryImg.getAttribute('data-gallery');
         const lightbox = document.getElementById('lightbox-overlay');
         
-        if (galleryName) {
-            // Grouped Gallery
-            currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
-        } else {
-            // Single Image: Create a temporary gallery of one
-            currentGallery = [galleryImg];
-        }
+        currentGallery = galleryName 
+            ? Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`))
+            : [galleryImg];
 
         currentIndex = currentGallery.indexOf(galleryImg);
         
         if (lightbox) {
             lightbox.setAttribute('style', 'display: flex !important'); 
             document.body.style.overflow = 'hidden'; 
-            updateLightbox(currentIndex);
+            updateLightbox(currentIndex, 'next');
         }
         return;
     }
 
-    // GHOST NAVIGATION CONTROLS
-    if (e.target.closest('.lightbox-next')) {
-        updateLightbox(currentIndex + 1);
-    } 
-    else if (e.target.closest('.lightbox-prev')) {
-        updateLightbox(currentIndex - 1);
-    }
-    else if (e.target.closest('.lightbox-close') || (e.target.id === 'lightbox-overlay')) {
-        closeLightbox();
-    }
+    // Ghost Controls
+    if (e.target.closest('.lightbox-next')) updateLightbox(currentIndex + 1, 'next');
+    else if (e.target.closest('.lightbox-prev')) updateLightbox(currentIndex - 1, 'prev');
+    else if (e.target.closest('.lightbox-close') || (e.target.id === 'lightbox-overlay')) closeLightbox();
 });
 
 /**
@@ -166,40 +192,8 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     const lightbox = document.getElementById('lightbox-overlay');
     if (lightbox && lightbox.getAttribute('style')?.includes('flex')) {
-        if (e.key === "ArrowRight") updateLightbox(currentIndex + 1);
-        if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1);
+        if (e.key === "ArrowRight") updateLightbox(currentIndex + 1, 'next');
+        if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1, 'prev');
         if (e.key === "Escape") closeLightbox();
     }
 });
-
-/**
- * 8. TOUCH NAVIGATION (Mobile Swipe)
- */
-let touchStartX = 0;
-let touchEndX = 0;
-
-function handleSwipe() {
-    const swipeThreshold = 50; // Minimum pixels moved to trigger swipe
-    const lightbox = document.getElementById('lightbox-overlay');
-    
-    // Only swipe if the lightbox is open and it's a gallery
-    if (lightbox && lightbox.style.display.includes('flex') && currentGallery.length > 1) {
-        if (touchEndX < touchStartX - swipeThreshold) {
-            // Swiped Left -> Go Next
-            updateLightbox(currentIndex + 1);
-        }
-        if (touchEndX > touchStartX + swipeThreshold) {
-            // Swiped Right -> Go Prev
-            updateLightbox(currentIndex - 1);
-        }
-    }
-}
-
-document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-}, false);
-
-document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, false);
