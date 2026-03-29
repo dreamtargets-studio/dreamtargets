@@ -171,3 +171,35 @@ document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeLightbox();
     }
 });
+
+/**
+ * 8. TOUCH NAVIGATION (Mobile Swipe)
+ */
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum pixels moved to trigger swipe
+    const lightbox = document.getElementById('lightbox-overlay');
+    
+    // Only swipe if the lightbox is open and it's a gallery
+    if (lightbox && lightbox.style.display.includes('flex') && currentGallery.length > 1) {
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swiped Left -> Go Next
+            updateLightbox(currentIndex + 1);
+        }
+        if (touchEndX > touchStartX + swipeThreshold) {
+            // Swiped Right -> Go Prev
+            updateLightbox(currentIndex - 1);
+        }
+    }
+}
+
+document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+}, false);
+
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, false);
