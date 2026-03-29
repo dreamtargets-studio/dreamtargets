@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v3.0 (UNIFIED)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v3.5 (UNIFIED)
    ============================================================ */
 
 /**
@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.0 Unified)
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.5 Unified)
  */
 let currentGallery = []; 
 let currentIndex = 0;
@@ -63,7 +63,8 @@ function updateLightbox(index) {
     const lightboxImg = document.getElementById('lightbox-img');
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
-    const infoBar = document.querySelector('.lightbox-info');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
 
     if (!lightboxImg) return;
 
@@ -74,25 +75,29 @@ function updateLightbox(index) {
     currentIndex = index;
     const targetImage = currentGallery[currentIndex];
     
-    // Static fade transition
+    // Fade out for transition
     lightboxImg.style.opacity = '0';
     
     setTimeout(() => {
         const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
         lightboxImg.src = fullSrc;
         
+        // Update Caption
         const altText = targetImage.getAttribute('alt');
         if (caption) caption.innerHTML = altText || "";
-        
-        // UNIFIED FIX: Only show the shadow/gradient if alt text exists
-        if (infoBar) infoBar.style.display = altText ? 'block' : 'none';
+
+        // UI SYNC: Only show nav and counter if it's a gallery
+        const isGallery = currentGallery.length > 1;
 
         if (counter) {
             counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
-            // Hide counter if it's a single image
-            counter.style.display = currentGallery.length > 1 ? 'block' : 'none';
+            counter.style.display = isGallery ? 'block' : 'none';
         }
+
+        if (prevBtn) prevBtn.style.display = isGallery ? 'flex' : 'none';
+        if (nextBtn) nextBtn.style.display = isGallery ? 'flex' : 'none';
         
+        // Fade in
         lightboxImg.style.opacity = '1';
     }, 150);
 }
@@ -112,6 +117,7 @@ function closeLightbox() {
  */
 document.addEventListener('click', (e) => {
     
+    // Back to Top
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
