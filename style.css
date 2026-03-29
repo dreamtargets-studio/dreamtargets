@@ -148,6 +148,12 @@ img { max-width: 100%; height: auto; display: block; }
     text-decoration: none !important;
 }
 
+
+/* GLOBAL SYSTEM: Apply magnifier to all lightbox-ready images */
+img[data-full] {
+    cursor: zoom-in !important;
+}
+
 /* BRANDING INTRO BAR (HOME PAGE ONLY) */
 .branding-intro-bar { background: var(--brand-blue); padding: 35px 0; border-top: 0px solid rgba(255,255,255,0.1); }
 .branding-flex { display: flex; justify-content: space-between; align-items: center; }
