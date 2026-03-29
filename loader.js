@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v3.5 (UNIFIED)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v3.6 (FORCE-SYNC)
    ============================================================ */
 
 /**
@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.5 Unified)
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.6 Unified)
  */
 let currentGallery = []; 
 let currentIndex = 0;
@@ -63,6 +63,8 @@ function updateLightbox(index) {
     const lightboxImg = document.getElementById('lightbox-img');
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
+    
+    // Explicitly target the nav squares
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
 
@@ -75,29 +77,28 @@ function updateLightbox(index) {
     currentIndex = index;
     const targetImage = currentGallery[currentIndex];
     
-    // Fade out for transition
+    // Static fade transition
     lightboxImg.style.opacity = '0';
     
     setTimeout(() => {
         const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
         lightboxImg.src = fullSrc;
         
-        // Update Caption
         const altText = targetImage.getAttribute('alt');
         if (caption) caption.innerHTML = altText || "";
 
-        // UI SYNC: Only show nav and counter if it's a gallery
+        // UI SYNC: Hide nav and counter if it's a single image (length <= 1)
         const isGallery = currentGallery.length > 1;
 
         if (counter) {
             counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
-            counter.style.display = isGallery ? 'block' : 'none';
+            counter.style.setProperty('display', isGallery ? 'block' : 'none', 'important');
         }
 
-        if (prevBtn) prevBtn.style.display = isGallery ? 'flex' : 'none';
-        if (nextBtn) nextBtn.style.display = isGallery ? 'flex' : 'none';
+        // Force hide the chevrons using !important override
+        if (prevBtn) prevBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
+        if (nextBtn) nextBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
         
-        // Fade in
         lightboxImg.style.opacity = '1';
     }, 150);
 }
@@ -117,7 +118,6 @@ function closeLightbox() {
  */
 document.addEventListener('click', (e) => {
     
-    // Back to Top
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -131,7 +131,7 @@ document.addEventListener('click', (e) => {
         const lightbox = document.getElementById('lightbox-overlay');
         
         if (galleryName) {
-            // Grouped Gallery: Find all siblings in this set
+            // Grouped Gallery
             currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
         } else {
             // Single Image: Create a temporary gallery of one
