@@ -1611,8 +1611,16 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* 6. MOBILE OVERRIDES (Aggressive space recovery for phones) */
 @media (max-width: 768px) {
     .lightbox-prev { left: 10px !important; }
-    .lightbox-next { right: 10px !important; }
-    .lightbox-close { top: 15px !important; right: 15px !important; }
+    .lightbox-next {
+        background: none !important;
+        border: none !important;
+        opacity: 0.3; /* Very faint hint that a button exists */
+    }
+    .lightbox-close {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        opacity: 1;
+    }
     
     .lightbox-content { 
         max-height: 80vh !important; /* Maximizes the portrait image on tall screens */
@@ -1623,6 +1631,3 @@ font-family: Arial, Helvetica, sans-serif !important;
         font-size: 13px !important; /* Slightly smaller text to save room */
     }
 }
-
-
-
