@@ -1610,7 +1610,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* 6. MOBILE OVERRIDES (Aggressive space recovery for phones) */
 @media (max-width: 768px) {
-    .lightbox-prev { left: 10px !important; }
+    .lightbox-prev, 
     .lightbox-next {
         background: none !important;
         border: none !important;
