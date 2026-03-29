@@ -1570,26 +1570,34 @@ font-family: Arial, Helvetica, sans-serif !important;
 .lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
 .lightbox-close { top: 25px !important; right: 25px !important; }
 
-/* 5. ICON GRAPHICS (Lean Unicode & CSS Hairlines) */
+/* 5. ICON GRAPHICS (Unified Hairline Suite) */
 
-/* The Close '×' (Unicode Multiplier) */
-.lightbox-close::before {
-    content: '\00d7'; 
-    font-size: 38px;
-    line-height: 0;
-    margin-bottom: 4px; /* Optical centering */
-    font-family: Arial, sans-serif;
+/* The Close 'X' (Lighter 2px Hairline) */
+.lightbox-close::before, 
+.lightbox-close::after {
+    content: '';
+    position: absolute;
+    width: 22px;      /* Length of the cross lines */
+    height: 2px;       /* Match this to the chevron thickness */
+    background-color: #fff;
+    display: block;
 }
 
-/* The Navigation Chevrons (CSS Hairlines) */
+/* Rotate the two bars to form a clean 'X' */
+.lightbox-close::before { transform: rotate(45deg); }
+.lightbox-close::after { transform: rotate(-45deg); }
+
+
+/* The Navigation Chevrons (2px Hairlines) */
 .lightbox-prev::after, 
 .lightbox-next::after {
     content: '';
     display: block;
     width: 12px; height: 12px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
+    border-top: 2px solid #fff;  /* Unified 2px weight */
+    border-right: 2px solid #fff; /* Unified 2px weight */
 }
+
 .lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
 .lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
 
