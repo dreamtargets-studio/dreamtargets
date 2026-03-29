@@ -1487,12 +1487,12 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX: STACKED RESTORATION (v3.1)
+   THINKAMIGO LIGHTBOX: UNIFIED STACKED SYSTEM (v3.2)
    ============================================================ */
 
 /* 1. THE STAGE (Pure Black Backdrop) */
 #lightbox-overlay {
-    display: none !important; 
+    display: none !important; /* Managed by loader.js */
     position: fixed;
     z-index: 100000;
     left: 0; top: 0;
@@ -1507,9 +1507,9 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* 2. THE IMAGE (Centered Hero) */
 .lightbox-content {
     max-width: 90vw !important;
-    max-height: 75vh !important; /* Constrained to leave room for caption */
+    max-height: 75vh !important; 
     object-fit: contain !important;
-    margin-bottom: 20px !important; /* The gap between image and text */
+    margin-bottom: 20px !important;
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
     transition: opacity 0.3s ease;
 }
@@ -1519,11 +1519,10 @@ font-family: Arial, Helvetica, sans-serif !important;
     position: relative !important; 
     width: 100%;
     max-width: 800px;
-    background: none !important; /* PERMANENT FIX: Kills the graduated shadow */
+    background: none !important; /* Ensures no graduated shadow */
     text-align: center;
     padding: 0 20px !important;
     z-index: 100002;
-    pointer-events: none;
 }
 
 .lightbox-caption {
@@ -1540,9 +1539,11 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-transform: uppercase;
 }
 
-/* 4. THE NAVIGATION (Pinned to Screen Center) */
-.lightbox-prev, .lightbox-next, .lightbox-close {
-    position: fixed !important; /* Stays relative to screen, not image */
+/* 4. THE GHOST SUITE (Navigation & Close Squares) */
+.lightbox-prev, 
+.lightbox-next, 
+.lightbox-close {
+    position: fixed !important;
     width: 50px !important;
     height: 50px !important;
     background: rgba(255, 255, 255, 0.1) !important; 
@@ -1553,20 +1554,36 @@ font-family: Arial, Helvetica, sans-serif !important;
     align-items: center;
     justify-content: center;
     cursor: pointer !important;
-    transition: background 0.3s;
+    transition: background 0.2s, border-color 0.2s;
+    color: #ffffff !important;
 }
 
-.lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
+.lightbox-prev:hover, 
+.lightbox-next:hover, 
+.lightbox-close:hover {
     background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Vertical Centering for Chevrons */
+/* Positions: Centered vertically on the screen */
 .lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
 .lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
 .lightbox-close { top: 25px !important; right: 25px !important; }
 
-/* Hairline Chevron Graphics */
-.lightbox-prev::after, .lightbox-next::after {
+/* 5. ICON GRAPHICS (Lean Unicode & CSS Hairlines) */
+
+/* The Close '×' (Unicode Multiplier) */
+.lightbox-close::before {
+    content: '\00d7'; 
+    font-size: 38px;
+    line-height: 0;
+    margin-bottom: 4px; /* Optical centering */
+    font-family: Arial, sans-serif;
+}
+
+/* The Navigation Chevrons (CSS Hairlines) */
+.lightbox-prev::after, 
+.lightbox-next::after {
     content: '';
     display: block;
     width: 12px; height: 12px;
@@ -1575,3 +1592,12 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 .lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
 .lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
+
+/* 6. MOBILE OVERRIDES */
+@media (max-width: 768px) {
+    .lightbox-prev { left: 10px !important; }
+    .lightbox-next { right: 10px !important; }
+    .lightbox-close { top: 15px !important; right: 15px !important; }
+    /* Shorter height on mobile to ensure caption fits on screen */
+    .lightbox-content { max-height: 65vh !important; } 
+}
