@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v3.0 (GHOST SUITE)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v3.0 (UNIFIED)
    ============================================================ */
 
 /**
@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.0 Ghost Version)
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v3.0 Unified)
  */
 let currentGallery = []; 
 let currentIndex = 0;
@@ -63,28 +63,34 @@ function updateLightbox(index) {
     const lightboxImg = document.getElementById('lightbox-img');
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
+    const infoBar = document.querySelector('.lightbox-info');
 
     if (!lightboxImg) return;
 
-    // Boundary check (looping)
+    // Loop logic
     if (index < 0) index = currentGallery.length - 1;
     if (index >= currentGallery.length) index = 0;
     
     currentIndex = index;
     const targetImage = currentGallery[currentIndex];
     
-    // Smooth transition between images
+    // Static fade transition
     lightboxImg.style.opacity = '0';
     
     setTimeout(() => {
         const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
         lightboxImg.src = fullSrc;
         
-        if (caption) {
-            caption.innerHTML = targetImage.getAttribute('alt') || "";
-        }
+        const altText = targetImage.getAttribute('alt');
+        if (caption) caption.innerHTML = altText || "";
+        
+        // UNIFIED FIX: Only show the shadow/gradient if alt text exists
+        if (infoBar) infoBar.style.display = altText ? 'block' : 'none';
+
         if (counter) {
             counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+            // Hide counter if it's a single image
+            counter.style.display = currentGallery.length > 1 ? 'block' : 'none';
         }
         
         lightboxImg.style.opacity = '1';
@@ -95,7 +101,7 @@ function closeLightbox() {
     const lightbox = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     if (lightbox) {
-        lightbox.removeAttribute('style'); // Return to CSS "display: none !important"
+        lightbox.setAttribute('style', 'display: none !important');
         if (lightboxImg) lightboxImg.src = ""; 
         document.body.style.overflow = 'auto';
     }
@@ -106,24 +112,26 @@ function closeLightbox() {
  */
 document.addEventListener('click', (e) => {
     
-    // A. Back to Top Logic
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
 
-    // B. Lightbox Open Logic
-    // This finds any image with a "data-full" attribute
+    // LIGHTBOX TRIGGER
     const galleryImg = e.target.closest('img[data-full]');
     
     if (galleryImg) {
         const galleryName = galleryImg.getAttribute('data-gallery');
-        if (!galleryName) return; // Ignore single images not in a gallery set
-
         const lightbox = document.getElementById('lightbox-overlay');
         
-        // Find all images in the same "folder" (data-gallery)
-        currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
+        if (galleryName) {
+            // Grouped Gallery: Find all siblings in this set
+            currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
+        } else {
+            // Single Image: Create a temporary gallery of one
+            currentGallery = [galleryImg];
+        }
+
         currentIndex = currentGallery.indexOf(galleryImg);
         
         if (lightbox) {
@@ -134,15 +142,14 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-    // C. Internal Ghost Navigation & Close
-    // Uses .closest() to ensure clicking the chevron icon triggers the parent square
+    // GHOST NAVIGATION CONTROLS
     if (e.target.closest('.lightbox-next')) {
         updateLightbox(currentIndex + 1);
     } 
     else if (e.target.closest('.lightbox-prev')) {
         updateLightbox(currentIndex - 1);
     }
-    else if (e.target.closest('.lightbox-close')) {
+    else if (e.target.closest('.lightbox-close') || (e.target.id === 'lightbox-overlay')) {
         closeLightbox();
     }
 });
@@ -152,7 +159,6 @@ document.addEventListener('click', (e) => {
  */
 document.addEventListener('keydown', (e) => {
     const lightbox = document.getElementById('lightbox-overlay');
-    // Check if lightbox is open via the style attribute
     if (lightbox && lightbox.getAttribute('style')?.includes('flex')) {
         if (e.key === "ArrowRight") updateLightbox(currentIndex + 1);
         if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1);
