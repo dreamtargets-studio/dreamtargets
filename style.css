@@ -1487,178 +1487,91 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX v3.0 (COMPLETE PRODUCTION BLOCK)
+   THINKAMIGO LIGHTBOX: STACKED RESTORATION (v3.1)
    ============================================================ */
 
-/* 1. THE STAGE (The Blackout) */
+/* 1. THE STAGE (Pure Black Backdrop) */
 #lightbox-overlay {
-    display: none !important; /* Controlled by JS */
+    display: none !important; 
     position: fixed;
     z-index: 100000;
     left: 0; top: 0;
     width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.98);
+    background-color: rgba(0, 0, 0, 0.95);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* THE FIX: Keeps caption BELOW the image */
     justify-content: center; 
     align-items: center;
-    overflow: hidden;
 }
 
-/* 2. THE IMAGE (The Hero) */
+/* 2. THE IMAGE (Centered Hero) */
 .lightbox-content {
     max-width: 90vw !important;
-    max-height: 82vh !important; 
+    max-height: 75vh !important; /* Constrained to leave room for caption */
     object-fit: contain !important;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    z-index: 100001;
-    /* Loading Spinner Placeholder */
-    background: #000 url('assets/img/loading-spinner.gif') no-repeat center;
-    background-size: 40px 40px;
+    margin-bottom: 20px !important; /* The gap between image and text */
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
     transition: opacity 0.3s ease;
 }
 
-/* 3. THE GHOST SUITE (Unified Square Controls) */
+/* 3. THE INFO (The Stacked Caption - No Shadow) */
+.lightbox-info {
+    position: relative !important; 
+    width: 100%;
+    max-width: 800px;
+    background: none !important; /* PERMANENT FIX: Kills the graduated shadow */
+    text-align: center;
+    padding: 0 20px !important;
+    z-index: 100002;
+    pointer-events: none;
+}
+
+.lightbox-caption {
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 5px !important;
+}
+
+.lightbox-counter {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+}
+
+/* 4. THE NAVIGATION (Pinned to Screen Center) */
 .lightbox-prev, .lightbox-next, .lightbox-close {
-    position: absolute !important;
-    width: 48px !important;
-    height: 48px !important;
-    background: rgba(0, 0, 0, 0.5) !important; 
+    position: fixed !important; /* Stays relative to screen, not image */
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.1) !important; 
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 4px !important;
+    border-radius: 4px;
     z-index: 100010 !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer !important;
-    transition: all 0.2s ease;
+    transition: background 0.3s;
 }
 
 .lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
-    background: rgba(0, 0, 0, 0.8) !important;
-    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Navigation Chevrons (Hairline Style) */
+/* Vertical Centering for Chevrons */
+.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-close { top: 25px !important; right: 25px !important; }
+
+/* Hairline Chevron Graphics */
 .lightbox-prev::after, .lightbox-next::after {
     content: '';
     display: block;
-    width: 10px; height: 10px;
+    width: 12px; height: 12px;
     border-top: 2px solid #fff;
     border-right: 2px solid #fff;
 }
-
-/* Close 'X' Graphic */
-.lightbox-close::before, .lightbox-close::after {
-    content: '';
-    position: absolute;
-    width: 18px; height: 2px;
-    background-color: #ffffff;
-}
-.lightbox-close::before { transform: rotate(45deg); }
-.lightbox-close::after { transform: rotate(-45deg); }
-
-/* Control Positions */
-.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-prev::after { transform: rotate(-135deg); margin-left: 4px; }
-
-.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-next::after { transform: rotate(45deg); margin-right: 4px; }
-
-.lightbox-close { top: 25px !important; right: 25px !important; }
-
-/* 4. THE CAPTION (The Cinematic Overlay) */
-.lightbox-info {
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9) 50%);
-    padding: 60px 20px 30px 20px !important;
-    text-align: center;
-    z-index: 100002;
-    pointer-events: none; /* Let clicks pass through to nav if they overlap */
-}
-
-.text-group {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.lightbox-caption {
-    font-family: 'Inter', Arial, sans-serif !important;
-    color: #ffffff !important;
-    font-size: 14px !important;
-    letter-spacing: 0.03em !important;
-    margin-bottom: 8px !important;
-    line-height: 1.4 !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-
-.lightbox-counter {
-    color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 11px !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important;
-}
-
-/* 5. MOBILE OVERRIDES */
-@media (max-width: 768px) {
-    .lightbox-prev { left: 10px !important; }
-    .lightbox-next { right: 10px !important; }
-    .lightbox-close { top: 15px !important; right: 15px !important; }
-    
-    .lightbox-content {
-        max-height: 85vh !important;
-        max-width: 100vw !important;
-    }
-
-    .lightbox-info {
-        padding: 40px 15px 20px 15px !important;
-    }
-}
-
-/* --- THE GRID ENGINE --- */
-
-/* Base Figure Reset */
-.editorial-post figure { margin: 0; padding: 0; }
-.editorial-post img[data-full] { cursor: zoom-in; width: 100%; display: block; }
-
-/* 2-Column Gallery */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 40px 0;
-}
-
-/* 3-Column Gallery (Landscape & Extendable) */
-.gallery-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin: 40px 0;
-}
-
-/* Portrait Galleries (Fixed 2:3 Ratio) */
-.portrait-gallery-grid-3, 
-.portrait-gallery-grid-4 {
-    display: grid;
-    gap: 15px;
-    margin: 40px 0;
-}
-
-.portrait-gallery-grid-3 { grid-template-columns: repeat(3, 1fr); }
-.portrait-gallery-grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-.portrait-gallery-grid-3 img, 
-.portrait-gallery-grid-4 img {
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
-}
-
-/* Mobile Collapse (All grids to 1 or 2 columns) */
-@media (max-width: 768px) {
-    .gallery-grid, .gallery-grid-3, .portrait-gallery-grid-3, .portrait-gallery-grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+.lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
+.lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
