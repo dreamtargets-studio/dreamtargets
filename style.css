@@ -1638,40 +1638,79 @@ font-family: Arial, Helvetica, sans-serif !important;
     }
 }
 
+:root {
+    --brand-orange: #ff6600;
+    --text-dark: #333;
+    --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
 .audio-playlist-container {
     max-width: 600px;
-    margin: 40px 0;
-    border: 1px solid #eee;
-    background: #fff;
-    padding: 10px;
+    margin: 60px 0;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: var(--ui-soft-shadow);
+    overflow: hidden; /* Clips the tracklist to the rounded corners */
 }
 
-.tracklist {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-    border-top: 1px solid #eee;
+/* The Player Top Section */
+.audio-player {
+    padding: 25px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
 }
 
+.play-pause {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--text-dark);
+    transition: all 0.2s ease;
+}
+
+.play-pause:hover {
+    background: var(--text-dark);
+    transform: scale(1.05);
+}
+
+/* Make the play triangle white when hovering/playing */
+.play-pause:hover::after,
+.play-pause.playing::after {
+    border-color: transparent transparent transparent #fff;
+}
+
+/* The Tracklist - Making it feel substantial */
 .track-item {
-    padding: 12px 15px;
-    font-family: var(--font-main);
-    font-size: 14px;
-    cursor: pointer;
-    border-bottom: 1px solid #f9f9f9;
-    display: flex;
-    gap: 15px;
-    transition: background 0.2s;
+    padding: 18px 25px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+    background: #fff;
 }
 
-.track-item:hover { background: #fcfcfc; }
+.track-item:last-child { border-bottom: none; }
+
+.track-item:hover {
+    background: #fffcf9;
+    padding-left: 30px; /* Subtle "slide" in on hover */
+    color: var(--brand-orange);
+}
 
 .track-item.active {
-    color: #ff6600; /* Your Thinkamigo Orange */
-    font-weight: bold;
+    background: #fff5ee;
+    border-left: 4px solid var(--brand-orange);
+    color: var(--brand-orange);
+    font-weight: 600;
 }
 
-.track-number {
-    color: #ccc;
-    font-variant-numeric: tabular-nums;
+/* Progress Bar - Thicker and more visible */
+.progress-container {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    background: var(--brand-orange);
+    border-radius: 2px;
 }
