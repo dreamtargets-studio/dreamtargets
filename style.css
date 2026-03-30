@@ -1644,37 +1644,79 @@ font-family: Arial, Helvetica, sans-serif !important;
     --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* --- 1. THE DISPLAY SCREEN (Legibility Fix) --- */
-.track-info {
-    flex-grow: 1;
+/* --- 1. THE MAIN HOUSING --- */
+.audio-playlist-container {
+    max-width: 650px;
+    margin: 60px 0;
+    background: #ebeae6; /* Industrial Steel/Grey */
+    border: 1px solid #c0bfba;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+/* --- 2. THE HEADER (Fixed Layout) --- */
+.album-header {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 15px;
-    background: #222; /* Dark "LCD Screen" background */
-    border-radius: 2px;
-    border: 1px solid #000;
+    align-items: center;
+    gap: 25px;
+    padding: 30px;
+    background: #f2f1ed;
+    border-bottom: 1px solid #d1d0cb;
 }
 
-#now-playing {
-    color: #ff6600; /* Orange "LED" text for high readability */
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.85rem;
-    font-weight: bold;
+.album-art {
+    /* Critical: These keep the 512px image contained */
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px;
+    object-fit: cover;
+    border: 1px solid #b1b0ab;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.album-meta {
+    flex: 1;
+}
+
+.album-meta .short-description {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.2;
+}
+
+.album-meta p {
+    margin: 4px 0 0 0;
+    font-size: 0.75rem;
     text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #666;
 }
 
-/* --- 2. THE MECHANICAL PLAY BUTTON --- */
+/* --- 3. THE CONTROL CONSOLE (Fixed Flex Layout) --- */
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: #d1d0cb; /* Darker recessed well */
+    border-bottom: 1px solid #b1b0ab;
+}
+
+/* THE PLAY BUTTON */
 .play-pause {
     width: 50px;
     height: 50px;
-    background: #333; /* Gunmetal grey button */
+    flex-shrink: 0; /* Prevents button from squishing */
+    background: #333;
     border: 1px solid #111 !important;
-    border-radius: 4px; /* Square with slight radius - like a real key */
+    border-radius: 4px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 3px 0 #000; /* Physical depth */
-    flex-shrink: 0;
+    box-shadow: 0 3px 0 #000;
 }
 
 .play-pause:active {
@@ -1682,36 +1724,103 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 1px 0 #000;
 }
 
-/* The Play Symbol (The Triangle) */
+/* The Play Triangle Icon */
 .play-pause::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 55%;
     transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
     border-style: solid;
     border-width: 8px 0 8px 14px;
     border-color: transparent transparent transparent #fff;
-    transition: border-color 0.2s;
 }
 
-.play-pause:hover {
-    background: #444;
-}
-
-.play-pause:hover::after {
-    border-color: transparent transparent transparent #ff6600;
-}
-
-/* --- 3. THE TIME READOUT --- */
-.time-display {
-    color: #ff6600;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    background: #222;
-    padding: 4px 8px;
+/* THE LCD SCREEN AREA */
+.track-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #1a1a1a; /* Black LCD background */
     border: 1px solid #000;
-    font-variant-numeric: tabular-nums;
+    border-radius: 2px;
+}
+
+#now-playing {
+    color: #ff6600; /* High-vis Orange LED text */
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.progress-container {
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #ff6600;
+    box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+}
+
+.time-display {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #ff6600;
+    background: #1a1a1a;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    min-width: 45px;
+    text-align: center;
+}
+
+/* --- 4. THE TRACKLIST --- */
+.tracklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+}
+
+.track-item {
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    color: #444;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.track-item:hover {
+    background: #f8f8f8;
+    color: #ff6600;
+    padding-left: 40px;
+}
+
+.track-item.active {
+    background: #fdf6f0;
+    color: #ff6600;
+    font-weight: 700;
+    border-left: 4px solid #ff6600;
+}
+
+.track-number {
+    font-family: monospace;
+    color: #ccc;
+    font-size: 0.8rem;
+}
+
+/* --- 5. RESPONSIVE --- */
+@media (max-width: 480px) {
+    .album-header { flex-direction: column; text-align: center; }
+    .audio-controls { flex-wrap: wrap; justify-content: center; }
+    .track-info { width: 100%; }
 }
