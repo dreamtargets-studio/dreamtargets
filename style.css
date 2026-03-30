@@ -1734,127 +1734,99 @@ font-family: Arial, Helvetica, sans-serif !important;
     gap: 10px;
 }
 
-/* --- 1. THE UNIFIED CONTAINER --- */
+/* --- 1. THE UNIFIED FACEPLATE --- */
 .audio-playlist-container {
     max-width: 650px;
     margin: 60px 0;
-    background: #f9f9f9; /* Single, cohesive off-white tone */
-    border: 1px solid #dcdcdc;
-    border-radius: 2px; /* Precision sharp corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: #ebeae6; /* Industrial "Putty" or Cool Grey */
+    border: 1px solid #d1d0cb;
+    border-radius: 3px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
 
-/* --- 2. THE HEADER (Art + Meta) --- */
+/* --- 2. THE TOP SECTION --- */
 .album-header {
     display: flex;
     align-items: center;
     gap: 30px;
-    padding: 40px; /* Generous breathing room */
-    border-bottom: 1px solid #eee;
+    padding: 40px;
+    background: linear-gradient(to bottom, #f2f1ed, #ebeae6); /* Subtle metallic sheen */
 }
 
 .album-art {
-    width: 110px !important;
-    height: 110px !important;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    filter: saturate(0.8); /* Desaturates slightly for an archival look */
+    width: 100px !important;
+    height: 100px !important;
+    border: 1px solid #c0bfba;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.album-meta .short-description {
+.short-description {
     margin: 0;
-    font-size: 1.6rem;
-    font-weight: 300; /* Light, elegant art-school weight */
-    color: #111;
-    letter-spacing: -0.02em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: -0.01em;
 }
 
 .album-meta p {
-    margin: 8px 0 0 0;
+    margin: 5px 0 0 0;
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.25em; /* Wide tracking for a 'Museum' feel */
-    color: #999;
+    letter-spacing: 0.15em;
+    color: #777;
 }
 
-/* --- 3. THE MINIMALIST CONTROLS --- */
+/* --- 3. THE RECESSED CONTROLS --- */
 .audio-controls {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
     padding: 20px 40px;
-    background: #f9f9f9; /* Matches the container exactly */
-    border-bottom: 1px solid #eee;
+    background: #e2e1dc; /* Slightly darker "recessed" well */
+    border-top: 1px solid #d1d0cb;
+    border-bottom: 1px solid #d1d0cb;
 }
 
 .play-pause {
-    width: 44px;
-    height: 44px;
-    background: #111; /* One solid focal point */
+    width: 42px;
+    height: 42px;
+    background: #333; /* Dark "Graphite" button */
     border: none !important;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.2s;
 }
 
 .play-pause:hover {
-    background: #ff6600; /* The ONLY place orange appears is on interaction */
+    background: #ff6600; /* Orange remains a functional highlight only */
 }
 
-.play-pause::after {
-    border-color: transparent transparent transparent #fff !important;
-}
-
-.progress-container {
-    flex-grow: 1;
-    height: 1px; /* Hairline progress bar */
-    background: #ddd;
-}
-
-.progress-bar {
-    height: 100%;
-    background: #111; /* Graphite gray/black line */
-}
-
-.time-display {
-    font-size: 0.8rem;
-    color: #aaa;
-    font-family: var(--font-main);
-    font-variant-numeric: tabular-nums;
-}
-
-/* --- 4. THE TRACKLIST --- */
+/* --- 4. THE INTEGRATED TRACKLIST --- */
 .tracklist {
     margin: 0;
     padding: 10px 0;
     list-style: none;
-    background: #fff; /* Pure white list for a subtle lift */
 }
 
 .track-item {
-    padding: 15px 40px;
+    padding: 14px 40px;
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 0.95rem;
-    color: #555;
-    transition: background 0.2s, color 0.2s;
-    border-bottom: 1px solid #f9f9f9;
+    font-size: 0.9rem;
+    color: #444;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.2s;
 }
 
 .track-item:hover {
-    background: #fcfcfc;
-    color: #111;
+    background: rgba(255, 255, 255, 0.4);
+    color: #000;
 }
 
 .track-item.active {
+    background: #fff;
     color: #ff6600;
-    font-weight: 500;
-}
-
-.track-number {
-    font-size: 0.7rem;
-    color: #ccc;
-    width: 25px;
+    font-weight: 600;
 }
