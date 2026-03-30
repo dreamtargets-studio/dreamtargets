@@ -1774,14 +1774,27 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
 }
 
+/* --- THE "ZERO-JITTER" TIMER DISPLAY --- */
 .time-display {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
-    color: #ff6600;
-    background: #111;
-    padding: 5px 10px;
-    border: 1px solid #000;
-    min-width: 45px;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 1rem !important;
+    color: #ff6600 !important;
+    background: #111 !important;
+    border: 1px solid #000 !important;
+    
+    /* THE FIXED GEOMETRY: 8ch fits "00:00" with perfect gutters */
+    width: 8ch !important; 
+    flex-shrink: 0 !important; /* Prevents the box from being squashed */
+    
+    /* Center the numbers perfectly within the fixed box */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 5px 0 !important;
+    
+    /* Essential for character-width consistency */
+    font-variant-numeric: tabular-nums !important;
+    letter-spacing: 0.05em;
     text-align: center;
 }
 
