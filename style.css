@@ -1648,11 +1648,12 @@ font-family: Arial, Helvetica, sans-serif !important;
 .audio-playlist-container {
     max-width: 600px;
     margin: 60px 0;
-    padding: 30px; 
-    background: #fff;
-    border: 1px solid #eee;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+    padding: 0; /* Removing padding here so the header and controls can hit the edges */
+    background: #ffffff;
+    border: 1px solid #dcdcdc; /* Darkened border for definition */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* Heavier shadow for "lift" */
+    border-radius: 8px;
+    overflow: hidden; /* Clips internal corners */
 }
 
 /* --- 2. ALBUM HEADER (Art + Meta) --- */
@@ -1660,92 +1661,139 @@ font-family: Arial, Helvetica, sans-serif !important;
     display: flex;
     align-items: center;
     gap: 20px;
-    margin-bottom: 25px;
+    padding: 30px;
+    background: #fafafa; /* Subtle contrast to the main paper */
+    border-bottom: 1px solid #eee;
 }
 
 .album-art {
-    width: 80px !important;  /* !important forces the size if other styles compete */
-    height: 80px !important;
-    object-fit: cover;       /* Ensures the 512px square fills the 80px square perfectly */
+    width: 90px !important;  /* Slightly larger for presence */
+    height: 90px !important;
+    object-fit: cover;
     border-radius: 4px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    flex-shrink: 0;          /* Prevents the image from being squashed by long text */
+    border: 2px solid #1a1a1a; /* Bold frame */
+    box-shadow: 4px 4px 0px rgba(255, 102, 0, 0.15); /* Subtle orange drop-shadow */
+    flex-shrink: 0;
 }
 
 .album-meta {
     flex: 1;
 }
 
-/* Unified Typography for the Header */
 .short-description {
     margin: 0;
-    font-size: 1.25rem; /* Adjusted to sit nicely next to 80px art */
-    font-weight: 700;
+    font-size: 1.4rem; /* More significant size */
+    font-weight: 800; /* Extra bold */
     color: #1a1a1a;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .album-meta p {
-    margin: 4px 0 0 0;
+    margin: 6px 0 0 0;
     font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #888;
+    letter-spacing: 0.12em;
+    color: #666; /* Darker grey for legibility */
+    font-weight: 600;
 }
 
-/* --- 3. THE PLAYER CONTROLS --- */
+/* --- 3. THE DARK PLAYER CONSOLE --- */
+/* This section provides the "Black Box" contrast to kill the blandness */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    padding: 25px 30px;
+    background: #1a1a1a; /* DEEP CHARCOAL: High contrast anchor */
+    color: #ffffff;
+}
+
+.play-pause {
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #ffffff !important; /* White button on black */
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+.play-pause:hover {
+    background: #ff6600;
+    border-color: #ff6600 !important;
+}
+
+.play-pause::after {
+    border-color: transparent transparent transparent #ffffff !important;
 }
 
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+}
+
+/* Progress Bar - Electric Orange Glow */
+.progress-container {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.15); /* Faint track */
+    border-radius: 2px;
+}
+
+.master-progress, .progress-bar {
+    height: 100%;
+    background: #ff6600; /* Thinkamigo Orange */
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.5); /* Glowing effect */
+}
+
+.time-display {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #ff6600; /* LED Look */
+    font-size: 0.9rem;
 }
 
 /* --- 4. THE TRACKLIST ITEMS --- */
+.tracklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .track-item {
-    padding: 15px 20px;
+    padding: 18px 30px;
     cursor: pointer;
     transition: all 0.2s ease;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f2f2f2;
     display: flex;
     align-items: center;
-    gap: 15px;
-    background: transparent;
+    gap: 20px;
+    background: #fff;
     color: #333;
 }
 
+.track-item:last-child {
+    border-bottom: none;
+}
+
 .track-item:hover {
-    background-color: #f9f9f9;
-    padding-left: 25px;
-    color: #ff6600;
+    background-color: #fffaf5;
+    padding-left: 35px; /* Physical slide interaction */
+    color: #1a1a1a;
 }
 
 .track-item.active {
-    background-color: #fff5ee;
+    background-color: #fff7f2;
     color: #ff6600;
-    font-weight: 600;
-    border-left: 4px solid #ff6600;
+    font-weight: 700;
+    border-left: 5px solid #ff6600; /* Thick active indicator */
 }
 
 .track-number {
     font-family: monospace;
-    color: #ccc;
-    transition: color 0.2s;
-}
-
-.track-item:hover .track-number {
-    color: #ff6600;
+    color: #bbb;
+    font-size: 0.8rem;
 }
 
 /* --- 5. RESPONSIVE TWEAKS --- */
@@ -1753,15 +1801,11 @@ font-family: Arial, Helvetica, sans-serif !important;
     .album-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        padding: 20px;
     }
     .album-art {
-        width: 120px !important;
-        height: 120px !important;
+        width: 100% !important; /* Full width mobile art */
+        height: auto !important;
+        max-width: 200px;
     }
 }
-
-
-
-
-
