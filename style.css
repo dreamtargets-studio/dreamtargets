@@ -1644,16 +1644,20 @@ font-family: Arial, Helvetica, sans-serif !important;
     --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* ============================================================
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v4.0 - Final Refinement)
+   ============================================================ */
+
 /* --- 1. THE UNIFIED CHASSIS --- */
 .audio-playlist-container {
     max-width: 650px;
     margin: 60px 0;
-    background: #e2e1dc; /* Deep Industrial Grey - Darker than the paper */
+    background: #e2e1dc; /* Industrial Grey Base */
     border: 1px solid #b1b0ab;
     border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     overflow: hidden;
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* --- 2. THE FACEPLATE (Top Section) --- */
@@ -1662,7 +1666,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     align-items: center;
     gap: 25px;
     padding: 30px;
-    background: #f2f1ed; /* Lighter "brushed" finish */
+    background: #f2f1ed;
     border-bottom: 1px solid #c0bfba;
 }
 
@@ -1672,46 +1676,44 @@ font-family: Arial, Helvetica, sans-serif !important;
     min-width: 100px;
     object-fit: cover;
     border: 1px solid #b1b0ab;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .album-meta .short-description {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111;
-    line-height: 1.2;
+    margin: 0 !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    line-height: 1.2 !important;
 }
 
 .album-meta p {
-    margin: 4px 0 0 0;
-    font-size: 0.75rem;
+    margin: 4px 0 0 0 !important;
+    font-size: 0.75rem !important;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #666;
+    color: #666 !important;
 }
 
-/* --- 3. THE RECESSED CONSOLE (Controls) --- */
+/* --- 3. THE CONSOLE (LCD Window & Controls) --- */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 20px 30px;
-    background: #d1d0cb; /* Darkest "well" of the machine */
+    background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
 
-/* MECHANICAL PLAY BUTTON */
 .play-pause {
     width: 52px;
     height: 52px;
     flex-shrink: 0;
-    background: #333; /* Gunmetal grey */
+    background: #333;
     border: 1px solid #111 !important;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 3px 0 #000; /* Physical depth */
+    box-shadow: 0 3px 0 #000;
     transition: all 0.1s ease;
 }
 
@@ -1720,12 +1722,10 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 1px 0 #000;
 }
 
-/* THE TRIANGLE PLAY ICON */
 .play-pause::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 55%;
+    top: 50%; left: 55%;
     transform: translate(-50%, -50%);
     border-style: solid;
     border-width: 8px 0 8px 14px;
@@ -1736,23 +1736,22 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-color: transparent transparent transparent #ff6600;
 }
 
-/* THE LCD DISPLAY SCREEN */
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 10px 15px;
-    background: #111; /* Black LCD Screen */
+    background: #111; /* The LCD Window */
     border: 1px solid #000;
     border-radius: 2px;
 }
 
 #now-playing {
-    color: #ff6600; /* Glowing LED Text */
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.85rem;
-    font-weight: bold;
+    color: #ff6600 !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 0.85rem !important;
+    font-weight: bold !important;
     text-transform: uppercase;
 }
 
@@ -1780,52 +1779,55 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-align: center;
 }
 
-/* --- 4. THE INTEGRATED BASE (Tracklist) --- */
+/* --- 4. THE TRACKLIST (Selection & Hover Fixed) --- */
 .tracklist {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background: #e2e1dc; /* Solid Chassis Color */
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    background: #e2e1dc; 
 }
 
 .track-item {
-    padding: 18px 30px;
-    display: flex;
+    padding: 18px 30px !important;
+    display: flex !important;
     align-items: center;
     gap: 20px;
-    /* This creates the "machined groove" look */
-    border-top: 1px solid #f2f1ed; 
-    border-bottom: 1px solid #c0bfba;
+    border-top: 1px solid #f2f1ed !important; 
+    border-bottom: 1px solid #c0bfba !important;
     cursor: pointer;
-    color: #444;
-    font-size: 0.95rem;
+    color: #555 !important;
+    font-size: 0.95rem !important;
     transition: all 0.2s ease;
+    border-left: 5px solid transparent !important; /* Placeholder for the line */
 }
 
-.track-item:first-child { border-top: none; }
+.track-item:first-child { border-top: none !important; }
 
+/* Darker Hover State with the Vertical Bar */
 .track-item:hover {
-    background: #dcdbd6; /* metallic highlight */
-    color: #000;
-    padding-left: 40px; /* Interaction feedback */
+    background: #d4d3ce !important; /* Deepened Grey */
+    color: #1a1a1a !important;
+    border-left: 5px solid #ff6600 !important; /* Orange Line restored */
 }
 
+/* Active State: Clean Orange Typography & Permanent Line */
 .track-item.active {
-    background: #1a1a1a; /* Selected state mimics LCD screen */
-    color: #ff6600;
-    font-weight: 700;
-    border-top: 1px solid #000;
+    background: #dad9d4 !important; /* Matches chassis, No ugly black box */
+    color: #ff6600 !important;
+    font-weight: 700 !important;
+    border-left: 5px solid #ff6600 !important; /* Orange Line permanent */
 }
 
 .track-number {
     font-family: monospace;
-    color: #888;
-    font-size: 0.8rem;
+    color: #888 !important;
+    font-size: 0.8rem !important;
     width: 25px;
 }
 
-.track-item.active .track-number {
-    color: #ff6600;
+.track-item.active .track-number,
+.track-item:hover .track-number {
+    color: #ff6600 !important;
 }
 
 /* --- 5. RESPONSIVE --- */
