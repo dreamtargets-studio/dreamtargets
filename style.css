@@ -1645,7 +1645,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v5.0 - Final Chassis)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v6.0 - Final Chassis)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING (The Machine Body) --- */
@@ -1700,8 +1700,8 @@ font-family: Arial, Helvetica, sans-serif !important;
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px;
-    background: #d1d0cb; /* Darker recessed "well" */
+    padding: 20px 30px; /* 30px padding creates the alignment grid */
+    background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
 
@@ -1745,14 +1745,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-direction: column;
     gap: 8px;
     padding: 10px 15px;
-    background: #111; /* Pure Black Screen */
+    background: #111; 
     border: 1px solid #000;
     border-radius: 2px;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 #now-playing {
-    color: #ff6600 !important; /* THE ONLY RADIANT ORANGE */
+    color: #ff6600 !important; 
     font-family: 'Courier New', Courier, monospace !important;
     font-size: 0.85rem !important;
     font-weight: bold !important;
@@ -1785,43 +1785,45 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-align: center;
 }
 
-/* --- 4. THE INTEGRATED TRACKLIST (Inert Selection) --- */
+/* --- 4. THE INTEGRATED TRACKLIST (Recessed Alignment) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 30px 10px 0 !important; /* 30px Right gutter matches console */
     list-style: none !important;
     background: #e2e1dc; 
 }
 
 .track-item {
-    padding: 16px 30px !important;
+    padding: 16px 0 16px 30px !important; /* 30px Left aligns with Play Button */
     display: flex !important;
     align-items: center;
     gap: 20px;
     border-top: 1px solid #f2f1ed !important; 
     border-bottom: 1px solid #c0bfba !important;
     cursor: pointer;
-    color: #777 !important; /* Muted by default */
+    color: #777 !important;
     font-size: 0.95rem !important;
     transition: all 0.2s ease;
     border-left: 5px solid transparent !important;
 }
 
-.track-item:first-child { border-top: none !important; }
+.track-item:first-child { 
+    border-top: none !important; 
+}
 
 /* HOVER: Momentary interaction hint */
 .track-item:hover {
     background: #d4d3ce !important;
     color: #1a1a1a !important;
-    border-left: 5px solid #ff6600 !important; /* Orange line only on hover */
+    border-left: 5px solid #ff6600 !important;
 }
 
 /* ACTIVE: The "Inert" state (Surrenders focus to the LED) */
 .track-item.active {
     background: #dcdbd6 !important; 
-    color: #222 !important; /* Dark solid text, not orange */
+    color: #222 !important;
     font-weight: 600 !important;
-    border-left: 5px solid #b1b0ab !important; /* Neutral marker only */
+    border-left: 5px solid #b1b0ab !important; /* Neutral grey marker */
 }
 
 .track-number {
@@ -1829,6 +1831,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #999 !important;
     font-size: 0.75rem !important;
     width: 25px;
+    flex-shrink: 0;
 }
 
 .track-item.active .track-number {
@@ -1838,6 +1841,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 /* --- 5. RESPONSIVE --- */
 @media (max-width: 480px) {
     .album-header { flex-direction: column; text-align: center; }
-    .audio-controls { flex-wrap: wrap; gap: 10px; }
+    .audio-controls { flex-wrap: wrap; gap: 10px; padding: 20px; }
     .track-info { width: 100%; }
+    .tracklist { padding-right: 0 !important; }
 }
