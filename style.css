@@ -1774,7 +1774,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
 }
 
-/* --- THE "ZERO-JITTER" TIMER DISPLAY --- */
+/* --- THE SYMMETRICAL LCD TIMER --- */
 .time-display {
     font-family: 'Courier New', Courier, monospace !important;
     font-size: 1rem !important;
@@ -1782,20 +1782,20 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #111 !important;
     border: 1px solid #000 !important;
     
-    /* THE FIXED GEOMETRY: 8ch fits "00:00" with perfect gutters */
+    /* THE SYMMETRY FIX: Fixed 5-character width (00:00) */
+    /* 8ch gives exactly enough 'glass' on either side of the 5 digits */
     width: 8ch !important; 
-    flex-shrink: 0 !important; /* Prevents the box from being squashed */
+    flex-shrink: 0 !important;
     
-    /* Center the numbers perfectly within the fixed box */
+    /* Perfect Centering */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 5px 0 !important;
     
-    /* Essential for character-width consistency */
+    /* Lock the character widths */
     font-variant-numeric: tabular-nums !important;
     letter-spacing: 0.05em;
-    text-align: center;
 }
 
 /* --- 4. THE INTEGRATED TRACKLIST (Recessed Alignment) --- */
