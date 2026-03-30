@@ -1664,12 +1664,13 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .album-art {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
+    width: 80px !important;  /* !important forces the size if other styles compete */
+    height: 80px !important;
+    object-fit: cover;       /* Ensures the 512px square fills the 80px square perfectly */
     border-radius: 4px;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex-shrink: 0;          /* Prevents the image from being squashed by long text */
 }
 
 .album-meta {
@@ -1755,7 +1756,12 @@ font-family: Arial, Helvetica, sans-serif !important;
         gap: 15px;
     }
     .album-art {
-        width: 120px;
-        height: 120px;
+        width: 120px !important;
+        height: 120px !important;
     }
 }
+
+
+
+
+
