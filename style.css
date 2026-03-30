@@ -1644,189 +1644,74 @@ font-family: Arial, Helvetica, sans-serif !important;
     --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* --- 1. THE MAIN CONTAINER --- */
-.audio-playlist-container {
-    max-width: 600px;
-    margin: 60px 0;
-    padding: 0; /* Removing padding here so the header and controls can hit the edges */
-    background: #ffffff;
-    border: 1px solid #dcdcdc; /* Darkened border for definition */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* Heavier shadow for "lift" */
-    border-radius: 8px;
-    overflow: hidden; /* Clips internal corners */
-}
-
-/* --- 2. ALBUM HEADER (Art + Meta) --- */
-.album-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 30px;
-    background: #fafafa; /* Subtle contrast to the main paper */
-    border-bottom: 1px solid #eee;
-}
-
-.album-art {
-    width: 90px !important;  /* Slightly larger for presence */
-    height: 90px !important;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 2px solid #1a1a1a; /* Bold frame */
-    box-shadow: 4px 4px 0px rgba(255, 102, 0, 0.15); /* Subtle orange drop-shadow */
-    flex-shrink: 0;
-}
-
-.album-meta {
-    flex: 1;
-}
-
-.short-description {
-    margin: 0;
-    font-size: 1.4rem; /* More significant size */
-    font-weight: 800; /* Extra bold */
-    color: #1a1a1a;
-    line-height: 1.1;
-}
-
-.album-meta p {
-    margin: 6px 0 0 0;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #666; /* Darker grey for legibility */
-    font-weight: 600;
-}
-
-/* --- 3. THE DARK PLAYER CONSOLE --- */
-/* This section provides the "Black Box" contrast to kill the blandness */
-.audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 25px 30px;
-    background: #1a1a1a; /* DEEP CHARCOAL: High contrast anchor */
-    color: #ffffff;
-}
-
-.play-pause {
-    width: 45px;
-    height: 45px;
-    background: transparent;
-    border: 2px solid #ffffff !important; /* White button on black */
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s ease;
-}
-
-.play-pause:hover {
-    background: #ff6600;
-    border-color: #ff6600 !important;
-}
-
-.play-pause::after {
-    border-color: transparent transparent transparent #ffffff !important;
-}
-
+/* --- 1. THE DISPLAY SCREEN (Legibility Fix) --- */
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #222; /* Dark "LCD Screen" background */
+    border-radius: 2px;
+    border: 1px solid #000;
 }
 
-/* --- 1. THE UNIFIED FACEPLATE --- */
-.audio-playlist-container {
-    max-width: 650px;
-    margin: 60px 0;
-    background: #ebeae6; /* Industrial "Putty" or Cool Grey */
-    border: 1px solid #d1d0cb;
-    border-radius: 3px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-}
-
-/* --- 2. THE TOP SECTION --- */
-.album-header {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    padding: 40px;
-    background: linear-gradient(to bottom, #f2f1ed, #ebeae6); /* Subtle metallic sheen */
-}
-
-.album-art {
-    width: 100px !important;
-    height: 100px !important;
-    border: 1px solid #c0bfba;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.short-description {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #222;
-    letter-spacing: -0.01em;
-}
-
-.album-meta p {
-    margin: 5px 0 0 0;
-    font-size: 0.75rem;
+#now-playing {
+    color: #ff6600; /* Orange "LED" text for high readability */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #777;
 }
 
-/* --- 3. THE RECESSED CONTROLS --- */
-.audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 40px;
-    background: #e2e1dc; /* Slightly darker "recessed" well */
-    border-top: 1px solid #d1d0cb;
-    border-bottom: 1px solid #d1d0cb;
-}
-
+/* --- 2. THE MECHANICAL PLAY BUTTON --- */
 .play-pause {
-    width: 42px;
-    height: 42px;
-    background: #333; /* Dark "Graphite" button */
-    border: none !important;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #333; /* Gunmetal grey button */
+    border: 1px solid #111 !important;
+    border-radius: 4px; /* Square with slight radius - like a real key */
     cursor: pointer;
-    transition: background 0.2s;
+    position: relative;
+    box-shadow: 0 3px 0 #000; /* Physical depth */
+    flex-shrink: 0;
+}
+
+.play-pause:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000;
+}
+
+/* The Play Symbol (The Triangle) */
+.play-pause::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px;
+    border-color: transparent transparent transparent #fff;
+    transition: border-color 0.2s;
 }
 
 .play-pause:hover {
-    background: #ff6600; /* Orange remains a functional highlight only */
+    background: #444;
 }
 
-/* --- 4. THE INTEGRATED TRACKLIST --- */
-.tracklist {
-    margin: 0;
-    padding: 10px 0;
-    list-style: none;
+.play-pause:hover::after {
+    border-color: transparent transparent transparent #ff6600;
 }
 
-.track-item {
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 0.9rem;
-    color: #444;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-    transition: all 0.2s;
-}
-
-.track-item:hover {
-    background: rgba(255, 255, 255, 0.4);
-    color: #000;
-}
-
-.track-item.active {
-    background: #fff;
+/* --- 3. THE TIME READOUT --- */
+.time-display {
     color: #ff6600;
-    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    background: #222;
+    padding: 4px 8px;
+    border: 1px solid #000;
+    font-variant-numeric: tabular-nums;
 }
