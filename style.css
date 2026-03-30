@@ -1644,40 +1644,35 @@ font-family: Arial, Helvetica, sans-serif !important;
     --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* --- 1. THE MAIN HOUSING --- */
+/* --- 1. THE UNIFIED CHASSIS --- */
 .audio-playlist-container {
     max-width: 650px;
     margin: 60px 0;
-    background: #ebeae6; /* Industrial Steel/Grey */
-    border: 1px solid #c0bfba;
+    background: #e2e1dc; /* Deep Industrial Grey - Darker than the paper */
+    border: 1px solid #b1b0ab;
     border-radius: 4px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     font-family: sans-serif;
 }
 
-/* --- 2. THE HEADER (Fixed Layout) --- */
+/* --- 2. THE FACEPLATE (Top Section) --- */
 .album-header {
     display: flex;
     align-items: center;
     gap: 25px;
     padding: 30px;
-    background: #f2f1ed;
-    border-bottom: 1px solid #d1d0cb;
+    background: #f2f1ed; /* Lighter "brushed" finish */
+    border-bottom: 1px solid #c0bfba;
 }
 
 .album-art {
-    /* Critical: These keep the 512px image contained */
     width: 100px !important;
     height: 100px !important;
     min-width: 100px;
     object-fit: cover;
     border: 1px solid #b1b0ab;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.album-meta {
-    flex: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .album-meta .short-description {
@@ -1696,27 +1691,28 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #666;
 }
 
-/* --- 3. THE CONTROL CONSOLE (Fixed Flex Layout) --- */
+/* --- 3. THE RECESSED CONSOLE (Controls) --- */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 20px 30px;
-    background: #d1d0cb; /* Darker recessed well */
+    background: #d1d0cb; /* Darkest "well" of the machine */
     border-bottom: 1px solid #b1b0ab;
 }
 
-/* THE PLAY BUTTON */
+/* MECHANICAL PLAY BUTTON */
 .play-pause {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0; /* Prevents button from squishing */
-    background: #333;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    background: #333; /* Gunmetal grey */
     border: 1px solid #111 !important;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 3px 0 #000;
+    box-shadow: 0 3px 0 #000; /* Physical depth */
+    transition: all 0.1s ease;
 }
 
 .play-pause:active {
@@ -1724,7 +1720,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 1px 0 #000;
 }
 
-/* The Play Triangle Icon */
+/* THE TRIANGLE PLAY ICON */
 .play-pause::after {
     content: '';
     position: absolute;
@@ -1736,23 +1732,28 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-color: transparent transparent transparent #fff;
 }
 
-/* THE LCD SCREEN AREA */
+.play-pause:hover::after {
+    border-color: transparent transparent transparent #ff6600;
+}
+
+/* THE LCD DISPLAY SCREEN */
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 10px 15px;
-    background: #1a1a1a; /* Black LCD background */
+    background: #111; /* Black LCD Screen */
     border: 1px solid #000;
     border-radius: 2px;
 }
 
 #now-playing {
-    color: #ff6600; /* High-vis Orange LED text */
-    font-family: monospace;
+    color: #ff6600; /* Glowing LED Text */
+    font-family: 'Courier New', Courier, monospace;
     font-size: 0.85rem;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .progress-container {
@@ -1769,58 +1770,67 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .time-display {
-    font-family: monospace;
-    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
     color: #ff6600;
-    background: #1a1a1a;
+    background: #111;
     padding: 5px 10px;
     border: 1px solid #000;
     min-width: 45px;
     text-align: center;
 }
 
-/* --- 4. THE TRACKLIST --- */
+/* --- 4. THE INTEGRATED BASE (Tracklist) --- */
 .tracklist {
     margin: 0;
     padding: 0;
     list-style: none;
-    background: #fff;
+    background: #e2e1dc; /* Solid Chassis Color */
 }
 
 .track-item {
-    padding: 15px 30px;
+    padding: 18px 30px;
     display: flex;
     align-items: center;
     gap: 20px;
-    border-bottom: 1px solid #f0f0f0;
+    /* This creates the "machined groove" look */
+    border-top: 1px solid #f2f1ed; 
+    border-bottom: 1px solid #c0bfba;
     cursor: pointer;
     color: #444;
     font-size: 0.95rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
+.track-item:first-child { border-top: none; }
+
 .track-item:hover {
-    background: #f8f8f8;
-    color: #ff6600;
-    padding-left: 40px;
+    background: #dcdbd6; /* metallic highlight */
+    color: #000;
+    padding-left: 40px; /* Interaction feedback */
 }
 
 .track-item.active {
-    background: #fdf6f0;
+    background: #1a1a1a; /* Selected state mimics LCD screen */
     color: #ff6600;
     font-weight: 700;
-    border-left: 4px solid #ff6600;
+    border-top: 1px solid #000;
 }
 
 .track-number {
     font-family: monospace;
-    color: #ccc;
+    color: #888;
     font-size: 0.8rem;
+    width: 25px;
+}
+
+.track-item.active .track-number {
+    color: #ff6600;
 }
 
 /* --- 5. RESPONSIVE --- */
 @media (max-width: 480px) {
     .album-header { flex-direction: column; text-align: center; }
-    .audio-controls { flex-wrap: wrap; justify-content: center; }
+    .audio-controls { flex-wrap: wrap; gap: 10px; }
     .track-info { width: 100%; }
 }
