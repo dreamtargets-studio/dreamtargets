@@ -197,3 +197,55 @@ document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") closeLightbox();
     }
 });
+
+/**
+ * AUDIO PLAYER
+ */
+document.addEventListener('click', (e) => {
+    const trackItem = e.target.closest('.track-item');
+    const playBtn = e.target.closest('#masterPlayBtn');
+    
+    const audio = document.getElementById('main-audio-engine');
+    const nowPlayingText = document.getElementById('now-playing');
+    const progressBar = document.getElementById('master-progress');
+    const timeDisplay = document.getElementById('master-time');
+
+    if (!audio) return;
+
+    // 1. TRACK SELECTION
+    if (trackItem) {
+        // Remove active class from all
+        document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
+        trackItem.classList.add('active');
+
+        // Swap Source
+        const newSrc = trackItem.getAttribute('data-src');
+        audio.src = newSrc;
+        nowPlayingText.textContent = trackItem.textContent.trim();
+        
+        audio.play();
+        if (playBtn) playBtn.classList.add('playing');
+    }
+
+    // 2. PLAY/PAUSE TOGGLE
+    if (playBtn) {
+        if (!audio.src) return; // Don't play if no track selected
+        if (audio.paused) {
+            audio.play();
+            playBtn.classList.add('playing');
+        } else {
+            audio.pause();
+            playBtn.classList.remove('playing');
+        }
+    }
+
+    // 3. PROGRESS TRACKING (One-time setup)
+    audio.ontimeupdate = () => {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        if (progressBar) progressBar.style.width = pct + '%';
+        
+        const mins = Math.floor(audio.currentTime / 60);
+        const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+        if (timeDisplay) timeDisplay.textContent = `${mins}:${secs}`;
+    };
+});
