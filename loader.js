@@ -221,6 +221,8 @@ document.addEventListener('click', (e) => {
         // Swap Source
         const newSrc = trackItem.getAttribute('data-src');
         audio.src = newSrc;
+        
+        // Clean the text: Remove the track number (if any) to keep the LED window clean
         nowPlayingText.textContent = trackItem.textContent.trim();
         
         audio.play();
@@ -229,7 +231,7 @@ document.addEventListener('click', (e) => {
 
     // 2. PLAY/PAUSE TOGGLE
     if (playBtn) {
-        if (!audio.src) return; // Don't play if no track selected
+        if (!audio.src) return; 
         if (audio.paused) {
             audio.play();
             playBtn.classList.add('playing');
@@ -239,13 +241,20 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // 3. PROGRESS TRACKING (One-time setup)
+    // 3. PROGRESS & SYMMETRICAL TIMER
     audio.ontimeupdate = () => {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        if (progressBar) progressBar.style.width = pct + '%';
+        // Progress Bar logic with safety check
+        if (audio.duration) {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            if (progressBar) progressBar.style.width = pct + '%';
+        }
         
-        const mins = Math.floor(audio.currentTime / 60);
+        // THE DESIGNER'S TIMER: Force 00:00 Symmetrical Format
+        const mins = Math.floor(audio.currentTime / 60).toString().padStart(2, '0');
         const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-        if (timeDisplay) timeDisplay.textContent = `${mins}:${secs}`;
+        
+        if (timeDisplay) {
+            timeDisplay.textContent = `${mins}:${secs}`;
+        }
     };
 });
