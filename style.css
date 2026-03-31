@@ -1645,7 +1645,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v6.0 - Final Chassis)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v7.0 - Final Chassis)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING (The Machine Body) --- */
@@ -1700,7 +1700,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px; /* 30px padding creates the alignment grid */
+    padding: 20px 30px; /* 30px creates the vertical alignment anchor */
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
@@ -1749,6 +1749,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     border: 1px solid #000;
     border-radius: 2px;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    position: relative; /* Anchor for mobile absolute progress bar */
 }
 
 #now-playing {
@@ -1782,32 +1783,33 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #111 !important;
     border: 1px solid #000 !important;
     
-    /* THE SYMMETRY FIX: Fixed 5-character width (00:00) */
-    /* 8ch gives exactly enough 'glass' on either side of the 5 digits */
+    /* THE FIXED GEOMETRY: 8ch fits "00:00" with perfect gutters */
     width: 8ch !important; 
     flex-shrink: 0 !important;
     
-    /* Perfect Centering */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 5px 0 !important;
     
-    /* Lock the character widths */
     font-variant-numeric: tabular-nums !important;
     letter-spacing: 0.05em;
 }
 
-/* --- 4. THE INTEGRATED TRACKLIST (Recessed Alignment) --- */
+/* --- 4. THE INTEGRATED TRACKLIST (Recessed Tray Fix) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 0 30px 10px 0 !important; /* 30px Right gutter matches console */
+    padding: 10px 0 !important; 
     list-style: none !important;
     background: #e2e1dc; 
 }
 
 .track-item {
-    padding: 16px 0 16px 30px !important; /* 30px Left aligns with Play Button */
+    /* THE ALIGNMENT FIX: Prevents right-edge bleed */
+    margin-right: 30px !important; 
+    margin-left: 0 !important;
+    padding: 16px 0 16px 30px !important; 
+    
     display: flex !important;
     align-items: center;
     gap: 20px;
@@ -1836,7 +1838,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #dcdbd6 !important; 
     color: #222 !important;
     font-weight: 600 !important;
-    border-left: 5px solid #b1b0ab !important; /* Neutral grey marker */
+    border-left: 5px solid #b1b0ab !important; 
 }
 
 .track-number {
@@ -1847,31 +1849,24 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-shrink: 0;
 }
 
-.track-item.active .track-number {
-    color: #444 !important;
-}
-
 /* --- 5. MOBILE ARCHITECTURE (Max-Width: 600px) --- */
 @media (max-width: 600px) {
     
-    /* 1. Stack the header for smaller screens */
     .album-header {
         flex-direction: column;
         text-align: center;
         padding: 20px;
     }
 
-    /* 2. RECONFIGURE CONSOLE: Stack the Play Button below the LED */
     .audio-controls {
-        flex-direction: column; /* Stacks the LED on top of the Button */
+        flex-direction: column; 
         padding: 20px;
         gap: 20px;
     }
 
-    /* 3. THE LED WINDOW: Maintains horizontal rail for Title + Timer */
     .track-info {
         width: 100%;
-        flex-direction: row !important; /* Forces Title and Timer to stay side-by-side */
+        flex-direction: row !important; 
         align-items: center;
         justify-content: space-between;
         padding: 12px;
@@ -1879,32 +1874,27 @@ font-family: Arial, Helvetica, sans-serif !important;
         display: flex !important;
     }
 
-    /* 4. THE TITLING: Ensure it wraps or truncates so it doesn't push the timer out */
     #now-playing {
-        font-size: 0.75rem !important; /* Slightly smaller for mobile rails */
+        font-size: 0.75rem !important; 
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         flex-grow: 1;
     }
 
-    /* 5. THE TIMER: Locked on the right of the title */
     .time-display {
-        width: 7ch !important; /* Slightly tighter for mobile */
+        width: 7ch !important; 
         font-size: 0.9rem !important;
         flex-shrink: 0;
     }
 
-    /* 6. THE PLAY BUTTON: Centered and "Hero" sized for thumbs */
     .play-pause {
-        order: 2; /* Ensures it sits below the LED */
+        order: 2; 
         margin: 0 auto;
-        width: 65px; /* Slightly larger target for mobile */
+        width: 65px; 
         height: 65px;
     }
 
-    /* 7. PROGRESS BAR: Now sits within the LED row logic */
-    /* If your progress bar is inside .track-info, it needs to be full width */
     .progress-container {
         position: absolute;
         bottom: 0;
@@ -1913,11 +1903,9 @@ font-family: Arial, Helvetica, sans-serif !important;
         height: 2px;
     }
     
-    .tracklist {
-        padding-right: 0 !important; /* Full width on mobile */
-    }
-    
     .track-item {
-        padding: 15px 20px !important;
+        /* On mobile, we keep a smaller margin for the gutter */
+        margin-right: 15px !important;
+        padding: 15px 0 15px 20px !important;
     }
 }
