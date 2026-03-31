@@ -1851,10 +1851,73 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #444 !important;
 }
 
-/* --- 5. RESPONSIVE --- */
-@media (max-width: 480px) {
-    .album-header { flex-direction: column; text-align: center; }
-    .audio-controls { flex-wrap: wrap; gap: 10px; padding: 20px; }
-    .track-info { width: 100%; }
-    .tracklist { padding-right: 0 !important; }
+/* --- 5. MOBILE ARCHITECTURE (Max-Width: 600px) --- */
+@media (max-width: 600px) {
+    
+    /* 1. Stack the header for smaller screens */
+    .album-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    /* 2. RECONFIGURE CONSOLE: Stack the Play Button below the LED */
+    .audio-controls {
+        flex-direction: column; /* Stacks the LED on top of the Button */
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* 3. THE LED WINDOW: Maintains horizontal rail for Title + Timer */
+    .track-info {
+        width: 100%;
+        flex-direction: row !important; /* Forces Title and Timer to stay side-by-side */
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        gap: 10px;
+        display: flex !important;
+    }
+
+    /* 4. THE TITLING: Ensure it wraps or truncates so it doesn't push the timer out */
+    #now-playing {
+        font-size: 0.75rem !important; /* Slightly smaller for mobile rails */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    /* 5. THE TIMER: Locked on the right of the title */
+    .time-display {
+        width: 7ch !important; /* Slightly tighter for mobile */
+        font-size: 0.9rem !important;
+        flex-shrink: 0;
+    }
+
+    /* 6. THE PLAY BUTTON: Centered and "Hero" sized for thumbs */
+    .play-pause {
+        order: 2; /* Ensures it sits below the LED */
+        margin: 0 auto;
+        width: 65px; /* Slightly larger target for mobile */
+        height: 65px;
+    }
+
+    /* 7. PROGRESS BAR: Now sits within the LED row logic */
+    /* If your progress bar is inside .track-info, it needs to be full width */
+    .progress-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+    }
+    
+    .tracklist {
+        padding-right: 0 !important; /* Full width on mobile */
+    }
+    
+    .track-item {
+        padding: 15px 20px !important;
+    }
 }
