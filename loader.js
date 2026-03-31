@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.0 (MOTION EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.1 (STABILITY EDITION)
    ============================================================ */
 
 /**
@@ -58,7 +58,7 @@ window.addEventListener('scroll', () => {
  */
 let currentGallery = []; 
 let currentIndex = 0;
-let isAnimating = false; // Prevents animation overlap glitches
+let isAnimating = false;
 
 function updateLightbox(index, direction = 'next') {
     if (isAnimating) return;
@@ -70,17 +70,13 @@ function updateLightbox(index, direction = 'next') {
     const nextBtn = document.querySelector('.lightbox-next');
 
     if (!lightboxImg) return;
-
     isAnimating = true;
 
-    // A. SLIDE OUT: Move current image in the direction of travel
     lightboxImg.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s';
     lightboxImg.style.opacity = '0';
-    // If 'next', fly left (-100px). If 'prev', fly right (100px).
     lightboxImg.style.transform = direction === 'next' ? 'translateX(-100px)' : 'translateX(100px)';
 
     setTimeout(() => {
-        // B. INDEX LOGIC
         if (index < 0) index = currentGallery.length - 1;
         if (index >= currentGallery.length) index = 0;
         currentIndex = index;
@@ -88,11 +84,9 @@ function updateLightbox(index, direction = 'next') {
         const targetImage = currentGallery[currentIndex];
         const isGallery = currentGallery.length > 1;
 
-        // C. PREP NEW IMAGE: Teleport it to the opposite side while invisible
         lightboxImg.style.transition = 'none';
         lightboxImg.style.transform = direction === 'next' ? 'translateX(100px)' : 'translateX(-100px)';
         
-        // D. UPDATE CONTENT
         const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
         lightboxImg.src = fullSrc;
         
@@ -106,7 +100,6 @@ function updateLightbox(index, direction = 'next') {
         if (prevBtn) prevBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
         if (nextBtn) nextBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
 
-        // E. SLIDE IN: Bring it back to center
         requestAnimationFrame(() => {
             setTimeout(() => {
                 lightboxImg.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s';
@@ -138,14 +131,13 @@ function closeLightbox() {
 let touchStartX = 0;
 let touchEndX = 0;
 
-// Swipe Listeners
 document.addEventListener('touchstart', e => { 
     touchStartX = e.changedTouches[0].screenX; 
 }, {passive: true});
 
 document.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
-    const threshold = 70; // Slightly higher for iPad stability
+    const threshold = 70;
     const lightbox = document.getElementById('lightbox-overlay');
     
     if (lightbox && lightbox.getAttribute('style')?.includes('flex') && currentGallery.length > 1) {
@@ -154,7 +146,6 @@ document.addEventListener('touchend', e => {
     }
 }, false);
 
-// Click Logic
 document.addEventListener('click', (e) => {
     if (e.target.closest('#backToTop')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -180,7 +171,6 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-    // Ghost Controls
     if (e.target.closest('.lightbox-next')) updateLightbox(currentIndex + 1, 'next');
     else if (e.target.closest('.lightbox-prev')) updateLightbox(currentIndex - 1, 'prev');
     else if (e.target.closest('.lightbox-close') || (e.target.id === 'lightbox-overlay')) closeLightbox();
@@ -199,7 +189,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
- * AUDIO PLAYER
+ * 8. INDUSTRIAL AUDIO PLAYER ENGINE
  */
 document.addEventListener('click', (e) => {
     const trackItem = e.target.closest('.track-item');
@@ -212,24 +202,24 @@ document.addEventListener('click', (e) => {
 
     if (!audio) return;
 
-    // 1. TRACK SELECTION
+    // A. TRACK SELECTION (Designer's Focus)
     if (trackItem) {
-        // Remove active class from all
         document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
         trackItem.classList.add('active');
 
-        // Swap Source
         const newSrc = trackItem.getAttribute('data-src');
-        audio.src = newSrc;
         
-        // Clean the text: Remove the track number (if any) to keep the LED window clean
-        nowPlayingText.textContent = trackItem.textContent.trim();
+        // Only swap if it's a different track to prevent jitter
+        if (audio.getAttribute('src') !== newSrc) {
+            audio.src = newSrc;
+            nowPlayingText.textContent = trackItem.textContent.trim();
+            audio.play();
+        }
         
-        audio.play();
         if (playBtn) playBtn.classList.add('playing');
     }
 
-    // 2. PLAY/PAUSE TOGGLE
+    // B. PLAY/PAUSE MECHANICAL TOGGLE
     if (playBtn) {
         if (!audio.src) return; 
         if (audio.paused) {
@@ -241,15 +231,14 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // 3. PROGRESS & SYMMETRICAL TIMER
+    // C. PROGRESS & SYMMETRICAL TIMER (00:00)
     audio.ontimeupdate = () => {
-        // Progress Bar logic with safety check
         if (audio.duration) {
             const pct = (audio.currentTime / audio.duration) * 100;
             if (progressBar) progressBar.style.width = pct + '%';
         }
         
-        // THE DESIGNER'S TIMER: Force 00:00 Symmetrical Format
+        // APPLE-STANDARD FORMATTING: Always XX:XX
         const mins = Math.floor(audio.currentTime / 60).toString().padStart(2, '0');
         const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         
