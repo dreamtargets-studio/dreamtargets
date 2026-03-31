@@ -1645,7 +1645,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v7.0 - Final Chassis)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.0 - Unified LED)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING (The Machine Body) --- */
@@ -1676,7 +1676,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     min-width: 100px;
     object-fit: cover;
     border: 1px solid #b1b0ab;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .album-meta .short-description {
@@ -1695,12 +1694,12 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #666 !important;
 }
 
-/* --- 3. THE CONTROL CONSOLE (Recessed LCD Area) --- */
+/* --- 3. THE CONTROL CONSOLE (Unified LED Panel) --- */
 .audio-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 20px 30px; /* 30px creates the vertical alignment anchor */
+    gap: 20px;
+    padding: 25px 30px;
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
@@ -1734,22 +1733,35 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-color: transparent transparent transparent #fff;
 }
 
-.play-pause:hover::after {
-    border-color: transparent transparent transparent #ff6600;
+.play-pause.playing::after {
+    border: none;
+    width: 14px;
+    height: 16px;
+    border-left: 5px solid #fff;
+    border-right: 5px solid #fff;
+    left: 50%;
 }
 
-/* THE HERO: THE BLACK LED WINDOW */
+/* THE CONTIGUOUS LED GLASS */
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 10px 15px;
-    background: #111; 
+    gap: 12px;
+    padding: 12px 18px;
+    background: #111; /* Pure Black Panel */
     border: 1px solid #000;
     border-radius: 2px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-    position: relative; /* Anchor for mobile absolute progress bar */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    min-width: 0; /* Important for title truncation */
+}
+
+/* THE SHARED DATA RAIL (Title + Timer) */
+.led-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 #now-playing {
@@ -1759,13 +1771,29 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-weight: bold !important;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    text-shadow: 0 0 5px rgba(255, 102, 0, 0.4);
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 15px;
+}
+
+/* THE SYMMETRICAL TIMER (No separate box, sits on the glass) */
+.time-display {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 1rem !important;
+    color: #ff6600 !important;
+    width: 6ch !important; 
+    flex-shrink: 0;
+    text-align: right;
+    font-variant-numeric: tabular-nums !important;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
 }
 
 .progress-container {
     height: 3px;
-    background: #333;
-    border-radius: 2px;
+    background: #222;
+    border-radius: 1px;
     overflow: hidden;
 }
 
@@ -1775,28 +1803,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
 }
 
-/* --- THE SYMMETRICAL LCD TIMER --- */
-.time-display {
-    font-family: 'Courier New', Courier, monospace !important;
-    font-size: 1rem !important;
-    color: #ff6600 !important;
-    background: #111 !important;
-    border: 1px solid #000 !important;
-    
-    /* THE FIXED GEOMETRY: 8ch fits "00:00" with perfect gutters */
-    width: 8ch !important; 
-    flex-shrink: 0 !important;
-    
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 5px 0 !important;
-    
-    font-variant-numeric: tabular-nums !important;
-    letter-spacing: 0.05em;
-}
-
-/* --- 4. THE INTEGRATED TRACKLIST (Recessed Tray Fix) --- */
+/* --- 4. THE INTEGRATED TRACKLIST (Recessed Tray) --- */
 .tracklist {
     margin: 0 !important;
     padding: 10px 0 !important; 
@@ -1805,11 +1812,9 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .track-item {
-    /* THE ALIGNMENT FIX: Prevents right-edge bleed */
-    margin-right: 30px !important; 
+    margin-right: 30px !important; /* Forces the right-side gutter */
     margin-left: 0 !important;
     padding: 16px 0 16px 30px !important; 
-    
     display: flex !important;
     align-items: center;
     gap: 20px;
@@ -1822,18 +1827,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-left: 5px solid transparent !important;
 }
 
-.track-item:first-child { 
-    border-top: none !important; 
-}
+.track-item:first-child { border-top: none !important; }
 
-/* HOVER: Momentary interaction hint */
 .track-item:hover {
     background: #d4d3ce !important;
     color: #1a1a1a !important;
     border-left: 5px solid #ff6600 !important;
 }
 
-/* ACTIVE: The "Inert" state (Surrenders focus to the LED) */
 .track-item.active {
     background: #dcdbd6 !important; 
     color: #222 !important;
@@ -1851,60 +1852,35 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* --- 5. MOBILE ARCHITECTURE (Max-Width: 600px) --- */
 @media (max-width: 600px) {
-    
-    .album-header {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
     .audio-controls {
-        flex-direction: column; 
+        flex-direction: column !important; /* Stacks Panel above Button */
         padding: 20px;
-        gap: 20px;
+        gap: 15px;
     }
 
     .track-info {
         width: 100%;
-        flex-direction: row !important; 
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px;
-        gap: 10px;
-        display: flex !important;
-    }
-
-    #now-playing {
-        font-size: 0.75rem !important; 
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        flex-grow: 1;
-    }
-
-    .time-display {
-        width: 7ch !important; 
-        font-size: 0.9rem !important;
-        flex-shrink: 0;
+        order: 1; /* LED Panel is the First Tier */
     }
 
     .play-pause {
-        order: 2; 
-        margin: 0 auto;
-        width: 65px; 
-        height: 65px;
+        order: 2; /* Centered Button is Second Tier */
+        margin: 5px auto 0;
+        width: 60px;
+        height: 60px;
     }
 
-    .progress-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
+    /* Keeps Title and Timer on a single rail */
+    .led-top-row {
+        display: flex !important;
+        flex-direction: row !important; 
+        justify-content: space-between;
     }
-    
+
+    #now-playing { font-size: 0.75rem !important; }
+    .time-display { font-size: 0.9rem !important; }
+
     .track-item {
-        /* On mobile, we keep a smaller margin for the gutter */
         margin-right: 15px !important;
         padding: 15px 0 15px 20px !important;
     }
