@@ -1493,7 +1493,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.5 - Flush Surface)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.6 - The Anchor Lock)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING --- */
@@ -1532,13 +1532,13 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-weight: 700 !important;
     color: #111 !important;
     line-height: 1.2 !important;
-    text-transform: none !important; /* No forced caps */
+    text-transform: none !important;
 }
 
 .album-meta p {
     margin: 4px 0 0 0 !important;
     font-size: 0.75rem !important;
-    text-transform: none !important; /* No forced caps */
+    text-transform: none !important;
     letter-spacing: 0.05em;
     color: #666 !important;
 }
@@ -1576,6 +1576,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #111; 
     border-radius: 2px;
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    min-width: 0; /* Prevents overflow pushing the timer out */
+}
+
+.led-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 #now-playing {
@@ -1583,16 +1591,30 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     font-weight: 400 !important; 
-    text-transform: none !important; /* "Select a track" is now lowercase/sentence case */
+    text-transform: none !important; 
     letter-spacing: 0;
-    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
+    text-shadow: 0 0- 10px rgba(255, 102, 0, 0.4);
+    /* Ensure the title leaves room for the timer */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
 }
 
+/* THE FIXED TIMER (The Baboon Cage) */
 .time-display {
     color: #ff6600 !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
+    /* CRITICAL FIX: Forces numbers to have equal width */
     font-variant-numeric: tabular-nums !important;
+    -moz-font-feature-settings: "tnum";
+    -webkit-font-feature-settings: "tnum";
+    /* FIXES ALIGNMENT: Right-justified in a fixed container */
+    width: 80px !important; 
+    text-align: right !important;
+    flex-shrink: 0;
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
 }
 
 .progress-container {
@@ -1605,7 +1627,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #ff6600;
 }
 
-/* --- 4. THE FLUSH TRACKLIST (No Gutters) --- */
+/* --- 4. THE FLUSH TRACKLIST --- */
 .tracklist {
     margin: 0 !important;
     padding: 0 !important; 
@@ -1614,29 +1636,23 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .track-item {
-    /* REMOVED GUTTERS: Padding handles the internal space only */
     padding: 18px 30px !important; 
-    margin: 0 !important; /* Zero margin ensures they touch */
+    margin: 0 !important; 
     display: flex !important;
     align-items: center;
     gap: 20px;
-    /* THE FEINT RULE: The only divider between tracks */
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
     color: #555 !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     text-transform: none !important; 
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease;
 }
 
-/* CLEAN ENDING */
 .track-item:last-child { border-bottom: none !important; }
 
-.track-item:hover {
-    background: #d4d3ce !important;
-    color: #111 !important;
-}
+.track-item:hover { background: #d4d3ce !important; color: #111 !important; }
 
 .track-item.active {
     background: #dcdbd6 !important; 
@@ -1656,4 +1672,5 @@ font-family: Arial, Helvetica, sans-serif !important;
     .audio-controls { flex-direction: column !important; }
     .track-info { width: 100%; order: 1; }
     .play-pause { order: 2; margin: 0 auto; }
+    .time-display { width: 60px !important; }
 }
