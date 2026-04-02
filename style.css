@@ -1645,19 +1645,20 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.0 - Unified LED)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.1 - The Finesse Edit)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING (The Machine Body) --- */
 .audio-playlist-container {
     max-width: 650px;
     margin: 60px 0;
-    background: #e2e1dc; /* Industrial Grey Base */
+    background: #e2e1dc; 
     border: 1px solid #b1b0ab;
     border-radius: 4px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+    /* UNIFIED BRAND FONT: No Serifs Allowed */
+    font-family: Arial, Helvetica, sans-serif; 
 }
 
 /* --- 2. THE FACEPLATE (Brushed Top Section) --- */
@@ -1694,7 +1695,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #666 !important;
 }
 
-/* --- 3. THE CONTROL CONSOLE (Unified LED Panel) --- */
+/* --- 3. THE CONTROL CONSOLE (The Logic Center) --- */
 .audio-controls {
     display: flex;
     align-items: center;
@@ -1718,30 +1719,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     transition: all 0.1s ease;
 }
 
-.play-pause:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #000;
-}
-
-.play-pause::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 55%;
-    transform: translate(-50%, -50%);
-    border-style: solid;
-    border-width: 8px 0 8px 14px;
-    border-color: transparent transparent transparent #fff;
-}
-
-.play-pause.playing::after {
-    border: none;
-    width: 14px;
-    height: 16px;
-    border-left: 5px solid #fff;
-    border-right: 5px solid #fff;
-    left: 50%;
-}
-
 /* THE CONTIGUOUS LED GLASS */
 .track-info {
     flex-grow: 1;
@@ -1749,139 +1726,96 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-direction: column;
     gap: 12px;
     padding: 12px 18px;
-    background: #111; /* Pure Black Panel */
-    border: 1px solid #000;
+    background: #000; /* Deep Black Glass */
     border-radius: 2px;
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
-    min-width: 0; /* Important for title truncation */
 }
 
-/* THE SHARED DATA RAIL (Title + Timer) */
+/* THE SHARED DATA RAIL (The "Jump" Destination) */
 .led-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
 #now-playing {
     color: #ff6600 !important; 
-    font-family: 'Courier New', Courier, monospace !important;
+    /* MATCHES TRACKLIST EXACTLY: Arial Sans */
+    font-family: Arial, Helvetica, sans-serif !important; 
     font-size: 0.85rem !important;
     font-weight: bold !important;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-right: 15px;
 }
 
-/* THE SYMMETRICAL TIMER (No separate box, sits on the glass) */
 .time-display {
-    font-family: 'Courier New', Courier, monospace !important;
-    font-size: 1rem !important;
+    /* MATCHES TRACKLIST EXACTLY: Arial Sans */
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 0.9rem !important;
     color: #ff6600 !important;
-    width: 6ch !important; 
-    flex-shrink: 0;
-    text-align: right;
     font-variant-numeric: tabular-nums !important;
     text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
 }
 
 .progress-container {
-    height: 3px;
+    height: 2px; /* Thinner for Finesse */
     background: #222;
-    border-radius: 1px;
-    overflow: hidden;
 }
 
 .progress-bar {
-    height: 100%;
     background: #ff6600;
-    box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
 }
 
-/* --- 4. THE INTEGRATED TRACKLIST (Recessed Tray) --- */
+/* --- 4. THE INTEGRATED TRACKLIST (The "Feint Rule" Tray) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 10px 0 !important; 
+    padding: 0 !important; 
     list-style: none !important;
     background: #e2e1dc; 
 }
 
 .track-item {
-    margin-right: 30px !important; /* Forces the right-side gutter */
-    margin-left: 0 !important;
-    padding: 16px 0 16px 30px !important; 
+    padding: 16px 30px !important; 
     display: flex !important;
     align-items: center;
     gap: 20px;
-    border-top: 1px solid #f2f1ed !important; 
-    border-bottom: 1px solid #c0bfba !important;
+    /* THE FEINT RULE: 1px subtle hairline only */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     cursor: pointer;
-    color: #777 !important;
-    font-size: 0.95rem !important;
+    color: #666 !important;
+    /* UNIFIED FONT SIZE & FAMILY */
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: all 0.2s ease;
-    border-left: 5px solid transparent !important;
 }
 
-.track-item:first-child { border-top: none !important; }
+/* REMOVE BORDER ON LAST ITEM */
+.track-item:last-child { border-bottom: none !important; }
 
 .track-item:hover {
     background: #d4d3ce !important;
-    color: #1a1a1a !important;
-    border-left: 5px solid #ff6600 !important;
+    color: #111 !important;
 }
 
 .track-item.active {
     background: #dcdbd6 !important; 
-    color: #222 !important;
-    font-weight: 600 !important;
-    border-left: 5px solid #b1b0ab !important; 
+    color: #000 !important;
+    font-weight: bold !important;
 }
 
 .track-number {
-    font-family: monospace;
     color: #999 !important;
-    font-size: 0.75rem !important;
-    width: 25px;
-    flex-shrink: 0;
+    font-size: 0.7rem !important;
+    width: 20px;
 }
 
-/* --- 5. MOBILE ARCHITECTURE (Max-Width: 600px) --- */
+/* --- 5. MOBILE RE-WIRE --- */
 @media (max-width: 600px) {
-    .audio-controls {
-        flex-direction: column !important; /* Stacks Panel above Button */
-        padding: 20px;
-        gap: 15px;
-    }
-
-    .track-info {
-        width: 100%;
-        order: 1; /* LED Panel is the First Tier */
-    }
-
-    .play-pause {
-        order: 2; /* Centered Button is Second Tier */
-        margin: 5px auto 0;
-        width: 60px;
-        height: 60px;
-    }
-
-    /* Keeps Title and Timer on a single rail */
-    .led-top-row {
-        display: flex !important;
-        flex-direction: row !important; 
-        justify-content: space-between;
-    }
-
-    #now-playing { font-size: 0.75rem !important; }
-    .time-display { font-size: 0.9rem !important; }
-
-    .track-item {
-        margin-right: 15px !important;
-        padding: 15px 0 15px 20px !important;
-    }
+    .audio-controls { flex-direction: column !important; }
+    .track-info { width: 100%; order: 1; }
+    .play-pause { order: 2; margin: 0 auto; }
 }
