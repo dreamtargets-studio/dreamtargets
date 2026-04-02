@@ -1493,49 +1493,95 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.7 - The Alignment Lock)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.9 - The Hardware Lock)
    ============================================================ */
 
-/* --- 1. THE MAIN HOUSING --- */
+/* --- 1. THE MAIN HOUSING (Milled Aluminum Base) --- */
 .audio-playlist-container {
-    max-width: 650px;
+    max-width: 600px; /* Slimmer for better focus */
     margin: 60px 0;
     background: #e2e1dc; 
     border: 1px solid #b1b0ab;
-    border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* --- 2. THE FACEPLATE --- */
+/* --- 2. THE FACEPLATE (Disciplined Header) --- */
 .album-header {
     display: flex;
     align-items: center;
-    gap: 25px;
-    padding: 30px;
+    gap: 20px;
+    padding: 20px 30px;
     background: #f2f1ed;
     border-bottom: 1px solid #c0bfba;
 }
 
-/* --- 3. THE CONTROL CONSOLE --- */
+.album-art {
+    width: 80px !important; /* Smaller, sharper footprint */
+    height: 80px !important;
+    object-fit: cover;
+    border: 1px solid #b1b0ab;
+    flex-shrink: 0;
+}
+
+.album-meta .short-description {
+    margin: 0 !important;
+    font-size: 1.2rem !important; /* Scaled down for elegance */
+    font-weight: 700 !important;
+    color: #111 !important;
+    text-transform: none !important;
+}
+
+.album-meta p {
+    margin: 2px 0 0 0 !important;
+    font-size: 0.7rem !important;
+    color: #888 !important;
+    text-transform: none !important;
+}
+
+/* --- 3. THE CONTROL CONSOLE (The Logic Center) --- */
 .audio-controls {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 25px 30px;
+    gap: 15px;
+    padding: 20px 30px;
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
 
+/* MECHANICAL TRIANGULAR BUTTON */
 .play-pause {
-    width: 52px; height: 52px;
+    width: 48px; height: 48px;
     flex-shrink: 0;
     background: #333;
     border: 1px solid #111 !important;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 3px 0 #000;
+    position: relative;
+    box-shadow: 0 2px 0 #000;
+}
+
+/* THE TRIANGLE (The Play Icon) */
+.play-pause::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 56%;
+    transform: translate(-50%, -50%);
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 12px;
+    border-color: transparent transparent transparent #fff;
+}
+
+/* THE PAUSE BARS */
+.play-pause.playing::after {
+    border: none;
+    width: 12px; height: 14px;
+    border-left: 4px solid #fff;
+    border-right: 4px solid #fff;
+    left: 50%;
 }
 
 /* THE LED GLASS */
@@ -1543,64 +1589,70 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 15px 20px;
-    background: #111; 
-    border-radius: 2px;
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    gap: 8px;
+    padding: 12px 15px;
+    background: #0a0a0a; 
+    border-radius: 1px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    min-width: 0;
+}
+
+.led-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 #now-playing {
     color: #ff6600 !important; 
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 16px !important; 
+    font-size: 14px !important; /* Balanced for the new 80px header */
     font-weight: 400 !important; 
-    /* FIXED: No forced capitalization */
     text-transform: none !important; 
-    letter-spacing: 0;
-    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-right: 10px;
 }
 
+/* THE FIXED RIGHT-ALIGNED TIMER */
 .time-display {
     color: #ff6600 !important;
-    font-size: 16px !important; 
+    font-size: 14px !important; 
     font-variant-numeric: tabular-nums !important;
-    width: 80px !important; 
     text-align: right !important;
+    width: 50px !important; /* Fixed width prevents shifting */
     flex-shrink: 0;
 }
 
-/* --- 4. THE RECESSED TRACKLIST (Aligned to LED) --- */
+.progress-container { height: 2px; background: #222; }
+.progress-bar { height: 100%; background: #ff6600; }
+
+/* --- 4. THE RECESSED TRACKLIST (The Alignment Lock) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 10px 0 !important; 
+    padding: 10px 30px !important; /* Aligns content exactly with LED Panel above */
     list-style: none !important;
     background: #e2e1dc; 
-    /* FIXED: This padding creates the gutter on the right to align with LED */
-    padding-right: 30px !important; 
 }
 
 .track-item {
-    /* FIXED: Margin 0 and Padding only to ensure NO GAPS on hover */
     margin: 0 !important;
-    padding: 18px 0 18px 30px !important; 
+    padding: 14px 15px !important; /* Matches LED internal padding */
     display: flex !important;
     align-items: center;
-    gap: 20px;
-    /* THE FEINT RULE: Single divider */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    gap: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
     cursor: pointer;
-    color: #555 !important;
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 16px !important; 
+    color: #666 !important;
+    font-size: 14px !important; /* 1:1 Scale Parity with LED */
     text-transform: none !important; 
-    transition: background 0.1s ease;
+    transition: all 0.1s ease;
 }
 
-/* Ensure the hover state is a solid block with no gaps */
+.track-item:last-child { border-bottom: none !important; }
+
+/* HOVER: No gaps, flush block within the tray */
 .track-item:hover {
     background: #d4d3ce !important;
     color: #111 !important;
@@ -1611,17 +1663,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #000 !important;
 }
 
-.track-item:last-child { border-bottom: none !important; }
-
 .track-number {
     color: #999 !important;
-    font-size: 11px !important;
-    width: 25px;
-    flex-shrink: 0;
+    font-size: 10px !important;
+    width: 20px;
 }
 
-/* --- 5. MOBILE --- */
+/* --- 5. MOBILE RE-WIRE --- */
 @media (max-width: 600px) {
-    .tracklist { padding-right: 15px !important; }
-    .track-item { padding-left: 20px !important; }
+    .audio-controls { padding: 15px 20px; }
+    .tracklist { padding: 10px 20px !important; }
 }
