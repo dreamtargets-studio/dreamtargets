@@ -1493,7 +1493,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v11.0 - Clean Tray)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v12.0 - The Bullet Nuke)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING --- */
@@ -1523,14 +1523,23 @@ font-family: Arial, Helvetica, sans-serif !important;
     height: 80px !important;
     object-fit: cover;
     border: 1px solid #b1b0ab;
+    flex-shrink: 0;
 }
 
-/* --- 3. THE CONTROL CONSOLE (LED & Play) --- */
+.album-meta .short-description {
+    margin: 0 !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    text-transform: none !important; /* NO CAPS */
+}
+
+/* --- 3. THE CONTROL CONSOLE --- */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px; /* 30px gutter locks the LED width */
+    padding: 20px 30px; 
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
@@ -1572,7 +1581,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #ff6600 !important; 
     font-size: 16px !important; 
     font-weight: 400 !important; 
-    text-transform: none !important; 
+    text-transform: none !important; /* NO CAPS */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1586,40 +1595,48 @@ font-family: Arial, Helvetica, sans-serif !important;
     width: 50px !important; 
 }
 
-/* --- 4. THE TRACKLIST (No Bullets / No Gaps) --- */
+/* --- 4. THE TRACKLIST (Bullet Nuke & Flush Alignment) --- */
 .tracklist {
+    /* THE NUKE: Removes ALL browser default list styling */
+    list-style: none !important; 
+    list-style-type: none !important; 
     margin: 0 !important;
-    padding: 0 30px 20px 30px !important; /* Side padding aligns to LED */
-    list-style-type: none !important; /* FIX: DROPS THE BULLETS */
+    padding: 0 30px 20px 30px !important; /* 30px Gutter aligns to LED panel */
     background: #e2e1dc; 
+    text-indent: 0 !important; /* Prevents indented bullets */
+}
+
+/* ENSURE NO PSEUDO-ELEMENT BULLETS */
+.tracklist li::before {
+    content: none !important;
+    display: none !important;
 }
 
 .track-item {
-    margin: 0 !important; /* NUKES GAPS */
-    padding: 18px 15px !important; /* Internal breathing room */
+    margin: 0 !important; /* No gaps */
+    padding: 18px 15px !important; /* Inner padding for hover plate */
     display: flex !important;
     align-items: center;
     gap: 15px;
-    /* THE FEINT RULE: Single divider */
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
     color: #555 !important;
     font-size: 16px !important; 
-    text-transform: none !important; 
+    text-transform: none !important; /* NO CAPS */
     transition: background 0.1s ease;
 }
 
 .track-item:last-child { border-bottom: none !important; }
 
-/* UNIFIED TRACK NUMBER (The new anchor) */
+/* UNIFIED TRACK NUMBER */
 .track-number {
     color: inherit !important;
     font-size: inherit !important;
-    width: 30px; /* Fixed width for vertical alignment */
+    width: 30px; 
     flex-shrink: 0;
 }
 
-/* HOVER: Solid block, flush to the tray walls */
+/* HOVER: Flush to the 30px tray walls */
 .track-item:hover {
     background: #d4d3ce !important;
     color: #111 !important;
