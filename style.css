@@ -1493,7 +1493,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.6 - The Anchor Lock)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.7 - The Alignment Lock)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING --- */
@@ -1518,31 +1518,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-bottom: 1px solid #c0bfba;
 }
 
-.album-art {
-    width: 100px !important;
-    height: 100px !important;
-    min-width: 100px;
-    object-fit: cover;
-    border: 1px solid #b1b0ab;
-}
-
-.album-meta .short-description {
-    margin: 0 !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    color: #111 !important;
-    line-height: 1.2 !important;
-    text-transform: none !important;
-}
-
-.album-meta p {
-    margin: 4px 0 0 0 !important;
-    font-size: 0.75rem !important;
-    text-transform: none !important;
-    letter-spacing: 0.05em;
-    color: #666 !important;
-}
-
 /* --- 3. THE CONTROL CONSOLE --- */
 .audio-controls {
     display: flex;
@@ -1554,16 +1529,13 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .play-pause {
-    width: 52px;
-    height: 52px;
+    width: 52px; height: 52px;
     flex-shrink: 0;
     background: #333;
     border: 1px solid #111 !important;
     border-radius: 4px;
     cursor: pointer;
-    position: relative;
     box-shadow: 0 3px 0 #000;
-    transition: all 0.1s ease;
 }
 
 /* THE LED GLASS */
@@ -1576,14 +1548,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #111; 
     border-radius: 2px;
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
-    min-width: 0; /* Prevents overflow pushing the timer out */
-}
-
-.led-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
 }
 
 #now-playing {
@@ -1591,74 +1555,63 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     font-weight: 400 !important; 
+    /* FIXED: No forced capitalization */
     text-transform: none !important; 
     letter-spacing: 0;
-    text-shadow: 0 0- 10px rgba(255, 102, 0, 0.4);
-    /* Ensure the title leaves room for the timer */
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-right: 10px;
 }
 
-/* THE FIXED TIMER (The Baboon Cage) */
 .time-display {
     color: #ff6600 !important;
-    font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
-    /* CRITICAL FIX: Forces numbers to have equal width */
     font-variant-numeric: tabular-nums !important;
-    -moz-font-feature-settings: "tnum";
-    -webkit-font-feature-settings: "tnum";
-    /* FIXES ALIGNMENT: Right-justified in a fixed container */
     width: 80px !important; 
     text-align: right !important;
     flex-shrink: 0;
-    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
 }
 
-.progress-container {
-    height: 2px;
-    background: #222;
-}
-
-.progress-bar {
-    height: 100%;
-    background: #ff6600;
-}
-
-/* --- 4. THE FLUSH TRACKLIST --- */
+/* --- 4. THE RECESSED TRACKLIST (Aligned to LED) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 0 !important; 
+    padding: 10px 0 !important; 
     list-style: none !important;
     background: #e2e1dc; 
+    /* FIXED: This padding creates the gutter on the right to align with LED */
+    padding-right: 30px !important; 
 }
 
 .track-item {
-    padding: 18px 30px !important; 
-    margin: 0 !important; 
+    /* FIXED: Margin 0 and Padding only to ensure NO GAPS on hover */
+    margin: 0 !important;
+    padding: 18px 0 18px 30px !important; 
     display: flex !important;
     align-items: center;
     gap: 20px;
+    /* THE FEINT RULE: Single divider */
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
     color: #555 !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     text-transform: none !important; 
-    transition: background 0.2s ease;
+    transition: background 0.1s ease;
 }
 
-.track-item:last-child { border-bottom: none !important; }
-
-.track-item:hover { background: #d4d3ce !important; color: #111 !important; }
+/* Ensure the hover state is a solid block with no gaps */
+.track-item:hover {
+    background: #d4d3ce !important;
+    color: #111 !important;
+}
 
 .track-item.active {
     background: #dcdbd6 !important; 
     color: #000 !important;
-    font-weight: 400 !important;
 }
+
+.track-item:last-child { border-bottom: none !important; }
 
 .track-number {
     color: #999 !important;
@@ -1669,8 +1622,6 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 /* --- 5. MOBILE --- */
 @media (max-width: 600px) {
-    .audio-controls { flex-direction: column !important; }
-    .track-info { width: 100%; order: 1; }
-    .play-pause { order: 2; margin: 0 auto; }
-    .time-display { width: 60px !important; }
+    .tracklist { padding-right: 15px !important; }
+    .track-item { padding-left: 20px !important; }
 }
