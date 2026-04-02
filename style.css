@@ -1493,7 +1493,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v9.0 - The Final Lock)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v11.0 - Clean Tray)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING --- */
@@ -1508,7 +1508,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-family: Arial, Helvetica, sans-serif !important;
 }
 
-/* --- 2. THE FACEPLATE (No Forced Caps) --- */
+/* --- 2. THE FACEPLATE (Header) --- */
 .album-header {
     display: flex;
     align-items: center;
@@ -1525,20 +1525,12 @@ font-family: Arial, Helvetica, sans-serif !important;
     border: 1px solid #b1b0ab;
 }
 
-.album-meta .short-description {
-    margin: 0 !important;
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: #111 !important;
-    text-transform: none !important; /* FIX 1: NO CAPS */
-}
-
-/* --- 3. THE CONTROL CONSOLE --- */
+/* --- 3. THE CONTROL CONSOLE (LED & Play) --- */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px; /* 30px side padding defines the LED width */
+    padding: 20px 30px; /* 30px gutter locks the LED width */
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
@@ -1552,7 +1544,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     position: relative;
 }
 
-/* THE TRIANGLE PLAY BUTTON */
+/* TRIANGLE PLAY ICON */
 .play-pause::after {
     content: '';
     position: absolute;
@@ -1578,9 +1570,9 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 #now-playing {
     color: #ff6600 !important; 
-    font-size: 14px !important;
+    font-size: 16px !important; 
     font-weight: 400 !important; 
-    text-transform: none !important; /* FIX 1: NO CAPS - "Select a track" */
+    text-transform: none !important; 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1588,40 +1580,46 @@ font-family: Arial, Helvetica, sans-serif !important;
 
 .time-display {
     color: #ff6600 !important;
-    font-size: 14px !important; 
+    font-size: 16px !important; 
     font-variant-numeric: tabular-nums !important;
     text-align: right !important;
     width: 50px !important; 
-    flex-shrink: 0;
 }
 
-/* --- 4. THE RECESSED TRACKLIST (The Final Alignment Fix) --- */
+/* --- 4. THE TRACKLIST (No Bullets / No Gaps) --- */
 .tracklist {
     margin: 0 !important;
-    padding: 0 30px 10px 30px !important; /* Side padding matches the LED/Controls above */
-    list-style: none !important;
+    padding: 0 30px 20px 30px !important; /* Side padding aligns to LED */
+    list-style-type: none !important; /* FIX: DROPS THE BULLETS */
     background: #e2e1dc; 
 }
 
 .track-item {
-    margin: 0 !important; /* FIX 2: ZERO MARGIN = NO GAPS */
-    padding: 14px 15px !important; /* Inner padding for text breathing room */
+    margin: 0 !important; /* NUKES GAPS */
+    padding: 18px 15px !important; /* Internal breathing room */
     display: flex !important;
     align-items: center;
     gap: 15px;
+    /* THE FEINT RULE: Single divider */
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
-    color: #666 !important;
-    font-size: 14px !important; 
-    text-transform: none !important; /* FIX 1: NO CAPS */
+    color: #555 !important;
+    font-size: 16px !important; 
+    text-transform: none !important; 
     transition: background 0.1s ease;
-    /* FIX 3: Ensures the hover block is exactly the same width as the LED panel */
-    width: auto !important; 
 }
 
 .track-item:last-child { border-bottom: none !important; }
 
-/* HOVER STATE: Flush against the tray edges */
+/* UNIFIED TRACK NUMBER (The new anchor) */
+.track-number {
+    color: inherit !important;
+    font-size: inherit !important;
+    width: 30px; /* Fixed width for vertical alignment */
+    flex-shrink: 0;
+}
+
+/* HOVER: Solid block, flush to the tray walls */
 .track-item:hover {
     background: #d4d3ce !important;
     color: #111 !important;
@@ -1632,14 +1630,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #000 !important;
 }
 
-.track-number {
-    color: #999 !important;
-    font-size: 10px !important;
-    width: 20px;
-    flex-shrink: 0;
-}
-
-/* --- 5. MOBILE RE-WIRE --- */
+/* --- 5. MOBILE --- */
 @media (max-width: 600px) {
     .audio-controls { padding: 15px 20px; }
     .tracklist { padding: 0 20px 10px 20px !important; }
