@@ -1493,175 +1493,22 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX: UNIFIED STACKED SYSTEM (v3.2)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.5 - Flush Surface)
    ============================================================ */
 
-/* 1. THE STAGE (Pure Black Backdrop) */
-#lightbox-overlay {
-    display: none !important; /* Managed by loader.js */
-    position: fixed;
-    z-index: 100000;
-    left: 0; top: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
-    flex-direction: column; /* THE FIX: Keeps caption BELOW the image */
-    justify-content: center; 
-    align-items: center;
-}
-
-/* 2. THE IMAGE (Centered Hero - Reclaiming Space) */
-.lightbox-content {
-    max-width: 95vw !important;  /* Allowed to go wider if needed */
-    max-height: 85vh !important; /* Increased from 75vh to fill the height */
-    object-fit: contain !important;
-    margin-bottom: 10px !important; /* Tightened gap to the caption */
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s;
-    position: relative;
-    /* Classes to trigger the slide animations */
-    .slide-out-left { transform: translateX(-100vw); opacity: 0; }
-    .slide-out-right { transform: translateX(100vw); opacity: 0; }
-    .slide-in-from-right { transform: translateX(100vw); }
-    .slide-in-from-left { transform: translateX(-100vw); }
-}
-
-
-/* 3. THE INFO (The Stacked Caption - No Shadow) */
-.lightbox-info {
-    position: relative !important; 
-    width: 100%;
-    max-width: 800px;
-    background: none !important; /* Ensures no graduated shadow */
-    text-align: center;
-    padding: 0 20px !important;
-    z-index: 100002;
-}
-
-.lightbox-caption {
-    font-family: Arial, Helvetica, sans-serif !important;
-    color: #ffffff !important;
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 5px !important;
-}
-
-.lightbox-counter {
-    color: rgba(255, 255, 255, 0.4) !important;
-    font-size: 12px !important;
-    text-transform: uppercase;
-}
-
-/* 4. THE GHOST SUITE (Navigation & Close Squares) */
-.lightbox-prev, 
-.lightbox-next, 
-.lightbox-close {
-    position: fixed !important;
-    width: 50px !important;
-    height: 50px !important;
-    background: rgba(255, 255, 255, 0.1) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 4px;
-    z-index: 100010 !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer !important;
-    transition: background 0.2s, border-color 0.2s;
-    color: #ffffff !important;
-}
-
-.lightbox-prev:hover, 
-.lightbox-next:hover, 
-.lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* Positions: Centered vertically on the screen */
-.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-close { top: 25px !important; right: 25px !important; }
-
-/* 5. ICON GRAPHICS (Unified Hairline Suite) */
-
-/* The Close 'X' (Lighter 2px Hairline) */
-.lightbox-close::before, 
-.lightbox-close::after {
-    content: '';
-    position: absolute;
-    width: 22px;      /* Length of the cross lines */
-    height: 2px;       /* Match this to the chevron thickness */
-    background-color: #fff;
-    display: block;
-}
-
-/* Rotate the two bars to form a clean 'X' */
-.lightbox-close::before { transform: rotate(45deg); }
-.lightbox-close::after { transform: rotate(-45deg); }
-
-
-/* The Navigation Chevrons (2px Hairlines) */
-.lightbox-prev::after, 
-.lightbox-next::after {
-    content: '';
-    display: block;
-    width: 12px; height: 12px;
-    border-top: 2px solid #fff;  /* Unified 2px weight */
-    border-right: 2px solid #fff; /* Unified 2px weight */
-}
-
-.lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
-.lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
-
-/* 6. MOBILE OVERRIDES (Aggressive space recovery for phones) */
-@media (max-width: 768px) {
-    .lightbox-prev, 
-    .lightbox-next {
-        background: none !important;
-        border: none !important;
-        opacity: 0.3; /* Very faint hint that a button exists */
-    }
-    .lightbox-close {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        opacity: 1;
-    }
-    
-    .lightbox-content { 
-        max-height: 80vh !important; /* Maximizes the portrait image on tall screens */
-        margin-bottom: 5px !important; 
-    }
-    
-    .lightbox-caption {
-        font-size: 13px !important; /* Slightly smaller text to save room */
-    }
-}
-
-:root {
-    --brand-orange: #ff6600;
-    --text-dark: #333;
-    --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.4 - The Finesse Lock)
-   ============================================================ */
-
-/* --- 1. THE MAIN HOUSING (The Machine Body) --- */
+/* --- 1. THE MAIN HOUSING --- */
 .audio-playlist-container {
     max-width: 650px;
     margin: 60px 0;
-    background: #e2e1dc; /* Industrial Grey Base */
+    background: #e2e1dc; 
     border: 1px solid #b1b0ab;
     border-radius: 4px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    /* UNIFIED BRAND FONT: No Serifs */
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* --- 2. THE FACEPLATE (Brushed Top Section) --- */
+/* --- 2. THE FACEPLATE --- */
 .album-header {
     display: flex;
     align-items: center;
@@ -1685,17 +1532,18 @@ font-family: Arial, Helvetica, sans-serif !important;
     font-weight: 700 !important;
     color: #111 !important;
     line-height: 1.2 !important;
+    text-transform: none !important; /* No forced caps */
 }
 
 .album-meta p {
     margin: 4px 0 0 0 !important;
     font-size: 0.75rem !important;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    text-transform: none !important; /* No forced caps */
+    letter-spacing: 0.05em;
     color: #666 !important;
 }
 
-/* --- 3. THE CONTROL CONSOLE (The Logic Center) --- */
+/* --- 3. THE CONTROL CONSOLE --- */
 .audio-controls {
     display: flex;
     align-items: center;
@@ -1705,7 +1553,6 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-bottom: 1px solid #b1b0ab;
 }
 
-/* MECHANICAL BUTTON */
 .play-pause {
     width: 52px;
     height: 52px;
@@ -1719,75 +1566,37 @@ font-family: Arial, Helvetica, sans-serif !important;
     transition: all 0.1s ease;
 }
 
-.play-pause:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #000;
-}
-
-.play-pause::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 55%;
-    transform: translate(-50%, -50%);
-    border-style: solid;
-    border-width: 8px 0 8px 14px;
-    border-color: transparent transparent transparent #fff;
-}
-
-.play-pause.playing::after {
-    border: none;
-    width: 14px;
-    height: 16px;
-    border-left: 5px solid #fff;
-    border-right: 5px solid #fff;
-    left: 50%;
-}
-
-/* THE CONTIGUOUS LED GLASS */
+/* THE LED GLASS */
 .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: 15px 20px;
-    background: #111; /* Pure Black Panel */
+    background: #111; 
     border-radius: 2px;
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
-    min-width: 0;
-}
-
-/* THE SHARED DATA RAIL (The "Jump" Destination) */
-.led-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 #now-playing {
     color: #ff6600 !important; 
-    /* PARITY LOCK: Must match the tracklist exactly */
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     font-weight: 400 !important; 
-    text-transform: none !important; /* Sentence case only */
+    text-transform: none !important; /* "Select a track" is now lowercase/sentence case */
     letter-spacing: 0;
     text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .time-display {
     color: #ff6600 !important;
-    /* PARITY LOCK */
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
     font-variant-numeric: tabular-nums !important;
-    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
 }
 
 .progress-container {
-    height: 2px; /* Thinner rule for Finesse */
+    height: 2px;
     background: #222;
 }
 
@@ -1796,7 +1605,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #ff6600;
 }
 
-/* --- 4. THE INTEGRATED TRACKLIST (The "Feint Rule" Tray) --- */
+/* --- 4. THE FLUSH TRACKLIST (No Gutters) --- */
 .tracklist {
     margin: 0 !important;
     padding: 0 !important; 
@@ -1805,21 +1614,23 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .track-item {
+    /* REMOVED GUTTERS: Padding handles the internal space only */
     padding: 18px 30px !important; 
+    margin: 0 !important; /* Zero margin ensures they touch */
     display: flex !important;
     align-items: center;
     gap: 20px;
-    /* THE MIKE CONWILL FEINT RULE: Minimalist Hairline */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    /* THE FEINT RULE: The only divider between tracks */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
     color: #555 !important;
-    /* SOURCE SCALE: 16px Sans */
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important; 
-    text-transform: none !important; /* Sentence Case */
-    transition: all 0.2s ease;
+    text-transform: none !important; 
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
+/* CLEAN ENDING */
 .track-item:last-child { border-bottom: none !important; }
 
 .track-item:hover {
@@ -1830,7 +1641,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 .track-item.active {
     background: #dcdbd6 !important; 
     color: #000 !important;
-    font-weight: 400 !important; /* Static weight prevents geometry shift */
+    font-weight: 400 !important;
 }
 
 .track-number {
@@ -1840,7 +1651,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-shrink: 0;
 }
 
-/* --- 5. MOBILE ARCHITECTURE --- */
+/* --- 5. MOBILE --- */
 @media (max-width: 600px) {
     .audio-controls { flex-direction: column !important; }
     .track-info { width: 100%; order: 1; }
