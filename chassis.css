@@ -146,16 +146,121 @@ p {
     color: #555;
 }
 
-/* 4. THE MASTER FOOTER */
+/* --- 4. THE MASTER FOOTER (Design System) --- */
 #main-footer { 
     background: var(--footer-bg); 
-    color: #fff; 
-    padding: 80px 0 40px; 
+    color: var(--white); 
+    padding: 60px 0 40px; 
     width: 100%;
     display: block;
     clear: both;
-    margin-top: 0 !important;
 }
+
+/* The Top Branding (Large Strapline) */
+.footer-branding-top {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-full-logo {
+    max-width: 100%;
+    height: auto;
+}
+
+/* THE FOOTER GRID: Logo + 2 Nav Columns */
+.footer-body-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-visual-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-brand-mark {
+    height: 35px;
+    width: auto;
+}
+
+/* Nav Columns */
+.footer-nav-col {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-nav-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav-col li {
+    margin-bottom: 12px;
+}
+
+.footer-nav-col a {
+    color: rgba(255,255,255,0.7) !important;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.footer-nav-col a:hover {
+    color: #ff8c00 !important;
+    padding-left: 5px; /* Subtle interaction */
+}
+
+/* Social Strip & Bottom Text */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+    text-align: center;
+}
+
+.social-strip {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.social-item a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-address {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-top: 20px;
+}
+
+/* --- BACK TO TOP BUTTON --- */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #ff8c00;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Controlled by loader.js */
+    z-index: 2000;
+}
+
+.back-to-top.show { display: block; }
 
 /* 5. UTILITY: THE ORANGE RULE */
 .orange-rule, .rule-orange {
@@ -165,3 +270,4 @@ p {
     margin: 12px 0 35px 0;
     border: none;
 }
+
