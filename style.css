@@ -1838,3 +1838,37 @@ font-family: Arial, Helvetica, sans-serif !important;
     .audio-playlist-container .tracklist { padding: 0 20px 10px 20px !important; }
     .audio-playlist-container #now-playing { max-width: 100% !important; }
 }
+
+/* 6. MAKER'S MARK (Static Hardware Label - Non-UI) */
+.audio-playlist-container .track-info {
+    position: relative;
+    /* Ensure no internal elements overlap the branding improperly */
+    overflow: hidden; 
+}
+
+.audio-playlist-container .track-info::after {
+    content: ''; 
+    position: absolute;
+    bottom: 8px; 
+    right: 12px;
+    
+    /* @2x RETINA CALIBRATION: Half of 180x46px source */
+    width: 90px; 
+    height: 23px;
+    
+    /* The High-Density White PNG */
+    background-image: url('assets/thinkamigo-player@2x.png'); 
+    background-size: 90px 23px; 
+    background-repeat: no-repeat;
+    background-position: right center;
+    
+    /* THE "INERT" FINISH */
+    /* 12% - 15% creates a "Ghost Silver" effect that never changes */
+    opacity: 0.12; 
+    
+    /* pointer-events: none is CRITICAL here */
+    /* It makes the logo 'transparent' to mouse clicks so it doesn't block the UI */
+    pointer-events: none; 
+    
+    z-index: 1; /* Sits behind the text/timers if they happen to overlap */
+}
