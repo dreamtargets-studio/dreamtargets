@@ -33,60 +33,72 @@ html, body {
     z-index: 1000;
 }
 
-.container.nav-flex {
-    display: flex;
-    justify-content: space-between; 
+/* THE ALIGNMENT ENGINE */
+#main-nav .nav-flex {
+    display: flex !important;
+    justify-content: space-between !important; /* Pushes Logo Left, Links Right */
     align-items: center;
     width: 100%;
     max-width: 100% !important; 
-    padding: 15px 40px; 
+    padding: 10px 40px; /* Reduced padding for a sleeker bar */
     box-sizing: border-box;
 }
 
-/* THE RIGHT: Navigation Links Formatting */
-.nav-links {
+/* THE LOGO: Taming the "Giant Bubble" */
+.logo {
     display: flex;
+    align-items: center;
+    max-width: 200px; /* Prevents the logo container from growing too large */
+}
+
+.logo img {
+    height: 40px !important; /* This kills the "Giant" bubble - adjust as needed */
+    width: auto;
+    display: block;
+}
+
+/* THE LINKS: Forcing Right Alignment */
+.nav-links {
+    display: flex !important;
     gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
+    margin-left: auto; /* Double-reinforcement for right alignment */
 }
 
 .nav-links a {
-    color: #ffffff !important; /* Force White */
+    color: #ffffff !important;
     text-decoration: none !important;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Slightly smaller to fit all items */
     font-weight: 500;
     transition: 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ff8c00 !important; /* Force Orange Hover */
+    color: #ff8c00 !important; /* Orange Hover */
 }
 
-/* --- THE HAMBURGER (Restoration) --- */
-#menu-toggle { display: none; }
-
+/* --- THE HAMBURGER (Mobile Positioning) --- */
 .hamburger {
-    display: none; /* Hidden on Desktop */
+    display: none; 
     cursor: pointer;
     flex-direction: column;
     justify-content: space-between;
     width: 25px;
-    height: 18px; /* Force height so the spans have space */
+    height: 18px;
+    margin-left: auto; /* Pins hamburger to the right */
 }
 
 .hamburger span {
     width: 100%;
     height: 3px;
-    background-color: #ffffff !important; /* Force White Lines */
+    background-color: #ffffff !important;
     display: block;
-    border-radius: 2px;
 }
 
-/* --- MOBILE VIEWPORT --- */
-@media (max-width: 1024px) {
-    /* Hide text links on mobile, show hamburger */
+/* MOBILE VIEWPORT */
+@media (max-width: 1100px) {
     .nav-links { 
         display: none; 
         position: absolute;
@@ -100,7 +112,6 @@ html, body {
     
     .hamburger { display: flex !important; }
 
-    /* When the checkbox is checked, show the links */
     #menu-toggle:checked ~ .nav-links {
         display: flex !important;
     }
@@ -109,7 +120,6 @@ html, body {
         padding: 15px 40px;
         border-top: 1px solid rgba(255,255,255,0.1);
         width: 100%;
-        box-sizing: border-box;
     }
 }
 
