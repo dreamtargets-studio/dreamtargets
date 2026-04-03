@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.4 (LOGIC-LOCK EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.5 (ENGINE-SYNC EDITION)
    ============================================================ */
 
 /**
@@ -189,17 +189,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
- * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.4 Final Logic Sync)
+ * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.5 Final Engine Sync)
  */
-document.addEventListener('click', (e) => {
-    const trackItem = e.target.closest('.track-item');
-    const playBtn = document.getElementById('masterPlayBtn');
-    
+document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('main-audio-engine');
-    const nowPlayingText = document.getElementById('now-playing');
+    const playBtn = document.getElementById('masterPlayBtn');
     const progressBar = document.getElementById('master-progress');
     const timeElapsed = document.getElementById('master-time');
     const timeTotal = document.getElementById('master-duration');
+    const nowPlayingText = document.getElementById('now-playing');
 
     if (!audio) return;
 
@@ -210,71 +208,73 @@ document.addEventListener('click', (e) => {
         return `${mins}:${secs}`;
     };
 
-    // A. TRACK SELECTION LOGIC
-    if (trackItem) {
-        e.stopPropagation(); // Stops click from bleeding into Section B
-        const newSrc = trackItem.getAttribute('data-src');
-        
-        if (audio.getAttribute('src') !== newSrc) {
-            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
-            trackItem.classList.add('active');
-            
-            audio.src = newSrc;
-            audio.play().then(() => {
-                // Ensure icon is Pause Bars since audio is playing
-                if (playBtn) playBtn.classList.add('playing');
-            }).catch(error => console.log("Playback failed:", error));
-            
-            const fullTitle = trackItem.textContent.trim();
-            if (nowPlayingText) {
-                nowPlayingText.textContent = fullTitle.replace(/^\d+\.\s*/, ''); 
-            }
-            
-            if (progressBar) progressBar.style.width = '0%';
-            if (timeElapsed) timeElapsed.textContent = "00:00";
-        } else {
-            // Clicking currently active track toggles Play/Pause
-            if (audio.paused) {
-                audio.play();
-                if (playBtn) playBtn.classList.add('playing');
-            } else {
-                audio.pause();
-                if (playBtn) playBtn.classList.remove('playing');
-            }
-        }
-        return; // Exit click handler entirely
-    }
-
-    // B. MASTER PLAY/PAUSE BUTTON LOGIC
-    if (e.target.closest('#masterPlayBtn')) {
-        if (!audio.src) return; 
-        if (audio.paused) {
-            audio.play().catch(error => console.log("Playback failed:", error));
-            playBtn.classList.add('playing');
-        } else {
-            audio.pause();
-            playBtn.classList.remove('playing');
-        }
-    }
-
-    // C. TELEMETRY & PROGRESS
-    audio.onloadedmetadata = () => {
-        if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
-    };
-
-    audio.ontimeupdate = () => {
+    // --- PERMANENT ENGINE LISTENERS ---
+    
+    audio.addEventListener('timeupdate', () => {
         if (audio.duration) {
             const pct = (audio.currentTime / audio.duration) * 100;
             if (progressBar) progressBar.style.width = pct + '%';
         }
-        if (timeElapsed) {
-            timeElapsed.textContent = formatTime(audio.currentTime);
-        }
-    };
+        if (timeElapsed) timeElapsed.textContent = formatTime(audio.currentTime);
+    });
 
-    audio.onended = () => {
+    audio.addEventListener('loadedmetadata', () => {
+        if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
         if (playBtn) playBtn.classList.remove('playing');
         if (progressBar) progressBar.style.width = '0%';
         if (timeElapsed) timeElapsed.textContent = "00:00";
-    };
+    });
+
+    // --- INTERFACE CLICK CONTROLS ---
+
+    document.addEventListener('click', (e) => {
+        const trackItem = e.target.closest('.track-item');
+        const masterBtnClick = e.target.closest('#masterPlayBtn');
+
+        // A. Track Selection Logic
+        if (trackItem) {
+            e.stopPropagation();
+            const newSrc = trackItem.getAttribute('data-src');
+            
+            if (audio.getAttribute('src') !== newSrc) {
+                document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
+                trackItem.classList.add('active');
+                
+                audio.src = newSrc;
+                audio.load(); // Forces immediate metadata handshake
+                audio.play().then(() => {
+                    if (playBtn) playBtn.classList.add('playing');
+                }).catch(err => console.log("Playback blocked:", err));
+
+                if (nowPlayingText) {
+                    nowPlayingText.textContent = trackItem.textContent.trim().replace(/^\d+\.\s*/, ''); 
+                }
+            } else {
+                // Clicking same track toggles state
+                if (audio.paused) { 
+                    audio.play(); 
+                    if (playBtn) playBtn.classList.add('playing'); 
+                } else { 
+                    audio.pause(); 
+                    if (playBtn) playBtn.classList.remove('playing'); 
+                }
+            }
+            return;
+        }
+
+        // B. Master Button Toggle
+        if (masterBtnClick) {
+            if (!audio.src) return;
+            if (audio.paused) { 
+                audio.play(); 
+                if (playBtn) playBtn.classList.add('playing'); 
+            } else { 
+                audio.pause(); 
+                if (playBtn) playBtn.classList.remove('playing'); 
+            }
+        }
+    });
 });
