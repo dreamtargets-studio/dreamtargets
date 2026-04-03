@@ -735,7 +735,13 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 5px 30px rgba(0,0,0,0.05);
     min-height: 100vh;
     padding-top: 60px; 
+    /* --- THE FIX --- */
+    overflow: hidden; /* This contains the 'leaking' margins from your lists */
+    min-height: auto; /* Since your page is long, auto is safer than 100vh */
 }
+
+
+
 
 .hero-rail { 
     width: 92%;
