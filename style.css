@@ -1634,3 +1634,20 @@ font-family: Arial, Helvetica, sans-serif !important;
     .audio-playlist-container .audio-controls { padding: 15px 20px; }
     .audio-playlist-container .tracklist { padding: 0 20px 10px 20px !important; }
 }
+
+/* FORCE CONTAINERS TO RECOGNIZE FLOATED CONTENT */
+.paper::after, 
+.editorial-post::after, 
+.text-rail::after,
+.gallery-grid-3::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ENSURE FOOTER STAYS AT THE ABSOLUTE BOTTOM */
+#main-footer {
+    clear: both !important;
+    display: block !important;
+    width: 100%;
+}
