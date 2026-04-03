@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.5 (ENGINE-SYNC EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.6 (ULTIMATE SYNC)
    ============================================================ */
 
 /**
@@ -189,7 +189,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
- * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.5 Final Engine Sync)
+ * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.6 Ultimate Sync)
  */
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('main-audio-engine');
@@ -238,20 +238,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (trackItem) {
             e.stopPropagation();
             const newSrc = trackItem.getAttribute('data-src');
+            const newTitle = trackItem.getAttribute('data-title');
             
             if (audio.getAttribute('src') !== newSrc) {
+                // UI Reset
                 document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
                 trackItem.classList.add('active');
                 
+                // Engine Update
                 audio.src = newSrc;
-                audio.load(); // Forces immediate metadata handshake
+                audio.load(); 
+                
+                // LED Update (Using data-title for precision)
+                if (nowPlayingText) {
+                    nowPlayingText.textContent = newTitle || trackItem.textContent.trim().replace(/^\d+\.\s*/, ''); 
+                }
+
                 audio.play().then(() => {
                     if (playBtn) playBtn.classList.add('playing');
                 }).catch(err => console.log("Playback blocked:", err));
 
-                if (nowPlayingText) {
-                    nowPlayingText.textContent = trackItem.textContent.trim().replace(/^\d+\.\s*/, ''); 
-                }
             } else {
                 // Clicking same track toggles state
                 if (audio.paused) { 
