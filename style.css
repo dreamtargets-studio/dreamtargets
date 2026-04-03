@@ -1493,126 +1493,32 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v13.0 - The Cockpit Lock)
+   THINKAMIGO PLAYER v15.1 - THE ISOLATION LOCK
    ============================================================ */
 
-/* --- 1. THE MAIN HOUSING (Modified) --- */
+/* This rule ONLY triggers if the player is physically on the page */
 .audio-playlist-container {
     max-width: 600px;
-    /* CHANGE: Top margin stays, Bottom margin goes to ZERO */
-    margin: 60px 0 0 0 !important; 
+    margin: 60px auto 0 auto !important; /* Center it, but NO bottom margin */
     background: #e2e1dc; 
     border: 1px solid #b1b0ab;
     border-radius: 2px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow: hidden; 
     font-family: Arial, Helvetica, sans-serif !important;
 }
 
-
-
-
-/* --- 2. THE FACEPLATE (Header) --- */
-.album-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 30px;
-    background: #f2f1ed;
-    border-bottom: 1px solid #c0bfba;
-}
-
-.album-art {
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: cover;
-    border: 1px solid #b1b0ab;
-}
-
-/* --- 3. THE CONTROL CONSOLE (LED & Play) --- */
-.audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px 30px; /* 30px gutter locks the vertical alignment rail */
-    background: #d1d0cb; 
-    border-bottom: 1px solid #b1b0ab;
-}
-
-.play-pause {
-    width: 48px; height: 48px;
-    background: #333;
-    border: 1px solid #111 !important;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-}
-
-.play-pause::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 56%;
-    transform: translate(-50%, -50%);
-    border-style: solid;
-    border-width: 7px 0 7px 12px;
-    border-color: transparent transparent transparent #fff;
-}
-
-/* THE LED GLASS */
-.track-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 15px;
-    background: #0a0a0a; 
-    border-radius: 1px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-    min-width: 0; /* Important for truncation */
-}
-
-/* THE COCKPIT RAIL (Title Left / Time Right) */
-.led-top-row {
-    display: flex;
-    justify-content: space-between; /* ALIGNMENT LOCK */
-    align-items: center;
-    width: 100%;
-}
-
-#now-playing {
-    color: #ff6600 !important; 
-    font-size: 16px !important; 
-    font-weight: 400 !important; 
-    text-transform: none !important; 
-    text-align: left; /* ALIGNED LEFT */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Automatic truncation */
-    flex: 1; /* Takes up all available space up to the timer */
-}
-
-.time-display {
-    color: #ff6600 !important;
-    font-size: 16px !important; 
-    font-variant-numeric: tabular-nums !important;
-    text-align: right !important; /* ALIGNED RIGHT */
-    width: 60px !important; 
-    flex-shrink: 0;
-    margin-left: 10px;
-}
-
-.progress-container { height: 2px; background: #222; }
-.progress-bar { height: 100%; background: #ff6600; }
-
-/* --- 4. THE TRACKLIST (No Bullets / No Gaps) --- */
-.tracklist {
+/* Scoped specifically to ensure no global UL/LI are affected */
+.audio-playlist-container .tracklist {
     list-style: none !important;
+    list-style-type: none !important;
     margin: 0 !important;
-    padding: 0 30px 20px 30px !important; /* Matches LED gutter */
-    background: #e2e1dc; 
+    padding: 0 30px 20px 30px !important; /* Aligned to LED edge */
+    background: #e2e1dc;
+    text-indent: 0 !important;
 }
 
-.track-item {
+.audio-playlist-container .track-item {
     margin: 0 !important;
     padding: 18px 15px !important;
     display: flex !important;
@@ -1621,33 +1527,30 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     cursor: pointer;
     color: #555 !important;
-    font-size: 16px !important; 
-    text-transform: none !important; 
+    font-size: 16px !important;
+    text-transform: none !important;
 }
 
-.track-item:last-child { border-bottom: none !important; }
-
-.track-number {
-    color: inherit;
-    width: 30px;
-    flex-shrink: 0;
+/* Hard-kill on any inherited bullets or pseudo-elements */
+.audio-playlist-container li::before,
+.audio-playlist-container .track-item::before {
+    content: none !important;
+    display: none !important;
 }
 
-.track-item:hover { background: #d4d3ce !important; color: #111 !important; }
-.track-item.active { background: #dcdbd6 !important; color: #000 !important; }
+/* LED Panel Controls - Scoped */
+.audio-playlist-container .led-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-/* --- 5. MOBILE ARCHITECTURE --- */
-@media (max-width: 600px) {
-    .audio-controls { padding: 15px 20px; }
-    .tracklist { padding: 0 20px 10px 20px !important; }
+.audio-playlist-container #now-playing {
+    color: #ff6600 !important;
+    text-transform: none !important; /* NO CAPS */
+}
 
-    /* MOBILE TRUNCATION RULE (15 characters approx) */
-    #now-playing {
-        max-width: 15ch !important; /* Limits width to roughly 15 characters */
-    }
-    
-    .time-display {
-        width: 50px !important;
-        font-size: 14px !important;
-    }
+.audio-playlist-container .time-display {
+    color: #ff6600 !important;
+    font-variant-numeric: tabular-nums !important;
 }
