@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.4 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v1.5 - THE UNBREAKABLE FRAME
    Contains: Navigation, Footer, Global Typography, Layout Guard
    ============================================================ */
 
@@ -154,7 +154,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 
 /* --- FOOTER LOGO: LARGE & RESPONSIVE --- */
 .footer-visual-col { 
-    flex: 1.5; /* Gives the logo column slightly more priority */
+    flex: 1.5; 
     min-width: 280px; 
     display: flex;
     justify-content: flex-start;
@@ -162,8 +162,8 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 
 .footer-visual-col a {
     display: block;
-    width: 100%; /* Spans the column */
-    max-width: 320px; /* Prevents oversized bubble on wide screens */
+    width: 100%; 
+    max-width: 320px; 
     text-decoration: none;
 }
 
@@ -182,8 +182,18 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 .footer-nav-col { flex: 1; min-width: 150px; }
 .footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
 .footer-nav-col li { margin-bottom: 12px; }
-.footer-nav-col a { color: rgba(255,255,255,0.7) !important; text-decoration: none; font-size: 0.95rem; transition: 0.3s; }
-.footer-nav-col a:hover { color: #ff8c00 !important; padding-left: 5px; }
+
+/* FIX: Removed the padding-left hover movement for solid UI */
+.footer-nav-col a { 
+    color: rgba(255,255,255,0.7) !important; 
+    text-decoration: none; 
+    font-size: 0.95rem; 
+    transition: color 0.3s ease; 
+}
+
+.footer-nav-col a:hover { 
+    color: #ff8c00 !important; 
+}
 
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1); 
@@ -210,7 +220,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
         width: 100%;
     }
     .footer-visual-col a {
-        width: 70%; /* Balanced mobile size */
+        width: 70%; 
         margin: 0 auto;
     }
 }
