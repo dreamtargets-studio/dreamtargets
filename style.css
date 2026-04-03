@@ -1645,7 +1645,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.0
+   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.1
    ============================================================ */
 
 /* 1. THE HOUSING */
@@ -1697,14 +1697,27 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-shrink: 0;
 }
 
+/* MECHANICAL ICON STATE: PLAY */
 .audio-playlist-container .play-pause::after {
     content: '';
     position: absolute;
-    top: 50%; left: 56%;
+    top: 50%; 
+    left: 56%; /* Optical nudge for triangle */
     transform: translate(-50%, -50%);
     border-style: solid;
     border-width: 7px 0 7px 12px;
     border-color: transparent transparent transparent #fff;
+    transition: all 0.1s ease;
+}
+
+/* MECHANICAL ICON STATE: PAUSE */
+.audio-playlist-container .play-pause.playing::after {
+    border-style: double;
+    border-width: 0 0 0 13px; /* Creates two vertical bars */
+    border-color: #fff;
+    width: 13px;
+    height: 14px;
+    left: 50%; /* Re-center for square block */
 }
 
 /* --- THE QUICKTIME DASHBOARD LED --- */
@@ -1712,7 +1725,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Precise spacing between the three tiers */
+    gap: 10px; 
     padding: 12px 18px;
     background: #0a0a0a; 
     border-radius: 1px;
@@ -1736,7 +1749,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-overflow: ellipsis;
 }
 
-/* Tier 2: The Progress Bar (The center sandwich) */
+/* Tier 2: The Progress Bar */
 .audio-playlist-container .progress-container { 
     height: 3px; 
     background: #222; 
@@ -1761,8 +1774,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #ff6600 !important;
     font-size: 12px !important; 
     font-variant-numeric: tabular-nums !important;
-    opacity: 0.8; /* Slight hierarchy reduction for timers */
-    width: auto !important; /* Let them hug the edges */
+    opacity: 0.8;
 }
 
 /* 4. THE TRACKLIST */
@@ -1816,6 +1828,5 @@ font-family: Arial, Helvetica, sans-serif !important;
 @media (max-width: 600px) {
     .audio-playlist-container .audio-controls { padding: 15px 20px; }
     .audio-playlist-container .tracklist { padding: 0 20px 10px 20px !important; }
-    /* Title can now be longer on mobile since timers are below it */
     .audio-playlist-container #now-playing { max-width: 100% !important; }
 }
