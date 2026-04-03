@@ -735,13 +735,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     box-shadow: 0 5px 30px rgba(0,0,0,0.05);
     min-height: 100vh;
     padding-top: 60px; 
-    /* --- THE FIX --- */
-    overflow: hidden; /* This contains the 'leaking' margins from your lists */
-    min-height: auto; /* Since your page is long, auto is safer than 100vh */
 }
-
-
-
 
 .hero-rail { 
     width: 92%;
@@ -1498,3 +1492,330 @@ font-family: Arial, Helvetica, sans-serif !important;
     margin-left: 0 !important;  /* Ensures it hugs the left gutter */
 }
 
+/* ============================================================
+   THINKAMIGO LIGHTBOX: UNIFIED STACKED SYSTEM (v3.2)
+   ============================================================ */
+
+/* 1. THE STAGE (Pure Black Backdrop) */
+#lightbox-overlay {
+    display: none !important; /* Managed by loader.js */
+    position: fixed;
+    z-index: 100000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column; /* THE FIX: Keeps caption BELOW the image */
+    justify-content: center; 
+    align-items: center;
+}
+
+/* 2. THE IMAGE (Centered Hero - Reclaiming Space) */
+.lightbox-content {
+    max-width: 95vw !important;  /* Allowed to go wider if needed */
+    max-height: 85vh !important; /* Increased from 75vh to fill the height */
+    object-fit: contain !important;
+    margin-bottom: 10px !important; /* Tightened gap to the caption */
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s;
+    position: relative;
+    /* Classes to trigger the slide animations */
+    .slide-out-left { transform: translateX(-100vw); opacity: 0; }
+    .slide-out-right { transform: translateX(100vw); opacity: 0; }
+    .slide-in-from-right { transform: translateX(100vw); }
+    .slide-in-from-left { transform: translateX(-100vw); }
+}
+
+
+/* 3. THE INFO (The Stacked Caption - No Shadow) */
+.lightbox-info {
+    position: relative !important; 
+    width: 100%;
+    max-width: 800px;
+    background: none !important; /* Ensures no graduated shadow */
+    text-align: center;
+    padding: 0 20px !important;
+    z-index: 100002;
+}
+
+.lightbox-caption {
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 5px !important;
+}
+
+.lightbox-counter {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+}
+
+/* 4. THE GHOST SUITE (Navigation & Close Squares) */
+.lightbox-prev, 
+.lightbox-next, 
+.lightbox-close {
+    position: fixed !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.1) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px;
+    z-index: 100010 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer !important;
+    transition: background 0.2s, border-color 0.2s;
+    color: #ffffff !important;
+}
+
+.lightbox-prev:hover, 
+.lightbox-next:hover, 
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Positions: Centered vertically on the screen */
+.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.lightbox-close { top: 25px !important; right: 25px !important; }
+
+/* 5. ICON GRAPHICS (Unified Hairline Suite) */
+
+/* The Close 'X' (Lighter 2px Hairline) */
+.lightbox-close::before, 
+.lightbox-close::after {
+    content: '';
+    position: absolute;
+    width: 22px;      /* Length of the cross lines */
+    height: 2px;       /* Match this to the chevron thickness */
+    background-color: #fff;
+    display: block;
+}
+
+/* Rotate the two bars to form a clean 'X' */
+.lightbox-close::before { transform: rotate(45deg); }
+.lightbox-close::after { transform: rotate(-45deg); }
+
+
+/* The Navigation Chevrons (2px Hairlines) */
+.lightbox-prev::after, 
+.lightbox-next::after {
+    content: '';
+    display: block;
+    width: 12px; height: 12px;
+    border-top: 2px solid #fff;  /* Unified 2px weight */
+    border-right: 2px solid #fff; /* Unified 2px weight */
+}
+
+.lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
+.lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
+
+/* 6. MOBILE OVERRIDES (Aggressive space recovery for phones) */
+@media (max-width: 768px) {
+    .lightbox-prev, 
+    .lightbox-next {
+        background: none !important;
+        border: none !important;
+        opacity: 0.3; /* Very faint hint that a button exists */
+    }
+    .lightbox-close {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        opacity: 1;
+    }
+    
+    .lightbox-content { 
+        max-height: 80vh !important; /* Maximizes the portrait image on tall screens */
+        margin-bottom: 5px !important; 
+    }
+    
+    .lightbox-caption {
+        font-size: 13px !important; /* Slightly smaller text to save room */
+    }
+}
+
+:root {
+    --brand-orange: #ff6600;
+    --text-dark: #333;
+    --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v8.1 - The Finesse Edit)
+   ============================================================ */
+
+/* --- 1. THE MAIN HOUSING (The Machine Body) --- */
+.audio-playlist-container {
+    max-width: 650px;
+    margin: 60px 0;
+    background: #e2e1dc; 
+    border: 1px solid #b1b0ab;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    /* UNIFIED BRAND FONT: No Serifs Allowed */
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* --- 2. THE FACEPLATE (Brushed Top Section) --- */
+.album-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 30px;
+    background: #f2f1ed;
+    border-bottom: 1px solid #c0bfba;
+}
+
+.album-art {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px;
+    object-fit: cover;
+    border: 1px solid #b1b0ab;
+}
+
+.album-meta .short-description {
+    margin: 0 !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    line-height: 1.2 !important;
+}
+
+.album-meta p {
+    margin: 4px 0 0 0 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #666 !important;
+}
+
+/* --- 3. THE CONTROL CONSOLE (The Logic Center) --- */
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px 30px;
+    background: #d1d0cb; 
+    border-bottom: 1px solid #b1b0ab;
+}
+
+/* MECHANICAL BUTTON */
+.play-pause {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    background: #333;
+    border: 1px solid #111 !important;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 3px 0 #000;
+    transition: all 0.1s ease;
+}
+
+/* THE CONTIGUOUS LED GLASS */
+.track-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 18px;
+    background: #000; /* Deep Black Glass */
+    border-radius: 2px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+}
+
+/* THE SHARED DATA RAIL (The "Jump" Destination) */
+.led-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#now-playing {
+    color: #ff6600 !important; 
+    /* MATCHES TRACKLIST EXACTLY: Arial Sans */
+    font-family: Arial, Helvetica, sans-serif !important; 
+    font-size: 0.85rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+    white-space: nowrap;
+}
+
+.time-display {
+    /* MATCHES TRACKLIST EXACTLY: Arial Sans */
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #ff6600 !important;
+    font-variant-numeric: tabular-nums !important;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+}
+
+.progress-container {
+    height: 2px; /* Thinner for Finesse */
+    background: #222;
+}
+
+.progress-bar {
+    background: #ff6600;
+}
+
+/* --- 4. THE INTEGRATED TRACKLIST (The "Feint Rule" Tray) --- */
+.tracklist {
+    margin: 0 !important;
+    padding: 0 !important; 
+    list-style: none !important;
+    background: #e2e1dc; 
+}
+
+.track-item {
+    padding: 16px 30px !important; 
+    display: flex !important;
+    align-items: center;
+    gap: 20px;
+    /* THE FEINT RULE: 1px subtle hairline only */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    cursor: pointer;
+    color: #666 !important;
+    /* UNIFIED FONT SIZE & FAMILY */
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+/* REMOVE BORDER ON LAST ITEM */
+.track-item:last-child { border-bottom: none !important; }
+
+.track-item:hover {
+    background: #d4d3ce !important;
+    color: #111 !important;
+}
+
+.track-item.active {
+    background: #dcdbd6 !important; 
+    color: #000 !important;
+    font-weight: bold !important;
+}
+
+.track-number {
+    color: #999 !important;
+    font-size: 0.7rem !important;
+    width: 20px;
+}
+
+/* --- 5. MOBILE RE-WIRE --- */
+@media (max-width: 600px) {
+    .audio-controls { flex-direction: column !important; }
+    .track-info { width: 100%; order: 1; }
+    .play-pause { order: 2; margin: 0 auto; }
+}
