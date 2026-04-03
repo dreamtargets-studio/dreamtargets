@@ -1496,10 +1496,11 @@ font-family: Arial, Helvetica, sans-serif !important;
    THINKAMIGO INDUSTRIAL AUDIO PLAYER (v13.0 - The Cockpit Lock)
    ============================================================ */
 
-/* --- 1. THE MAIN HOUSING --- */
+/* --- 1. THE MAIN HOUSING (Modified) --- */
 .audio-playlist-container {
     max-width: 600px;
-    margin: 60px 0;
+    /* CHANGE: Top margin stays, Bottom margin goes to ZERO */
+    margin: 60px 0 0 0 !important; 
     background: #e2e1dc; 
     border: 1px solid #b1b0ab;
     border-radius: 2px;
@@ -1507,6 +1508,9 @@ font-family: Arial, Helvetica, sans-serif !important;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif !important;
 }
+
+
+
 
 /* --- 2. THE FACEPLATE (Header) --- */
 .album-header {
