@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.1 (STABILITY EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.2 (QUICKTIME EDITION)
    ============================================================ */
 
 /**
@@ -189,7 +189,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
- * 8. INDUSTRIAL AUDIO PLAYER ENGINE
+ * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.0 Quicktime Edition)
  */
 document.addEventListener('click', (e) => {
     const trackItem = e.target.closest('.track-item');
@@ -198,32 +198,52 @@ document.addEventListener('click', (e) => {
     const audio = document.getElementById('main-audio-engine');
     const nowPlayingText = document.getElementById('now-playing');
     const progressBar = document.getElementById('master-progress');
-    const timeDisplay = document.getElementById('master-time');
+    const timeElapsed = document.getElementById('master-time');
+    const timeTotal = document.getElementById('master-duration');
 
     if (!audio) return;
 
-    // A. TRACK SELECTION (Designer's Focus)
-    if (trackItem) {
-        document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
-        trackItem.classList.add('active');
+    // Helper: Apple-Standard Time Formatting (00:00)
+    const formatTime = (time) => {
+        if (isNaN(time) || time === Infinity) return "00:00";
+        const mins = Math.floor(time / 60).toString().padStart(2, '0');
+        const secs = Math.floor(time % 60).toString().padStart(2, '0');
+        return `${mins}:${secs}`;
+    };
 
+    // A. TRACK SELECTION (Quicktime Stack Logic)
+    if (trackItem) {
         const newSrc = trackItem.getAttribute('data-src');
         
-        // Only swap if it's a different track to prevent jitter
         if (audio.getAttribute('src') !== newSrc) {
+            // UI Reset
+            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
+            trackItem.classList.add('active');
+            
+            // Load New Track
             audio.src = newSrc;
-            nowPlayingText.textContent = trackItem.textContent.trim();
-            audio.play();
+            
+            // Clean Title (Removes leading numbers/dots if present)
+            const fullTitle = trackItem.textContent.trim();
+            if (nowPlayingText) {
+                nowPlayingText.textContent = fullTitle.replace(/^\d+\.\s*/, ''); 
+            }
+            
+            // Reset Progress while loading
+            if (progressBar) progressBar.style.width = '0%';
+            if (timeElapsed) timeElapsed.textContent = "00:00";
+            if (timeTotal) timeTotal.textContent = "00:00";
+
+            audio.play().catch(error => console.log("Playback failed:", error));
+            if (playBtn) playBtn.classList.add('playing');
         }
-        
-        if (playBtn) playBtn.classList.add('playing');
     }
 
     // B. PLAY/PAUSE MECHANICAL TOGGLE
     if (playBtn) {
         if (!audio.src) return; 
         if (audio.paused) {
-            audio.play();
+            audio.play().catch(error => console.log("Playback failed:", error));
             playBtn.classList.add('playing');
         } else {
             audio.pause();
@@ -231,19 +251,28 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // C. PROGRESS & SYMMETRICAL TIMER (00:00)
+    // C. DUAL-TIMER TELEMETRY & PROGRESS
+    // 1. Update Total Duration when metadata loads
+    audio.onloadedmetadata = () => {
+        if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
+    };
+
+    // 2. Update Elapsed Time & Bar during playback
     audio.ontimeupdate = () => {
         if (audio.duration) {
             const pct = (audio.currentTime / audio.duration) * 100;
             if (progressBar) progressBar.style.width = pct + '%';
         }
         
-        // APPLE-STANDARD FORMATTING: Always XX:XX
-        const mins = Math.floor(audio.currentTime / 60).toString().padStart(2, '0');
-        const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-        
-        if (timeDisplay) {
-            timeDisplay.textContent = `${mins}:${secs}`;
+        if (timeElapsed) {
+            timeElapsed.textContent = formatTime(audio.currentTime);
         }
+    };
+
+    // 3. Reset Play Button when track ends
+    audio.onended = () => {
+        if (playBtn) playBtn.classList.remove('playing');
+        if (progressBar) progressBar.style.width = '0%';
+        if (timeElapsed) timeElapsed.textContent = "00:00";
     };
 });
