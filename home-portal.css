@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.1
+   THINKAMIGO HOME PORTAL v1.2
    Contains: 3-Column Branding Bar, 5-Column Grid, Responsive Logic
    ============================================================ */
 
 /* 1. THE BRANDING INTRO BAR 
-   The blue horizontal "Native App" section below main nav */
+   A high-contrast horizontal "Command Strip" */
 .branding-intro-bar { 
     background: var(--brand-blue); 
-    padding: 35px 0; 
+    padding: 25px 0; /* Tighter vertical space for a cinematic horizontal look */
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
 }
@@ -15,19 +15,23 @@
 .branding-flex { 
     display: flex; 
     justify-content: space-between; 
-    align-items: center; 
+    align-items: center; /* PERFECT HORIZONTAL BASELINE */
     max-width: 1200px; 
     margin: 0 auto; 
-    padding: 0 40px; /* Matches Nav padding */
+    padding: 0 40px; 
     box-sizing: border-box;
 }
 
-/* Branding Bar Column Logic */
+/* Branding Bar Column Logic (1-2-1 Distribution) */
 .hero-logotype { flex: 1; display: flex; justify-content: flex-start; }
 .hero-statement { flex: 2; text-align: center; }
 .hero-action    { flex: 1; display: flex; justify-content: flex-end; }
 
-.branding-logo { height: 42px; width: auto; display: block; }
+.branding-logo { 
+    height: 55px; /* SCALED UP for brand authority */
+    width: auto; 
+    display: block; 
+}
 
 .branding-text { 
     font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -39,19 +43,38 @@
     -webkit-font-smoothing: antialiased;
 }
 
+/* THE CONTACT BUTTON (System Match: Ghost Style) */
+.pill-contact-btn {
+    display: inline-block !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    padding: 10px 40px !important;
+    border: 4px solid #ffffff !important; /* System standard 4px */
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.pill-contact-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
 /* 2. THE 5-COLUMN GRID ENGINE */
 .home-hero-grid, 
 .blog-grid { 
     display: grid; 
     grid-template-columns: repeat(5, 1fr); 
-    gap: 12px; /* Slightly wider gap for breathing room */
+    gap: 12px; 
     margin: 40px auto;
     max-width: 1200px;
     padding: 0 20px;
 }
 
-/* 3. THE FEATURED CARD
-   Spans 2 columns to anchor the left side of the grid */
+/* 3. THE FEATURED CARD */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
@@ -71,7 +94,7 @@
 /* 4. CARD CONTENT & TYPOGRAPHY */
 .card-content { padding: 15px; }
 
-.card-content h2 { font-size: 1.4rem; color: var(--brand-blue); margin: 0 0 5px 0; } /* For Featured */
+.card-content h2 { font-size: 1.4rem; color: var(--brand-blue); margin: 0 0 5px 0; }
 .card-content h3 { 
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 600; 
@@ -93,19 +116,17 @@
 }
 
 /* 6. MOBILE & TABLET RESPONSIVE OVERRIDES */
-
-/* Tablet: Drop to 3 columns */
 @media (max-width: 1024px) {
     .home-hero-grid, .blog-grid { grid-template-columns: repeat(3, 1fr); }
-    .featured-card { grid-column: span 3; } /* Featured takes full width of the row */
+    .featured-card { grid-column: span 3; } 
     
     /* Branding Bar "Native App" Stack */
-    .branding-flex { flex-direction: column; gap: 15px; padding: 40px 20px; }
-    .hero-action { display: none !important; } /* Remove button on mobile */
+    .branding-flex { flex-direction: column; gap: 20px; padding: 40px 20px; }
+    .branding-logo { height: 45px; } /* Scale down for smaller viewports */
+    .hero-action { display: none !important; } 
     .branding-text { white-space: normal; font-size: 1.1rem; text-align: center; }
 }
 
-/* Phone: Drop to 1 or 2 columns */
 @media (max-width: 600px) {
     .home-hero-grid, .blog-grid { grid-template-columns: repeat(1, 1fr); }
     .featured-card { grid-column: span 1; }
