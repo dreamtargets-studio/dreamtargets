@@ -1645,10 +1645,10 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v17.0
+   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.0
    ============================================================ */
 
-/* 1. THE HOUSING (Strictly contained) */
+/* 1. THE HOUSING */
 .audio-playlist-container {
     max-width: 600px;
     margin: 60px 0 0 0 !important; 
@@ -1694,6 +1694,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
+    flex-shrink: 0;
 }
 
 .audio-playlist-container .play-pause::after {
@@ -1706,50 +1707,65 @@ font-family: Arial, Helvetica, sans-serif !important;
     border-color: transparent transparent transparent #fff;
 }
 
-/* THE LED GLASS */
+/* --- THE QUICKTIME DASHBOARD LED --- */
 .audio-playlist-container .track-info {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 12px 15px;
+    gap: 10px; /* Precise spacing between the three tiers */
+    padding: 12px 18px;
     background: #0a0a0a; 
     border-radius: 1px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.9);
     min-width: 0;
 }
 
-.audio-playlist-container .led-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Tier 1: The Title Deck */
+.audio-playlist-container .led-title-row {
     width: 100%;
 }
 
 .audio-playlist-container #now-playing {
     color: #ff6600 !important; 
-    font-size: 16px !important;
-    font-weight: 400 !important; 
-    text-transform: none !important; /* Sentence Case Fix */
-    text-align: left;
+    font-size: 15px !important;
+    font-weight: 500 !important; 
+    text-transform: none !important;
+    display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    flex: 1;
+}
+
+/* Tier 2: The Progress Bar (The center sandwich) */
+.audio-playlist-container .progress-container { 
+    height: 3px; 
+    background: #222; 
+    width: 100%;
+    border-radius: 1px;
+}
+
+.audio-playlist-container .progress-bar { 
+    height: 100%; 
+    background: #ff6600; 
+    width: 0%; 
+}
+
+/* Tier 3: The Telemetry Deck (Dual Timers) */
+.audio-playlist-container .led-time-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .audio-playlist-container .time-display {
     color: #ff6600 !important;
-    font-size: 16px !important; 
+    font-size: 12px !important; 
     font-variant-numeric: tabular-nums !important;
-    text-align: right !important;
-    width: 60px !important; 
+    opacity: 0.8; /* Slight hierarchy reduction for timers */
+    width: auto !important; /* Let them hug the edges */
 }
 
-.audio-playlist-container .progress-container { height: 2px; background: #222; }
-.audio-playlist-container .progress-bar { height: 100%; background: #ff6600; }
-
-/* 4. THE TRACKLIST (Scoped Bullet Kill) */
+/* 4. THE TRACKLIST */
 .audio-playlist-container .tracklist {
     list-style: none !important;
     margin: 0 !important;
@@ -1758,9 +1774,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     text-indent: 0 !important;
 }
 
-.audio-playlist-container .tracklist li {
-    list-style: none !important;
-}
+.audio-playlist-container .tracklist li { list-style: none !important; }
 
 .audio-playlist-container .tracklist li::before {
     content: none !important;
@@ -1777,7 +1791,7 @@ font-family: Arial, Helvetica, sans-serif !important;
     cursor: pointer;
     color: #555 !important;
     font-size: 16px !important; 
-    text-transform: none !important; /* Sentence Case Fix */
+    text-transform: none !important;
 }
 
 .audio-playlist-container .track-item:last-child { border-bottom: none !important; }
@@ -1798,9 +1812,10 @@ font-family: Arial, Helvetica, sans-serif !important;
     color: #000 !important;
 }
 
-/* 5. MOBILE (Truncation Rule) */
+/* 5. MOBILE ARCHITECTURE */
 @media (max-width: 600px) {
     .audio-playlist-container .audio-controls { padding: 15px 20px; }
     .audio-playlist-container .tracklist { padding: 0 20px 10px 20px !important; }
-    .audio-playlist-container #now-playing { max-width: 15ch !important; }
+    /* Title can now be longer on mobile since timers are below it */
+    .audio-playlist-container #now-playing { max-width: 100% !important; }
 }
