@@ -1645,228 +1645,42 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.2
+   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.3
    ============================================================ */
 
-/* 1. THE HOUSING */
-.audio-playlist-container {
-    max-width: 600px;
-    margin: 60px 0 0 0 !important; 
-    background: #e2e1dc; 
-    border: 1px solid #b1b0ab;
-    border-radius: 2px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    overflow: hidden; 
-    font-family: Arial, Helvetica, sans-serif !important;
-}
+/* ... (Sections 1 through 5 remain exactly as you have them) ... */
 
-/* 2. FACEPLATE */
-.audio-playlist-container .album-header {
+/* 6. THE LOWER CHASSIS & MAKER'S MARK */
+.player-chassis-footer {
+    background: #e2e1dc; /* Matches the main housing metal */
+    padding: 60px 30px 80px 30px; /* Massive breathing room: 60px top, 80px bottom */
     display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 30px;
-    background: #f2f1ed;
-    border-bottom: 1px solid #c0bfba;
+    justify-content: flex-start; /* Aligned left, Moog style */
+    border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle seam in the metal */
 }
 
-.audio-playlist-container .album-art {
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: cover;
-    border: 1px solid #b1b0ab;
-}
-
-/* 3. CONTROL CONSOLE */
-.audio-playlist-container .audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px 30px;
-    background: #d1d0cb; 
-    border-bottom: 1px solid #b1b0ab;
-}
-
-.audio-playlist-container .play-pause {
-    width: 48px; height: 48px;
-    background: #333;
-    border: 1px solid #111 !important;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    flex-shrink: 0;
-}
-
-/* MECHANICAL ICON CORE (Precision Centered) */
-.audio-playlist-container .play-pause::after {
-    content: '';
-    position: absolute;
-    top: 50%; 
-    left: 50%; /* Anchor fixed to mathematical center */
-    transform: translate(-50%, -50%);
-    transition: all 0.1s ease;
-    box-sizing: border-box;
-}
-
-/* STATE: PLAY (The Optical Triangle) */
-.audio-playlist-container .play-pause::after {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 8px 0 8px 14px; 
-    border-color: transparent transparent transparent #fff;
-    margin-left: 2px; /* Optical nudge to account for triangle's visual weight */
-}
-
-/* STATE: PAUSE (The Stability Bars) */
-.audio-playlist-container .play-pause.playing::after {
-    width: 15px; 
-    height: 16px;
-    border-style: double;
-    border-width: 0 0 0 15px; /* Creates two vertical bars with clean gap */
-    border-color: #fff;
-    margin-left: 0; /* Remove nudge for perfect symmetry */
-}
-
-/* --- THE QUICKTIME DASHBOARD LED --- */
-.audio-playlist-container .track-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; 
-    padding: 12px 18px;
-    background: #0a0a0a; 
-    border-radius: 1px;
-    box-shadow: inset 0 0 12px rgba(0,0,0,0.9);
-    min-width: 0;
-}
-
-/* Tier 1: The Title Deck */
-.audio-playlist-container .led-title-row {
-    width: 100%;
-}
-
-.audio-playlist-container #now-playing {
-    color: #ff6600 !important; 
-    font-size: 15px !important;
-    font-weight: 500 !important; 
-    text-transform: none !important;
+.chassis-logo {
+    /* Half-width of the 600px player is 300px, but 180px gives it 
+       that classic "Hardware Badge" scale without dominating the deck. */
+    width: 240px; 
+    height: auto;
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    opacity: 1.0;
+    pointer-events: none;
+    user-select: none;
 }
 
-/* Tier 2: The Progress Bar */
-.audio-playlist-container .progress-container { 
-    height: 3px; 
-    background: #222; 
-    width: 100%;
-    border-radius: 1px;
-}
-
-.audio-playlist-container .progress-bar { 
-    height: 100%; 
-    background: #ff6600; 
-    width: 0%; 
-}
-
-/* Tier 3: The Telemetry Deck (Dual Timers) */
-.audio-playlist-container .led-time-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.audio-playlist-container .time-display {
-    color: #ff6600 !important;
-    font-size: 12px !important; 
-    font-variant-numeric: tabular-nums !important;
-    opacity: 0.8;
-}
-
-/* 4. THE TRACKLIST */
+/* Ensure the tracklist no longer needs that awkward bottom padding */
 .audio-playlist-container .tracklist {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 30px 20px 30px !important; 
-    background: #e2e1dc; 
-    text-indent: 0 !important;
+    padding-bottom: 0 !important;
 }
 
-.audio-playlist-container .tracklist li { list-style: none !important; }
-
-.audio-playlist-container .tracklist li::before {
-    content: none !important;
-    display: none !important;
-}
-
-.audio-playlist-container .track-item {
-    margin: 0 !important;
-    padding: 18px 15px !important;
-    display: flex !important;
-    align-items: center;
-    gap: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    cursor: pointer;
-    color: #555 !important;
-    font-size: 16px !important; 
-    text-transform: none !important;
-}
-
-.audio-playlist-container .track-item:last-child { border-bottom: none !important; }
-
-.audio-playlist-container .track-number {
-    color: inherit;
-    width: 30px;
-    flex-shrink: 0;
-}
-
-.audio-playlist-container .track-item:hover {
-    background: #d4d3ce !important;
-    color: #111 !important;
-}
-
-.audio-playlist-container .track-item.active {
-    background: #dcdbd6 !important; 
-    color: #000 !important;
-}
-
-/* 5. MOBILE ARCHITECTURE */
+/* Mobile scaling for the badge */
 @media (max-width: 600px) {
-    .audio-playlist-container .audio-controls { padding: 15px 20px; }
-    .audio-playlist-container .tracklist { padding: 0 20px 10px 20px !important; }
-    .audio-playlist-container #now-playing { max-width: 100% !important; }
-}
-
-/* 6. MAKER'S MARK (Manufacturer's Front-Panel Logo) */
-.tracklist {
-    position: relative;
-    /* CHASSIS EXPANSION: Significant "Metal" space below the tracks */
-    padding-bottom: 150px; 
-    list-style: none;
-    margin: 0;
-}
-
-.tracklist::after {
-    content: ''; 
-    position: absolute;
-    /* ALIGNMENT: Boldly placed in the bottom-left "Chassis" area */
-    bottom: 50px; 
-    left: 30px; 
-    
-    /* SCALE: 180px wide (Half-width of a standard 360px-400px player) */
-    width: 180px; 
-    height: 46px; /* Native 1:1 scale of your @2x asset */
-    
-    /* THE ASSET */
-    background-image: url('assets/img/thinkamigo-player@2x.png'); 
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left center;
-    
-    /* THE FINISH: Solid, high-contrast white */
-    opacity: 1.0; 
-    pointer-events: none; 
-    z-index: 10;
+    .player-chassis-footer {
+        padding: 40px 20px 60px 20px;
+    }
+    .chassis-logo {
+        width: 160px;
+    }
 }
