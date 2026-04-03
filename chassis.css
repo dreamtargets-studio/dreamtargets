@@ -156,17 +156,28 @@ p {
     clear: both;
 }
 
+/* THE FOOTER GUTTER: Ensures 20px margin on mobile/desktop */
+#main-footer .container {
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 /* The Top Branding (Large Strapline) */
 .footer-branding-top {
     text-align: center;
     margin-bottom: 50px;
     padding-bottom: 40px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
 }
 
 .footer-full-logo {
-    max-width: 100%;
+    max-width: 100%; /* Respects the 20px padding of the container */
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* THE FOOTER GRID: Logo + 2 Nav Columns */
@@ -213,7 +224,7 @@ p {
 
 .footer-nav-col a:hover {
     color: #ff8c00 !important;
-    padding-left: 5px; /* Subtle interaction */
+    padding-left: 5px;
 }
 
 /* Social Strip & Bottom Text */
@@ -256,7 +267,7 @@ p {
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
-    display: none; /* Controlled by loader.js */
+    display: none; 
     z-index: 2000;
 }
 
