@@ -1645,7 +1645,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.1
+   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.2
    ============================================================ */
 
 /* 1. THE HOUSING */
@@ -1697,27 +1697,35 @@ font-family: Arial, Helvetica, sans-serif !important;
     flex-shrink: 0;
 }
 
-/* MECHANICAL ICON STATE: PLAY */
+/* MECHANICAL ICON CORE (Precision Centered) */
 .audio-playlist-container .play-pause::after {
     content: '';
     position: absolute;
     top: 50%; 
-    left: 56%; /* Optical nudge for triangle */
+    left: 50%; /* Anchor fixed to mathematical center */
     transform: translate(-50%, -50%);
-    border-style: solid;
-    border-width: 7px 0 7px 12px;
-    border-color: transparent transparent transparent #fff;
     transition: all 0.1s ease;
+    box-sizing: border-box;
 }
 
-/* MECHANICAL ICON STATE: PAUSE */
+/* STATE: PLAY (The Optical Triangle) */
+.audio-playlist-container .play-pause::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px; 
+    border-color: transparent transparent transparent #fff;
+    margin-left: 2px; /* Optical nudge to account for triangle's visual weight */
+}
+
+/* STATE: PAUSE (The Stability Bars) */
 .audio-playlist-container .play-pause.playing::after {
+    width: 15px; 
+    height: 16px;
     border-style: double;
-    border-width: 0 0 0 13px; /* Creates two vertical bars */
+    border-width: 0 0 0 15px; /* Creates two vertical bars with clean gap */
     border-color: #fff;
-    width: 13px;
-    height: 14px;
-    left: 50%; /* Re-center for square block */
+    margin-left: 0; /* Remove nudge for perfect symmetry */
 }
 
 /* --- THE QUICKTIME DASHBOARD LED --- */
