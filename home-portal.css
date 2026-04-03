@@ -1,0 +1,87 @@
+/* ============================================================
+   THINKAMIGO HOME PORTAL v1.0
+   Contains: 5-Column Grid, Branding Intro, Featured Cards
+   ============================================================ */
+
+/* 1. THE BRANDING INTRO BAR 
+   The blue horizontal section below the main nav */
+.branding-intro-bar { 
+    background: var(--brand-blue); 
+    padding: 35px 0; 
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1); 
+}
+
+.branding-flex { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 15px; 
+}
+
+/* 2. THE 5-COLUMN GRID ENGINE
+   This is the high-density layout for your service/blog cards */
+.home-hero-grid, 
+.blog-grid { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 8px; 
+    margin: 40px auto;
+    max-width: 1200px;
+}
+
+/* 3. THE FEATURED CARD (The "Hero" of the Grid)
+   This occupies a 2x2 space in the 5-column layout */
+.featured-card { 
+    grid-column: 1 / span 2; 
+    grid-row: 1 / span 2; 
+    background: #fff; 
+    display: flex; 
+    flex-direction: column; 
+    border-radius: 6px 6px 0 0; 
+    overflow: hidden; 
+}
+
+/* 4. CARD CONTENT & TYPOGRAPHY 
+   Precision spacing for titles and text inside grid cards */
+.card-content { 
+    padding: 15px; 
+}
+
+.card-content h3 { 
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 600; 
+    font-size: 19px; 
+    color: #333; 
+    margin: 0 0 10px 0; 
+    line-height: 1.3;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+/* 5. IMAGE RATIOS
+   Ensures all card images maintain a cinematic 16:9 look */
+.featured-card img, 
+.service-card img, 
+.blog-card img { 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+}
+
+/* 6. MOBILE RESPONSIVE OVERRIDE
+   Drops the 5-column grid to 2-columns for readability on phones */
+@media (max-width: 768px) {
+    .home-hero-grid, .blog-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .featured-card { 
+        grid-column: span 2; 
+    }
+}
