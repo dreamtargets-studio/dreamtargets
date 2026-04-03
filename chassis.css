@@ -25,7 +25,7 @@ html, body {
     clear: both;
 }
 
-/* 2. GLOBAL NAVIGATION (Blue Bar) - SYNCED TO PARTIALS */
+/* --- 2. GLOBAL NAVIGATION (Blue Bar) --- */
 #main-nav {
     background-color: var(--brand-blue);
     width: 100%;
@@ -33,33 +33,35 @@ html, body {
     z-index: 1000;
 }
 
-/* Forces the edge-to-edge span across the whole window */
 .container.nav-flex {
     display: flex;
-    justify-content: space-between; /* LOGO LEFT, LINKS RIGHT */
-    align-items: center;
+    align-items: center; /* Vertically centers logo and links */
     width: 100%;
     max-width: 100% !important; 
     box-sizing: border-box;
     padding: 15px 40px; 
 }
 
-/* THE LEFT: Logo Graphic */
-.logo a {
-    display: flex;
-    align-items: center;
+/* THE LEFT: Logo */
+.logo {
+    flex-shrink: 0; /* Prevents the logo from being squashed */
 }
 
 .logo img {
-    height: 35px; /* Adjust this to fit your bar */
+    height: 35px;
     width: auto;
     display: block;
 }
 
-/* THE RIGHT: Nav Links */
+/* THE RIGHT: Navigation Links (The Alignment Fix) */
 .nav-links {
     display: flex;
     gap: 20px;
+    margin-left: auto; /* THIS IS THE TRICK: Pushes links to the far right */
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -68,21 +70,17 @@ html, body {
     font-size: 0.9rem;
     font-weight: 500;
     white-space: nowrap;
-    transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: #ff8c00 !important;
-}
-
-/* THE HAMBURGER (Checkbox Hack Logic) */
+/* --- THE HAMBURGER (Mobile Alignment Fix) --- */
 #menu-toggle { display: none; }
 
 .hamburger {
-    display: none; /* Hidden on Desktop */
+    display: none; 
     cursor: pointer;
     flex-direction: column;
     gap: 5px;
+    margin-left: auto; /* Pushes the hamburger to the far right on mobile */
 }
 
 .hamburger span {
@@ -94,21 +92,21 @@ html, body {
 
 /* MOBILE BREAKPOINT */
 @media (max-width: 1024px) {
+    /* Hide standard links, show hamburger */
+    .nav-links { display: none; } 
     .hamburger { display: flex; }
-    
-    .nav-links {
-        display: none; /* Hidden until checkbox is checked */
+
+    /* When the checkbox is checked, show the links as a dropdown */
+    #menu-toggle:checked ~ .nav-links {
+        display: flex;
+        flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         background: var(--brand-blue);
-        flex-direction: column;
         padding: 10px 0;
-    }
-
-    #menu-toggle:checked ~ .nav-links {
-        display: flex;
+        margin-left: 0; /* Reset the push for the dropdown */
     }
 
     .nav-links a {
@@ -116,13 +114,6 @@ html, body {
         border-top: 1px solid rgba(255,255,255,0.1);
     }
 }
-
-
-
-
-
-
-
 
 
 /* 3. GLOBAL TYPOGRAPHY (Poppins/Arial Sync) */
