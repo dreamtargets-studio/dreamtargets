@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.0 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v1.1 - THE UNBREAKABLE FRAME
    Contains: Navigation, Footer, Global Typography, Layout Guard
    ============================================================ */
 
@@ -11,8 +11,7 @@
     --section-tan: #e3dcd2;
 }
 
-/* 1. THE LAYOUT GUARD (The "Firewall")
-   This prevents any internal "floats" from breaking the page height. */
+/* 1. THE LAYOUT GUARD (The "Firewall") */
 html, body { 
     margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
     font-family: 'Segoe UI', Tahoma, sans-serif; 
@@ -20,7 +19,7 @@ html, body {
 }
 
 .paper, .paper-sheet, .editorial-post, .container {
-    display: flow-root !important; /* Forces containment of all internal elements */
+    display: flow-root !important; 
     width: 100%;
     clear: both;
 }
@@ -33,14 +32,22 @@ html, body {
     z-index: 1000;
 }
 
-/* THE ALIGNMENT ENGINE */
+/* THE INVISIBLE TRIGGER: Fixes the white rectangular box (Checkbox) */
+#menu-toggle {
+    display: none !important;
+    visibility: hidden;
+    position: absolute;
+    left: -9999px;
+}
+
+/* THE ALIGNMENT ENGINE: Forces edge-to-edge span */
 #main-nav .nav-flex {
     display: flex !important;
     justify-content: space-between !important; /* Pushes Logo Left, Links Right */
     align-items: center;
-    width: 100%;
+    width: 100% !important;
     max-width: 100% !important; 
-    padding: 10px 40px; /* Reduced padding for a sleeker bar */
+    padding: 10px 40px; 
     box-sizing: border-box;
 }
 
@@ -48,29 +55,29 @@ html, body {
 .logo {
     display: flex;
     align-items: center;
-    max-width: 200px; /* Prevents the logo container from growing too large */
+    flex-shrink: 0;
 }
 
 .logo img {
-    height: 40px !important; /* This kills the "Giant" bubble - adjust as needed */
+    height: 40px !important; 
     width: auto;
     display: block;
 }
 
-/* THE LINKS: Forcing Right Alignment */
+/* THE LINKS: Right Alignment */
 .nav-links {
     display: flex !important;
     gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-left: auto; /* Double-reinforcement for right alignment */
+    margin-left: auto; /* Secondary push to ensure right-alignment */
 }
 
 .nav-links a {
     color: #ffffff !important;
     text-decoration: none !important;
-    font-size: 0.85rem; /* Slightly smaller to fit all items */
+    font-size: 0.85rem; 
     font-weight: 500;
     transition: 0.3s;
 }
@@ -87,7 +94,7 @@ html, body {
     justify-content: space-between;
     width: 25px;
     height: 18px;
-    margin-left: auto; /* Pins hamburger to the right */
+    margin-left: auto; 
 }
 
 .hamburger span {
@@ -108,6 +115,7 @@ html, body {
         background: var(--brand-blue);
         flex-direction: column;
         padding: 20px 0;
+        margin-left: 0;
     }
     
     .hamburger { display: flex !important; }
@@ -120,10 +128,11 @@ html, body {
         padding: 15px 40px;
         border-top: 1px solid rgba(255,255,255,0.1);
         width: 100%;
+        box-sizing: border-box;
     }
 }
 
-/* 3. GLOBAL TYPOGRAPHY (Poppins/Arial Sync) */
+/* 3. GLOBAL TYPOGRAPHY */
 h1, h2, h3, h4 {
     font-family: 'Poppins', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
