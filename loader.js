@@ -1,12 +1,11 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.0
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.1
    Features: HTML Partials, Lightbox, Audio Engine, UI Utils
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. THE INJECTOR ENGINE (The "Glue") ---
-    // This fetches your external HTML files and plugs them into the sockets.
     const loadPartials = async () => {
         try {
             // Fetch and Inject Header
@@ -22,10 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (fRes.ok) {
                 const fData = await fRes.text();
                 const footerSocket = document.getElementById('main-footer');
-                if (footerSocket) footerSocket.innerHTML = fData;
+                if (footerSocket) {
+                    footerSocket.innerHTML = fData;
+                    
+                    // CRITICAL: Initialize UI elements (Back-to-top) AFTER injection
+                    setupUI(); 
+                }
             }
 
-            // After injection is complete, initialize any dynamic UI (like mobile menus)
+            // Initialize Mobile Menu (Checkbox backup or extra states)
             setupMobileMenu();
 
         } catch (err) {
@@ -33,12 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: MOBILE MENU (Handles the Hamburger) ---
+    // --- 2. MODULE: MOBILE MENU ---
     const setupMobileMenu = () => {
         const btn = document.getElementById('menu-toggle');
         const nav = document.querySelector('.nav-links');
-        // If you are using the Checkbox Hack in CSS, this JS is a backup 
-        // but it's good to have for future interactive states.
+        // Checkbox hack handles visibility; JS left open for future animation states.
     };
 
     // --- 3. MODULE: LIGHTBOX (Galleries & Archives) ---
@@ -104,11 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 5. MODULE: UI UTILITIES (Back to Top) ---
     const setupUI = () => {
-        const topBtn = document.querySelector('.back-to-top');
+        const topBtn = document.getElementById('backToTop');
         if (!topBtn) return;
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            // Appears after 400px of scrolling
+            if (window.scrollY > 400) {
                 topBtn.classList.add('show');
             } else {
                 topBtn.classList.remove('show');
@@ -121,8 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- EXECUTION ---
-    loadPartials();    // Runs the fetch for header/footer
-    setupLightbox();   // Scans for gallery images
-    setupAudioPlayer(); // Scans for audio elements
-    setupUI();         // Scans for scroll buttons
+    loadPartials();      // Starts the partial injection sequence
+    setupLightbox();     // Scans for gallery images
+    setupAudioPlayer();  // Scans for audio elements (if present on page)
 });
