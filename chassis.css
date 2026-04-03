@@ -308,18 +308,51 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 }
 
 /* Back to Top Utility */
+/* --- BACK TO TOP COMPONENT --- */
 .back-to-top {
     position: fixed;
-    bottom: 30px; right: 30px;
-    background: #ff8c00;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--brand-blue); 
     border: none;
-    width: 45px; height: 45px;
     border-radius: 50%;
     cursor: pointer;
-    display: none; 
     z-index: 2000;
+    
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s ease-in-out;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-.back-to-top.show { display: block; }
+
+/* Triggered by JavaScript on scroll */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: #ff8c00; /* Subtle orange shift */
+}
+
+/* The CSS Chevron (No image file needed) */
+.chevron-up {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    transform: rotate(-45deg) translate(-2px, 2px);
+}
 
 /* 5. UTILITY: THE ORANGE RULE */
 .orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
