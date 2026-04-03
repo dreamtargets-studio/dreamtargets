@@ -1,286 +1,79 @@
-/* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.6 (ULTIMATE SYNC)
-   ============================================================ */
-
-/**
- * 1. COMPONENT LOADER
- */
-async function loadComponent(elementId, filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const content = await response.text();
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.innerHTML = content;
-        }
-    } catch (error) {
-        console.error('Error loading ' + filePath, error);
-    }
-}
-
-/**
- * 2. NAVIGATION SYNC
- */
-function highlightActiveLink() {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        if (linkHref && currentPath.includes(linkHref) && linkHref !== "") {
-            link.classList.add('active');
-        }
-    });
-}
-
-/**
- * 3. INITIALIZATION
- */
-window.addEventListener('DOMContentLoaded', async () => {
-    await loadComponent('main-nav', 'header.html');
-    await loadComponent('main-footer', 'footer.html');
-    highlightActiveLink();
-});
-
-/**
- * 4. SCROLL WATCHER
- */
-window.addEventListener('scroll', () => {
-    const btn = document.getElementById("backToTop");
-    if (btn) {
-        if (window.scrollY > 40) btn.classList.add("show");
-        else btn.classList.remove("show");
-    }
-});
-
-/**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE
- */
-let currentGallery = []; 
-let currentIndex = 0;
-let isAnimating = false;
-
-function updateLightbox(index, direction = 'next') {
-    if (isAnimating) return;
+document.addEventListener('DOMContentLoaded', () => {
     
+    /* --- SYSTEM 1: THE GLOBAL LIGHTBOX --- */
+    const lightbox = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
-    const caption = document.getElementById('lightbox-caption');
-    const counter = document.getElementById('lightbox-counter');
-    const prevBtn = document.querySelector('.lightbox-prev');
-    const nextBtn = document.querySelector('.lightbox-next');
+    // This selector covers ALL galleries on ALL your pages
+    const galleryImages = document.querySelectorAll('.gallery-grid-3 img, figure img');
 
-    if (!lightboxImg) return;
-    isAnimating = true;
-
-    lightboxImg.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s';
-    lightboxImg.style.opacity = '0';
-    lightboxImg.style.transform = direction === 'next' ? 'translateX(-100px)' : 'translateX(100px)';
-
-    setTimeout(() => {
-        if (index < 0) index = currentGallery.length - 1;
-        if (index >= currentGallery.length) index = 0;
-        currentIndex = index;
-        
-        const targetImage = currentGallery[currentIndex];
-        const isGallery = currentGallery.length > 1;
-
-        lightboxImg.style.transition = 'none';
-        lightboxImg.style.transform = direction === 'next' ? 'translateX(100px)' : 'translateX(-100px)';
-        
-        const fullSrc = targetImage.getAttribute('data-full') || targetImage.src;
-        lightboxImg.src = fullSrc;
-        
-        if (caption) caption.innerHTML = targetImage.getAttribute('alt') || "";
-        
-        if (counter) {
-            counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
-            counter.style.setProperty('display', isGallery ? 'block' : 'none', 'important');
-        }
-
-        if (prevBtn) prevBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
-        if (nextBtn) nextBtn.style.setProperty('display', isGallery ? 'flex' : 'none', 'important');
-
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                lightboxImg.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s';
-                lightboxImg.style.opacity = '1';
-                lightboxImg.style.transform = 'translateX(0)';
-                isAnimating = false;
-            }, 50);
+    if (lightbox && galleryImages.length > 0) {
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                const fullSrc = img.getAttribute('data-full');
+                if (fullSrc) {
+                    lightboxImg.src = fullSrc;
+                    lightbox.classList.add('active');
+                }
+            });
         });
 
-    }, 250);
-}
-
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox-overlay');
-    const lightboxImg = document.getElementById('lightbox-img');
-    if (lightbox) {
-        lightbox.setAttribute('style', 'display: none !important');
-        if (lightboxImg) {
-            lightboxImg.src = ""; 
-            lightboxImg.style.transform = 'translateX(0)';
-        }
-        document.body.style.overflow = 'auto';
-    }
-}
-
-/**
- * 6. GLOBAL CLICK & GESTURE MANAGER
- */
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', e => { 
-    touchStartX = e.changedTouches[0].screenX; 
-}, {passive: true});
-
-document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    const threshold = 70;
-    const lightbox = document.getElementById('lightbox-overlay');
-    
-    if (lightbox && lightbox.getAttribute('style')?.includes('flex') && currentGallery.length > 1) {
-        if (touchEndX < touchStartX - threshold) updateLightbox(currentIndex + 1, 'next');
-        if (touchEndX > touchStartX + threshold) updateLightbox(currentIndex - 1, 'prev');
-    }
-}, false);
-
-document.addEventListener('click', (e) => {
-    if (e.target.closest('#backToTop')) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+        });
     }
 
-    const galleryImg = e.target.closest('img[data-full]');
-    if (galleryImg) {
-        const galleryName = galleryImg.getAttribute('data-gallery');
-        const lightbox = document.getElementById('lightbox-overlay');
-        
-        currentGallery = galleryName 
-            ? Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`))
-            : [galleryImg];
-
-        currentIndex = currentGallery.indexOf(galleryImg);
-        
-        if (lightbox) {
-            lightbox.setAttribute('style', 'display: flex !important'); 
-            document.body.style.overflow = 'hidden'; 
-            updateLightbox(currentIndex, 'next');
-        }
-        return;
-    }
-
-    if (e.target.closest('.lightbox-next')) updateLightbox(currentIndex + 1, 'next');
-    else if (e.target.closest('.lightbox-prev')) updateLightbox(currentIndex - 1, 'prev');
-    else if (e.target.closest('.lightbox-close') || (e.target.id === 'lightbox-overlay')) closeLightbox();
-});
-
-/**
- * 7. ACCESSIBILITY
- */
-document.addEventListener('keydown', (e) => {
-    const lightbox = document.getElementById('lightbox-overlay');
-    if (lightbox && lightbox.getAttribute('style')?.includes('flex')) {
-        if (e.key === "ArrowRight") updateLightbox(currentIndex + 1, 'next');
-        if (e.key === "ArrowLeft") updateLightbox(currentIndex - 1, 'prev');
-        if (e.key === "Escape") closeLightbox();
-    }
-});
-
-/**
- * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.6 Ultimate Sync)
- */
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('main-audio-engine');
-    const playBtn = document.getElementById('masterPlayBtn');
-    const progressBar = document.getElementById('master-progress');
-    const timeElapsed = document.getElementById('master-time');
-    const timeTotal = document.getElementById('master-duration');
+    /* --- SYSTEM 2: THE AUDIO PLAYER DASHBOARD --- */
+    const mainAudio = document.getElementById('main-audio-engine');
+    const masterPlayBtn = document.getElementById('masterPlayBtn');
+    const trackItems = document.querySelectorAll('.track-item');
     const nowPlayingText = document.getElementById('now-playing');
+    const progressBar = document.getElementById('master-progress');
+    const timeDisplay = document.getElementById('master-time');
 
-    if (!audio) return;
+    if (mainAudio && masterPlayBtn) {
+        
+        // Logic for clicking individual songs in the list
+        trackItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.getAttribute('data-src');
+                const title = item.getAttribute('data-title');
+                trackItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                mainAudio.src = src;
+                nowPlayingText.textContent = title;
+                mainAudio.play();
+                masterPlayBtn.classList.add('playing');
+            });
+        });
 
-    const formatTime = (time) => {
-        if (isNaN(time) || time === Infinity) return "00:00";
-        const mins = Math.floor(time / 60).toString().padStart(2, '0');
-        const secs = Math.floor(time % 60).toString().padStart(2, '0');
-        return `${mins}:${secs}`;
-    };
-
-    // --- PERMANENT ENGINE LISTENERS ---
-    
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
-            const pct = (audio.currentTime / audio.duration) * 100;
-            if (progressBar) progressBar.style.width = pct + '%';
-        }
-        if (timeElapsed) timeElapsed.textContent = formatTime(audio.currentTime);
-    });
-
-    audio.addEventListener('loadedmetadata', () => {
-        if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
-    });
-
-    audio.addEventListener('ended', () => {
-        if (playBtn) playBtn.classList.remove('playing');
-        if (progressBar) progressBar.style.width = '0%';
-        if (timeElapsed) timeElapsed.textContent = "00:00";
-    });
-
-    // --- INTERFACE CLICK CONTROLS ---
-
-    document.addEventListener('click', (e) => {
-        const trackItem = e.target.closest('.track-item');
-        const masterBtnClick = e.target.closest('#masterPlayBtn');
-
-        // A. Track Selection Logic
-        if (trackItem) {
-            e.stopPropagation();
-            const newSrc = trackItem.getAttribute('data-src');
-            const newTitle = trackItem.getAttribute('data-title');
-            
-            if (audio.getAttribute('src') !== newSrc) {
-                // UI Reset
-                document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
-                trackItem.classList.add('active');
-                
-                // Engine Update
-                audio.src = newSrc;
-                audio.load(); 
-                
-                // LED Update (Using data-title for precision)
-                if (nowPlayingText) {
-                    nowPlayingText.textContent = newTitle || trackItem.textContent.trim().replace(/^\d+\.\s*/, ''); 
+        // Logic for the big central Play/Pause button
+        masterPlayBtn.addEventListener('click', () => {
+            if (mainAudio.paused) {
+                if (!mainAudio.src && trackItems.length > 0) {
+                    trackItems[0].click(); // Default to track 1
+                } else {
+                    mainAudio.play();
+                    masterPlayBtn.classList.add('playing');
                 }
-
-                audio.play().then(() => {
-                    if (playBtn) playBtn.classList.add('playing');
-                }).catch(err => console.log("Playback blocked:", err));
-
             } else {
-                // Clicking same track toggles state
-                if (audio.paused) { 
-                    audio.play(); 
-                    if (playBtn) playBtn.classList.add('playing'); 
-                } else { 
-                    audio.pause(); 
-                    if (playBtn) playBtn.classList.remove('playing'); 
+                mainAudio.pause();
+                masterPlayBtn.classList.remove('playing');
+            }
+        });
+
+        // Logic for the moving orange bar and digital timer
+        mainAudio.addEventListener('timeupdate', () => {
+            if (mainAudio.duration) {
+                const progress = (mainAudio.currentTime / mainAudio.duration) * 100;
+                if (progressBar) progressBar.style.width = `${progress}%`;
+                
+                if (timeDisplay) {
+                    let mins = Math.floor(mainAudio.currentTime / 60);
+                    let secs = Math.floor(mainAudio.currentTime % 60);
+                    timeDisplay.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
                 }
             }
-            return;
-        }
-
-        // B. Master Button Toggle
-        if (masterBtnClick) {
-            if (!audio.src) return;
-            if (audio.paused) { 
-                audio.play(); 
-                if (playBtn) playBtn.classList.add('playing'); 
-            } else { 
-                audio.pause(); 
-                if (playBtn) playBtn.classList.remove('playing'); 
-            }
-        }
-    });
+        });
+    }
 });
