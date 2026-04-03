@@ -1,20 +1,21 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.4
-   Contains: 3-Column Branding Bar, 5-Column Grid, Precision Alignment
+   THINKAMIGO HOME PORTAL v1.5
+   Features: 5-Column Grid-Lock, Precision Alignment, Card UI
    ============================================================ */
 
-/* 1. THE BRANDING INTRO BAR 
-   Aligned to the 5-column grid architectural axis */
+/* --- 1. THE BRANDING INTRO BAR (Architectural Alignment) --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
-    padding: 40px 0; /* More air to balance the larger logo */
+    padding: 60px 0; /* Vertical air to support the wide logotype */
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
 }
 
 .branding-flex { 
-    display: flex; 
-    justify-content: space-between; 
+    display: grid; 
+    /* MATCHES THE CONTENT GRID BELOW EXACTLY */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; 
     align-items: center; 
     max-width: 1200px; 
     margin: 0 auto; 
@@ -22,59 +23,59 @@
     box-sizing: border-box;
 }
 
-/* Distribution Logic: Logo (Anchor) | Text (Center) | Button (End) */
+/* Column 1 & 2: The Anchor (Spans same as Featured Card) */
 .hero-logotype { 
-    flex: 0 0 471px; /* MATCHES 2-COLUMN WIDTH OF FEATURED CARD BELOW */
+    grid-column: span 2; 
     display: flex; 
     justify-content: flex-start; 
-    align-items: center;
-}
-
-.hero-statement { 
-    flex: 1; 
-    text-align: center; 
-    padding: 0 20px;
-}
-
-.hero-action { 
-    flex: 0 0 200px; /* Fixed zone for button to stabilize the right edge */
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center;
 }
 
 .branding-logo { 
-    width: 100%; /* Fills the 471px container */
+    width: 100%; 
+    max-width: 471px; /* Precision 2-column width */
     height: auto; 
     display: block; 
+}
+
+/* Column 3 & 4: The Statement */
+.hero-statement { 
+    grid-column: span 2; 
+    text-align: center;
 }
 
 .branding-text { 
     font-family: 'Segoe UI', Tahoma, sans-serif;
     color: var(--white); 
-    font-size: 1.15rem; /* Slightly refined to respect the larger logo */
+    font-size: 1.15rem; 
     font-weight: 400; 
     margin: 0; 
-    white-space: normal; /* Allows natural wrapping if the name is long */
+    line-height: 1.4;
     -webkit-font-smoothing: antialiased;
 }
 
-/* THE CONTACT BUTTON (System Match: Precision Height) */
+/* Column 5: The Action */
+.hero-action { 
+    grid-column: span 1; 
+    display: flex; 
+    justify-content: flex-end; 
+}
+
 .pill-contact-btn {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
     background-color: transparent !important;
     color: #ffffff !important;
-    height: 52px; 
-    padding: 0 45px !important; 
+    height: 50px; 
+    width: 100%; 
+    max-width: 180px;
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
     font-family: 'Segoe UI', Tahoma, sans-serif !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    transition: background-color 0.3s ease;
+    font-size: 1rem !important;
+    transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
@@ -82,7 +83,7 @@
     background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* 2. THE 5-COLUMN GRID ENGINE */
+/* --- 2. THE 5-COLUMN GRID ENGINE --- */
 .home-hero-grid, 
 .blog-grid { 
     display: grid; 
@@ -91,9 +92,10 @@
     margin: 40px auto;
     max-width: 1200px; 
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
-/* 3. THE FEATURED CARD (Spans 2/5 columns) */
+/* --- 3. THE FEATURED CARD (The 2x2 Hero) --- */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
@@ -104,9 +106,22 @@
     overflow: hidden; 
 }
 
-/* 4. CARD CONTENT & TYPOGRAPHY */
+.service-card, .blog-card {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 4. CARD CONTENT & TYPOGRAPHY --- */
 .card-content { padding: 15px; }
-.card-content h2 { font-size: 1.4rem; color: var(--brand-blue); margin: 0 0 5px 0; }
+
+.card-content h2 { 
+    font-size: 1.45rem; 
+    color: var(--brand-blue); 
+    margin: 0 0 5px 0; 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
 .card-content h3 { 
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 600; 
@@ -114,9 +129,15 @@
     color: #333; 
     margin: 0 0 8px 0; 
 }
-.card-content p { font-size: 0.9rem; color: #555; line-height: 1.4; margin: 0; }
 
-/* 5. IMAGE RATIOS */
+.card-content p { 
+    font-size: 0.9rem; 
+    color: #555; 
+    line-height: 1.45; 
+    margin: 0; 
+}
+
+/* --- 5. IMAGE RATIOS --- */
 .featured-card img, 
 .service-card img, 
 .blog-card img { 
@@ -126,13 +147,23 @@
     display: block;
 }
 
-/* 6. MOBILE & TABLET RESPONSIVE OVERRIDES */
+/* --- 6. MOBILE & TABLET RESPONSIVE OVERRIDES --- */
 @media (max-width: 1024px) {
-    .home-hero-grid, .blog-grid { grid-template-columns: repeat(3, 1fr); }
-    .featured-card { grid-column: span 3; } 
-    
-    .branding-flex { flex-direction: column; gap: 20px; padding: 40px 20px; }
-    .hero-logotype { flex: 0 0 auto; width: 80%; }
+    .branding-flex { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 30px; 
+        padding: 40px 20px; 
+    }
+    .branding-logo { width: 80%; max-width: 320px; }
     .hero-action { display: none !important; } 
-    .branding-text { white-space: normal; font-size: 1.1rem; text-align: center; }
+    .branding-text { font-size: 1.1rem; text-align: center; }
+
+    .home-hero-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-card { grid-column: span 2; }
+}
+
+@media (max-width: 600px) {
+    .home-hero-grid, .blog-grid { grid-template-columns: repeat(1, 1fr); }
+    .featured-card { grid-column: span 1; }
 }
