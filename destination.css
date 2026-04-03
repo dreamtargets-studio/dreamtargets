@@ -1,0 +1,80 @@
+/* ============================================================
+   THINKAMIGO DESTINATION ENGINE v1.0
+   Contains: Text Rail (800px), Story Branding, Gallery Grids
+   ============================================================ */
+
+/* 1. THE PAPER CONTAINER 
+   The white sheet that sits on the eggshell background */
+.paper-sheet {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--white);
+    min-height: 100vh;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+/* 2. THE TEXT RAIL (The "Editorial Column")
+   Focuses the reader's eye by limiting width to 800px */
+.text-rail {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 88%;
+    padding: 60px 0;
+}
+
+/* 3. STORY HEADINGS (Precision Tuned) */
+.text-rail h1 { 
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    line-height: 1.1; 
+    margin-bottom: 20px;
+}
+
+.text-rail h2.short-description {
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+/* 4. THE GALLERY GRID (3-UP)
+   Strictly scoped so it doesn't fight with the Home Portal grid */
+.gallery-grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.gallery-grid-3 figure {
+    flex: 0 0 calc(33.333% - 10px);
+    margin: 0;
+}
+
+.gallery-grid-3 img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #444;
+    cursor: zoom-in; /* Signals Lightbox readiness */
+}
+
+/* 5. EDITORIAL CAPTIONS */
+.caption {
+    background: #e7e6df;
+    padding: 8px 15px;
+    margin-top: -15px; /* Pulls up to "dock" with the image above */
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #444;
+}
+
+/* 6. MOBILE RESPONSIVE 
+   Ensures the text rail expands and galleries stack on phones */
+@media (max-width: 768px) {
+    .text-rail { width: 92%; padding: 30px 0; }
+    .gallery-grid-3 figure { flex: 0 0 calc(50% - 8px); }
+    .paper-sheet { border: none; }
+}
