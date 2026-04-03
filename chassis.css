@@ -25,53 +25,105 @@ html, body {
     clear: both;
 }
 
-/* 2. GLOBAL NAVIGATION (Blue Bar) */
+/* 2. GLOBAL NAVIGATION (Blue Bar) - SYNCED TO PARTIALS */
 #main-nav {
     background-color: var(--brand-blue);
     width: 100%;
     position: relative;
     z-index: 1000;
-    display: block;
-    clear: both;
 }
 
-/* The Container that forces the Left/Right split across the whole window */
-.nav-flex {
+/* Forces the edge-to-edge span across the whole window */
+.container.nav-flex {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between; /* LOGO LEFT, LINKS RIGHT */
     align-items: center;
     width: 100%;
-    max-width: 100%; /* Removes any 1200px restrictions */
+    max-width: 100% !important; 
     box-sizing: border-box;
-    padding: 15px 40px; /* Adjust 40px to change the "gutter" from the screen edge */
+    padding: 15px 40px; 
 }
 
-/* THE LEFT: Thinkbubble Graphic */
-.nav-brand a, .thinkbubble-home a {
-    display: flex;         /* Centers the image vertically in the bar */
+/* THE LEFT: Logo Graphic */
+.logo a {
+    display: flex;
     align-items: center;
-    text-decoration: none; /* Removes any "invisible" underlines from the link */
-    border: none;          /* Ensures no border appears around the graphic */
 }
 
-.nav-brand img, .thinkbubble-home img {
-    height: 40px;          /* Adjust this to your logo's preferred height */
-    width: auto;           /* Keeps the logo from stretching */
+.logo img {
+    height: 35px; /* Adjust this to fit your bar */
+    width: auto;
     display: block;
 }
 
-#main-nav .nav-links a { 
-    color: var(--eggshell); 
-    text-decoration: none !important; 
-    font-size: 0.9rem; 
-    transition: 0.3s; 
-    font-weight: 400 !important; 
+/* THE RIGHT: Nav Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
 }
 
-#main-nav .nav-links a.active, 
-#main-nav .nav-links a:hover { 
-    color: #ff8c00 !important; 
+.nav-links a {
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: 0.3s;
 }
+
+.nav-links a:hover {
+    color: #ff8c00 !important;
+}
+
+/* THE HAMBURGER (Checkbox Hack Logic) */
+#menu-toggle { display: none; }
+
+.hamburger {
+    display: none; /* Hidden on Desktop */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    display: block;
+}
+
+/* MOBILE BREAKPOINT */
+@media (max-width: 1024px) {
+    .hamburger { display: flex; }
+    
+    .nav-links {
+        display: none; /* Hidden until checkbox is checked */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--brand-blue);
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    #menu-toggle:checked ~ .nav-links {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 15px 40px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+}
+
+
+
+
+
+
+
+
 
 /* 3. GLOBAL TYPOGRAPHY (Poppins/Arial Sync) */
 h1, h2, h3, h4 {
