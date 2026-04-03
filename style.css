@@ -1839,36 +1839,33 @@ font-family: Arial, Helvetica, sans-serif !important;
     .audio-playlist-container #now-playing { max-width: 100% !important; }
 }
 
-/* 6. MAKER'S MARK (Static Hardware Label - Non-UI) */
-.audio-playlist-container .track-info {
+/* 6. MAKER'S MARK (Bottom Chassis - 180x46 @2x) */
+.audio-playlist-container {
     position: relative;
-    /* Ensure no internal elements overlap the branding improperly */
-    overflow: hidden; 
+    /* Adjusted padding to ensure the logo has a dedicated 'shelf' */
+    padding-bottom: 45px; 
 }
 
-.audio-playlist-container .track-info::after {
+.audio-playlist-container::after {
     content: ''; 
     position: absolute;
-    bottom: 8px; 
-    right: 12px;
+    bottom: 15px; 
+    right: 20px;
     
-    /* @2x RETINA CALIBRATION: Half of 180x46px source */
+    /* @2x RETINA CALIBRATION: Half of 180x46px */
     width: 90px; 
     height: 23px;
     
     /* The High-Density White PNG */
-    background-image: url('assets/thinkamigo-player@2x.png'); 
+    background-image: url('assets/thinkamigo-branding@2x.png'); 
     background-size: 90px 23px; 
     background-repeat: no-repeat;
     background-position: right center;
     
-    /* THE "INERT" FINISH */
-    /* 12% - 15% creates a "Ghost Silver" effect that never changes */
-    opacity: 0.12; 
+    /* THE "ENAMEL" FINISH */
+    /* Set to 1.0 for a solid white badge, or 0.1 for a ghost effect */
+    opacity: 1.0; 
     
-    /* pointer-events: none is CRITICAL here */
-    /* It makes the logo 'transparent' to mouse clicks so it doesn't block the UI */
     pointer-events: none; 
-    
-    z-index: 1; /* Sits behind the text/timers if they happen to overlap */
+    z-index: 1;
 }
