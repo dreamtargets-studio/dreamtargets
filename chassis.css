@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.5 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v1.6 - THE UNBREAKABLE FRAME
    Contains: Navigation, Footer, Global Typography, Layout Guard
    ============================================================ */
 
@@ -152,7 +152,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     margin-bottom: 50px;
 }
 
-/* --- FOOTER LOGO: LARGE & RESPONSIVE --- */
+/* FOOTER LOGO: LARGE & RESPONSIVE */
 .footer-visual-col { 
     flex: 1.5; 
     min-width: 280px; 
@@ -183,7 +183,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 .footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
 .footer-nav-col li { margin-bottom: 12px; }
 
-/* FIX: Removed the padding-left hover movement for solid UI */
 .footer-nav-col a { 
     color: rgba(255,255,255,0.7) !important; 
     text-decoration: none; 
@@ -193,6 +192,38 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 
 .footer-nav-col a:hover { 
     color: #ff8c00 !important; 
+}
+
+/* --- FOOTER CALL TO ACTION (Original Ghost Button Style) --- */
+.footer-cta {
+    display: flex;
+    justify-content: center; /* Centered per reference image */
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.btn-pill {
+    display: inline-block !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    padding: 10px 45px !important;
+    border: 2.5px solid #ffffff !important; /* Thick white border */
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.btn-pill:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Subtle tint */
+    border-color: #a0c4ff !important; /* Light blue border shift */
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(160, 196, 255, 0.2); /* Faint blue halo */
 }
 
 .footer-bottom {
