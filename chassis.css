@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.1 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v1.2 - THE UNBREAKABLE FRAME
    Contains: Navigation, Footer, Global Typography, Layout Guard
    ============================================================ */
 
@@ -32,7 +32,6 @@ html, body {
     z-index: 1000;
 }
 
-/* THE INVISIBLE TRIGGER: Fixes the white rectangular box (Checkbox) */
 #menu-toggle {
     display: none !important;
     visibility: hidden;
@@ -40,10 +39,9 @@ html, body {
     left: -9999px;
 }
 
-/* THE ALIGNMENT ENGINE: Forces edge-to-edge span */
 #main-nav .nav-flex {
     display: flex !important;
-    justify-content: space-between !important; /* Pushes Logo Left, Links Right */
+    justify-content: space-between !important; 
     align-items: center;
     width: 100% !important;
     max-width: 100% !important; 
@@ -51,27 +49,16 @@ html, body {
     box-sizing: border-box;
 }
 
-/* THE LOGO: Taming the "Giant Bubble" */
-.logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
+.logo { display: flex; align-items: center; flex-shrink: 0; }
+.logo img { height: 40px !important; width: auto; display: block; }
 
-.logo img {
-    height: 40px !important; 
-    width: auto;
-    display: block;
-}
-
-/* THE LINKS: Right Alignment */
 .nav-links {
     display: flex !important;
     gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-left: auto; /* Secondary push to ensure right-alignment */
+    margin-left: auto;
 }
 
 .nav-links a {
@@ -82,11 +69,8 @@ html, body {
     transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: #ff8c00 !important; /* Orange Hover */
-}
+.nav-links a:hover { color: #ff8c00 !important; }
 
-/* --- THE HAMBURGER (Mobile Positioning) --- */
 .hamburger {
     display: none; 
     cursor: pointer;
@@ -104,32 +88,19 @@ html, body {
     display: block;
 }
 
-/* MOBILE VIEWPORT */
 @media (max-width: 1100px) {
     .nav-links { 
         display: none; 
         position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+        top: 100%; left: 0; width: 100%;
         background: var(--brand-blue);
         flex-direction: column;
         padding: 20px 0;
         margin-left: 0;
     }
-    
     .hamburger { display: flex !important; }
-
-    #menu-toggle:checked ~ .nav-links {
-        display: flex !important;
-    }
-
-    .nav-links a {
-        padding: 15px 40px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        width: 100%;
-        box-sizing: border-box;
-    }
+    #menu-toggle:checked ~ .nav-links { display: flex !important; }
+    .nav-links a { padding: 15px 40px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; box-sizing: border-box; }
 }
 
 /* 3. GLOBAL TYPOGRAPHY */
@@ -139,12 +110,7 @@ h1, h2, h3, h4 {
     color: #1a1a1a;
 }
 
-p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.66;
-    color: #555;
-}
+p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1.66; color: #555; }
 
 /* --- 4. THE MASTER FOOTER (Design System) --- */
 #main-footer { 
@@ -156,7 +122,31 @@ p {
     clear: both;
 }
 
-/* THE FOOTER GUTTER: Ensures 20px margin on mobile/desktop */
+/* FULL WIDTH BRANDING WRAPPER */
+.footer-branding-top {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* The Full-Width Rule */
+    width: 100%;
+}
+
+/* INTERNAL CONTAINER FOR IMAGE (Gutter Control) */
+.footer-branding-top .container {
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.footer-full-logo {
+    max-width: 100%; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* MAIN FOOTER CONTAINER */
 #main-footer .container {
     padding: 0 20px;
     max-width: 1200px;
@@ -164,23 +154,6 @@ p {
     box-sizing: border-box;
 }
 
-/* The Top Branding (Large Strapline) */
-.footer-branding-top {
-    text-align: center;
-    margin-bottom: 50px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    width: 100%;
-}
-
-.footer-full-logo {
-    max-width: 100%; /* Respects the 20px padding of the container */
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* THE FOOTER GRID: Logo + 2 Nav Columns */
 .footer-body-grid {
     display: flex;
     justify-content: space-between;
@@ -189,96 +162,37 @@ p {
     margin-bottom: 50px;
 }
 
-.footer-visual-col {
-    flex: 1;
-    min-width: 200px;
-}
+.footer-visual-col { flex: 1; min-width: 200px; }
+.footer-brand-mark { height: 35px; width: auto; }
 
-.footer-brand-mark {
-    height: 35px;
-    width: auto;
-}
+.footer-nav-col { flex: 1; min-width: 150px; }
+.footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-nav-col li { margin-bottom: 12px; }
+.footer-nav-col a { color: rgba(255,255,255,0.7) !important; text-decoration: none; font-size: 0.95rem; transition: 0.3s; }
+.footer-nav-col a:hover { color: #ff8c00 !important; padding-left: 5px; }
 
-/* Nav Columns */
-.footer-nav-col {
-    flex: 1;
-    min-width: 150px;
-}
-
-.footer-nav-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-nav-col li {
-    margin-bottom: 12px;
-}
-
-.footer-nav-col a {
-    color: rgba(255,255,255,0.7) !important;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: 0.3s;
-}
-
-.footer-nav-col a:hover {
-    color: #ff8c00 !important;
-    padding-left: 5px;
-}
-
-/* Social Strip & Bottom Text */
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 40px;
     text-align: center;
 }
 
-.social-strip {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 25px;
-}
+.social-strip { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
+.social-item a { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-size: 0.9rem; }
+.footer-address { font-size: 0.85rem; opacity: 0.6; margin-top: 20px; }
 
-.social-item a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.footer-address {
-    font-size: 0.85rem;
-    opacity: 0.6;
-    margin-top: 20px;
-}
-
-/* --- BACK TO TOP BUTTON --- */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 30px; right: 30px;
     background: #ff8c00;
     border: none;
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     border-radius: 50%;
     cursor: pointer;
     display: none; 
     z-index: 2000;
 }
-
 .back-to-top.show { display: block; }
 
 /* 5. UTILITY: THE ORANGE RULE */
-.orange-rule, .rule-orange {
-    height: 2px;
-    background-color: #f26522;
-    width: 250px;
-    margin: 12px 0 35px 0;
-    border: none;
-}
-
+.orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
