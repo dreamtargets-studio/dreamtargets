@@ -1,0 +1,93 @@
+/* ============================================================
+   THINKAMIGO CHASSIS v1.0 - THE UNBREAKABLE FRAME
+   Contains: Navigation, Footer, Global Typography, Layout Guard
+   ============================================================ */
+
+:root {
+    --brand-blue: #0054dc;
+    --footer-bg: #0a254a;
+    --white: #ffffff;
+    --eggshell: #f7f7f7;
+    --section-tan: #e3dcd2;
+}
+
+/* 1. THE LAYOUT GUARD (The "Firewall")
+   This prevents any internal "floats" from breaking the page height. */
+html, body { 
+    margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    background: #fff; color: #333; line-height: 1.5;
+}
+
+.paper, .paper-sheet, .editorial-post, .container {
+    display: flow-root !important; /* Forces containment of all internal elements */
+    width: 100%;
+    clear: both;
+}
+
+/* 2. GLOBAL NAVIGATION (Blue Bar) */
+#main-nav { 
+    background: var(--brand-blue); 
+    padding: 15px 0; 
+    position: relative; 
+    z-index: 1000; 
+    width: 100%; 
+    display: block;
+    clear: both;
+}
+
+.nav-flex { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 15px; 
+}
+
+#main-nav .nav-links a { 
+    color: var(--eggshell); 
+    text-decoration: none !important; 
+    font-size: 0.9rem; 
+    transition: 0.3s; 
+    font-weight: 400 !important; 
+}
+
+#main-nav .nav-links a.active, 
+#main-nav .nav-links a:hover { 
+    color: #ff8c00 !important; 
+}
+
+/* 3. GLOBAL TYPOGRAPHY (Poppins/Arial Sync) */
+h1, h2, h3, h4 {
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #1a1a1a;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.66;
+    color: #555;
+}
+
+/* 4. THE MASTER FOOTER */
+#main-footer { 
+    background: var(--footer-bg); 
+    color: #fff; 
+    padding: 80px 0 40px; 
+    width: 100%;
+    display: block;
+    clear: both;
+    margin-top: 0 !important;
+}
+
+/* 5. UTILITY: THE ORANGE RULE */
+.orange-rule, .rule-orange {
+    height: 2px;
+    background-color: #f26522;
+    width: 250px;
+    margin: 12px 0 35px 0;
+    border: none;
+}
