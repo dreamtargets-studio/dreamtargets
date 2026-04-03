@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.3 (STATE-SYNC EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.4 (LOGIC-LOCK EDITION)
    ============================================================ */
 
 /**
@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * 5. UNIFIED GALLERY & LIGHTBOX ENGINE (v4.0 - Motion Physics)
+ * 5. UNIFIED GALLERY & LIGHTBOX ENGINE
  */
 let currentGallery = []; 
 let currentIndex = 0;
@@ -177,7 +177,7 @@ document.addEventListener('click', (e) => {
 });
 
 /**
- * 7. ACCESSIBILITY (Keyboard Nav)
+ * 7. ACCESSIBILITY
  */
 document.addEventListener('keydown', (e) => {
     const lightbox = document.getElementById('lightbox-overlay');
@@ -189,11 +189,11 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
- * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.0 Quicktime Edition)
+ * 8. INDUSTRIAL AUDIO PLAYER ENGINE (v18.4 Final Logic Sync)
  */
 document.addEventListener('click', (e) => {
     const trackItem = e.target.closest('.track-item');
-    const playBtn = e.target.closest('#masterPlayBtn');
+    const playBtn = document.getElementById('masterPlayBtn');
     
     const audio = document.getElementById('main-audio-engine');
     const nowPlayingText = document.getElementById('now-playing');
@@ -203,7 +203,6 @@ document.addEventListener('click', (e) => {
 
     if (!audio) return;
 
-    // Helper: Apple-Standard Time Formatting (00:00)
     const formatTime = (time) => {
         if (isNaN(time) || time === Infinity) return "00:00";
         const mins = Math.floor(time / 60).toString().padStart(2, '0');
@@ -211,34 +210,30 @@ document.addEventListener('click', (e) => {
         return `${mins}:${secs}`;
     };
 
-    // A. TRACK SELECTION & INSTANT STATE SYNC
+    // A. TRACK SELECTION LOGIC
     if (trackItem) {
+        e.stopPropagation(); // Stops click from bleeding into Section B
         const newSrc = trackItem.getAttribute('data-src');
         
         if (audio.getAttribute('src') !== newSrc) {
-            // UI Reset
             document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
             trackItem.classList.add('active');
             
-            // Load and Play
             audio.src = newSrc;
-            audio.play().catch(error => console.log("Playback failed:", error));
+            audio.play().then(() => {
+                // Ensure icon is Pause Bars since audio is playing
+                if (playBtn) playBtn.classList.add('playing');
+            }).catch(error => console.log("Playback failed:", error));
             
-            // SYNC ICON: Set to Pause bars immediately as track is now playing
-            if (playBtn) playBtn.classList.add('playing');
-            
-            // Clean Title
             const fullTitle = trackItem.textContent.trim();
             if (nowPlayingText) {
                 nowPlayingText.textContent = fullTitle.replace(/^\d+\.\s*/, ''); 
             }
             
-            // Reset Progress while loading
             if (progressBar) progressBar.style.width = '0%';
             if (timeElapsed) timeElapsed.textContent = "00:00";
-            if (timeTotal) timeTotal.textContent = "00:00";
         } else {
-            // If clicking the currently playing track, treat it as a play/pause toggle
+            // Clicking currently active track toggles Play/Pause
             if (audio.paused) {
                 audio.play();
                 if (playBtn) playBtn.classList.add('playing');
@@ -247,10 +242,11 @@ document.addEventListener('click', (e) => {
                 if (playBtn) playBtn.classList.remove('playing');
             }
         }
+        return; // Exit click handler entirely
     }
 
-    // B. MASTER PLAY/PAUSE TOGGLE
-    if (playBtn) {
+    // B. MASTER PLAY/PAUSE BUTTON LOGIC
+    if (e.target.closest('#masterPlayBtn')) {
         if (!audio.src) return; 
         if (audio.paused) {
             audio.play().catch(error => console.log("Playback failed:", error));
@@ -261,7 +257,7 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // C. DUAL-TIMER TELEMETRY & PROGRESS
+    // C. TELEMETRY & PROGRESS
     audio.onloadedmetadata = () => {
         if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
     };
