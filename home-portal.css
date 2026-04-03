@@ -1,45 +1,50 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.5
-   Features: 5-Column Grid-Lock, Precision Alignment, Card UI
+   THINKAMIGO HOME PORTAL v1.6
+   Features: 5-Column Grid-Lock, Full Horizontal Baseline, Card UI
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR (Architectural Alignment) --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
-    padding: 60px 0; /* Vertical air to support the wide logotype */
+    padding: 60px 0; 
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
+    position: relative;
+    z-index: 10; /* Lower than the Nav dropdown z-index */
 }
 
 .branding-flex { 
     display: grid; 
-    /* MATCHES THE CONTENT GRID BELOW EXACTLY */
     grid-template-columns: repeat(5, 1fr); 
     gap: 15px; 
-    align-items: center; 
+    align-items: center; /* Vertical alignment for the grid row */
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px; 
     box-sizing: border-box;
 }
 
-/* Column 1 & 2: The Anchor (Spans same as Featured Card) */
+/* Column 1 & 2: The Anchor (Locked to Featured Card width) */
 .hero-logotype { 
     grid-column: span 2; 
     display: flex; 
+    align-items: center; /* Sub-alignment fix */
     justify-content: flex-start; 
 }
 
 .branding-logo { 
     width: 100%; 
-    max-width: 471px; /* Precision 2-column width */
+    max-width: 471px; 
     height: auto; 
     display: block; 
 }
 
-/* Column 3 & 4: The Statement */
+/* Column 3 & 4: The Statement (Centered) */
 .hero-statement { 
     grid-column: span 2; 
+    display: flex;
+    align-items: center; /* Sub-alignment fix */
+    justify-content: center;
     text-align: center;
 }
 
@@ -49,14 +54,15 @@
     font-size: 1.15rem; 
     font-weight: 400; 
     margin: 0; 
-    line-height: 1.4;
+    line-height: 1.2;
     -webkit-font-smoothing: antialiased;
 }
 
-/* Column 5: The Action */
+/* Column 5: The Action (End-aligned) */
 .hero-action { 
     grid-column: span 1; 
     display: flex; 
+    align-items: center; /* Sub-alignment fix */
     justify-content: flex-end; 
 }
 
@@ -66,7 +72,7 @@
     justify-content: center;
     background-color: transparent !important;
     color: #ffffff !important;
-    height: 50px; 
+    height: 54px; /* Fixed height match for visual weight */
     width: 100%; 
     max-width: 180px;
     border: 4px solid #ffffff !important; 
