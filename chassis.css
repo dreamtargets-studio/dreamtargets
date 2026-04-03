@@ -211,20 +211,21 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     background-color: transparent !important;
     color: #ffffff !important;
     padding: 10px 45px !important;
-    border: 4px solid #ffffff !important; 
+    border: 4px solid #ffffff !important; /* Thick white border remains constant */
     border-radius: 50px !important;
     text-decoration: none !important;
     font-family: 'Segoe UI', Tahoma, sans-serif !important;
     font-weight: 700 !important;
     font-size: 1.1rem !important;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
     box-sizing: border-box;
 }
 
 .btn-pill:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    border-color: #a0c4ff !important; 
+    /* Border stays white; only the background fills with a tint */
+    background-color: rgba(160, 196, 255, 0.2) !important; 
+    border-color: #ffffff !important; 
     color: #ffffff !important;
     box-shadow: 0 0 15px rgba(160, 196, 255, 0.2); 
 }
@@ -308,51 +309,18 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 }
 
 /* Back to Top Utility */
-/* --- BACK TO TOP COMPONENT --- */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--brand-blue); 
+    bottom: 30px; right: 30px;
+    background: #ff8c00;
     border: none;
+    width: 45px; height: 45px;
     border-radius: 50%;
     cursor: pointer;
+    display: none; 
     z-index: 2000;
-    
-    /* Hidden state */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.4s ease-in-out;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-
-/* Triggered by JavaScript on scroll */
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-to-top:hover {
-    background-color: #ff8c00; /* Subtle orange shift */
-}
-
-/* The CSS Chevron (No image file needed) */
-.chevron-up {
-    display: block;
-    width: 12px;
-    height: 12px;
-    border-top: 3px solid #fff;
-    border-right: 3px solid #fff;
-    transform: rotate(-45deg) translate(-2px, 2px);
-}
+.back-to-top.show { display: block; }
 
 /* 5. UTILITY: THE ORANGE RULE */
 .orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
