@@ -26,23 +26,38 @@ html, body {
 }
 
 /* 2. GLOBAL NAVIGATION (Blue Bar) */
-#main-nav { 
-    background: var(--brand-blue); 
-    padding: 15px 0; 
-    position: relative; 
-    z-index: 1000; 
-    width: 100%; 
+#main-nav {
+    background-color: var(--brand-blue);
+    width: 100%;
+    position: relative;
+    z-index: 1000;
     display: block;
     clear: both;
 }
 
-.nav-flex { 
-    display: flex; 
+/* The Container that forces the Left/Right split across the whole window */
+.nav-flex {
+    display: flex;
     justify-content: space-between; 
-    align-items: center; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 15px; 
+    align-items: center;
+    width: 100%;
+    max-width: 100%; /* Removes any 1200px restrictions */
+    box-sizing: border-box;
+    padding: 15px 40px; /* Adjust 40px to change the "gutter" from the screen edge */
+}
+
+/* THE LEFT: Thinkbubble Graphic */
+.nav-brand a, .thinkbubble-home a {
+    display: flex;         /* Centers the image vertically in the bar */
+    align-items: center;
+    text-decoration: none; /* Removes any "invisible" underlines from the link */
+    border: none;          /* Ensures no border appears around the graphic */
+}
+
+.nav-brand img, .thinkbubble-home img {
+    height: 40px;          /* Adjust this to your logo's preferred height */
+    width: auto;           /* Keeps the logo from stretching */
+    display: block;
 }
 
 #main-nav .nav-links a { 
