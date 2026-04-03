@@ -1839,11 +1839,11 @@ font-family: Arial, Helvetica, sans-serif !important;
     .audio-playlist-container #now-playing { max-width: 100% !important; }
 }
 
-/* 6. MAKER'S MARK (Bottom-Left Archive Label) */
+/* 6. MAKER'S MARK (Manufacturer's Front-Panel Logo) */
 .tracklist {
     position: relative;
-    /* INCREASED BREATHING SPACE: Creates a generous gutter below the last track */
-    padding-bottom: 80px; 
+    /* CHASSIS EXPANSION: Significant "Metal" space below the tracks */
+    padding-bottom: 150px; 
     list-style: none;
     margin: 0;
 }
@@ -1851,22 +1851,22 @@ font-family: Arial, Helvetica, sans-serif !important;
 .tracklist::after {
     content: ''; 
     position: absolute;
-    /* PLACEMENT: Tucked into the bottom-left of the expanded padding */
-    bottom: 25px; 
-    left: 15px; 
+    /* ALIGNMENT: Boldly placed in the bottom-left "Chassis" area */
+    bottom: 50px; 
+    left: 30px; 
     
-    /* UPSCALED SIZE: Larger presence while keeping high-fidelity @2x detail */
-    width: 120px; 
-    height: 31px; /* Proportional to the 180x46 aspect ratio */
+    /* SCALE: 180px wide (Half-width of a standard 360px-400px player) */
+    width: 180px; 
+    height: 46px; /* Native 1:1 scale of your @2x asset */
     
-    /* THE ASSET PATH */
+    /* THE ASSET */
     background-image: url('assets/img/thinkamigo-player@2x.png'); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left center;
     
-    /* THE FINISH */
-    opacity: 1.0; /* Solid white badge */
+    /* THE FINISH: Solid, high-contrast white */
+    opacity: 1.0; 
     pointer-events: none; 
-    z-index: 5;
+    z-index: 10;
 }
