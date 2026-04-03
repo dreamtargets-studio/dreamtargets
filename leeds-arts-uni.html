@@ -239,7 +239,7 @@
 
         <p>Our art school demo tapes received praise from the music press in 1983-84, but most of these recordings have now disappeared from the public domain. In an effort to give a flavour of the Cookies sound, below is a selection of Smart Cookies recordings. Some were recorded on our trusty Hitachi TRK8190E ghetto blaster in the wonderful, chaotic, squalor that was the Leeds Poly Fine Art Sound Studio. Most of these tracks were included in the listening posts at the <i>Mixed-up</i> exhibition. <i>Smart Cookies, Loud and Lonely </i>is also featured on the compilation LP and CD <i>The Art School Dance Goes On: Leeds Post-Punk 1977-84’ </i> released by Caroline True Records in 2023.</p>
 
-        <div class="audio-playlist-container">
+<div class="audio-playlist-container">
     <div class="album-header">
         <img src="assets/img/smart-cookies-album-art.jpg" class="album-art" alt="Finance and Sky Cover">
         <div class="album-meta">
@@ -252,12 +252,17 @@
         <button class="play-pause" id="masterPlayBtn"></button>
 
         <div class="track-info">
-            <div class="led-top-row">
+            <div class="led-title-row">
                 <span id="now-playing">Select a track</span>
-                <span id="master-time" class="time-display">00:00</span>
             </div>
+
             <div class="progress-container">
                 <div id="master-progress" class="progress-bar"></div>
+            </div>
+
+            <div class="led-time-row">
+                <span id="master-time" class="time-display">00:00</span>
+                <span id="master-duration" class="time-display">00:00</span>
             </div>
         </div>
 
@@ -266,10 +271,10 @@
 
     <ul class="tracklist">
         <li class="track-item" data-src="media/01-sc-skymonkey.mp3">
-            <span class="track-number">01</span> Sky Monkey Music
+            <span class="track-number">01</span> Sky Monkey Music (04:08)
         </li>
         <li class="track-item" data-src="media/02-sc-finance.mp3">
-            <span class="track-number">02</span> Satellite
+            <span class="track-number">02</span> Satellite (03:01)
         </li>
         <li class="track-item" data-src="media/03-sc-satellite-bonus.mp3">
             <span class="track-number">03</span> Finance of Romance
