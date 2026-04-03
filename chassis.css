@@ -246,7 +246,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     color: rgba(255, 255, 255, 0.7) !important;
     text-decoration: none;
     font-size: 0.75rem; /* Smaller, elegant label size */
-    text-transform: uppercase;
     letter-spacing: 1px;
     transition: color 0.3s ease; 
 }
@@ -282,8 +281,14 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     margin-top: 50px;
 }
 
-.footer-address { font-size: 0.85rem; opacity: 0.6; margin-top: 20px; }
-
+.footer-address { 
+    font-size: 0.85rem; 
+    color: #cccccc; /* Clean off-white/silver for high legibility */
+    margin-top: 25px; 
+    font-weight: 400;
+    letter-spacing: 0.5px; /* Slight tracking helps small text on dark backgrounds */
+    line-height: 1.6;
+}
 /* Mobile Viewport Overrides */
 @media (max-width: 768px) {
     .footer-body-grid {
