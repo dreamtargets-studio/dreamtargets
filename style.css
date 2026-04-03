@@ -1493,7 +1493,7 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v12.0 - The Bullet Nuke)
+   THINKAMIGO INDUSTRIAL AUDIO PLAYER (v13.0 - The Cockpit Lock)
    ============================================================ */
 
 /* --- 1. THE MAIN HOUSING --- */
@@ -1523,23 +1523,14 @@ font-family: Arial, Helvetica, sans-serif !important;
     height: 80px !important;
     object-fit: cover;
     border: 1px solid #b1b0ab;
-    flex-shrink: 0;
 }
 
-.album-meta .short-description {
-    margin: 0 !important;
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: #111 !important;
-    text-transform: none !important; /* NO CAPS */
-}
-
-/* --- 3. THE CONTROL CONSOLE --- */
+/* --- 3. THE CONTROL CONSOLE (LED & Play) --- */
 .audio-controls {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 30px; 
+    padding: 20px 30px; /* 30px gutter locks the vertical alignment rail */
     background: #d1d0cb; 
     border-bottom: 1px solid #b1b0ab;
 }
@@ -1553,13 +1544,11 @@ font-family: Arial, Helvetica, sans-serif !important;
     position: relative;
 }
 
-/* TRIANGLE PLAY ICON */
 .play-pause::after {
     content: '';
     position: absolute;
     top: 50%; left: 56%;
     transform: translate(-50%, -50%);
-    width: 0; height: 0;
     border-style: solid;
     border-width: 7px 0 7px 12px;
     border-color: transparent transparent transparent #fff;
@@ -1575,46 +1564,53 @@ font-family: Arial, Helvetica, sans-serif !important;
     background: #0a0a0a; 
     border-radius: 1px;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    min-width: 0; /* Important for truncation */
+}
+
+/* THE COCKPIT RAIL (Title Left / Time Right) */
+.led-top-row {
+    display: flex;
+    justify-content: space-between; /* ALIGNMENT LOCK */
+    align-items: center;
+    width: 100%;
 }
 
 #now-playing {
     color: #ff6600 !important; 
     font-size: 16px !important; 
     font-weight: 400 !important; 
-    text-transform: none !important; /* NO CAPS */
+    text-transform: none !important; 
+    text-align: left; /* ALIGNED LEFT */
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; /* Automatic truncation */
+    flex: 1; /* Takes up all available space up to the timer */
 }
 
 .time-display {
     color: #ff6600 !important;
     font-size: 16px !important; 
     font-variant-numeric: tabular-nums !important;
-    text-align: right !important;
-    width: 50px !important; 
+    text-align: right !important; /* ALIGNED RIGHT */
+    width: 60px !important; 
+    flex-shrink: 0;
+    margin-left: 10px;
 }
 
-/* --- 4. THE TRACKLIST (Bullet Nuke & Flush Alignment) --- */
+.progress-container { height: 2px; background: #222; }
+.progress-bar { height: 100%; background: #ff6600; }
+
+/* --- 4. THE TRACKLIST (No Bullets / No Gaps) --- */
 .tracklist {
-    /* THE NUKE: Removes ALL browser default list styling */
-    list-style: none !important; 
-    list-style-type: none !important; 
+    list-style: none !important;
     margin: 0 !important;
-    padding: 0 30px 20px 30px !important; /* 30px Gutter aligns to LED panel */
+    padding: 0 30px 20px 30px !important; /* Matches LED gutter */
     background: #e2e1dc; 
-    text-indent: 0 !important; /* Prevents indented bullets */
-}
-
-/* ENSURE NO PSEUDO-ELEMENT BULLETS */
-.tracklist li::before {
-    content: none !important;
-    display: none !important;
 }
 
 .track-item {
-    margin: 0 !important; /* No gaps */
-    padding: 18px 15px !important; /* Inner padding for hover plate */
+    margin: 0 !important;
+    padding: 18px 15px !important;
     display: flex !important;
     align-items: center;
     gap: 15px;
@@ -1622,33 +1618,32 @@ font-family: Arial, Helvetica, sans-serif !important;
     cursor: pointer;
     color: #555 !important;
     font-size: 16px !important; 
-    text-transform: none !important; /* NO CAPS */
-    transition: background 0.1s ease;
+    text-transform: none !important; 
 }
 
 .track-item:last-child { border-bottom: none !important; }
 
-/* UNIFIED TRACK NUMBER */
 .track-number {
-    color: inherit !important;
-    font-size: inherit !important;
-    width: 30px; 
+    color: inherit;
+    width: 30px;
     flex-shrink: 0;
 }
 
-/* HOVER: Flush to the 30px tray walls */
-.track-item:hover {
-    background: #d4d3ce !important;
-    color: #111 !important;
-}
+.track-item:hover { background: #d4d3ce !important; color: #111 !important; }
+.track-item.active { background: #dcdbd6 !important; color: #000 !important; }
 
-.track-item.active {
-    background: #dcdbd6 !important; 
-    color: #000 !important;
-}
-
-/* --- 5. MOBILE --- */
+/* --- 5. MOBILE ARCHITECTURE --- */
 @media (max-width: 600px) {
     .audio-controls { padding: 15px 20px; }
     .tracklist { padding: 0 20px 10px 20px !important; }
+
+    /* MOBILE TRUNCATION RULE (15 characters approx) */
+    #now-playing {
+        max-width: 15ch !important; /* Limits width to roughly 15 characters */
+    }
+    
+    .time-display {
+        width: 50px !important;
+        font-size: 14px !important;
+    }
 }
