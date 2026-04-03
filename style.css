@@ -1493,194 +1493,209 @@ font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* ============================================================
-   THINKAMIGO LIGHTBOX: UNIFIED STACKED SYSTEM (v3.2)
+   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.3
+   Project: Smart Cookies / Finance and Sky Archive
    ============================================================ */
 
-/* 1. THE STAGE (Pure Black Backdrop) */
-#lightbox-overlay {
-    display: none !important; /* Managed by loader.js */
-    position: fixed;
-    z-index: 100000;
-    left: 0; top: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
-    flex-direction: column; /* THE FIX: Keeps caption BELOW the image */
-    justify-content: center; 
-    align-items: center;
-}
-
-/* 2. THE IMAGE (Centered Hero - Reclaiming Space) */
-.lightbox-content {
-    max-width: 95vw !important;  /* Allowed to go wider if needed */
-    max-height: 85vh !important; /* Increased from 75vh to fill the height */
-    object-fit: contain !important;
-    margin-bottom: 10px !important; /* Tightened gap to the caption */
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s;
-    position: relative;
-    /* Classes to trigger the slide animations */
-    .slide-out-left { transform: translateX(-100vw); opacity: 0; }
-    .slide-out-right { transform: translateX(100vw); opacity: 0; }
-    .slide-in-from-right { transform: translateX(100vw); }
-    .slide-in-from-left { transform: translateX(-100vw); }
-}
-
-
-/* 3. THE INFO (The Stacked Caption - No Shadow) */
-.lightbox-info {
-    position: relative !important; 
-    width: 100%;
-    max-width: 800px;
-    background: none !important; /* Ensures no graduated shadow */
-    text-align: center;
-    padding: 0 20px !important;
-    z-index: 100002;
-}
-
-.lightbox-caption {
+/* 1. THE HOUSING (Chassis Frame) */
+.audio-playlist-container {
+    max-width: 600px;
+    margin: 60px 0 0 0 !important; 
+    background: #e2e1dc; 
+    border: 1px solid #b1b0ab;
+    border-radius: 2px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
     font-family: Arial, Helvetica, sans-serif !important;
-    color: #ffffff !important;
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 5px !important;
 }
 
-.lightbox-counter {
-    color: rgba(255, 255, 255, 0.4) !important;
-    font-size: 12px !important;
-    text-transform: uppercase;
-}
-
-/* 4. THE GHOST SUITE (Navigation & Close Squares) */
-.lightbox-prev, 
-.lightbox-next, 
-.lightbox-close {
-    position: fixed !important;
-    width: 50px !important;
-    height: 50px !important;
-    background: rgba(255, 255, 255, 0.1) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 4px;
-    z-index: 100010 !important;
-    display: flex !important;
+/* 2. FACEPLATE (Album Identity) */
+.audio-playlist-container .album-header {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer !important;
-    transition: background 0.2s, border-color 0.2s;
-    color: #ffffff !important;
+    gap: 20px;
+    padding: 20px 30px;
+    background: #f2f1ed;
+    border-bottom: 1px solid #c0bfba;
 }
 
-.lightbox-prev:hover, 
-.lightbox-next:hover, 
-.lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
+.audio-playlist-container .album-art {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover;
+    border: 1px solid #b1b0ab;
 }
 
-/* Positions: Centered vertically on the screen */
-.lightbox-prev { left: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-next { right: 25px !important; top: 50% !important; transform: translateY(-50%) !important; }
-.lightbox-close { top: 25px !important; right: 25px !important; }
+.audio-playlist-container .album-meta h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
 
-/* 5. ICON GRAPHICS (Unified Hairline Suite) */
+.audio-playlist-container .album-meta p {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: #777;
+}
 
-/* The Close 'X' (Lighter 2px Hairline) */
-.lightbox-close::before, 
-.lightbox-close::after {
+/* 3. CONTROL CONSOLE (The Logic Deck) */
+.audio-playlist-container .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: #d1d0cb; 
+    border-bottom: 1px solid #b1b0ab;
+}
+
+.audio-playlist-container .play-pause {
+    width: 48px; height: 48px;
+    background: #333;
+    border: 1px solid #111 !important;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* MECHANICAL ICON CORE */
+.audio-playlist-container .play-pause::after {
     content: '';
     position: absolute;
-    width: 22px;      /* Length of the cross lines */
-    height: 2px;       /* Match this to the chevron thickness */
-    background-color: #fff;
-    display: block;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    box-sizing: border-box;
 }
 
-/* Rotate the two bars to form a clean 'X' */
-.lightbox-close::before { transform: rotate(45deg); }
-.lightbox-close::after { transform: rotate(-45deg); }
-
-
-/* The Navigation Chevrons (2px Hairlines) */
-.lightbox-prev::after, 
-.lightbox-next::after {
-    content: '';
-    display: block;
-    width: 12px; height: 12px;
-    border-top: 2px solid #fff;  /* Unified 2px weight */
-    border-right: 2px solid #fff; /* Unified 2px weight */
+/* STATE: PLAY (Optical Triangle) */
+.audio-playlist-container .play-pause::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px; 
+    border-color: transparent transparent transparent #fff;
+    margin-left: 2px; 
 }
 
-.lightbox-prev::after { transform: rotate(-135deg); margin-left: 5px; }
-.lightbox-next::after { transform: rotate(45deg); margin-right: 5px; }
-
-/* 6. MOBILE OVERRIDES (Aggressive space recovery for phones) */
-@media (max-width: 768px) {
-    .lightbox-prev, 
-    .lightbox-next {
-        background: none !important;
-        border: none !important;
-        opacity: 0.3; /* Very faint hint that a button exists */
-    }
-    .lightbox-close {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        opacity: 1;
-    }
-    
-    .lightbox-content { 
-        max-height: 80vh !important; /* Maximizes the portrait image on tall screens */
-        margin-bottom: 5px !important; 
-    }
-    
-    .lightbox-caption {
-        font-size: 13px !important; /* Slightly smaller text to save room */
-    }
+/* STATE: PAUSE (Stability Bars) */
+.audio-playlist-container .play-pause.playing::after {
+    width: 15px; 
+    height: 16px;
+    border-style: double;
+    border-width: 0 0 0 15px; 
+    border-color: #fff;
+    margin-left: 0; 
 }
 
-:root {
-    --brand-orange: #ff6600;
-    --text-dark: #333;
-    --ui-soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* ============================================================
-   THINKAMIGO AUDIO PLAYER - ISOLATED MODULE v18.3
-   ============================================================ */
-
-/* ... (Sections 1 through 5 remain exactly as you have them) ... */
-
-/* 6. THE LOWER CHASSIS & MAKER'S MARK */
-.player-chassis-footer {
-    background: #e2e1dc; /* Matches the main housing metal */
-    padding: 60px 30px 80px 30px; /* Massive breathing room: 60px top, 80px bottom */
+/* --- THE QUICKTIME DASHBOARD LED --- */
+.audio-playlist-container .track-info {
+    flex-grow: 1;
     display: flex;
-    justify-content: flex-start; /* Aligned left, Moog style */
-    border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle seam in the metal */
+    flex-direction: column;
+    gap: 10px; 
+    padding: 12px 18px;
+    background: #0a0a0a; 
+    border-radius: 1px;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.9);
+    min-width: 0;
+}
+
+.audio-playlist-container #now-playing {
+    color: #ff6600 !important; 
+    font-size: 15px !important;
+    font-weight: 500 !important; 
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.audio-playlist-container .progress-container { 
+    height: 3px; 
+    background: #222; 
+    width: 100%;
+    border-radius: 1px;
+}
+
+.audio-playlist-container .progress-bar { 
+    height: 100%; 
+    background: #ff6600; 
+    width: 0%; 
+}
+
+.audio-playlist-container .led-time-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.audio-playlist-container .time-display {
+    color: #ff6600 !important;
+    font-size: 12px !important; 
+    font-variant-numeric: tabular-nums !important;
+    opacity: 0.8;
+}
+
+/* 4. THE TRACKLIST (Data Feed) */
+.audio-playlist-container .tracklist {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 30px !important; 
+    background: #e2e1dc; 
+    text-indent: 0 !important;
+}
+
+.audio-playlist-container .track-item {
+    margin: 0 !important;
+    padding: 18px 15px !important;
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    cursor: pointer;
+    color: #555 !important;
+    font-size: 16px !important; 
+}
+
+.audio-playlist-container .track-item:last-child { border-bottom: none !important; }
+
+.audio-playlist-container .track-number {
+    width: 30px;
+    flex-shrink: 0;
+    opacity: 0.5;
+}
+
+.audio-playlist-container .track-item:hover {
+    background: #d4d3ce !important;
+    color: #111 !important;
+}
+
+.audio-playlist-container .track-item.active {
+    background: #dcdbd6 !important; 
+    color: #000 !important;
+}
+
+/* 5. THE LOWER CHASSIS & MAKER'S MARK (Manufacturer's Plate) */
+.player-chassis-footer {
+    background: #e2e1dc; 
+    padding: 80px 30px 100px 45px; /* Massive breathing space for the logo */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .chassis-logo {
-    /* Half-width of the 600px player is 300px, but 180px gives it 
-       that classic "Hardware Badge" scale without dominating the deck. */
-    width: 240px; 
+    width: 240px; /* Strong, near-half width presence */
     height: auto;
     display: block;
-    opacity: 1.0;
+    opacity: 1.0; 
     pointer-events: none;
     user-select: none;
 }
 
-/* Ensure the tracklist no longer needs that awkward bottom padding */
-.audio-playlist-container .tracklist {
-    padding-bottom: 0 !important;
-}
-
-/* Mobile scaling for the badge */
+/* 6. MOBILE RE-CALIBRATION */
 @media (max-width: 600px) {
-    .player-chassis-footer {
-        padding: 40px 20px 60px 20px;
-    }
-    .chassis-logo {
-        width: 160px;
-    }
+    .audio-playlist-container .audio-controls { padding: 15px 20px; }
+    .audio-playlist-container .tracklist { padding: 0 20px !important; }
+    .player-chassis-footer { padding: 60px 25px; }
+    .chassis-logo { width: 180px; }
 }
