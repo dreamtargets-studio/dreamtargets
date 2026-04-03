@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO MASTER LOADER & LIGHTBOX v4.2 (QUICKTIME EDITION)
+   THINKAMIGO MASTER LOADER & LIGHTBOX v4.3 (STATE-SYNC EDITION)
    ============================================================ */
 
 /**
@@ -211,7 +211,7 @@ document.addEventListener('click', (e) => {
         return `${mins}:${secs}`;
     };
 
-    // A. TRACK SELECTION (Quicktime Stack Logic)
+    // A. TRACK SELECTION & INSTANT STATE SYNC
     if (trackItem) {
         const newSrc = trackItem.getAttribute('data-src');
         
@@ -220,10 +220,14 @@ document.addEventListener('click', (e) => {
             document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
             trackItem.classList.add('active');
             
-            // Load New Track
+            // Load and Play
             audio.src = newSrc;
+            audio.play().catch(error => console.log("Playback failed:", error));
             
-            // Clean Title (Removes leading numbers/dots if present)
+            // SYNC ICON: Set to Pause bars immediately as track is now playing
+            if (playBtn) playBtn.classList.add('playing');
+            
+            // Clean Title
             const fullTitle = trackItem.textContent.trim();
             if (nowPlayingText) {
                 nowPlayingText.textContent = fullTitle.replace(/^\d+\.\s*/, ''); 
@@ -233,13 +237,19 @@ document.addEventListener('click', (e) => {
             if (progressBar) progressBar.style.width = '0%';
             if (timeElapsed) timeElapsed.textContent = "00:00";
             if (timeTotal) timeTotal.textContent = "00:00";
-
-            audio.play().catch(error => console.log("Playback failed:", error));
-            if (playBtn) playBtn.classList.add('playing');
+        } else {
+            // If clicking the currently playing track, treat it as a play/pause toggle
+            if (audio.paused) {
+                audio.play();
+                if (playBtn) playBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                if (playBtn) playBtn.classList.remove('playing');
+            }
         }
     }
 
-    // B. PLAY/PAUSE MECHANICAL TOGGLE
+    // B. MASTER PLAY/PAUSE TOGGLE
     if (playBtn) {
         if (!audio.src) return; 
         if (audio.paused) {
@@ -252,24 +262,20 @@ document.addEventListener('click', (e) => {
     }
 
     // C. DUAL-TIMER TELEMETRY & PROGRESS
-    // 1. Update Total Duration when metadata loads
     audio.onloadedmetadata = () => {
         if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
     };
 
-    // 2. Update Elapsed Time & Bar during playback
     audio.ontimeupdate = () => {
         if (audio.duration) {
             const pct = (audio.currentTime / audio.duration) * 100;
             if (progressBar) progressBar.style.width = pct + '%';
         }
-        
         if (timeElapsed) {
             timeElapsed.textContent = formatTime(audio.currentTime);
         }
     };
 
-    // 3. Reset Play Button when track ends
     audio.onended = () => {
         if (playBtn) playBtn.classList.remove('playing');
         if (progressBar) progressBar.style.width = '0%';
