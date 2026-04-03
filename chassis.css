@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.7 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v1.8 - THE UNBREAKABLE FRAME
    Contains: Navigation, Footer, Global Typography, Layout Guard
    ============================================================ */
 
@@ -129,7 +129,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     box-sizing: border-box;
 }
 
-/* Footer Top Branding */
 .footer-branding-top {
     text-align: center;
     margin-bottom: 50px;
@@ -145,7 +144,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     margin: 0 auto;
 }
 
-/* Footer Grid Body */
 .footer-body-grid {
     display: flex;
     justify-content: space-between;
@@ -154,7 +152,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     margin-bottom: 50px;
 }
 
-/* Footer Logo Interaction */
 .footer-visual-col { 
     flex: 1.5; 
     min-width: 280px; 
@@ -181,7 +178,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
 }
 
-/* Footer Navigation Links */
 .footer-nav-col { flex: 1; min-width: 150px; }
 .footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
 .footer-nav-col li { margin-bottom: 12px; }
@@ -197,7 +193,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     color: #ff8c00 !important; 
 }
 
-/* Footer Call to Action (Pill Button) */
+/* Footer CTA Button */
 .footer-cta {
     display: flex;
     justify-content: center; 
@@ -211,7 +207,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     background-color: transparent !important;
     color: #ffffff !important;
     padding: 10px 45px !important;
-    border: 4px solid #ffffff !important; /* Thick white border remains constant */
+    border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
     font-family: 'Segoe UI', Tahoma, sans-serif !important;
@@ -223,7 +219,6 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 }
 
 .btn-pill:hover {
-    /* Border stays white; only the background fills with a tint */
     background-color: rgba(160, 196, 255, 0.2) !important; 
     border-color: #ffffff !important; 
     color: #ffffff !important;
@@ -241,18 +236,17 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 
 .social-item a {
     display: flex;
-    flex-direction: column; /* Stack Icon over Text */
+    flex-direction: column; 
     align-items: center;
-    gap: 8px; /* Space between icon and text label */
+    gap: 8px;
     color: rgba(255, 255, 255, 0.7) !important;
     text-decoration: none;
-    font-size: 0.75rem; /* Smaller, elegant label size */
-    letter-spacing: 1px;
+    font-size: 0.9rem;
     transition: color 0.3s ease; 
 }
 
 .social-icon {
-    width: 26px; /* Slightly larger for stacking prominence */
+    width: 26px; 
     height: 26px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -264,13 +258,12 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-/* HOVER: Matches Footer Nav Link Behavior */
 .social-item a:hover { 
-    color: #ff8c00 !important; /* Changes to Orange on hover */
+    color: #ff8c00 !important; 
 }
 
 .social-item a:hover .social-icon { 
-    transform: scale(1.1); /* Subtle grow effect */
+    transform: scale(1.1); 
 }
 
 /* Footer Bottom Strip */
@@ -284,12 +277,13 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 
 .footer-address { 
     font-size: 0.85rem; 
-    color: #cccccc; /* Clean off-white/silver for high legibility */
+    color: #cccccc; 
     margin-top: 25px; 
     font-weight: 400;
-    letter-spacing: 0.5px; /* Slight tracking helps small text on dark backgrounds */
+    letter-spacing: 0.5px;
     line-height: 1.6;
 }
+
 /* Mobile Viewport Overrides */
 @media (max-width: 768px) {
     .footer-body-grid {
@@ -308,19 +302,43 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     }
 }
 
-/* Back to Top Utility */
+/* --- UI COMPONENT: BACK TO TOP (Gallery Match) --- */
 .back-to-top {
     position: fixed;
-    bottom: 30px; right: 30px;
-    background: #ff8c00;
+    bottom: 0;      /* Flush with bottom viewport */
+    right: 30px;
+    width: 60px;
+    height: 50px;
+    background-color: rgba(10, 37, 74, 0.7) !important; /* Semi-opaque Footer BG */
     border: none;
-    width: 45px; height: 45px;
-    border-radius: 50%;
+    border-radius: 0; /* Rectangular Design */
     cursor: pointer;
-    display: none; 
     z-index: 2000;
+    
+    display: none; /* Controlled by .show in loader.js */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease;
 }
-.back-to-top.show { display: block; }
+
+.back-to-top.show { 
+    display: flex; 
+}
+
+.back-to-top:hover {
+    background-color: rgba(10, 37, 74, 0.9) !important;
+}
+
+/* System-matching Chevron */
+.chevron-up {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(-45deg) translateY(2px);
+}
 
 /* 5. UTILITY: THE ORANGE RULE */
 .orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
