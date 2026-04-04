@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v3.5 - MASTER SYSTEM RESTORE
+   THINKAMIGO CHASSIS v3.6 - MASTER SYSTEM RESTORE
    Structure: Full-Width Nav | Mobile Toggle | Footer Alignment
    ============================================================ */
 
@@ -22,7 +22,6 @@ html, body {
     background: #ffffff; 
 }
 
-/* Standard Page Gutter for Content & Footer Inner */
 .container { 
     max-width: 1200px; 
     margin: 0 auto; 
@@ -47,7 +46,7 @@ html, body {
     width: 100% !important; 
     max-width: none !important; 
     margin: 0;
-    padding: 10px 20px; /* Minimal padding for edge-to-edge span */
+    padding: 10px 20px; 
     box-sizing: border-box;
 }
 
@@ -97,7 +96,7 @@ html, body {
     display: block; 
 }
 
-/* --- 3. MASTER FOOTER (Injected Content Sync) --- */
+/* --- 3. MASTER FOOTER --- */
 #main-footer { 
     background-color: var(--footer-bg) !important; 
     color: #ffffff !important; 
@@ -112,7 +111,6 @@ html, body {
     text-align: center;
 }
 
-/* Fluid Scaling for 'Great Ideas' Picture/Img */
 #main-footer .footer-full-logo {
     width: 100% !important;
     max-width: 1100px; 
@@ -121,7 +119,6 @@ html, body {
     margin: 0 auto;
 }
 
-/* THE ALIGNMENT FIX: Anchors logo top to match text link top */
 #main-footer .footer-body-grid { 
     display: flex !important; 
     justify-content: space-between !important; 
@@ -133,7 +130,7 @@ html, body {
 #main-footer .footer-visual-col { 
     flex: 1; 
     min-width: 250px; 
-    margin-top: -8px !important; /* Visual nudge for Poppins cap-height alignment */
+    margin-top: -8px !important; 
 }
 
 #main-footer .footer-brand-mark {
@@ -148,14 +145,10 @@ html, body {
 }
 
 #main-footer .footer-nav-col ul { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
+    list-style: none; padding: 0; margin: 0; 
 }
 
-#main-footer .footer-nav-col li { 
-    margin-bottom: 10px; 
-}
+#main-footer .footer-nav-col li { margin-bottom: 10px; }
 
 #main-footer .footer-nav-col a { 
     color: rgba(255,255,255,0.7) !important; 
@@ -169,11 +162,6 @@ html, body {
     color: var(--brand-orange) !important; 
 }
 
-#main-footer .footer-cta { 
-    margin-top: 40px; 
-    text-align: center; 
-}
-
 /* --- 4. UI COMPONENTS --- */
 .btn-pill { 
     display: inline-block; 
@@ -185,7 +173,6 @@ html, body {
     font-family: 'Poppins', sans-serif; 
     font-weight: 400; 
     font-size: 18px; 
-    transition: 0.3s;
 }
 
 .back-to-top { 
@@ -205,20 +192,8 @@ html, body {
 .back-to-top.show { display: flex !important; }
 
 /* SOCIALS */
-.social-strip { 
-    display: flex; 
-    justify-content: center; 
-    gap: 40px; 
-    margin: 30px 0; 
-}
-
-.social-icon { 
-    width: 28px; 
-    height: 28px; 
-    background-size: contain; 
-    background-repeat: no-repeat; 
-}
-
+.social-strip { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
+.social-icon { width: 28px; height: 28px; background-size: contain; background-repeat: no-repeat; }
 .icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
@@ -226,8 +201,10 @@ html, body {
 /* --- 5. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
     #main-nav .nav-flex { padding: 10px 20px; }
+    
     .hamburger { display: flex !important; }
 
+    /* STRICT HIDE: Menu is invisible until clicked */
     .nav-links {
         display: none !important;
         position: absolute;
@@ -240,8 +217,10 @@ html, body {
         z-index: 3001;
     }
 
-    /* Mobile Toggle Logic */
-    .menu-toggle:checked ~ .nav-links { display: flex !important; }
+    /* THE TRIGGER: Shows ONLY when checkbox is checked */
+    #menu-toggle:checked ~ .nav-links { 
+        display: flex !important; 
+    }
 
     .nav-links a { 
         padding: 15px 30px !important; 
@@ -252,10 +231,22 @@ html, body {
     }
 }
 
+/* DESKTOP RESTORE: Prevents mobile styles from leaking into desktop window */
+@media (min-width: 1101px) {
+    .nav-links {
+        display: flex !important;
+        position: static !important;
+        width: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+    }
+    .hamburger { display: none !important; }
+}
+
 @media (max-width: 768px) {
     #main-footer .footer-branding-top { padding: 0 20px 40px 20px; }
     #main-footer .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
     #main-footer .footer-visual-col { margin-bottom: 30px; margin-top: 0 !important; }
     #main-footer .footer-brand-mark { margin: 0 auto; max-width: 200px !important; }
-    .back-to-top { bottom: 100px !important; right: 20px !important; }
 }
