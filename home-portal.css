@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.12
-   Complete System: Architectural Grid + Editorial Typography
+   THINKAMIGO HOME PORTAL v1.14
+   Complete System: Dual-Tone Gallery Backgrounds
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -17,7 +17,6 @@
 
 .branding-flex { 
     display: grid !important; 
-    /* THIS MASTER 5-COLUMN TRACK MIRRORS THE CONTENT BELOW */
     grid-template-columns: repeat(5, 1fr) !important; 
     gap: 15px; 
     align-items: center; 
@@ -27,213 +26,116 @@
     box-sizing: border-box;
 }
 
-/* LOCK 1: Logotype to Hero Image (Columns 1 & 2) */
-.hero-logotype { 
-    grid-column: 1 / span 2 !important; 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+.hero-logotype { grid-column: 1 / span 2 !important; display: flex; justify-content: flex-start; align-items: center; }
+.branding-logo { width: 100%; height: auto; display: block; }
 
-.branding-logo { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-}
+.hero-statement { grid-column: 3 / span 2 !important; text-align: center; display: flex; justify-content: center; align-items: center; padding: 0 10px; }
+.branding-text { font-family: 'Segoe UI', Tahoma, sans-serif; color: var(--white); font-size: 1.15rem; font-weight: 400; margin: 0; line-height: 1.3; -webkit-font-smoothing: antialiased; }
 
-/* LOCK 2: H1 centered over Columns 3 & 4 */
-.hero-statement { 
-    grid-column: 3 / span 2 !important; 
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-}
-
-.branding-text { 
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    color: var(--white); 
-    font-size: 1.15rem; 
-    font-weight: 400; 
-    margin: 0; 
-    line-height: 1.3;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* LOCK 3: Button to Right Edge (Column 5) */
-.hero-action { 
-    grid-column: 5 / span 1 !important; 
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
+.hero-action { grid-column: 5 / span 1 !important; display: flex; justify-content: flex-end; align-items: center; }
 
 .pill-contact-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent !important;
-    color: #ffffff !important;
-    height: 52px; 
-    width: 100%; 
-    max-width: 180px; 
-    border: 4px solid #ffffff !important; 
-    border-radius: 50px !important;
-    text-decoration: none !important;
-    font-family: 'Segoe UI', Tahoma, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
+    display: flex !important; align-items: center; justify-content: center;
+    background-color: transparent !important; color: #ffffff !important;
+    height: 52px; width: 100%; max-width: 180px; 
+    border: 4px solid #ffffff !important; border-radius: 50px !important;
+    text-decoration: none !important; font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    font-weight: 700 !important; font-size: 1rem !important;
+    box-sizing: border-box; transition: background-color 0.3s ease;
+}
+.pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
+
+/* --- 2. DUAL GALLERY WRAPPERS (The Color Spine) --- */
+
+/* Top Section: Stone/Grey Backdrop */
+.hero-full-width-wrapper {
+    background-color: #e3e2d9; 
+    padding: 60px 0;
+    width: 100%;
 }
 
-.pill-contact-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
+/* Story/Blog Section: Warm Sand Backdrop */
+.blog-full-width-wrapper {
+    background-color: #dbccbe; 
+    padding: 60px 0;
+    width: 100%;
 }
 
-/* --- 2. THE 5-COLUMN CONTENT ENGINE --- */
 .home-hero-grid, 
 .blog-grid { 
     display: grid; 
     grid-template-columns: repeat(5, 1fr); 
     gap: 15px; 
-    margin: 40px auto;
+    margin: 0 auto;
     max-width: 1200px; 
     padding: 0 20px;
 }
 
-/* --- 3. CARD LINK RESET (The Decoration Fix) --- */
+/* --- 3. CARD LINK RESET & WHITE BACKGROUNDS --- */
 .home-hero-grid a, 
 .blog-grid a {
     text-decoration: none !important;
     color: inherit;
     display: block;
+    background: #ffffff; /* Forces cards to stay white on colored backdrops */
+    height: 100%;
 }
 
-/* --- 4. THE FEATURED CARD (Poppins Semi-Bold) --- */
+/* --- 4. THE FEATURED CARD --- */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
-    background: #fff; 
+    background: #ffffff; 
     display: flex; 
     flex-direction: column; 
-    border-bottom: 1px solid #eee;
     overflow: hidden; 
 }
 
-.featured-card .card-content { 
-    padding: 20px 0; 
-}
+.featured-card .card-content { padding: 20px 15px; } /* Internal padding for white cards */
 
 .featured-card .card-content h2 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 600; 
-    font-size: 26px; 
+    font-weight: 600; font-size: 26px; 
     color: var(--brand-blue); 
-    margin: 0 0 8px 0; 
-    line-height: 1.2;
+    margin: 0 0 8px 0; line-height: 1.2;
 }
 
 .featured-card .card-content h3 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 500; 
-    font-size: 19px; 
+    font-weight: 500; font-size: 19px; 
     color: #1a1a1a; 
-    margin: 0 0 12px 0; 
-    line-height: 1.4;
+    margin: 0 0 12px 0; line-height: 1.4;
 }
 
 /* --- 5. STANDARD CARDS --- */
-.service-card, .blog-card { 
-    background: #fff; 
-    display: flex; 
-    flex-direction: column; 
-}
+.service-card, .blog-card { background: #ffffff; display: flex; flex-direction: column; }
 
-.card-content { 
-    padding: 12px 0; 
-}
+.card-content { padding: 12px 15px; } /* Balanced internal padding */
 
 .card-content h3 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 600; 
-    font-size: 18px; 
+    font-weight: 600; font-size: 18px; 
     color: #333; 
     margin: 0 0 6px 0; 
     letter-spacing: -0.01em;
 }
 
-.card-content p { 
-    font-size: 0.95rem; 
-    color: #555; 
-    line-height: 1.5; 
-    margin: 0; 
-}
+.card-content p { font-size: 0.95rem; color: #555; line-height: 1.5; margin: 0; }
 
 /* --- 6. IMAGE RATIOS --- */
-.featured-card img, 
-.service-card img, 
-.blog-card img { 
-    width: 100%; 
-    aspect-ratio: 16 / 9; 
-    object-fit: cover; 
-    display: block;
+.featured-card img, .service-card img, .blog-card img { 
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
 }
 
-/* --- 7. MOBILE & TABLET RESPONSIVE --- */
+/* --- 7. MOBILE RESPONSIVE --- */
 @media (max-width: 1024px) {
-    .branding-intro-bar { 
-        padding: 20px 0; 
-    }
+    .branding-flex { display: flex !important; flex-direction: column; gap: 4px; padding: 0 20px; }
+    .hero-logotype { width: 100%; justify-content: center; margin: 0; }
+    .branding-logo { width: 100%; height: auto; }
+    .branding-text { font-size: 1.15rem; text-align: center; white-space: nowrap; margin: 0; }
+    .hero-action { display: none !important; }
 
-    .branding-flex { 
-        display: flex !important; 
-        flex-direction: column; 
-        gap: 4px; 
-        padding: 0 20px;
-    }
-
-    .hero-logotype { 
-        width: 100%; 
-        justify-content: center;
-        margin: 0;
-    }
-
-    .branding-logo {
-        width: 100%;
-        height: auto;
-    }
-
-    .hero-statement {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-    .branding-text { 
-        font-size: 1.15rem; 
-        text-align: center; 
-        line-height: 1.2;
-        white-space: nowrap; 
-        margin: 0;
-    }
-
-    .hero-action { 
-        display: none !important; 
-    }
-
-    /* Grid Stacking for Content */
-    .home-hero-grid, .blog-grid { 
-        grid-template-columns: 1fr; 
-        margin: 20px auto; 
-    }
-    
-    .featured-card { 
-        grid-column: span 1; 
-    }
-    
-    .featured-card .card-content h2 { 
-        font-size: 22px; 
-    }
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; }
+    .featured-card { grid-column: span 1; }
+    .featured-card .card-content h2 { font-size: 22px; }
 }
