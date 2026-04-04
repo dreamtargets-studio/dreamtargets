@@ -1,7 +1,8 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.7
+   THINKAMIGO DESTINATION ENGINE v2.8
    Architecture: 1250px Horizon | 800px Editorial Rail
-   Features: SATURATION LOCK (#0054dc), Hairline Accents, Paper Sheet
+   Typography: Px-Precision (No REM)
+   Features: SATURATION LOCK (#0054dc), Hairline Accents
    ============================================================ */
 
 :root {
@@ -17,16 +18,15 @@ body.content-page {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     color: #333;
+    font-size: 16px;          /* Base body size in px */
 }
 
-/* 2. THE NAV SATURATION LOCK 
-   Ensures the #main-nav uses the electric index blue */
+/* 2. THE NAV SATURATION LOCK */
 #main-nav {
     background-color: var(--brand-blue) !important;
 }
 
-/* 3. THE CINEMATIC HERO ENGINE 
-   Full-width wrapper with a centered 1250px core */
+/* 3. THE CINEMATIC HERO ENGINE */
 .story-hero-wrapper {
     width: 100%;
     background-color: var(--stone-bg); 
@@ -34,41 +34,39 @@ body.content-page {
     justify-content: center;        
     border-top: 1px solid #ffffff; 
     margin-top: 0;
-    line-height: 0;          /* Removes whitespace gap below nav */
+    line-height: 0;
 }
 
 .panoramic-hero {
     width: 100%;             
-    max-width: 1250px;       /* The Brand Horizon */
+    max-width: 1250px;       
     height: auto;            
     display: block;          
     aspect-ratio: auto;      
     object-fit: contain;     
 }
 
-/* 4. THE PAPER SHEET 
-   The white 1250px container that aligns with the hero */
+/* 4. THE PAPER SHEET */
 .paper-sheet {
     background-color: #ffffff;
-    max-width: 1250px;       /* Matches Hero exactly */
-    margin: 0 auto;          /* Centers it on the stone background */
+    max-width: 1250px;       
+    margin: 0 auto;          
     min-height: 600px;
-    padding-bottom: 80px;    /* Breathing room at the end of the page */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle lift */
+    padding-bottom: 80px;    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
 }
 
-/* 5. THE TEXT RAIL 
-   Reduced top padding to bring H1 closer to the header */
+/* 5. THE TEXT RAIL */
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
     width: 90%;              
-    padding: 30px 0 60px 0;  /* Tighter 30px top padding */
+    padding: 30px 0 60px 0;  
 }
 
-/* 6. STORY HEADINGS & ACCENTS */
+/* 6. STORY HEADINGS & ACCENTS (All in PX) */
 .text-rail h1 { 
-    font-size: 2.8rem; 
+    font-size: 45px;         /* Specific PX sizing */
     font-weight: 900; 
     line-height: 1.1; 
     margin-bottom: 15px;
@@ -76,17 +74,23 @@ body.content-page {
 }
 
 .orange-rule { 
-    width: 120px;            /* Longer horizontal reach */
-    height: 1px;             /* Subtle hairline width */
+    width: 120px;            
+    height: 1px;             
     background-color: var(--brand-orange); 
     margin-bottom: 30px; 
 }
 
 .text-rail h3 {
-    font-size: 1.25rem;
+    font-size: 20px;         /* Specific PX sizing */
     font-weight: 600;
     color: var(--brand-blue);
     margin: 40px 0 15px 0;
+}
+
+.text-rail p {
+    font-size: 17px;         /* Clean reading size */
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 /* 7. THE GALLERY GRID (3-UP) */
@@ -109,13 +113,13 @@ body.content-page {
     border: 1px solid #ddd;
 }
 
-/* 8. EDITORIAL CAPTIONS */
+/* 8. EDITORIAL CAPTIONS (In PX) */
 .caption {
     background: #f4f3ef;
     padding: 10px 15px;
     margin-top: -15px;
     margin-bottom: 20px;
-    font-size: 0.85rem;
+    font-size: 14px;         /* Specific PX sizing */
     color: #666;
     border-left: 3px solid var(--brand-orange);
 }
@@ -123,17 +127,16 @@ body.content-page {
 /* 9. MOBILE RESPONSIVE */
 @media (max-width: 1250px) {
     .paper-sheet {
-        box-shadow: none; /* Flatten when it fills the screen width */
+        box-shadow: none; 
     }
 }
 
 @media (max-width: 768px) {
     .text-rail { 
         width: 92%; 
-        padding: 20px 0 40px 0; /* Even tighter for mobile */
+        padding: 20px 0 40px 0; 
     }
-    .text-rail h1 { font-size: 2.2rem; }
-    .gallery-grid-3 figure { 
-        flex: 0 0 100%; 
+    .text-rail h1 { 
+        font-size: 35px;     /* Scaled for mobile in PX */
     }
 }
