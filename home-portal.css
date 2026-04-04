@@ -71,14 +71,21 @@
     padding: 0 20px;
 }
 
-/* --- 3. CARD LINK RESET & WHITE BACKGROUNDS --- */
+/* --- 3. THE CARD ENGINE (The Cookie Cutter) --- */
 .home-hero-grid a, 
 .blog-grid a {
     text-decoration: none !important;
     color: inherit;
     display: block;
-    background: #ffffff; /* Forces cards to stay white on colored backdrops */
+    background: #ffffff;
     height: 100%;
+    
+    /* THE RADIUS LOCK */
+    border-radius: 4px; 
+    overflow: hidden; /* <--- This clips the image and the card bottom */
+    
+    /* Interaction */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* --- 4. THE FEATURED CARD --- */
