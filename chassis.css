@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v3.1 - TRUE FULL-WIDTH NAV
+   THINKAMIGO CHASSIS v3.2 - FOOTER SYNC
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -17,12 +17,11 @@ html, body {
     font-family: 'Segoe UI', Tahoma, sans-serif; background: #ffffff; 
 }
 
-/* Footer/Grid anchor remains centered at 1200px */
 .container { 
     max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; 
 }
 
-/* --- 2. GLOBAL NAVIGATION (TRUE FULL-WIDTH) --- */
+/* --- 2. GLOBAL NAVIGATION (LOCKED) --- */
 #main-nav {
     background-color: var(--brand-blue) !important;
     width: 100% !important;
@@ -39,25 +38,13 @@ html, body {
     width: 100% !important; 
     max-width: none !important; 
     margin: 0;
-    /* MINIMAL PADDING: Spans the full browser window */
     padding: 10px 20px; 
     box-sizing: border-box;
 }
 
-.logo img {
-    height: 40px !important;
-    width: auto;
-    display: block;
-}
+.logo img { height: 40px !important; width: auto; display: block; }
 
-.nav-links {
-    display: flex !important;
-    gap: 15px; /* Tight gap for horizontal span */
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+.nav-links { display: flex !important; gap: 15px; align-items: center; list-style: none; margin: 0; padding: 0; }
 
 .nav-links a {
     color: #ffffff !important;
@@ -69,31 +56,50 @@ html, body {
     transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: var(--brand-orange) !important;
-}
+.nav-links a:hover { color: var(--brand-orange) !important; }
 
 /* --- MOBILE TOGGLE LOGIC --- */
 .menu-toggle { display: none !important; }
-.hamburger {
-    display: none; 
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
-}
+.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
 .hamburger span { width: 25px; height: 3px; background-color: #ffffff; display: block; }
 
-/* --- 3. MASTER FOOTER --- */
+/* --- 3. MASTER FOOTER (Updated for scaling) --- */
 #main-footer { 
     background-color: var(--footer-bg); color: #ffffff; 
     padding: 60px 0 20px; width: 100%; clear: both; 
 }
-#main-footer .container {
-    max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;
+
+.footer-branding-top { padding-bottom: 40px; }
+
+/* Forces the 'Great Ideas' graphic to fit mobile screen */
+.footer-full-logo {
+    width: 100% !important;
+    max-width: 1100px; 
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
 }
+
 .footer-body-grid { 
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; 
 }
+
+.footer-visual-col { flex: 1; min-width: 250px; }
+
+/* Forces the footer logo to scale */
+.footer-brand-mark {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+.footer-nav-col { flex: 1; min-width: 150px; }
+.footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-nav-col li { margin-bottom: 10px; }
+.footer-nav-col a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+.footer-nav-col a:hover { color: var(--brand-orange); }
+
+.footer-cta { margin-top: 40px; text-align: center; }
 
 /* --- 4. UI COMPONENTS --- */
 .btn-pill { 
@@ -118,12 +124,8 @@ html, body {
 
 /* --- 5. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
-    #main-nav .nav-flex { 
-        padding: 10px 20px; 
-    }
-
+    #main-nav .nav-flex { padding: 10px 20px; }
     .hamburger { display: flex !important; }
-
     .nav-links {
         display: none !important;
         position: absolute;
@@ -133,21 +135,14 @@ html, body {
         padding: 10px 0;
         z-index: 3001;
     }
-
-    .menu-toggle:checked ~ .nav-links { 
-        display: flex !important; 
-    }
-
-    .nav-links a { 
-        padding: 15px 30px !important; 
-        width: 100%; 
-        box-sizing: border-box; 
-        border-top: 1px solid rgba(255,255,255,0.1); 
-        text-align: left;
-    }
+    .menu-toggle:checked ~ .nav-links { display: flex !important; }
+    .nav-links a { padding: 15px 30px !important; width: 100%; box-sizing: border-box; border-top: 1px solid rgba(255,255,255,0.1); text-align: left; }
 }
 
 @media (max-width: 768px) {
+    .footer-branding-top { padding: 0 20px 40px 20px; }
     .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
+    .footer-visual-col { margin-bottom: 30px; }
+    .footer-brand-mark { margin: 0 auto; max-width: 200px !important; }
     .back-to-top { bottom: 100px !important; right: 20px !important; }
 }
