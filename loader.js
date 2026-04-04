@@ -1,6 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.1
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.2
    Features: HTML Partials, Lightbox, Audio Engine, UI Utils
+   Architecture: Pixel-Perfect Scroll Triggers
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Initialize Mobile Menu (Checkbox backup or extra states)
+            // Initialize Mobile Menu
             setupMobileMenu();
 
         } catch (err) {
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setupMobileMenu = () => {
         const btn = document.getElementById('menu-toggle');
         const nav = document.querySelector('.nav-links');
-        // Checkbox hack handles visibility; JS left open for future animation states.
+        // Logic left open for future animation states; Checkbox handles primary toggle.
     };
 
     // --- 3. MODULE: LIGHTBOX (Galleries & Archives) ---
@@ -110,22 +111,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const topBtn = document.getElementById('backToTop');
         if (!topBtn) return;
 
+        // Optimized scroll listener for appearance
         window.addEventListener('scroll', () => {
             // Appears after 400px of scrolling
-            if (window.scrollY > 400) {
+            if (window.pageYOffset > 400) {
                 topBtn.classList.add('show');
             } else {
                 topBtn.classList.remove('show');
             }
-        });
+        }, { passive: true });
 
-        topBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Smooth Scroll Execution
+        topBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
         });
     };
 
     // --- EXECUTION ---
     loadPartials();      // Starts the partial injection sequence
     setupLightbox();     // Scans for gallery images
-    setupAudioPlayer();  // Scans for audio elements (if present on page)
+    setupAudioPlayer();  // Scans for audio elements
 });
