@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.1 - MOBILE CENTER SYNC
+   THINKAMIGO CHASSIS v4.2 - TRUE MOBILE CENTER
    Structure: Full-Width Nav | Strict Mobile Toggle | 100px Nudge
    ============================================================ */
 
@@ -159,22 +159,37 @@ html, body {
         flex-direction: column !important; 
         align-items: center !important; 
         text-align: center !important; 
+        width: 100% !important;
     }
 
     #main-footer .footer-visual-col { margin-bottom: 30px; }
 
-    /* Centered Mobile Nav Columns */
+    /* MATHEMATICAL CENTER FOR MOBILE LINKS */
     #main-footer .footer-nav-col { 
         padding-top: 0 !important; 
-        width: 100%;
+        width: 100% !important;
         text-align: center !important;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        display: block !important;
     }
 
     #main-footer .footer-nav-col ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
+        display: block !important;
+        padding-left: 0 !important; /* CRITICAL: Removes browser default 40px offset */
+        margin: 0 auto !important;
+        list-style: none !important;
+        width: 100% !important;
+    }
+
+    #main-footer .footer-nav-col li {
+        text-align: center !important;
+        margin: 0 0 12px 0 !important;
+        width: 100% !important;
+    }
+    
+    #main-footer .footer-nav-col a {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
     }
 }
