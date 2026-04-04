@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.7 - BALANCED MOBILE SYNC
-   Structure: 3-Col Footer | Horizontal Socials | Centered Block
+   THINKAMIGO CHASSIS v4.8 - STABLE MASTER
+   Structure: 3-Col Footer | 100px Nudge | Square Back-to-Top
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -182,12 +182,41 @@ html, body {
     color: #ffffff !important;
 }
 
+/* BACK TO TOP: Square Semi-Opaque Grey */
 .back-to-top { 
-    position: fixed; bottom: 200px; right: 30px; width: 44px; height: 44px; 
-    background-color: #666666; z-index: 9999; display: none; 
-    align-items: center; justify-content: center; opacity: 0.5; 
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    width: 44px; 
+    height: 44px; 
+    background-color: rgba(102, 102, 102, 0.5); 
+    z-index: 9999; 
+    display: none; /* Controlled by JS show class */
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
 }
+
 .back-to-top.show { display: flex !important; }
+
+.back-to-top:hover {
+    background-color: rgba(102, 102, 102, 0.8);
+    transform: translateY(-3px);
+}
+
+/* White Chevron */
+.back-to-top::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    transform: rotate(-45deg);
+    margin-top: 4px;
+    display: block;
+}
 
 /* --- 6. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
@@ -215,12 +244,11 @@ html, body {
         align-items: center !important; 
         text-align: center !important; 
         width: 100% !important;
-        gap: 0 !important; /* Unified look */
+        gap: 0 !important; 
     }
 
     #main-footer .footer-visual-col { margin-bottom: 30px; }
 
-    /* UNIFIED MOBILE NAV BLOCK */
     #main-footer .footer-nav-col { 
         padding-top: 0 !important; 
         width: 100% !important;
@@ -249,10 +277,16 @@ html, body {
         text-align: center !important;
     }
 
-    /* HORIZONTAL SOCIALS ON MOBILE */
     .social-strip {
         flex-direction: row !important;
         gap: 30px;
         align-items: center;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
     }
 }
