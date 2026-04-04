@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v3.6 - MASTER SYSTEM RESTORE
-   Structure: Full-Width Nav | Mobile Toggle | Footer Alignment
+   THINKAMIGO CHASSIS v3.7 - LOCKED SYSTEM
+   Structure: Full-Width Nav | Strict Mobile Toggle | Footer Sync
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -12,31 +12,23 @@
     --white: #ffffff;
 }
 
-/* --- 1. CORE RESET & LAYOUT --- */
+/* --- 1. CORE RESET --- */
 html, body { 
-    margin: 0; 
-    padding: 0; 
-    width: 100%; 
-    overflow-x: hidden; 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
-    background: #ffffff; 
+    margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
+    font-family: 'Segoe UI', Tahoma, sans-serif; background: #ffffff; 
 }
 
 .container { 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-    box-sizing: border-box; 
+    max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; 
 }
 
-/* --- 2. GLOBAL NAVIGATION (LOCKED FULL-WIDTH) --- */
+/* --- 2. GLOBAL NAVIGATION (DESKTOP DEFAULT) --- */
 #main-nav {
     background-color: var(--brand-blue) !important;
     width: 100% !important;
     position: relative;
     z-index: 3000;
     display: block !important;
-    clear: both;
 }
 
 #main-nav .nav-flex {
@@ -45,27 +37,22 @@ html, body {
     align-items: center;
     width: 100% !important; 
     max-width: none !important; 
-    margin: 0;
     padding: 10px 20px; 
     box-sizing: border-box;
 }
 
-#main-nav .logo img { 
-    height: 40px !important; 
-    width: auto; 
-    display: block; 
-}
+.logo img { height: 40px !important; width: auto; display: block; }
 
-#main-nav .nav-links { 
-    display: flex !important; 
+/* Desktop View: Links are visible and horizontal */
+.nav-links { 
+    display: flex; 
     gap: 15px; 
     align-items: center; 
     list-style: none; 
-    margin: 0; 
-    padding: 0; 
+    margin: 0; padding: 0; 
 }
 
-#main-nav .nav-links a {
+.nav-links a {
     color: #ffffff !important;
     text-decoration: none !important;
     font-family: 'Poppins', sans-serif;
@@ -75,12 +62,10 @@ html, body {
     transition: 0.3s ease;
 }
 
-#main-nav .nav-links a:hover { 
-    color: var(--brand-orange) !important; 
-}
+.nav-links a:hover { color: var(--brand-orange) !important; }
 
-/* --- MOBILE TOGGLE SYSTEM --- */
-.menu-toggle { display: none !important; }
+/* --- MOBILE TOGGLE CORE --- */
+.menu-toggle { display: none !important; } /* The hidden engine */
 
 .hamburger { 
     display: none; 
@@ -89,106 +74,34 @@ html, body {
     gap: 5px; 
 }
 
-.hamburger span { 
-    width: 25px; 
-    height: 3px; 
-    background-color: #ffffff; 
-    display: block; 
-}
+.hamburger span { width: 25px; height: 3px; background-color: #ffffff; display: block; }
 
 /* --- 3. MASTER FOOTER --- */
 #main-footer { 
-    background-color: var(--footer-bg) !important; 
-    color: #ffffff !important; 
-    padding: 60px 0 20px !important; 
-    width: 100% !important; 
-    display: block !important;
-    clear: both; 
+    background-color: var(--footer-bg) !important; color: #ffffff !important; 
+    padding: 60px 0 20px !important; width: 100% !important; 
+    display: block !important; clear: both; 
 }
 
-#main-footer .footer-branding-top { 
-    padding-bottom: 40px; 
-    text-align: center;
+.footer-full-logo { width: 100% !important; max-width: 1100px; height: auto !important; display: block; margin: 0 auto; }
+
+.footer-body-grid { 
+    display: flex !important; justify-content: space-between !important; 
+    align-items: flex-start !important; flex-wrap: wrap; gap: 40px; 
 }
 
-#main-footer .footer-full-logo {
-    width: 100% !important;
-    max-width: 1100px; 
-    height: auto !important;
-    display: block;
-    margin: 0 auto;
-}
+.footer-visual-col { flex: 1; min-width: 250px; margin-top: -8px !important; }
+.footer-brand-mark { max-width: 100% !important; height: auto !important; display: block; }
 
-#main-footer .footer-body-grid { 
-    display: flex !important; 
-    justify-content: space-between !important; 
-    align-items: flex-start !important; 
-    flex-wrap: wrap; 
-    gap: 40px; 
-}
-
-#main-footer .footer-visual-col { 
-    flex: 1; 
-    min-width: 250px; 
-    margin-top: -8px !important; 
-}
-
-#main-footer .footer-brand-mark {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block;
-}
-
-#main-footer .footer-nav-col { 
-    flex: 1; 
-    min-width: 150px; 
-}
-
-#main-footer .footer-nav-col ul { 
-    list-style: none; padding: 0; margin: 0; 
-}
-
-#main-footer .footer-nav-col li { margin-bottom: 10px; }
-
-#main-footer .footer-nav-col a { 
-    color: rgba(255,255,255,0.7) !important; 
-    text-decoration: none; 
-    font-size: 0.9rem; 
-    font-family: 'Poppins', sans-serif;
-    transition: 0.3s;
-}
-
-#main-footer .footer-nav-col a:hover { 
-    color: var(--brand-orange) !important; 
-}
+.footer-nav-col { flex: 1; min-width: 150px; }
+.footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-nav-col li { margin-bottom: 10px; }
+.footer-nav-col a { color: rgba(255,255,255,0.7) !important; text-decoration: none; font-size: 0.9rem; font-family: 'Poppins', sans-serif; }
+.footer-nav-col a:hover { color: var(--brand-orange) !important; }
 
 /* --- 4. UI COMPONENTS --- */
-.btn-pill { 
-    display: inline-block; 
-    padding: 12px 45px; 
-    border: 4px solid #fff; 
-    border-radius: 50px; 
-    color: #fff; 
-    text-decoration: none; 
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 400; 
-    font-size: 18px; 
-}
-
-.back-to-top { 
-    position: fixed; 
-    bottom: 200px; 
-    right: 30px; 
-    width: 44px; 
-    height: 44px; 
-    background-color: #666666; 
-    z-index: 9999; 
-    display: none; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0.5;
-}
-
+.btn-pill { display: inline-block; padding: 12px 45px; border: 4px solid #fff; border-radius: 50px; color: #fff; text-decoration: none; font-family: 'Poppins', sans-serif; font-size: 18px; }
+.back-to-top { position: fixed; bottom: 200px; right: 30px; width: 44px; height: 44px; background-color: #666666; z-index: 9999; display: none; align-items: center; justify-content: center; opacity: 0.5; }
 .back-to-top.show { display: flex !important; }
 
 /* SOCIALS */
@@ -198,26 +111,22 @@ html, body {
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-/* --- 5. RESPONSIVE OVERRIDES --- */
+/* --- 5. RESPONSIVE OVERRIDES (THE TOGGLE ENGINE) --- */
 @media (max-width: 1100px) {
-    #main-nav .nav-flex { padding: 10px 20px; }
-    
     .hamburger { display: flex !important; }
 
-    /* STRICT HIDE: Menu is invisible until clicked */
+    /* 1. FORCE HIDE: The links are gone on mobile by default */
     .nav-links {
-        display: none !important;
+        display: none !important; 
         position: absolute;
-        top: 100%; 
-        left: 0; 
-        width: 100%;
+        top: 100%; left: 0; width: 100%;
         background-color: var(--brand-blue);
         flex-direction: column;
         padding: 10px 0;
         z-index: 3001;
     }
 
-    /* THE TRIGGER: Shows ONLY when checkbox is checked */
+    /* 2. THE TRIGGER: Show ONLY when checkbox is :checked */
     #menu-toggle:checked ~ .nav-links { 
         display: flex !important; 
     }
@@ -231,7 +140,7 @@ html, body {
     }
 }
 
-/* DESKTOP RESTORE: Prevents mobile styles from leaking into desktop window */
+/* 3. DESKTOP SAFETY: Re-enforce visibility for larger screens */
 @media (min-width: 1101px) {
     .nav-links {
         display: flex !important;
@@ -239,7 +148,6 @@ html, body {
         width: auto !important;
         background: transparent !important;
         flex-direction: row !important;
-        padding: 0 !important;
     }
     .hamburger { display: none !important; }
 }
@@ -248,5 +156,4 @@ html, body {
     #main-footer .footer-branding-top { padding: 0 20px 40px 20px; }
     #main-footer .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
     #main-footer .footer-visual-col { margin-bottom: 30px; margin-top: 0 !important; }
-    #main-footer .footer-brand-mark { margin: 0 auto; max-width: 200px !important; }
 }
