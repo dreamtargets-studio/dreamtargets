@@ -1,21 +1,157 @@
 /* ============================================================
-   HOME-PORTAL.CSS - RESTORED STABLE
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.40)
+   Covers: Branding Bar, Stone/Sand Grids, Card Engine
    ============================================================ */
 
-.hero-full-width-wrapper { background-color: #e3e2d9; padding: 30px 0; width: 100%; clear: both; }
-.blog-full-width-wrapper { background-color: #dbccbe; padding: 30px 0; width: 100%; clear: both; }
-
-.home-hero-grid, .blog-grid { 
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; 
-    max-width: 1200px; margin: 0 auto; padding: 0 20px; 
+/* --- 1. THE BRANDING INTRO BAR --- */
+.branding-intro-bar { 
+    background-color: var(--brand-blue); 
+    padding: 60px 0; 
+    width: 100%; 
+    clear: both; 
+    display: block;
 }
 
-.featured-card { grid-column: span 2; grid-row: span 2; }
-.featured-card h2 { font-family: 'Poppins', sans-serif; color: var(--brand-blue); font-size: 26px; }
-
-/* Branding Bar */
-.branding-intro-bar { background: var(--brand-blue); padding: 40px 0; width: 100%; clear: both; }
 .branding-flex { 
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; 
-    max-width: 1200px; margin: 0 auto; padding: 0 20px; align-items: center; 
+    display: grid !important; 
+    grid-template-columns: repeat(5, 1fr) !important; 
+    gap: 20px; 
+    align-items: center; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px;
+}
+
+.hero-logotype { grid-column: span 2; }
+.hero-statement { grid-column: span 2; text-align: center; }
+.hero-action { grid-column: span 1; display: flex; justify-content: flex-end; }
+
+.branding-text { 
+    font-size: 20px; 
+    line-height: 1.4; 
+    color: #ffffff; 
+    margin: 0;
+    font-weight: 400;
+}
+
+/* --- 2. THE DUAL GRID WRAPPERS --- */
+.hero-full-width-wrapper { 
+    background-color: #e3e2d9; /* Stone */
+    padding: 50px 0; 
+    width: 100%; 
+    clear: both;
+}
+
+.blog-full-width-wrapper { 
+    background-color: #dbccbe; /* Sand */
+    padding: 50px 0; 
+    width: 100%; 
+    clear: both;
+}
+
+.home-hero-grid, .blog-grid { 
+    display: grid !important; 
+    grid-template-columns: repeat(5, 1fr) !important; 
+    gap: 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px;
+}
+
+/* --- 3. THE CARD ENGINE --- */
+.home-hero-grid a, .blog-grid a { 
+    display: flex; 
+    flex-direction: column; 
+    background: #ffffff; 
+    text-decoration: none; 
+    color: inherit; 
+    height: 100%; 
+    border-radius: 4px; 
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-hero-grid a:hover, .blog-grid a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.featured-card img, .service-card img, .blog-card img { 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.card-content { 
+    padding: 20px; 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 4. SPECIFIC CARD SPANS --- */
+.featured-card { 
+    grid-column: span 2 !important; 
+    grid-row: span 2 !important; 
+}
+
+.featured-card .card-content h2 { 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 28px; 
+    color: var(--brand-blue); 
+    margin: 0 0 10px 0; 
+}
+
+.featured-card .card-content h3 { 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 20px; 
+    margin: 0 0 15px 0; 
+    color: #333;
+}
+
+.service-card h3, .blog-card h3 { 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 18px; 
+    font-weight: 600; 
+    margin: 0; 
+}
+
+/* --- 5. AWARDS PANEL (Static) --- */
+.awards-full-width-wrapper { 
+    background-color: #e3e2d9; 
+    padding: 80px 0; 
+    width: 100%; 
+    clear: both;
+}
+
+.awards-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    align-items: center; 
+    justify-items: center; 
+}
+
+.award-item img { 
+    width: 100%; 
+    max-width: 180px; 
+    height: auto; 
+    display: block; 
+}
+
+/* --- 6. RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 1024px) {
+    .branding-flex { display: flex; flex-direction: column; text-align: center; gap: 20px; }
+    .hero-action { display: none; }
+    .home-hero-grid, .blog-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .featured-card { grid-column: span 2 !important; }
+}
+
+@media (max-width: 600px) {
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr !important; }
+    .featured-card { grid-column: span 1 !important; }
 }
