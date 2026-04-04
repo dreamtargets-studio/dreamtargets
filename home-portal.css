@@ -1,49 +1,50 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.6
-   Features: 5-Column Grid-Lock, Full Horizontal Baseline, Card UI
+   THINKAMIGO HOME PORTAL v1.7
+   Features: Architectural Lockstep, Vertical Baseline, Mobile Slab UI
    ============================================================ */
 
-/* --- 1. THE BRANDING INTRO BAR (Architectural Alignment) --- */
+/* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
     padding: 60px 0; 
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
     position: relative;
-    z-index: 10; /* Lower than the Nav dropdown z-index */
+    z-index: 10;
 }
 
 .branding-flex { 
     display: grid; 
+    /* MIRRORS THE 5-COLUMN CONTENT GRID */
     grid-template-columns: repeat(5, 1fr); 
     gap: 15px; 
-    align-items: center; /* Vertical alignment for the grid row */
+    align-items: center; 
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px; 
     box-sizing: border-box;
 }
 
-/* Column 1 & 2: The Anchor (Locked to Featured Card width) */
+/* Column 1 & 2: The Logotype Anchor (The Lockstep Engine) */
 .hero-logotype { 
     grid-column: span 2; 
     display: flex; 
-    align-items: center; /* Sub-alignment fix */
+    align-items: center; 
     justify-content: flex-start; 
 }
 
 .branding-logo { 
-    width: 100%; 
-    max-width: 471px; 
+    width: 100%; /* Spans the exact width of the 2 columns below */
     height: auto; 
     display: block; 
+    /* Max-width removed to ensure it stays in lockstep with grid scaling */
 }
 
-/* Column 3 & 4: The Statement (Centered) */
+/* Column 3 & 4: The Statement */
 .hero-statement { 
     grid-column: span 2; 
     display: flex;
-    align-items: center; /* Sub-alignment fix */
+    align-items: center; 
     justify-content: center;
     text-align: center;
 }
@@ -58,11 +59,11 @@
     -webkit-font-smoothing: antialiased;
 }
 
-/* Column 5: The Action (End-aligned) */
+/* Column 5: The Action */
 .hero-action { 
     grid-column: span 1; 
     display: flex; 
-    align-items: center; /* Sub-alignment fix */
+    align-items: center; 
     justify-content: flex-end; 
 }
 
@@ -72,9 +73,8 @@
     justify-content: center;
     background-color: transparent !important;
     color: #ffffff !important;
-    height: 54px; /* Fixed height match for visual weight */
+    height: 54px; 
     width: 100%; 
-    max-width: 180px;
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
@@ -83,10 +83,6 @@
     font-size: 1rem !important;
     transition: all 0.3s ease;
     box-sizing: border-box;
-}
-
-.pill-contact-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 /* --- 2. THE 5-COLUMN GRID ENGINE --- */
@@ -120,56 +116,42 @@
 
 /* --- 4. CARD CONTENT & TYPOGRAPHY --- */
 .card-content { padding: 15px; }
-
-.card-content h2 { 
-    font-size: 1.45rem; 
-    color: var(--brand-blue); 
-    margin: 0 0 5px 0; 
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-}
-
-.card-content h3 { 
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 600; 
-    font-size: 1.1rem; 
-    color: #333; 
-    margin: 0 0 8px 0; 
-}
-
-.card-content p { 
-    font-size: 0.9rem; 
-    color: #555; 
-    line-height: 1.45; 
-    margin: 0; 
-}
+.card-content h2 { font-size: 1.45rem; color: var(--brand-blue); margin: 0 0 5px 0; }
+.card-content h3 { font-family: Helvetica, Arial, sans-serif; font-weight: 600; font-size: 1.1rem; color: #333; margin: 0 0 8px 0; }
+.card-content p { font-size: 0.9rem; color: #555; line-height: 1.45; margin: 0; }
 
 /* --- 5. IMAGE RATIOS --- */
-.featured-card img, 
-.service-card img, 
-.blog-card img { 
+.featured-card img, .service-card img, .blog-card img { 
     width: 100%; 
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
     display: block;
 }
 
-/* --- 6. MOBILE & TABLET RESPONSIVE OVERRIDES --- */
+/* --- 6. MOBILE & TABLET RESPONSIVE --- */
 @media (max-width: 1024px) {
+    /* Vertical Branding Slab */
     .branding-flex { 
         display: flex; 
         flex-direction: column; 
-        gap: 30px; 
+        gap: 25px; 
         padding: 40px 20px; 
     }
-    .branding-logo { width: 80%; max-width: 320px; }
+
+    .hero-logotype {
+        width: 100%; 
+        justify-content: center; /* Centered for mobile/tablet */
+    }
+
+    .branding-logo { 
+        width: 100%; 
+        max-width: 500px; /* Prevents oversized tablet appearance */
+    }
+
     .hero-action { display: none !important; } 
     .branding-text { font-size: 1.1rem; text-align: center; }
 
-    .home-hero-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    .featured-card { grid-column: span 2; }
-}
-
-@media (max-width: 600px) {
-    .home-hero-grid, .blog-grid { grid-template-columns: repeat(1, 1fr); }
+    /* Grid Stacking */
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; }
     .featured-card { grid-column: span 1; }
 }
