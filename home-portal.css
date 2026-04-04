@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.18 - FINAL PIXEL LOCK
+   THINKAMIGO HOME PORTAL v1.19 - FINAL STATIC LOCK
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -25,7 +25,6 @@
     box-sizing: border-box;
 }
 
-/* LOCK 1: Logotype to Hero Image (Columns 1 & 2) */
 .hero-logotype { 
     grid-column: 1 / span 2 !important; 
     display: flex;
@@ -39,7 +38,6 @@
     display: block; 
 }
 
-/* LOCK 2: H1 Statement centered over Columns 3 & 4 */
 .hero-statement { 
     grid-column: 3 / span 2 !important; 
     text-align: center;
@@ -52,14 +50,13 @@
 .branding-text { 
     font-family: 'Segoe UI', Tahoma, sans-serif;
     color: var(--white); 
-    font-size: 18px; /* FIXED PIXELS */
+    font-size: 18px; 
     font-weight: 400; 
     margin: 0; 
     line-height: 24px;
     -webkit-font-smoothing: antialiased;
 }
 
-/* LOCK 3: Button to Right Edge (Column 5) */
 .hero-action { 
     grid-column: 5 / span 1 !important; 
     display: flex; 
@@ -81,7 +78,7 @@
     text-decoration: none !important;
     font-family: 'Segoe UI', Tahoma, sans-serif !important;
     font-weight: 700 !important;
-    font-size: 16px; /* FIXED PIXELS */
+    font-size: 16px; 
     box-sizing: border-box;
     transition: background-color 0.3s ease;
 }
@@ -91,15 +88,12 @@
 }
 
 /* --- 2. DUAL GALLERY WRAPPERS --- */
-
-/* Top Section: Stone Backdrop */
 .hero-full-width-wrapper {
     background-color: #e3e2d9; 
     padding: 60px 0;
     width: 100%;
 }
 
-/* Story/Blog Section: Warm Sand Backdrop */
 .blog-full-width-wrapper {
     background-color: #dbccbe; 
     padding: 60px 0;
@@ -116,7 +110,7 @@
     padding: 0 20px;
 }
 
-/* --- 3. THE CARD ENGINE (Cookie-Cutter Radius) --- */
+/* --- 3. THE CARD ENGINE (Persistent & Static) --- */
 .home-hero-grid a, 
 .blog-grid a {
     text-decoration: none !important;
@@ -124,15 +118,9 @@
     display: block;
     background: #ffffff;
     height: 100%;
-    border-radius: 4px; /* Subtle Pixel Radius */
-    overflow: hidden;    /* Clips image and content corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.home-hero-grid a:hover, 
-.blog-grid a:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-radius: 4px; 
+    overflow: hidden;    
+    /* NO MOVEMENT: Hover effects removed for accessibility/persistence */
 }
 
 /* --- 4. THE FEATURED CARD (2x2) --- */
@@ -200,7 +188,7 @@
     display: block;
 }
 
-/* --- 7. AWARDS PANEL (Stone Backdrop) --- */
+/* --- 7. AWARDS PANEL --- */
 .awards-full-width-wrapper {
     background-color: #e3e2d9; 
     padding: 60px 0;
@@ -249,7 +237,7 @@
     .branding-logo { width: 100%; height: auto; }
 
     .branding-text { 
-        font-size: 17px; /* THE PIXEL ALIGNMENT LOCK */
+        font-size: 17px; 
         text-align: center; 
         line-height: 22px;
         white-space: nowrap; 
@@ -259,12 +247,10 @@
 
     .hero-action { display: none !important; }
 
-    /* Grid Stacking */
     .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 20px; }
     .featured-card { grid-column: span 1; }
     .featured-card .card-content h2 { font-size: 22px; }
 
-    /* Awards Grid remains 4 columns */
     .awards-grid { gap: 20px; }
     .award-item img { max-width: 100px; }
 }
