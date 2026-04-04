@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.59)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.60)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | 5px Edge Utility
+   Architecture: 1250px Wide Horizon | 200px Thumb-Safe UI
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR (TIGHTENED) --- */
@@ -115,11 +115,11 @@
 .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1150px; margin: 0 auto; padding: 0 20px; align-items: center; justify-items: center; }
 .award-item img { width: 100%; max-width: 180px; height: auto; display: block; opacity: 0.5; }
 
-/* --- 7. BACK TO TOP / SCROLL UI (5PX EDGE LOCK) --- */
+/* --- 7. BACK TO TOP / SCROLL UI (THUMB-SAFE PRECISION) --- */
 .scroll-up, #back-to-top, .back-to-top, .scroll-to-top {
     position: fixed !important;
-    right: 5px !important;
-    bottom: 20px !important;
+    right: 5px !important;    /* Precision edge */
+    bottom: 200px !important; /* Thumb-safe: Reclaims room above Mac Dock/iOS bars */
     z-index: 9999;
 }
 
