@@ -1,5 +1,6 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v3.2 - FOOTER SYNC
+   THINKAMIGO CHASSIS v3.4 - MASTER SYNC
+   LOCKED: Full-Width Nav | Mobile Toggle | Footer Alignment
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -13,15 +14,23 @@
 
 /* --- 1. CORE LAYOUT --- */
 html, body { 
-    margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
-    font-family: 'Segoe UI', Tahoma, sans-serif; background: #ffffff; 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    overflow-x: hidden; 
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    background: #ffffff; 
 }
 
+/* Centered container for Page Content & Footer Grid */
 .container { 
-    max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    box-sizing: border-box; 
 }
 
-/* --- 2. GLOBAL NAVIGATION (LOCKED) --- */
+/* --- 2. GLOBAL NAVIGATION (LOCKED FULL-WIDTH) --- */
 #main-nav {
     background-color: var(--brand-blue) !important;
     width: 100% !important;
@@ -38,13 +47,24 @@ html, body {
     width: 100% !important; 
     max-width: none !important; 
     margin: 0;
-    padding: 10px 20px; 
+    padding: 10px 20px; /* Minimal padding for edge-to-edge span */
     box-sizing: border-box;
 }
 
-.logo img { height: 40px !important; width: auto; display: block; }
+.logo img { 
+    height: 40px !important; 
+    width: auto; 
+    display: block; 
+}
 
-.nav-links { display: flex !important; gap: 15px; align-items: center; list-style: none; margin: 0; padding: 0; }
+.nav-links { 
+    display: flex !important; 
+    gap: 15px; 
+    align-items: center; 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+}
 
 .nav-links a {
     color: #ffffff !important;
@@ -56,22 +76,43 @@ html, body {
     transition: 0.3s;
 }
 
-.nav-links a:hover { color: var(--brand-orange) !important; }
-
-/* --- MOBILE TOGGLE LOGIC --- */
-.menu-toggle { display: none !important; }
-.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-.hamburger span { width: 25px; height: 3px; background-color: #ffffff; display: block; }
-
-/* --- 3. MASTER FOOTER (Updated for scaling) --- */
-#main-footer { 
-    background-color: var(--footer-bg); color: #ffffff; 
-    padding: 60px 0 20px; width: 100%; clear: both; 
+.nav-links a:hover { 
+    color: var(--brand-orange) !important; 
 }
 
-.footer-branding-top { padding-bottom: 40px; }
+/* --- MOBILE TOGGLE LOGIC --- */
+.menu-toggle { 
+    display: none !important; 
+}
 
-/* Forces the 'Great Ideas' graphic to fit mobile screen */
+.hamburger { 
+    display: none; 
+    cursor: pointer; 
+    flex-direction: column; 
+    gap: 5px; 
+}
+
+.hamburger span { 
+    width: 25px; 
+    height: 3px; 
+    background-color: #ffffff; 
+    display: block; 
+}
+
+/* --- 3. MASTER FOOTER --- */
+#main-footer { 
+    background-color: var(--footer-bg); 
+    color: #ffffff; 
+    padding: 60px 0 20px; 
+    width: 100%; 
+    clear: both; 
+}
+
+.footer-branding-top { 
+    padding-bottom: 40px; 
+}
+
+/* Scaling for 'Great Ideas' Strapline */
 .footer-full-logo {
     width: 100% !important;
     max-width: 1100px; 
@@ -81,68 +122,167 @@ html, body {
 }
 
 .footer-body-grid { 
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; 
+    display: flex !important; 
+    justify-content: space-between !important; 
+    align-items: flex-start !important; /* THE FIX: Top-aligns logo and links */
+    flex-wrap: wrap; 
+    gap: 40px; 
 }
 
-.footer-visual-col { flex: 1; min-width: 250px; }
+.footer-visual-col { 
+    flex: 1; 
+    min-width: 250px; 
+    margin-top: -6px; /* Visual nudge to align logo top with Poppins text */
+}
 
-/* Forces the footer logo to scale */
 .footer-brand-mark {
     max-width: 100% !important;
     height: auto !important;
     display: block;
 }
 
-.footer-nav-col { flex: 1; min-width: 150px; }
-.footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
-.footer-nav-col li { margin-bottom: 10px; }
-.footer-nav-col a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
-.footer-nav-col a:hover { color: var(--brand-orange); }
+.footer-nav-col { 
+    flex: 1; 
+    min-width: 150px; 
+}
 
-.footer-cta { margin-top: 40px; text-align: center; }
+.footer-nav-col ul { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.footer-nav-col li { 
+    margin-bottom: 10px; 
+}
+
+.footer-nav-col a { 
+    color: rgba(255,255,255,0.7); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    transition: 0.3s;
+}
+
+.footer-nav-col a:hover { 
+    color: var(--brand-orange); 
+}
+
+.footer-cta { 
+    margin-top: 40px; 
+    text-align: center; 
+}
 
 /* --- 4. UI COMPONENTS --- */
 .btn-pill { 
-    display: inline-block; padding: 12px 45px; border: 4px solid #fff; 
-    border-radius: 50px; color: #fff; text-decoration: none; 
-    font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 18px; 
+    display: inline-block; 
+    padding: 12px 45px; 
+    border: 4px solid #fff; 
+    border-radius: 50px; 
+    color: #fff; 
+    text-decoration: none; 
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 400; 
+    font-size: 18px; 
+    transition: 0.3s;
 }
 
 .back-to-top { 
-    position: fixed; bottom: 200px; right: 30px; width: 44px; height: 44px; 
-    background-color: #666666; z-index: 9999; display: none; 
-    align-items: center; justify-content: center; opacity: 0.5;
+    position: fixed; 
+    bottom: 200px; 
+    right: 30px; 
+    width: 44px; 
+    height: 44px; 
+    background-color: #666666; 
+    z-index: 9999; 
+    display: none; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.5;
+    transition: 0.3s;
 }
-.back-to-top.show { display: flex !important; }
+
+.back-to-top.show { 
+    display: flex !important; 
+}
 
 /* SOCIALS */
-.social-strip { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
-.social-icon { width: 28px; height: 28px; background-size: contain; background-repeat: no-repeat; }
+.social-strip { 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    margin: 30px 0; 
+}
+
+.social-icon { 
+    width: 28px; 
+    height: 28px; 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+}
+
 .icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
 /* --- 5. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
-    #main-nav .nav-flex { padding: 10px 20px; }
-    .hamburger { display: flex !important; }
+    #main-nav .nav-flex { 
+        padding: 10px 20px; 
+    }
+
+    .hamburger { 
+        display: flex !important; 
+    }
+
     .nav-links {
         display: none !important;
         position: absolute;
-        top: 100%; left: 0; width: 100%;
+        top: 100%; 
+        left: 0; 
+        width: 100%;
         background-color: var(--brand-blue);
         flex-direction: column;
         padding: 10px 0;
         z-index: 3001;
     }
-    .menu-toggle:checked ~ .nav-links { display: flex !important; }
-    .nav-links a { padding: 15px 30px !important; width: 100%; box-sizing: border-box; border-top: 1px solid rgba(255,255,255,0.1); text-align: left; }
+
+    /* Checkbox Trigger */
+    .menu-toggle:checked ~ .nav-links { 
+        display: flex !important; 
+    }
+
+    .nav-links a { 
+        padding: 15px 30px !important; 
+        width: 100%; 
+        box-sizing: border-box; 
+        border-top: 1px solid rgba(255,255,255,0.1); 
+        text-align: left;
+    }
 }
 
 @media (max-width: 768px) {
-    .footer-branding-top { padding: 0 20px 40px 20px; }
-    .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
-    .footer-visual-col { margin-bottom: 30px; }
-    .footer-brand-mark { margin: 0 auto; max-width: 200px !important; }
-    .back-to-top { bottom: 100px !important; right: 20px !important; }
+    .footer-branding-top { 
+        padding: 0 20px 40px 20px; 
+    }
+
+    .footer-body-grid { 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+    }
+
+    .footer-visual-col { 
+        margin-bottom: 30px; 
+        margin-top: 0; 
+    }
+
+    .footer-brand-mark { 
+        margin: 0 auto; 
+        max-width: 200px !important; 
+    }
+
+    .back-to-top { 
+        bottom: 100px !important; 
+        right: 20px !important; 
+    }
 }
