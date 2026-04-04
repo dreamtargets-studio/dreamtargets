@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.41)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.42)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 5-Column Synchronized Lockstep
+   Architecture: 5-Column Synchronized Lockstep (H1 Precision)
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background-color: var(--brand-blue); 
-    padding: 80px 0; /* Slightly more air to match the footer vibe */
+    padding: 80px 0; 
     width: 100%; 
     clear: both; 
     display: block;
@@ -15,7 +15,7 @@
 
 .branding-flex { 
     display: grid !important; 
-    /* SYNCED GRID: 5 columns to match the hero grid below */
+    /* 5-COLUMN MASTER GRID SYNC */
     grid-template-columns: repeat(5, 1fr) !important; 
     gap: 20px; 
     align-items: center; 
@@ -25,35 +25,40 @@
     box-sizing: border-box;
 }
 
-/* THE ANCHOR: This must be span 2 to match the featured-card below */
+/* Slot 1: Columns 1-2 (Matches Hero Card) */
 .hero-logotype { 
     grid-column: span 2 !important; 
 }
 
 .hero-logotype img { 
-    width: 100%; /* Ensures logo fills the 2-column span for flush alignment */
+    width: 100%; 
     height: auto; 
     display: block; 
 }
 
+/* Slot 2: Columns 3-4 (Matches the next 2 Cards) */
 .hero-statement { 
     grid-column: span 2 !important; 
     text-align: center; 
+    padding: 0 15px; /* Subtle internal breathing room */
 }
 
+/* Slot 3: Column 5 (Endcap) */
 .hero-action { 
     grid-column: span 1 !important; 
     display: flex; 
     justify-content: flex-end; 
 }
 
-.branding-text { 
+/* THE H1 & BRANDING TEXT */
+.hero-statement h1, .branding-text { 
     font-family: 'Poppins', sans-serif;
     font-size: 22px; 
     line-height: 1.4; 
     color: #ffffff; 
     margin: 0;
     font-weight: 400;
+    letter-spacing: -0.01em;
 }
 
 /* --- 2. THE DUAL GRID WRAPPERS --- */
@@ -114,7 +119,6 @@
 }
 
 /* --- 4. SPECIFIC CARD SPANS --- */
-/* THE MIRROR: This spans 2 columns, exactly like the logotype above */
 .featured-card { 
     grid-column: span 2 !important; 
     grid-row: span 2 !important; 
@@ -167,7 +171,7 @@
     display: block; 
 }
 
-/* --- 6. RESPONSIVE BREAKPOINTS (Staging - Explanations Pending) --- */
+/* --- 6. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1024px) {
     .branding-flex { display: flex; flex-direction: column; text-align: center; gap: 20px; }
     .hero-action { display: none; }
