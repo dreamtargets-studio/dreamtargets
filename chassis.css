@@ -225,13 +225,17 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
-    font-family: 'Segoe UI', Tahoma, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1.1rem !important;
+/* THE 400-WEIGHT AMENDMENT */
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important; 
+    font-size: 18px !important;
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
     box-sizing: border-box;
 }
+
+
+
 
 .btn-pill:hover {
     background-color: rgba(160, 196, 255, 0.2) !important; 
