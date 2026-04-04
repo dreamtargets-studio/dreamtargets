@@ -66,7 +66,7 @@ body.content-page {
 
 /* 6. STORY HEADINGS & ACCENTS (Px-Precision) */
 .text-rail h1 { 
-    font-size: 52px;         /* Upscaled for the wider 960px rail */
+    font-size: 48px;         /* Upscaled for the wider 960px rail */
     font-weight: 900; 
     line-height: 1.1; 
     margin-bottom: 18px;
@@ -74,7 +74,7 @@ body.content-page {
 }
 
 .orange-rule { 
-    width: 140px;            /* Widened slightly to balance the new measure */
+    width: 250px;            /* Widened slightly to balance the new measure */
     height: 1px;             
     background-color: var(--brand-orange); 
     margin-bottom: 35px; 
