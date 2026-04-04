@@ -1,10 +1,10 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.62)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.63)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | 15px Tight Gutters
+   Architecture: 1250px Wide Horizon | 15px Ultra-Tight Spacing
    ============================================================ */
 
-/* --- 1. THE BRANDING INTRO BAR (TIGHTENED) --- */
+/* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background-color: var(--brand-blue); 
     padding: 40px 0; 
@@ -16,7 +16,7 @@
 .branding-flex { 
     display: grid !important; 
     grid-template-columns: repeat(5, 1fr) !important; 
-    gap: 15px; /* SYNCED: Matches 15px grid gutters */
+    gap: 15px; 
     align-items: center; 
     max-width: 1250px; 
     margin: 0 auto; 
@@ -61,13 +61,25 @@
 }
 
 /* --- 2. THE DUAL GRID WRAPPERS --- */
-.hero-full-width-wrapper { background-color: #e3e2d9; padding: 30px 0 50px; width: 100%; clear: both; }
-.blog-full-width-wrapper { background-color: #dbccbe; padding: 30px 0 50px; width: 100%; clear: both; }
+.hero-full-width-wrapper { 
+    background-color: #e3e2d9; 
+    /* ULTRA-TIGHT: Reduced top from 30px to 15px for tightest vertical flow */
+    padding: 15px 0 50px; 
+    width: 100%; 
+    clear: both; 
+}
+
+.blog-full-width-wrapper { 
+    background-color: #dbccbe; 
+    padding: 30px 0 50px; 
+    width: 100%; 
+    clear: both; 
+}
 
 .home-hero-grid, .blog-grid { 
     display: grid !important; 
     grid-template-columns: repeat(5, 1fr) !important; 
-    gap: 15px; /* TIGHTENED: Reduced from 20px to 15px */
+    gap: 15px; 
     max-width: 1250px; 
     margin: 0 auto; 
     padding: 0; 
@@ -90,7 +102,7 @@
 .featured-card img, .service-card img, .blog-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
 
 .card-content { 
-    padding: 15px; /* TIGHTENED: Reduced from 20px to match new gutter */
+    padding: 15px; 
     flex-grow: 1 !important; 
     display: flex;
     flex-direction: column;
@@ -135,7 +147,8 @@
     .hero-statement h1, .branding-text { white-space: normal; font-size: 18px; text-align: center; }
     .hero-action { display: none !important; }
 
-    .hero-full-width-wrapper .container, .blog-full-width-wrapper .container { padding: 0 20px !important; }
+    /* MOBILE SYNC: Tighten top padding here too */
+    .hero-full-width-wrapper { padding: 15px 0 40px; }
 
     .home-hero-grid, .blog-grid { 
         grid-template-columns: repeat(2, 1fr) !important; 
