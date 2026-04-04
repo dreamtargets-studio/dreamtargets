@@ -22,34 +22,62 @@ html, body {
     max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; 
 }
 
-/* --- 2. NAVIGATION & HAMBURGER SYSTEM --- */
-#main-nav { 
-    background-color: var(--brand-blue) !important; 
-    width: 100%; position: relative; z-index: 3000; 
+/* --- 2. GLOBAL NAVIGATION (Restored Structure) --- */
+#main-nav {
+    background-color: var(--brand-blue) !important;
+    width: 100%;
+    position: relative;
+    z-index: 3000;
+    /* Forces the blue bar to span the full width */
+    display: block;
+    clear: both;
 }
 
-#main-nav .nav-flex { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 10px 40px; max-width: 1200px; margin: 0 auto;
+#main-nav .nav-flex {
+    display: flex !important;
+    justify-content: space-between !important; /* Logo Left | Links Right */
+    align-items: center;
+    
+    /* THE ALIGNMENT ANCHOR */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 10px 40px; 
+    box-sizing: border-box;
 }
 
-.logo img { height: 40px; width: auto; display: block; }
-
-.nav-links { 
-    display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; 
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-.nav-links a { 
-    color: #ffffff !important; text-decoration: none; 
-    font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 500;
-    transition: 0.3s ease;
+.logo img {
+    height: 40px !important;
+    width: auto;
+    display: block;
 }
 
-.nav-links a:hover { color: var(--brand-orange) !important; }
+.nav-links {
+    display: flex !important;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* Pushes links to the right */
+}
 
-/* Hamburger (Hidden on Desktop) */
-.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-.hamburger span { width: 25px; height: 3px; background: #fff; }
+.nav-links a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff8c00 !important; /* Brand Orange Hover */
+}
 
 /* --- 3. MASTER FOOTER --- */
 #main-footer { 
