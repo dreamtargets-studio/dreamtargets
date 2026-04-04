@@ -110,75 +110,20 @@
     padding: 0 20px;
 }
 
-/* --- 3. THE CARD ENGINE (Persistent & Static) --- */
+/* --- 3. THE CARD ENGINE (Manual Corner Lock) --- */
 .home-hero-grid a, 
 .blog-grid a {
     text-decoration: none !important;
     color: inherit;
-    display: block;
+    display: flex; 
+    flex-direction: column;
     background: #ffffff;
     height: 100%;
+    /* No overflow:hidden needed here */
     border-radius: 4px; 
-    overflow: hidden;    
-    /* NO MOVEMENT: Hover effects removed for accessibility/persistence */
 }
 
-/* --- 4. THE FEATURED CARD (2x2) --- */
-.featured-card { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-    background: #ffffff; 
-    display: flex; 
-    flex-direction: column; 
-}
-
-.featured-card .card-content { padding: 20px 15px; }
-
-.featured-card .card-content h2 { 
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600; 
-    font-size: 26px; 
-    color: var(--brand-blue); 
-    margin: 0 0 8px 0; 
-    line-height: 32px;
-}
-
-.featured-card .card-content h3 { 
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500; 
-    font-size: 20px; 
-    color: #1a1a1a; 
-    margin: 0 0 12px 0; 
-    line-height: 26px;
-}
-
-/* --- 5. STANDARD CARDS --- */
-.service-card, .blog-card { 
-    background: #ffffff; 
-    display: flex; 
-    flex-direction: column; 
-}
-
-.card-content { padding: 12px 15px; }
-
-.card-content h3 { 
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600; 
-    font-size: 18px; 
-    color: #333; 
-    margin: 0 0 6px 0; 
-    letter-spacing: -0.01em;
-}
-
-.card-content p { 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px; 
-    color: #555; 
-    line-height: 22px; 
-    margin: 0; 
-}
-
-/* --- 6. IMAGE RATIOS --- */
+/* --- 4. THE IMAGE (Top Corners Only) --- */
 .featured-card img, 
 .service-card img, 
 .blog-card img { 
@@ -186,6 +131,29 @@
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
     display: block;
+    /* Only round the top two corners to match the card */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+/* --- 5. THE CARD CONTENT (Bottom Corners Only) --- */
+.card-content { 
+    padding: 12px 15px; 
+    flex-grow: 1; /* Ensures the white box fills the space */
+    background: #ffffff;
+    /* Only round the bottom two corners */
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+/* --- 6. FEATURED CARD SPECIFIC --- */
+.featured-card { 
+    grid-column: span 2; 
+    grid-row: span 2; 
+}
+
+.featured-card .card-content { 
+    padding: 20px 15px; 
 }
 
 /* --- 7. AWARDS PANEL --- */
