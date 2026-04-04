@@ -1,27 +1,35 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.9 - THE UNBREAKABLE FRAME
-   Contains: Navigation Fix, Footer, Global Typography
+   THINKAMIGO CHASSIS v2.5 - THE UNBREAKABLE FRAME
+   Complete Stable Rollback: Nav, Footer, Fonts, Socials
    ============================================================ */
+
+/* FONT ENGINE - MUST BE AT TOP */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
     --brand-blue: #0054dc;
     --footer-bg: #0a254a;
     --white: #ffffff;
-    --eggshell: #f7f7f7;
-    --section-tan: #e3dcd2;
 }
 
-/* 1. THE LAYOUT GUARD (The "Firewall") */
+/* --- 1. THE LAYOUT GUARD (Prevents Page Collapse) --- */
 html, body { 
-    margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    overflow-x: hidden; 
     font-family: 'Segoe UI', Tahoma, sans-serif; 
-    background: #fff; color: #333; line-height: 1.5;
+    background: #ffffff; 
+    color: #333333; 
+    line-height: 1.5;
 }
 
+/* Ensures index.html content stays structured */
 .paper, .paper-sheet, .editorial-post, .container {
-    display: flow-root !important; 
+    display: block !important; 
     width: 100%;
     clear: both;
+    position: relative;
 }
 
 /* --- 2. GLOBAL NAVIGATION (Blue Bar) --- */
@@ -29,27 +37,19 @@ html, body {
     background-color: var(--brand-blue) !important;
     width: 100%;
     position: relative;
-    z-index: 3000; /* High index to stay above branding bar */
-}
-
-#menu-toggle {
-    display: none !important;
-    visibility: hidden;
-    position: absolute;
-    left: -9999px;
+    z-index: 3000;
 }
 
 #main-nav .nav-flex {
     display: flex !important;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
     align-items: center;
-    width: 100% !important;
-    max-width: 100% !important; 
-    padding: 10px 40px; 
+    max-width: 1200px; /* ALIGNMENT ANCHOR */
+    margin: 0 auto;
+    padding: 10px 40px;
     box-sizing: border-box;
 }
 
-.logo { display: flex; align-items: center; flex-shrink: 0; }
 .logo img { height: 40px !important; width: auto; display: block; }
 
 .nav-links {
@@ -58,165 +58,26 @@ html, body {
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-left: auto;
 }
 
 .nav-links a {
     color: #ffffff !important;
     text-decoration: none !important;
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
     font-weight: 500;
-    transition: 0.3s;
 }
 
-.nav-links a:hover { color: #ff8c00 !important; }
-
-.hamburger {
-    display: none; 
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 25px;
-    height: 18px;
-    margin-left: auto; 
-}
-
-.hamburger span {
-    width: 100%;
-    height: 3px;
-    background-color: #ffffff !important;
-    display: block;
-}
-
-/* --- MOBILE NAVIGATION LOGIC --- */
-@media (max-width: 1100px) {
-    .nav-links { 
-        display: none !important; /* FIXED: Hidden by default on mobile */
-        position: absolute;
-        top: 100%; 
-        left: 0; 
-        width: 100%;
-        background: var(--brand-blue);
-        flex-direction: column;
-        padding: 20px 0;
-        margin-left: 0;
-        z-index: 3001;
-    }
-
-    .hamburger { display: flex !important; }
-
-    /* FIXED: Only display when checkbox is checked */
-    #menu-toggle:checked ~ .nav-links { 
-        display: flex !important; 
-    }
-
-    .nav-links a { 
-        padding: 15px 40px; 
-        border-top: 1px solid rgba(255,255,255,0.1); 
-        width: 100%; 
-        box-sizing: border-box; 
-    }
-}
-
-/* 3. GLOBAL TYPOGRAPHY */
-h1, h2, h3, h4 {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;
+/* --- 3. GLOBAL TYPOGRAPHY LOCK --- */
+h1, h2, h3, h4, .btn-pill, .card-content h2, .card-content h3 {
+    font-family: 'Poppins', sans-serif !important;
     -webkit-font-smoothing: antialiased;
-    color: #1a1a1a;
 }
 
-p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1.66; color: #555; }
-
-/* --- 4. THE MASTER FOOTER (Modular Component) --- */
-#main-footer { 
-    background: var(--footer-bg); 
-    color: var(--white); 
-    padding: 60px 0 0px; 
-    width: 100%;
-    display: block;
-    clear: both;
+p, .branding-text, .footer-nav-col a { 
+    font-family: Arial, Helvetica, sans-serif !important; 
 }
 
-#main-footer .container {
-    padding: 0 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.footer-branding-top {
-    text-align: center;
-    margin-bottom: 50px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1); 
-    width: 100%;
-}
-
-.footer-full-logo {
-    max-width: 100%; 
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-.footer-body-grid {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-bottom: 50px;
-}
-
-.footer-visual-col { 
-    flex: 1.5; 
-    min-width: 280px; 
-    display: flex;
-    justify-content: flex-start;
-}
-
-.footer-visual-col a {
-    display: block;
-    width: 100%; 
-    max-width: 320px; 
-    text-decoration: none;
-}
-
-.footer-brand-mark { 
-    width: 100%;
-    height: auto; 
-    display: block;
-    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); 
-    transition: filter 0.4s ease-in-out;
-}
-
-.footer-visual-col a:hover .footer-brand-mark {
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
-}
-
-.footer-nav-col { flex: 1; min-width: 150px; }
-.footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
-.footer-nav-col li { margin-bottom: 12px; }
-
-.footer-nav-col a { 
-    color: rgba(255,255,255,0.7) !important; 
-    text-decoration: none; 
-    font-size: 0.95rem; 
-    transition: color 0.3s ease; 
-}
-
-.footer-nav-col a:hover { 
-    color: #ff8c00 !important; 
-}
-
-/* Footer CTA Button */
-.footer-cta {
-    display: flex;
-    justify-content: center; 
-    margin-top: 40px;
-    margin-bottom: 40px;
-    width: 100%;
-}
-
+/* --- 4. GLOBAL UI (Buttons & Back-to-Top) --- */
 .btn-pill {
     display: inline-block !important;
     background-color: transparent !important;
@@ -225,129 +86,35 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
-    font-family: 'Segoe UI', Tahoma, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-weight: 400 !important; 
+    font-size: 18px !important;
+    transition: 0.3s ease;
     cursor: pointer;
-    box-sizing: border-box;
 }
 
-.btn-pill:hover {
-    background-color: rgba(160, 196, 255, 0.2) !important; 
-    border-color: #ffffff !important; 
-    color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(160, 196, 255, 0.2); 
-}
+.btn-pill:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-/* Social Icon Component */
-.social-strip {
-    display: flex;
-    justify-content: center;
-    gap: 40px; 
-    margin-bottom: 25px;
-    padding-top: 20px;
-}
-
-.social-item a {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 8px;
-    color: rgba(255, 255, 255, 0.7) !important;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s ease; 
-}
-
-.social-icon {
-    width: 26px; 
-    height: 26px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.3s ease;
-}
-
-.icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
-.icon-substack { background-image: url('assets/img/icon-substack.png'); }
-.icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
-
-.social-item a:hover { 
-    color: #ff8c00 !important; 
-}
-
-.social-item a:hover .social-icon { 
-    transform: scale(1.1); 
-}
-
-/* Footer Bottom Strip */
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1); 
-    padding: 40px 0;
-    text-align: center;
-    width: 100%;
-    margin-top: 50px;
-}
-
-.footer-address { 
-    font-size: 0.85rem; 
-    color: #cccccc; 
-    margin-top: 25px; 
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-}
-
-/* Mobile Viewport Overrides */
-@media (max-width: 768px) {
-    .footer-body-grid {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .footer-visual-col {
-        justify-content: center;
-        margin-bottom: 40px;
-        width: 100%;
-    }
-    .footer-visual-col a {
-        width: 70%; 
-        margin: 0 auto;
-    }
-}
-
-/* --- UI COMPONENT: BACK TO TOP (Gallery Match) --- */
+/* THE ARCHITECTURAL SQUARE */
 .back-to-top {
-    position: fixed;
-    bottom: 150px;    
-    right: 30px;
-    width: 60px;
-    height: 50px;
-    background-color: rgba(10, 37, 74, 0.7) !important; 
+    position: fixed !important;
+    bottom: 200px !important; /* Desktop Elevation */
+    right: 30px !important;
+    width: 44px;
+    height: 44px;
+    background-color: #666666 !important; 
     border: none;
-    border-radius: 0; 
-    cursor: pointer;
-    z-index: 2000;
-    
-    display: none; 
+    border-radius: 0 !important;
+    z-index: 9999;
+    display: none; /* Managed by loader.js */
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(5px);
-    transition: background-color 0.3s ease;
+    opacity: 0.4;
+    transition: 0.3s ease;
 }
 
-.back-to-top.show { 
-    display: flex; 
-}
+.back-to-top.show { display: flex !important; }
 
-.back-to-top:hover {
-    background-color: rgba(10, 37, 74, 0.9) !important;
-}
-
-/* System-matching Chevron */
 .chevron-up {
-    display: block;
     width: 10px;
     height: 10px;
     border-top: 2px solid #ffffff;
@@ -355,5 +122,48 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     transform: rotate(-45deg) translateY(2px);
 }
 
-/* 5. UTILITY: THE ORANGE RULE */
-.orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
+/* --- 5. THE MASTER FOOTER --- */
+#main-footer { 
+    background: var(--footer-bg); 
+    color: #ffffff; 
+    padding: 60px 0 20px; 
+    width: 100%;
+    clear: both;
+}
+
+#main-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.footer-body-grid {
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* SOCIAL ICON STRIP */
+.social-strip { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
+.social-icon { 
+    width: 26px; height: 26px; background-size: contain; 
+    background-repeat: no-repeat; background-position: center; 
+}
+.icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
+.icon-substack { background-image: url('assets/img/icon-substack.png'); }
+.icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
+
+/* --- 6. MOBILE OVERRIDES --- */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 100px !important; /* Thumb Height */
+        right: 20px !important;
+    }
+    .footer-body-grid {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
