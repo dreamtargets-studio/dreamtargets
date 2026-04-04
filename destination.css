@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.8
-   Architecture: 1250px Horizon | 800px Editorial Rail
+   THINKAMIGO DESTINATION ENGINE v2.9
+   Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
-   Features: SATURATION LOCK (#0054dc), Hairline Accents
+   Features: SATURATION LOCK (#0054dc), Expanded Column
    ============================================================ */
 
 :root {
@@ -18,7 +18,7 @@ body.content-page {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     color: #333;
-    font-size: 16px;          /* Base body size in px */
+    font-size: 18px;          /* Bumped to 18px for the 960px measure */
 }
 
 /* 2. THE NAV SATURATION LOCK */
@@ -56,41 +56,41 @@ body.content-page {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
 }
 
-/* 5. THE TEXT RAIL */
+/* 5. THE TEXT RAIL (Expanded to 960px) */
 .text-rail {
-    max-width: 800px;
+    max-width: 960px;        /* Increased from 800px */
     margin: 0 auto;
     width: 90%;              
-    padding: 30px 0 60px 0;  
+    padding: 40px 0 80px 0;  
 }
 
-/* 6. STORY HEADINGS & ACCENTS (All in PX) */
+/* 6. STORY HEADINGS & ACCENTS (Px-Precision) */
 .text-rail h1 { 
-    font-size: 45px;         /* Specific PX sizing */
+    font-size: 52px;         /* Upscaled for the wider 960px rail */
     font-weight: 900; 
     line-height: 1.1; 
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     color: var(--brand-blue);
 }
 
 .orange-rule { 
-    width: 120px;            
+    width: 140px;            /* Widened slightly to balance the new measure */
     height: 1px;             
     background-color: var(--brand-orange); 
-    margin-bottom: 30px; 
+    margin-bottom: 35px; 
 }
 
 .text-rail h3 {
-    font-size: 20px;         /* Specific PX sizing */
+    font-size: 24px;         
     font-weight: 600;
     color: var(--brand-blue);
-    margin: 40px 0 15px 0;
+    margin: 45px 0 20px 0;
 }
 
 .text-rail p {
-    font-size: 17px;         /* Clean reading size */
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: 18px;         
+    line-height: 1.65;       /* Relaxed leading for the wider line-length */
+    margin-bottom: 24px;
 }
 
 /* 7. THE GALLERY GRID (3-UP) */
@@ -98,12 +98,12 @@ body.content-page {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 15px;
-    margin: 40px 0;
+    gap: 20px;               /* More breathing room for larger column */
+    margin: 50px 0;
 }
 
 .gallery-grid-3 figure {
-    flex: 0 0 calc(33.333% - 10px);
+    flex: 0 0 calc(33.333% - 14px);
     margin: 0;
 }
 
@@ -116,10 +116,10 @@ body.content-page {
 /* 8. EDITORIAL CAPTIONS (In PX) */
 .caption {
     background: #f4f3ef;
-    padding: 10px 15px;
+    padding: 12px 18px;
     margin-top: -15px;
-    margin-bottom: 20px;
-    font-size: 14px;         /* Specific PX sizing */
+    margin-bottom: 25px;
+    font-size: 15px;         
     color: #666;
     border-left: 3px solid var(--brand-orange);
 }
@@ -134,9 +134,9 @@ body.content-page {
 @media (max-width: 768px) {
     .text-rail { 
         width: 92%; 
-        padding: 20px 0 40px 0; 
+        padding: 30px 0 40px 0; 
     }
     .text-rail h1 { 
-        font-size: 35px;     /* Scaled for mobile in PX */
+        font-size: 38px;     
     }
 }
