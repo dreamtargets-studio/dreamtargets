@@ -1,6 +1,7 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v1.9 - THE UNBREAKABLE FRAME
+   THINKAMIGO CHASSIS v2.0 - THE UNBREAKABLE FRAME
    Contains: Navigation Fix, Footer, Global Typography
+   Updated: 400-wt Buttons, 80px Elevated Hard-Square Utility
    ============================================================ */
 
 :root {
@@ -29,7 +30,7 @@ html, body {
     background-color: var(--brand-blue) !important;
     width: 100%;
     position: relative;
-    z-index: 3000; /* High index to stay above branding bar */
+    z-index: 3000;
 }
 
 #menu-toggle {
@@ -88,10 +89,9 @@ html, body {
     display: block;
 }
 
-/* --- MOBILE NAVIGATION LOGIC --- */
 @media (max-width: 1100px) {
     .nav-links { 
-        display: none !important; /* FIXED: Hidden by default on mobile */
+        display: none !important; 
         position: absolute;
         top: 100%; 
         left: 0; 
@@ -102,14 +102,10 @@ html, body {
         margin-left: 0;
         z-index: 3001;
     }
-
     .hamburger { display: flex !important; }
-
-    /* FIXED: Only display when checkbox is checked */
     #menu-toggle:checked ~ .nav-links { 
         display: flex !important; 
     }
-
     .nav-links a { 
         padding: 15px 40px; 
         border-top: 1px solid rgba(255,255,255,0.1); 
@@ -127,7 +123,7 @@ h1, h2, h3, h4 {
 
 p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1.66; color: #555; }
 
-/* --- 4. THE MASTER FOOTER (Modular Component) --- */
+/* --- 4. THE MASTER FOOTER & GLOBAL UI --- */
 #main-footer { 
     background: var(--footer-bg); 
     color: var(--white); 
@@ -204,9 +200,7 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     transition: color 0.3s ease; 
 }
 
-.footer-nav-col a:hover { 
-    color: #ff8c00 !important; 
-}
+.footer-nav-col a:hover { color: #ff8c00 !important; }
 
 /* Footer CTA Button */
 .footer-cta {
@@ -225,23 +219,21 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
-/* THE 400-WEIGHT AMENDMENT */
+    
+    /* THE 400-WEIGHT AMENDMENT */
     font-family: 'Poppins', sans-serif !important;
     font-weight: 400 !important; 
     font-size: 18px !important;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
     box-sizing: border-box;
 }
 
-
-
-
 .btn-pill:hover {
-    background-color: rgba(160, 196, 255, 0.2) !important; 
+    background-color: rgba(255, 255, 255, 0.15) !important; 
     border-color: #ffffff !important; 
     color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(160, 196, 255, 0.2); 
 }
 
 /* Social Icon Component */
@@ -277,15 +269,9 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-.social-item a:hover { 
-    color: #ff8c00 !important; 
-}
+.social-item a:hover { color: #ff8c00 !important; }
+.social-item a:hover .social-icon { transform: scale(1.1); }
 
-.social-item a:hover .social-icon { 
-    transform: scale(1.1); 
-}
-
-/* Footer Bottom Strip */
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1); 
     padding: 40px 0;
@@ -303,50 +289,37 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     line-height: 1.6;
 }
 
-/* Mobile Viewport Overrides */
 @media (max-width: 768px) {
-    .footer-body-grid {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .footer-visual-col {
-        justify-content: center;
-        margin-bottom: 40px;
-        width: 100%;
-    }
-    .footer-visual-col a {
-        width: 70%; 
-        margin: 0 auto;
-    }
+    .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
+    .footer-visual-col { justify-content: center; margin-bottom: 40px; width: 100%; }
+    .footer-visual-col a { width: 70%; margin: 0 auto; }
 }
 
-/* --- UI COMPONENT: BACK TO TOP (Gallery Match) --- */
+/* --- UI COMPONENT: BACK TO TOP (Architectural Square) --- */
 .back-to-top {
     position: fixed;
-    bottom: 150px;    
+    bottom: 80px;      /* Elevated as requested */    
     right: 30px;
-    width: 60px;
-    height: 50px;
-    background-color: rgba(10, 37, 74, 0.7) !important; 
+    width: 44px;       /* Consistent square size */
+    height: 44px;
+    background-color: #666666 !important; /* Neutral Grey */
     border: none;
-    border-radius: 0; 
+    border-radius: 0 !important; /* HARD SQUARE - NO RADIUS */
     cursor: pointer;
     z-index: 2000;
     
-    display: none; 
+    display: none;     /* Toggled by loader.js */
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(5px);
-    transition: background-color 0.3s ease;
+    opacity: 0.4;      /* Resting opacity */
+    transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-.back-to-top.show { 
-    display: flex; 
-}
+.back-to-top.show { display: flex; }
 
 .back-to-top:hover {
-    background-color: rgba(10, 37, 74, 0.9) !important;
+    background-color: #333333 !important;
+    opacity: 0.9;      /* Focused opacity */
 }
 
 /* System-matching Chevron */
