@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.8 - THE ARCHITECTURAL LOCK
+   THINKAMIGO HOME PORTAL v1.10 - THE ARCHITECTURAL LOCK
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
@@ -14,7 +14,6 @@
 
 .branding-flex { 
     display: grid !important; 
-    /* THIS MASTER 5-COLUMN TRACK MIRRORS THE CONTENT BELOW */
     grid-template-columns: repeat(5, 1fr) !important; 
     gap: 15px; 
     align-items: center; 
@@ -73,8 +72,8 @@
     background-color: transparent !important;
     color: #ffffff !important;
     height: 52px; 
-    width: 100%; /* Fills the 5th column exactly */
-    max-width: 180px; /* Keeps the pill shape elegant */
+    width: 100%; 
+    max-width: 180px; 
     border: 4px solid #ffffff !important; 
     border-radius: 50px !important;
     text-decoration: none !important;
@@ -89,7 +88,7 @@
     background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* --- 2. THE 5-COLUMN CONTENT ENGINE (The Mirror) --- */
+/* --- 2. THE 5-COLUMN CONTENT ENGINE --- */
 .home-hero-grid, 
 .blog-grid { 
     display: grid; 
@@ -130,24 +129,24 @@
     display: block;
 }
 
-/* --- 5. MOBILE: CENTRED SLAB UI (Finessed Spacing) --- */
+/* --- 5. MOBILE: CENTRED SLAB UI (Restored Scale & Tightened Gap) --- */
 @media (max-width: 1024px) {
     .branding-intro-bar { 
-        padding: 25px 0; /* Tightened top/bottom of the entire blue block */
+        padding: 20px 0; /* Minimal top/bottom blue space */
     }
 
     .branding-flex { 
         display: flex !important; 
         flex-direction: column; 
-        gap: 12px; /* Reduced vertical space between Logo and Text */
+        gap: 4px; /* Tight vertical lock between Logo and H1 */
         padding: 0 20px;
     }
 
     .hero-logotype { 
         width: 100%; 
-        max-width: 320px; /* Scaled down for mobile elegance */
+        max-width: 100%; /* Restored width */
         justify-content: center;
-        margin: 0 auto;
+        margin: 0;
     }
 
     .branding-logo {
@@ -156,26 +155,27 @@
     }
 
     .hero-statement {
-        grid-column: span 1; /* Reset grid logic for flex stack */
+        width: 100%;
         padding: 0;
+        margin: 0;
     }
 
     .branding-text { 
-        font-size: 1.05rem; /* Slightly smaller for mobile balance */
+        font-size: 1.15rem; /* Restored size for authority */
         text-align: center; 
-        line-height: 1.3;
-        max-width: 90%;
-        margin: 0 auto;
+        line-height: 1.2;
+        white-space: nowrap; /* Forces one line to match 'Slab' feel */
+        margin: 0;
     }
 
     .hero-action { 
-        display: none !important; /* Keep the UI clean */
+        display: none !important; 
     }
 
     /* Grid Stacking for Content */
     .home-hero-grid, .blog-grid { 
         grid-template-columns: 1fr; 
-        margin: 25px auto; /* Tighter gap between branding and content */
+        margin: 20px auto; 
     }
     
     .featured-card { 
