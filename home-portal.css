@@ -1,14 +1,15 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.21 - FINAL SPATIAL LOCK
-   Features: Pixel Precision, Direct-Corner Radius, Tight Spacing
+   THINKAMIGO HOME PORTAL v1.23
+   Features: Pixel Precision, Direct Radius, Synchronized Gaps, 
+             Minimalist Utility UI
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* --- 1. THE BRANDING INTRO BAR (Tightened) --- */
+/* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
-    padding: 40px 0; /* Reduced from 60px to reclaim top space */
+    padding: 40px 0; 
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
     position: relative;
@@ -58,30 +59,29 @@
 }
 .pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-/* --- 2. DUAL GALLERY WRAPPERS (Synchronized Spacing) --- */
+/* --- 2. DUAL GALLERY WRAPPERS --- */
 .hero-full-width-wrapper { 
     background-color: #e3e2d9; 
-    padding: 30px 0; /* Matches the top gap */
+    padding: 30px 0; 
     width: 100%; 
 }
 
 .blog-full-width-wrapper { 
     background-color: #dbccbe; 
-    padding: 30px 0; /* Reduced from 50px to match the hero section */
+    padding: 30px 0; 
     width: 100%; 
 }
 
-/* --- 8. MOBILE PORTRAIT LOCK (Synchronized) --- */
-@media (max-width: 1024px) {
-    .hero-full-width-wrapper {
-        padding: 20px 0; 
-    }
-    
-    .blog-full-width-wrapper {
-        padding: 20px 0; /* Synchronized mobile gap */
-    }
+.home-hero-grid, .blog-grid { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; 
+    margin: 0 auto; 
+    max-width: 1200px; 
+    padding: 0 20px;
 }
-/* --- 3. THE CARD ENGINE (Manual Corner Lock) --- */
+
+/* --- 3. THE CARD ENGINE (Direct-Corner Radius) --- */
 .home-hero-grid a, .blog-grid a {
     text-decoration: none !important;
     color: inherit;
@@ -91,7 +91,7 @@
     border-radius: 4px; 
 }
 
-/* --- 4. THE IMAGE (Top Corners Only) --- */
+/* --- 4. THE IMAGE (Top Corners) --- */
 .featured-card img, .service-card img, .blog-card img { 
     width: 100%; 
     aspect-ratio: 16 / 9; 
@@ -101,7 +101,7 @@
     border-top-right-radius: 4px;
 }
 
-/* --- 5. THE CARD CONTENT (Typography & Bottom Radius) --- */
+/* --- 5. THE CARD CONTENT (Bottom Corners) --- */
 .card-content { 
     padding: 12px 15px; 
     flex-grow: 1; 
@@ -110,7 +110,7 @@
     border-bottom-right-radius: 4px;
 }
 
-/* Featured Card Headlines */
+/* Typography Headlines */
 .featured-card .card-content h2 { 
     font-family: 'Poppins', sans-serif; font-weight: 600; 
     font-size: 26px; color: var(--brand-blue); margin: 0 0 8px 0; line-height: 32px; 
@@ -119,24 +119,22 @@
     font-family: 'Poppins', sans-serif; font-weight: 500; 
     font-size: 20px; color: #1a1a1a; margin: 0 0 12px 0; line-height: 26px; 
 }
-
-/* Standard Card Headlines */
 .service-card .card-content h3, .blog-card .card-content h3 { 
     font-family: 'Poppins', sans-serif; font-weight: 600; 
     font-size: 18px; color: #333; margin: 0 0 6px 0; letter-spacing: -0.01em; 
 }
 
-/* Card Body Text */
+/* Typography Body */
 .card-content p { 
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px; color: #555; line-height: 22px; margin: 0; 
 }
 
-/* --- 6. FEATURED CARD SPECIFIC --- */
+/* --- 6. FEATURED CARD POSITIONING --- */
 .featured-card { grid-column: span 2; grid-row: span 2; }
 .featured-card .card-content { padding: 20px 15px; }
 
-/* --- 7. AWARDS PANEL (Stone Backdrop) --- */
+/* --- 7. AWARDS PANEL --- */
 .awards-full-width-wrapper { 
     background-color: #e3e2d9; 
     padding: 60px 0; 
@@ -161,35 +159,51 @@
 }
 .award-item:hover img { filter: grayscale(0%); opacity: 1; }
 
-/* --- 8. MOBILE PORTRAIT LOCK (Tightened) --- */
+/* --- 8. BACK-TO-TOP UTILITY --- */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+    background-color: #666666; 
+    opacity: 0.4;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.back-to-top:hover {
+    opacity: 0.9;
+    background-color: #333333;
+}
+
+/* --- 9. MOBILE REFINEMENTS --- */
 @media (max-width: 1024px) {
-    .branding-intro-bar { 
-        padding: 15px 0; /* Minimal footprint */
-    }
-    
-    .hero-full-width-wrapper {
-        padding: 20px 0; /* Brings grid up close to header */
-    }
+    .branding-intro-bar { padding: 15px 0; }
+    .hero-full-width-wrapper, .blog-full-width-wrapper { padding: 20px 0; }
 
     .branding-flex { display: flex !important; flex-direction: column; gap: 6px; padding: 0 20px; }
     .hero-logotype { width: 100%; justify-content: center; margin: 0; }
     .branding-logo { width: 100%; height: auto; }
     
     .branding-text { 
-        font-size: 17px; 
-        text-align: center; 
-        line-height: 22px; 
-        white-space: nowrap; 
-        margin: 0; 
-        letter-spacing: -0.01em; 
+        font-size: 17px; text-align: center; line-height: 22px; 
+        white-space: nowrap; margin: 0; letter-spacing: -0.01em; 
     }
 
     .hero-action { display: none !important; }
-
     .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 10px; }
     .featured-card { grid-column: span 1; }
     .featured-card .card-content h2 { font-size: 22px; }
 
     .awards-grid { gap: 20px; }
     .award-item img { max-width: 100px; }
+    
+    .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
 }
