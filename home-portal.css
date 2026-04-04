@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.48)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.49)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | 5-Column Sync | STATIC CARDS
+   Architecture: 1250px Wide Horizon | Full-Bleed Grid Logic
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
@@ -87,11 +87,11 @@
     gap: 20px; 
     max-width: 1250px; 
     margin: 0 auto; 
-    padding: 0 20px;
+    padding: 0; /* REMOVED padding: 0 20px to reclaim edge real estate */
     box-sizing: border-box;
 }
 
-/* --- 3. THE CARD ENGINE (STATIC - HOVER ANIMATIONS REMOVED) --- */
+/* --- 3. THE CARD ENGINE (STATIC) --- */
 .home-hero-grid a, .blog-grid a { 
     display: flex; 
     flex-direction: column; 
@@ -101,7 +101,6 @@
     height: 100%; 
     border-radius: 4px; 
     overflow: hidden;
-    /* Static cards: No shadow or transform on hover */
 }
 
 .featured-card img, .service-card img, .blog-card img { 
@@ -171,7 +170,12 @@
     display: block; 
 }
 
-/* --- 6. RESPONSIVE BREAKPOINTS --- */
+/* --- 6. RESPONSIVE BREAKPOINTS (Precision Adjusted) --- */
+@media (max-width: 1280px) {
+    /* Safety padding for screens narrower than the grid */
+    .home-hero-grid, .blog-grid { padding: 0 20px; }
+}
+
 @media (max-width: 1024px) {
     .branding-intro-bar { padding: 60px 0; }
     
