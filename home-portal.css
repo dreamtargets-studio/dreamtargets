@@ -146,3 +146,60 @@
     .featured-card { grid-column: span 1; }
     .featured-card .card-content h2 { font-size: 22px; }
 }
+
+/* --- 8. AWARDS PANEL (4-Column Persistent Grid) --- */
+.awards-full-width-wrapper {
+    background-color: #ffffff; /* Clean white break from the sand/stone sections */
+    padding: 60px 0;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.awards-grid {
+    display: grid;
+    /* FORCES 4 COLUMNS ON DESKTOP AND MOBILE */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px; 
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    align-items: center; 
+    justify-items: center;
+}
+
+.award-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Subtle brand treatment */
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+.award-item:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.award-item img {
+    width: 100%;
+    max-width: 160px; /* Adjust based on your standard graphic width */
+    height: auto;
+    display: block;
+}
+
+/* MOBILE ADJUSTMENT: Maintains 4 columns, just scales the spacing */
+@media (max-width: 768px) {
+    .awards-full-width-wrapper {
+        padding: 40px 0;
+    }
+    
+    .awards-grid {
+        gap: 20px; /* Tighter gap for smaller screens */
+    }
+    
+    .award-item img {
+        max-width: 100px; /* Prevents logos from crowding on mobile */
+    }
+}
