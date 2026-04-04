@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.6 - SOPHISTICATED SYNC
-   Structure: Full-Width Nav | Mobile Toggle | 100px Nudge | Subtle UI
+   THINKAMIGO CHASSIS v4.7 - BALANCED MOBILE SYNC
+   Structure: 3-Col Footer | Horizontal Socials | Centered Block
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
     --brand-blue: #0054dc;
-    --brand-blue-light: rgba(255, 255, 255, 0.15); /* Subtle internal wash */
+    --brand-blue-light: rgba(255, 255, 255, 0.15); /* Subtle white-wash glow */
     --brand-orange: #ff8c00;
     --footer-bg: #0a254a;
     --white: #ffffff;
@@ -88,11 +88,11 @@ html, body {
     justify-content: space-between !important; 
     align-items: flex-start !important; 
     flex-wrap: wrap; 
-    gap: 40px; 
+    gap: 20px; 
 }
 
 /* LOGO STYLE & SOFT BLUE GLOW */
-.footer-visual-col { flex: 1; min-width: 250px; margin-top: 0 !important; }
+.footer-visual-col { flex: 0 0 250px; margin-top: 0 !important; }
 
 .footer-brand-mark { 
     max-width: 100% !important; 
@@ -108,7 +108,7 @@ html, body {
 /* Desktop: 100px nudge */
 .footer-nav-col { 
     flex: 1; 
-    min-width: 150px; 
+    min-width: 140px; 
     padding-top: 100px !important; 
 }
 
@@ -168,23 +168,17 @@ html, body {
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-/* --- 5. UI COMPONENTS (SOPHISTICATED PILL) --- */
+.footer-address { text-align: center; color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 20px; }
+
+/* --- 5. UI COMPONENTS --- */
 .btn-pill { 
-    display: inline-block; 
-    padding: 12px 45px; 
-    border: 4px solid #ffffff; /* Locked White Border */
-    border-radius: 50px; 
-    color: #ffffff; 
-    text-decoration: none; 
-    font-family: 'Poppins', sans-serif; 
-    font-size: 18px; 
-    font-weight: 500;
-    background-color: transparent;
-    transition: background-color 0.4s ease; 
+    display: inline-block; padding: 12px 45px; border: 4px solid #ffffff; border-radius: 50px; 
+    color: #ffffff; text-decoration: none; font-family: 'Poppins', sans-serif; 
+    font-size: 18px; font-weight: 500; transition: background-color 0.4s ease; 
 }
 
 .btn-pill:hover { 
-    background-color: var(--brand-blue-light) !important; /* Subtle internal glow */
+    background-color: var(--brand-blue-light) !important; 
     color: #ffffff !important;
 }
 
@@ -221,15 +215,17 @@ html, body {
         align-items: center !important; 
         text-align: center !important; 
         width: 100% !important;
+        gap: 0 !important; /* Unified look */
     }
 
     #main-footer .footer-visual-col { margin-bottom: 30px; }
 
+    /* UNIFIED MOBILE NAV BLOCK */
     #main-footer .footer-nav-col { 
         padding-top: 0 !important; 
         width: 100% !important;
         text-align: center !important;
-        margin-bottom: 30px;
+        margin-bottom: 0 !important; 
         display: block !important;
     }
 
@@ -243,7 +239,7 @@ html, body {
 
     #main-footer .footer-nav-col li {
         text-align: center !important;
-        margin: 0 0 12px 0 !important;
+        margin: 0 0 10px 0 !important;
         width: 100% !important;
     }
     
@@ -253,8 +249,9 @@ html, body {
         text-align: center !important;
     }
 
+    /* HORIZONTAL SOCIALS ON MOBILE */
     .social-strip {
-        flex-direction: column;
+        flex-direction: row !important;
         gap: 30px;
         align-items: center;
     }
