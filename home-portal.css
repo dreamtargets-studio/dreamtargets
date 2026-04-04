@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.19 - FINAL STATIC LOCK
+   THINKAMIGO HOME PORTAL v1.20 - FINAL ROBUST LOCK
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -25,200 +25,111 @@
     box-sizing: border-box;
 }
 
-.hero-logotype { 
-    grid-column: 1 / span 2 !important; 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.branding-logo { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-}
+.hero-logotype { grid-column: 1 / span 2 !important; display: flex; justify-content: flex-start; align-items: center; }
+.branding-logo { width: 100%; height: auto; display: block; }
 
 .hero-statement { 
     grid-column: 3 / span 2 !important; 
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
+    display: flex; justify-content: center; align-items: center; padding: 0 10px;
 }
 
 .branding-text { 
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    color: var(--white); 
-    font-size: 18px; 
-    font-weight: 400; 
-    margin: 0; 
-    line-height: 24px;
-    -webkit-font-smoothing: antialiased;
+    color: var(--white); font-size: 18px; font-weight: 400; 
+    margin: 0; line-height: 24px; -webkit-font-smoothing: antialiased;
 }
 
-.hero-action { 
-    grid-column: 5 / span 1 !important; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center; 
-}
+.hero-action { grid-column: 5 / span 1 !important; display: flex; justify-content: flex-end; align-items: center; }
 
 .pill-contact-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent !important;
-    color: #ffffff !important;
-    height: 52px; 
-    width: 100%; 
-    max-width: 180px; 
-    border: 4px solid #ffffff !important; 
-    border-radius: 50px !important;
-    text-decoration: none !important;
-    font-family: 'Segoe UI', Tahoma, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 16px; 
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
+    display: flex !important; align-items: center; justify-content: center;
+    background-color: transparent !important; color: #ffffff !important;
+    height: 52px; width: 100%; max-width: 180px; 
+    border: 4px solid #ffffff !important; border-radius: 50px !important;
+    text-decoration: none !important; font-family: 'Segoe UI', sans-serif !important;
+    font-weight: 700 !important; font-size: 16px; 
+    box-sizing: border-box; transition: background-color 0.3s ease;
 }
-
-.pill-contact-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-}
+.pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
 /* --- 2. DUAL GALLERY WRAPPERS --- */
-.hero-full-width-wrapper {
-    background-color: #e3e2d9; 
-    padding: 60px 0;
-    width: 100%;
-}
+.hero-full-width-wrapper { background-color: #e3e2d9; padding: 60px 0; width: 100%; }
+.blog-full-width-wrapper { background-color: #dbccbe; padding: 60px 0; width: 100%; }
 
-.blog-full-width-wrapper {
-    background-color: #dbccbe; 
-    padding: 60px 0;
-    width: 100%;
-}
-
-.home-hero-grid, 
-.blog-grid { 
-    display: grid; 
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 15px; 
-    margin: 0 auto;
-    max-width: 1200px; 
-    padding: 0 20px;
+.home-hero-grid, .blog-grid { 
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; 
+    margin: 0 auto; max-width: 1200px; padding: 0 20px;
 }
 
 /* --- 3. THE CARD ENGINE (Manual Corner Lock) --- */
-.home-hero-grid a, 
-.blog-grid a {
+.home-hero-grid a, .blog-grid a {
     text-decoration: none !important;
     color: inherit;
-    display: flex; 
-    flex-direction: column;
+    display: flex; flex-direction: column;
     background: #ffffff;
     height: 100%;
-    /* No overflow:hidden needed here */
     border-radius: 4px; 
 }
 
 /* --- 4. THE IMAGE (Top Corners Only) --- */
-.featured-card img, 
-.service-card img, 
-.blog-card img { 
-    width: 100%; 
-    aspect-ratio: 16 / 9; 
-    object-fit: cover; 
-    display: block;
-    /* Only round the top two corners to match the card */
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+.featured-card img, .service-card img, .blog-card img { 
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    border-top-left-radius: 4px; border-top-right-radius: 4px;
 }
 
-/* --- 5. THE CARD CONTENT (Bottom Corners Only) --- */
+/* --- 5. THE CARD CONTENT (Typography Restored) --- */
 .card-content { 
     padding: 12px 15px; 
-    flex-grow: 1; /* Ensures the white box fills the space */
+    flex-grow: 1; 
     background: #ffffff;
-    /* Only round the bottom two corners */
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;
+}
+
+/* Featured Card Headlines */
+.featured-card .card-content h2 { 
+    font-family: 'Poppins', sans-serif; font-weight: 600; 
+    font-size: 26px; color: var(--brand-blue); margin: 0 0 8px 0; line-height: 32px; 
+}
+.featured-card .card-content h3 { 
+    font-family: 'Poppins', sans-serif; font-weight: 500; 
+    font-size: 20px; color: #1a1a1a; margin: 0 0 12px 0; line-height: 26px; 
+}
+
+/* Standard Card Headlines */
+.service-card .card-content h3, .blog-card .card-content h3 { 
+    font-family: 'Poppins', sans-serif; font-weight: 600; 
+    font-size: 18px; color: #333; margin: 0 0 6px 0; letter-spacing: -0.01em; 
+}
+
+/* Card Body Text */
+.card-content p { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px; color: #555; line-height: 22px; margin: 0; 
 }
 
 /* --- 6. FEATURED CARD SPECIFIC --- */
-.featured-card { 
-    grid-column: span 2; 
-    grid-row: span 2; 
-}
-
-.featured-card .card-content { 
-    padding: 20px 15px; 
-}
+.featured-card { grid-column: span 2; grid-row: span 2; }
+.featured-card .card-content { padding: 20px 15px; }
 
 /* --- 7. AWARDS PANEL --- */
-.awards-full-width-wrapper {
-    background-color: #e3e2d9; 
-    padding: 60px 0;
-    width: 100%;
-    border-top: 1px solid rgba(0,0,0,0.05); 
-}
-
-.awards-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 40px; 
-    max-width: 1100px; 
-    margin: 0 auto;
-    padding: 0 20px;
-    align-items: center; 
-    justify-items: center;
-}
-
-.award-item img {
-    width: 100%;
-    max-width: 160px; 
-    height: auto;
-    display: block;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: all 0.4s ease;
-}
-
-.award-item:hover img {
-    filter: grayscale(0%);
-    opacity: 1;
-}
+.awards-full-width-wrapper { background-color: #e3e2d9; padding: 60px 0; width: 100%; border-top: 1px solid rgba(0,0,0,0.05); }
+.awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 20px; align-items: center; justify-items: center; }
+.award-item img { width: 100%; max-width: 160px; height: auto; display: block; filter: grayscale(100%); opacity: 0.6; transition: all 0.4s ease; }
+.award-item:hover img { filter: grayscale(0%); opacity: 1; }
 
 /* --- 8. MOBILE PORTRAIT LOCK --- */
 @media (max-width: 1024px) {
     .branding-intro-bar { padding: 20px 0; }
-    
-    .branding-flex { 
-        display: flex !important; 
-        flex-direction: column; 
-        gap: 6px; 
-        padding: 0 20px;
-    }
-
+    .branding-flex { display: flex !important; flex-direction: column; gap: 6px; padding: 0 20px; }
     .hero-logotype { width: 100%; justify-content: center; margin: 0; }
     .branding-logo { width: 100%; height: auto; }
-
-    .branding-text { 
-        font-size: 17px; 
-        text-align: center; 
-        line-height: 22px;
-        white-space: nowrap; 
-        margin: 0;
-        letter-spacing: -0.01em;
-    }
-
+    .branding-text { font-size: 17px; text-align: center; line-height: 22px; white-space: nowrap; margin: 0; letter-spacing: -0.01em; }
     .hero-action { display: none !important; }
 
     .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 20px; }
     .featured-card { grid-column: span 1; }
     .featured-card .card-content h2 { font-size: 22px; }
-
     .awards-grid { gap: 20px; }
     .award-item img { max-width: 100px; }
 }
