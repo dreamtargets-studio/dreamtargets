@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.53)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.54)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | STATIC ENGINE (No Hovers)
+   Architecture: 1250px Wide Horizon | 4-Col Mobile Awards
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
@@ -140,7 +140,7 @@
     max-width: 180px; 
     height: auto; 
     display: block; 
-    opacity: 0.5; /* Subdued watermark look - NO HOVER */
+    opacity: 0.5; /* STATIC 50% */
 }
 
 /* --- 6. RESPONSIVE BREAKPOINTS --- */
@@ -164,6 +164,9 @@
         padding: 0; 
     }
     .featured-card { grid-column: span 2 !important; }
+
+    /* RESTORED: 4 columns for mobile/tablet to show 4x2 grid */
+    .awards-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px; }
 }
 
 @media (max-width: 600px) {
@@ -172,5 +175,6 @@
     .hero-full-width-wrapper .container, 
     .blog-full-width-wrapper .container { padding: 0 20px !important; }
     
-    .awards-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    /* Ensure 4x2 grid persists on small mobile screens */
+    .awards-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 10px; }
 }
