@@ -1,13 +1,14 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.20 - FINAL ROBUST LOCK
+   THINKAMIGO HOME PORTAL v1.21 - FINAL SPATIAL LOCK
+   Features: Pixel Precision, Direct-Corner Radius, Tight Spacing
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* --- 1. THE BRANDING INTRO BAR --- */
+/* --- 1. THE BRANDING INTRO BAR (Tightened) --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
-    padding: 60px 0; 
+    padding: 40px 0; /* Reduced from 60px to reclaim top space */
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.1); 
     position: relative;
@@ -36,8 +37,12 @@
 
 .branding-text { 
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    color: var(--white); font-size: 18px; font-weight: 400; 
-    margin: 0; line-height: 24px; -webkit-font-smoothing: antialiased;
+    color: var(--white); 
+    font-size: 18px; 
+    font-weight: 400; 
+    margin: 0; 
+    line-height: 24px; 
+    -webkit-font-smoothing: antialiased;
 }
 
 .hero-action { grid-column: 5 / span 1 !important; display: flex; justify-content: flex-end; align-items: center; }
@@ -53,13 +58,26 @@
 }
 .pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-/* --- 2. DUAL GALLERY WRAPPERS --- */
-.hero-full-width-wrapper { background-color: #e3e2d9; padding: 60px 0; width: 100%; }
-.blog-full-width-wrapper { background-color: #dbccbe; padding: 60px 0; width: 100%; }
+/* --- 2. DUAL GALLERY WRAPPERS (Tightened) --- */
+.hero-full-width-wrapper { 
+    background-color: #e3e2d9; 
+    padding: 30px 0; /* Reduced from 60px to bring grid up */
+    width: 100%; 
+}
+
+.blog-full-width-wrapper { 
+    background-color: #dbccbe; 
+    padding: 50px 0; 
+    width: 100%; 
+}
 
 .home-hero-grid, .blog-grid { 
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; 
-    margin: 0 auto; max-width: 1200px; padding: 0 20px;
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; 
+    margin: 0 auto; 
+    max-width: 1200px; 
+    padding: 0 20px;
 }
 
 /* --- 3. THE CARD ENGINE (Manual Corner Lock) --- */
@@ -74,16 +92,21 @@
 
 /* --- 4. THE IMAGE (Top Corners Only) --- */
 .featured-card img, .service-card img, .blog-card img { 
-    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
-    border-top-left-radius: 4px; border-top-right-radius: 4px;
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    display: block;
+    border-top-left-radius: 4px; 
+    border-top-right-radius: 4px;
 }
 
-/* --- 5. THE CARD CONTENT (Typography Restored) --- */
+/* --- 5. THE CARD CONTENT (Typography & Bottom Radius) --- */
 .card-content { 
     padding: 12px 15px; 
     flex-grow: 1; 
     background: #ffffff;
-    border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px; 
+    border-bottom-right-radius: 4px;
 }
 
 /* Featured Card Headlines */
@@ -112,24 +135,60 @@
 .featured-card { grid-column: span 2; grid-row: span 2; }
 .featured-card .card-content { padding: 20px 15px; }
 
-/* --- 7. AWARDS PANEL --- */
-.awards-full-width-wrapper { background-color: #e3e2d9; padding: 60px 0; width: 100%; border-top: 1px solid rgba(0,0,0,0.05); }
-.awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 20px; align-items: center; justify-items: center; }
-.award-item img { width: 100%; max-width: 160px; height: auto; display: block; filter: grayscale(100%); opacity: 0.6; transition: all 0.4s ease; }
+/* --- 7. AWARDS PANEL (Stone Backdrop) --- */
+.awards-full-width-wrapper { 
+    background-color: #e3e2d9; 
+    padding: 60px 0; 
+    width: 100%; 
+    border-top: 1px solid rgba(0,0,0,0.05); 
+}
+
+.awards-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    align-items: center; 
+    justify-items: center; 
+}
+
+.award-item img { 
+    width: 100%; max-width: 160px; height: auto; display: block; 
+    filter: grayscale(100%); opacity: 0.6; transition: all 0.4s ease; 
+}
 .award-item:hover img { filter: grayscale(0%); opacity: 1; }
 
-/* --- 8. MOBILE PORTRAIT LOCK --- */
+/* --- 8. MOBILE PORTRAIT LOCK (Tightened) --- */
 @media (max-width: 1024px) {
-    .branding-intro-bar { padding: 20px 0; }
+    .branding-intro-bar { 
+        padding: 15px 0; /* Minimal footprint */
+    }
+    
+    .hero-full-width-wrapper {
+        padding: 20px 0; /* Brings grid up close to header */
+    }
+
     .branding-flex { display: flex !important; flex-direction: column; gap: 6px; padding: 0 20px; }
     .hero-logotype { width: 100%; justify-content: center; margin: 0; }
     .branding-logo { width: 100%; height: auto; }
-    .branding-text { font-size: 17px; text-align: center; line-height: 22px; white-space: nowrap; margin: 0; letter-spacing: -0.01em; }
+    
+    .branding-text { 
+        font-size: 17px; 
+        text-align: center; 
+        line-height: 22px; 
+        white-space: nowrap; 
+        margin: 0; 
+        letter-spacing: -0.01em; 
+    }
+
     .hero-action { display: none !important; }
 
-    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 20px; }
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 10px; }
     .featured-card { grid-column: span 1; }
     .featured-card .card-content h2 { font-size: 22px; }
+
     .awards-grid { gap: 20px; }
     .award-item img { max-width: 100px; }
 }
