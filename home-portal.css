@@ -1,12 +1,13 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.40)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.41)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
+   Architecture: 5-Column Synchronized Lockstep
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background-color: var(--brand-blue); 
-    padding: 60px 0; 
+    padding: 80px 0; /* Slightly more air to match the footer vibe */
     width: 100%; 
     clear: both; 
     display: block;
@@ -14,20 +15,41 @@
 
 .branding-flex { 
     display: grid !important; 
+    /* SYNCED GRID: 5 columns to match the hero grid below */
     grid-template-columns: repeat(5, 1fr) !important; 
     gap: 20px; 
     align-items: center; 
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.hero-logotype { grid-column: span 2; }
-.hero-statement { grid-column: span 2; text-align: center; }
-.hero-action { grid-column: span 1; display: flex; justify-content: flex-end; }
+/* THE ANCHOR: This must be span 2 to match the featured-card below */
+.hero-logotype { 
+    grid-column: span 2 !important; 
+}
+
+.hero-logotype img { 
+    width: 100%; /* Ensures logo fills the 2-column span for flush alignment */
+    height: auto; 
+    display: block; 
+}
+
+.hero-statement { 
+    grid-column: span 2 !important; 
+    text-align: center; 
+}
+
+.hero-action { 
+    grid-column: span 1 !important; 
+    display: flex; 
+    justify-content: flex-end; 
+}
 
 .branding-text { 
-    font-size: 20px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px; 
     line-height: 1.4; 
     color: #ffffff; 
     margin: 0;
@@ -56,6 +78,7 @@
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* --- 3. THE CARD ENGINE --- */
@@ -91,6 +114,7 @@
 }
 
 /* --- 4. SPECIFIC CARD SPANS --- */
+/* THE MIRROR: This spans 2 columns, exactly like the logotype above */
 .featured-card { 
     grid-column: span 2 !important; 
     grid-row: span 2 !important; 
@@ -117,7 +141,7 @@
     margin: 0; 
 }
 
-/* --- 5. AWARDS PANEL (Static) --- */
+/* --- 5. AWARDS PANEL --- */
 .awards-full-width-wrapper { 
     background-color: #e3e2d9; 
     padding: 80px 0; 
@@ -143,7 +167,7 @@
     display: block; 
 }
 
-/* --- 6. RESPONSIVE BREAKPOINTS --- */
+/* --- 6. RESPONSIVE BREAKPOINTS (Staging - Explanations Pending) --- */
 @media (max-width: 1024px) {
     .branding-flex { display: flex; flex-direction: column; text-align: center; gap: 20px; }
     .hero-action { display: none; }
