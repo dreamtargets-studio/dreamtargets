@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.4
+   THINKAMIGO DESTINATION ENGINE v2.5
    Architecture: 1250px Horizon | 800px Editorial Rail
-   Features: Zero-Gap Cinematic Hero, Stone Horizon Sync
+   Features: 1250px Paper Sheet, Zero-Gap Hero, Stone Sync
    ============================================================ */
 
 :root {
@@ -12,7 +12,7 @@
 
 /* 1. GLOBAL PAGE BASE */
 body.content-page {
-    background-color: var(--stone-bg);
+    background-color: var(--stone-bg); /* The "Desk" surface */
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
@@ -23,36 +23,44 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: var(--stone-bg);
+    background-color: var(--stone-bg); /* Matches body for "wings" */
     display: flex;
     justify-content: center;        
     border-top: 1px solid #ffffff; 
-    margin-top: 0;           /* Zero-Gap Fix */
-    line-height: 0;          /* Zero-Gap Fix: Removes whitespace below nav */
+    margin-top: 0;
+    line-height: 0;          /* Removes whitespace gap below nav */
 }
 
 .panoramic-hero {
-    /* FLUIDITY & PROPORTION */
-    width: 100%;             /* Fills browser 100% when < 1250px */
-    max-width: 1250px;       /* Stops at the Brand Horizon */
-    height: auto;            /* Maintains natural aspect ratio (No-Crop) */
-    display: block;          /* Removes the inline 4px bottom gap */
-    
-    /* RESET */
+    width: 100%;             
+    max-width: 1250px;       /* The Brand Horizon */
+    height: auto;            
+    display: block;          
     aspect-ratio: auto;      
     object-fit: contain;     
 }
 
-/* 3. THE TEXT RAIL 
-   Optimized for line-length and readability */
+/* 3. THE PAPER SHEET 
+   The white 1250px container that aligns with the hero */
+.paper-sheet {
+    background-color: #ffffff;
+    max-width: 1250px;       /* Matches Hero exactly */
+    margin: 0 auto;          /* Centers it on the stone background */
+    min-height: 600px;
+    padding-bottom: 80px;    /* Breathing room at the end of the page */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle lift */
+}
+
+/* 4. THE TEXT RAIL 
+   Optimized for line-length and readability within the Paper */
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
-    width: 90%;              /* Breathing room on mobile */
+    width: 90%;              
     padding: 60px 0;
 }
 
-/* 4. STORY HEADINGS & ACCENTS */
+/* 5. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
     font-size: 2.8rem; 
     font-weight: 900; 
@@ -68,14 +76,6 @@ body.content-page {
     margin-bottom: 25px; 
 }
 
-.text-rail h2.short-description {
-    font-size: 1.35rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: #444;
-    margin-bottom: 30px;
-}
-
 .text-rail h3 {
     font-size: 1.25rem;
     font-weight: 600;
@@ -83,7 +83,7 @@ body.content-page {
     margin: 40px 0 15px 0;
 }
 
-/* 5. THE GALLERY GRID (3-UP) */
+/* 6. THE GALLERY GRID (3-UP) */
 .gallery-grid-3 {
     display: flex;
     flex-wrap: wrap;
@@ -101,21 +101,26 @@ body.content-page {
     width: 100%;
     height: auto;
     border: 1px solid #ddd;
-    cursor: zoom-in;
 }
 
-/* 6. EDITORIAL CAPTIONS */
+/* 7. EDITORIAL CAPTIONS */
 .caption {
     background: #f4f3ef;
     padding: 10px 15px;
-    margin-top: -15px; /* Docks with image */
+    margin-top: -15px;
     margin-bottom: 20px;
     font-size: 0.85rem;
     color: #666;
     border-left: 3px solid var(--brand-orange);
 }
 
-/* 7. MOBILE RESPONSIVE */
+/* 8. MOBILE RESPONSIVE */
+@media (max-width: 1250px) {
+    .paper-sheet {
+        box-shadow: none; /* Flatten when it fills the screen width */
+    }
+}
+
 @media (max-width: 768px) {
     .text-rail { 
         width: 92%; 
@@ -123,6 +128,6 @@ body.content-page {
     }
     .text-rail h1 { font-size: 2.2rem; }
     .gallery-grid-3 figure { 
-        flex: 0 0 100%; /* Stack fully on phones */
+        flex: 0 0 100%; 
     }
 }
