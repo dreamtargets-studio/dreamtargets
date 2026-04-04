@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v2.8 - FULL-WIDTH NAV SYNC
+   THINKAMIGO CHASSIS v2.9 - MOBILE PADDING SYNC
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -36,11 +36,10 @@ html, body {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center;
-    /* Removed 1200px max-width to allow edge-to-edge */
     width: 100% !important; 
     max-width: none !important; 
     margin: 0;
-    padding: 10px 60px; /* Side breathing room for ultra-wide screens */
+    padding: 10px 60px; /* Desktop Breathing Room */
     box-sizing: border-box;
 }
 
@@ -52,7 +51,7 @@ html, body {
 
 .nav-links {
     display: flex !important;
-    gap: 18px; /* Tighter gap to accommodate 8+ links */
+    gap: 18px; 
     align-items: center;
     list-style: none;
     margin: 0;
@@ -118,19 +117,35 @@ html, body {
 
 /* --- 5. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
-    #main-nav .nav-flex { padding: 10px 20px; }
+    #main-nav .nav-flex { 
+        padding: 10px 20px; /* Tighter logo/hamburger padding */
+    }
+
     .hamburger { display: flex !important; }
+
     .nav-links {
         display: none !important;
         position: absolute;
         top: 100%; left: 0; width: 100%;
         background-color: var(--brand-blue);
         flex-direction: column;
-        padding: 20px 0;
+        padding: 10px 0;
         z-index: 3001;
     }
-    .menu-toggle:checked ~ .nav-links { display: flex !important; }
-    .nav-links a { padding: 15px 40px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); }
+
+    /* Checkbox Trigger */
+    .menu-toggle:checked ~ .nav-links { 
+        display: flex !important; 
+    }
+
+    /* THE ALIGNMENT FIX: 30px Margin inside dropdown */
+    .nav-links a { 
+        padding: 15px 30px !important; 
+        width: 100%; 
+        box-sizing: border-box; 
+        border-top: 1px solid rgba(255,255,255,0.1); 
+        text-align: left;
+    }
 }
 
 @media (max-width: 768px) {
