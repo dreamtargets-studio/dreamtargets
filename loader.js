@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.2
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.3
    Features: HTML Partials, Lightbox, Audio Engine, UI Utils
-   Architecture: Pixel-Perfect Scroll Triggers
+   Architecture: Pixel-Perfect Scroll Triggers & Fixed UI Hooks
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hRes.ok) {
                 const hData = await hRes.text();
                 const headerSocket = document.getElementById('main-nav');
-                if (headerSocket) headerSocket.innerHTML = hData;
+                if (headerSocket) {
+                    headerSocket.innerHTML = hData;
+                    // Initialize Mobile Menu specifically after header is in
+                    setupMobileMenu();
+                }
             }
 
             // Fetch and Inject Footer
@@ -30,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Initialize Mobile Menu
-            setupMobileMenu();
-
         } catch (err) {
             console.error("Critical: Partial injection failed.", err);
         }
@@ -40,9 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. MODULE: MOBILE MENU ---
     const setupMobileMenu = () => {
-        const btn = document.getElementById('menu-toggle');
-        const nav = document.querySelector('.nav-links');
-        // Logic left open for future animation states; Checkbox handles primary toggle.
+        const checkbox = document.getElementById('menu-toggle');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        if (!checkbox) return;
+
+        // Auto-close menu when a link is clicked (Essential for One-Page sections)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                checkbox.checked = false;
+            });
+        });
     };
 
     // --- 3. MODULE: LIGHTBOX (Galleries & Archives) ---
@@ -111,10 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const topBtn = document.getElementById('backToTop');
         if (!topBtn) return;
 
-        // Optimized scroll listener for appearance
+        // Use a throttle-style check for scroll performance
         window.addEventListener('scroll', () => {
             // Appears after 400px of scrolling
-            if (window.pageYOffset > 400) {
+            if (window.scrollY > 400) {
                 topBtn.classList.add('show');
             } else {
                 topBtn.classList.remove('show');
