@@ -1,13 +1,12 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.58)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.59)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | High-Efficiency Branding
+   Architecture: 1250px Wide Horizon | 5px Edge Utility
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR (TIGHTENED) --- */
 .branding-intro-bar { 
     background-color: var(--brand-blue); 
-    /* RECLAIMED: Dropped from 80px to 40px to pull cards up */
     padding: 40px 0; 
     width: 100%; 
     clear: both; 
@@ -62,19 +61,8 @@
 }
 
 /* --- 2. THE DUAL GRID WRAPPERS --- */
-.hero-full-width-wrapper { 
-    background-color: #e3e2d9; 
-    padding: 30px 0 50px; 
-    width: 100%; 
-    clear: both; 
-}
-
-.blog-full-width-wrapper { 
-    background-color: #dbccbe; 
-    padding: 30px 0 50px; 
-    width: 100%; 
-    clear: both; 
-}
+.hero-full-width-wrapper { background-color: #e3e2d9; padding: 30px 0 50px; width: 100%; clear: both; }
+.blog-full-width-wrapper { background-color: #dbccbe; padding: 30px 0 50px; width: 100%; clear: both; }
 
 .home-hero-grid, .blog-grid { 
     display: grid !important; 
@@ -127,15 +115,21 @@
 .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1150px; margin: 0 auto; padding: 0 20px; align-items: center; justify-items: center; }
 .award-item img { width: 100%; max-width: 180px; height: auto; display: block; opacity: 0.5; }
 
-/* --- 7. RESPONSIVE BREAKPOINTS --- */
+/* --- 7. BACK TO TOP / SCROLL UI (5PX EDGE LOCK) --- */
+.scroll-up, #back-to-top, .back-to-top, .scroll-to-top {
+    position: fixed !important;
+    right: 5px !important;
+    bottom: 20px !important;
+    z-index: 9999;
+}
+
+/* --- 8. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1280px) {
     .home-hero-grid, .blog-grid { padding: 0 20px; }
 }
 
 @media (max-width: 1024px) {
-    /* MOBILE TIGHTEN: Padding dropped to 30px */
     .branding-intro-bar { padding: 30px 0; }
-    
     .branding-flex { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 20px; padding: 0 20px; }
     .hero-logotype { width: 100%; max-width: 320px; } 
     .hero-statement h1, .branding-text { white-space: normal; font-size: 18px; text-align: center; }
