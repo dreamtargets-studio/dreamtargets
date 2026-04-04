@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.11
-   Complete System: Branding Bar, 5-Column Grid, Editorial Cards
+   THINKAMIGO HOME PORTAL v1.12
+   Complete System: Architectural Grid + Editorial Typography
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -103,7 +103,15 @@
     padding: 0 20px;
 }
 
-/* --- 3. THE FEATURED CARD (Poppins v1.0 Style) --- */
+/* --- 3. CARD LINK RESET (The Decoration Fix) --- */
+.home-hero-grid a, 
+.blog-grid a {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+/* --- 4. THE FEATURED CARD (Poppins Semi-Bold) --- */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
@@ -121,23 +129,22 @@
 .featured-card .card-content h2 { 
     font-family: 'Poppins', sans-serif;
     font-weight: 600; 
-    font-size: 26px; /* Matched to legacy H2 */
+    font-size: 26px; 
     color: var(--brand-blue); 
     margin: 0 0 8px 0; 
     line-height: 1.2;
-    -webkit-font-smoothing: antialiased;
 }
 
 .featured-card .card-content h3 { 
     font-family: 'Poppins', sans-serif;
     font-weight: 500; 
-    font-size: 19px; /* Matched to legacy H3 */
+    font-size: 19px; 
     color: #1a1a1a; 
     margin: 0 0 12px 0; 
     line-height: 1.4;
 }
 
-/* --- 4. STANDARD SERVICE & BLOG CARDS --- */
+/* --- 5. STANDARD CARDS --- */
 .service-card, .blog-card { 
     background: #fff; 
     display: flex; 
@@ -164,7 +171,7 @@
     margin: 0; 
 }
 
-/* --- 5. IMAGE RATIOS --- */
+/* --- 6. IMAGE RATIOS --- */
 .featured-card img, 
 .service-card img, 
 .blog-card img { 
@@ -174,7 +181,7 @@
     display: block;
 }
 
-/* --- 6. MOBILE & TABLET RESPONSIVE --- */
+/* --- 7. MOBILE & TABLET RESPONSIVE --- */
 @media (max-width: 1024px) {
     .branding-intro-bar { 
         padding: 20px 0; 
