@@ -23,18 +23,17 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: #000;         /* Cinematic "black bars" on ultra-wide */
+    background-color: #ffffff;
     display: flex;
-    justify-content: center;        /* Centers image when browser > 1250px */
-    border-top: 1px solid #ffffff;  /* The crisp white separator line */
-    overflow: hidden;
+    justify-content: center;
+    /* Removed border and overflow */
 }
 
 .panoramic-hero {
-    width: 100%;                    /* Fluid: fills browser < 1250px */
-    max-width: 1250px;              /* Fixed: stops growing at brand horizon */
+    width: 100%;
+    max-width: 1250px;
     height: auto;
-    aspect-ratio: 21 / 9;           /* Precise cinematic crop */
+    aspect-ratio: 21 / 9;
     object-fit: cover;
     display: block;
 }
