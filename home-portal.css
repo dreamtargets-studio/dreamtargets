@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.43)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.44)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 5-Column Synchronized Lockstep (Single Line H1)
+   Architecture: 5-Column Synchronized Lockstep (Hero Button Sync)
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
@@ -36,30 +36,51 @@
     display: block; 
 }
 
-/* Slot 2: Columns 3-4 (Matches the next 2 Vertical Card Tracks) */
+/* Slot 2: Columns 3-4 (Matches middle cards) */
 .hero-statement { 
     grid-column: span 2 !important; 
     text-align: center; 
     padding: 0 10px;
 }
 
-/* Slot 3: Column 5 (Endcap) */
+/* Slot 3: Column 5 (Endcap - Aligned with last card) */
 .hero-action { 
     grid-column: span 1 !important; 
     display: flex; 
     justify-content: flex-end; 
 }
 
-/* THE H1 & BRANDING TEXT - NO-WRAP PRECISION */
+/* THE H1 & BRANDING TEXT */
 .hero-statement h1, .branding-text { 
     font-family: 'Poppins', sans-serif;
-    font-size: 18px; /* Reduced to prevent wrapping in 2-col track */
+    font-size: 18px; 
     line-height: 1.2; 
     color: #ffffff; 
     margin: 0;
     font-weight: 400;
-    letter-spacing: -0.02em; /* Tighter tracking for single-line fit */
-    white-space: nowrap; /* Forces text to stay on one line */
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+/* HERO PILL STYLE: Sync with Footer but tuned for Blue BG */
+.btn-pill-hero { 
+    display: inline-block; 
+    padding: 10px 35px; 
+    border: 4px solid #ffffff; 
+    border-radius: 50px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px; 
+    font-weight: 500;
+    background-color: transparent;
+    transition: background-color 0.4s ease;
+    white-space: nowrap;
+}
+
+.btn-pill-hero:hover { 
+    background-color: rgba(255, 255, 255, 0.15) !important; /* Subtle internal wash */
+    color: #ffffff !important;
 }
 
 /* --- 2. THE DUAL GRID WRAPPERS --- */
@@ -174,11 +195,20 @@
 
 /* --- 6. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1024px) {
-    .branding-flex { display: flex; flex-direction: column; text-align: center; gap: 20px; }
-    .hero-action { display: none; }
+    .branding-flex { 
+        display: flex; 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 30px; 
+    }
+    .hero-action { 
+        display: block; 
+        margin: 0 auto; 
+        justify-content: center;
+    }
     .home-hero-grid, .blog-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .featured-card { grid-column: span 2 !important; }
-    .hero-statement h1, .branding-text { white-space: normal; } /* Restore wrapping for small screens */
+    .hero-statement h1, .branding-text { white-space: normal; font-size: 18px; } 
 }
 
 @media (max-width: 600px) {
