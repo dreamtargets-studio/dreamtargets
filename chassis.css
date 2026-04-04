@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.3 - FULL SOCIAL & CENTER SYNC
-   Structure: Full-Width Nav | Strict Mobile Toggle | 100px Nudge
+   THINKAMIGO CHASSIS v4.5 - MASTER SYNC
+   Structure: Full-Width Nav | Mobile Toggle | 100px Nudge | Logo Glow
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -91,8 +91,19 @@ html, body {
     gap: 40px; 
 }
 
+/* LOGO STYLE & SOFT GLOW */
 .footer-visual-col { flex: 1; min-width: 250px; margin-top: 0 !important; }
-.footer-brand-mark { max-width: 100% !important; height: auto !important; display: block; }
+
+.footer-brand-mark { 
+    max-width: 100% !important; 
+    height: auto !important; 
+    display: block;
+    transition: filter 0.4s ease-in-out; 
+}
+
+.footer-visual-col a:hover .footer-brand-mark {
+    filter: drop-shadow(0 0 15px rgba(51, 133, 255, 0.8));
+}
 
 /* Desktop: 100px nudge */
 .footer-nav-col { 
@@ -103,7 +114,13 @@ html, body {
 
 .footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
 .footer-nav-col li { margin-bottom: 10px; }
-.footer-nav-col a { color: rgba(255,255,255,0.7) !important; text-decoration: none; font-size: 0.9rem; font-family: 'Poppins', sans-serif; transition: 0.3s; }
+.footer-nav-col a { 
+    color: rgba(255,255,255,0.7) !important; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    font-family: 'Poppins', sans-serif; 
+    transition: 0.3s ease;
+}
 .footer-nav-col a:hover { color: var(--brand-orange) !important; }
 
 .footer-cta { 
@@ -111,6 +128,45 @@ html, body {
     text-align: center; 
     width: 100%;
 }
+
+/* SOCIALS SYNC: Icons centered over text links */
+.social-strip { 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    margin: 40px 0; 
+}
+
+.social-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.social-icon { 
+    width: 28px; 
+    height: 28px; 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.social-item span {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s ease;
+}
+
+.social-item a:hover span {
+    color: var(--brand-orange) !important;
+}
+
+.icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
+.icon-substack { background-image: url('assets/img/icon-substack.png'); }
+.icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
 /* --- 5. UI COMPONENTS --- */
 .btn-pill { 
@@ -125,48 +181,12 @@ html, body {
     color: #ffffff !important;
 }
 
-.back-to-top { position: fixed; bottom: 200px; right: 30px; width: 44px; height: 44px; background-color: #666666; z-index: 9999; display: none; align-items: center; justify-content: center; opacity: 0.5; }
+.back-to-top { 
+    position: fixed; bottom: 200px; right: 30px; width: 44px; height: 44px; 
+    background-color: #666666; z-index: 9999; display: none; 
+    align-items: center; justify-content: center; opacity: 0.5; 
+}
 .back-to-top.show { display: flex !important; }
-
-/* SOCIAL STRIP UPDATED: Icons centered over text */
-.social-strip { 
-    display: flex; 
-    justify-content: center; 
-    gap: 40px; 
-    margin: 40px 0; 
-}
-
-.social-item a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    transition: 0.3s ease;
-}
-
-.social-icon { 
-    width: 28px; 
-    height: 28px; 
-    background-size: contain; 
-    background-repeat: no-repeat; 
-    background-position: center;
-}
-
-/* Sync Social Text with Nav Link Styles */
-.social-item span {
-    margin-top: 10px;
-    color: rgba(255,255,255,0.7) !important;
-    font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-.social-item a:hover span {
-    color: var(--brand-orange) !important;
-}
-
-.icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
-.icon-substack { background-image: url('assets/img/icon-substack.png'); }
-.icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
 /* --- 6. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
@@ -226,7 +246,6 @@ html, body {
         text-align: center !important;
     }
 
-    /* Stack Socials on Mobile */
     .social-strip {
         flex-direction: column;
         gap: 30px;
