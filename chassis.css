@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.9 - HIGH-RISE UI
-   Structure: 3-Col Footer | 100px Nudge | 200px Floating UI
+   THINKAMIGO CHASSIS v5.0 - THE FINAL MASTER SYNC
+   Structure: 3-Col Footer | 100px Nudge | 200px UI | Enhanced Spacing
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -91,7 +91,6 @@ html, body {
     gap: 20px; 
 }
 
-/* LOGO STYLE & SOFT BLUE GLOW */
 .footer-visual-col { flex: 0 0 250px; margin-top: 0 !important; }
 
 .footer-brand-mark { 
@@ -105,7 +104,6 @@ html, body {
     filter: drop-shadow(0 0 15px rgba(51, 133, 255, 0.8));
 }
 
-/* Desktop: 100px nudge */
 .footer-nav-col { 
     flex: 1; 
     min-width: 140px; 
@@ -123,18 +121,20 @@ html, body {
 }
 .footer-nav-col a:hover { color: var(--brand-orange) !important; }
 
+/* SPACED CTA: Increased margins for breathing room */
 .footer-cta { 
-    margin-top: 50px; 
+    margin-top: 80px; 
+    margin-bottom: 60px;
     text-align: center; 
     width: 100%;
 }
 
-/* SOCIALS SYNC */
+/* SOCIALS SYNC: Vertical stack per icon, Horizontal row for strip */
 .social-strip { 
     display: flex; 
     justify-content: center; 
     gap: 40px; 
-    margin: 40px 0; 
+    margin: 20px 0 40px; 
 }
 
 .social-item a {
@@ -182,10 +182,10 @@ html, body {
     color: #ffffff !important;
 }
 
-/* BACK TO TOP: High-Rise Logic */
+/* BACK TO TOP: Square Semi-Opaque High-Rise */
 .back-to-top { 
     position: fixed; 
-    bottom: 200px; /* Clears Mac Dock & Mobile Nav Clutter */
+    bottom: 200px; 
     right: 30px; 
     width: 44px; 
     height: 44px; 
@@ -276,6 +276,7 @@ html, body {
         text-align: center !important;
     }
 
+    /* HORIZONTAL SOCIALS: Enforce row layout even on narrow screens */
     .social-strip {
         flex-direction: row !important;
         gap: 30px;
@@ -283,7 +284,7 @@ html, body {
     }
 
     .back-to-top {
-        bottom: 200px; /* Unified ergonomic height */
+        bottom: 200px;
         right: 20px;
         width: 40px;
         height: 40px;
