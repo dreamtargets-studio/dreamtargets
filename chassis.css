@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v4.5 - MASTER SYNC
-   Structure: Full-Width Nav | Mobile Toggle | 100px Nudge | Logo Glow
+   THINKAMIGO CHASSIS v4.6 - SOPHISTICATED SYNC
+   Structure: Full-Width Nav | Mobile Toggle | 100px Nudge | Subtle UI
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
     --brand-blue: #0054dc;
-    --brand-blue-light: #3385ff;
+    --brand-blue-light: rgba(255, 255, 255, 0.15); /* Subtle internal wash */
     --brand-orange: #ff8c00;
     --footer-bg: #0a254a;
     --white: #ffffff;
@@ -91,7 +91,7 @@ html, body {
     gap: 40px; 
 }
 
-/* LOGO STYLE & SOFT GLOW */
+/* LOGO STYLE & SOFT BLUE GLOW */
 .footer-visual-col { flex: 1; min-width: 250px; margin-top: 0 !important; }
 
 .footer-brand-mark { 
@@ -168,16 +168,23 @@ html, body {
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-/* --- 5. UI COMPONENTS --- */
+/* --- 5. UI COMPONENTS (SOPHISTICATED PILL) --- */
 .btn-pill { 
-    display: inline-block; padding: 12px 45px; border: 4px solid #fff; border-radius: 50px; 
-    color: #fff; text-decoration: none; font-family: 'Poppins', sans-serif; 
-    font-size: 18px; font-weight: 500; transition: all 0.3s ease;
+    display: inline-block; 
+    padding: 12px 45px; 
+    border: 4px solid #ffffff; /* Locked White Border */
+    border-radius: 50px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 18px; 
+    font-weight: 500;
+    background-color: transparent;
+    transition: background-color 0.4s ease; 
 }
 
 .btn-pill:hover { 
-    background-color: var(--brand-blue-light) !important; 
-    border-color: var(--brand-blue-light) !important; 
+    background-color: var(--brand-blue-light) !important; /* Subtle internal glow */
     color: #ffffff !important;
 }
 
