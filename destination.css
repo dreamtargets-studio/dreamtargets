@@ -1,11 +1,11 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.6
+   THINKAMIGO DESTINATION ENGINE v2.7
    Architecture: 1250px Horizon | 800px Editorial Rail
-   Features: Hairline Accents, Tight Vertical Tracking, Stone Sync
+   Features: SATURATION LOCK (#0054dc), Hairline Accents, Paper Sheet
    ============================================================ */
 
 :root {
-    --brand-blue: #0056b3;
+    --brand-blue: #0054dc;    /* FIXED: Matches Index.html saturation */
     --brand-orange: #ff6600;
     --stone-bg: #e3e2d9;
 }
@@ -19,7 +19,13 @@ body.content-page {
     color: #333;
 }
 
-/* 2. THE CINEMATIC HERO ENGINE 
+/* 2. THE NAV SATURATION LOCK 
+   Ensures the #main-nav uses the electric index blue */
+#main-nav {
+    background-color: var(--brand-blue) !important;
+}
+
+/* 3. THE CINEMATIC HERO ENGINE 
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
@@ -40,7 +46,7 @@ body.content-page {
     object-fit: contain;     
 }
 
-/* 3. THE PAPER SHEET 
+/* 4. THE PAPER SHEET 
    The white 1250px container that aligns with the hero */
 .paper-sheet {
     background-color: #ffffff;
@@ -51,7 +57,7 @@ body.content-page {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle lift */
 }
 
-/* 4. THE TEXT RAIL 
+/* 5. THE TEXT RAIL 
    Reduced top padding to bring H1 closer to the header */
 .text-rail {
     max-width: 800px;
@@ -60,7 +66,7 @@ body.content-page {
     padding: 30px 0 60px 0;  /* Tighter 30px top padding */
 }
 
-/* 5. STORY HEADINGS & ACCENTS */
+/* 6. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
     font-size: 2.8rem; 
     font-weight: 900; 
@@ -83,7 +89,7 @@ body.content-page {
     margin: 40px 0 15px 0;
 }
 
-/* 6. THE GALLERY GRID (3-UP) */
+/* 7. THE GALLERY GRID (3-UP) */
 .gallery-grid-3 {
     display: flex;
     flex-wrap: wrap;
@@ -103,7 +109,7 @@ body.content-page {
     border: 1px solid #ddd;
 }
 
-/* 7. EDITORIAL CAPTIONS */
+/* 8. EDITORIAL CAPTIONS */
 .caption {
     background: #f4f3ef;
     padding: 10px 15px;
@@ -114,7 +120,7 @@ body.content-page {
     border-left: 3px solid var(--brand-orange);
 }
 
-/* 8. MOBILE RESPONSIVE */
+/* 9. MOBILE RESPONSIVE */
 @media (max-width: 1250px) {
     .paper-sheet {
         box-shadow: none; /* Flatten when it fills the screen width */
