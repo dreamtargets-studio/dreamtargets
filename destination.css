@@ -1,14 +1,31 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.2 (1250px Sync)
+   THINKAMIGO DESTINATION ENGINE v2.3
+   Architecture: 1250px Horizon | 800px Editorial Rail
+   Features: Cinematic Hero, Orange Accent Sync, Responsive Grid
    ============================================================ */
 
-/* 1. THE CINEMATIC HERO ENGINE 
+:root {
+    --brand-blue: #0056b3;
+    --brand-orange: #ff6600;
+    --stone-bg: #e3e2d9;
+}
+
+/* 1. GLOBAL PAGE BASE */
+body.content-page {
+    background-color: var(--stone-bg);
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* 2. THE CINEMATIC HERO ENGINE 
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: #000;         /* Cinematic black bars on ultra-wide */
+    background-color: #000;         /* Cinematic "black bars" on ultra-wide */
     display: flex;
-    justify-content: center;        /* Centers the image when browser > 1250px */
+    justify-content: center;        /* Centers image when browser > 1250px */
     border-top: 1px solid #ffffff;  /* The crisp white separator line */
     overflow: hidden;
 }
@@ -22,34 +39,47 @@
     display: block;
 }
 
-/* 2. THE TEXT RAIL 
-   Kept at 800px for optimal line-length and readability */
+/* 3. THE TEXT RAIL 
+   Optimized for line-length and readability */
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
     width: 90%;                     /* Breathing room on mobile */
     padding: 60px 0;
-    font-family: 'Poppins', sans-serif;
 }
 
-/* 3. STORY HEADINGS (Precision Tuned) */
+/* 4. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
-    font-size: 2.5rem; 
+    font-size: 2.8rem; 
     font-weight: 900; 
     line-height: 1.1; 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: var(--brand-blue);
+}
+
+.orange-rule { 
+    width: 60px; 
+    height: 4px; 
+    background-color: var(--brand-orange); 
+    margin-bottom: 25px; 
 }
 
 .text-rail h2.short-description {
     font-size: 1.35rem;
     font-weight: 300;
     letter-spacing: 0.05em;
-    color: #222;
+    color: #444;
     margin-bottom: 30px;
 }
 
-/* 4. THE GALLERY GRID (3-UP)
-   Strictly scoped so it doesn't fight with the Home Portal grid */
+.text-rail h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--brand-blue);
+    margin: 40px 0 15px 0;
+}
+
+/* 5. THE GALLERY GRID (3-UP) */
 .gallery-grid-3 {
     display: flex;
     flex-wrap: wrap;
@@ -66,24 +96,35 @@
 .gallery-grid-3 img {
     width: 100%;
     height: auto;
-    border: 1px solid #444;
-    cursor: zoom-in; /* Signals Lightbox readiness */
+    border: 1px solid #ddd;
+    cursor: zoom-in;
 }
 
-/* 5. EDITORIAL CAPTIONS */
+/* 6. EDITORIAL CAPTIONS */
 .caption {
-    background: #e7e6df;
-    padding: 8px 15px;
-    margin-top: -15px; /* Pulls up to "dock" with the image above */
+    background: #f4f3ef;
+    padding: 10px 15px;
+    margin-top: -15px; /* Docks with image */
     margin-bottom: 20px;
     font-size: 0.85rem;
-    color: #444;
+    color: #666;
+    border-left: 3px solid var(--brand-orange);
 }
 
-/* 6. MOBILE RESPONSIVE 
-   Ensures the text rail expands and galleries stack on phones */
+/* 7. MOBILE RESPONSIVE */
+@media (max-width: 1024px) {
+    .panoramic-hero {
+        aspect-ratio: 16 / 9; /* Taller on tablets for better impact */
+    }
+}
+
 @media (max-width: 768px) {
-    .text-rail { width: 92%; padding: 30px 0; }
-    .gallery-grid-3 figure { flex: 0 0 calc(50% - 8px); }
-    .paper-sheet { border: none; }
+    .text-rail { 
+        width: 92%; 
+        padding: 40px 0; 
+    }
+    .text-rail h1 { font-size: 2.2rem; }
+    .gallery-grid-3 figure { 
+        flex: 0 0 100%; /* Stack fully on phones */
+    }
 }
