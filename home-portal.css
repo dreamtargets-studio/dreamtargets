@@ -1,11 +1,10 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.14
-   Complete System: Dual-Tone Gallery Backgrounds
+   THINKAMIGO HOME PORTAL v1.18 - FINAL PIXEL LOCK
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* --- 1. THE BRANDING INTRO BAR (Architectural Lock) --- */
+/* --- 1. THE BRANDING INTRO BAR --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
     padding: 60px 0; 
@@ -26,28 +25,74 @@
     box-sizing: border-box;
 }
 
-.hero-logotype { grid-column: 1 / span 2 !important; display: flex; justify-content: flex-start; align-items: center; }
-.branding-logo { width: 100%; height: auto; display: block; }
+/* LOCK 1: Logotype to Hero Image (Columns 1 & 2) */
+.hero-logotype { 
+    grid-column: 1 / span 2 !important; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 
-.hero-statement { grid-column: 3 / span 2 !important; text-align: center; display: flex; justify-content: center; align-items: center; padding: 0 10px; }
-.branding-text { font-family: 'Segoe UI', Tahoma, sans-serif; color: var(--white); font-size: 1.15rem; font-weight: 400; margin: 0; line-height: 1.3; -webkit-font-smoothing: antialiased; }
+.branding-logo { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
 
-.hero-action { grid-column: 5 / span 1 !important; display: flex; justify-content: flex-end; align-items: center; }
+/* LOCK 2: H1 Statement centered over Columns 3 & 4 */
+.hero-statement { 
+    grid-column: 3 / span 2 !important; 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.branding-text { 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--white); 
+    font-size: 18px; /* FIXED PIXELS */
+    font-weight: 400; 
+    margin: 0; 
+    line-height: 24px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* LOCK 3: Button to Right Edge (Column 5) */
+.hero-action { 
+    grid-column: 5 / span 1 !important; 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+}
 
 .pill-contact-btn {
-    display: flex !important; align-items: center; justify-content: center;
-    background-color: transparent !important; color: #ffffff !important;
-    height: 52px; width: 100%; max-width: 180px; 
-    border: 4px solid #ffffff !important; border-radius: 50px !important;
-    text-decoration: none !important; font-family: 'Segoe UI', Tahoma, sans-serif !important;
-    font-weight: 700 !important; font-size: 1rem !important;
-    box-sizing: border-box; transition: background-color 0.3s ease;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    height: 52px; 
+    width: 100%; 
+    max-width: 180px; 
+    border: 4px solid #ffffff !important; 
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 16px; /* FIXED PIXELS */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
-.pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-/* --- 2. DUAL GALLERY WRAPPERS (The Color Spine) --- */
+.pill-contact-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
 
-/* Top Section: Stone/Grey Backdrop */
+/* --- 2. DUAL GALLERY WRAPPERS --- */
+
+/* Top Section: Stone Backdrop */
 .hero-full-width-wrapper {
     background-color: #e3e2d9; 
     padding: 60px 0;
@@ -71,7 +116,7 @@
     padding: 0 20px;
 }
 
-/* --- 3. THE CARD ENGINE (The Cookie Cutter) --- */
+/* --- 3. THE CARD ENGINE (Cookie-Cutter Radius) --- */
 .home-hero-grid a, 
 .blog-grid a {
     text-decoration: none !important;
@@ -79,86 +124,92 @@
     display: block;
     background: #ffffff;
     height: 100%;
-    
-    /* THE RADIUS LOCK */
-    border-radius: 4px; 
-    overflow: hidden; /* <--- This clips the image and the card bottom */
-    
-    /* Interaction */
+    border-radius: 4px; /* Subtle Pixel Radius */
+    overflow: hidden;    /* Clips image and content corners */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- 4. THE FEATURED CARD --- */
+.home-hero-grid a:hover, 
+.blog-grid a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* --- 4. THE FEATURED CARD (2x2) --- */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
     background: #ffffff; 
     display: flex; 
     flex-direction: column; 
-    overflow: hidden; 
 }
 
-.featured-card .card-content { padding: 20px 15px; } /* Internal padding for white cards */
+.featured-card .card-content { padding: 20px 15px; }
 
 .featured-card .card-content h2 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 600; font-size: 26px; 
+    font-weight: 600; 
+    font-size: 26px; 
     color: var(--brand-blue); 
-    margin: 0 0 8px 0; line-height: 1.2;
+    margin: 0 0 8px 0; 
+    line-height: 32px;
 }
 
 .featured-card .card-content h3 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 500; font-size: 19px; 
+    font-weight: 500; 
+    font-size: 20px; 
     color: #1a1a1a; 
-    margin: 0 0 12px 0; line-height: 1.4;
+    margin: 0 0 12px 0; 
+    line-height: 26px;
 }
 
 /* --- 5. STANDARD CARDS --- */
-.service-card, .blog-card { background: #ffffff; display: flex; flex-direction: column; }
+.service-card, .blog-card { 
+    background: #ffffff; 
+    display: flex; 
+    flex-direction: column; 
+}
 
-.card-content { padding: 12px 15px; } /* Balanced internal padding */
+.card-content { padding: 12px 15px; }
 
 .card-content h3 { 
     font-family: 'Poppins', sans-serif;
-    font-weight: 600; font-size: 18px; 
+    font-weight: 600; 
+    font-size: 18px; 
     color: #333; 
     margin: 0 0 6px 0; 
     letter-spacing: -0.01em;
 }
 
-.card-content p { font-size: 0.95rem; color: #555; line-height: 1.5; margin: 0; }
+.card-content p { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px; 
+    color: #555; 
+    line-height: 22px; 
+    margin: 0; 
+}
 
 /* --- 6. IMAGE RATIOS --- */
-.featured-card img, .service-card img, .blog-card img { 
-    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+.featured-card img, 
+.service-card img, 
+.blog-card img { 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    display: block;
 }
 
-/* --- 7. MOBILE RESPONSIVE --- */
-@media (max-width: 1024px) {
-    .branding-flex { display: flex !important; flex-direction: column; gap: 4px; padding: 0 20px; }
-    .hero-logotype { width: 100%; justify-content: center; margin: 0; }
-    .branding-logo { width: 100%; height: auto; }
-    .branding-text { font-size: 1.15rem; text-align: center; white-space: nowrap; margin: 0; }
-    .hero-action { display: none !important; }
-
-    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; }
-    .featured-card { grid-column: span 1; }
-    .featured-card .card-content h2 { font-size: 22px; }
-}
-
-/* --- 8. AWARDS PANEL (4-Column Persistent Grid) --- */
+/* --- 7. AWARDS PANEL (Stone Backdrop) --- */
 .awards-full-width-wrapper {
-    background-color: #e3e2d9; /* MATCHED TO TOP GRID: Stone/Gallery Backdrop */
+    background-color: #e3e2d9; 
     padding: 60px 0;
     width: 100%;
-    /* Subtle separation from the Sand section above */
     border-top: 1px solid rgba(0,0,0,0.05); 
 }
 
 .awards-grid {
     display: grid;
-    /* FORCES 4 COLUMNS ON ALL SCREENS (4x2 Formation) */
     grid-template-columns: repeat(4, 1fr); 
     gap: 40px; 
     max-width: 1100px; 
@@ -168,39 +219,52 @@
     justify-items: center;
 }
 
-.award-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Keeps the prestige logos subtle against the Stone background */
+.award-item img {
+    width: 100%;
+    max-width: 160px; 
+    height: auto;
+    display: block;
     filter: grayscale(100%);
     opacity: 0.6;
     transition: all 0.4s ease;
 }
 
-.award-item:hover {
+.award-item:hover img {
     filter: grayscale(0%);
     opacity: 1;
 }
 
-.award-item img {
-    width: 100%;
-    max-width: 160px; /* Standard size limit */
-    height: auto;
-    display: block;
-}
+/* --- 8. MOBILE PORTRAIT LOCK --- */
+@media (max-width: 1024px) {
+    .branding-intro-bar { padding: 20px 0; }
+    
+    .branding-flex { 
+        display: flex !important; 
+        flex-direction: column; 
+        gap: 6px; 
+        padding: 0 20px;
+    }
 
-/* MOBILE: Maintains 4 columns, tightens the gaps */
-@media (max-width: 768px) {
-    .awards-full-width-wrapper {
-        padding: 40px 0;
+    .hero-logotype { width: 100%; justify-content: center; margin: 0; }
+    .branding-logo { width: 100%; height: auto; }
+
+    .branding-text { 
+        font-size: 17px; /* THE PIXEL ALIGNMENT LOCK */
+        text-align: center; 
+        line-height: 22px;
+        white-space: nowrap; 
+        margin: 0;
+        letter-spacing: -0.01em;
     }
-    
-    .awards-grid {
-        gap: 20px; 
-    }
-    
-    .award-item img {
-        max-width: 100px; /* Scaled for phone screens */
-    }
+
+    .hero-action { display: none !important; }
+
+    /* Grid Stacking */
+    .home-hero-grid, .blog-grid { grid-template-columns: 1fr; margin-top: 20px; }
+    .featured-card { grid-column: span 1; }
+    .featured-card .card-content h2 { font-size: 22px; }
+
+    /* Awards Grid remains 4 columns */
+    .awards-grid { gap: 20px; }
+    .award-item img { max-width: 100px; }
 }
