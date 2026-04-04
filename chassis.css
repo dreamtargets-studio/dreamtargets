@@ -295,31 +295,35 @@ p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1
     .footer-visual-col a { width: 70%; margin: 0 auto; }
 }
 
-/* --- UI COMPONENT: BACK TO TOP (Architectural Square) --- */
+/* --- UI COMPONENT: BACK TO TOP (200px Right-Aligned) --- */
 .back-to-top {
-    position: fixed;
-    bottom: 80px;      /* Elevated as requested */    
-    right: 30px;
-    width: 44px;       /* Consistent square size */
-    height: 44px;
-    background-color: #666666 !important; /* Neutral Grey */
-    border: none;
-    border-radius: 0 !important; /* HARD SQUARE - NO RADIUS */
-    cursor: pointer;
-    z-index: 2000;
+    position: fixed !important; 
+    bottom: 200px !important;    /* YOUR SPECIFIC ELEVATION */
+    right: 30px !important;      /* ALIGNED RIGHT to Grid Margin */
     
-    display: none;     /* Toggled by loader.js */
+    width: 44px;
+    height: 44px;
+    z-index: 9999;               /* Stays above all content */
+    
+    background-color: #666666 !important; 
+    border: none;
+    border-radius: 0 !important; /* HARD SQUARE */
+    cursor: pointer;
+    
+    display: none;               /* Toggled by loader.js */
     align-items: center;
     justify-content: center;
-    opacity: 0.4;      /* Resting opacity */
+    opacity: 0.4;
     transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-.back-to-top.show { display: flex; }
+.back-to-top.show { 
+    display: flex !important; 
+}
 
 .back-to-top:hover {
+    opacity: 0.9;
     background-color: #333333 !important;
-    opacity: 0.9;      /* Focused opacity */
 }
 
 /* System-matching Chevron */
