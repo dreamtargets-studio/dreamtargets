@@ -149,15 +149,16 @@
 
 /* --- 8. AWARDS PANEL (4-Column Persistent Grid) --- */
 .awards-full-width-wrapper {
-    background-color: #ffffff; /* Clean white break from the sand/stone sections */
+    background-color: #e3e2d9; /* MATCHED TO TOP GRID: Stone/Gallery Backdrop */
     padding: 60px 0;
     width: 100%;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    /* Subtle separation from the Sand section above */
+    border-top: 1px solid rgba(0,0,0,0.05); 
 }
 
 .awards-grid {
     display: grid;
-    /* FORCES 4 COLUMNS ON DESKTOP AND MOBILE */
+    /* FORCES 4 COLUMNS ON ALL SCREENS (4x2 Formation) */
     grid-template-columns: repeat(4, 1fr); 
     gap: 40px; 
     max-width: 1100px; 
@@ -171,7 +172,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Subtle brand treatment */
+    /* Keeps the prestige logos subtle against the Stone background */
     filter: grayscale(100%);
     opacity: 0.6;
     transition: all 0.4s ease;
@@ -184,22 +185,22 @@
 
 .award-item img {
     width: 100%;
-    max-width: 160px; /* Adjust based on your standard graphic width */
+    max-width: 160px; /* Standard size limit */
     height: auto;
     display: block;
 }
 
-/* MOBILE ADJUSTMENT: Maintains 4 columns, just scales the spacing */
+/* MOBILE: Maintains 4 columns, tightens the gaps */
 @media (max-width: 768px) {
     .awards-full-width-wrapper {
         padding: 40px 0;
     }
     
     .awards-grid {
-        gap: 20px; /* Tighter gap for smaller screens */
+        gap: 20px; 
     }
     
     .award-item img {
-        max-width: 100px; /* Prevents logos from crowding on mobile */
+        max-width: 100px; /* Scaled for phone screens */
     }
 }
