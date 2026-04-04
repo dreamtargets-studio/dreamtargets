@@ -1,26 +1,35 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v1.0
-   Contains: Text Rail (800px), Story Branding, Gallery Grids
+   THINKAMIGO DESTINATION ENGINE v2.2 (1250px Sync)
    ============================================================ */
 
-/* 1. THE PAPER CONTAINER 
-   The white sheet that sits on the eggshell background */
-.paper-sheet {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: var(--white);
-    min-height: 100vh;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+/* 1. THE CINEMATIC HERO ENGINE 
+   Full-width wrapper with a centered 1250px core */
+.story-hero-wrapper {
+    width: 100%;
+    background-color: #000;         /* Cinematic black bars on ultra-wide */
+    display: flex;
+    justify-content: center;        /* Centers the image when browser > 1250px */
+    border-top: 1px solid #ffffff;  /* The crisp white separator line */
+    overflow: hidden;
 }
 
-/* 2. THE TEXT RAIL (The "Editorial Column")
-   Focuses the reader's eye by limiting width to 800px */
+.panoramic-hero {
+    width: 100%;                    /* Fluid: fills browser < 1250px */
+    max-width: 1250px;              /* Fixed: stops growing at brand horizon */
+    height: auto;
+    aspect-ratio: 21 / 9;           /* Precise cinematic crop */
+    object-fit: cover;
+    display: block;
+}
+
+/* 2. THE TEXT RAIL 
+   Kept at 800px for optimal line-length and readability */
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
-    width: 88%;
+    width: 90%;                     /* Breathing room on mobile */
     padding: 60px 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* 3. STORY HEADINGS (Precision Tuned) */
