@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v2.9 - MOBILE PADDING SYNC
+   THINKAMIGO CHASSIS v3.1 - TRUE FULL-WIDTH NAV
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -17,12 +17,12 @@ html, body {
     font-family: 'Segoe UI', Tahoma, sans-serif; background: #ffffff; 
 }
 
-/* Page structural consistency - Footer/Grid anchor */
+/* Footer/Grid anchor remains centered at 1200px */
 .container { 
     max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; 
 }
 
-/* --- 2. GLOBAL NAVIGATION (Full-Width RESTORE) --- */
+/* --- 2. GLOBAL NAVIGATION (TRUE FULL-WIDTH) --- */
 #main-nav {
     background-color: var(--brand-blue) !important;
     width: 100% !important;
@@ -39,7 +39,8 @@ html, body {
     width: 100% !important; 
     max-width: none !important; 
     margin: 0;
-    padding: 10px 60px; /* Desktop Breathing Room */
+    /* MINIMAL PADDING: Spans the full browser window */
+    padding: 10px 20px; 
     box-sizing: border-box;
 }
 
@@ -51,7 +52,7 @@ html, body {
 
 .nav-links {
     display: flex !important;
-    gap: 18px; 
+    gap: 15px; /* Tight gap for horizontal span */
     align-items: center;
     list-style: none;
     margin: 0;
@@ -82,7 +83,7 @@ html, body {
 }
 .hamburger span { width: 25px; height: 3px; background-color: #ffffff; display: block; }
 
-/* --- 3. MASTER FOOTER (Stays Centered) --- */
+/* --- 3. MASTER FOOTER --- */
 #main-footer { 
     background-color: var(--footer-bg); color: #ffffff; 
     padding: 60px 0 20px; width: 100%; clear: both; 
@@ -118,7 +119,7 @@ html, body {
 /* --- 5. RESPONSIVE OVERRIDES --- */
 @media (max-width: 1100px) {
     #main-nav .nav-flex { 
-        padding: 10px 20px; /* Tighter logo/hamburger padding */
+        padding: 10px 20px; 
     }
 
     .hamburger { display: flex !important; }
@@ -133,12 +134,10 @@ html, body {
         z-index: 3001;
     }
 
-    /* Checkbox Trigger */
     .menu-toggle:checked ~ .nav-links { 
         display: flex !important; 
     }
 
-    /* THE ALIGNMENT FIX: 30px Margin inside dropdown */
     .nav-links a { 
         padding: 15px 30px !important; 
         width: 100%; 
