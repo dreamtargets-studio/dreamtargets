@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.3
+   THINKAMIGO DESTINATION ENGINE v2.4
    Architecture: 1250px Horizon | 800px Editorial Rail
-   Features: Cinematic Hero, Orange Accent Sync, Responsive Grid
+   Features: Zero-Gap Cinematic Hero, Stone Horizon Sync
    ============================================================ */
 
 :root {
@@ -23,24 +23,24 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: #e3e2d9;      /* Stone "wings" */
+    background-color: var(--stone-bg);
     display: flex;
     justify-content: center;        
     border-top: 1px solid #ffffff; 
+    margin-top: 0;           /* Zero-Gap Fix */
+    line-height: 0;          /* Zero-Gap Fix: Removes whitespace below nav */
 }
 
 .panoramic-hero {
-    /* 1. FLUIDITY */
-    width: 100%;                    /* Fills browser 100% when < 1250px */
-    max-width: 1250px;              /* Stops at the Brand Horizon */
+    /* FLUIDITY & PROPORTION */
+    width: 100%;             /* Fills browser 100% when < 1250px */
+    max-width: 1250px;       /* Stops at the Brand Horizon */
+    height: auto;            /* Maintains natural aspect ratio (No-Crop) */
+    display: block;          /* Removes the inline 4px bottom gap */
     
-    /* 2. PROPORTION (The No-Crop Secret) */
-    height: auto;                   /* Maintains natural height/width ratio */
-    display: block;                 /* Removes the tiny gap at the bottom */
-    
-    /* 3. RESET */
-    aspect-ratio: auto;             /* Disables forced cinematic cropping */
-    object-fit: contain;            /* Ensures the entire image is always visible */
+    /* RESET */
+    aspect-ratio: auto;      
+    object-fit: contain;     
 }
 
 /* 3. THE TEXT RAIL 
@@ -48,7 +48,7 @@ body.content-page {
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
-    width: 90%;                     /* Breathing room on mobile */
+    width: 90%;              /* Breathing room on mobile */
     padding: 60px 0;
 }
 
@@ -116,12 +116,6 @@ body.content-page {
 }
 
 /* 7. MOBILE RESPONSIVE */
-@media (max-width: 1024px) {
-    .panoramic-hero {
-        aspect-ratio: 16 / 9; /* Taller on tablets for better impact */
-    }
-}
-
 @media (max-width: 768px) {
     .text-rail { 
         width: 92%; 
