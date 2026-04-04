@@ -23,18 +23,21 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: #ffffff;
+    background-color: #e3e2d9;      /* THE STONE COLOR: Matches the home grid */
     display: flex;
-    justify-content: center;
-    /* Removed border and overflow */
+    justify-content: center;        
+    
+    /* THE SEPARATOR: 1px white line provides a "surgical" cut from the blue nav */
+    border-top: 1px solid #ffffff; 
+    overflow: hidden;               /* Keeps the aspect-ratio crop clean */
 }
 
 .panoramic-hero {
-    width: 100%;
-    max-width: 1250px;
+    width: 100%;                    
+    max-width: 1250px;              
     height: auto;
-    aspect-ratio: 21 / 9;
-    object-fit: cover;
+    aspect-ratio: 21 / 9;           
+    object-fit: cover;              
     display: block;
 }
 
