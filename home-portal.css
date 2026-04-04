@@ -158,17 +158,20 @@
 }
 .award-item:hover img { filter: grayscale(0%); opacity: 1; }
 
-/* --- 8. BACK-TO-TOP UTILITY (Hard-Edge Square) --- */
+/* --- 8. BACK-TO-TOP UTILITY (Elevated Hard-Edge Square) --- */
 #backToTop {
-    position: fixed;
-    bottom: 30px;
+    position: fixed; 
+    /* INCREASE THIS VALUE to move it higher up the screen */
+    bottom: 80px; 
     right: 30px;
-    z-index: 100;
+    
+    z-index: 9999;
     background-color: #666666; 
     color: #ffffff;
     width: 44px;
     height: 44px;
-    border-radius: 0; /* HARD EDGE SQUARE */
+    border-radius: 0; /* Hard square - no radius */
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,7 +179,7 @@
     border: none;
     cursor: pointer;
 
-    /* HIDDEN STATE */
+    /* Hidden state (controlled by loader.js) */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
