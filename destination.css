@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v2.5
+   THINKAMIGO DESTINATION ENGINE v2.6
    Architecture: 1250px Horizon | 800px Editorial Rail
-   Features: 1250px Paper Sheet, Zero-Gap Hero, Stone Sync
+   Features: Hairline Accents, Tight Vertical Tracking, Stone Sync
    ============================================================ */
 
 :root {
@@ -23,7 +23,7 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: var(--stone-bg); /* Matches body for "wings" */
+    background-color: var(--stone-bg); 
     display: flex;
     justify-content: center;        
     border-top: 1px solid #ffffff; 
@@ -52,12 +52,12 @@ body.content-page {
 }
 
 /* 4. THE TEXT RAIL 
-   Optimized for line-length and readability within the Paper */
+   Reduced top padding to bring H1 closer to the header */
 .text-rail {
     max-width: 800px;
     margin: 0 auto;
     width: 90%;              
-    padding: 60px 0;
+    padding: 30px 0 60px 0;  /* Tighter 30px top padding */
 }
 
 /* 5. STORY HEADINGS & ACCENTS */
@@ -65,15 +65,15 @@ body.content-page {
     font-size: 2.8rem; 
     font-weight: 900; 
     line-height: 1.1; 
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: var(--brand-blue);
 }
 
 .orange-rule { 
-    width: 60px; 
-    height: 4px; 
+    width: 120px;            /* Longer horizontal reach */
+    height: 1px;             /* Subtle hairline width */
     background-color: var(--brand-orange); 
-    margin-bottom: 25px; 
+    margin-bottom: 30px; 
 }
 
 .text-rail h3 {
@@ -124,7 +124,7 @@ body.content-page {
 @media (max-width: 768px) {
     .text-rail { 
         width: 92%; 
-        padding: 40px 0; 
+        padding: 20px 0 40px 0; /* Even tighter for mobile */
     }
     .text-rail h1 { font-size: 2.2rem; }
     .gallery-grid-3 figure { 
