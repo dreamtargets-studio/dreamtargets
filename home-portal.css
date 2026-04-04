@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.61)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.62)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | Scrollbar-Safe UI
+   Architecture: 1250px Wide Horizon | 15px Tight Gutters
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR (TIGHTENED) --- */
@@ -16,7 +16,7 @@
 .branding-flex { 
     display: grid !important; 
     grid-template-columns: repeat(5, 1fr) !important; 
-    gap: 20px; 
+    gap: 15px; /* SYNCED: Matches 15px grid gutters */
     align-items: center; 
     max-width: 1250px; 
     margin: 0 auto; 
@@ -67,7 +67,7 @@
 .home-hero-grid, .blog-grid { 
     display: grid !important; 
     grid-template-columns: repeat(5, 1fr) !important; 
-    gap: 20px; 
+    gap: 15px; /* TIGHTENED: Reduced from 20px to 15px */
     max-width: 1250px; 
     margin: 0 auto; 
     padding: 0; 
@@ -90,7 +90,7 @@
 .featured-card img, .service-card img, .blog-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
 
 .card-content { 
-    padding: 20px; 
+    padding: 15px; /* TIGHTENED: Reduced from 20px to match new gutter */
     flex-grow: 1 !important; 
     display: flex;
     flex-direction: column;
@@ -118,8 +118,8 @@
 /* --- 7. BACK TO TOP / SCROLL UI (SCROLLBAR CLEARANCE) --- */
 .scroll-up, #back-to-top, .back-to-top, .scroll-to-top {
     position: fixed !important;
-    right: 10px !important;    /* Desktop: 10px to clear scrollbar */
-    bottom: 200px !important;  /* Thumb-safe height */
+    right: 10px !important;
+    bottom: 200px !important;
     z-index: 9999;
 }
 
@@ -130,7 +130,7 @@
 
 @media (max-width: 1024px) {
     .branding-intro-bar { padding: 30px 0; }
-    .branding-flex { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 20px; padding: 0 20px; }
+    .branding-flex { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 15px; padding: 0 20px; }
     .hero-logotype { width: 100%; max-width: 320px; } 
     .hero-statement h1, .branding-text { white-space: normal; font-size: 18px; text-align: center; }
     .hero-action { display: none !important; }
@@ -139,16 +139,13 @@
 
     .home-hero-grid, .blog-grid { 
         grid-template-columns: repeat(2, 1fr) !important; 
-        gap: 20px; 
+        gap: 15px; 
         padding: 0; 
     }
     .featured-card { grid-column: span 2 !important; }
     .awards-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px; }
 
-    /* MOBILE OVERRIDE: Return to 5px for touch screens (no scrollbar) */
-    .scroll-up, #back-to-top, .back-to-top, .scroll-to-top {
-        right: 5px !important;
-    }
+    .scroll-up, #back-to-top, .back-to-top, .scroll-to-top { right: 5px !important; }
 }
 
 @media (max-width: 600px) {
