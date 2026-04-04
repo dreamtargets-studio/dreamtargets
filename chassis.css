@@ -1,7 +1,10 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v2.1 - THE UNBREAKABLE FRAME
-   Contains: Navigation, Footer, Global UI, Typography
+   THINKAMIGO CHASSIS v2.2 - THE UNBREAKABLE FRAME
+   Expanded for Human Readability
    ============================================================ */
+
+/* FONT ENGINE */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
     --brand-blue: #0054dc;
@@ -13,117 +16,272 @@
 
 /* --- 1. THE LAYOUT GUARD --- */
 html, body { 
-    margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    overflow-x: hidden; 
     font-family: 'Segoe UI', Tahoma, sans-serif; 
-    background: #fff; color: #333; line-height: 1.5;
+    background: #fff; 
+    color: #333; 
+    line-height: 1.5; 
 }
 
-.paper, .paper-sheet, .editorial-post, .container {
-    display: flow-root !important; width: 100%; clear: both;
+.paper, .paper-sheet, .editorial-post, .container { 
+    display: flow-root !important; 
+    width: 100%; 
+    clear: both; 
 }
 
 /* --- 2. GLOBAL NAVIGATION --- */
-#main-nav {
-    background-color: var(--brand-blue) !important;
-    width: 100%; position: relative; z-index: 3000;
+#main-nav { 
+    background-color: var(--brand-blue) !important; 
+    width: 100%; 
+    position: relative; 
+    z-index: 3000; 
 }
 
-#menu-toggle { display: none !important; visibility: hidden; position: absolute; left: -9999px; }
-
-#main-nav .nav-flex {
-    display: flex !important; justify-content: space-between !important; 
-    align-items: center; width: 100% !important; padding: 10px 40px; box-sizing: border-box;
+#menu-toggle { 
+    display: none !important; 
+    visibility: hidden; 
+    position: absolute; 
+    left: -9999px; 
 }
 
-.logo img { height: 40px !important; width: auto; display: block; }
-
-.nav-links {
-    display: flex !important; gap: 20px; list-style: none; margin: 0; padding: 0; margin-left: auto;
+#main-nav .nav-flex { 
+    display: flex !important; 
+    justify-content: space-between !important; 
+    align-items: center; 
+    width: 100% !important; 
+    padding: 10px 40px; 
+    box-sizing: border-box; 
 }
 
-.nav-links a {
-    color: #ffffff !important; text-decoration: none !important;
-    font-size: 0.85rem; font-weight: 500; transition: 0.3s;
+.logo img { 
+    height: 40px !important; 
+    width: auto; 
+    display: block; 
 }
+
+.nav-links { 
+    display: flex !important; 
+    gap: 20px; 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    margin-left: auto; 
+}
+
+.nav-links a { 
+    color: #ffffff !important; 
+    text-decoration: none !important; 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    transition: 0.3s; 
+}
+
 .nav-links a:hover { color: #ff8c00 !important; }
 
-.hamburger {
-    display: none; cursor: pointer; flex-direction: column;
-    justify-content: space-between; width: 25px; height: 18px; margin-left: auto; 
+.hamburger { 
+    display: none; 
+    cursor: pointer; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    width: 25px; 
+    height: 18px; 
+    margin-left: auto; 
 }
-.hamburger span { width: 100%; height: 3px; background-color: #ffffff !important; display: block; }
 
-/* --- 3. GLOBAL TYPOGRAPHY --- */
-h1, h2, h3, h4 {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased; color: #1a1a1a;
+.hamburger span { 
+    width: 100%; 
+    height: 3px; 
+    background-color: #ffffff !important; 
+    display: block; 
 }
-p { font-family: Arial, Helvetica, sans-serif; font-size: 1.1rem; line-height: 1.66; color: #555; }
 
-/* --- 4. GLOBAL UI COMPONENTS (Buttons & Utilities) --- */
-.btn-pill {
-    display: inline-block !important; background-color: transparent !important;
-    color: #ffffff !important; padding: 10px 45px !important;
-    border: 4px solid #ffffff !important; border-radius: 50px !important;
-    text-decoration: none !important; font-family: 'Poppins', sans-serif !important;
-    font-weight: 400 !important; font-size: 18px !important;
-    transition: all 0.3s ease-in-out; cursor: pointer; box-sizing: border-box;
+/* --- 3. GLOBAL TYPOGRAPHY LOCK --- */
+h1, h2, h3, h4, .btn-pill, .card-content h2, .card-content h3 { 
+    font-family: 'Poppins', sans-serif !important; 
+    -webkit-font-smoothing: antialiased; 
 }
-.btn-pill:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-.back-to-top {
+p, .branding-text, .footer-nav-col a { 
+    font-family: Arial, Helvetica, sans-serif !important; 
+}
+
+/* --- 4. GLOBAL UI COMPONENTS --- */
+.btn-pill { 
+    display: inline-block !important; 
+    background-color: transparent !important; 
+    color: #ffffff !important; 
+    padding: 10px 45px !important; 
+    border: 4px solid #ffffff !important; 
+    border-radius: 50px !important; 
+    text-decoration: none !important; 
+    font-family: 'Poppins', sans-serif !important; 
+    font-weight: 400 !important; 
+    font-size: 18px !important; 
+    transition: all 0.3s ease-in-out; 
+    cursor: pointer; 
+    box-sizing: border-box; 
+}
+
+.btn-pill:hover { 
+    background-color: rgba(255, 255, 255, 0.15) !important; 
+}
+
+.back-to-top { 
     position: fixed !important; 
-    bottom: 200px !important;    /* Desktop Elevation */
-    right: 30px !important;      /* Aligned to Grid Margin */
-    width: 44px; height: 44px; z-index: 9999;
-    background-color: #666666 !important; border: none; border-radius: 0 !important;
-    cursor: pointer; display: none; align-items: center; justify-content: center;
-    opacity: 0.4; transition: opacity 0.3s ease, background-color 0.3s ease;
+    bottom: 200px !important; 
+    right: 30px !important; 
+    width: 44px; 
+    height: 44px; 
+    z-index: 9999; 
+    background-color: #666666 !important; 
+    border: none; 
+    border-radius: 0 !important; 
+    cursor: pointer; 
+    display: none; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.4; 
+    transition: 0.3s ease; 
 }
+
 .back-to-top.show { display: flex !important; }
-.back-to-top:hover { opacity: 0.9; background-color: #333333 !important; }
 
-.chevron-up {
-    display: block; width: 10px; height: 10px;
-    border-top: 2px solid #ffffff; border-right: 2px solid #ffffff;
-    transform: rotate(-45deg) translateY(2px);
+.back-to-top:hover { 
+    opacity: 0.9; 
+    background-color: #333333 !important; 
 }
 
-.orange-rule, .rule-orange { height: 2px; background-color: #f26522; width: 250px; margin: 12px 0 35px 0; border: none; }
+.chevron-up { 
+    display: block; 
+    width: 10px; 
+    height: 10px; 
+    border-top: 2px solid #ffffff; 
+    border-right: 2px solid #ffffff; 
+    transform: rotate(-45deg) translateY(2px); 
+}
 
-/* --- 5. THE MASTER FOOTER --- */
-#main-footer { background: var(--footer-bg); color: var(--white); padding: 60px 0 0px; width: 100%; clear: both; }
-#main-footer .container { padding: 0 20px; max-width: 1200px; margin: 0 auto; }
-.footer-branding-top { text-align: center; margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.footer-body-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px; }
-.footer-visual-col { flex: 1.5; min-width: 280px; display: flex; }
-.footer-brand-mark { width: 100%; max-width: 320px; height: auto; transition: filter 0.4s ease; }
+/* --- 5. THE MASTER FOOTER & SOCIALS --- */
+#main-footer { 
+    background: var(--footer-bg); 
+    color: var(--white); 
+    padding: 60px 0 0px; 
+    width: 100%; 
+    clear: both; 
+}
+
+#main-footer .container { 
+    padding: 0 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.footer-branding-top { 
+    text-align: center; 
+    margin-bottom: 50px; 
+    padding-bottom: 40px; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.footer-body-grid { 
+    display: flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    gap: 40px; 
+    margin-bottom: 50px; 
+}
+
+.footer-visual-col { 
+    flex: 1.5; 
+    min-width: 280px; 
+    display: flex; 
+}
+
+.footer-brand-mark { 
+    width: 100%; 
+    max-width: 320px; 
+    height: auto; 
+}
+
 .footer-nav-col ul { list-style: none; padding: 0; }
-.footer-nav-col a { color: rgba(255,255,255,0.7) !important; text-decoration: none; font-size: 0.95rem; }
-.footer-nav-col a:hover { color: #ff8c00 !important; }
-.social-strip { display: flex; justify-content: center; gap: 40px; margin: 20px 0; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; text-align: center; margin-top: 50px; }
 
-/* --- 6. MOBILE VIEWPORT OVERRIDES --- */
-
-/* Desktop Nav Adjustment */
-@media (max-width: 1100px) {
-    .nav-links { 
-        display: none !important; position: absolute; top: 100%; left: 0; width: 100%;
-        background: var(--brand-blue); flex-direction: column; padding: 20px 0; z-index: 3001;
-    }
-    .hamburger { display: flex !important; }
-    #menu-toggle:checked ~ .nav-links { display: flex !important; }
+.footer-nav-col a { 
+    color: rgba(255,255,255,0.7) !important; 
+    text-decoration: none; 
+    font-size: 0.95rem; 
 }
 
-/* Tablet & Mobile Layouts */
-@media (max-width: 768px) {
-    .footer-body-grid { flex-direction: column; align-items: center; text-align: center; }
-    
-    /* THE THUMB HEIGHT FIX */
-    .back-to-top {
-        bottom: 100px !important; /* Specific Thumb Height */
-        right: 20px !important;
-        opacity: 0.8 !important; /* Better visibility for touch */
-    }
+.footer-nav-col a:hover { color: #ff8c00 !important; }
+
+/* SOCIAL ICON STRIP */
+.social-strip { 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    margin: 20px 0; 
+}
+
+.social-item a { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px; 
+    color: rgba(255, 255, 255, 0.7) !important; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+}
+
+.social-icon { 
+    width: 26px; 
+    height: 26px; 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    transition: transform 0.3s ease; 
+}
+
+.icon-linkedin { background-image: url('assets/img/icon-linkedin.png'); }
+.icon-substack { background-image: url('assets/img/icon-substack.png'); }
+.icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
+
+.social-item a:hover { color: #ff8c00 !important; }
+.social-item a:hover .social-icon { transform: scale(1.1); }
+
+.footer-bottom { 
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    padding: 40px 0; 
+    text-align: center; 
+    margin-top: 50px; 
+}
+
+/* --- 6. MOBILE OVERRIDES --- */
+@media (max-width: 1100px) { 
+    .nav-links { 
+        display: none !important; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        width: 100%; 
+        background: var(--brand-blue); 
+        flex-direction: column; 
+        padding: 20px 0; 
+        z-index: 3001; 
+    } 
+    .hamburger { display: flex !important; } 
+    #menu-toggle:checked ~ .nav-links { display: flex !important; } 
+}
+
+@media (max-width: 768px) { 
+    .footer-body-grid { 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+    } 
+    .back-to-top { 
+        bottom: 100px !important; 
+        right: 20px !important; 
+        opacity: 0.8 !important; 
+    } 
 }
