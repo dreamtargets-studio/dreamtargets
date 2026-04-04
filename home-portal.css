@@ -58,28 +58,29 @@
 }
 .pill-contact-btn:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
 
-/* --- 2. DUAL GALLERY WRAPPERS (Tightened) --- */
+/* --- 2. DUAL GALLERY WRAPPERS (Synchronized Spacing) --- */
 .hero-full-width-wrapper { 
     background-color: #e3e2d9; 
-    padding: 30px 0; /* Reduced from 60px to bring grid up */
+    padding: 30px 0; /* Matches the top gap */
     width: 100%; 
 }
 
 .blog-full-width-wrapper { 
     background-color: #dbccbe; 
-    padding: 50px 0; 
+    padding: 30px 0; /* Reduced from 50px to match the hero section */
     width: 100%; 
 }
 
-.home-hero-grid, .blog-grid { 
-    display: grid; 
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 15px; 
-    margin: 0 auto; 
-    max-width: 1200px; 
-    padding: 0 20px;
+/* --- 8. MOBILE PORTRAIT LOCK (Synchronized) --- */
+@media (max-width: 1024px) {
+    .hero-full-width-wrapper {
+        padding: 20px 0; 
+    }
+    
+    .blog-full-width-wrapper {
+        padding: 20px 0; /* Synchronized mobile gap */
+    }
 }
-
 /* --- 3. THE CARD ENGINE (Manual Corner Lock) --- */
 .home-hero-grid a, .blog-grid a {
     text-decoration: none !important;
