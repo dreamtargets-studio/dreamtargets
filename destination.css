@@ -23,22 +23,24 @@ body.content-page {
    Full-width wrapper with a centered 1250px core */
 .story-hero-wrapper {
     width: 100%;
-    background-color: #e3e2d9;      /* THE STONE COLOR: Matches the home grid */
+    background-color: #e3e2d9;      /* Stone "wings" */
     display: flex;
     justify-content: center;        
-    
-    /* THE SEPARATOR: 1px white line provides a "surgical" cut from the blue nav */
     border-top: 1px solid #ffffff; 
-    overflow: hidden;               /* Keeps the aspect-ratio crop clean */
 }
 
 .panoramic-hero {
-    width: 100%;                    
-    max-width: 1250px;              
-    height: auto;
-    aspect-ratio: 21 / 9;           
-    object-fit: cover;              
-    display: block;
+    /* 1. FLUIDITY */
+    width: 100%;                    /* Fills browser 100% when < 1250px */
+    max-width: 1250px;              /* Stops at the Brand Horizon */
+    
+    /* 2. PROPORTION (The No-Crop Secret) */
+    height: auto;                   /* Maintains natural height/width ratio */
+    display: block;                 /* Removes the tiny gap at the bottom */
+    
+    /* 3. RESET */
+    aspect-ratio: auto;             /* Disables forced cinematic cropping */
+    object-fit: contain;            /* Ensures the entire image is always visible */
 }
 
 /* 3. THE TEXT RAIL 
