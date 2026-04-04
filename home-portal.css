@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.63)
+   THINKAMIGO HOME PORTAL - FULL STABLE RESTORE (v1.64)
    Covers: Branding Bar, Stone/Sand Grids, Card Engine
-   Architecture: 1250px Wide Horizon | 15px Ultra-Tight Spacing
+   Architecture: 1250px Wide Horizon | 15px Universal Rhythm
    ============================================================ */
 
 /* --- 1. THE BRANDING INTRO BAR --- */
@@ -60,18 +60,19 @@
     color: #ffffff !important;
 }
 
-/* --- 2. THE DUAL GRID WRAPPERS --- */
+/* --- 2. THE DUAL GRID WRAPPERS (UNIVERSAL 15PX RHYTHM) --- */
 .hero-full-width-wrapper { 
     background-color: #e3e2d9; 
-    /* ULTRA-TIGHT: Reduced top from 30px to 15px for tightest vertical flow */
-    padding: 15px 0 50px; 
+    /* 15px top to branding | 15px bottom to Story grid */
+    padding: 15px 0; 
     width: 100%; 
     clear: both; 
 }
 
 .blog-full-width-wrapper { 
     background-color: #dbccbe; 
-    padding: 30px 0 50px; 
+    /* 15px top from Feature grid | 50px bottom to Awards */
+    padding: 15px 0 50px; 
     width: 100%; 
     clear: both; 
 }
@@ -127,7 +128,7 @@
 .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1150px; margin: 0 auto; padding: 0 20px; align-items: center; justify-items: center; }
 .award-item img { width: 100%; max-width: 180px; height: auto; display: block; opacity: 0.5; }
 
-/* --- 7. BACK TO TOP / SCROLL UI (SCROLLBAR CLEARANCE) --- */
+/* --- 7. BACK TO TOP / SCROLL UI --- */
 .scroll-up, #back-to-top, .back-to-top, .scroll-to-top {
     position: fixed !important;
     right: 10px !important;
@@ -147,8 +148,9 @@
     .hero-statement h1, .branding-text { white-space: normal; font-size: 18px; text-align: center; }
     .hero-action { display: none !important; }
 
-    /* MOBILE SYNC: Tighten top padding here too */
-    .hero-full-width-wrapper { padding: 15px 0 40px; }
+    /* MOBILE SYNC: 15px horizontal rhythm */
+    .hero-full-width-wrapper { padding: 15px 0; }
+    .blog-full-width-wrapper { padding: 15px 0 40px; }
 
     .home-hero-grid, .blog-grid { 
         grid-template-columns: repeat(2, 1fr) !important; 
