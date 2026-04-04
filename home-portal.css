@@ -1,8 +1,11 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.10 - THE ARCHITECTURAL LOCK
+   THINKAMIGO HOME PORTAL v1.11
+   Complete System: Branding Bar, 5-Column Grid, Editorial Cards
    ============================================================ */
 
-/* --- 1. THE BRANDING INTRO BAR --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* --- 1. THE BRANDING INTRO BAR (Architectural Lock) --- */
 .branding-intro-bar { 
     background: var(--brand-blue); 
     padding: 60px 0; 
@@ -14,6 +17,7 @@
 
 .branding-flex { 
     display: grid !important; 
+    /* THIS MASTER 5-COLUMN TRACK MIRRORS THE CONTENT BELOW */
     grid-template-columns: repeat(5, 1fr) !important; 
     gap: 15px; 
     align-items: center; 
@@ -99,6 +103,7 @@
     padding: 0 20px;
 }
 
+/* --- 3. THE FEATURED CARD (Poppins v1.0 Style) --- */
 .featured-card { 
     grid-column: span 2; 
     grid-row: span 2; 
@@ -109,42 +114,81 @@
     overflow: hidden; 
 }
 
+.featured-card .card-content { 
+    padding: 20px 0; 
+}
+
+.featured-card .card-content h2 { 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; 
+    font-size: 26px; /* Matched to legacy H2 */
+    color: var(--brand-blue); 
+    margin: 0 0 8px 0; 
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+}
+
+.featured-card .card-content h3 { 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; 
+    font-size: 19px; /* Matched to legacy H3 */
+    color: #1a1a1a; 
+    margin: 0 0 12px 0; 
+    line-height: 1.4;
+}
+
+/* --- 4. STANDARD SERVICE & BLOG CARDS --- */
 .service-card, .blog-card { 
     background: #fff; 
     display: flex; 
     flex-direction: column; 
 }
 
-/* --- 3. CARD CONTENT & TYPOGRAPHY --- */
-.card-content { padding: 15px; }
-.card-content h2 { font-size: 1.45rem; color: var(--brand-blue); margin: 0 0 5px 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-.card-content h3 { font-family: Helvetica, Arial, sans-serif; font-weight: 600; font-size: 1.1rem; color: #333; margin: 0 0 8px 0; }
-.card-content p { font-size: 0.9rem; color: #555; line-height: 1.45; margin: 0; }
+.card-content { 
+    padding: 12px 0; 
+}
 
-/* --- 4. IMAGE RATIOS --- */
-.featured-card img, .service-card img, .blog-card img { 
+.card-content h3 { 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; 
+    font-size: 18px; 
+    color: #333; 
+    margin: 0 0 6px 0; 
+    letter-spacing: -0.01em;
+}
+
+.card-content p { 
+    font-size: 0.95rem; 
+    color: #555; 
+    line-height: 1.5; 
+    margin: 0; 
+}
+
+/* --- 5. IMAGE RATIOS --- */
+.featured-card img, 
+.service-card img, 
+.blog-card img { 
     width: 100%; 
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
     display: block;
 }
 
-/* --- 5. MOBILE: CENTRED SLAB UI (Restored Scale & Tightened Gap) --- */
+/* --- 6. MOBILE & TABLET RESPONSIVE --- */
 @media (max-width: 1024px) {
     .branding-intro-bar { 
-        padding: 20px 0; /* Minimal top/bottom blue space */
+        padding: 20px 0; 
     }
 
     .branding-flex { 
         display: flex !important; 
         flex-direction: column; 
-        gap: 4px; /* Tight vertical lock between Logo and H1 */
+        gap: 4px; 
         padding: 0 20px;
     }
 
     .hero-logotype { 
         width: 100%; 
-        max-width: 100%; /* Restored width */
         justify-content: center;
         margin: 0;
     }
@@ -161,10 +205,10 @@
     }
 
     .branding-text { 
-        font-size: 1.15rem; /* Restored size for authority */
+        font-size: 1.15rem; 
         text-align: center; 
         line-height: 1.2;
-        white-space: nowrap; /* Forces one line to match 'Slab' feel */
+        white-space: nowrap; 
         margin: 0;
     }
 
@@ -180,5 +224,9 @@
     
     .featured-card { 
         grid-column: span 1; 
+    }
+    
+    .featured-card .card-content h2 { 
+        font-size: 22px; 
     }
 }
