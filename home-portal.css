@@ -1,7 +1,6 @@
 /* ============================================================
-   THINKAMIGO HOME PORTAL v1.23
-   Features: Pixel Precision, Direct Radius, Synchronized Gaps, 
-             Minimalist Utility UI
+   THINKAMIGO HOME PORTAL v1.25
+   Features: Pixel Precision, Hard-Edge Utility, Synchronized Gaps
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -159,7 +158,7 @@
 }
 .award-item:hover img { filter: grayscale(0%); opacity: 1; }
 
-/* --- 8. BACK-TO-TOP UTILITY --- */
+/* --- 8. BACK-TO-TOP UTILITY (Hard-Edge Square) --- */
 .back-to-top {
     position: fixed;
     bottom: 30px;
@@ -170,7 +169,7 @@
     color: #ffffff;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: 0; /* HARD EDGE SQUARE */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,5 +204,11 @@
     .awards-grid { gap: 20px; }
     .award-item img { max-width: 100px; }
     
-    .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    .back-to-top { 
+        bottom: 20px; 
+        right: 20px; 
+        width: 40px; 
+        height: 40px; 
+        border-radius: 0; /* ENSURED ON MOBILE */
+    }
 }
