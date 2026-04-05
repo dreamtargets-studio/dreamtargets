@@ -80,12 +80,20 @@ body.content-page {
     margin-bottom: 35px; 
 }
 
+.text-rail h2 {
+    font-size: 24px;         
+    font-weight: 200;
+    color: var(--brand-blue);
+    margin: 45px 0 20px 0;
+}
+
 .text-rail h3 {
     font-size: 24px;         
     font-weight: 600;
     color: var(--brand-blue);
     margin: 45px 0 20px 0;
 }
+
 
 .text-rail p {
     font-size: 18px;         
