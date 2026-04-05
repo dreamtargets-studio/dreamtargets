@@ -1,0 +1,82 @@
+/* ============================================================
+   THINKAMIGO GALLERY ENGINE v1.0
+   Architecture: Disciplined 16:9 & A4 Portrait Grids
+   Logic: Pure CSS Grid (No Aspect-Ratio Hacks)
+   ============================================================ */
+
+/* --- 1. THE EDITORIAL GRIDS (Paper-Sheet) --- */
+
+/* LANDSCAPE 3-UP: Optimized for 640x360px Thumbs in 960px Rail */
+.gallery-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 40px 0;
+}
+
+/* PORTRAIT 4-UP: Optimized for 452x640px Thumbs across 1250px Page */
+.gallery-portrait-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 50px 0;
+}
+
+/* --- 2. THE CINEMATIC GRIDS (Dark Theme) --- */
+
+/* VIDEO 4-UP: Optimized for 640x360px Screengrabs */
+.video-gallery-dark {
+    background-color: #000000;
+    padding: 60px 0;
+    width: 100%;
+}
+
+.video-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- 3. THE UNIVERSAL ASSET RULES --- */
+
+.gallery-item img, 
+.portrait-item img,
+.video-item img {
+    width: 100%;
+    height: auto;      /* Naturally resolves to 16:9 or A4 */
+    display: block;
+    cursor: zoom-in;   /* Affirmative Lightbox/Player signal */
+    border: 1px solid #ddd;
+    transition: filter 0.3s ease, transform 0.3s ease, border 0.3s ease;
+}
+
+/* Editorial Hover */
+.gallery-item img:hover, 
+.portrait-item img:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* Cinematic Hover */
+.video-item img:hover {
+    border: 1px solid #ffffff;
+    transform: scale(1.03);
+}
+
+/* --- 4. THE LIGHTBOX GHOST ZONE (Mobile Prep) --- */
+/* We define these now so they are ready for the JS injection */
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 25%; /* Large touch zones */
+    z-index: 10010;
+    cursor: pointer;
+    display: none; /* Hidden until JS detects a gallery group > 1 */
+}
+
+.lightbox-prev { left: 0; }
+.lightbox-next { right: 0; }
