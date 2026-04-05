@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9.2
+   THINKAMIGO GALLERY ENGINE v1.9.5
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Layered Dark Themes (Black vs Charcoal)
+   Logic: Layered Dark Themes & Vimeo-Optimized UI
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -42,22 +42,45 @@
     padding: 0 20px;
 }
 
-/* --- 3. THE CINEMATIC GRIDS --- */
+/* --- 3. THE CINEMATIC GRIDS & CAPTIONS --- */
 
 .video-grid-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 25px;
     max-width: 1260px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 0 20px;
+}
+
+.video-item-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-description {
+    padding-top: 12px;
+}
+
+.video-description h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.video-description p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #888;
 }
 
 /* --- 4. UNIVERSAL ASSET RULES --- */
 
+/* Standard Images: Keep the Zoom cursor */
 .gallery-item img, 
 .portrait-item img,
-.video-item img,
 .gallery-portrait-960 img,
 .gallery-portrait-4 img,
 .gallery-grid-1260 img {
@@ -69,6 +92,21 @@
     transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
+/* Video Thumbnails: Switch to Pointer (Play Action) */
+.video-item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.video-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #333;
+    transition: filter 0.3s ease, transform 0.5s ease;
+}
+
 .gallery-item img:hover, 
 .portrait-item img:hover,
 .gallery-portrait-960 img:hover,
@@ -77,8 +115,9 @@
     border-color: #bbb;
 }
 
-.video-item img:hover {
-    filter: brightness(1.2);
+.video-item:hover img {
+    filter: brightness(1.1) grayscale(0.2);
+    transform: scale(1.03);
     border-color: #ffffff;
 }
 
@@ -196,7 +235,7 @@
     .gallery-portrait-4, 
     .video-grid-4 {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 15px;
         padding: 0 15px;
         margin: 30px auto;
     }
@@ -212,41 +251,27 @@
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
-/* --- 8. THE CINEMATIC OVERRIDES (Video Gallery Dark Theme) --- */
+/* --- 8. THE CINEMATIC OVERRIDES (Dark Theme Theme) --- */
 
-/* THE VOID: Outer background is pure black */
 body.dark-theme {
     background-color: #000000 !important;
 }
 
-/* THE MATTE: The 1250px sheet is Charcoal */
 body.dark-theme .paper-sheet {
-    background-color: #1a1a1a !important; /* Dark Charcoal */
+    background-color: #1a1a1a !important; 
     border: none !important;
     box-shadow: 0 0 50px rgba(0,0,0,0.6) !important;
 }
 
-/* TEXT ADAPTATION */
 body.dark-theme .text-rail h1, 
 body.dark-theme .text-rail h2 {
     color: #ffffff;
 }
 
 body.dark-theme .text-rail p {
-    color: #aaaaaa; /* Brighter for readability on charcoal */
+    color: #aaaaaa;
 }
 
-/* ASSET REFINEMENT: Darker borders for images on charcoal surfaces */
-body.dark-theme .gallery-item img, 
-body.dark-theme .portrait-item img,
-body.dark-theme .video-item img,
-body.dark-theme .gallery-portrait-960 img,
-body.dark-theme .gallery-portrait-4 img,
-body.dark-theme .gallery-grid-1260 img {
-    border-color: #2a2a2a;
-}
-
-/* HERO TREATMENT */
 body.dark-theme .story-hero-wrapper {
     background-color: #000;
 }
@@ -255,13 +280,13 @@ body.dark-theme .panoramic-hero {
     filter: brightness(0.7);
 }
 
-/* --- 9. THE VIDEO STAGE --- */
+/* --- 9. THE VIDEO STAGE & OVERLAY --- */
 
 .video-stage {
-    width: 90vw;           /* Responsive width */
-    max-width: 1100px;     /* Cinematic maximum */
-    aspect-ratio: 16 / 9;  /* Forces the 16:9 box */
-    background: #000;      /* Prevents white flashes while loading */
+    width: 90vw;
+    max-width: 1100px;
+    aspect-ratio: 16 / 9;
+    background: #000;
     box-shadow: 0 0 100px rgba(0,0,0,1);
 }
 
@@ -271,7 +296,37 @@ body.dark-theme .panoramic-hero {
     display: block;
 }
 
-/* Ensure the close button stays visible over the black void */
+/* Play Button Branding */
+.play-button-overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 60px; height: 60px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    z-index: 10;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.play-button-overlay::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 55%;
+    transform: translate(-50%, -50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #fff;
+}
+
+.video-item:hover .play-button-overlay {
+    background: #f39c12; /* Thinkamigo Orange */
+    border-color: #f39c12;
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.4);
+}
+
 .dark-theme .lightbox-close {
     color: #fff;
     opacity: 0.8;
