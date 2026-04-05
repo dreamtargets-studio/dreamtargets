@@ -1,268 +1,140 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.1.7
+   THINKAMIGO GALLERY ENGINE v2.2.1 [CLEAN SLATE]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Synchronized Text & Asset Rails (The 960px lock)
+   Logic: Master Spacing & Video-Safe Rail Logic
    ============================================================ */
 
-/* --- 1. THE EDITORIAL RAIL (Unified Text & Asset Alignment) --- */
+/* --- 1. THE VERTICAL SPACER (The "Global Pulse") --- */
 
-.text-rail,
+/* Every direct module under the paper-sheet gets a 25px gap. 
+   This eliminates "margin-leak" from chassis or destination.css */
+.paper-sheet > * {
+    margin-top: 0 !important;
+    margin-bottom: 25px !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Reset for the very first item on the page */
+.paper-sheet > *:first-child {
+    margin-top: 0 !important;
+}
+
+/* --- 2. THE EDITORIAL RAIL (960px) --- */
+
+.text-rail, 
 .gallery-grid-960, 
-.gallery-portrait-960,
+.gallery-portrait-960, 
 .featured-image-single {
     max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
-    padding-left: 20px; /* Standardized side-gutter */
-    padding-right: 20px;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* Grids inside the rail */
-.gallery-grid-960 { 
+/* --- 3. THE CINEMATIC RAIL (1260px) --- */
+
+.gallery-grid-1260, 
+.gallery-portrait-4, 
+.video-grid-4 {
+    max-width: 1260px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* --- 4. GRID LAYOUTS (Structure Only) --- */
+
+.gallery-grid-960, 
+.gallery-grid-1260 { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
-    margin: 40px auto; 
 }
 
-.gallery-portrait-960 { 
+.gallery-portrait-960, 
+.gallery-portrait-4 { 
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
     gap: 12px; 
-    margin: 40px auto; 
 }
 
-/* --- 2. THE CINEMATIC RAIL (1260px Standard Alignment) --- */
-
-.gallery-grid-1260,
-.gallery-portrait-4,
-.video-grid-4 {
-    display: grid;
-    max-width: 1260px;
-    margin: 60px auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 100%;
-    box-sizing: border-box;
+.video-grid-4 { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px; 
 }
 
-.gallery-grid-1260 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.gallery-portrait-4 { grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.video-grid-4 { grid-template-columns: repeat(4, 1fr); gap: 25px; padding-top: 2px; padding-bottom: 2px; }
-
-/* --- 4. UNIVERSAL ASSET RULES --- */
+/* --- 5. UNIVERSAL ASSET RULES --- */
 
 .gallery-item img, 
-.portrait-item img,
-.gallery-portrait-960 img,
-.gallery-portrait-4 img,
-.gallery-grid-1260 img,
-.featured-image-single img {
-    width: 100%;
-    height: auto;      
-    display: block;
-    box-sizing: border-box;
-    cursor: zoom-in;   
-    border: 1px solid #ddd;
-    transition: filter 0.2s ease, border-color 0.2s ease;
-}
-
-.video-item { position: relative; cursor: pointer; overflow: hidden; }
+.portrait-item img, 
+.featured-image-single img,
 .video-item img {
     width: 100%;
     height: auto;
     display: block;
     box-sizing: border-box;
-    border: 1px solid #333;
-    transition: filter 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #ddd;
+    transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
-.gallery-item img:hover, 
-.portrait-item img:hover, 
-.featured-image-single img:hover {
-    filter: brightness(1.08);
-    border-color: #bbb;
-}
+.video-item img { border-color: #333; }
+.gallery-item img:hover, .featured-image-single img:hover { filter: brightness(1.08); border-color: #bbb; }
 
-.video-item:hover img {
-    filter: brightness(1.1);
-    border-color: rgba(255, 255, 255, 0.5); 
-}
+/* --- 6. VIDEO UI (Micro-Ghost) --- */
 
-/* --- 5. THE LIGHTBOX OVERLAY UI --- */
-
-.lightbox {
-    display: none; 
-    position: fixed;
-    z-index: 10000;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.97); 
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 95vw;
-    max-height: 95vh;
-}
-
-.lightbox-content {
-    max-width: 100%;
-    max-height: 85vh; 
-    object-fit: contain;
-    border: 1px solid #333;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.lightbox-info {
-    width: 100%;
-    padding: 15px 0;
-    display: flex;
-    justify-content: space-between;
-    color: #999;
-    font-size: 14px;
-}
-
-.lightbox-counter { color: #555; font-style: italic; }
-
-.lightbox-close {
-    position: absolute;
-    top: 10px; right: 10px;
-    width: 60px; height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px; 
-    color: #fff;
-    cursor: pointer;
-    line-height: 1;
-    z-index: 10020;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 100; 
-    user-select: none;
-    transition: color 0.3s ease;
-}
-
-.lightbox-close:hover { color: #bbb; }
-
-.lightbox-prev, .lightbox-next {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 30%; 
-    z-index: 10010;
-    cursor: pointer;
-}
-
-.lightbox-prev { left: 0; }
-.lightbox-next { right: 0; }
-
-.lightbox-prev::after, .lightbox-next::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 25px; height: 25px;
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-    border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.lightbox-prev::after { left: 40px; transform: translateY(-50%) rotate(-135deg); }
-.lightbox-next::after { right: 40px; transform: translateY(-50%) rotate(45deg); }
-
-/* --- 7. RESPONSIVE ENGINE (Unified Global Rail Sync) --- */
-
-@media (max-width: 768px) {
-    /* FLUID MOBILE SPACING: Snap all elements to 15px gaps */
-    .text-rail,
-    .gallery-grid-960, 
-    .gallery-grid-1260, 
-    .gallery-portrait-960,
-    .gallery-portrait-4, 
-    .video-grid-4,
-    .featured-image-single {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        /* Uniform vertical gaps for a tight scroll */
-        margin-top: 15px !important;
-        margin-bottom: 15px !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* TIGHT 2-UP GRID LOGIC */
-    .gallery-grid-960, 
-    .gallery-grid-1260, 
-    .gallery-portrait-960, 
-    .gallery-portrait-4, 
-    .video-grid-4 {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-    }
-
-    /* HEADER FIX: Tight snap to nav on mobile */
-    .featured-image-single.header-mode {
-        padding-top: 15px !important;
-        margin-top: 0 !important;
-        margin-bottom: 15px !important;
-    }
-
-    .lightbox-close { top: 0px; right: 0px; font-size: 60px; width: 80px; height: 80px; }
-    .lightbox-prev::after, .lightbox-next::after { display: none; }
-}
-
-/* --- 8. THE CINEMATIC OVERRIDES --- */
-
-body.dark-theme { background-color: #000000 !important; }
-.paper-sheet { margin-top: 0 !important; padding-top: 0 !important; }
-
-body.dark-theme .paper-sheet { 
-    background-color: #1a1a1a !important; 
-    border: none !important; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.6) !important; 
-}
-
-body.dark-theme .text-rail h1, body.dark-theme .text-rail h2 { color: #ffffff; }
-body.dark-theme .text-rail p { color: #aaaaaa; }
-body.dark-theme .story-hero-wrapper { background-color: #000; }
-body.dark-theme .panoramic-hero { filter: brightness(0.7); }
-
-/* --- 9. THE VIDEO STAGE & MICRO-GHOST UI --- */
-
-.video-stage { width: 90vw; max-width: 1100px; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 0 100px rgba(0,0,0,1); }
-.video-stage iframe { width: 100%; height: 100%; display: block; }
-
+.video-item { position: relative; cursor: pointer; overflow: hidden; }
 .play-button-overlay { 
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
     width: 0; height: 0; 
     border-top: 9px solid transparent; 
     border-bottom: 9px solid transparent; 
     border-left: 14px solid rgba(255, 255, 255, 0.15); 
+    z-index: 10; 
+    pointer-events: none; 
     transition: border-left-color 0.4s ease, transform 0.4s ease; 
 }
-
 .video-item:hover .play-button-overlay { 
-    border-left-color: rgba(255, 255, 255, 0.75); transform: translate(-42%, -50%) scale(1.05); 
+    border-left-color: rgba(255, 255, 255, 0.75); 
+    transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. EDITORIAL: SINGLE FEATURED IMAGE --- */
+/* --- 7. LIGHTBOX OVERLAY --- */
 
-.featured-image-single.header-mode { 
-    padding-top: 60px !important; 
-    margin-top: 0 !important; 
-    margin-bottom: 60px !important; 
+.lightbox { display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); justify-content: center; align-items: center; }
+.lightbox-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 95vw; max-height: 95vh; }
+.lightbox-content { max-width: 100%; max-height: 85vh; object-fit: contain; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+.lightbox-close { position: absolute; top: 10px; right: 10px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #fff; cursor: pointer; font-family: Helvetica, sans-serif; }
+
+/* --- 8. RESPONSIVE ENGINE (15px Snap) --- */
+
+@media (max-width: 768px) {
+    .paper-sheet > * {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .featured-image-single.header-mode {
+        padding-top: 15px !important;
+    }
 }
 
-.featured-caption { 
-    margin-top: 12px; font-size: 13px; line-height: 1.5; color: #888; font-style: italic; text-align: left; 
-}
+/* --- 9. THE CINEMATIC OVERRIDES --- */
+
+body.dark-theme { background-color: #000000 !important; }
+.paper-sheet { margin-top: 0 !important; padding-top: 0 !important; background-color: #fff; }
+body.dark-theme .paper-sheet { background-color: #1a1a1a !important; border: none !important; }
+body.dark-theme .text-rail h1, body.dark-theme .text-rail h2 { color: #ffffff; }
+
+/* --- 10. EDITORIAL SPECIALTIES --- */
+
+.featured-image-single.header-mode { padding-top: 60px; }
+.featured-caption { margin-top: 10px; font-size: 13px; color: #888; font-style: italic; text-align: left; }
