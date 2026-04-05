@@ -199,9 +199,10 @@ body.content-page {
 /* --- MOBILE RESPONSIVE FINESSE --- */
 @media (max-width: 768px) {
     .text-rail blockquote {
-        /* THE MOBILE SPINE FIX: 
-           Increased to 50px to extend the blue line higher. */
-        padding: 50px 0 15px 45px;   
+        /* INCREASED padding-top to 65px to ensure the blue line 
+           extends well above the quote mark per your mockup */
+        padding: 65px 0 15px 45px;   
+        margin: 40px 0;
     }
 
     .text-rail blockquote p {
@@ -209,19 +210,25 @@ body.content-page {
     }
 
     .text-rail blockquote p::before {
+        /* PULLS the quote into the gutter gap */
         left: 10px;                  
         
-        /* THE MOBILE QUOTE FIX: 
-           Nudged to 42px to stay aligned with the 24px text 
-           now that the padding is deeper. */
-        top: 42px;                   
+        /* ALIGNS the quote with the first line of text.
+           Since padding is 65px, 60px puts it right at the cap-height. */
+        top: 60px;                   
         
         font-size: 40px;             
+        line-height: 0;
     }
 
     .text-rail blockquote p::after {
         font-size: 40px;
         transform: translateY(8px);
+    }
+
+    .text-rail blockquote footer {
+        margin-top: 25px;
+        font-size: 16px;
     }
 }
 
