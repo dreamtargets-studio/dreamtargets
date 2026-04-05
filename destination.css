@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.16
+   THINKAMIGO DESTINATION ENGINE v4.18
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
@@ -131,18 +131,14 @@ body.content-page {
     border-left: 3px solid var(--brand-orange);
 }
 
-/* 10. THE TYPOGRAPHIC BLOCKQUOTE 
-   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs
-   Diagnostic: Red Border active to verify cache clearing. 
-   Mobile: 30px Indent aligned to UL Bullet text. */
-
+/* 10. THE TYPOGRAPHIC BLOCKQUOTE (DESKTOP) */
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 40px 0 15px 60px;       /* Desktop Spine */
+    padding: 40px 0 15px 60px;       
     max-width: 640px;                
     position: relative;              
     border: none;
-    border-left: 4px solid var(--brand-blue); /* BLUE SPINE */
+    border-left: 4px solid var(--brand-blue);
 }
 
 .text-rail blockquote p {
@@ -154,7 +150,6 @@ body.content-page {
     display: inline;                 
 }
 
-/* OPENING CURLY “ (Desktop) */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
@@ -166,7 +161,6 @@ body.content-page {
     line-height: 0;                  
 }
 
-/* CLOSING CURLY ” */
 .text-rail blockquote p::after {
     content: "\201D";                
     color: #888;
@@ -178,7 +172,6 @@ body.content-page {
     transform: translateY(15px);     
 }
 
-/* SIGNATURE */
 .text-rail blockquote footer {
     display: block;                  
     margin-top: 32px;                
@@ -189,13 +182,27 @@ body.content-page {
     font-family: 'Poppins', sans-serif; 
 }
 
-/* --- MOBILE RESPONSIVE FINESSE --- */
+/* 11. RESPONSIVE ENGINE (CONSOLIDATED) */
+@media (max-width: 1250px) {
+    .paper-sheet { box-shadow: none; }
+}
+
 @media (max-width: 768px) {
+    .text-rail { 
+        width: 92%; 
+        padding: 30px 0 40px 0; 
+    }
+    
+    .text-rail h1 { 
+        font-size: 38px; 
+    }
+
+    /* MOBILE BLOCKQUOTE: FIXED SINGLE INSTANCE */
     .text-rail blockquote {
-        /* Aligning 30px indent to standard UL text */
-        padding: 70px 0 15px 20px; /* REDUCED FROM 30px */   
+        padding: 70px 0 15px 20px; /* 70px Bar Height | 20px Indent */   
         margin: 40px 0;
-        border-left: 4px solid var(--brand-blue);        
+        border-left: 4px solid var(--brand-blue);
+        max-width: 100%;
     }
 
     .text-rail blockquote p {
@@ -210,43 +217,6 @@ body.content-page {
 
     .text-rail blockquote p::after {
         font-size: 36px;
-        transform: translateY(8px);
-    }
-
-    .text-rail blockquote footer {
-        margin-top: 25px;
-        font-size: 16px;
-    }
-}
-
-/* 11. RESPONSIVE ENGINE */
-@media (max-width: 1250px) {
-    .paper-sheet { box-shadow: none; }
-}
-
-@media (max-width: 768px) {
-    .text-rail { width: 92%; padding: 30px 0 40px 0; }
-    .text-rail h1 { font-size: 38px; }
-
-    /* MOBILE BLOCKQUOTE: Locked to UL Bullet Guide */
-    .text-rail blockquote {
-        padding: 80px 0 15px 62px; /* 80px Spine Height | 62px Bullet Alignment */
-        margin: 40px 0;
-        border-left: 4px solid #FF0000; /* DIAGNOSTIC RED */
-    }
-
-    .text-rail blockquote p {
-        font-size: 24px;             
-    }
-
-    .text-rail blockquote p::before {
-        left: 15px;                  
-        top: 78px;                 /* Optical alignment for 80px padding */
-        font-size: 40px;             
-    }
-
-    .text-rail blockquote p::after {
-        font-size: 40px;
         transform: translateY(8px);
     }
 
