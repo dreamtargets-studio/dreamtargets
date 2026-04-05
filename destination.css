@@ -132,10 +132,11 @@ body.content-page {
     border-left: 3px solid var(--brand-orange);
 }
 
-/* 10. REFINED BLOCKQUOTES */
+/* 10. REFINED BLOCKQUOTES 
+   Features: Optical Margin Alignment (Hanging Punctuation) */
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 25px 0 25px 45px;
+    padding: 25px 0 25px 60px;       /* INCREASED: From 45px to 60px to allow for 'the hang' */
     border-left: 4px solid var(--brand-blue);
     font-style: normal;
     font-size: 32px;
@@ -143,6 +144,20 @@ body.content-page {
     line-height: 1.4;
     color: #444;
     max-width: 840px;
+
+    /* THE FINESSE: Negative indent for the opening mark */
+    text-indent: -16px;              /* Pulls the " back over the gutter */
+}
+
+.text-rail blockquote footer {
+    display: block;              
+    margin-top: 20px;            
+    font-size: 18px;             
+    font-weight: 300;            
+    color: #888;                 
+    font-style: normal;          
+    letter-spacing: 0.02em;
+    text-indent: 0;                  /* RESET: Ensures the signature doesn't hang! */
 }
 
 /* THE SIGNATURE NEST 
