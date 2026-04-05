@@ -142,7 +142,7 @@ body.content-page {
     max-width: 640px;                
     position: relative;              
     border: none;
-    border-left: 4px solid #FF0000;  /* RED SPINE */
+    border-left: 4px solid var(--brand-blue); /* BLUE SPINE */
 }
 
 .text-rail blockquote p {
