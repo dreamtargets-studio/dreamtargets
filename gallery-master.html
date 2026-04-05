@@ -1,167 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery Master Template | Thinkamigo</title>
-    
-    <link rel="stylesheet" href="chassis.css">
-    <link rel="stylesheet" href="destination.css">
-    <link rel="stylesheet" href="gallery.css">
-</head>
-<body class="content-page">
+/* ============================================================
+   THINKAMIGO GALLERY ENGINE v2.1.1
+   Architecture: Disciplined 16:9 & A4 Portrait Grids
+   Logic: Perfect Vertical Alignment & Flush Mobile Padding
+   ============================================================ */
 
-    <nav id="main-nav"></nav>
+/* --- 1. THE EDITORIAL RAIL (960px Standard Alignment) --- */
 
-    <main class="paper-sheet">
-        
-        <section class="story-hero-wrapper">
-            <img src="assets/img/placeholder-cinematic-1280x414.jpg" 
-                 alt="Cinematic Hero" 
-                 class="panoramic-hero">
-        </section>
+.gallery-grid-960, 
+.gallery-portrait-960,
+.featured-image-single {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 0 20px; /* Standardized side-gutter */
+    box-sizing: border-box;
+    display: block; /* Default for single images */
+}
 
-        <section class="featured-image-single header-mode">
-            <img src="assets/img/placeholder-muted-1280x720.jpg" 
-                 data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                 alt="Editorial Project Header">
-        </section>
+/* Specific Grid Behaviors */
+.gallery-grid-960 { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px; 
+    margin: 40px auto; 
+}
 
-        <article class="text-rail">
-            <h1>Gallery Master Template</h1>
-            <div class="orange-rule"></div>
-            
-            <h2>Editorial Landscape Grid (3-up)</h2>
-            <p>This section demonstrates the standard 16:9 landscape grid contained within the 960px editorial rail. It is optimized for cinematic screengrabs and wide-format photography.</p>
+.gallery-portrait-960 { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 12px; 
+    margin: 40px auto; 
+}
 
-            <div class="gallery-grid-960">
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 01">
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 02">
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 03">
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 04">
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 05">
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                         data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                         data-gallery="landscape-set" 
-                         alt="Editorial Landscape Sample 06">
-                </div>
-            </div>
+/* --- 2. THE CINEMATIC RAIL (1260px Standard Alignment) --- */
 
-            <blockquote>
-                <p>Architecture is the learned game, correct and magnificent, of forms assembled in the light.</p>
-                <footer>Le Corbusier</footer>
-            </blockquote>
+.gallery-grid-1260,
+.gallery-portrait-4,
+.video-grid-4 {
+    display: grid;
+    max-width: 1260px;
+    margin: 60px auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-            <h2>Editorial Portrait Grid (4-up)</h2>
-            <p>The following section demonstrates the 4-up portrait grid, specifically designed for A4 ratio documents, comic book covers, and vertical print archives.</p>
+.gallery-grid-1260 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.gallery-portrait-4 { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.video-grid-4 { grid-template-columns: repeat(4, 1fr); gap: 25px; padding-top: 2px; padding-bottom: 2px; }
 
-            <div class="gallery-portrait-960">
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 01">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 02">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 03">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 04">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 05">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 06">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 07">
-                </div>
-                <div class="portrait-item">
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                        data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                        data-gallery="portrait-set" 
-                        alt="A4 Archive: Page 08">
-                </div>
-            </div>
+/* --- 4. UNIVERSAL ASSET RULES --- */
 
-            <hr class="rule-grey-paper" style="margin: 40px 0;">
+.gallery-item img, 
+.portrait-item img,
+.gallery-portrait-960 img,
+.gallery-portrait-4 img,
+.gallery-grid-1260 img,
+.featured-image-single img {
+    width: 100%;
+    height: auto;      
+    display: block;
+    box-sizing: border-box;
+    cursor: zoom-in;   
+    border: 1px solid #ddd;
+    transition: filter 0.2s ease, border-color 0.2s ease;
+}
 
-            <figure class="featured-image-single">
-                <img src="assets/img/placeholder-muted-1280x720.jpg" 
-                     data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                     alt="Cinematic documentation of site infrastructure">
-                <figcaption class="featured-caption">
-                    Featured Analysis: High-resolution documentation of structural components under standard operational lighting.
-                </figcaption>
-            </figure>
+.video-item { position: relative; cursor: pointer; overflow: hidden; }
+.video-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    transition: filter 0.3s ease, border-color 0.3s ease;
+}
 
-        </article>
-    </main>
+.gallery-item img:hover, .portrait-item img:hover, .featured-image-single img:hover {
+    filter: brightness(1.08);
+    border-color: #bbb;
+}
 
-    <div class="rule-grey-paper"></div>
+.video-item:hover img {
+    filter: brightness(1.1);
+    border-color: rgba(255, 255, 255, 0.5); 
+}
 
-    <main class="paper-sheet links-section" style="padding-bottom: 30px; min-height: auto;">
-        <article class="text-rail">
-            <h2>Reference Links</h2>
-            <ul class="link-list">
-                <li><a href="#" target="_blank">Project Documentation (PDF)</a></li>
-                <li><a href="#" target="_blank">Interactive Research Portal</a></li>
-                <li><a href="#" target="_blank">Case Study Archive</a></li>
-            </ul>
-        </article>
-    </main>
+/* --- 5. THE LIGHTBOX OVERLAY UI --- */
 
-    <footer id="main-footer"></footer>
-    
-    <script src="loader.js"></script>
+.lightbox {
+    display: none; 
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.97); 
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
 
-</body>
-</html>
+.lightbox-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 95vw;
+    max-height: 95vh;
+}
+
+.lightbox-content {
+    max-width: 100%;
+    max-height: 85vh; 
+    object-fit: contain;
+    border: 1px solid #333;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.lightbox-info {
+    width: 100%;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+    font-size: 14px;
+}
+
+.lightbox-counter { color: #555; font-style: italic; }
+
+.lightbox-close {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 60px; height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px; 
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10020;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 100; 
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.lightbox-close:hover { color: #bbb; }
+
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 30%; 
+    z-index: 10010;
+    cursor: pointer;
+}
+
+.lightbox-prev { left: 0; }
+.lightbox-next { right: 0; }
+
+.lightbox-prev::after, .lightbox-next::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25px; 
+    height: 25px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.lightbox-prev::after { left: 40px; transform: translateY(-50%) rotate(-135deg); }
+.lightbox-next::after { right: 40px; transform: translateY(-50%) rotate(45deg); }
+
+.lightbox-prev:hover::after, .lightbox-next:hover::after { border-color: rgba(255, 255, 255, 1); }
+
+/* --- 7. RESPONSIVE ENGINE (Unified Mobile Alignment) --- */
+
+@media (max-width: 768px) {
+    .gallery-grid-960, 
+    .gallery-grid-1260, 
+    .gallery-portrait-960,
+    .gallery-portrait-4, 
+    .video-grid-4,
+    .featured-image-single {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin: 30px auto;
+    }
+
+    .lightbox-close { top: 0px; right: 0px; font-size: 60px; width: 80px; height: 80px; }
+    .lightbox-prev::after, .lightbox-next::after { display: none; }
+}
+
+/* --- 8. THE CINEMATIC OVERRIDES --- */
+
+body.dark-theme { background-color: #000000 !important; }
+.paper-sheet { margin-top: 0 !important; padding-top: 0 !important; }
+
+body.dark-theme .paper-sheet { 
+    background-color: #1a1a1a !important; 
+    border: none !important; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.6) !important; 
+}
+
+body.dark-theme .text-rail h1, body.dark-theme .text-rail h2 { color: #ffffff; }
+body.dark-theme .text-rail p { color: #aaaaaa; }
+body.dark-theme .story-hero-wrapper { background-color: #000; }
+body.dark-theme .panoramic-hero { filter: brightness(0.7); }
+
+/* --- 9. THE VIDEO STAGE & MICRO-GHOST UI --- */
+
+.video-stage { width: 90vw; max-width: 1100px; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 0 100px rgba(0,0,0,1); }
+.video-stage iframe { width: 100%; height: 100%; display: block; }
+
+.play-button-overlay { 
+    position: absolute; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 0; height: 0; 
+    border-top: 9px solid transparent; 
+    border-bottom: 9px solid transparent; 
+    border-left: 14px solid rgba(255, 255, 255, 0.15); 
+    z-index: 10; 
+    pointer-events: none; 
+    transition: border-left-color 0.4s ease, transform 0.4s ease; 
+}
+
+.video-item:hover .play-button-overlay { 
+    border-left-color: rgba(255, 255, 255, 0.75); 
+    transform: translate(-42%, -50%) scale(1.05); 
+}
+
+/* --- 10. EDITORIAL: SINGLE FEATURED IMAGE (Header Mode) --- */
+
+.featured-image-single.header-mode { 
+    padding-top: 60px; 
+    margin-top: 0; 
+    margin-bottom: 60px; 
+}
+
+.featured-caption { 
+    margin-top: 12px; 
+    font-size: 13px; 
+    line-height: 1.5; 
+    color: #888; 
+    font-style: italic; 
+    text-align: left; 
+}
