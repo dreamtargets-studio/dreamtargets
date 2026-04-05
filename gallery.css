@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9.6
+   THINKAMIGO GALLERY ENGINE v1.9.7
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Layered Dark Themes & Pure Minimalist Video UI
+   Logic: Layered Dark Themes & Micro-Minimalist Video UI
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -280,7 +280,7 @@ body.dark-theme .panoramic-hero {
     filter: brightness(0.7);
 }
 
-/* --- 9. THE VIDEO STAGE & PURE TRIANGLE UI --- */
+/* --- 9. THE VIDEO STAGE & MICRO-GHOST UI --- */
 
 .video-stage {
     width: 90vw;
@@ -296,26 +296,26 @@ body.dark-theme .panoramic-hero {
     display: block;
 }
 
-/* PURE TRIANGLE: Floating icon only */
+/* MICRO-TRIANGLE: Half-size, ghost-opacity icon only */
 .play-button-overlay {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 0; 
     height: 0; 
-    /* The shape is created by CSS borders alone */
-    border-top: 18px solid transparent;
-    border-bottom: 18px solid transparent;
-    border-left: 28px solid rgba(255, 255, 255, 0.4); 
+    /* Borders reduced for micro-precision (approx 14px total width) */
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 14px solid rgba(255, 255, 255, 0.15); 
     z-index: 10;
     pointer-events: none;
-    transition: border-left-color 0.3s ease, transform 0.3s ease;
+    transition: border-left-color 0.4s ease, transform 0.4s ease;
 }
 
-/* ROLLOVER: Triangle brightens to crisp white */
+/* ROLLOVER: Becomes a sharp white hint */
 .video-item:hover .play-button-overlay {
-    border-left-color: rgba(255, 255, 255, 0.95);
-    transform: translate(-45%, -50%) scale(1.1);
+    border-left-color: rgba(255, 255, 255, 0.75);
+    transform: translate(-42%, -50%) scale(1.05);
 }
 
 .dark-theme .lightbox-close {
