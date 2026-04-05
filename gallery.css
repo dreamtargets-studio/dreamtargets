@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.1.3
+   THINKAMIGO GALLERY ENGINE v2.1.7
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Synchronized Text & Asset Rails (The 960px lock)
    ============================================================ */
@@ -179,7 +179,7 @@
 /* --- 7. RESPONSIVE ENGINE (Unified Global Rail Sync) --- */
 
 @media (max-width: 768px) {
-    /* LOCK ALL CONTAINERS TO 15px GUTTER */
+    /* FLUID MOBILE SPACING: Snap all elements to 15px gaps */
     .text-rail,
     .gallery-grid-960, 
     .gallery-grid-1260, 
@@ -193,10 +193,13 @@
         padding-right: 15px !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
+        /* Uniform vertical gaps for a tight scroll */
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
         box-sizing: border-box !important;
     }
     
-    /* UNIFIED 2-UP GRID BEHAVIOR */
+    /* TIGHT 2-UP GRID LOGIC */
     .gallery-grid-960, 
     .gallery-grid-1260, 
     .gallery-portrait-960, 
@@ -205,8 +208,13 @@
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
-        margin-top: 30px !important;
-        margin-bottom: 30px !important;
+    }
+
+    /* HEADER FIX: Tight snap to nav on mobile */
+    .featured-image-single.header-mode {
+        padding-top: 15px !important;
+        margin-top: 0 !important;
+        margin-bottom: 15px !important;
     }
 
     .lightbox-close { top: 0px; right: 0px; font-size: 60px; width: 80px; height: 80px; }
