@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.6
-   Features: Auto-Injection, Video Engine (No-Cookie Fix)
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.7
+   Features: Auto-Injection, Video Engine (Domain-Agnostic Origin Fix)
    Architecture: Pixel-Strict Asset Handling (16:9 & A4)
    ============================================================ */
 
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. MODULE: VIDEO ENGINE (No-Cookie Edition) ---
+    // --- 3. MODULE: VIDEO ENGINE (No-Cookie & Origin Verified) ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
@@ -157,11 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const id = videoTrigger.getAttribute('data-video-id');
             const platform = videoTrigger.getAttribute('data-platform');
+            
+            // SECURITY: Detects current domain automatically to satisfy YT security
+            const currentOrigin = window.location.origin;
             let url = "";
 
-            // THE FIX: youtube-nocookie bypasses tracking-based bot blocks
             if (platform === 'youtube') {
-                url = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+                url = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&origin=${currentOrigin}`;
             }
             if (platform === 'vimeo') {
                 url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12`;
