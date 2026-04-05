@@ -199,7 +199,7 @@ body.content-page {
 
     /* MOBILE BLOCKQUOTE: FIXED SINGLE INSTANCE */
     .text-rail blockquote {
-        padding: 70px 0 15px 25px; /* 70px Bar Height | 25px Indent */   
+        padding: 70px 0 15px 30px; /* 70px Bar Height | 30px Indent */   
         margin: 40px 0;
         border-left: 4px solid var(--brand-blue);
         max-width: 100%;
