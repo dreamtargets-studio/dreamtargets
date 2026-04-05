@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v5.5 - STABLE DOUBLE-MAIN SYNC
+   THINKAMIGO CHASSIS v5.6 - STABLE INTERNAL DIVIDER SYNC
    Structure: 1250px Grid | 3-Col Footer | Archival Link List
    ============================================================ */
 
@@ -182,8 +182,8 @@ html, body {
 
 /* --- 5. UI COMPONENTS & TRANSITIONS --- */
 
-/* THE FULL WIDTH CUT */
-.rule-grey-full {
+/* THE PAPER-CONSTRAINED RULE (1250px) */
+.rule-grey-paper {
     width: 100%;
     height: 1px;
     background-color: #cccccc;
@@ -191,7 +191,6 @@ html, body {
     padding: 0;
     border: none;
     display: block;
-    clear: both;
 }
 
 /* THE ARCHIVAL LINK LIST */
