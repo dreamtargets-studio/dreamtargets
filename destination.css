@@ -168,7 +168,7 @@ body.content-page {
     content: "\201C";                
     position: absolute;
     left: 24px;                      
-    top: 50px;                       /* <--- THE ALIGNMENT FIX */
+    top: 54px;                       /* <--- THE ALIGNMENT FIX */
     color: #888;
     font-size: 52px;                 
     font-family: Georgia, serif;     
