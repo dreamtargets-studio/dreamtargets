@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v5.8 - INTERACTIVE ARCHIVAL SYNC
-   Structure: 1250px Grid | 3-Col Footer | Strict Pixel UI
-   Features: Manual Weight Toggle | Active Blue Affordance
+   THINKAMIGO CHASSIS v5.9 - GLOBAL SHELL
+   Architecture: 1250px Grid | 3-Col Footer | UI Components
+   Note: Page-specific elements (Dividers/Links) moved to destination.css
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -12,7 +12,7 @@
     --brand-orange: #ff8c00;
     --footer-bg: #0a254a;
     --white: #ffffff;
-    --stone-bg: #e3e2d9; /* Sync with destination.css background */
+    --stone-bg: #e3e2d9; 
 }
 
 /* --- 1. CORE RESET --- */
@@ -181,49 +181,7 @@ html, body {
 
 .footer-address { text-align: center; color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 20px; }
 
-/* --- 5. UI COMPONENTS & TRANSITIONS --- */
-
-/* THE PAPER-CONSTRAINED RULE (Strict Pixels) */
-.rule-grey-paper {
-    width: 100%;
-    height: 1px;
-    background-color: #dddddd;
-    margin: 0;
-    padding: 0;
-    border: none;
-    display: block;
-}
-
-/* THE ARCHIVAL LINK LIST (Strict Pixels) */
-.link-list {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0 20px 0;
-}
-
-.link-list li {
-    margin-bottom: 6px;
-    line-height: 40px;
-}
-
-.link-list a {
-    color: var(--brand-blue); /* ACTIVE COLOR: Indicates clickable state */
-    text-decoration: none !important;
-    border: none !important;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    
-    /* MANUAL WEIGHT TOGGLE: 400 (Regular), 500 (Medium), 600 (Bold) */
-    font-weight: 600; 
-    
-    transition: color 0.3s ease;
-}
-
-.link-list a:hover {
-    color: var(--brand-orange); /* HOVER STATE */
-    text-decoration: none !important;
-    border: none !important;
-}
+/* --- 5. UI COMPONENTS --- */
 
 .btn-pill { 
     display: inline-block; padding: 12px 45px; border: 4px solid #ffffff; border-radius: 50px; 
