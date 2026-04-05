@@ -132,17 +132,17 @@ body.content-page {
 }
 
 /* 10. THE TYPOGRAPHIC BLOCKQUOTE 
-   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs */
+   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs
+   Diagnostic: Red Border active to verify cache clearing. 
+   Mobile: 30px Indent aligned to UL Bullet text. */
 
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 40px 0 15px 60px;       
-    border-left: 4px solid #FF0000; /* DIAGNOSTIC RED */
+    padding: 40px 0 15px 60px;       /* Desktop Spine */
     max-width: 640px;                
     position: relative;              
-    border-top: none;                
-    border-right: none;
-    border-bottom: none;
+    border: none;
+    border-left: 4px solid #FF0000;  /* RED SPINE */
 }
 
 .text-rail blockquote p {
@@ -154,7 +154,7 @@ body.content-page {
     display: inline;                 
 }
 
-/* OPENING CURLY “ */
+/* OPENING CURLY “ (Desktop) */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
@@ -187,6 +187,36 @@ body.content-page {
     color: #888;                     
     letter-spacing: 0.02em;
     font-family: 'Poppins', sans-serif; 
+}
+
+/* --- MOBILE RESPONSIVE FINESSE --- */
+@media (max-width: 768px) {
+    .text-rail blockquote {
+        /* Aligning 30px indent to standard UL text */
+        padding: 70px 0 15px 30px;   
+        margin: 40px 0;
+        border-left: 4px solid #FF0000; /* RED SPINE MOBILE */
+    }
+
+    .text-rail blockquote p {
+        font-size: 24px;             
+    }
+
+    .text-rail blockquote p::before {
+        left: 8px;                  
+        top: 68px;                 
+        font-size: 36px;             
+    }
+
+    .text-rail blockquote p::after {
+        font-size: 36px;
+        transform: translateY(8px);
+    }
+
+    .text-rail blockquote footer {
+        margin-top: 25px;
+        font-size: 16px;
+    }
 }
 
 /* 11. RESPONSIVE ENGINE */
