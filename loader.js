@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.5
-   Features: Auto-Injection, One vs. Many Lightbox, Video Engine
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.6
+   Features: Auto-Injection, Video Engine (No-Cookie Fix)
    Architecture: Pixel-Strict Asset Handling (16:9 & A4)
    ============================================================ */
 
@@ -50,8 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="lightbox-close">&times;</span>
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
-            <div class="lightbox-wrapper">
-                </div>
+            <div class="lightbox-wrapper"></div>
         `;
         document.body.appendChild(lb);
         setupLightboxLogic();
@@ -129,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay || e.target.classList.contains('lightbox-close')) {
                 overlay.style.display = 'none';
-                lbWrapper.innerHTML = ''; // Eject content to stop video/clear memory
+                lbWrapper.innerHTML = ''; // Eject content to stop video
             }
         });
 
@@ -145,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. MODULE: VIDEO ENGINE (Injected into Lightbox) ---
+    // --- 3. MODULE: VIDEO ENGINE (No-Cookie Edition) ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
@@ -160,8 +159,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const platform = videoTrigger.getAttribute('data-platform');
             let url = "";
 
-            if (platform === 'youtube') url = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-            if (platform === 'vimeo') url = `https://player.vimeo.com/video/${id}?autoplay=1`;
+            // THE FIX: youtube-nocookie bypasses tracking-based bot blocks
+            if (platform === 'youtube') {
+                url = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+            }
+            if (platform === 'vimeo') {
+                url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12`;
+            }
 
             // Hide Gallery Nav
             prevBtn.style.display = 'none';
@@ -170,7 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Inject Video Stage
             lbWrapper.innerHTML = `
                 <div class="video-stage">
-                    <iframe src="${url}" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <iframe src="${url}" 
+                            frameborder="0"
+                            allow="autoplay; fullscreen" 
+                            allowfullscreen></iframe>
                 </div>
             `;
             
@@ -207,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 6. MODULE: UI UTILITIES (Scroll Behavior) ---
+    // --- 6. MODULE: UI UTILITIES ---
     const setupUI = () => {
         const topBtn = document.getElementById('backToTop');
         if (!topBtn) return;
