@@ -203,7 +203,7 @@ html, body {
 
 .link-list li {
     margin-bottom: 6px;
-    line-height: 20px;
+    line-height: 40px;
 }
 
 .link-list a {
@@ -211,10 +211,10 @@ html, body {
     text-decoration: none !important;
     border: none !important;
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     
     /* MANUAL WEIGHT TOGGLE: 400 (Regular), 500 (Medium), 600 (Bold) */
-    font-weight: 400; 
+    font-weight: 600; 
     
     transition: color 0.3s ease;
 }
