@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9.5
+   THINKAMIGO GALLERY ENGINE v1.9.6
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Layered Dark Themes & Vimeo-Optimized UI
+   Logic: Layered Dark Themes & Pure Minimalist Video UI
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -104,7 +104,7 @@
     height: auto;
     display: block;
     border: 1px solid #333;
-    transition: filter 0.3s ease, transform 0.5s ease;
+    transition: filter 0.3s ease;
 }
 
 .gallery-item img:hover, 
@@ -115,10 +115,10 @@
     border-color: #bbb;
 }
 
+/* Video Hover: Just a subtle brightness lift */
 .video-item:hover img {
-    filter: brightness(1.1) grayscale(0.2);
-    transform: scale(1.03);
-    border-color: #ffffff;
+    filter: brightness(1.1);
+    border-color: #555;
 }
 
 /* --- 5. THE LIGHTBOX OVERLAY UI --- */
@@ -251,7 +251,7 @@
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
-/* --- 8. THE CINEMATIC OVERRIDES (Dark Theme Theme) --- */
+/* --- 8. THE CINEMATIC OVERRIDES (Dark Theme) --- */
 
 body.dark-theme {
     background-color: #000000 !important;
@@ -280,7 +280,7 @@ body.dark-theme .panoramic-hero {
     filter: brightness(0.7);
 }
 
-/* --- 9. THE VIDEO STAGE & OVERLAY --- */
+/* --- 9. THE VIDEO STAGE & PURE TRIANGLE UI --- */
 
 .video-stage {
     width: 90vw;
@@ -296,35 +296,26 @@ body.dark-theme .panoramic-hero {
     display: block;
 }
 
-/* Play Button Branding */
+/* PURE TRIANGLE: Floating icon only */
 .play-button-overlay {
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    width: 60px; height: 60px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 2px solid #fff;
-    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    width: 0; 
+    height: 0; 
+    /* The shape is created by CSS borders alone */
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 28px solid rgba(255, 255, 255, 0.4); 
     z-index: 10;
     pointer-events: none;
-    transition: all 0.3s ease;
+    transition: border-left-color 0.3s ease, transform 0.3s ease;
 }
 
-.play-button-overlay::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 55%;
-    transform: translate(-50%, -50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid #fff;
-}
-
+/* ROLLOVER: Triangle brightens to crisp white */
 .video-item:hover .play-button-overlay {
-    background: #f39c12; /* Thinkamigo Orange */
-    border-color: #f39c12;
-    transform: translate(-50%, -50%) scale(1.15);
-    box-shadow: 0 0 20px rgba(243, 156, 18, 0.4);
+    border-left-color: rgba(255, 255, 255, 0.95);
+    transform: translate(-45%, -50%) scale(1.1);
 }
 
 .dark-theme .lightbox-close {
