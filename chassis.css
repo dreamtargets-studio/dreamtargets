@@ -1,6 +1,7 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v5.7 - REFINED ARCHIVAL SYNC
+   THINKAMIGO CHASSIS v5.8 - INTERACTIVE ARCHIVAL SYNC
    Structure: 1250px Grid | 3-Col Footer | Strict Pixel UI
+   Features: Manual Weight Toggle | Active Blue Affordance
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -206,16 +207,20 @@ html, body {
 }
 
 .link-list a {
-    color: #666;
+    color: var(--brand-blue); /* ACTIVE COLOR: Indicates clickable state */
     text-decoration: none !important;
     border: none !important;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+    
+    /* MANUAL WEIGHT TOGGLE: 400 (Regular), 500 (Medium), 600 (Bold) */
+    font-weight: 400; 
+    
     transition: color 0.3s ease;
 }
 
 .link-list a:hover {
-    color: var(--brand-blue);
+    color: var(--brand-orange); /* HOVER STATE */
     text-decoration: none !important;
     border: none !important;
 }
