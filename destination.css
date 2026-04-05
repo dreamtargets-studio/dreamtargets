@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v3.3
+   THINKAMIGO DESTINATION ENGINE v3.4
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
-   Features: SATURATION LOCK (#0054dc), Overshot 4px Blue Rule
+   Features: SATURATION LOCK (#0054dc), Signature Style Sync
    ============================================================ */
 
 :root {
@@ -95,7 +95,6 @@ body.content-page {
     margin: 45px 0 20px 0;
 }
 
-
 .text-rail p {
     font-size: 18px;         
     line-height: 1.65;       
@@ -147,17 +146,18 @@ body.content-page {
 }
 
 /* THE SIGNATURE NEST 
-   Formatted as a regular paragraph but locked to the quote */
+   Formatted as a lightweight grey anchor */
 .text-rail blockquote footer {
-    display: block;              /* Forces it to a new line */
-    margin-top: 15px;            /* Small gap below the quote */
-    font-size: 18px;             /* Regular body size */
-    font-weight: 600;            /* Semi-bold to give the name some 'ink' weight */
-    color: #333;                 /* Darker than the quote for contrast */
-    font-style: normal;          /* Ensures no accidental italics */
+    display: block;              
+    margin-top: 20px;            
+    font-size: 18px;             
+    font-weight: 300;            /* Lightweight as requested */
+    color: #888;                 /* Sophisticated Grey */
+    font-style: normal;          
+    letter-spacing: 0.02em;
 }
 
-/* 10. MOBILE RESPONSIVE */
+/* 11. MOBILE RESPONSIVE */
 @media (max-width: 1250px) {
     .paper-sheet {
         box-shadow: none; 
