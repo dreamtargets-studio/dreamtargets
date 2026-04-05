@@ -193,7 +193,7 @@ body.content-page {
 @media (max-width: 768px) {
     .text-rail blockquote {
         /* Aligning 30px indent to standard UL text */
-        padding: 70px 0 15px 30px;   
+        padding: 70px 0 15px 20px; /* REDUCED FROM 30px */   
         margin: 40px 0;
         border-left: 4px solid #FF0000; /* RED SPINE MOBILE */
     }
