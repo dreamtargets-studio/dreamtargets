@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.6
+   THINKAMIGO DESTINATION ENGINE v4.7
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
@@ -139,7 +139,7 @@ body.content-page {
 
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 15px 0 15px 60px;       /* THE FIXED SPINE: All text (I and P) starts here */
+    padding: 15px 0 15px 60px;       /* THE FIXED SPINE: All text starts here */
     border-left: 4px solid var(--brand-blue); 
     max-width: 640px;                /* Constrained for graphic 'block' shape */
     position: relative;              /* Anchor for the absolute opening quote */
@@ -159,20 +159,20 @@ body.content-page {
 }
 
 /* THE OPENING CURLY “ 
-   Injected via Unicode; Positioned in the negative space of the 60px gutter. */
+   Nudged down (top: 14px) to align optically with the cap-height of the text. */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
-    left: 24px;                      /* Nudges glyph into the gutter gap */
-    top: 4px;                        /* Aligned to cap-height of first line */
+    left: 24px;                      /* Gutter gap positioning */
+    top: 14px;                       /* THE FIX: Drops the quote into the optical window */
     color: #888;
     font-size: 52px;                 
-    font-family: Georgia, serif;     /* Georgia used for superior 'curl' geometry */
-    line-height: 0;                  /* Neutralized: Does not disrupt top-line leading */
+    font-family: Georgia, serif;     
+    line-height: 0;                  /* Neutralized leading */
 }
 
 /* THE CLOSING CURLY ”
-   Injected via Unicode; Placed in-flow at the end of the last sentence. */
+   Neutralized leading ensures the bottom line doesn't 'gap'. */
 .text-rail blockquote p::after {
     content: "\201D";                
     color: #888;
@@ -180,19 +180,19 @@ body.content-page {
     font-family: Georgia, serif;
     margin-left: 6px;
     
-    /* THE LEADING FIX: Prevents the large glyph from pushing the baseline down */
+    /* THE LEADING FIX: Neutralizes glyph height to lock vertical rhythm */
     display: inline-block;           
     line-height: 0;                  
-    transform: translateY(15px);     /* Optically nudged to baseline without affecting layout */
+    transform: translateY(15px);     /* Optically nudged to baseline */
 }
 
 /* THE SIGNATURE: Sits directly on the 60px spine below the quote block */
 .text-rail blockquote footer {
-    display: block;                  /* Forces new line to avoid 'trapping' in the quote inline flow */
-    margin-top: 32px;                /* Intentional air between quote and attribution */
+    display: block;                  
+    margin-top: 32px;                
     font-size: 18px;
     font-weight: 300;
-    color: #888;                     /* Recedes signature as a secondary element */
+    color: #888;                     
     letter-spacing: 0.02em;
     font-family: 'Poppins', sans-serif; 
 }
