@@ -211,7 +211,7 @@ body.content-page {
 
     .text-rail blockquote p::before {
         left: 8px;                  
-        top: 68px;                 
+        top: 72px;  /* <--- INCREASE THIS NUMBER TO MOVE THE QUOTE DOWN */        
         font-size: 36px;             
     }
 
