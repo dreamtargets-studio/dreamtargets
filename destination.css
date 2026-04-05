@@ -134,59 +134,60 @@ body.content-page {
 
 /* 10. THE TYPOGRAPHIC BLOCKQUOTE 
    Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs
-   Logic: Blockquote provides the structural anchor; P provides the hero text.
-   Signature: Nested footer remains on the fixed 60px spine. */
+   Finesse: Extended Blue Header Spine */
 
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 15px 0 15px 60px;       /* THE FIXED SPINE: All text starts here */
+    
+    /* THE SPINE EXTENSION: 
+       Increasing padding-top stretches the blue border above the quote mark. */
+    padding: 40px 0 15px 60px;       
+
     border-left: 4px solid var(--brand-blue); 
-    max-width: 640px;                /* Constrained for graphic 'block' shape */
-    position: relative;              /* Anchor for the absolute opening quote */
+    max-width: 640px;                
+    position: relative;              
     border-top: none;                
     border-right: none;
     border-bottom: none;
 }
 
-/* THE QUOTE TEXT: High-impact editorial scaling */
+/* THE QUOTE TEXT */
 .text-rail blockquote p {
     margin: 0;                       
     font-size: 32px;                 
     font-weight: 300;                
-    line-height: 1.35;               /* FIXED LEADING: Governs the entire block rhythm */
+    line-height: 1.35;               
     color: #444;
-    display: inline;                 /* Ensures punctuation 'hugs' the text flow */
+    display: inline;                 
 }
 
 /* THE OPENING CURLY “ 
-   Nudged down (top: 14px) to align optically with the cap-height of the text. */
+   Maintained at 22px to sit against the cap-height of the Poppins 'I'.
+   Since the block now has 40px top padding, the blue line starts 18px above this mark. */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
-    left: 24px;                      /* Gutter gap positioning */
-    top: 14px;                       /* THE FIX: Drops the quote into the optical window */
+    left: 24px;                      
+    top: 22px;                       
     color: #888;
     font-size: 52px;                 
     font-family: Georgia, serif;     
-    line-height: 0;                  /* Neutralized leading */
+    line-height: 0;                  
 }
 
-/* THE CLOSING CURLY ”
-   Neutralized leading ensures the bottom line doesn't 'gap'. */
+/* THE CLOSING CURLY ” */
 .text-rail blockquote p::after {
     content: "\201D";                
     color: #888;
     font-size: 52px;
     font-family: Georgia, serif;
     margin-left: 6px;
-    
-    /* THE LEADING FIX: Neutralizes glyph height to lock vertical rhythm */
     display: inline-block;           
     line-height: 0;                  
-    transform: translateY(15px);     /* Optically nudged to baseline */
+    transform: translateY(15px);     
 }
 
-/* THE SIGNATURE: Sits directly on the 60px spine below the quote block */
+/* THE SIGNATURE */
 .text-rail blockquote footer {
     display: block;                  
     margin-top: 32px;                
