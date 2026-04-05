@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.8
-   Features: Auto-Injection, Video Engine (UK Safety Fix)
-   Architecture: Pixel-Strict Asset Handling (16:9 & A4)
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.9
+   Features: Auto-Injection, Vimeo-Exclusive Video Engine
+   Architecture: High-Fidelity Cinematic Overlay
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. MODULE: VIDEO ENGINE (UK Safety Fix) ---
+    // --- 3. MODULE: VIDEO ENGINE (Vimeo Optimized) ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
@@ -151,20 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!videoTrigger) return;
 
             const id = videoTrigger.getAttribute('data-video-id');
-            const platform = videoTrigger.getAttribute('data-platform');
-            const currentOrigin = window.location.origin;
-            let url = "";
+            
+            /* VIMEO ARCHITECTURE:
+               - autoplay=1: Instant cinematic start
+               - color=f39c12: Thinkamigo Orange interface
+               - title/byline/portrait=0: Minimalist industrial aesthetic
+            */
+            const url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12&title=0&byline=0&portrait=0`;
 
-            if (platform === 'youtube') {
-                /* UK SAFETY FIX: Autoplay is removed to bypass 
-                   mandatory age-verification/bot-check walls.
-                */
-                url = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&origin=${currentOrigin}`;
-            }
-            if (platform === 'vimeo') {
-                url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12`;
-            }
-
+            // Clear gallery nav for theater mode
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
