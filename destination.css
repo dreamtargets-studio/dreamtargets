@@ -199,7 +199,7 @@ body.content-page {
 
     /* MOBILE BLOCKQUOTE: FIXED SINGLE INSTANCE */
     .text-rail blockquote {
-        padding: 40px 0 15px 30px; /* 70px Bar Height | 30px Indent */   
+        padding: 40px 0 15px 30px; /* XXpx Bar Height | 30px Indent */   
         margin: 40px 0;
         border-left: 4px solid var(--brand-blue); /* BLUE SPINE MOBILE */
         max-width: 100%;
@@ -211,7 +211,7 @@ body.content-page {
 
     .text-rail blockquote p::before {
         left: 8px;                  
-        top: 72px;  /* <--- INCREASE THIS NUMBER TO MOVE THE QUOTE DOWN */        
+        top: 50px;  /* <--- INCREASE THIS NUMBER TO MOVE THE QUOTE DOWN */        
         font-size: 36px;             
     }
 
