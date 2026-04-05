@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.6
+   THINKAMIGO GALLERY ENGINE v1.7
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Static UI / Lightbox Overlay / 2-Up Mobile
    Standards: 640px Thumbs (Landscape) | 452x640px Thumbs (A4)
@@ -7,7 +7,6 @@
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
 
-/* 3-up inside the 960px Editorial Rail */
 .gallery-grid-960 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -16,7 +15,6 @@
     margin: 40px auto;
 }
 
-/* 3-up breakout spanning the full 1260px Paper Sheet */
 .gallery-grid-1260 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -28,7 +26,6 @@
 
 /* --- 2. THE PORTRAIT GRIDS (Print & Comics) --- */
 
-/* 4-up Portrait inside the 960px Editorial Rail */
 .gallery-portrait-960 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -37,7 +34,6 @@
     margin: 40px auto;
 }
 
-/* 4-up Portrait spanning the full 1250px Page */
 .gallery-portrait-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -68,7 +64,6 @@
 
 /* --- 4. UNIVERSAL ASSET RULES (STATIC) --- */
 
-/* Ensures all images fill their grid cells correctly */
 .gallery-item img, 
 .portrait-item img,
 .video-item img,
@@ -82,7 +77,6 @@
     transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
-/* Editorial Hover Styles */
 .gallery-item img:hover, 
 .portrait-item img:hover,
 .gallery-portrait-960 img:hover,
@@ -91,7 +85,6 @@
     border-color: #bbb;
 }
 
-/* Cinematic Hover Styles */
 .video-item img:hover {
     filter: brightness(1.2);
     border-color: #ffffff;
@@ -142,13 +135,14 @@
 
 .lightbox-counter { color: #555; font-style: italic; }
 
+/* ENHANCED HITBOX CLOSE BUTTON */
 .lightbox-close {
     position: absolute;
-    top: 10px; /* Brought it down slightly for easier thumb reach */
+    top: 10px; 
     right: 10px;
     
-    /* THE FIX: Expand the touch target */
-    width: 60px;   /* Large 60px square target */
+    /* Touch Target Fix */
+    width: 60px;   
     height: 60px;
     display: flex;
     align-items: center;
@@ -162,13 +156,14 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 100; 
     
-    /* Prevent accidental text selection on double-tap */
     user-select: none;
     -webkit-tap-highlight-color: transparent; 
+    transition: color 0.3s ease;
 }
 
 .lightbox-close:hover { color: #bbb; }
 
+/* GHOST NAVIGATION ZONES */
 .lightbox-prev, .lightbox-next {
     position: absolute;
     top: 0;
@@ -224,7 +219,14 @@
 
     .video-gallery-dark { padding: 40px 0; }
 
-    .lightbox-close { top: 10px; right: 20px; font-size: 40px; }
+    /* Mobile Close Box: Maximum Tap Area */
+    .lightbox-close { 
+        top: 0px; 
+        right: 0px; 
+        font-size: 60px; 
+        width: 80px;    
+        height: 80px;
+    }
     
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
