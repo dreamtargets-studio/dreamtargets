@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v3.4
+   THINKAMIGO DESTINATION ENGINE v4.6
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
@@ -133,59 +133,68 @@ body.content-page {
 }
 
 /* 10. THE TYPOGRAPHIC BLOCKQUOTE 
-   Logic: Large 32px Inline-P inside the 4px Blue Spine */
+   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs
+   Logic: Blockquote provides the structural anchor; P provides the hero text.
+   Signature: Nested footer remains on the fixed 60px spine. */
 
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 15px 0 15px 60px;       /* THE FIXED SPINE */
+    padding: 15px 0 15px 60px;       /* THE FIXED SPINE: All text (I and P) starts here */
     border-left: 4px solid var(--brand-blue); 
-    max-width: 640px;
-    position: relative;
-    border-top: none;                /* Cleanup for any browser defaults */
+    max-width: 640px;                /* Constrained for graphic 'block' shape */
+    position: relative;              /* Anchor for the absolute opening quote */
+    border-top: none;                
     border-right: none;
     border-bottom: none;
 }
 
-/* THE QUOTE TEXT: Specifically scaled to 32px */
+/* THE QUOTE TEXT: High-impact editorial scaling */
 .text-rail blockquote p {
     margin: 0;                       
-    font-size: 32px;                 /* HERO SIZE */
-    font-weight: 300;                /* ELEGANT WEIGHT */
-    line-height: 1.3;
+    font-size: 32px;                 
+    font-weight: 300;                
+    line-height: 1.35;               /* FIXED LEADING: Governs the entire block rhythm */
     color: #444;
-    display: inline;                 /* CRITICAL: Wraps quotes to text, not box */
+    display: inline;                 /* Ensures punctuation 'hugs' the text flow */
 }
 
-/* THE OPENING CURLY “ (Georgia Serif for the best curls) */
+/* THE OPENING CURLY “ 
+   Injected via Unicode; Positioned in the negative space of the 60px gutter. */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
-    left: 24px;                      /* Nudged into the 60px gutter */
-    top: 2px;                        
+    left: 24px;                      /* Nudges glyph into the gutter gap */
+    top: 4px;                        /* Aligned to cap-height of first line */
     color: #888;
-    font-size: 52px;                 /* Large graphic impact */
-    font-family: Georgia, serif;     
+    font-size: 52px;                 
+    font-family: Georgia, serif;     /* Georgia used for superior 'curl' geometry */
+    line-height: 0;                  /* Neutralized: Does not disrupt top-line leading */
 }
 
-/* THE CLOSING CURLY ” */
+/* THE CLOSING CURLY ”
+   Injected via Unicode; Placed in-flow at the end of the last sentence. */
 .text-rail blockquote p::after {
     content: "\201D";                
     color: #888;
     font-size: 52px;
-    margin-left: 6px;
     font-family: Georgia, serif;
-    vertical-align: -12px;           /* Aligns the curl optically to the baseline */
+    margin-left: 6px;
+    
+    /* THE LEADING FIX: Prevents the large glyph from pushing the baseline down */
+    display: inline-block;           
+    line-height: 0;                  
+    transform: translateY(15px);     /* Optically nudged to baseline without affecting layout */
 }
 
-/* THE SIGNATURE: Standard 18px body size */
+/* THE SIGNATURE: Sits directly on the 60px spine below the quote block */
 .text-rail blockquote footer {
-    display: block;                  /* Breaks to a new line below the quote */
-    margin-top: 30px;                /* Breathing space between quote and name */
+    display: block;                  /* Forces new line to avoid 'trapping' in the quote inline flow */
+    margin-top: 32px;                /* Intentional air between quote and attribution */
     font-size: 18px;
     font-weight: 300;
-    color: #888;
+    color: #888;                     /* Recedes signature as a secondary element */
     letter-spacing: 0.02em;
-    font-family: 'Poppins', sans-serif; /* Keep the signature in Poppins */
+    font-family: 'Poppins', sans-serif; 
 }
 
 /* 11. MOBILE RESPONSIVE */
