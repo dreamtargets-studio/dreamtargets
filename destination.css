@@ -139,8 +139,7 @@ body.content-page {
 .text-rail blockquote {
     margin: 80px 0;
     
-    /* THE SPINE EXTENSION: 
-       40px top padding creates the blue lead-in bar. */
+    /* DESKTOP SPINE: 40px lead-in */
     padding: 40px 0 15px 60px;       
 
     border-left: 4px solid var(--brand-blue); 
@@ -162,7 +161,7 @@ body.content-page {
 }
 
 /* THE OPENING CURLY “ 
-   Desktop: Nudged to 54px to align with cap-height. */
+   Desktop: 54px anchor */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
@@ -195,6 +194,35 @@ body.content-page {
     color: #888;                     
     letter-spacing: 0.02em;
     font-family: 'Poppins', sans-serif; 
+}
+
+/* --- MOBILE RESPONSIVE FINESSE --- */
+@media (max-width: 768px) {
+    .text-rail blockquote {
+        /* THE MOBILE SPINE FIX: 
+           Increased to 50px to extend the blue line higher. */
+        padding: 50px 0 15px 45px;   
+    }
+
+    .text-rail blockquote p {
+        font-size: 24px;             
+    }
+
+    .text-rail blockquote p::before {
+        left: 10px;                  
+        
+        /* THE MOBILE QUOTE FIX: 
+           Nudged to 42px to stay aligned with the 24px text 
+           now that the padding is deeper. */
+        top: 42px;                   
+        
+        font-size: 40px;             
+    }
+
+    .text-rail blockquote p::after {
+        font-size: 40px;
+        transform: translateY(8px);
+    }
 }
 
 /* --- MOBILE RESPONSIVE FINESSE --- */
