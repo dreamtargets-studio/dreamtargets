@@ -132,49 +132,49 @@ body.content-page {
     border-left: 3px solid var(--brand-orange);
 }
 
-/* 10. REFINED BLOCKQUOTES 
-   Art Director Finesse: Compact Block Width & Optical Alignment */
+/* 10. THE GRAPHIC QUOTE ENGINE 
+   Logic: HTML contains ONLY text. CSS injects the punctuation. */
+
 .text-rail blockquote {
     margin: 80px 0;
-    padding: 25px 0 25px 62px;       /* Keep this synced for the signature alignment */
+    padding: 25px 0 25px 65px;       /* THE GUTNER: The absolute vertical spine */
     border-left: 4px solid var(--brand-blue);
     font-style: normal;
     font-size: 32px;
     font-weight: 300;
-    line-height: 1.3;                /* Slightly tighter line-height for the 'block' feel */
+    line-height: 1.3;
     color: #444;
-    
-    /* THE COMPACT BLOCK: Constraints the quote to a deliberate shape */
-    max-width: 640px;                /* Adjusted from 840px for a 'chunkier' look */
-    
-    /* THE HANG: Pulls the opening " into the gutter */
-    text-indent: -18px;              /* Tweak this value to align the 'I' with the 'P' */
+    max-width: 640px;
+    position: relative;              /* Required for absolute positioning */
 }
 
-.text-rail blockquote footer {
-    display: block;              
-    margin-top: 20px;            
-    font-size: 18px;             
-    font-weight: 300;            
-    color: #888;                 
-    font-style: normal;          
-    letter-spacing: 0.02em;
-    
-    /* THE RESET: Keeps the signature flush with the rail edge */
-    text-indent: 0;                  
-    max-width: 100%;                 /* Inherits the 640px constraint */
+/* THE OPENING HANG: Injected into the 65px gutter */
+.text-rail blockquote::before {
+    content: '"';                    /* Injected Glyph */
+    position: absolute;
+    left: 25px;                      /* Adjust to center the " in the blue/text gap */
+    top: 20px;                       /* Adjust to align with the cap-height of the first line */
+    color: #888;                     /* Sophisticated Grey */
+    font-size: 40px;                 /* Slightly larger for graphic impact */
 }
 
-/* THE SIGNATURE NEST 
-   Formatted as a lightweight grey anchor */
+/* THE CLOSING ANCHOR: Stays inline with the text flow */
+.text-rail blockquote::after {
+    content: '"';                    /* Injected Glyph */
+    color: #888;                     /* Matches the opening mark exactly */
+    font-size: 40px;
+    margin-left: 5px;                /* Slight kerning away from the last letter */
+    vertical-align: sub;             /* Fine-tunes the baseline alignment */
+}
+
+/* THE SIGNATURE: Automatically follows the 65px spine */
 .text-rail blockquote footer {
-    display: block;              
-    margin-top: 20px;            
-    font-size: 18px;             
-    font-weight: 300;            /* Lightweight as requested */
-    color: #888;                 /* Sophisticated Grey */
-    font-style: normal;          
-    letter-spacing: 0.02em;
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #888;
+    text-indent: 0;                  /* No indent needed; it's already on the spine */
 }
 
 /* 11. MOBILE RESPONSIVE */
