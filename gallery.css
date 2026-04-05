@@ -7,6 +7,7 @@
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
 
+/* 3-up inside the 960px Editorial Rail */
 .gallery-grid-960 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -15,6 +16,7 @@
     margin: 40px auto;
 }
 
+/* 3-up breakout spanning the full 1260px Paper Sheet */
 .gallery-grid-1260 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -26,7 +28,7 @@
 
 /* --- 2. THE PORTRAIT GRIDS (Print & Comics) --- */
 
-/* PORTRAIT 4-UP (Inside 960px Rail) */
+/* 4-up Portrait inside the 960px Editorial Rail */
 .gallery-portrait-960 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -35,7 +37,7 @@
     margin: 40px auto;
 }
 
-/* PORTRAIT 4-UP (Full 1250px Page) */
+/* 4-up Portrait spanning the full 1250px Page */
 .gallery-portrait-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -66,11 +68,12 @@
 
 /* --- 4. UNIVERSAL ASSET RULES (STATIC) --- */
 
-/* Targeting the images directly within any of our defined items */
+/* Ensures all images fill their grid cells correctly */
 .gallery-item img, 
 .portrait-item img,
 .video-item img,
-.gallery-portrait-960 img {
+.gallery-portrait-960 img,
+.gallery-portrait-4 img {
     width: 100%;
     height: auto;      
     display: block;
@@ -79,13 +82,16 @@
     transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
+/* Editorial Hover Styles */
 .gallery-item img:hover, 
 .portrait-item img:hover,
-.gallery-portrait-960 img:hover {
+.gallery-portrait-960 img:hover,
+.gallery-portrait-4 img:hover {
     filter: brightness(1.08);
     border-color: #bbb;
 }
 
+/* Cinematic Hover Styles */
 .video-item img:hover {
     filter: brightness(1.2);
     border-color: #ffffff;
