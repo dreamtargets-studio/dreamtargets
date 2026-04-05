@@ -146,7 +146,7 @@ body.content-page {
     max-width: 840px;
 
     /* THE FINESSE: Negative indent for the opening mark */
-    text-indent: -16px;              /* Pulls the " back over the gutter */
+    text-indent: -12px;              /* Pulls the " back over the gutter */
 }
 
 .text-rail blockquote footer {
