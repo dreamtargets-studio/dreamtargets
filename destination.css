@@ -1,12 +1,12 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.7
+   THINKAMIGO DESTINATION ENGINE v4.16
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
    ============================================================ */
 
 :root {
-    --brand-blue: #0054dc;    /* FIXED: Matches Index.html saturation */
+    --brand-blue: #0054dc;
     --brand-orange: #ff6600;
     --stone-bg: #e3e2d9;
     --charcoal: #191919;
@@ -14,7 +14,7 @@
 
 /* 1. GLOBAL PAGE BASE */
 body.content-page {
-    background-color: var(--stone-bg); /* The "Desk" surface */
+    background-color: var(--stone-bg);
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
@@ -43,7 +43,6 @@ body.content-page {
     max-width: 1250px;       
     height: auto;            
     display: block;          
-    aspect-ratio: auto;      
     object-fit: contain;     
 }
 
@@ -57,7 +56,7 @@ body.content-page {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
 }
 
-/* 5. THE TEXT RAIL (Expanded to 960px) */
+/* 5. THE TEXT RAIL */
 .text-rail {
     max-width: 960px;        
     margin: 0 auto;
@@ -65,7 +64,7 @@ body.content-page {
     padding: 20px 0 80px 0;  
 }
 
-/* 6. STORY HEADINGS & ACCENTS (Px-Precision) */
+/* 6. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
     font-size: 48px;         
     font-weight: 900; 
@@ -121,7 +120,7 @@ body.content-page {
     border: 1px solid #ddd;
 }
 
-/* 8. EDITORIAL CAPTIONS (In PX) */
+/* 8. EDITORIAL CAPTIONS */
 .caption {
     background: #f4f3ef;
     padding: 12px 18px;
@@ -133,16 +132,12 @@ body.content-page {
 }
 
 /* 10. THE TYPOGRAPHIC BLOCKQUOTE 
-   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs
-   Finesse: Extended Blue Header Spine & Aligned Curly Quote */
+   Architecture: Unified 4px Spine | Optical Margin Alignment | Curly Glyphs */
 
 .text-rail blockquote {
     margin: 80px 0;
-    
-    /* DESKTOP SPINE: 40px lead-in */
     padding: 40px 0 15px 60px;       
-
-    border-left: 4px solid #FF0000;
+    border-left: 4px solid #FF0000; /* DIAGNOSTIC RED */
     max-width: 640px;                
     position: relative;              
     border-top: none;                
@@ -150,7 +145,6 @@ body.content-page {
     border-bottom: none;
 }
 
-/* THE QUOTE TEXT */
 .text-rail blockquote p {
     margin: 0;                       
     font-size: 32px;                 
@@ -160,8 +154,7 @@ body.content-page {
     display: inline;                 
 }
 
-/* THE OPENING CURLY “ 
-   Desktop: 54px anchor */
+/* OPENING CURLY “ */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
@@ -173,7 +166,7 @@ body.content-page {
     line-height: 0;                  
 }
 
-/* THE CLOSING CURLY ” */
+/* CLOSING CURLY ” */
 .text-rail blockquote p::after {
     content: "\201D";                
     color: #888;
@@ -185,7 +178,7 @@ body.content-page {
     transform: translateY(15px);     
 }
 
-/* THE SIGNATURE */
+/* SIGNATURE */
 .text-rail blockquote footer {
     display: block;                  
     margin-top: 32px;                
@@ -196,13 +189,20 @@ body.content-page {
     font-family: 'Poppins', sans-serif; 
 }
 
-/* --- MOBILE RESPONSIVE FINESSE --- */
+/* 11. RESPONSIVE ENGINE */
+@media (max-width: 1250px) {
+    .paper-sheet { box-shadow: none; }
+}
+
 @media (max-width: 768px) {
+    .text-rail { width: 92%; padding: 30px 0 40px 0; }
+    .text-rail h1 { font-size: 38px; }
+
+    /* MOBILE BLOCKQUOTE: Locked to UL Bullet Guide */
     .text-rail blockquote {
-        /* INCREASED padding-top to 65px to ensure the blue line 
-           extends well above the quote mark per your mockup */
-        padding: 65px 0 15px 45px;   
+        padding: 80px 0 15px 62px; /* 80px Spine Height | 62px Bullet Alignment */
         margin: 40px 0;
+        border-left: 4px solid #FF0000; /* DIAGNOSTIC RED */
     }
 
     .text-rail blockquote p {
@@ -210,15 +210,9 @@ body.content-page {
     }
 
     .text-rail blockquote p::before {
-        /* PULLS the quote into the gutter gap */
-        left: 10px;                  
-        
-        /* ALIGNS the quote with the first line of text.
-           Since padding is 65px, 60px puts it right at the cap-height. */
-        top: 60px;                   
-        
+        left: 15px;                  
+        top: 78px;                 /* Optical alignment for 80px padding */
         font-size: 40px;             
-        line-height: 0;
     }
 
     .text-rail blockquote p::after {
@@ -229,53 +223,5 @@ body.content-page {
     .text-rail blockquote footer {
         margin-top: 25px;
         font-size: 16px;
-    }
-}
-
-/* --- MOBILE RESPONSIVE FINESSE --- */
-@media (max-width: 768px) {
-    .text-rail blockquote {
-        padding: 30px 0 15px 45px;   /* Tighten gutter and lead-in for mobile */
-    }
-
-    .text-rail blockquote p {
-        font-size: 24px;             /* Scale down quote text for small screens */
-    }
-
-    .text-rail blockquote p::before {
-        left: 10px;                  /* Pull quote further into the margin */
-        
-        /* THE MOBILE HEIGHT FIX: 
-           Moved from 38px to 24px to clear the text collision. */
-        top: 24px;                   
-        
-        font-size: 40px;             
-    }
-
-    .text-rail blockquote p::after {
-        font-size: 40px;
-        transform: translateY(8px);
-    }
-}
-
-/* 11. MOBILE RESPONSIVE */
-@media (max-width: 1250px) {
-    .paper-sheet {
-        box-shadow: none; 
-    }
-}
-
-@media (max-width: 768px) {
-    .text-rail { 
-        width: 92%; 
-        padding: 30px 0 40px 0; 
-    }
-    .text-rail h1 { 
-        font-size: 38px;     
-    }
-    .text-rail blockquote {
-        font-size: 24px;
-        padding: 15px 0 15px 25px;
-        margin: 50px 0;
     }
 }
