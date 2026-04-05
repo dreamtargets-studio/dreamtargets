@@ -1,82 +1,121 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.0
+   THINKAMIGO GALLERY ENGINE v1.1
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Pure CSS Grid (No Aspect-Ratio Hacks)
+   Standards: 640px Thumbs (Landscape) | 452x640px Thumbs (A4)
    ============================================================ */
 
-/* --- 1. THE EDITORIAL GRIDS (Paper-Sheet) --- */
+/* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
 
-/* LANDSCAPE 3-UP: Optimized for 640x360px Thumbs in 960px Rail */
-.gallery-grid-3 {
+/* 960 RAIL GRID: 3-up inside the Editorial Rail */
+.gallery-grid-960 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    margin: 40px 0;
+    max-width: 960px;
+    margin: 40px auto;
 }
 
-/* PORTRAIT 4-UP: Optimized for 452x640px Thumbs across 1250px Page */
+/* 1260 HORIZON GRID: 3-up breakout spanning the full Paper Sheet */
+.gallery-grid-1260 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1260px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* --- 2. THE PORTRAIT GRID (Print & Comics) --- */
+
+/* A4 PORTRAIT 4-UP: Optimized for 452x640px Thumbs across 1250px Page */
 .gallery-portrait-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    margin: 50px 0;
+    max-width: 1250px;
+    margin: 50px auto;
+    padding: 0 20px;
 }
 
-/* --- 2. THE CINEMATIC GRIDS (Dark Theme) --- */
+/* --- 3. THE CINEMATIC GRIDS (Dark Theme) --- */
 
-/* VIDEO 4-UP: Optimized for 640x360px Screengrabs */
+/* VIDEO GALLERY WRAPPER */
 .video-gallery-dark {
     background-color: #000000;
     padding: 60px 0;
     width: 100%;
+    display: block;
+    clear: both;
 }
 
+/* VIDEO 4-UP: Optimized for 640x360px Screengrabs */
 .video-grid-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    max-width: 1250px;
+    max-width: 1260px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* --- 3. THE UNIVERSAL ASSET RULES --- */
+/* --- 4. UNIVERSAL ASSET RULES --- */
 
 .gallery-item img, 
 .portrait-item img,
 .video-item img {
     width: 100%;
-    height: auto;      /* Naturally resolves to 16:9 or A4 */
+    height: auto;      /* Naturally resolves to 16:9 or A4 based on source */
     display: block;
     cursor: zoom-in;   /* Affirmative Lightbox/Player signal */
     border: 1px solid #ddd;
     transition: filter 0.3s ease, transform 0.3s ease, border 0.3s ease;
 }
 
-/* Editorial Hover */
+/* Editorial Hover Styles */
 .gallery-item img:hover, 
 .portrait-item img:hover {
     filter: brightness(1.1);
     transform: translateY(-2px);
 }
 
-/* Cinematic Hover */
+/* Cinematic Hover Styles */
 .video-item img:hover {
     border: 1px solid #ffffff;
     transform: scale(1.03);
 }
 
-/* --- 4. THE LIGHTBOX GHOST ZONE (Mobile Prep) --- */
-/* We define these now so they are ready for the JS injection */
+/* --- 5. LIGHTBOX GHOST ZONES (Mobile Touch Prep) --- */
+
 .lightbox-prev, .lightbox-next {
     position: absolute;
     top: 0;
     height: 100%;
-    width: 25%; /* Large touch zones */
+    width: 30%; /* Generous touch zones for comic navigation */
     z-index: 10010;
     cursor: pointer;
-    display: none; /* Hidden until JS detects a gallery group > 1 */
+    display: none; /* Controlled via JS gallery grouping logic */
 }
 
 .lightbox-prev { left: 0; }
 .lightbox-next { right: 0; }
+
+/* --- 6. RESPONSIVE ENGINE (The Mobile 2-Up) --- */
+
+@media (max-width: 768px) {
+    /* Collapse all grids to 2-up for mobile real estate */
+    .gallery-grid-960, 
+    .gallery-grid-1260, 
+    .gallery-portrait-4, 
+    .video-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 15px;
+        margin: 30px auto;
+    }
+
+    /* Video section usually benefits from a bit more padding on mobile */
+    .video-gallery-dark {
+        padding: 40px 0;
+    }
+}
