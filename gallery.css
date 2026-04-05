@@ -1,13 +1,11 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.1.2
+   THINKAMIGO GALLERY ENGINE v2.1.3
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Synchronized Text & Asset Rails (The 960px lock)
    ============================================================ */
 
 /* --- 1. THE EDITORIAL RAIL (Unified Text & Asset Alignment) --- */
 
-/* Added .text-rail here to ensure headlines/paragraphs share the exact 
-   same vertical axis and padding as the grids and single images. */
 .text-rail,
 .gallery-grid-960, 
 .gallery-portrait-960,
@@ -27,7 +25,6 @@
     grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
     margin: 40px auto; 
-    padding: 0; /* Resetting padding because parent or container handles it */
 }
 
 .gallery-portrait-960 { 
@@ -35,7 +32,6 @@
     grid-template-columns: repeat(4, 1fr); 
     gap: 12px; 
     margin: 40px auto; 
-    padding: 0; 
 }
 
 /* --- 2. THE CINEMATIC RAIL (1260px Standard Alignment) --- */
@@ -180,9 +176,10 @@
 .lightbox-prev::after { left: 40px; transform: translateY(-50%) rotate(-135deg); }
 .lightbox-next::after { right: 40px; transform: translateY(-50%) rotate(45deg); }
 
-/* --- 7. RESPONSIVE ENGINE (Unified Mobile Alignment) --- */
+/* --- 7. RESPONSIVE ENGINE (Unified Global Rail Sync) --- */
 
 @media (max-width: 768px) {
+    /* LOCK ALL CONTAINERS TO 15px GUTTER */
     .text-rail,
     .gallery-grid-960, 
     .gallery-grid-1260, 
@@ -190,20 +187,30 @@
     .gallery-portrait-4, 
     .video-grid-4,
     .featured-image-single {
+        width: 100% !important;
+        max-width: 100% !important;
         padding-left: 15px !important;
         padding-right: 15px !important;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
     }
     
-    /* 2-up grids on mobile */
-    .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+    /* UNIFIED 2-UP GRID BEHAVIOR */
+    .gallery-grid-960, 
+    .gallery-grid-1260, 
+    .gallery-portrait-960, 
+    .gallery-portrait-4, 
+    .video-grid-4 {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-top: 30px !important;
+        margin-bottom: 30px !important;
     }
 
     .lightbox-close { top: 0px; right: 0px; font-size: 60px; width: 80px; height: 80px; }
+    .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
 /* --- 8. THE CINEMATIC OVERRIDES --- */
@@ -243,9 +250,9 @@ body.dark-theme .panoramic-hero { filter: brightness(0.7); }
 /* --- 10. EDITORIAL: SINGLE FEATURED IMAGE --- */
 
 .featured-image-single.header-mode { 
-    padding-top: 60px; 
-    margin-top: 0; 
-    margin-bottom: 60px; 
+    padding-top: 60px !important; 
+    margin-top: 0 !important; 
+    margin-bottom: 60px !important; 
 }
 
 .featured-caption { 
