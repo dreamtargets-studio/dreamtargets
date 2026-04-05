@@ -142,7 +142,7 @@ body.content-page {
     /* DESKTOP SPINE: 40px lead-in */
     padding: 40px 0 15px 60px;       
 
-    border-left: 4px solid var(--brand-blue); 
+    border-left: 4px solid #FF0000;
     max-width: 640px;                
     position: relative;              
     border-top: none;                
