@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.2.1 [CLEAN SLATE]
+   THINKAMIGO GALLERY ENGINE v2.2.2 [CLEAN SLATE]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Master Spacing & Video-Safe Rail Logic
+   Logic: Multi-Rail Architecture (960px vs 1260px)
    ============================================================ */
 
-/* --- 1. THE VERTICAL SPACER (The "Global Pulse") --- */
+/* --- 1. GLOBAL VERTICAL RHYTHM --- */
 
 /* Every direct module under the paper-sheet gets a 25px gap. 
-   This eliminates "margin-leak" from chassis or destination.css */
+   This creates a perfect "Stack" regardless of container width. */
 .paper-sheet > * {
     margin-top: 0 !important;
     margin-bottom: 25px !important; 
@@ -15,18 +15,19 @@
     margin-right: auto !important;
 }
 
-/* Reset for the very first item on the page */
+/* Ensure the first item (Header) is flush to the top */
 .paper-sheet > *:first-child {
     margin-top: 0 !important;
 }
 
 /* --- 2. THE EDITORIAL RAIL (960px) --- */
 
+/* Standard text sections and editorial image grids */
 .text-rail, 
 .gallery-grid-960, 
 .gallery-portrait-960, 
 .featured-image-single {
-    max-width: 960px;
+    max-width: 960px !important;
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
@@ -34,16 +35,17 @@
 
 /* --- 3. THE CINEMATIC RAIL (1260px) --- */
 
+/* Expanded galleries and video archives */
 .gallery-grid-1260, 
 .gallery-portrait-4, 
 .video-grid-4 {
-    max-width: 1260px;
+    max-width: 1260px !important;
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* --- 4. GRID LAYOUTS (Structure Only) --- */
+/* --- 4. GRID STRUCTURES (Layout only) --- */
 
 .gallery-grid-960, 
 .gallery-grid-1260 { 
