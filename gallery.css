@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.1
+   THINKAMIGO GALLERY ENGINE v1.2
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Pure CSS Grid (No Aspect-Ratio Hacks)
+   Logic: Static UI / No Movement on Hover
    Standards: 640px Thumbs (Landscape) | 452x640px Thumbs (A4)
    ============================================================ */
 
@@ -59,7 +59,7 @@
     padding: 0 20px;
 }
 
-/* --- 4. UNIVERSAL ASSET RULES --- */
+/* --- 4. UNIVERSAL ASSET RULES (STATIC) --- */
 
 .gallery-item img, 
 .portrait-item img,
@@ -69,20 +69,21 @@
     display: block;
     cursor: zoom-in;   /* Affirmative Lightbox/Player signal */
     border: 1px solid #ddd;
-    transition: filter 0.3s ease, transform 0.3s ease, border 0.3s ease;
+    /* Transition only for visual tones, not layout properties */
+    transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
-/* Editorial Hover Styles */
+/* Editorial Hover Styles: Subtle Brightness Shift */
 .gallery-item img:hover, 
 .portrait-item img:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
+    filter: brightness(1.08);
+    border-color: #bbb;
 }
 
-/* Cinematic Hover Styles */
+/* Cinematic Hover Styles: Brighter Glow for Dark Theme */
 .video-item img:hover {
-    border: 1px solid #ffffff;
-    transform: scale(1.03);
+    filter: brightness(1.2);
+    border-color: #ffffff;
 }
 
 /* --- 5. LIGHTBOX GHOST ZONES (Mobile Touch Prep) --- */
@@ -91,10 +92,10 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: 30%; /* Generous touch zones for comic navigation */
+    width: 30%; /* Generous touch zones for navigation */
     z-index: 10010;
     cursor: pointer;
-    display: none; /* Controlled via JS gallery grouping logic */
+    display: none; /* Controlled via JS */
 }
 
 .lightbox-prev { left: 0; }
@@ -103,7 +104,6 @@
 /* --- 6. RESPONSIVE ENGINE (The Mobile 2-Up) --- */
 
 @media (max-width: 768px) {
-    /* Collapse all grids to 2-up for mobile real estate */
     .gallery-grid-960, 
     .gallery-grid-1260, 
     .gallery-portrait-4, 
@@ -114,7 +114,6 @@
         margin: 30px auto;
     }
 
-    /* Video section usually benefits from a bit more padding on mobile */
     .video-gallery-dark {
         padding: 40px 0;
     }
