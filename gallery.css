@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9
+   THINKAMIGO GALLERY ENGINE v1.9.2
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Static UI / Lightbox Overlay / Charcoal & Black Themes
+   Logic: Layered Dark Themes (Black vs Charcoal)
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -20,8 +20,7 @@
     gap: 20px;
     max-width: 1260px;
     margin: 60px auto;
-    padding: 40px 20px; /* Enhanced for Charcoal */
-    background-color: #1a1a1a;
+    padding: 0 20px;
 }
 
 /* --- 2. THE PORTRAIT GRIDS (Print & Comics) --- */
@@ -40,8 +39,7 @@
     gap: 12px;
     max-width: 1250px;
     margin: 50px auto;
-    padding: 40px 20px; /* Enhanced for Charcoal */
-    background-color: #1a1a1a;
+    padding: 0 20px;
 }
 
 /* --- 3. THE CINEMATIC GRIDS --- */
@@ -69,13 +67,6 @@
     cursor: zoom-in;   
     border: 1px solid #ddd;
     transition: filter 0.2s ease, border-color 0.2s ease;
-}
-
-/* Darken borders for assets sitting on Charcoal/Black */
-.gallery-portrait-4 img, 
-.gallery-grid-1260 img,
-.video-item img {
-    border-color: #333;
 }
 
 .gallery-item img:hover, 
@@ -206,7 +197,7 @@
     .video-grid-4 {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        padding: 20px 15px; /* Adjusted for charcoal padding */
+        padding: 0 15px;
         margin: 30px auto;
     }
 
@@ -221,31 +212,45 @@
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
-/* --- 8. THE CINEMATIC BLACKOUT (Dark Theme Overrides) --- */
+/* --- 8. THE CINEMATIC OVERRIDES (Video Gallery Dark Theme) --- */
 
+/* THE VOID: Outer background is pure black */
 body.dark-theme {
     background-color: #000000 !important;
 }
 
+/* THE MATTE: The 1250px sheet is Charcoal */
 body.dark-theme .paper-sheet {
-    background-color: #000000 !important;
+    background-color: #1a1a1a !important; /* Dark Charcoal */
     border: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 0 50px rgba(0,0,0,0.6) !important;
 }
 
+/* TEXT ADAPTATION */
 body.dark-theme .text-rail h1, 
 body.dark-theme .text-rail h2 {
     color: #ffffff;
 }
 
 body.dark-theme .text-rail p {
-    color: #888;
+    color: #aaaaaa; /* Brighter for readability on charcoal */
 }
 
+/* ASSET REFINEMENT: Darker borders for images on charcoal surfaces */
+body.dark-theme .gallery-item img, 
+body.dark-theme .portrait-item img,
+body.dark-theme .video-item img,
+body.dark-theme .gallery-portrait-960 img,
+body.dark-theme .gallery-portrait-4 img,
+body.dark-theme .gallery-grid-1260 img {
+    border-color: #2a2a2a;
+}
+
+/* HERO TREATMENT */
 body.dark-theme .story-hero-wrapper {
     background-color: #000;
 }
 
 body.dark-theme .panoramic-hero {
-    filter: brightness(0.6);
+    filter: brightness(0.7);
 }
