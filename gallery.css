@@ -1,8 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.8
+   THINKAMIGO GALLERY ENGINE v1.9
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Static UI / Lightbox Overlay / 2-Up Mobile
-   Standards: 640px Thumbs (Landscape) | 452x640px Thumbs (A4)
+   Logic: Static UI / Lightbox Overlay / Charcoal & Black Themes
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -21,7 +20,8 @@
     gap: 20px;
     max-width: 1260px;
     margin: 60px auto;
-    padding: 0 20px;
+    padding: 40px 20px; /* Enhanced for Charcoal */
+    background-color: #1a1a1a;
 }
 
 /* --- 2. THE PORTRAIT GRIDS (Print & Comics) --- */
@@ -40,10 +40,11 @@
     gap: 12px;
     max-width: 1250px;
     margin: 50px auto;
-    padding: 0 20px;
+    padding: 40px 20px; /* Enhanced for Charcoal */
+    background-color: #1a1a1a;
 }
 
-/* --- 3. THE CINEMATIC GRIDS (Video Section) --- */
+/* --- 3. THE CINEMATIC GRIDS --- */
 
 .video-grid-4 {
     display: grid;
@@ -54,19 +55,27 @@
     padding: 0 20px;
 }
 
-/* --- 4. UNIVERSAL ASSET RULES (STATIC) --- */
+/* --- 4. UNIVERSAL ASSET RULES --- */
 
 .gallery-item img, 
 .portrait-item img,
 .video-item img,
 .gallery-portrait-960 img,
-.gallery-portrait-4 img {
+.gallery-portrait-4 img,
+.gallery-grid-1260 img {
     width: 100%;
     height: auto;      
     display: block;
     cursor: zoom-in;   
     border: 1px solid #ddd;
     transition: filter 0.2s ease, border-color 0.2s ease;
+}
+
+/* Darken borders for assets sitting on Charcoal/Black */
+.gallery-portrait-4 img, 
+.gallery-grid-1260 img,
+.video-item img {
+    border-color: #333;
 }
 
 .gallery-item img:hover, 
@@ -77,7 +86,6 @@
     border-color: #bbb;
 }
 
-/* High-contrast hover for dark video thumbnails */
 .video-item img:hover {
     filter: brightness(1.2);
     border-color: #ffffff;
@@ -128,13 +136,10 @@
 
 .lightbox-counter { color: #555; font-style: italic; }
 
-/* REFINED HITBOX CLOSE BUTTON */
 .lightbox-close {
     position: absolute;
-    top: 10px; 
-    right: 10px;
-    width: 60px;   
-    height: 60px;
+    top: 10px; right: 10px;
+    width: 60px; height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,7 +206,7 @@
     .video-grid-4 {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        padding: 0 15px;
+        padding: 20px 15px; /* Adjusted for charcoal padding */
         margin: 30px auto;
     }
 
@@ -218,7 +223,6 @@
 
 /* --- 8. THE CINEMATIC BLACKOUT (Dark Theme Overrides) --- */
 
-/* Only triggers when <body class="dark-theme"> is present */
 body.dark-theme {
     background-color: #000000 !important;
 }
