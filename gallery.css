@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.5
+   THINKAMIGO GALLERY ENGINE v1.6
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Static UI / Lightbox Overlay / 2-Up Mobile
    Standards: 640px Thumbs (Landscape) | 452x640px Thumbs (A4)
@@ -66,9 +66,11 @@
 
 /* --- 4. UNIVERSAL ASSET RULES (STATIC) --- */
 
+/* Targeting the images directly within any of our defined items */
 .gallery-item img, 
 .portrait-item img,
-.video-item img {
+.video-item img,
+.gallery-portrait-960 img {
     width: 100%;
     height: auto;      
     display: block;
@@ -78,7 +80,8 @@
 }
 
 .gallery-item img:hover, 
-.portrait-item img:hover {
+.portrait-item img:hover,
+.gallery-portrait-960 img:hover {
     filter: brightness(1.08);
     border-color: #bbb;
 }
