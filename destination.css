@@ -9,6 +9,7 @@
     --brand-blue: #0054dc;    /* FIXED: Matches Index.html saturation */
     --brand-orange: #ff6600;
     --stone-bg: #e3e2d9;
+    --charcoal: #191919;
 }
 
 /* 1. GLOBAL PAGE BASE */
@@ -83,7 +84,7 @@ body.content-page {
 .text-rail h2 {
     font-size: 24px;         
     font-weight: 200;
-    color: #191919;
+    color: var(--charcoal);
     margin: 45px 0 20px 0;
 }
 
