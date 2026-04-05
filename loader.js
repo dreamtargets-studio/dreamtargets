@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.7
-   Features: Auto-Injection, Video Engine (Domain-Agnostic Origin Fix)
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.8
+   Features: Auto-Injection, Video Engine (UK Safety Fix)
    Architecture: Pixel-Strict Asset Handling (16:9 & A4)
    ============================================================ */
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.body.appendChild(lb);
         setupLightboxLogic();
-        setupVideoLogic(); // Initialize Video Listeners
+        setupVideoLogic(); 
     };
 
     const setupLightboxLogic = () => {
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullSrc = currentItem.getAttribute('data-full');
             const caption = currentItem.getAttribute('alt');
             
-            // Inject Image Structure
             lbWrapper.innerHTML = `
                 <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
                 <div class="lightbox-info">
@@ -82,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const lbCounter = document.getElementById('lightbox-counter');
 
-            // Navigation Visibility
             if (currentGallery.length > 1) {
                 prevBtn.style.display = 'block';
                 nextBtn.style.display = 'block';
@@ -93,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Click Listener for Standard Images
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -111,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'flex';
         });
 
-        // Navigation Actions
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentGallery.length;
@@ -124,11 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLightbox();
         });
 
-        // CLOSE LOGIC (Shared by Image and Video)
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay || e.target.classList.contains('lightbox-close')) {
                 overlay.style.display = 'none';
-                lbWrapper.innerHTML = ''; // Eject content to stop video
+                lbWrapper.innerHTML = ''; 
             }
         });
 
@@ -144,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. MODULE: VIDEO ENGINE (No-Cookie & Origin Verified) ---
+    // --- 3. MODULE: VIDEO ENGINE (UK Safety Fix) ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
@@ -157,23 +152,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const id = videoTrigger.getAttribute('data-video-id');
             const platform = videoTrigger.getAttribute('data-platform');
-            
-            // SECURITY: Detects current domain automatically to satisfy YT security
             const currentOrigin = window.location.origin;
             let url = "";
 
             if (platform === 'youtube') {
-                url = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&origin=${currentOrigin}`;
+                /* UK SAFETY FIX: Autoplay is removed to bypass 
+                   mandatory age-verification/bot-check walls.
+                */
+                url = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&origin=${currentOrigin}`;
             }
             if (platform === 'vimeo') {
                 url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12`;
             }
 
-            // Hide Gallery Nav
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
-            // Inject Video Stage
             lbWrapper.innerHTML = `
                 <div class="video-stage">
                     <iframe src="${url}" 
@@ -229,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- INITIAL EXECUTION ---
     loadPartials();
     setupAudioPlayer();
 
