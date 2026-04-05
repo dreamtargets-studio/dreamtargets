@@ -208,14 +208,18 @@ body.content-page {
     }
 
     .text-rail blockquote p::before {
-        left: 12px;                  /* Pull quote further into the margin to avoid crash */
-        top: 38px;                   /* Re-align to the smaller 24px cap-height */
-        font-size: 40px;             /* Scale down the glyph */
+        left: 10px;                  /* Pull quote further into the margin */
+        
+        /* THE MOBILE HEIGHT FIX: 
+           Moved from 38px to 24px to clear the text collision. */
+        top: 24px;                   
+        
+        font-size: 40px;             
     }
 
     .text-rail blockquote p::after {
         font-size: 40px;
-        transform: translateY(10px);
+        transform: translateY(8px);
     }
 }
 
