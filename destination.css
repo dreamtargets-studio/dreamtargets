@@ -199,9 +199,9 @@ body.content-page {
 
     /* MOBILE BLOCKQUOTE: FIXED SINGLE INSTANCE */
     .text-rail blockquote {
-        padding: 70px 0 15px 30px; /* 70px Bar Height | 30px Indent */   
+        padding: 60px 0 15px 30px; /* 70px Bar Height | 30px Indent */   
         margin: 40px 0;
-        border-left: 4px solid #FF0000; /* RED SPINE MOBILE */
+        border-left: 4px solid var(--brand-blue); /* BLUE SPINE MOBILE */
         max-width: 100%;
     }
 
