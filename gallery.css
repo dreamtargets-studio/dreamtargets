@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9.8
+   THINKAMIGO GALLERY ENGINE v2.0.0
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Layered Dark Themes & Border Clipping Fix
+   Modules: Multi-Grid, Video Stage, Featured Editorial
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -50,7 +50,6 @@
     gap: 25px;
     max-width: 1260px;
     margin: 40px auto;
-    /* Added slight horizontal padding to ensure outer borders aren't clipped */
     padding: 2px 22px; 
 }
 
@@ -88,13 +87,12 @@
     width: 100%;
     height: auto;      
     display: block;
-    box-sizing: border-box; /* Ensures borders stay within allocated width */
+    box-sizing: border-box; /* Ensures borders stay within footprint */
     cursor: zoom-in;   
     border: 1px solid #ddd;
     transition: filter 0.2s ease, border-color 0.2s ease;
 }
 
-/* Video Thumbnails: Switch to Pointer (Play Action) */
 .video-item {
     position: relative;
     cursor: pointer;
@@ -105,7 +103,7 @@
     width: 100%;
     height: auto;
     display: block;
-    box-sizing: border-box; /* FIX: Prevents right-side border clipping */
+    box-sizing: border-box;
     border: 1px solid #333;
     transition: filter 0.3s ease, border-color 0.3s ease;
 }
@@ -118,7 +116,6 @@
     border-color: #bbb;
 }
 
-/* Video Hover: Brighten border on all sides */
 .video-item:hover img {
     filter: brightness(1.1);
     border-color: rgba(255, 255, 255, 0.5); 
@@ -254,7 +251,7 @@
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
-/* --- 8. THE CINEMATIC OVERRIDES (Dark Theme) --- */
+/* --- 8. THE CINEMATIC OVERRIDES (Dark Theme Theme) --- */
 
 body.dark-theme {
     background-color: #000000 !important;
@@ -299,13 +296,11 @@ body.dark-theme .panoramic-hero {
     display: block;
 }
 
-/* MICRO-TRIANGLE: Ultra-subtle, half-size ghost icon */
 .play-button-overlay {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 0; 
-    height: 0; 
+    width: 0; height: 0; 
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
     border-left: 14px solid rgba(255, 255, 255, 0.15); 
@@ -314,7 +309,6 @@ body.dark-theme .panoramic-hero {
     transition: border-left-color 0.4s ease, transform 0.4s ease;
 }
 
-/* ROLLOVER: Becomes a sharp white hint */
 .video-item:hover .play-button-overlay {
     border-left-color: rgba(255, 255, 255, 0.75);
     transform: translate(-42%, -50%) scale(1.05);
@@ -323,4 +317,43 @@ body.dark-theme .panoramic-hero {
 .dark-theme .lightbox-close {
     color: #fff;
     opacity: 0.8;
+}
+
+/* --- 10. EDITORIAL: SINGLE FEATURED IMAGE (960px) --- */
+
+.featured-image-single {
+    max-width: 960px;
+    margin: 40px auto; 
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Header Mode for top-of-page impact */
+.featured-image-single.header-mode {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.featured-image-single img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
+    cursor: zoom-in;
+    border: 1px solid #333;
+    transition: filter 0.3s ease, border-color 0.3s ease;
+}
+
+.featured-image-single img:hover {
+    filter: brightness(1.1);
+    border-color: #555;
+}
+
+.featured-caption {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #888;
+    font-style: italic;
+    text-align: left;
 }
