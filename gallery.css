@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v1.9.7
+   THINKAMIGO GALLERY ENGINE v1.9.8
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Layered Dark Themes & Micro-Minimalist Video UI
+   Logic: Layered Dark Themes & Border Clipping Fix
    ============================================================ */
 
 /* --- 1. THE LANDSCAPE GRIDS (Editorial & Horizon) --- */
@@ -50,7 +50,8 @@
     gap: 25px;
     max-width: 1260px;
     margin: 40px auto;
-    padding: 0 20px;
+    /* Added slight horizontal padding to ensure outer borders aren't clipped */
+    padding: 2px 22px; 
 }
 
 .video-item-container {
@@ -87,6 +88,7 @@
     width: 100%;
     height: auto;      
     display: block;
+    box-sizing: border-box; /* Ensures borders stay within allocated width */
     cursor: zoom-in;   
     border: 1px solid #ddd;
     transition: filter 0.2s ease, border-color 0.2s ease;
@@ -103,8 +105,9 @@
     width: 100%;
     height: auto;
     display: block;
+    box-sizing: border-box; /* FIX: Prevents right-side border clipping */
     border: 1px solid #333;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, border-color 0.3s ease;
 }
 
 .gallery-item img:hover, 
@@ -115,10 +118,10 @@
     border-color: #bbb;
 }
 
-/* Video Hover: Just a subtle brightness lift */
+/* Video Hover: Brighten border on all sides */
 .video-item:hover img {
     filter: brightness(1.1);
-    border-color: #555;
+    border-color: rgba(255, 255, 255, 0.5); 
 }
 
 /* --- 5. THE LIGHTBOX OVERLAY UI --- */
@@ -296,14 +299,13 @@ body.dark-theme .panoramic-hero {
     display: block;
 }
 
-/* MICRO-TRIANGLE: Half-size, ghost-opacity icon only */
+/* MICRO-TRIANGLE: Ultra-subtle, half-size ghost icon */
 .play-button-overlay {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 0; 
     height: 0; 
-    /* Borders reduced for micro-precision (approx 14px total width) */
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
     border-left: 14px solid rgba(255, 255, 255, 0.15); 
