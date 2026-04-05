@@ -1,13 +1,11 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.2.2 [CLEAN SLATE]
+   THINKAMIGO GALLERY ENGINE v2.2.6 [CLEAN SLATE]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
    Logic: Multi-Rail Architecture (960px vs 1260px)
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
 
-/* Every direct module under the paper-sheet gets a 25px gap. 
-   This creates a perfect "Stack" regardless of container width. */
 .paper-sheet > * {
     margin-top: 0 !important;
     margin-bottom: 25px !important; 
@@ -15,14 +13,12 @@
     margin-right: auto !important;
 }
 
-/* Ensure the first item (Header) is flush to the top */
 .paper-sheet > *:first-child {
     margin-top: 0 !important;
 }
 
 /* --- 2. THE EDITORIAL RAIL (960px) --- */
 
-/* Standard text sections and editorial image grids */
 .text-rail, 
 .gallery-grid-960, 
 .gallery-portrait-960, 
@@ -35,39 +31,31 @@
 
 /* --- 3. THE CINEMATIC RAIL (1260px) --- */
 
-/* Expanded galleries and video archives */
 .gallery-grid-1260, 
 .gallery-portrait-4, 
-.video-grid-4 {
+.video-grid-4,
+.border-top-1260 {
     max-width: 1260px !important;
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* --- 4. GRID STRUCTURES (Layout only) --- */
+/* --- 4. THE 1260px BORDER UTILITY --- */
 
-.gallery-grid-960, 
-.gallery-grid-1260 { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; 
+.border-top-1260 {
+    border-top: 1px solid #ddd;
+    padding-top: 40px; /* Space inside the section below the line */
+    margin-top: 15px !important; /* Extra breathing room above the line */
 }
 
-.gallery-portrait-960, 
-.gallery-portrait-4 { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 12px; 
-}
+/* --- 5. GRID STRUCTURES (Layout only) --- */
 
-.video-grid-4 { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 25px; 
-}
+.gallery-grid-960, .gallery-grid-1260 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
-/* --- 5. UNIVERSAL ASSET RULES --- */
+/* --- 6. UNIVERSAL ASSET RULES --- */
 
 .gallery-item img, 
 .portrait-item img, 
@@ -84,7 +72,7 @@
 .video-item img { border-color: #333; }
 .gallery-item img:hover, .featured-image-single img:hover { filter: brightness(1.08); border-color: #bbb; }
 
-/* --- 6. VIDEO UI (Micro-Ghost) --- */
+/* --- 7. VIDEO UI (Micro-Ghost) --- */
 
 .video-item { position: relative; cursor: pointer; overflow: hidden; }
 .play-button-overlay { 
@@ -102,14 +90,14 @@
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 7. LIGHTBOX OVERLAY --- */
+/* --- 8. LIGHTBOX OVERLAY --- */
 
 .lightbox { display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); justify-content: center; align-items: center; }
 .lightbox-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 95vw; max-height: 95vh; }
 .lightbox-content { max-width: 100%; max-height: 85vh; object-fit: contain; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
 .lightbox-close { position: absolute; top: 10px; right: 10px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #fff; cursor: pointer; font-family: Helvetica, sans-serif; }
 
-/* --- 8. RESPONSIVE ENGINE (15px Snap) --- */
+/* --- 9. RESPONSIVE ENGINE (15px Snap) --- */
 
 @media (max-width: 768px) {
     .paper-sheet > * {
@@ -124,19 +112,24 @@
         gap: 10px !important;
     }
 
+    .border-top-1260 {
+        padding-top: 25px;
+        margin-top: 10px !important;
+    }
+
     .featured-image-single.header-mode {
         padding-top: 15px !important;
     }
 }
 
-/* --- 9. THE CINEMATIC OVERRIDES --- */
+/* --- 10. THE CINEMATIC OVERRIDES --- */
 
 body.dark-theme { background-color: #000000 !important; }
 .paper-sheet { margin-top: 0 !important; padding-top: 0 !important; background-color: #fff; }
 body.dark-theme .paper-sheet { background-color: #1a1a1a !important; border: none !important; }
 body.dark-theme .text-rail h1, body.dark-theme .text-rail h2 { color: #ffffff; }
 
-/* --- 10. EDITORIAL SPECIALTIES --- */
+/* --- 11. EDITORIAL SPECIALTIES --- */
 
 .featured-image-single.header-mode { padding-top: 60px; }
 .featured-caption { margin-top: 10px; font-size: 13px; color: #888; font-style: italic; text-align: left; }
