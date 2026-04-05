@@ -1,6 +1,6 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.4
-   Features: Auto-Injection, One vs. Many Lightbox, Audio Engine
+   THINKAMIGO UNIFIED LOADER & INJECTOR v20.5
+   Features: Auto-Injection, One vs. Many Lightbox, Video Engine
    Architecture: Pixel-Strict Asset Handling (16:9 & A4)
    ============================================================ */
 
@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // AUTO-INJECT LIGHTBOX BONES
-            // We do this here so it's ready regardless of page content
             injectLightbox();
 
         } catch (err) {
@@ -52,22 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
             <div class="lightbox-wrapper">
-                <img class="lightbox-content" id="lightbox-img" src="">
-                <div class="lightbox-info">
-                    <span id="lightbox-caption" class="lightbox-caption"></span>
-                    <span id="lightbox-counter" class="lightbox-counter"></span>
                 </div>
-            </div>
         `;
         document.body.appendChild(lb);
         setupLightboxLogic();
+        setupVideoLogic(); // Initialize Video Listeners
     };
 
     const setupLightboxLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
-        const lbImg = document.getElementById('lightbox-img');
-        const lbCaption = document.getElementById('lightbox-caption');
-        const lbCounter = document.getElementById('lightbox-counter');
+        const lbWrapper = document.querySelector('.lightbox-wrapper');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         
@@ -76,12 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateLightbox = () => {
             const currentItem = currentGallery[currentIndex];
-            // Clear current src to prevent "ghosting" while new high-res loads
-            lbImg.src = ''; 
-            lbImg.src = currentItem.getAttribute('data-full');
-            lbCaption.innerText = currentItem.getAttribute('alt');
+            const fullSrc = currentItem.getAttribute('data-full');
+            const caption = currentItem.getAttribute('alt');
+            
+            // Inject Image Structure
+            lbWrapper.innerHTML = `
+                <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
+                <div class="lightbox-info">
+                    <span id="lightbox-caption" class="lightbox-caption">${caption}</span>
+                    <span id="lightbox-counter" class="lightbox-counter"></span>
+                </div>
+            `;
 
-            // ONE vs MANY LOGIC (Hides Nav if standalone)
+            const lbCounter = document.getElementById('lightbox-counter');
+
+            // Navigation Visibility
             if (currentGallery.length > 1) {
                 prevBtn.style.display = 'block';
                 nextBtn.style.display = 'block';
@@ -89,22 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
-                lbCounter.innerText = '';
             }
         };
 
-        // EVENT DELEGATION: Listens for clicks on any thumbnail with data-full
+        // Click Listener for Standard Images
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
 
             const galleryTag = clicked.getAttribute('data-gallery');
             if (galleryTag) {
-                // Group by gallery tag (e.g. "publications" or "comic-issue-1")
                 currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryTag}"]`));
                 currentIndex = currentGallery.indexOf(clicked);
             } else {
-                // Standalone image mode
                 currentGallery = [clicked];
                 currentIndex = 0;
             }
@@ -113,40 +112,73 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'flex';
         });
 
-        // NAVIGATION: Next
+        // Navigation Actions
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentGallery.length;
             updateLightbox();
         });
 
-        // NAVIGATION: Prev
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
             updateLightbox();
         });
 
-        // CLOSE LOGIC
+        // CLOSE LOGIC (Shared by Image and Video)
         overlay.addEventListener('click', (e) => {
-            // Closes if clicking background, X button, or if specific targets hit
             if (e.target === overlay || e.target.classList.contains('lightbox-close')) {
                 overlay.style.display = 'none';
-                lbImg.src = ''; // Clean memory
+                lbWrapper.innerHTML = ''; // Eject content to stop video/clear memory
             }
         });
 
-        // Keyboard Support (Esc to close, arrows to nav)
         document.addEventListener('keydown', (e) => {
             if (overlay.style.display === 'flex') {
-                if (e.key === 'Escape') overlay.style.display = 'none';
+                if (e.key === 'Escape') {
+                    overlay.style.display = 'none';
+                    lbWrapper.innerHTML = '';
+                }
                 if (e.key === 'ArrowRight' && currentGallery.length > 1) nextBtn.click();
                 if (e.key === 'ArrowLeft' && currentGallery.length > 1) prevBtn.click();
             }
         });
     };
 
-    // --- 3. MODULE: MOBILE MENU (Auto-close on click) ---
+    // --- 3. MODULE: VIDEO ENGINE (Injected into Lightbox) ---
+    const setupVideoLogic = () => {
+        const overlay = document.getElementById('lightbox-overlay');
+        const lbWrapper = document.querySelector('.lightbox-wrapper');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        document.addEventListener('click', (e) => {
+            const videoTrigger = e.target.closest('.video-item');
+            if (!videoTrigger) return;
+
+            const id = videoTrigger.getAttribute('data-video-id');
+            const platform = videoTrigger.getAttribute('data-platform');
+            let url = "";
+
+            if (platform === 'youtube') url = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+            if (platform === 'vimeo') url = `https://player.vimeo.com/video/${id}?autoplay=1`;
+
+            // Hide Gallery Nav
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+
+            // Inject Video Stage
+            lbWrapper.innerHTML = `
+                <div class="video-stage">
+                    <iframe src="${url}" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+            `;
+            
+            overlay.style.display = 'flex';
+        });
+    };
+
+    // --- 4. MODULE: MOBILE MENU ---
     const setupMobileMenu = () => {
         const checkbox = document.getElementById('menu-toggle');
         if (!checkbox) return;
@@ -155,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 4. MODULE: AUDIO ENGINE (Playlist logic) ---
+    // --- 5. MODULE: AUDIO ENGINE ---
     const setupAudioPlayer = () => {
         const engine = document.getElementById('main-audio-engine');
         const masterBtn = document.getElementById('masterPlayBtn');
@@ -175,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 5. MODULE: UI UTILITIES (Scroll Behavior) ---
+    // --- 6. MODULE: UI UTILITIES (Scroll Behavior) ---
     const setupUI = () => {
         const topBtn = document.getElementById('backToTop');
         if (!topBtn) return;
