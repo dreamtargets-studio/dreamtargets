@@ -162,13 +162,12 @@ body.content-page {
 }
 
 /* THE OPENING CURLY “ 
-   Nudged to 48px to overcome the 40px block padding and 
-   sit flush with the cap-height of the first line. */
+   Desktop: Nudged to 54px to align with cap-height. */
 .text-rail blockquote p::before {
     content: "\201C";                
     position: absolute;
     left: 24px;                      
-    top: 54px;                       /* <--- THE ALIGNMENT FIX */
+    top: 54px;                       
     color: #888;
     font-size: 52px;                 
     font-family: Georgia, serif;     
@@ -196,6 +195,28 @@ body.content-page {
     color: #888;                     
     letter-spacing: 0.02em;
     font-family: 'Poppins', sans-serif; 
+}
+
+/* --- MOBILE RESPONSIVE FINESSE --- */
+@media (max-width: 768px) {
+    .text-rail blockquote {
+        padding: 30px 0 15px 45px;   /* Tighten gutter and lead-in for mobile */
+    }
+
+    .text-rail blockquote p {
+        font-size: 24px;             /* Scale down quote text for small screens */
+    }
+
+    .text-rail blockquote p::before {
+        left: 12px;                  /* Pull quote further into the margin to avoid crash */
+        top: 38px;                   /* Re-align to the smaller 24px cap-height */
+        font-size: 40px;             /* Scale down the glyph */
+    }
+
+    .text-rail blockquote p::after {
+        font-size: 40px;
+        transform: translateY(10px);
+    }
 }
 
 /* 11. MOBILE RESPONSIVE */
