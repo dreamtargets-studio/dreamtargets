@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.8 [1280px HD UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.9 [1280px HD UPDATE]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
    Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
    Rules: Strict Hex-Only | No RGB | GDS-compliant
@@ -181,13 +181,19 @@
     z-index: 10000001; 
 }
 
+
 .lightbox-caption, .lightbox-counter { 
+    display: block;
     color: #ffffff; 
     font-family: 'Poppins', sans-serif; 
-    font-size: 11px; 
-    letter-spacing: 1px; 
-    opacity: 0.8; 
+    font-size: 14px;           /* Modern Editorial Size */
+    font-weight: 400;          /* Medium weight for punch */
+    letter-spacing: 1.2px;     /* Tracking for elegance */
+    text-transform: uppercase; /* Optional: adds a "Gallery Plaque" feel */
+    opacity: 0.95; 
+    margin-bottom: 2px;
 }
+
 
 /* --- 8. RESPONSIVE ENGINE --- */
 @media (max-width: 768px) {
