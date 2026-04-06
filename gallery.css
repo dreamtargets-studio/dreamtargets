@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.3.6 [SINGLE-LINE STATUS]
+   THINKAMIGO GALLERY ENGINE v2.3.7 [UI RESCUE]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Flex-Stacked Lightbox + Single-Line Metadata
+   Logic: Fixed Corner Close + Hardened High-Contrast Meta
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -144,7 +144,7 @@ body.dark-theme .border-top-1260 {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. LIGHTBOX OVERLAY UI (Vertical Stack & Meta Line) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (Precision Status Line) --- */
 
 .lightbox { 
     display: none; 
@@ -160,38 +160,38 @@ body.dark-theme .border-top-1260 {
 .lightbox-wrapper { 
     position: relative; 
     display: flex; 
-    flex-direction: column; /* Image on top, Meta below */
+    flex-direction: column; 
     align-items: center; 
-    max-width: 95vw; 
-    max-height: 95vh; 
+    max-width: 90vw; 
+    max-height: 85vh; 
 }
 
 .lightbox-content { 
     max-width: 100%; 
-    max-height: 82vh; /* Room for metadata line */
+    max-height: 75vh; 
     object-fit: contain; 
     border: 1px solid #333; 
     box-shadow: 0 0 50px rgba(0,0,0,0.8); 
 }
 
-/* SINGLE LINE STATUS BAR */
+/* THE STATUS BAR: Forced White & Elegant */
 .lightbox-meta {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* Spacing between count and text */
+    gap: 12px;
     width: 100%;
     margin-top: 15px;
-    color: #ffffff !important;
+    color: #ffffff !important; 
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .lightbox-counter {
-    opacity: 0.6;
+    opacity: 0.5;
     white-space: nowrap;
 }
 
@@ -199,29 +199,33 @@ body.dark-theme .border-top-1260 {
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Prevents overflow if text is massive */
-    max-width: 60vw;
+    text-overflow: ellipsis;
+    max-width: 50vw;
+    color: #ffffff !important;
 }
 
+/* THE CLOSE BUTTON: Fixed Corner Placement */
 .lightbox-close { 
     position: absolute; 
-    top: -50px; right: -10px; /* Offset to clear visual field */
-    width: 80px !important; 
-    height: 80px !important; 
+    top: 20px; right: 20px; 
+    width: 60px !important; 
+    height: 60px !important; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
     cursor: pointer; 
-    z-index: 10020; 
+    z-index: 10050; 
+    background: none; 
+    border: none; 
     -webkit-tap-highlight-color: transparent; 
 }
 
 .lightbox-close::before, .lightbox-close::after {
     content: '';
     position: absolute;
-    width: 28px; 
+    width: 24px; 
     height: 1.5px; 
-    background-color: #fff;
+    background-color: #ffffff !important;
 }
 
 .lightbox-close::before { transform: rotate(45deg); }
@@ -230,7 +234,7 @@ body.dark-theme .border-top-1260 {
 .lightbox-prev, .lightbox-next { 
     position: absolute; 
     top: 0; height: 100%; 
-    width: 30%; 
+    width: 25%; 
     z-index: 10010; 
     cursor: pointer; 
 }
@@ -241,12 +245,12 @@ body.dark-theme .border-top-1260 {
     content: '';
     position: absolute;
     top: 50%;
-    width: 18px; height: 18px;
-    border-top: 1.5px solid rgba(255, 255, 255, 0.6); 
-    border-right: 1.5px solid rgba(255, 255, 255, 0.6);
+    width: 16px; height: 16px;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.5); 
+    border-right: 1.5px solid rgba(255, 255, 255, 0.5);
 }
-.lightbox-prev::after { left: 35px; transform: translateY(-50%) rotate(-135deg); }
-.lightbox-next::after { right: 35px; transform: translateY(-50%) rotate(45deg); }
+.lightbox-prev::after { left: 30px; transform: translateY(-50%) rotate(-135deg); }
+.lightbox-next::after { right: 30px; transform: translateY(-50%) rotate(45deg); }
 
 /* --- 11. RESPONSIVE ENGINE --- */
 
@@ -263,12 +267,13 @@ body.dark-theme .border-top-1260 {
     }
 
     .lightbox-close { 
-        top: -60px; right: -10px; 
+        top: 10px; right: 10px; 
+        width: 80px !important; height: 80px !important;
     }
 
     .lightbox-meta {
-        font-size: 11px;
-        gap: 10px;
+        font-size: 10px;
+        gap: 8px;
     }
 
     .video-stage { width: 95vw !important; }
