@@ -1,27 +1,62 @@
-/* brand-thinkamigo.css - v1.21 Visual DNA */
+/* ============================================================
+   thinkamigo.css - v1.21 Visual DNA
+   Architecture: Core Branding Tokens (Colours, Type, Assets)
+   Note: All graphic paths require filename verification.
+   ============================================================ */
 
 :root {
-    /* 1. PRIMARY COLOUR PALETTE */
-    --brand-blue: #0054dc;
-    --brand-orange: #ff8c00;
+    /* 1. COLOUR PALETTES */
+    --brand-blue: #0054dc;      /* Saturation Lock Blue */
+    --brand-orange: #ff6600;    /* v4.19 Precision Orange */
     --footer-bg: #0a254a;
     --white: #ffffff;
-    --stone-bg: #e3e2d9; 
+    --stone-bg: #e3e2d9;        /* Global Page Base */
+    --charcoal: #191919;        /* Heading/H2 Accent */
 
-    /* 2. UI & INTERACTION COLOURS */
+    /* 2. EDITORIAL & UI COLOURS */
     --brand-blue-light: #3385ff; 
-    --text-muted: #b3c2d4; 
-    --text-dim: #8091a8;
+    --text-primary: #333333;    /* Main Body Text */
+    --text-muted: #666666;       /* Editorial Captions */
+    --text-dim: #888888;         /* Quote Marks & Footer Meta */
+    --text-quote: #444444;       /* Blockquote Paragraphs */
+    
+    --border-grey: #dddddd;      /* Dividers & Gallery Borders */
+    --caption-bg: #f4f3ef;       /* Caption Box Background */
 
-    /* 3. TYPOGRAPHY (STRICT SANS-SERIF) */
+    /* 3. FONT STYLES & TYPOGRAPHIC SCALE */
     --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+
+    /* H1: Primary Story Heading */
+    --h1-size: 48px;         
+    --h1-weight: 900; 
+    --h1-line-height: 1.1;
+
+    /* H2: Secondary Section Heading */
+    --h2-size: 28px;         
+    --h2-weight: 200;
+
+    /* H3: Sub-headings / Accents */
+    --h3-size: 24px;         
+    --h3-weight: 600;
+
+    /* P: Standard Body Copy */
+    --p-size: 18px;          
+    --p-line-height: 1.65;
+
+    /* Editorial Elements */
+    --caption-size: 15px;
+    --blockquote-size: 32px;
+    --blockquote-weight: 300;
+
+    /* 4. GRAPHIC ASSETS (VERIFY FILENAMES IN /assets/img/) */
+    /* Logotype: Custom designed type style of the brand name */
+    --logotype-main: url('assets/img/logotype-thinkamigo.png'); 
     
-    /* 4. GRAPHIC ASSETS */
-    /* Check these filenames against your /img/ folder! */
-    --logo-main: url('assets/img/logo-thinkamigo.png'); 
+    /* Logo: The recognisable bubble graphic */
     --logo-bubble: url('assets/img/logo-bubble.png');  
-    
-    /* Social Icons (Verified from your chassis.css) */
+
+    /* Social Utility Assets */
     --icon-linkedin: url('assets/img/icon-linkedin.png');
     --icon-substack: url('assets/img/icon-substack.png');
     --icon-instagram: url('assets/img/icon-instagram.png');
