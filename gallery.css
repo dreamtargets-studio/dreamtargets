@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.3.2 [SYSTEM WEIGHT SYNC]
+   THINKAMIGO GALLERY ENGINE v2.3.3 [VISUAL POLISH]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Multi-Rail + UI Stroke Sync + Expanded Touch Targets
+   Logic: Dark-Theme Contrast + CSS Magnifier + Asset Safety
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -69,7 +69,7 @@
     display: block;
 }
 
-/* --- 6. DARK THEME OVERRIDES --- */
+/* --- 6. DARK THEME RESTORE (High Contrast Fix) --- */
 
 body.dark-theme { background-color: #000000 !important; color: #ffffff !important; }
 body.dark-theme .paper-sheet { background-color: #1a1a1a !important; border: none !important; }
@@ -82,10 +82,12 @@ body.dark-theme .video-description h4 {
     color: #ffffff !important; 
 }
 
+/* Ensures captions and counter are readable light-grey, not charcoal */
 body.dark-theme .text-rail p,
 body.dark-theme .video-description p,
-body.dark-theme .featured-caption { 
-    color: #aaaaaa !important; 
+body.dark-theme .featured-caption,
+.lightbox-counter { 
+    color: #bbbbbb !important; 
 }
 
 body.dark-theme .border-top-1260 {
@@ -98,22 +100,63 @@ body.dark-theme .border-top-1260 {
 .gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
-/* --- 8. UNIVERSAL ASSET RULES --- */
+/* --- 8. UNIVERSAL ASSET RULES (Magnifier Logic) --- */
+
+.gallery-item, .portrait-item, .featured-image-single {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
 
 .gallery-item img, 
 .portrait-item img, 
-.featured-image-single img,
+.featured-image-single img, 
 .video-item img {
     width: 100%;
     height: auto;
     display: block;
     box-sizing: border-box;
     border: 1px solid #ddd;
-    transition: filter 0.2s ease, border-color 0.2s ease;
+    transition: filter 0.3s ease;
 }
 
 .video-item img { border-color: #333; }
-.gallery-item img:hover, .featured-image-single img:hover { filter: brightness(1.08); border-color: #bbb; }
+
+/* STATIC IMAGE MAGNIFIER (CSS-only Vector) */
+.gallery-item::after, .portrait-item::after, .featured-image-single::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 26px; height: 26px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    /* Drawing the glass handle */
+    background: linear-gradient(45deg, transparent 48%, #fff 48%, #fff 52%, transparent 52%) no-repeat 16px 16px / 10px 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Hover: Focus brightness drop + Magnifier Pop */
+.gallery-item:hover img, 
+.portrait-item:hover img, 
+.featured-image-single:hover img {
+    filter: brightness(0.7);
+}
+
+.gallery-item:hover::after, 
+.portrait-item:hover::after, 
+.featured-image-single:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* VIDEO PROTECTION: Maintains play icon logic and "lit" hover */
+.video-item:hover img { 
+    filter: brightness(1.1); 
+}
 
 /* --- 9. VIDEO UI (Micro-Ghost Overlay) --- */
 
@@ -163,7 +206,17 @@ body.dark-theme .border-top-1260 {
     box-shadow: 0 0 50px rgba(0,0,0,0.8); 
 }
 
-/* THE CLOSE BUTTON: Massive 100px Hit Area */
+.lightbox-counter {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-family: var(--font-main);
+    letter-spacing: 1px;
+    z-index: 10020;
+}
+
 .lightbox-close { 
     position: absolute; 
     top: -10px; right: -10px; 
@@ -179,7 +232,6 @@ body.dark-theme .border-top-1260 {
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* The Visual "X" (Matched to Back-to-Top Stroke) */
 .lightbox-close::before, .lightbox-close::after {
     content: '';
     position: absolute;
@@ -198,7 +250,6 @@ body.dark-theme .border-top-1260 {
     opacity: 1;
 }
 
-/* Nav Side-Zones */
 .lightbox-prev, .lightbox-next { 
     position: absolute; 
     top: 0; height: 100%; 
@@ -209,7 +260,6 @@ body.dark-theme .border-top-1260 {
 .lightbox-prev { left: 0; }
 .lightbox-next { right: 0; }
 
-/* Chevrons (Matched to Back-to-Top Stroke) */
 .lightbox-prev::after, .lightbox-next::after {
     content: '';
     position: absolute;
@@ -236,6 +286,7 @@ body.dark-theme .border-top-1260 {
     }
     
     .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 {
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
@@ -250,12 +301,9 @@ body.dark-theme .border-top-1260 {
         opacity: 0.9;
     }
 
-    .featured-image-single.header-mode {
-        padding-top: 15px !important;
-    }
-
     .video-stage { width: 95vw !important; }
     .lightbox-prev::after, .lightbox-next::after { display: none; }
+    .gallery-item::after, .portrait-item::after, .featured-image-single::after { display: none; }
 }
 
 /* --- 12. SPECIALTIES --- */
