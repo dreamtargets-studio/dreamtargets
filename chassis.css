@@ -194,38 +194,39 @@ html, body {
     color: #ffffff !important;
 }
 
+/* UPDATED BACK-TO-TOP SECTION */
 .back-to-top { 
     position: fixed; 
-    bottom: 200px; 
+    bottom: 30px;           /* Lowered from 200px to remove the grey bar gap */
     right: 30px; 
     width: 44px; 
     height: 44px; 
-    background-color: rgba(102, 102, 102, 0.5); 
+    background-color: #191919; 
     z-index: 9999; 
     display: none; 
     align-items: center; 
     justify-content: center; 
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none;
+    border: 1px solid #ffffff;
 }
 
 .back-to-top.show { display: flex !important; }
 
 .back-to-top:hover {
-    background-color: rgba(102, 102, 102, 0.8);
+    background-color: var(--brand-blue);
     transform: translateY(-3px);
 }
 
-.back-to-top::after {
-    content: '';
+/* Arrow fix - Targeting the .chevron-up class in your HTML */
+.chevron-up {
+    display: block;
     width: 10px;
     height: 10px;
-    border-top: 3px solid #ffffff;
-    border-right: 3px solid #ffffff;
-    transform: rotate(-45deg);
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    transform: rotate(45deg);
     margin-top: 4px;
-    display: block;
 }
 
 /* --- 6. RESPONSIVE OVERRIDES --- */
@@ -297,8 +298,9 @@ html, body {
         flex: 0 0 90px;
     }
 
+    /* Fixed mobile positioning */
     .back-to-top {
-        bottom: 200px;
+        bottom: 30px;
         right: 20px;
         width: 40px;
         height: 40px;
