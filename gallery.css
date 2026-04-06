@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.7 [1280px HD UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.8 [1280px HD UPDATE]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
    Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
    Rules: Strict Hex-Only | No RGB | GDS-compliant
@@ -21,16 +21,10 @@
 .featured-image-single {
     max-width: 960px; 
     width: 100%; 
-    margin: 0 auto;           /* Centering Negotiator */
+    margin: 0 auto; 
     padding: 0; 
     box-sizing: border-box;
-}
-
-/* --- 2a. RAIL ASSET SPECIFICITY --- */
-/* This removes the 1px border ONLY for images inside the 960px rail */
-.featured-image-single img {
-    border: none;
-    display: block;
+    display: block; 
 }
 
 /* The Cinematic Rail (Standardized to 1280px for 720p HD) */
@@ -41,8 +35,8 @@
 .story-hero-wrapper {
     max-width: 1280px; 
     width: 100%; 
-    margin: 0 auto;           /* Fixes the Left-Align Screenshot Bug */
-    padding: 0;               /* Clean 1:1 Edge-to-Edge */
+    margin: 0 auto; 
+    padding: 0; 
     box-sizing: border-box;
     display: block;
 }
@@ -89,6 +83,13 @@
     transition: border-color 0.2s ease;
 }
 
+/* --- 5a. RAIL ASSET OVERRIDE --- */
+/* Cascading logic: This kills the border specifically for the 960px rail image */
+.featured-image-single img {
+    border: none; 
+    margin: 0;
+}
+
 .gallery-item:hover img, 
 .video-item:hover img { 
     border-color: #bbbbbb; 
@@ -103,11 +104,11 @@
     transform: translate(-50%, -50%); 
     border-top: 9px solid #00000000; 
     border-bottom: 9px solid #00000000; 
-    border-left: 14px solid #ffffff66; /* 40% White Hex-8 */
+    border-left: 14px solid #ffffff66; 
     pointer-events: none; 
 }
 
-/* --- 7. LIGHTBOX COMMAND LAYER (Strict Hex-8) --- */
+/* --- 7. LIGHTBOX COMMAND LAYER --- */
 .lightbox { 
     display: none; 
     position: fixed; 
@@ -116,7 +117,7 @@
     left: 0; 
     width: 100vw; 
     height: 100vh; 
-    background-color: #000000fa; /* 98% Opaque Black */
+    background-color: #000000fa; 
     justify-content: center; 
     align-items: center;
 }
@@ -168,11 +169,7 @@
 .lightbox-prev { left: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 .lightbox-next { right: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 
-.lightbox-close:hover, 
-.lightbox-prev:hover, 
-.lightbox-next:hover { 
-    opacity: 1; 
-}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
 
 .lightbox-info { 
     position: absolute; 
@@ -184,8 +181,7 @@
     z-index: 10000001; 
 }
 
-.lightbox-caption, 
-.lightbox-counter { 
+.lightbox-caption, .lightbox-counter { 
     color: #ffffff; 
     font-family: 'Poppins', sans-serif; 
     font-size: 11px; 
@@ -195,48 +191,27 @@
 
 /* --- 8. RESPONSIVE ENGINE --- */
 @media (max-width: 768px) {
-    .paper-sheet > * { 
-        padding-left: 15px; 
-        padding-right: 15px; 
-        margin-bottom: 15px; 
-    }
-
-    .gallery-grid-960, 
-    .gallery-grid-1280, 
-    .gallery-portrait-960, 
-    .gallery-portrait-4, 
-    .video-grid-4 { 
+    .paper-sheet > * { padding-left: 15px; padding-right: 15px; margin-bottom: 15px; }
+    .gallery-grid-960, .gallery-grid-1280, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 { 
         grid-template-columns: repeat(2, 1fr) !important; 
         gap: 10px; 
     }
-    
-    .lightbox-prev, 
-    .lightbox-next { 
-        width: 70px; 
-        background-image: none; 
-    }
-    
-    .lightbox-close { 
-        width: 70px; 
-        height: 70px; 
-        background-size: 24px; 
-    }
-    
-    .lightbox-content { 
-        max-width: 100vw; 
-        max-height: 75vh; 
-    }
+    .lightbox-prev, .lightbox-next { width: 70px; background-image: none; }
+    .lightbox-close { width: 70px; height: 70px; background-size: 24px; }
+    .lightbox-content { max-width: 100vw; max-height: 75vh; }
 }
 
-/* --- 9. UTILITIES (MINIMALIST) --- */
+/* --- 9. BRAND UTILITIES --- */
 .featured-caption { 
-    display: block;              /* 1. Forces it to be a box, not just text */
-    width: 100%;                 /* 2. Matches image width exactly */
-    box-sizing: border-box;      /* 3. Keeps padding inside that width */
-    background-color: #0000000d; /* 4. The grey tint */
-    padding: 12px 18px;          /* 5. Space inside the tint */
-    font-size: 14px;             /* 6. Hierarchy */
-    color: #444444;              /* 7. Readability */
+    display: block;              
+    width: 100%;                 
+    margin: 0;                
+    background-color: #e2dfd2; /* Brand Stone */
+    padding: 12px 18px;          
+    box-sizing: border-box;   
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #444444;
 }
 
 .border-top-1280 { 
@@ -246,4 +221,3 @@
     margin-bottom: 25px; 
     padding: 0; 
 }
-
