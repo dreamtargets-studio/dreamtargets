@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.3.3 [VISUAL POLISH]
+   THINKAMIGO GALLERY ENGINE v2.3.5 [PRECISION UI]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Dark-Theme Contrast + CSS Magnifier + Asset Safety
+   Logic: Standard Magnifier Cursor + Forced White Lightbox UI
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -69,7 +69,7 @@
     display: block;
 }
 
-/* --- 6. DARK THEME RESTORE (High Contrast Fix) --- */
+/* --- 6. DARK THEME CONTRAST --- */
 
 body.dark-theme { background-color: #000000 !important; color: #ffffff !important; }
 body.dark-theme .paper-sheet { background-color: #1a1a1a !important; border: none !important; }
@@ -82,12 +82,10 @@ body.dark-theme .video-description h4 {
     color: #ffffff !important; 
 }
 
-/* Ensures captions and counter are readable light-grey, not charcoal */
 body.dark-theme .text-rail p,
 body.dark-theme .video-description p,
-body.dark-theme .featured-caption,
-.lightbox-counter { 
-    color: #bbbbbb !important; 
+body.dark-theme .featured-caption { 
+    color: #aaaaaa !important; 
 }
 
 body.dark-theme .border-top-1260 {
@@ -100,12 +98,10 @@ body.dark-theme .border-top-1260 {
 .gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
-/* --- 8. UNIVERSAL ASSET RULES (Magnifier Logic) --- */
+/* --- 8. UNIVERSAL ASSET RULES (No Shadows, Magnifier Cursor) --- */
 
 .gallery-item, .portrait-item, .featured-image-single {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+    cursor: zoom-in; /* Native browser magnifier cursor */
 }
 
 .gallery-item img, 
@@ -117,46 +113,19 @@ body.dark-theme .border-top-1260 {
     display: block;
     box-sizing: border-box;
     border: 1px solid #ddd;
-    transition: filter 0.3s ease;
+    transition: border-color 0.2s ease;
 }
 
-.video-item img { border-color: #333; }
-
-/* STATIC IMAGE MAGNIFIER (CSS-only Vector) */
-.gallery-item::after, .portrait-item::after, .featured-image-single::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    width: 26px; height: 26px;
-    border: 1.5px solid #fff;
-    border-radius: 50%;
-    /* Drawing the glass handle */
-    background: linear-gradient(45deg, transparent 48%, #fff 48%, #fff 52%, transparent 52%) no-repeat 16px 16px / 10px 10px;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* Hover: Focus brightness drop + Magnifier Pop */
+/* Hover: Only subtle border highlight, no brightness change or shadows */
 .gallery-item:hover img, 
 .portrait-item:hover img, 
 .featured-image-single:hover img {
-    filter: brightness(0.7);
+    border-color: #bbb;
 }
 
-.gallery-item:hover::after, 
-.portrait-item:hover::after, 
-.featured-image-single:hover::after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* VIDEO PROTECTION: Maintains play icon logic and "lit" hover */
-.video-item:hover img { 
-    filter: brightness(1.1); 
-}
+.video-item { cursor: pointer; }
+.video-item img { border-color: #333; }
+.video-item:hover img { border-color: #555; }
 
 /* --- 9. VIDEO UI (Micro-Ghost Overlay) --- */
 
@@ -176,7 +145,7 @@ body.dark-theme .border-top-1260 {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. LIGHTBOX OVERLAY UI (System Weight Sync) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (Forced White Fix) --- */
 
 .lightbox { 
     display: none; 
@@ -189,15 +158,6 @@ body.dark-theme .border-top-1260 {
     align-items: center; 
 }
 
-.lightbox-wrapper { 
-    position: relative; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    max-width: 95vw; 
-    max-height: 95vh; 
-}
-
 .lightbox-content { 
     max-width: 100%; 
     max-height: 85vh; 
@@ -206,15 +166,28 @@ body.dark-theme .border-top-1260 {
     box-shadow: 0 0 50px rgba(0,0,0,0.8); 
 }
 
+/* FORCED WHITE: Ensures captions/counter are never charcoal in lightbox */
+.lightbox-caption, 
+.lightbox-counter {
+    color: #ffffff !important;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.lightbox-caption {
+    margin-top: 15px;
+    font-size: 14px;
+    width: 80%;
+    line-height: 1.4;
+}
+
 .lightbox-counter {
     position: absolute;
     bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 13px;
-    font-family: var(--font-main);
+    font-size: 12px;
     letter-spacing: 1px;
-    z-index: 10020;
+    opacity: 0.8;
 }
 
 .lightbox-close { 
@@ -238,17 +211,10 @@ body.dark-theme .border-top-1260 {
     width: 28px; 
     height: 1.5px; 
     background-color: #fff;
-    transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
-    opacity: 0.8; 
 }
 
 .lightbox-close::before { transform: rotate(45deg); }
 .lightbox-close::after { transform: rotate(-45deg); }
-
-.lightbox-close:hover::before, .lightbox-close:hover::after {
-    background-color: #fff;
-    opacity: 1;
-}
 
 .lightbox-prev, .lightbox-next { 
     position: absolute; 
@@ -267,14 +233,9 @@ body.dark-theme .border-top-1260 {
     width: 18px; height: 18px;
     border-top: 1.5px solid rgba(255, 255, 255, 0.6); 
     border-right: 1.5px solid rgba(255, 255, 255, 0.6);
-    transition: border-color 0.2s ease;
 }
 .lightbox-prev::after { left: 35px; transform: translateY(-50%) rotate(-135deg); }
 .lightbox-next::after { right: 35px; transform: translateY(-50%) rotate(45deg); }
-
-.lightbox-prev:hover::after, .lightbox-next:hover::after {
-    border-color: rgba(255, 255, 255, 1);
-}
 
 /* --- 11. RESPONSIVE ENGINE --- */
 
@@ -286,7 +247,6 @@ body.dark-theme .border-top-1260 {
     }
     
     .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 {
-        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
@@ -298,12 +258,10 @@ body.dark-theme .border-top-1260 {
     .lightbox-close::before, .lightbox-close::after {
         width: 32px; 
         height: 2px; 
-        opacity: 0.9;
     }
 
     .video-stage { width: 95vw !important; }
     .lightbox-prev::after, .lightbox-next::after { display: none; }
-    .gallery-item::after, .portrait-item::after, .featured-image-single::after { display: none; }
 }
 
 /* --- 12. SPECIALTIES --- */
