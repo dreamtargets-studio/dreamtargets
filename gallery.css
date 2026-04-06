@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.4.5 [LOADER SYNC]
+   THINKAMIGO GALLERY ENGINE v2.5.0 [SVG DATA-URI EDITION]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Flex-Overlay + Absolute Info Strip + Synced IDs
+   Logic: Embedded SVG Icons + Absolute Centering + Zero-Artefact
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -51,10 +51,10 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 /* --- 9. VIDEO UI --- */
 .play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid rgba(255, 255, 255, 0.4); pointer-events: none; }
 
-/* --- 10. LIGHTBOX OVERLAY UI (Synced to loader.js) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (SVG ICON EDITION) --- */
 
 .lightbox { 
-    display: none; /* Controlled by loader.js display: flex */
+    display: none; 
     position: fixed; z-index: 999999; 
     top: 0; left: 0; width: 100vw; height: 100vh; 
     background-color: #000000; 
@@ -63,10 +63,8 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 
 .lightbox-wrapper {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    width: 100%; height: 100%; z-index: 10;
 }
 
 .lightbox-content { 
@@ -75,31 +73,33 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
     object-fit: contain; 
 }
 
-/* THE CLOSE BUTTON: Synced to .lightbox-close */
+/* CLOSE & NAV: Common SVG Icon Logic */
+.lightbox-close, .lightbox-prev, .lightbox-next {
+    position: absolute; z-index: 1000; cursor: pointer;
+    background-repeat: no-repeat; background-position: center;
+    opacity: 0.5; transition: opacity 0.2s, background-color 0.2s;
+    border: none !important; outline: none !important;
+}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+
+/* The 'X' Close Button (Pure SVG) */
 .lightbox-close { 
-    position: absolute; top: 20px; right: 20px; 
-    width: 60px; height: 60px; 
-    color: #fff; font-size: 35px; line-height: 60px; text-align: center;
-    cursor: pointer; z-index: 100; font-family: Arial, sans-serif;
-    opacity: 0.6; transition: opacity 0.2s;
+    top: 15px; right: 15px; width: 50px; height: 50px; 
+    background-size: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    color: transparent !important; /* Deletes character artefact */
 }
-.lightbox-close:hover { opacity: 1; }
 
-/* NAV BUTTONS: Synced to #prev-btn / #next-btn */
-.lightbox-prev, .lightbox-next { 
-    position: absolute; top: 0; height: 100%; width: 15%; 
-    z-index: 90; cursor: pointer; display: flex; align-items: center; justify-content: center;
+/* Nav Hit-Zones (Strips) */
+.lightbox-prev, .lightbox-next { top: 0; height: 100%; width: 15vw; background-size: 24px; }
+.lightbox-prev { 
+    left: 0; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
-.lightbox-prev { left: 0; }
-.lightbox-next { right: 0; }
-
-.lightbox-prev::after, .lightbox-next::after {
-    content: ''; width: 18px; height: 18px;
-    border-top: 1.5px solid #fff; border-right: 1.5px solid #fff;
-    opacity: 0.4;
+.lightbox-next { 
+    right: 0; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
-.lightbox-prev::after { transform: rotate(-135deg); }
-.lightbox-next::after { transform: rotate(45deg); }
 
 /* THE INFO STRIP: Synced to .lightbox-info */
 .lightbox-info {
@@ -111,15 +111,14 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 .lightbox-caption, .lightbox-counter {
     color: #ffffff !important; font-family: Helvetica, sans-serif;
     font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-    opacity: 0.5;
+    opacity: 0.4;
 }
-.lightbox-counter { font-weight: bold; }
 
 /* --- 11. RESPONSIVE --- */
 @media (max-width: 768px) {
-    .lightbox-prev::after, .lightbox-next::after { display: none; }
-    .lightbox-info { bottom: 20px; font-size: 10px; padding: 0 20px; }
-    .lightbox-close { top: 10px; right: 10px; }
+    .lightbox-prev, .lightbox-next { width: 20vw; background-image: none !important; }
+    .lightbox-info { bottom: 20px; font-size: 10px; padding: 0 20px; flex-direction: row; }
+    .lightbox-close { top: 10px; right: 10px; width: 60px; height: 60px; background-size: 24px; }
 }
 
 /* --- 12. SPECIALTIES --- */
