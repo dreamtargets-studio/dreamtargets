@@ -1,14 +1,14 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v6.0 - GLOBAL SHELL
+   THINKAMIGO CHASSIS v6.3 - GLOBAL SHELL
    Architecture: 1250px Grid | 3-Col Footer | UI Components
-   Updates: Refined Back-to-Top (30% Opacity & 250px Clearance)
+   Updates: STRICT HEX-ONLY (Converted all RGB/RGBA to Hex-8)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
     --brand-blue: #0054dc;
-    --brand-blue-light: rgba(255, 255, 255, 0.15);
+    --brand-blue-light: #ffffff26; /* Converted from rgba(255,255,255,0.15) */
     --brand-orange: #ff8c00;
     --footer-bg: #0a254a;
     --white: #ffffff;
@@ -106,7 +106,7 @@ html, body {
 }
 
 .footer-visual-col a:hover .footer-brand-mark {
-    filter: drop-shadow(0 0 15px rgba(51, 133, 255, 0.8));
+    filter: drop-shadow(0 0 15px #3385ffcc); /* Converted from rgba */
 }
 
 .footer-nav-col { 
@@ -118,7 +118,7 @@ html, body {
 .footer-nav-col ul { list-style: none; padding: 0; margin: 0; }
 .footer-nav-col li { margin-bottom: 10px; }
 .footer-nav-col a { 
-    color: rgba(255,255,255,0.7) !important; 
+    color: #ffffffb3 !important; /* Converted from rgba(255,255,255,0.7) */
     text-decoration: none; 
     font-size: 14px; 
     font-family: 'Poppins', sans-serif; 
@@ -164,7 +164,7 @@ html, body {
 
 .social-item span {
     margin-top: 10px;
-    color: rgba(255,255,255,0.7) !important;
+    color: #ffffffb3 !important; /* Converted from rgba(255,255,255,0.7) */
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
     transition: 0.3s ease;
@@ -179,7 +179,7 @@ html, body {
 .icon-substack { background-image: url('assets/img/icon-substack.png'); }
 .icon-instagram { background-image: url('assets/img/icon-instagram.png'); }
 
-.footer-address { text-align: center; color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 20px; }
+.footer-address { text-align: center; color: #ffffff80; font-size: 13px; margin-top: 20px; }
 
 /* --- 5. UI COMPONENTS --- */
 
@@ -194,37 +194,37 @@ html, body {
     color: #ffffff !important;
 }
 
-/* BACK TO TOP: 30% Opaque Block + 250px Clearance */
+/* BACK TO TOP: Lighter Grey Block (30% Opaque Hex-8) */
 .back-to-top { 
     position: fixed; 
-    bottom: 250px;           /* Clears Mac toolbar and aligns with thumb arc */
+    bottom: 250px; 
     right: 25px; 
     width: 46px; 
     height: 46px; 
-    background-color: rgba(25, 25, 25, 0.3); /* 30% Opaque Grey/Charcoal */
+    background-color: #E0E0E04D; /* 30% Opacity */
     z-index: 9999; 
-    display: none;          /* Controlled by loader.js */
+    display: none; 
     align-items: center; 
     justify-content: center; 
     cursor: pointer;
     transition: all 0.3s ease;
-    border: none;           /* Clean industrial block */
+    border: none;
 }
 
 .back-to-top.show { display: flex !important; }
 
 .back-to-top:hover {
-    background-color: rgba(25, 25, 25, 0.6); /* Intensifies on hover */
+    background-color: #E0E0E099; /* 60% Opacity */
     transform: scale(1.05);
 }
 
-/* Solid White Up-Chevron */
+/* THE WHITE CHEVRON */
 .chevron-up {
     display: block;
     width: 10px;
     height: 10px;
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
+    border-top: 2px solid #ffffff; 
+    border-left: 2px solid #ffffff; 
     transform: rotate(45deg);
     margin-top: 4px;
 }
@@ -239,7 +239,7 @@ html, body {
         flex-direction: column; padding: 10px 0; z-index: 3001;
     }
     #menu-toggle:checked ~ .nav-links { display: flex !important; }
-    .nav-links a { padding: 15px 30px !important; width: 100%; box-sizing: border-box; border-top: 1px solid rgba(255,255,255,0.1); text-align: left; }
+    .nav-links a { padding: 15px 30px !important; width: 100%; box-sizing: border-box; border-top: 1px solid #ffffff1a; text-align: left; }
 }
 
 @media (min-width: 1101px) {
@@ -298,7 +298,6 @@ html, body {
         flex: 0 0 90px;
     }
 
-    /* Fixed mobile positioning maintained at 250px for thumb zone */
     .back-to-top {
         bottom: 250px;
         right: 20px;
