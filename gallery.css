@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.3.1 [ELEGANCE REBUILD]
+   THINKAMIGO GALLERY ENGINE v2.3.2 [SYSTEM WEIGHT SYNC]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Multi-Rail + Ultra-Thin UI + Expanded Touch Targets
+   Logic: Multi-Rail + UI Stroke Sync + Expanded Touch Targets
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -133,7 +133,7 @@ body.dark-theme .border-top-1260 {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. LIGHTBOX OVERLAY UI (Elegance Sync) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (System Weight Sync) --- */
 
 .lightbox { 
     display: none; 
@@ -163,7 +163,7 @@ body.dark-theme .border-top-1260 {
     box-shadow: 0 0 50px rgba(0,0,0,0.8); 
 }
 
-/* THE CLOSE BUTTON: Invisible 100px Hit Area */
+/* THE CLOSE BUTTON: Massive 100px Hit Area */
 .lightbox-close { 
     position: absolute; 
     top: -10px; right: -10px; 
@@ -179,15 +179,15 @@ body.dark-theme .border-top-1260 {
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* The Visual "X" (Razor-Thin 0.5px Line) */
+/* The Visual "X" (Matched to Back-to-Top Stroke) */
 .lightbox-close::before, .lightbox-close::after {
     content: '';
     position: absolute;
-    width: 25px; 
-    height: 0.5px; 
+    width: 28px; 
+    height: 1.5px; 
     background-color: #fff;
-    transition: background-color 0.2s ease, opacity 0.2s ease;
-    opacity: 0.7; 
+    transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0.8; 
 }
 
 .lightbox-close::before { transform: rotate(45deg); }
@@ -209,16 +209,22 @@ body.dark-theme .border-top-1260 {
 .lightbox-prev { left: 0; }
 .lightbox-next { right: 0; }
 
+/* Chevrons (Matched to Back-to-Top Stroke) */
 .lightbox-prev::after, .lightbox-next::after {
     content: '';
     position: absolute;
     top: 50%;
-    width: 20px; height: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    width: 18px; height: 18px;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.6); 
+    border-right: 1.5px solid rgba(255, 255, 255, 0.6);
+    transition: border-color 0.2s ease;
 }
-.lightbox-prev::after { left: 30px; transform: translateY(-50%) rotate(-135deg); }
-.lightbox-next::after { right: 30px; transform: translateY(-50%) rotate(45deg); }
+.lightbox-prev::after { left: 35px; transform: translateY(-50%) rotate(-135deg); }
+.lightbox-next::after { right: 35px; transform: translateY(-50%) rotate(45deg); }
+
+.lightbox-prev:hover::after, .lightbox-next:hover::after {
+    border-color: rgba(255, 255, 255, 1);
+}
 
 /* --- 11. RESPONSIVE ENGINE --- */
 
@@ -239,8 +245,8 @@ body.dark-theme .border-top-1260 {
         width: 120px !important; height: 120px !important; 
     }
     .lightbox-close::before, .lightbox-close::after {
-        width: 30px; 
-        height: 1px; /* Slightly more weight for mobile screens */
+        width: 32px; 
+        height: 2px; 
         opacity: 0.9;
     }
 
