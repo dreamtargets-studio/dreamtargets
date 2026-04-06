@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.3.5 [PRECISION UI]
+   THINKAMIGO GALLERY ENGINE v2.3.6 [SINGLE-LINE STATUS]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Standard Magnifier Cursor + Forced White Lightbox UI
+   Logic: Flex-Stacked Lightbox + Single-Line Metadata
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -98,10 +98,10 @@ body.dark-theme .border-top-1260 {
 .gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
-/* --- 8. UNIVERSAL ASSET RULES (No Shadows, Magnifier Cursor) --- */
+/* --- 8. UNIVERSAL ASSET RULES --- */
 
 .gallery-item, .portrait-item, .featured-image-single {
-    cursor: zoom-in; /* Native browser magnifier cursor */
+    cursor: zoom-in;
 }
 
 .gallery-item img, 
@@ -116,7 +116,6 @@ body.dark-theme .border-top-1260 {
     transition: border-color 0.2s ease;
 }
 
-/* Hover: Only subtle border highlight, no brightness change or shadows */
 .gallery-item:hover img, 
 .portrait-item:hover img, 
 .featured-image-single:hover img {
@@ -145,7 +144,7 @@ body.dark-theme .border-top-1260 {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. LIGHTBOX OVERLAY UI (Forced White Fix) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (Vertical Stack & Meta Line) --- */
 
 .lightbox { 
     display: none; 
@@ -158,50 +157,62 @@ body.dark-theme .border-top-1260 {
     align-items: center; 
 }
 
+.lightbox-wrapper { 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; /* Image on top, Meta below */
+    align-items: center; 
+    max-width: 95vw; 
+    max-height: 95vh; 
+}
+
 .lightbox-content { 
     max-width: 100%; 
-    max-height: 85vh; 
+    max-height: 82vh; /* Room for metadata line */
     object-fit: contain; 
     border: 1px solid #333; 
     box-shadow: 0 0 50px rgba(0,0,0,0.8); 
 }
 
-/* FORCED WHITE: Ensures captions/counter are never charcoal in lightbox */
-.lightbox-caption, 
-.lightbox-counter {
+/* SINGLE LINE STATUS BAR */
+.lightbox-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Spacing between count and text */
+    width: 100%;
+    margin-top: 15px;
     color: #ffffff !important;
-    text-align: center;
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-.lightbox-caption {
-    margin-top: 15px;
-    font-size: 14px;
-    width: 80%;
-    line-height: 1.4;
+.lightbox-counter {
+    opacity: 0.6;
+    white-space: nowrap;
 }
 
-.lightbox-counter {
-    position: absolute;
-    bottom: 25px;
-    font-size: 12px;
-    letter-spacing: 1px;
-    opacity: 0.8;
+.lightbox-caption {
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Prevents overflow if text is massive */
+    max-width: 60vw;
 }
 
 .lightbox-close { 
     position: absolute; 
-    top: -10px; right: -10px; 
-    width: 100px !important; 
-    height: 100px !important; 
+    top: -50px; right: -10px; /* Offset to clear visual field */
+    width: 80px !important; 
+    height: 80px !important; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
     cursor: pointer; 
     z-index: 10020; 
-    background: none; 
-    border: none; 
     -webkit-tap-highlight-color: transparent; 
 }
 
@@ -219,7 +230,7 @@ body.dark-theme .border-top-1260 {
 .lightbox-prev, .lightbox-next { 
     position: absolute; 
     top: 0; height: 100%; 
-    width: 35%; 
+    width: 30%; 
     z-index: 10010; 
     cursor: pointer; 
 }
@@ -252,12 +263,12 @@ body.dark-theme .border-top-1260 {
     }
 
     .lightbox-close { 
-        top: -15px; right: -15px; 
-        width: 120px !important; height: 120px !important; 
+        top: -60px; right: -10px; 
     }
-    .lightbox-close::before, .lightbox-close::after {
-        width: 32px; 
-        height: 2px; 
+
+    .lightbox-meta {
+        font-size: 11px;
+        gap: 10px;
     }
 
     .video-stage { width: 95vw !important; }
