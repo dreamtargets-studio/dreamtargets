@@ -1,7 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v20.9
-   Features: Auto-Injection, Vimeo-Exclusive Video Engine
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.0
+   Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
    Architecture: High-Fidelity Cinematic Overlay
+   Updates: Conditional Lightbox Check (Fixes Footer Leak)
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,8 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // AUTO-INJECT LIGHTBOX BONES
-            injectLightbox();
+            // --- THE CLEAN CHECK ---
+            // Only inject lightbox bones if the page actually uses them
+            const needsGallery = document.querySelector('img[data-full]');
+            const needsVideo = document.querySelector('.video-item');
+            
+            if (needsGallery || needsVideo) {
+                injectLightbox();
+            }
 
         } catch (err) {
             console.error("Critical: Partial injection failed.", err);
@@ -151,12 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!videoTrigger) return;
 
             const id = videoTrigger.getAttribute('data-video-id');
-            
-            /* VIMEO ARCHITECTURE:
-               - autoplay=1: Instant cinematic start
-               - color=f39c12: Thinkamigo Orange interface
-               - title/byline/portrait=0: Minimalist industrial aesthetic
-            */
             const url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12&title=0&byline=0&portrait=0`;
 
             // Clear gallery nav for theater mode
