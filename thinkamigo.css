@@ -1,0 +1,23 @@
+/* brand-thinkamigo.css - v1.21 Visual DNA */
+
+:root {
+    /* 1. Colour Palette */
+    --brand-blue: #0054dc;
+    --brand-blue-light: rgba(255, 255, 255, 0.15);
+    --brand-orange: #ff8c00;
+    --footer-bg: #0a254a;
+    --white: #ffffff;
+    --stone-bg: #e3e2d9; 
+    --nav-text: #ffffff;
+    --footer-text-muted: rgba(255, 255, 255, 0.7);
+    --footer-address-text: rgba(255, 255, 255, 0.5);
+
+    /* 2. Typography (Strict Sans-Serif) */
+    --font-primary: 'Poppins', sans-serif;
+    --font-system: 'Segoe UI', Tahoma, Arial, sans-serif; /* Removed Serif fallbacks */
+    
+    /* 3. Graphic Assets */
+    --icon-linkedin: url('assets/img/icon-linkedin.png');
+    --icon-substack: url('assets/img/icon-substack.png');
+    --icon-instagram: url('assets/img/icon-instagram.png');
+}
