@@ -1,62 +1,59 @@
 /* ============================================================
    thinkamigo.css - v1.21 Visual DNA
-   Architecture: Core Branding Tokens (Colours, Type, Assets)
+   Architecture: 1250px Horizon | 960px Editorial Rail
    Note: All graphic paths require filename verification.
    ============================================================ */
 
 :root {
-    /* 1. COLOUR PALETTES */
-    --brand-blue: #0054dc;      /* Saturation Lock Blue */
-    --brand-orange: #ff6600;    /* v4.19 Precision Orange */
+    /* 1. LAYOUT RAILS (The 1250px Standard) */
+    --grid-max-width: 1250px;
+    --editorial-rail-width: 960px;
+
+    /* 2. PRIMARY COLOUR PALETTE */
+    --brand-blue: #0054dc;      
+    --brand-orange: #ff6600;    
     --footer-bg: #0a254a;
     --white: #ffffff;
-    --stone-bg: #e3e2d9;        /* Global Page Base */
-    --charcoal: #191919;        /* Heading/H2 Accent */
+    --stone-bg: #e3e2d9;        
+    --charcoal: #191919;        
 
-    /* 2. EDITORIAL & UI COLOURS */
+    /* 3. EDITORIAL & UI COLOURS */
     --brand-blue-light: #3385ff; 
-    --text-primary: #333333;    /* Main Body Text */
-    --text-muted: #666666;       /* Editorial Captions */
-    --text-dim: #888888;         /* Quote Marks & Footer Meta */
-    --text-quote: #444444;       /* Blockquote Paragraphs */
+    --text-primary: #333333;    
+    --text-muted: #666666;       
+    --text-dim: #888888;         
+    --text-quote: #444444;       
     
-    --border-grey: #dddddd;      /* Dividers & Gallery Borders */
-    --caption-bg: #f4f3ef;       /* Caption Box Background */
+    --border-grey: #dddddd;      
+    --caption-bg: #f4f3ef;       
 
-    /* 3. FONT STYLES & TYPOGRAPHIC SCALE */
+    /* 4. TYPOGRAPHY (STRICT SANS-SERIF) */
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Poppins', sans-serif;
 
-    /* H1: Primary Story Heading */
+    /* Typographic Scale */
     --h1-size: 48px;         
     --h1-weight: 900; 
     --h1-line-height: 1.1;
 
-    /* H2: Secondary Section Heading */
     --h2-size: 28px;         
     --h2-weight: 200;
 
-    /* H3: Sub-headings / Accents */
     --h3-size: 24px;         
     --h3-weight: 600;
 
-    /* P: Standard Body Copy */
     --p-size: 18px;          
     --p-line-height: 1.65;
 
-    /* Editorial Elements */
     --caption-size: 15px;
     --blockquote-size: 32px;
     --blockquote-weight: 300;
 
-    /* 4. GRAPHIC ASSETS (VERIFY FILENAMES IN /assets/img/) */
-    /* Logotype: Custom designed type style of the brand name */
+    /* 5. BRAND ASSETS (VERIFY FILENAMES) */
     --logotype-main: url('assets/img/logotype-thinkamigo.png'); 
-    
-    /* Logo: The recognisable bubble graphic */
     --logo-bubble: url('assets/img/logo-bubble.png');  
 
-    /* Social Utility Assets */
+    /* Social Assets */
     --icon-linkedin: url('assets/img/icon-linkedin.png');
     --icon-substack: url('assets/img/icon-substack.png');
     --icon-instagram: url('assets/img/icon-instagram.png');
