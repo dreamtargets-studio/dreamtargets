@@ -120,8 +120,8 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 
 .lightbox-caption, .lightbox-counter {
     color: #ffffff !important; font-family: Helvetica, sans-serif;
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    opacity: 0.4;
+    font-size: 11px; letter-spacing: 1px;
+    opacity: 0.8;
 }
 
 /* --- 13. RESPONSIVE ENGINE --- */
