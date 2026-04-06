@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.12 [1280px HD UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.13 [1280px HD UPDATE]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
    Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
    Rules: Strict Hex-Only | No RGB | GDS-compliant
@@ -186,10 +186,12 @@
     display: block;
     color: #ffffff; 
     font-family: 'Poppins', sans-serif; 
-    font-size: 14px;           /* Modern Editorial Size */
+    font-size: 12px;           /* Modern Editorial Size */
     font-weight: 400;          /* Medium weight for punch */
-    letter-spacing: 1.2px;     /* Tracking for elegance */
-    opacity: 0.5; 
+    letter-spacing: 0;       /* RECLAIMED: Removes the 'expansion' */    
+    width: 90%;              /* SAFETY: Keeps text 5% away from both edges */
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 2px;
 }
 
@@ -240,9 +242,14 @@
 
     /* 3. FOOTER PIN: Moves the 14px text block into the safe zone */
     body .lightbox-info { 
-        bottom: 20px; 
-        padding: 0 20px;
+        left: 0;
+        width: 100%;
+        bottom: 20px;
+        text-align: center;
+        bottom: 10px; 
+        padding: 0 10px;
     }
+
 
     /* 4. NAV CLEANUP: Removes arrows to prevent accidental clicks on small screens */
     body .lightbox-prev, 
