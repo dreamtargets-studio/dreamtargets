@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
         lb.innerHTML = `
-            <span class="lightbox-close">&times;</span>
+            <span class="lightbox-close"></span>
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
             <div class="lightbox-wrapper"></div>
