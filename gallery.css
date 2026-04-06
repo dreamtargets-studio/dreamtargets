@@ -26,6 +26,13 @@
     box-sizing: border-box;
 }
 
+/* --- 2a. RAIL ASSET SPECIFICITY --- */
+/* This removes the 1px border ONLY for images inside the 960px rail */
+.featured-image-single img {
+    border: none;
+    display: block;
+}
+
 /* The Cinematic Rail (Standardized to 1280px for 720p HD) */
 .gallery-grid-1280, 
 .gallery-portrait-4, 
