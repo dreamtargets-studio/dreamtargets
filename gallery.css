@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.5.2 [UNIFIED STAGE]
+   THINKAMIGO GALLERY ENGINE v2.5.3 [HIGH-WEIGHT UI]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Command-Layer UI + Universal Asset Centering
+   Logic: 2.5px SVG Stroke + Scaled Hit-Zones + Unified Stage
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -51,7 +51,7 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 /* --- 9. VIDEO PREVIEW UI --- */
 .play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid rgba(255, 255, 255, 0.4); pointer-events: none; }
 
-/* --- 10. LIGHTBOX COMMAND LAYER (UI Controls) --- */
+/* --- 10. LIGHTBOX COMMAND LAYER (Weighted UI) --- */
 
 .lightbox { 
     display: none; position: fixed; z-index: 999999 !important; 
@@ -60,32 +60,37 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
     justify-content: center; align-items: center;
 }
 
-/* THE CLOSE BUTTON: Absolute Master Layer */
+/* THE CLOSE BUTTON: High-Visibility SVG */
 .lightbox-close { 
-    position: absolute; top: 15px; right: 15px; 
-    width: 65px !important; height: 65px !important; 
+    position: absolute; top: 20px; right: 20px; 
+    width: 70px !important; height: 70px !important; 
     cursor: pointer !important; z-index: 1000001 !important; 
-    background-repeat: no-repeat; background-position: center; background-size: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center; 
+    background-size: 28px; /* Increased Icon Scale */
+    /* SVG: Forced 2.5px Stroke Weight */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
     color: transparent !important;
-    opacity: 0.6; transition: opacity 0.2s;
+    opacity: 0.5; transition: opacity 0.2s, transform 0.2s;
 }
-.lightbox-close:hover { opacity: 1; }
+.lightbox-close:hover { opacity: 1; transform: scale(1.1); }
 
-/* NAV BUTTONS: High-Priority Edge Strips */
+/* NAV BUTTONS: High-Visibility Edge Strips */
 .lightbox-prev, .lightbox-next { 
     position: absolute; top: 0; height: 100%; width: 15vw; 
-    z-index: 1000000; cursor: pointer; opacity: 0.4;
-    background-repeat: no-repeat; background-position: center; background-size: 24px;
+    z-index: 1000000; cursor: pointer; opacity: 0.35;
+    background-repeat: no-repeat; background-position: center; 
+    background-size: 32px; /* Increased Navigation Scale */
     transition: opacity 0.2s;
 }
+
 .lightbox-prev { 
     left: 0; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
+
 .lightbox-next { 
     right: 0; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
 .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
 
