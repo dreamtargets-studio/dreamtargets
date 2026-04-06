@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.6.3 [FEATURED FOCUS]
+   THINKAMIGO GALLERY ENGINE v2.6.6 [ABSOLUTE LOCK]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Dedicated Featured Image Buffers (30px / 15px)
+   Logic: ALWAYS Flush Panoramic + Buffered Featured Image
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -14,7 +14,7 @@
 }
 
 /* --- 3. THE CINEMATIC RAIL (1260px) --- */
-.gallery-grid-1260, .gallery-portrait-4, .video-grid-4, .border-top-1260 {
+.gallery-grid-1260, .gallery-portrait-4, .video-grid-4, .border-top-1260, .story-hero-wrapper {
     max-width: 1260px !important; width: 100%; padding: 0 20px; box-sizing: border-box;
 }
 
@@ -45,7 +45,10 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 /* FEATURED IMAGE: Strict 30px Top Buffer for Desktop */
 .featured-image-single { margin-top: 30px !important; }
 
-.gallery-item img, .portrait-item img, .featured-image-single img, .video-item img {
+/* PANORAMIC HERO: ALWAYS SLAMMED (0px Globally) */
+.story-hero-wrapper { margin-top: 0 !important; }
+
+.gallery-item img, .portrait-item img, .featured-image-single img, .video-item img, .panoramic-hero {
     width: 100%; height: auto; display: block; border: 1px solid #ddd; transition: border-color 0.2s ease;
 }
 .gallery-item:hover img { border-color: #bbb; }
@@ -102,8 +105,11 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 @media (max-width: 768px) {
     .paper-sheet > * { padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 15px !important; }
     
-    /* MOBILE PRECISION: Featured header snaps to 15px buffer */
+    /* FEATURED IMAGE: Snaps to 15px on mobile */
     .featured-image-single { margin-top: 15px !important; }
+
+    /* PANORAMIC HERO: Remains SLAMMED (0px) on mobile */
+    .story-hero-wrapper { margin-top: 0 !important; }
 
     .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
     
