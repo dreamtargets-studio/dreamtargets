@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.4.1 [BACK TO BASICS]
+   THINKAMIGO GALLERY ENGINE v2.4.4 [SIMPLE STAGE]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Absolute Centering + High-Contrast UI + Low-Profile Meta
+   Logic: Absolute Centering + High-Visibility Icons + Clean Meta
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -51,7 +51,7 @@
     padding: 0 !important;
 }
 
-/* --- 5. VIDEO STAGE (Cinematic Dimensions) --- */
+/* --- 5. VIDEO STAGE --- */
 
 .video-stage { 
     width: 90vw !important; 
@@ -126,7 +126,7 @@ body.dark-theme .border-top-1260 {
 .video-item img { border-color: #333; }
 .video-item:hover img { border-color: #555; }
 
-/* --- 9. VIDEO UI (Micro-Ghost Overlay) --- */
+/* --- 9. VIDEO UI --- */
 
 .video-item { position: relative; cursor: pointer; overflow: hidden; }
 .play-button-overlay { 
@@ -144,7 +144,7 @@ body.dark-theme .border-top-1260 {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 10. LIGHTBOX OVERLAY UI (The Absolute Reset) --- */
+/* --- 10. LIGHTBOX OVERLAY UI (Simple Stage Restoration) --- */
 
 .lightbox { 
     display: none; 
@@ -152,11 +152,11 @@ body.dark-theme .border-top-1260 {
     z-index: 999999; 
     top: 0; left: 0; 
     width: 100vw; height: 100vh; 
-    background-color: #000000; /* Solid Black Background */
+    background-color: #000000; 
     overflow: hidden;
 }
 
-/* The Image: Forced mathematical center of the viewport */
+/* Image Centering: Absolute mathematical center */
 .lightbox-content { 
     position: absolute;
     top: 50%; left: 50%;
@@ -168,57 +168,55 @@ body.dark-theme .border-top-1260 {
     z-index: 10;
 }
 
-/* UI GHOST BOXES: Standard Square Zones */
+/* UI Icons: High-Contrast White */
 .lightbox-close, .lightbox-prev, .lightbox-next {
     position: absolute;
     z-index: 100;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Close Button: Top Right Corner */
+/* Close Box: Top Right Corner */
 .lightbox-close { 
-    top: 0; right: 0; 
-    width: 60px; height: 60px; 
+    top: 15px; right: 15px; width: 50px; height: 50px; 
 }
 .lightbox-close::before, .lightbox-close::after {
-    content: ''; position: absolute; width: 22px; height: 1.5px; background: #fff;
+    content: ''; position: absolute; width: 26px; height: 1.5px; background: #fff;
 }
 .lightbox-close::before { transform: rotate(45deg); }
 .lightbox-close::after { transform: rotate(-45deg); }
 
-/* Navigation Strips: Vertical Edge Zones */
+/* Navigation Zones: Side Edge Zones */
 .lightbox-prev, .lightbox-next { 
-    top: 0; height: 100%; width: 10vw; 
+    top: 0; height: 100%; width: 15vw; 
 }
 .lightbox-prev { left: 0; }
 .lightbox-next { right: 0; }
 
-/* The Chevrons: High-Contrast White Lines */
+/* The Chevrons: Matched to system weight */
 .lightbox-prev::after, .lightbox-next::after {
     content: ''; width: 15px; height: 15px;
     border-top: 2px solid #fff; border-right: 2px solid #fff;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 .lightbox-prev::after { transform: rotate(-135deg); }
 .lightbox-next::after { transform: rotate(45deg); }
 
-/* METADATA: Muted, Tiny, Centered Status Line */
+/* METADATA: Centered, Tiny, Forced White Line */
 .lightbox-meta {
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    
     display: flex;
-    gap: 10px;
-    color: rgba(255, 255, 255, 0.4) !important;
+    gap: 15px;
+    color: rgba(255, 255, 255, 0.5) !important;
     font-family: Helvetica, sans-serif;
-    font-size: 10px; 
+    font-size: 11px; 
     letter-spacing: 1.5px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -242,9 +240,9 @@ body.dark-theme .border-top-1260 {
     }
 
     .lightbox-content { max-width: 100vw; max-height: 80vh; }
-    .lightbox-prev, .lightbox-next { width: 15vw; background: none; }
-    .lightbox-prev::after, .lightbox-next::after { width: 12px; height: 12px; }
-    .lightbox-meta { font-size: 9px; bottom: 20px; }
+    .lightbox-prev, .lightbox-next { width: 20vw; background: none; }
+    .lightbox-prev::after, .lightbox-next::after { width: 12px; height: 12px; opacity: 0.3; }
+    .lightbox-meta { font-size: 10px; bottom: 20px; }
 }
 
 /* --- 12. SPECIALTIES --- */
