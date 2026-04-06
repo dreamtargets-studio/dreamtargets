@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.5.8 [MOBILE PRECISION]
+   THINKAMIGO GALLERY ENGINE v2.6.3 [FEATURED FOCUS]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: 15px Uniform Mobile Gutters + Tight Top Spacing
+   Logic: Dedicated Featured Image Buffers (30px / 15px)
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -41,6 +41,10 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 
 /* --- 8. UNIVERSAL ASSET RULES --- */
 .gallery-item, .portrait-item, .featured-image-single { cursor: zoom-in; }
+
+/* FEATURED IMAGE: Strict 30px Top Buffer for Desktop */
+.featured-image-single { margin-top: 30px !important; }
+
 .gallery-item img, .portrait-item img, .featured-image-single img, .video-item img {
     width: 100%; height: auto; display: block; border: 1px solid #ddd; transition: border-color 0.2s ease;
 }
@@ -94,16 +98,21 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
     font-size: 11px; letter-spacing: 1px; opacity: 0.8;
 }
 
-/* --- 13. RESPONSIVE ENGINE (15px Mobile Precision) --- */
+/* --- 13. RESPONSIVE ENGINE --- */
 @media (max-width: 768px) {
-    /* Restore 15px side gutters to all elements */
     .paper-sheet > * { padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 15px !important; }
     
-    /* Lock top image exactly 15px under navigation */
+    /* MOBILE PRECISION: Featured header snaps to 15px buffer */
     .featured-image-single { margin-top: 15px !important; }
 
     .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
     
     .lightbox-prev, .lightbox-next { width: 70px; background-image: none !important; }
     .lightbox-close { width: 70px !important; height: 70px !important; background-size: 24px; }
-    .lightbox-info { bottom: 20px; font-size: 10px; padding: 0 2
+    .lightbox-info { bottom: 20px; font-size: 10px; padding: 0 20px; }
+    .lightbox-content { max-width: 100vw; max-height: 75vh; }
+}
+
+/* --- 14. SPECIALTIES --- */
+.featured-image-single.header-mode { padding-top: 60px; }
+.featured-caption { margin-top: 10px; font-size: 13px; color: #888; font-style: italic; text-align: left; }
