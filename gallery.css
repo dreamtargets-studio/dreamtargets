@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.2.7 [RESTORE EDITION]
+   THINKAMIGO GALLERY ENGINE v2.2.9 [FINAL CLEAN]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: Multi-Rail + Dark Theme Fix + Lightbox UI Restore
+   Logic: Multi-Rail + Light Grey Rule Utility
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -41,9 +41,18 @@
     box-sizing: border-box;
 }
 
-/* --- 4. VIDEO STAGE (The Size Restore) --- */
+/* --- 4. THE 1260px BORDER UTILITY --- */
 
-/* Ensures the Vimeo/YouTube stage ignores global rail squashing */
+.border-top-1260 {
+    border-top: 1px solid #eeeeee !important; /* Light Grey Rule */
+    height: 1px;
+    margin-top: 15px !important;
+    margin-bottom: 25px !important;
+    padding: 0 !important;
+}
+
+/* --- 5. VIDEO STAGE (Cinematic Dimensions) --- */
+
 .video-stage { 
     width: 90vw !important; 
     max-width: 1100px !important; 
@@ -60,13 +69,7 @@
     display: block;
 }
 
-/* --- 5. GRID STRUCTURES (Layout only) --- */
-
-.gallery-grid-960, .gallery-grid-1260 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
-
-/* --- 6. DARK THEME RESTORE (The White Text Fix) --- */
+/* --- 6. DARK THEME OVERRIDES --- */
 
 body.dark-theme { background-color: #000000 !important; color: #ffffff !important; }
 body.dark-theme .paper-sheet { background-color: #1a1a1a !important; border: none !important; }
@@ -85,7 +88,17 @@ body.dark-theme .featured-caption {
     color: #aaaaaa !important; 
 }
 
-/* --- 7. UNIVERSAL ASSET RULES --- */
+body.dark-theme .border-top-1260 {
+    border-top-color: #333333 !important;
+}
+
+/* --- 7. GRID STRUCTURES (Layout only) --- */
+
+.gallery-grid-960, .gallery-grid-1260 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.gallery-portrait-960, .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+
+/* --- 8. UNIVERSAL ASSET RULES --- */
 
 .gallery-item img, 
 .portrait-item img, 
@@ -102,7 +115,7 @@ body.dark-theme .featured-caption {
 .video-item img { border-color: #333; }
 .gallery-item img:hover, .featured-image-single img:hover { filter: brightness(1.08); border-color: #bbb; }
 
-/* --- 8. VIDEO UI (Micro-Ghost Overlay) --- */
+/* --- 9. VIDEO UI (Micro-Ghost Overlay) --- */
 
 .video-item { position: relative; cursor: pointer; overflow: hidden; }
 .play-button-overlay { 
@@ -120,7 +133,7 @@ body.dark-theme .featured-caption {
     transform: translate(-42%, -50%) scale(1.05); 
 }
 
-/* --- 9. LIGHTBOX OVERLAY UI (Nav Arrows Restore) --- */
+/* --- 10. LIGHTBOX OVERLAY UI --- */
 
 .lightbox { display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); justify-content: center; align-items: center; }
 .lightbox-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 95vw; max-height: 95vh; }
@@ -128,7 +141,6 @@ body.dark-theme .featured-caption {
 
 .lightbox-close { position: absolute; top: 10px; right: 10px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #fff; cursor: pointer; font-family: Helvetica, sans-serif; z-index: 10020; }
 
-/* Nav Arrows */
 .lightbox-prev, .lightbox-next { position: absolute; top: 0; height: 100%; width: 30%; z-index: 10010; cursor: pointer; }
 .lightbox-prev { left: 0; }
 .lightbox-next { right: 0; }
@@ -144,7 +156,7 @@ body.dark-theme .featured-caption {
 .lightbox-prev::after { left: 40px; transform: translateY(-50%) rotate(-135deg); }
 .lightbox-next::after { right: 40px; transform: translateY(-50%) rotate(45deg); }
 
-/* --- 10. RESPONSIVE ENGINE (15px Snap) --- */
+/* --- 11. RESPONSIVE ENGINE --- */
 
 @media (max-width: 768px) {
     .paper-sheet > * {
@@ -154,14 +166,13 @@ body.dark-theme .featured-caption {
     }
     
     .gallery-grid-960, .gallery-grid-1260, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 {
-        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
 
     .border-top-1260 {
-        padding-top: 25px;
         margin-top: 10px !important;
+        margin-bottom: 15px !important;
     }
 
     .featured-image-single.header-mode {
@@ -172,8 +183,7 @@ body.dark-theme .featured-caption {
     .lightbox-prev::after, .lightbox-next::after { display: none; }
 }
 
-/* --- 11. EDITORIAL SPECIALTIES --- */
+/* --- 12. SPECIALTIES --- */
 
 .featured-image-single.header-mode { padding-top: 60px; }
-.border-top-1260 { border-top: 1px solid #444; padding-top: 40px; margin-top: 15px !important; }
 .featured-caption { margin-top: 10px; font-size: 13px; color: #888; font-style: italic; text-align: left; }
