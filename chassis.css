@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO CHASSIS v5.9 - GLOBAL SHELL
+   THINKAMIGO CHASSIS v6.0 - GLOBAL SHELL
    Architecture: 1250px Grid | 3-Col Footer | UI Components
-   Note: Page-specific elements (Dividers/Links) moved to destination.css
+   Updates: Refined Back-to-Top (30% Opacity & 250px Clearance)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -194,31 +194,31 @@ html, body {
     color: #ffffff !important;
 }
 
-/* UPDATED BACK-TO-TOP SECTION */
+/* BACK TO TOP: 30% Opaque Block + 250px Clearance */
 .back-to-top { 
     position: fixed; 
-    bottom: 30px;           /* Lowered from 200px to remove the grey bar gap */
-    right: 30px; 
-    width: 44px; 
-    height: 44px; 
-    background-color: #191919; 
+    bottom: 250px;           /* Clears Mac toolbar and aligns with thumb arc */
+    right: 25px; 
+    width: 46px; 
+    height: 46px; 
+    background-color: rgba(25, 25, 25, 0.3); /* 30% Opaque Grey/Charcoal */
     z-index: 9999; 
-    display: none; 
+    display: none;          /* Controlled by loader.js */
     align-items: center; 
     justify-content: center; 
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: 1px solid #ffffff;
+    transition: all 0.3s ease;
+    border: none;           /* Clean industrial block */
 }
 
 .back-to-top.show { display: flex !important; }
 
 .back-to-top:hover {
-    background-color: var(--brand-blue);
-    transform: translateY(-3px);
+    background-color: rgba(25, 25, 25, 0.6); /* Intensifies on hover */
+    transform: scale(1.05);
 }
 
-/* Arrow fix - Targeting the .chevron-up class in your HTML */
+/* Solid White Up-Chevron */
 .chevron-up {
     display: block;
     width: 10px;
@@ -298,11 +298,11 @@ html, body {
         flex: 0 0 90px;
     }
 
-    /* Fixed mobile positioning */
+    /* Fixed mobile positioning maintained at 250px for thumb zone */
     .back-to-top {
-        bottom: 30px;
+        bottom: 250px;
         right: 20px;
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
     }
 }
