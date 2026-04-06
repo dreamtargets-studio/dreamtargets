@@ -223,11 +223,19 @@
 
 /* --- 9. UTILITIES --- */
 .featured-caption { 
-    margin-top: 10px; 
-    font-size: 13px; 
-    color: #888888; 
-    font-style: italic; 
-    text-align: left; 
+    margin-top: 0;
+    padding: 12px 18px;
+    background-color: #0000000d; /* 5% Black Tint */
+    font-family: 'Poppins', sans-serif; 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: #444444; 
+    text-align: left;
+    letter-spacing: 0.3px; 
+    line-height: 1.4;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
 }
 
 .border-top-1280 { 
@@ -237,3 +245,4 @@
     margin-bottom: 25px; 
     padding: 0; 
 }
+
