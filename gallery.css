@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.11 [1280px HD UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.12 [1280px HD UPDATE]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
    Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
    Rules: Strict Hex-Only | No RGB | GDS-compliant
@@ -205,6 +205,56 @@
     .lightbox-close { width: 70px; height: 70px; background-size: 24px; }
     .lightbox-content { max-width: 100vw; max-height: 75vh; }
 }
+
+
+/* --- 8. RESPONSIVE ENGINE (Clean Overrides) --- */
+@media (max-width: 768px) {
+
+    /* NEW ATTRIBUTE */
+    body .lightbox {
+        position: fixed;
+        height: 100%;      /* Use 100% instead of 100vh to respect the URL bar */
+        width: 100%;
+        overflow: hidden;  /* Kills the scroll entirely */
+        touch-action: none; /* Stops the background page from 'bouncing' */
+    }
+
+    /* 1. STICKY CLOSE: We change to fixed so it stays on the glass */
+    body .lightbox-close { 
+        position: fixed; 
+        top: 10px; 
+        right: 10px; 
+        width: 60px; 
+        height: 60px; 
+        background-size: 24px;
+        opacity: 0.8;
+        z-index: 10000010; /* Ensures it stays on top of the image */
+    }
+
+
+    /* 2. IMAGE CONSTRAINT: Prevents the image from pushing the footer off-screen */
+    body .lightbox-content { 
+        max-height: 65vh; 
+        max-width: 92vw;
+    }
+
+    /* 3. FOOTER PIN: Moves the 14px text block into the safe zone */
+    body .lightbox-info { 
+        bottom: 20px; 
+        padding: 0 20px;
+    }
+
+    /* 4. NAV CLEANUP: Removes arrows to prevent accidental clicks on small screens */
+    body .lightbox-prev, 
+    body .lightbox-next { 
+        display: none; 
+    }
+}
+
+
+
+
+
 
 /* --- 9. BRAND UTILITIES --- */
 .featured-caption { 
