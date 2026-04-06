@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v2.5.4 [EDGE-ANCHORED SYMMETRY]
+   THINKAMIGO GALLERY ENGINE v2.5.5 [ALIGNMENT LOCKDOWN]
    Architecture: Disciplined 16:9 & A4 Portrait Grids
-   Logic: 2.5px SVG Stroke + Edge-Locked Navigation + Unified Stage
+   Logic: Perfect Vertical Axis Sync + Edge-Anchored UI
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -51,7 +51,7 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 /* --- 9. VIDEO PREVIEW UI --- */
 .play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid rgba(255, 255, 255, 0.4); pointer-events: none; }
 
-/* --- 10. LIGHTBOX COMMAND LAYER (Edge-Anchored Symmetry) --- */
+/* --- 10. LIGHTBOX COMMAND LAYER (Vertical Axis Sync) --- */
 
 .lightbox { 
     display: none; position: fixed; z-index: 999999 !important; 
@@ -60,12 +60,14 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
     justify-content: center; align-items: center;
 }
 
-/* THE CLOSE BUTTON: Fixed Top Right */
+/* THE CLOSE BUTTON: Standardized hit-box for axis alignment */
 .lightbox-close { 
-    position: absolute; top: 15px; right: 15px; 
-    width: 80px !important; height: 80px !important; 
+    position: absolute; 
+    top: 0; right: 0; 
+    width: 100px !important; height: 100px !important; 
     cursor: pointer !important; z-index: 1000001 !important; 
-    background-repeat: no-repeat; background-position: center; 
+    background-repeat: no-repeat; 
+    background-position: center; /* Locked to the 50px vertical line */
     background-size: 28px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
     color: transparent !important;
@@ -73,26 +75,23 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 }
 .lightbox-close:hover { opacity: 1; transform: scale(1.1); }
 
-/* NAV BUTTONS: Edge-Locked Hit Areas */
+/* NAV BUTTONS: Matched-Width Edge Rails */
 .lightbox-prev, .lightbox-next { 
-    position: absolute; top: 0; height: 100%; width: 25vw; 
+    position: absolute; top: 0; height: 100%; width: 100px; 
     z-index: 1000000; cursor: pointer; opacity: 0.35;
     background-repeat: no-repeat; 
+    background-position: center; /* Locks chevrons to the same 50px vertical line */
     background-size: 32px; 
     transition: opacity 0.2s;
 }
 
-/* Prev Chevron: Locked to Left Edge gutter */
 .lightbox-prev { 
     left: 0; 
-    background-position: left 60px center; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
-/* Next Chevron: Locked to Right Edge gutter (Vertical alignment with X) */
 .lightbox-next { 
     right: 0; 
-    background-position: right 60px center; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
 }
 .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
@@ -127,9 +126,9 @@ body.dark-theme .border-top-1260 { border-top-color: #333333 !important; }
 
 /* --- 13. RESPONSIVE ENGINE --- */
 @media (max-width: 768px) {
-    .lightbox-prev, .lightbox-next { width: 25vw; background-image: none !important; }
+    .lightbox-prev, .lightbox-next { width: 60px; background-image: none !important; }
     .lightbox-info { bottom: 20px; font-size: 10px; padding: 0 20px; }
-    .lightbox-close { top: 10px; right: 10px; width: 60px; height: 60px; background-size: 24px; }
+    .lightbox-close { width: 60px !important; height: 60px !important; background-size: 24px; }
 }
 
 /* --- 14. SPECIALTIES --- */
