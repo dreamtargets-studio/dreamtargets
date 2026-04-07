@@ -47,7 +47,7 @@ figure {
 }
 
 /* --- 3. THE PAPER SHEET (CENTRE & SNAP) --- */
-/* Fix: display: flow-root prevents the 'Stone Gap' bleed */
+/* Fix: display: flow-root prevents the 'Stone Gap' bleed by containing internal margins */
 /* Fix: margin: 0 auto restores the desktop alignment seen in Consulting */
 .paper-sheet {
     background-color: #ffffff;
@@ -59,7 +59,7 @@ figure {
     display: flow-root; 
 }
 
-/* Ensure Hero image sits perfectly flush with paper */
+/* Ensure Hero image sits perfectly flush with paper by removing inline descender space */
 .panoramic-hero {
     display: block;
     width: 100%;
