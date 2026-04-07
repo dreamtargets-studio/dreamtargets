@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.81 [FINAL LAYERING]
+   THINKAMIGO GALLERY ENGINE v6.82 [KINETIC BUILD]
    Architecture: Z-Indexed Pseudo-Box (Consulting Base)
-   Updates: Top-Layer Icons | Subtle 15% Ghost Box | Axis Lock
+   Updates: Pseudo-Swipe States | Top-Layer Icons | Ghost Boxes
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -96,6 +96,21 @@
 
 .lightbox-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
 
+/* KINETIC TRANSITION WRAPPER */
+.lightbox-wrapper {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pseudo-swipe animation state */
+.lightbox-animating {
+    opacity: 0;
+    transform: scale(0.98);
+}
+
 /* SHARED BUTTON ARCHITECTURE */
 .lightbox-close, 
 .lightbox-prev, 
@@ -106,7 +121,7 @@
     background-position: center;
     background-size: 24px;
     z-index: 120;
-    background-color: transparent; /* Icon sits on this clear layer */
+    background-color: transparent;
 }
 
 /* THE GHOST BOX: Locked behind the icon */
@@ -117,9 +132,9 @@
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: #666666;
-    opacity: 0.15; /* Substrate is now very subtle */
+    opacity: 0.15;
     border-radius: 2px;
-    z-index: -1; /* Confirmed: physically under the icon */
+    z-index: -1;
     transition: background-color 0.4s ease, opacity 0.4s ease;
 }
 
@@ -127,7 +142,7 @@
 .lightbox-prev:hover::before, 
 .lightbox-next:hover::before {
     background-color: #888888;
-    opacity: 0.4; /* Subtle highlight only */
+    opacity: 0.4;
 }
 
 /* POSITIONING & SVG REFINEMENT */
