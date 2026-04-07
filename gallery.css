@@ -1,140 +1,197 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.55 [STACKED & WHITE-OUT]
-   Architecture: 1250px Horizon | 15px Razor Sync
-   Logic: Stacking Architecture (Zero-Nesting)
-   Sync: Mobile White-Out with CSS Transitions
+   THINKAMIGO GALLERY ENGINE v6.62 [THE DEFINITIVE BUILD]
+   Architecture: Internal Rail Injection (Consulting Base)
+   Grids: 3-Col Standard | 4-Col Portrait | 4-Col Video
+   Sync: 15px Mobile Razor Rail | 960px Desktop Rail
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
-body.content-page, 
-body.content-page .paper-sheet,
-body.content-page .paper-sheet *,
-body.content-page [class*="gallery-grid-"],
-body.content-page .video-grid-4,
-body.content-page .featured-image-single {
+.gallery-grid-3, 
+.video-grid-4, 
+.gallery-portrait-4,
+.gallery-item, 
+.featured-image-single,
+.gallery-grid-3 * {
     box-sizing: border-box;
 }
 
-body.content-page figure {
-    margin: 0;
-    padding: 0;
+/* --- 1. THE GRID SUITE (Nested inside .text-rail) --- */
+
+/* Standard 3-Column Grid */
+.gallery-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+/* Video Grid (4-Column Thumbnails) */
+.video-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+/* Portrait Gallery (4-Column Tall Assets) */
+.gallery-portrait-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+/* --- 2. ASSET STYLING --- */
+.gallery-item img, 
+.video-item img, 
+.portrait-item img,
+.featured-image-single img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #dddddd;
+    transition: border-color 0.2s ease;
+}
+
+.gallery-item:hover img, 
+.video-item:hover img { 
+    border-color: #bbbbbb; 
+}
+
+/* Featured Image Specifics */
+.featured-image-single {
+    width: 100%;
+    margin: 35px 0;
     display: block;
 }
 
-/* --- 1. THE MAIN STAGE --- */
-body.content-page main.editorial-post {
-    width: 100%;
-    display: flow-root;
-    /* Smoothly fades the stone background to white on resize */
-    transition: background-color 0.3s ease; 
-}
-
-/* --- 2. DESKTOP BLOCKS (1250px HORIZON) --- */
-body.content-page .paper-sheet,
-body.content-page .gallery-grid-3,
-body.content-page .gallery-grid-1250,
-body.content-page .video-grid-4,
-body.content-page .featured-image-single,
-body.content-page .rule-grey-1250 {
-    max-width: 1250px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #ffffff;
-    position: relative;
-}
-
-body.content-page .paper-sheet { padding: 40px 0; }
-body.content-page .text-rail { max-width: 960px; width: 100%; margin: 0 auto; }
-
-/* --- 3. GRID STRUCTURES (DESKTOP) --- */
-body.content-page .gallery-grid-3 { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; 
-    margin-bottom: 30px;
-}
-
-body.content-page .video-grid-4 { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 25px; 
-}
-
-/* --- 4. THE HORIZONTAL RULE --- */
-body.content-page .rule-grey-1250 {
-    height: 1px;
-    background-color: #eeeeee;
-    border: none;
+.featured-caption {
     display: block;
+    width: 100%;
+    background-color: #e2dfd2;
+    padding: 12px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #444444;
+    border-left: 3px solid #ff6600; /* Thinkamigo Signature */
 }
 
-/* --- 5. ASSET RULES --- */
-.gallery-item img, .featured-image-single img {
-    width: 100%; height: auto; display: block; border: 1px solid #dddddd; transition: border-color 0.2s ease;
+/* --- 3. VIDEO UI OVERLAYS --- */
+.video-item { position: relative; cursor: pointer; }
+
+.play-button-overlay { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 44px;
+    height: 44px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; 
+    border: 2px solid rgba(255,255,255,0.8);
 }
-.featured-image-single img { border: none; }
-.gallery-item:hover img { border-color: #bbbbbb; }
 
-/* --- 6. LIGHTBOX ENGINE --- */
-.lightbox { display: none; position: fixed; z-index: 9999999; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000000fa; justify-content: center; align-items: center; }
-.lightbox-content { max-height: 80vh; max-width: 90vw; object-fit: contain; }
-.lightbox-close { position: absolute; top: 0; right: 0; width: 80px; height: 80px; cursor: pointer; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center/32px; opacity: 0.8; }
-.lightbox-close:hover { opacity: 1; }
+.play-button-overlay::after {
+    content: '';
+    display: block;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid #ffffff;
+    margin-left: 4px;
+}
 
-/* --- 7. THE RAZOR SYNC ENGINE (1024px & BELOW) --- */
+/* --- 4. MOBILE ADAPTATION (Rail-Sync) --- */
 @media (max-width: 1024px) {
-    
-    /* Paint the main background white to hide stone bleed on mobile/tablet */
-    body.content-page main.editorial-post {
-        background-color: #ffffff !important;
-    }
-
-    /* Lock all stacked elements to the same 15px rail */
-    body.content-page .paper-sheet,
-    body.content-page .gallery-grid-3,
-    body.content-page .gallery-grid-1250,
-    body.content-page .video-grid-4,
-    body.content-page .featured-image-single,
-    body.content-page .rule-grey-1250 {
-        width: calc(100% - 30px) !important;
-        max-width: calc(100% - 30px) !important;
-        margin-left: 15px !important;
-        margin-right: 15px !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        background-color: #ffffff !important; 
-    }
-
-    /* Remove vertical gaps between stacked blocks */
-    body.content-page .paper-sheet,
-    body.content-page .gallery-grid-3,
-    body.content-page .featured-image-single {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    /* Mobile Grid Parity */
-    body.content-page .gallery-grid-3,
-    body.content-page .gallery-grid-1250 {
-        display: grid !important;
+    /* All grids collapse to 2-column for touch usability */
+    .gallery-grid-3,
+    .video-grid-4, 
+    .gallery-portrait-4 {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
+        gap: 10px !important;
+        margin: 20px 0 !important;
     }
 
-    /* Cinematic Assets (Touch the Glass) */
-    body.content-page .panoramic-hero,
-    body.content-page .story-hero-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+    .featured-caption {
+        padding: 10px 15px;
+        font-size: 13px;
     }
 }
 
-/* --- 8. BRAND UTILITIES --- */
-.featured-caption { 
-    display: block; width: 100%; margin: 0; background-color: #e2dfd2; 
-    padding: 12px 18px; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-size: 14px; color: #444444;
+/* --- 5. LIGHTBOX ENGINE UI --- */
+.lightbox { 
+    display: none; 
+    position: fixed; 
+    z-index: 9999999; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    background-color: #000000fa; 
+    justify-content: center; 
+    align-items: center;
+    user-select: none;
+}
+
+.lightbox-content { 
+    max-width: 90vw; 
+    max-height: 80vh; 
+    object-fit: contain; 
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.lightbox-close { 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    width: 80px; 
+    height: 80px; 
+    cursor: pointer; 
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center/32px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.lightbox-prev, .lightbox-next { 
+    position: absolute; 
+    top: 0; 
+    height: 100%; 
+    width: 15%; 
+    cursor: pointer; 
+    opacity: 0.3; 
+    transition: opacity 0.2s;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-size: 32px;
+}
+
+.lightbox-close:hover, 
+.lightbox-prev:hover, 
+.lightbox-next:hover { opacity: 1; }
+
+.lightbox-prev { 
+    left: 0; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.lightbox-next { 
+    right: 0; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.lightbox-info { 
+    position: absolute; 
+    bottom: 30px; 
+    width: 100%; 
+    text-align: center; 
+    color: #ffffff; 
+    font-size: 13px; 
+    font-family: 'Poppins', sans-serif; 
+    letter-spacing: 1px;
 }
