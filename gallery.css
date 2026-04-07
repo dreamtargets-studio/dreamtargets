@@ -1,16 +1,17 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.50 [THE STACKING ENGINE]
-   Architecture: Independent Block Slices (1250px Horizon)
-   Logic: Zero Nesting | Top-Level Component Authority
-   Compatibility: Absolute Parity across Mobile & iPad
+   THINKAMIGO GALLERY ENGINE v6.55 [STACKED & WHITE-OUT]
+   Architecture: 1250px Horizon | 15px Razor Sync
+   Logic: Stacking Architecture (Zero-Nesting)
+   Sync: Mobile White-Out with CSS Transitions
    ============================================================ */
 
-/* --- 0. UNIVERSAL BOX MODEL LOCK --- */
+/* --- 0. UNIVERSAL RESET --- */
 body.content-page, 
 body.content-page .paper-sheet,
 body.content-page .paper-sheet *,
 body.content-page [class*="gallery-grid-"],
-body.content-page .video-grid-4 {
+body.content-page .video-grid-4,
+body.content-page .featured-image-single {
     box-sizing: border-box;
 }
 
@@ -20,40 +21,37 @@ body.content-page figure {
     display: block;
 }
 
-/* --- 1. THE PAPER BLOCK (TEXT SLICE) --- */
-body.content-page .paper-sheet {
-    background-color: #ffffff;
-    max-width: 1250px;
+/* --- 1. THE MAIN STAGE --- */
+body.content-page main.editorial-post {
     width: 100%;
-    margin: 0 auto;   
-    padding: 40px 0;  /* Standard vertical rhythm for stacked blocks */
     display: flow-root;
-    position: relative;
+    /* Smoothly fades the stone background to white on resize */
+    transition: background-color 0.3s ease; 
 }
 
-/* Inside the paper, the text rail centers at 960px */
-body.content-page .text-rail {
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-/* --- 2. THE GALLERY & VIDEO BLOCKS (INDEPENDENT SLICES) --- */
+/* --- 2. DESKTOP BLOCKS (1250px HORIZON) --- */
+body.content-page .paper-sheet,
 body.content-page .gallery-grid-3,
 body.content-page .gallery-grid-1250,
 body.content-page .video-grid-4,
-body.content-page .featured-image-single {
+body.content-page .featured-image-single,
+body.content-page .rule-grey-1250 {
     max-width: 1250px;
     width: 100%;
-    margin: 0 auto 30px auto; 
-    background-color: #ffffff; /* Seamless match with paper blocks */
+    margin: 0 auto;
+    background-color: #ffffff;
+    position: relative;
 }
+
+body.content-page .paper-sheet { padding: 40px 0; }
+body.content-page .text-rail { max-width: 960px; width: 100%; margin: 0 auto; }
 
 /* --- 3. GRID STRUCTURES (DESKTOP) --- */
 body.content-page .gallery-grid-3 { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
+    margin-bottom: 30px;
 }
 
 body.content-page .video-grid-4 { 
@@ -62,13 +60,10 @@ body.content-page .video-grid-4 {
     gap: 25px; 
 }
 
-/* --- 4. THE HORIZONTAL RULE (THE STACKING DIVIDER) --- */
+/* --- 4. THE HORIZONTAL RULE --- */
 body.content-page .rule-grey-1250 {
-    width: 100%;
-    max-width: 1250px;
     height: 1px;
     background-color: #eeeeee;
-    margin: 0 auto;
     border: none;
     display: block;
 }
@@ -77,17 +72,24 @@ body.content-page .rule-grey-1250 {
 .gallery-item img, .featured-image-single img {
     width: 100%; height: auto; display: block; border: 1px solid #dddddd; transition: border-color 0.2s ease;
 }
+.featured-image-single img { border: none; }
 .gallery-item:hover img { border-color: #bbbbbb; }
 
-/* --- 6. LIGHTBOX ENGINE (UNCHANGED) --- */
+/* --- 6. LIGHTBOX ENGINE --- */
 .lightbox { display: none; position: fixed; z-index: 9999999; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000000fa; justify-content: center; align-items: center; }
 .lightbox-content { max-height: 80vh; max-width: 90vw; object-fit: contain; }
 .lightbox-close { position: absolute; top: 0; right: 0; width: 80px; height: 80px; cursor: pointer; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center/32px; opacity: 0.8; }
 .lightbox-close:hover { opacity: 1; }
 
-/* --- 7. THE RAZOR SYNC (MOBILE & TABLET BREAKPOINT) --- */
+/* --- 7. THE RAZOR SYNC ENGINE (1024px & BELOW) --- */
 @media (max-width: 1024px) {
-    /* Every stacked block now obeys the exact same 15px safety rail */
+    
+    /* Paint the main background white to hide stone bleed on mobile/tablet */
+    body.content-page main.editorial-post {
+        background-color: #ffffff !important;
+    }
+
+    /* Lock all stacked elements to the same 15px rail */
     body.content-page .paper-sheet,
     body.content-page .gallery-grid-3,
     body.content-page .gallery-grid-1250,
@@ -98,19 +100,30 @@ body.content-page .rule-grey-1250 {
         max-width: calc(100% - 30px) !important;
         margin-left: 15px !important;
         margin-right: 15px !important;
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background-color: #ffffff !important; 
     }
 
-    /* Grids transition to 2-up stacking */
+    /* Remove vertical gaps between stacked blocks */
+    body.content-page .paper-sheet,
+    body.content-page .gallery-grid-3,
+    body.content-page .featured-image-single {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    /* Mobile Grid Parity */
     body.content-page .gallery-grid-3,
     body.content-page .gallery-grid-1250 {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
+        gap: 12px !important;
     }
 
-    /* Cinematic assets touch the glass */
+    /* Cinematic Assets (Touch the Glass) */
     body.content-page .panoramic-hero,
     body.content-page .story-hero-wrapper {
         width: 100% !important;
