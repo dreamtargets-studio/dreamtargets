@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.13 [1280px HD UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.14 [3-UP GRID UPDATE]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
    Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
    Rules: Strict Hex-Only | No RGB | GDS-compliant
@@ -17,6 +17,7 @@
 /* The Editorial Rail (960px for Readability) */
 .text-rail, 
 .gallery-grid-960, 
+.gallery-grid-3,
 .gallery-portrait-960, 
 .featured-image-single {
     max-width: 960px; 
@@ -47,7 +48,8 @@
 
 /* --- 4. GRID STRUCTURES --- */
 .gallery-grid-960, 
-.gallery-grid-1280 { 
+.gallery-grid-1280,
+.gallery-grid-3 { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
@@ -67,7 +69,11 @@
 }
 
 /* --- 5. UNIVERSAL ASSET RULES --- */
-.gallery-item, .portrait-item, .featured-image-single, .video-item { 
+.gallery-item, 
+.portrait-item, 
+.featured-image-single, 
+.video-item,
+.gallery-grid-3 figure { 
     cursor: zoom-in; 
 }
 
@@ -75,6 +81,7 @@
 .portrait-item img, 
 .featured-image-single img, 
 .video-item img, 
+.gallery-grid-3 img,
 .panoramic-hero {
     width: 100%; 
     height: auto; 
@@ -84,14 +91,14 @@
 }
 
 /* --- 5a. RAIL ASSET OVERRIDE --- */
-/* Cascading logic: This kills the border specifically for the 960px rail image */
 .featured-image-single img {
     border: none; 
     margin: 0;
 }
 
 .gallery-item:hover img, 
-.video-item:hover img { 
+.video-item:hover img,
+.gallery-grid-3 img:hover { 
     border-color: #bbbbbb; 
 }
 
@@ -181,47 +188,47 @@
     z-index: 10000001; 
 }
 
-
 .lightbox-caption, .lightbox-counter { 
     display: block;
     color: #ffffff; 
     font-family: 'Poppins', sans-serif; 
-    font-size: 12px;           /* Modern Editorial Size */
-    font-weight: 400;          /* Medium weight for punch */
-    letter-spacing: 0;       /* RECLAIMED: Removes the 'expansion' */    
-    width: 90%;              /* SAFETY: Keeps text 5% away from both edges */
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2px;
 }
 
-
-/* --- 8. RESPONSIVE ENGINE --- */
+/* --- 8. RESPONSIVE ENGINE (Global) --- */
 @media (max-width: 768px) {
     .paper-sheet > * { padding-left: 15px; padding-right: 15px; margin-bottom: 15px; }
-    .gallery-grid-960, .gallery-grid-1280, .gallery-portrait-960, .gallery-portrait-4, .video-grid-4 { 
+    
+    .gallery-grid-960, 
+    .gallery-grid-1280, 
+    .gallery-grid-3,
+    .gallery-portrait-960, 
+    .gallery-portrait-4, 
+    .video-grid-4 { 
         grid-template-columns: repeat(2, 1fr) !important; 
         gap: 10px; 
     }
+    
     .lightbox-prev, .lightbox-next { width: 70px; background-image: none; }
     .lightbox-close { width: 70px; height: 70px; background-size: 24px; }
-    .lightbox-content { max-width: 100vw; max-height: 75vh; }
 }
 
-
-/* --- 8. RESPONSIVE ENGINE (Clean Overrides) --- */
+/* --- 8a. RESPONSIVE ENGINE (Lightbox Locks) --- */
 @media (max-width: 768px) {
-
-    /* NEW ATTRIBUTE */
     body .lightbox {
         position: fixed;
-        height: 100%;      /* Use 100% instead of 100vh to respect the URL bar */
+        height: 100%;
         width: 100%;
-        overflow: hidden;  /* Kills the scroll entirely */
-        touch-action: none; /* Stops the background page from 'bouncing' */
+        overflow: hidden;
+        touch-action: none;
     }
 
-    /* 1. STICKY CLOSE: We change to fixed so it stays on the glass */
     body .lightbox-close { 
         position: fixed; 
         top: 10px; 
@@ -230,38 +237,27 @@
         height: 60px; 
         background-size: 24px;
         opacity: 0.8;
-        z-index: 10000010; /* Ensures it stays on top of the image */
+        z-index: 10000010;
     }
 
-
-    /* 2. IMAGE CONSTRAINT: Prevents the image from pushing the footer off-screen */
     body .lightbox-content { 
         max-height: 65vh; 
         max-width: 92vw;
     }
 
-    /* 3. FOOTER PIN: Moves the 14px text block into the safe zone */
     body .lightbox-info { 
         left: 0;
         width: 100%;
-        bottom: 20px;
         text-align: center;
-        bottom: 10px; 
+        bottom: 15px; 
         padding: 0 10px;
     }
 
-
-    /* 4. NAV CLEANUP: Removes arrows to prevent accidental clicks on small screens */
     body .lightbox-prev, 
     body .lightbox-next { 
         display: none; 
     }
 }
-
-
-
-
-
 
 /* --- 9. BRAND UTILITIES --- */
 .featured-caption { 
