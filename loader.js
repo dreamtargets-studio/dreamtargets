@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.2
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.3
    Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
    Architecture: High-Fidelity Cinematic Overlay
-   Updates: StopPropagation on Close, Centered Caption Support
+   Updates: Mobile Swipe Engine, Kinetic Transition Logic
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. THE INJECTOR ENGINE (Header, Footer, Lightbox) ---
     const loadPartials = async () => {
         try {
-            // Fetch and Inject Header
             const hRes = await fetch('header.html');
             if (hRes.ok) {
                 const hData = await hRes.text();
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Fetch and Inject Footer
             const fRes = await fetch('footer.html');
             if (fRes.ok) {
                 const fData = await fRes.text();
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // --- THE CLEAN CHECK ---
             const needsGallery = document.querySelector('img[data-full]');
             const needsVideo = document.querySelector('.video-item');
             
@@ -71,32 +68,59 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let currentGallery = [];
         let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         const updateLightbox = () => {
             const currentItem = currentGallery[currentIndex];
             const fullSrc = currentItem.getAttribute('data-full');
             const caption = currentItem.getAttribute('alt') || "";
             
-            lbWrapper.innerHTML = `
-                <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
-                <div class="lightbox-info">
-                    <span class="lightbox-caption">${caption}</span>
-                    <span id="lightbox-counter" class="lightbox-counter"></span>
-                </div>
-            `;
+            // Apply animating class for visual feedback
+            lbWrapper.classList.add('lightbox-animating');
 
-            if (currentGallery.length > 1) {
-                prevBtn.style.display = 'block';
-                nextBtn.style.display = 'block';
-                const lbCounter = document.getElementById('lightbox-counter');
-                if (lbCounter) lbCounter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
-            } else {
-                prevBtn.style.display = 'none';
-                nextBtn.style.display = 'none';
-            }
+            // Brief delay to allow CSS transition to trigger before content swap
+            setTimeout(() => {
+                lbWrapper.innerHTML = `
+                    <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
+                    <div class="lightbox-info">
+                        <span class="lightbox-caption">${caption}</span>
+                        <span id="lightbox-counter" class="lightbox-counter"></span>
+                    </div>
+                `;
+
+                if (currentGallery.length > 1) {
+                    prevBtn.style.display = 'block';
+                    nextBtn.style.display = 'block';
+                    const lbCounter = document.getElementById('lightbox-counter');
+                    if (lbCounter) lbCounter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
+                } else {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                }
+                
+                // Remove class to fade/scale image back in
+                lbWrapper.classList.remove('lightbox-animating');
+            }, 150); 
         };
 
-        // Delegated click listener for any image with data-full
+        // Swipe Logic for Mobile
+        const handleSwipe = () => {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) nextBtn.click();
+            if (touchEndX > touchStartX + swipeThreshold) prevBtn.click();
+        };
+
+        overlay.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        overlay.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        // Delegated click listener
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -115,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         });
 
-        // Navigation controls
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentGallery.length;
@@ -128,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLightbox();
         });
 
-        // Close logic with propagation kill to prevent "next" skip
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
@@ -136,15 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'auto';
         };
 
-        // Explicit Close Button listener
         const closeBtn = overlay.querySelector('.lightbox-close');
         closeBtn.addEventListener('click', closeLB);
 
-        // Background Click listener
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                closeLB(e);
-            }
+            if (e.target === overlay) closeLB(e);
         });
 
         document.addEventListener('keydown', (e) => {
@@ -156,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. MODULE: VIDEO ENGINE (Vimeo Optimized) ---
+    // --- 3. MODULE: VIDEO ENGINE ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
@@ -175,10 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             lbWrapper.innerHTML = `
                 <div class="video-stage">
-                    <iframe src="${url}" 
-                            frameborder="0"
-                            allow="autoplay; fullscreen" 
-                            allowfullscreen></iframe>
+                    <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
             `;
             
