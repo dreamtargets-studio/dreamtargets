@@ -1,12 +1,11 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.22 [CHASSIS HARMONY]
-   Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
-   Logic: Margin-Collapse Containment & Global Figure Reset
+   THINKAMIGO GALLERY ENGINE v6.23 [CONSULTING PARITY]
+   Architecture: Disciplined 1250px Left-Aligned Grid
+   Logic: Downscaled Widths & Left-Bias Alignment
    Rules: Strict Hex-Only | No !important | GDS-compliant
    ============================================================ */
 
 /* --- 0. PRECISION RESET --- */
-/* Kill browser-default figure margins (40px) that chassis.css missed */
 figure {
     margin: 0;
     padding: 0;
@@ -19,7 +18,7 @@ figure {
     margin-bottom: 25px; 
 }
 
-/* --- 2. ASSET RAILS (STRICT 1280px STANDARD) --- */
+/* --- 2. ASSET RAILS (1250px LEFT-ALIGNED STANDARD) --- */
 .text-rail, 
 .gallery-grid-960, 
 .gallery-grid-3,
@@ -27,48 +26,52 @@ figure {
 .featured-image-single {
     max-width: 960px; 
     width: 100%; 
-    margin: 0 auto; /* Ensures centered alignment within paper */
+    margin-left: 0;        /* Match consulting.html left alignment */
+    margin-right: auto; 
     padding: 0; 
     box-sizing: border-box;
     display: block; 
 }
 
+.gallery-grid-1250, 
 .gallery-grid-1280, 
 .gallery-portrait-4, 
 .video-grid-4, 
 .border-top-1280, 
 .story-hero-wrapper {
-    max-width: 1280px; 
+    max-width: 1250px;     /* Downscaled to match consulting.html */
     width: 100%; 
-    margin: 0 auto; 
+    margin-left: 0;        /* Match consulting.html left alignment */
+    margin-right: auto; 
     padding: 0; 
     box-sizing: border-box;
     display: block;
 }
 
-/* --- 3. THE PAPER SHEET (CENTRE & SNAP) --- */
-/* Fix: display: flow-root prevents the 'Stone Gap' bleed by containing internal margins */
-/* Fix: margin: 0 auto restores the desktop alignment seen in Consulting */
+/* --- 3. THE PAPER SHEET (1250px LEFT-ALIGNED) --- */
 .paper-sheet {
     background-color: #ffffff;
-    max-width: 1280px;
-    margin: 0 auto;   
+    max-width: 1250px;     /* Match consulting.html width */
+    margin-left: 0;        /* Align to left edge */
+    margin-right: auto; 
     padding: 60px 0;  
     position: relative;
     z-index: 10;
     display: flow-root; 
 }
 
-/* Ensure Hero image sits perfectly flush with paper by removing inline descender space */
+/* Force cinematic header to exactly 1250px width */
 .panoramic-hero {
     display: block;
-    width: 100%;
+    width: 1250px;         
+    max-width: 100%;       /* Prevent overflow on small screens */
+    height: auto;
     margin-bottom: 0;
 }
 
 /* --- 4. GRID STRUCTURES --- */
 .gallery-grid-960, 
-.gallery-grid-1280,
+.gallery-grid-1250,
 .gallery-grid-3 { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -222,7 +225,6 @@ figure {
 
 /* --- 8. RESPONSIVE ENGINE (Global) --- */
 @media (max-width: 768px) {
-    /* Specificity boost with 'body' to ensure Chassis alignment parity */
     body .paper-sheet { 
         padding: 30px 20px; 
         width: 100%;
@@ -232,7 +234,7 @@ figure {
     body .paper-sheet > * { padding-left: 0; padding-right: 0; margin-bottom: 15px; }
     
     body .gallery-grid-960, 
-    body .gallery-grid-1280, 
+    body .gallery-grid-1250, 
     body .gallery-grid-3,
     body .gallery-portrait-960, 
     body .gallery-portrait-4, 
@@ -241,15 +243,11 @@ figure {
         gap: 10px; 
     }
 
-    /* Kill browser default figure margins on mobile */
     body figure,
     body .gallery-grid-3 figure {
         margin: 0 0 15px 0;
         padding: 0;
     }
-    
-    .lightbox-prev, .lightbox-next { width: 70px; background-image: none; }
-    .lightbox-close { width: 70px; height: 70px; background-size: 24px; }
 }
 
 /* --- 8a. RESPONSIVE ENGINE (Lightbox Locks) --- */
@@ -297,7 +295,7 @@ figure {
     display: block;              
     width: 100%;                 
     margin: 0;                
-    background-color: #e2dfd2; /* Brand Stone */
+    background-color: #e2dfd2; 
     padding: 12px 18px;          
     box-sizing: border-box;   
     font-family: 'Poppins', sans-serif;
