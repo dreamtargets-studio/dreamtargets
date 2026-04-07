@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.62 [THE DEFINITIVE BUILD]
+   THINKAMIGO GALLERY ENGINE v6.63 [ART DIRECTOR'S CUT]
    Architecture: Internal Rail Injection (Consulting Base)
    Grids: 3-Col Standard | 4-Col Portrait | 4-Col Video
    Sync: 15px Mobile Razor Rail | 960px Desktop Rail
@@ -16,8 +16,6 @@
 }
 
 /* --- 1. THE GRID SUITE (Nested inside .text-rail) --- */
-
-/* Standard 3-Column Grid */
 .gallery-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -26,7 +24,6 @@
     width: 100%;
 }
 
-/* Video Grid (4-Column Thumbnails) */
 .video-grid-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -35,7 +32,6 @@
     width: 100%;
 }
 
-/* Portrait Gallery (4-Column Tall Assets) */
 .gallery-portrait-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -53,145 +49,65 @@
     height: auto;
     display: block;
     border: 1px solid #dddddd;
-    transition: border-color 0.2s ease;
 }
 
-.gallery-item:hover img, 
-.video-item:hover img { 
-    border-color: #bbbbbb; 
-}
-
-/* Featured Image Specifics */
 .featured-image-single {
     width: 100%;
     margin: 35px 0;
     display: block;
 }
 
-.featured-caption {
-    display: block;
-    width: 100%;
-    background-color: #e2dfd2;
-    padding: 12px 18px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+/* --- 3. THE CAPTION (RESTORED EXACTLY) --- */
+.featured-caption { 
+    display: block; 
+    width: 100%; 
+    margin: 0; 
+    background-color: #e2dfd2; 
+    padding: 12px 18px; 
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 14px; 
     color: #444444;
-    border-left: 3px solid #ff6600; /* Thinkamigo Signature */
+    border: none; /* No orange elements */
 }
 
-/* --- 3. VIDEO UI OVERLAYS --- */
+/* --- 4. VIDEO UI OVERLAYS --- */
 .video-item { position: relative; cursor: pointer; }
-
 .play-button-overlay { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 44px;
-    height: 44px;
-    background: rgba(0,0,0,0.6);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none; 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 44px; height: 44px; background: rgba(0,0,0,0.6); border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; pointer-events: none; 
     border: 2px solid rgba(255,255,255,0.8);
 }
-
 .play-button-overlay::after {
-    content: '';
-    display: block;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 12px solid #ffffff;
-    margin-left: 4px;
+    content: ''; border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 12px solid #ffffff; margin-left: 4px;
 }
 
-/* --- 4. MOBILE ADAPTATION (Rail-Sync) --- */
+/* --- 5. MOBILE ADAPTATION (Rail-Sync) --- */
 @media (max-width: 1024px) {
-    /* All grids collapse to 2-column for touch usability */
-    .gallery-grid-3,
-    .video-grid-4, 
-    .gallery-portrait-4 {
+    .gallery-grid-3, .video-grid-4, .gallery-portrait-4 {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
         margin: 20px 0 !important;
     }
-
-    .featured-caption {
-        padding: 10px 15px;
-        font-size: 13px;
-    }
 }
 
-/* --- 5. LIGHTBOX ENGINE UI --- */
+/* --- 6. LIGHTBOX ENGINE UI --- */
 .lightbox { 
-    display: none; 
-    position: fixed; 
-    z-index: 9999999; 
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
-    height: 100vh; 
-    background-color: #000000fa; 
-    justify-content: center; 
-    align-items: center;
-    user-select: none;
+    display: none; position: fixed; z-index: 9999999; top: 0; left: 0; width: 100vw; height: 100vh; 
+    background-color: #000000fa; justify-content: center; align-items: center;
 }
-
-.lightbox-content { 
-    max-width: 90vw; 
-    max-height: 80vh; 
-    object-fit: contain; 
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-
+.lightbox-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
 .lightbox-close { 
-    position: absolute; 
-    top: 0; 
-    right: 0; 
-    width: 80px; 
-    height: 80px; 
-    cursor: pointer; 
+    position: absolute; top: 0; right: 0; width: 80px; height: 80px; cursor: pointer; 
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center/32px;
     opacity: 0.6;
-    transition: opacity 0.2s;
 }
-
 .lightbox-prev, .lightbox-next { 
-    position: absolute; 
-    top: 0; 
-    height: 100%; 
-    width: 15%; 
-    cursor: pointer; 
-    opacity: 0.3; 
-    transition: opacity 0.2s;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    background-size: 32px;
+    position: absolute; top: 0; height: 100%; width: 15%; cursor: pointer; opacity: 0.3; 
+    background-repeat: no-repeat; background-position: center; background-size: 32px;
 }
-
-.lightbox-close:hover, 
-.lightbox-prev:hover, 
-.lightbox-next:hover { opacity: 1; }
-
-.lightbox-prev { 
-    left: 0; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
-}
-
-.lightbox-next { 
-    right: 0; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
-}
-
-.lightbox-info { 
-    position: absolute; 
-    bottom: 30px; 
-    width: 100%; 
-    text-align: center; 
-    color: #ffffff; 
-    font-size: 13px; 
-    font-family: 'Poppins', sans-serif; 
-    letter-spacing: 1px;
-}
+.lightbox-prev { left: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
+.lightbox-next { right: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
+.lightbox-info { position: absolute; bottom: 30px; width: 100%; text-align: center; color: #ffffff; font-size: 13px; font-family: 'Poppins', sans-serif; }
