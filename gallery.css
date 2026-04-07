@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.71 [CENTERED LIGHTBOX FIX]
+   THINKAMIGO GALLERY ENGINE v6.75 [UNIFIED GREY UI]
    Architecture: Internal Rail Injection (Consulting Base)
    Grids: 3-Col Standard | 4-Col Portrait | 4-Col Video
-   Updates: Mathematical Centering for Lightbox Typography
+   Updates: Unified UI (Grey Boxes), Mathematical Centering
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -93,28 +93,57 @@
 
 .lightbox-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
 
+/* SHARED BUTTON ARCHITECTURE (Unified with backToTop) */
+.lightbox-close, 
+.lightbox-prev, 
+.lightbox-next {
+    position: absolute;
+    cursor: pointer;
+    background-color: rgba(102, 102, 102, 0.6); /* Muted Grey */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    transition: background-color 0.3s, opacity 0.3s;
+    z-index: 120;
+    border-radius: 2px;
+}
+
+.lightbox-close:hover, 
+.lightbox-prev:hover, 
+.lightbox-next:hover {
+    background-color: rgba(153, 153, 153, 0.8);
+    opacity: 1;
+}
+
+/* POSITIONING: Close X and Next aligned to 25px right-rail */
 .lightbox-close { 
-    position: absolute; top: 0; right: 0; width: 80px; height: 80px; cursor: pointer; 
-    z-index: 100;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center/32px;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+    top: 25px; 
+    right: 25px; 
+    width: 50px; 
+    height: 50px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
 }
 
-.lightbox-close:hover { opacity: 1; }
-
-.lightbox-prev, .lightbox-next { 
-    position: absolute; top: 0; height: 100%; width: 15%; cursor: pointer; opacity: 0.3; 
-    background-repeat: no-repeat; background-position: center; background-size: 32px;
-    transition: opacity 0.2s;
+.lightbox-prev, 
+.lightbox-next { 
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 55px; 
+    height: 55px; 
+    opacity: 0.7;
 }
 
-.lightbox-prev:hover, .lightbox-next:hover { opacity: 0.8; }
+.lightbox-prev { 
+    left: 25px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
 
-.lightbox-prev { left: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
-.lightbox-next { right: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
+.lightbox-next { 
+    right: 25px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
 
-/* Cinematic Centering Logic */
+/* TYPOGRAPHY: Center-locked via transform */
 .lightbox-info { 
     position: absolute; 
     bottom: 30px; 
@@ -140,4 +169,15 @@
 .lightbox-counter {
     opacity: 0.5;
     font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+        width: 44px;
+        height: 44px;
+        background-size: 20px;
+    }
+    .lightbox-prev { left: 15px; }
+    .lightbox-next { right: 15px; }
+    .lightbox-close { top: 15px; right: 15px; }
 }
