@@ -1,16 +1,22 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.15 [MOBILE GRID REFINEMENT]
+   THINKAMIGO GALLERY ENGINE v6.22 [CHASSIS HARMONY]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
-   Logic: Zero-Margin Figure Strategy & High-Specificity Overrides
+   Logic: Margin-Collapse Containment & Global Figure Reset
    Rules: Strict Hex-Only | No !important | GDS-compliant
    ============================================================ */
+
+/* --- 0. PRECISION RESET --- */
+/* Kill browser-default figure margins (40px) that chassis.css missed */
+figure {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
 .paper-sheet > * { 
     margin-top: 0; 
     margin-bottom: 25px; 
-    margin-left: auto; 
-    margin-right: auto; 
 }
 
 /* --- 2. ASSET RAILS (STRICT 1280px STANDARD) --- */
@@ -21,7 +27,7 @@
 .featured-image-single {
     max-width: 960px; 
     width: 100%; 
-    margin: 0 auto; 
+    margin: 0 auto; /* Ensures centered alignment within paper */
     padding: 0; 
     box-sizing: border-box;
     display: block; 
@@ -40,9 +46,25 @@
     display: block;
 }
 
-/* --- 3. FEATURED IMAGE PRECISION --- */
-.featured-image-single { margin-top: 30px; }
-.story-hero-wrapper { margin-top: 0; }
+/* --- 3. THE PAPER SHEET (CENTRE & SNAP) --- */
+/* Fix: display: flow-root prevents the 'Stone Gap' bleed */
+/* Fix: margin: 0 auto restores the desktop alignment seen in Consulting */
+.paper-sheet {
+    background-color: #ffffff;
+    max-width: 1280px;
+    margin: 0 auto;   
+    padding: 60px 0;  
+    position: relative;
+    z-index: 10;
+    display: flow-root; 
+}
+
+/* Ensure Hero image sits perfectly flush with paper */
+.panoramic-hero {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+}
 
 /* --- 4. GRID STRUCTURES --- */
 .gallery-grid-960, 
@@ -73,15 +95,13 @@
 .video-item,
 .gallery-grid-3 figure { 
     cursor: zoom-in; 
-    margin: 0; /* Baseline reset */
 }
 
 .gallery-item img, 
 .portrait-item img, 
 .featured-image-single img, 
 .video-item img, 
-.gallery-grid-3 img,
-.panoramic-hero {
+.gallery-grid-3 img {
     width: 100%; 
     height: auto; 
     display: block; 
@@ -202,9 +222,15 @@
 
 /* --- 8. RESPONSIVE ENGINE (Global) --- */
 @media (max-width: 768px) {
-    body .paper-sheet > * { padding-left: 15px; padding-right: 15px; margin-bottom: 15px; }
+    /* Specificity boost with 'body' to ensure Chassis alignment parity */
+    body .paper-sheet { 
+        padding: 30px 20px; 
+        width: 100%;
+        margin-top: 0;
+    }
+
+    body .paper-sheet > * { padding-left: 0; padding-right: 0; margin-bottom: 15px; }
     
-    /* Specificity boost to force 2-up layout and clean gutters */
     body .gallery-grid-960, 
     body .gallery-grid-1280, 
     body .gallery-grid-3,
@@ -215,11 +241,10 @@
         gap: 10px; 
     }
 
-    /* Kill browser default figure margins which bloat mobile spacing */
-    body .gallery-grid-3 figure,
-    body .gallery-grid-960 figure,
-    body .gallery-grid-1280 figure {
-        margin: 0;
+    /* Kill browser default figure margins on mobile */
+    body figure,
+    body .gallery-grid-3 figure {
+        margin: 0 0 15px 0;
         padding: 0;
     }
     
