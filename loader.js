@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.0
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.1
    Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
    Architecture: High-Fidelity Cinematic Overlay
-   Updates: Conditional Lightbox Check (Fixes Footer Leak)
+   Updates: Sync with Gallery.css v6.68 [Flush Alignment]
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // --- THE CLEAN CHECK ---
-            // Only inject lightbox bones if the page actually uses them
             const needsGallery = document.querySelector('img[data-full]');
             const needsVideo = document.querySelector('.video-item');
             
@@ -53,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const lb = document.createElement('div');
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
+        // HTML Structure synced with gallery.css classes
         lb.innerHTML = `
-            <span class="lightbox-close"></span>
+            <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
             <div class="lightbox-wrapper"></div>
@@ -76,28 +76,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const updateLightbox = () => {
             const currentItem = currentGallery[currentIndex];
             const fullSrc = currentItem.getAttribute('data-full');
-            const caption = currentItem.getAttribute('alt');
+            const caption = currentItem.getAttribute('alt') || "";
             
+            // Re-injecting the inner content ensures clean state for every click
             lbWrapper.innerHTML = `
                 <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
                 <div class="lightbox-info">
-                    <span id="lightbox-caption" class="lightbox-caption">${caption}</span>
+                    <span class="lightbox-caption">${caption}</span>
                     <span id="lightbox-counter" class="lightbox-counter"></span>
                 </div>
             `;
 
-            const lbCounter = document.getElementById('lightbox-counter');
-
             if (currentGallery.length > 1) {
                 prevBtn.style.display = 'block';
                 nextBtn.style.display = 'block';
-                lbCounter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
+                const lbCounter = document.getElementById('lightbox-counter');
+                if (lbCounter) lbCounter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
             } else {
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
             }
         };
 
+        // Delegated click listener for any image with data-full
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -113,8 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateLightbox();
             overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Lock background scroll
         });
 
+        // Navigation controls
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentGallery.length;
@@ -127,19 +130,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLightbox();
         });
 
+        // Close logic
+        const closeLB = () => {
+            overlay.style.display = 'none';
+            lbWrapper.innerHTML = ''; 
+            document.body.style.overflow = 'auto'; // Restore scroll
+        };
+
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay || e.target.classList.contains('lightbox-close')) {
-                overlay.style.display = 'none';
-                lbWrapper.innerHTML = ''; 
+                closeLB();
             }
         });
 
         document.addEventListener('keydown', (e) => {
             if (overlay.style.display === 'flex') {
-                if (e.key === 'Escape') {
-                    overlay.style.display = 'none';
-                    lbWrapper.innerHTML = '';
-                }
+                if (e.key === 'Escape') closeLB();
                 if (e.key === 'ArrowRight' && currentGallery.length > 1) nextBtn.click();
                 if (e.key === 'ArrowLeft' && currentGallery.length > 1) prevBtn.click();
             }
@@ -160,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = videoTrigger.getAttribute('data-video-id');
             const url = `https://player.vimeo.com/video/${id}?autoplay=1&color=f39c12&title=0&byline=0&portrait=0`;
 
-            // Clear gallery nav for theater mode
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
@@ -174,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             
             overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
     };
 
