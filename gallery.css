@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.23 [CONSULTING PARITY]
-   Architecture: Disciplined 1250px Left-Aligned Grid
-   Logic: Downscaled Widths & Left-Bias Alignment
+   THINKAMIGO GALLERY ENGINE v6.24 [CENTERED 1250px]
+   Architecture: Disciplined 1250px Centered Grid
+   Logic: Restore margin: auto for Desktop Centering
    Rules: Strict Hex-Only | No !important | GDS-compliant
    ============================================================ */
 
@@ -18,7 +18,7 @@ figure {
     margin-bottom: 25px; 
 }
 
-/* --- 2. ASSET RAILS (1250px LEFT-ALIGNED STANDARD) --- */
+/* --- 2. ASSET RAILS (1250px CENTERED STANDARD) --- */
 .text-rail, 
 .gallery-grid-960, 
 .gallery-grid-3,
@@ -26,8 +26,7 @@ figure {
 .featured-image-single {
     max-width: 960px; 
     width: 100%; 
-    margin-left: 0;        /* Match consulting.html left alignment */
-    margin-right: auto; 
+    margin: 0 auto;        /* CENTERED */
     padding: 0; 
     box-sizing: border-box;
     display: block; 
@@ -39,33 +38,32 @@ figure {
 .video-grid-4, 
 .border-top-1280, 
 .story-hero-wrapper {
-    max-width: 1250px;     /* Downscaled to match consulting.html */
+    max-width: 1250px;     /* Match consulting.html width */
     width: 100%; 
-    margin-left: 0;        /* Match consulting.html left alignment */
-    margin-right: auto; 
+    margin: 0 auto;        /* CENTERED */
     padding: 0; 
     box-sizing: border-box;
     display: block;
 }
 
-/* --- 3. THE PAPER SHEET (1250px LEFT-ALIGNED) --- */
+/* --- 3. THE PAPER SHEET (1250px CENTERED) --- */
 .paper-sheet {
     background-color: #ffffff;
     max-width: 1250px;     /* Match consulting.html width */
-    margin-left: 0;        /* Align to left edge */
-    margin-right: auto; 
+    margin: 0 auto;        /* CENTERED */
     padding: 60px 0;  
     position: relative;
     z-index: 10;
-    display: flow-root; 
+    display: flow-root;    /* Contain margins to prevent gap */
 }
 
-/* Force cinematic header to exactly 1250px width */
+/* Force cinematic header to exactly 1250px width and center it */
 .panoramic-hero {
     display: block;
     width: 1250px;         
-    max-width: 100%;       /* Prevent overflow on small screens */
+    max-width: 100%;       
     height: auto;
+    margin: 0 auto;        /* CENTERED */
     margin-bottom: 0;
 }
 
