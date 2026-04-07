@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.14 [3-UP GRID UPDATE]
+   THINKAMIGO GALLERY ENGINE v6.15 [MOBILE GRID REFINEMENT]
    Architecture: Disciplined 16:9 (1280px) & A4 Portrait Grids
-   Logic: Decoupled Lightbox Overlay + 1:1 Pixel Mapping
-   Rules: Strict Hex-Only | No RGB | GDS-compliant
+   Logic: Zero-Margin Figure Strategy & High-Specificity Overrides
+   Rules: Strict Hex-Only | No !important | GDS-compliant
    ============================================================ */
 
 /* --- 1. GLOBAL VERTICAL RHYTHM --- */
@@ -14,7 +14,6 @@
 }
 
 /* --- 2. ASSET RAILS (STRICT 1280px STANDARD) --- */
-/* The Editorial Rail (960px for Readability) */
 .text-rail, 
 .gallery-grid-960, 
 .gallery-grid-3,
@@ -28,7 +27,6 @@
     display: block; 
 }
 
-/* The Cinematic Rail (Standardized to 1280px for 720p HD) */
 .gallery-grid-1280, 
 .gallery-portrait-4, 
 .video-grid-4, 
@@ -75,6 +73,7 @@
 .video-item,
 .gallery-grid-3 figure { 
     cursor: zoom-in; 
+    margin: 0; /* Baseline reset */
 }
 
 .gallery-item img, 
@@ -203,16 +202,25 @@
 
 /* --- 8. RESPONSIVE ENGINE (Global) --- */
 @media (max-width: 768px) {
-    .paper-sheet > * { padding-left: 15px; padding-right: 15px; margin-bottom: 15px; }
+    body .paper-sheet > * { padding-left: 15px; padding-right: 15px; margin-bottom: 15px; }
     
-    .gallery-grid-960, 
-    .gallery-grid-1280, 
-    .gallery-grid-3,
-    .gallery-portrait-960, 
-    .gallery-portrait-4, 
-    .video-grid-4 { 
-        grid-template-columns: repeat(2, 1fr) !important; 
+    /* Specificity boost to force 2-up layout and clean gutters */
+    body .gallery-grid-960, 
+    body .gallery-grid-1280, 
+    body .gallery-grid-3,
+    body .gallery-portrait-960, 
+    body .gallery-portrait-4, 
+    body .video-grid-4 { 
+        grid-template-columns: repeat(2, 1fr); 
         gap: 10px; 
+    }
+
+    /* Kill browser default figure margins which bloat mobile spacing */
+    body .gallery-grid-3 figure,
+    body .gallery-grid-960 figure,
+    body .gallery-grid-1280 figure {
+        margin: 0;
+        padding: 0;
     }
     
     .lightbox-prev, .lightbox-next { width: 70px; background-image: none; }
