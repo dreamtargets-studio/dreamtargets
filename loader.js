@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.1
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.2
    Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
    Architecture: High-Fidelity Cinematic Overlay
-   Updates: Sync with Gallery.css v6.68 [Flush Alignment]
+   Updates: StopPropagation on Close, Centered Caption Support
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const lb = document.createElement('div');
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
-        // HTML Structure synced with gallery.css classes
         lb.innerHTML = `
             <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullSrc = currentItem.getAttribute('data-full');
             const caption = currentItem.getAttribute('alt') || "";
             
-            // Re-injecting the inner content ensures clean state for every click
             lbWrapper.innerHTML = `
                 <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
                 <div class="lightbox-info">
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateLightbox();
             overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Lock background scroll
+            document.body.style.overflow = 'hidden';
         });
 
         // Navigation controls
@@ -130,16 +128,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLightbox();
         });
 
-        // Close logic
-        const closeLB = () => {
+        // Close logic with propagation kill to prevent "next" skip
+        const closeLB = (e) => {
+            if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
             lbWrapper.innerHTML = ''; 
-            document.body.style.overflow = 'auto'; // Restore scroll
+            document.body.style.overflow = 'auto';
         };
 
+        // Explicit Close Button listener
+        const closeBtn = overlay.querySelector('.lightbox-close');
+        closeBtn.addEventListener('click', closeLB);
+
+        // Background Click listener
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay || e.target.classList.contains('lightbox-close')) {
-                closeLB();
+            if (e.target === overlay) {
+                closeLB(e);
             }
         });
 
