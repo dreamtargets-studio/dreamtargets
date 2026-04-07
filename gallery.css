@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.75 [UNIFIED GREY UI]
+   THINKAMIGO GALLERY ENGINE v6.79 [HEX + OPACITY BUILD]
    Architecture: Internal Rail Injection (Consulting Base)
    Grids: 3-Col Standard | 4-Col Portrait | 4-Col Video
-   Updates: Unified UI (Grey Boxes), Mathematical Centering
+   Updates: Clean Hex only; Ghost opacity property; Axis lock
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -67,9 +67,11 @@
 .video-item { position: relative; cursor: pointer; }
 .play-button-overlay { 
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-    width: 44px; height: 44px; background: rgba(0,0,0,0.6); border-radius: 50%;
+    width: 44px; height: 44px; background-color: #000000; 
+    opacity: 0.6; /* Property used instead of RGBA */
+    border-radius: 50%;
     display: flex; justify-content: center; align-items: center; pointer-events: none; 
-    border: 2px solid rgba(255,255,255,0.8);
+    border: 2px solid #ffffff;
 }
 .play-button-overlay::after {
     content: ''; border-top: 8px solid transparent; border-bottom: 8px solid transparent;
@@ -88,7 +90,9 @@
 /* --- 6. LIGHTBOX UI (Theater Mode) --- */
 .lightbox { 
     display: none; position: fixed; z-index: 9999999; top: 0; left: 0; width: 100vw; height: 100vh; 
-    background-color: #000000fa; justify-content: center; align-items: center;
+    background-color: #000000;
+    opacity: 0.98; /* Pure Hex background with property-based opacity */
+    justify-content: center; align-items: center;
 }
 
 .lightbox-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
@@ -99,7 +103,8 @@
 .lightbox-next {
     position: absolute;
     cursor: pointer;
-    background-color: rgba(102, 102, 102, 0.6); /* Muted Grey */
+    background-color: #666666; /* Standard Hex */
+    opacity: 0.3; /* Subtle Ghost State */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 24px;
@@ -111,8 +116,8 @@
 .lightbox-close:hover, 
 .lightbox-prev:hover, 
 .lightbox-next:hover {
-    background-color: rgba(153, 153, 153, 0.8);
-    opacity: 1;
+    background-color: #999999;
+    opacity: 0.8; /* Highlighted interaction state */
 }
 
 /* POSITIONING: Close X and Next aligned to 25px right-rail */
@@ -130,7 +135,6 @@
     transform: translateY(-50%); 
     width: 55px; 
     height: 55px; 
-    opacity: 0.7;
 }
 
 .lightbox-prev { 
