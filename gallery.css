@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.0 [FILMSTRIP BUILD]
-   Architecture: Triple-Slot Horizontal Track (300vw)
-   Updates: Native Nudge Transition | DVH Safety Lock | Axis Lock
+   THINKAMIGO GALLERY ENGINE v7.2 [THE TRUNCATOR]
+   Architecture: Triple-Slot Filmstrip (300vw Track)
+   Updates: Counter-First Priority | Truncation Rule | Portrait Max
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -61,107 +61,79 @@
     }
 }
 
-/* --- 6. LIGHTBOX UI (Theater Mode - v7.0 Filmstrip) --- */
+/* --- 6. LIGHTBOX UI (Theater Mode - v7.2 Filmstrip Build) --- */
 .lightbox { 
-    display: none; 
-    position: fixed; 
-    z-index: 9999999; 
-    top: 0; left: 0; 
-    width: 100vw; 
-    height: 100dvh; /* Locked to dynamic viewport */
-    background-color: #0A0A0A; 
-    overflow: hidden; /* Critical for the 300% track */
+    display: none; position: fixed; z-index: 9999999; 
+    top: 0; left: 0; width: 100vw; height: 100dvh; 
+    background-color: #0A0A0A; overflow: hidden;
 }
 
-/* THE FILMSTRIP TRACK: Moves as a single unit */
 .lightbox-track {
-    display: flex;
-    width: 300%;
-    height: 100dvh;
-    transform: translateX(-33.33%); /* Initial center focus */
-    will-change: transform;
+    display: flex; width: 300%; height: 100dvh;
+    transform: translateX(-33.33%); will-change: transform;
 }
 
-/* INDIVIDUAL SLOTS: Ensure each takes exactly 100vw */
 .lb-slot {
-    width: 100vw;
-    height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+    width: 100vw; height: 100dvh; display: flex;
+    justify-content: center; align-items: center; flex-shrink: 0;
 }
 
 .lightbox-content { 
     max-width: 90vw; 
-    max-height: 70dvh; /* Gutter reserved for footer */
+    max-height: 70dvh; /* Reserved gutter for footer anchor */
     object-fit: contain; 
-    opacity: 1;
-    margin-bottom: 80px; /* Locked separation from caption */
+    opacity: 1; 
+    margin-bottom: 80px; 
 }
 
-/* UI BUTTONS: Layered ABOVE the track */
+/* UI BUTTONS */
 .lightbox-close, .lightbox-prev, .lightbox-next {
-    position: absolute; 
-    cursor: pointer; 
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: 24px; 
-    z-index: 200; /* Above the track */
-    background-color: transparent;
+    position: absolute; cursor: pointer; background-repeat: no-repeat;
+    background-position: center; background-size: 24px; z-index: 200;
 }
 
-.lightbox-close::before, .lightbox-prev::before, .lightbox-next::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #666666; opacity: 0.15; border-radius: 2px;
-    z-index: -1; transition: background-color 0.4s ease, opacity 0.4s ease;
-}
-
-.lightbox-close:hover::before, .lightbox-prev:hover::before, .lightbox-next:hover::before {
-    background-color: #888888; opacity: 0.4;
-}
-
-/* POSITIONING: High-visibility placement */
 .lightbox-close { 
     top: 25px; right: 25px; width: 50px; height: 50px; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
 }
 
-.lightbox-prev, .lightbox-next { 
-    top: 45%; 
-    transform: translateY(-50%); 
-    width: 55px; height: 55px; 
-}
+.lightbox-prev, .lightbox-next { top: 45%; transform: translateY(-50%); width: 55px; height: 55px; }
+.lightbox-prev { left: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
+.lightbox-next { right: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 
-.lightbox-prev { 
-    left: 25px; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); 
-}
-
-.lightbox-next { 
-    right: 25px; 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
-}
-
-/* CONCERTINA FOOTER: Anchored Outside Track */
+/* CONCERTINA FOOTER WITH TRUNCATION */
 .lightbox-info { 
     position: absolute; 
-    bottom: 60px; /* Clear mobile URL bars */
+    bottom: 30px; 
     left: 50%; transform: translateX(-50%);
-    width: 100%; max-width: 90%;
-    display: flex; justify-content: center; align-items: center; gap: 15px;
+    width: 90%; text-align: center;
     color: #ffffff; font-family: 'Poppins', sans-serif;
-    pointer-events: none; 
-    z-index: 210; /* Top Layer */
+    pointer-events: none; z-index: 210;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
 }
 
-.lightbox-caption { font-size: 13px; font-weight: 500; letter-spacing: 0.8px; opacity: 1; margin: 0; }
-.lightbox-counter { font-size: 11px; font-weight: 400; opacity: 0.4; letter-spacing: 1px; }
+.lightbox-caption {
+    display: block;
+    font-size: 12px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase;
+    /* TRUNCATION LOGIC */
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
 
-/* MOBILE REFINEMENT */
+.lb-count-accent {
+    opacity: 0.5; font-weight: 400; margin-right: 2px;
+}
+
+/* PORTRAIT MAXIMIZER (Mobile Refinement) */
 @media (max-width: 768px) {
-    .lb-slot .lightbox-content { max-height: 60dvh; margin-bottom: 120px; }
-    .lightbox-info { bottom: 100px; gap: 10px; }
+    .lb-slot .lightbox-content { 
+        max-height: 82dvh; /* Lift portrait images significantly */
+        margin-bottom: 40px; 
+    }
+    .lightbox-info { bottom: 25px; width: 85%; }
+    .lightbox-caption { font-size: 11px; }
     .lightbox-prev, .lightbox-next { top: 40%; }
     .lightbox-prev { left: 10px; }
     .lightbox-next { right: 10px; }
