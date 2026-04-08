@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.4
-   Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
-   Architecture: High-Fidelity Cinematic Overlay
-   Updates: Concertina Footer Logic, Static Vertical Anchor Lock
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.5
+   Features: Context-Aware Injection, Persistent DOM Lightbox
+   Architecture: High-Fidelity Kinetic Cross-Fade
+   Updates: Aspect-Ratio Lock, Zero-Jump Footer, Target-Swapping
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. THE INJECTOR ENGINE (Header, Footer, Lightbox) ---
+    // --- 1. THE INJECTOR ENGINE ---
     const loadPartials = async () => {
         try {
             const hRes = await fetch('header.html');
@@ -42,18 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE ---
+    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Persistent Mode) ---
     const injectLightbox = () => {
         if (document.getElementById('lightbox-overlay')) return;
 
         const lb = document.createElement('div');
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
+        // Persistent structure: elements are created once, swapped later
         lb.innerHTML = `
             <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
-            <div class="lightbox-wrapper"></div>
+            <div class="lightbox-wrapper">
+                <img class="lightbox-content" id="lb-main-img" src="">
+                <div class="lightbox-info">
+                    <span class="lightbox-caption" id="lb-cap"></span>
+                    <span class="lightbox-counter" id="lb-count"></span>
+                </div>
+            </div>
         `;
         document.body.appendChild(lb);
         setupLightboxLogic();
@@ -63,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const setupLightboxLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
         const lbWrapper = document.querySelector('.lightbox-wrapper');
+        const lbImg = document.getElementById('lb-main-img');
+        const lbCap = document.getElementById('lb-cap');
+        const lbCount = document.getElementById('lb-count');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         
@@ -73,33 +83,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateLightbox = () => {
             const currentItem = currentGallery[currentIndex];
-            const fullSrc = currentItem.getAttribute('data-full');
-            const caption = currentItem.getAttribute('alt') || "";
             
-            // Apply kinetic animating class
+            // Trigger Fade Out/Scale via CSS
             lbWrapper.classList.add('lightbox-animating');
 
+            // Swap content during the transparent state
             setTimeout(() => {
-                // Concertina Footer: Caption and Counter are adjacent siblings
-                lbWrapper.innerHTML = `
-                    <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
-                    <div class="lightbox-info">
-                        <span class="lightbox-caption">${caption}</span>
-                        <span class="lightbox-counter">${currentIndex + 1} / ${currentGallery.length}</span>
-                    </div>
-                `;
-
+                lbImg.src = currentItem.getAttribute('data-full');
+                lbCap.textContent = currentItem.getAttribute('alt') || "";
+                
                 if (currentGallery.length > 1) {
+                    lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+                    lbCount.style.display = 'inline-block';
                     prevBtn.style.display = 'block';
                     nextBtn.style.display = 'block';
                 } else {
+                    lbCount.style.display = 'none';
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
-                    // Hide counter if single asset
-                    const counter = lbWrapper.querySelector('.lightbox-counter');
-                    if (counter) counter.style.display = 'none';
                 }
                 
+                // Fade In
                 lbWrapper.classList.remove('lightbox-animating');
             }, 150); 
         };
@@ -152,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
-            lbWrapper.innerHTML = ''; 
+            lbImg.src = ''; // Clear image to free memory
             document.body.style.overflow = 'auto';
         };
 
@@ -189,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
+            // Videos still require innerHTML because of iframe instantiation
             lbWrapper.innerHTML = `
                 <div class="video-stage">
                     <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
