@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.3
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.4
    Features: Context-Aware Injection, Vimeo-Exclusive Video Engine
    Architecture: High-Fidelity Cinematic Overlay
-   Updates: Mobile Swipe Engine, Kinetic Transition Logic
+   Updates: Concertina Footer Logic, Static Vertical Anchor Lock
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -76,35 +76,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullSrc = currentItem.getAttribute('data-full');
             const caption = currentItem.getAttribute('alt') || "";
             
-            // Apply animating class for visual feedback
+            // Apply kinetic animating class
             lbWrapper.classList.add('lightbox-animating');
 
-            // Brief delay to allow CSS transition to trigger before content swap
             setTimeout(() => {
+                // Concertina Footer: Caption and Counter are adjacent siblings
                 lbWrapper.innerHTML = `
                     <img class="lightbox-content" id="lightbox-img" src="${fullSrc}">
                     <div class="lightbox-info">
                         <span class="lightbox-caption">${caption}</span>
-                        <span id="lightbox-counter" class="lightbox-counter"></span>
+                        <span class="lightbox-counter">${currentIndex + 1} / ${currentGallery.length}</span>
                     </div>
                 `;
 
                 if (currentGallery.length > 1) {
                     prevBtn.style.display = 'block';
                     nextBtn.style.display = 'block';
-                    const lbCounter = document.getElementById('lightbox-counter');
-                    if (lbCounter) lbCounter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
                 } else {
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
+                    // Hide counter if single asset
+                    const counter = lbWrapper.querySelector('.lightbox-counter');
+                    if (counter) counter.style.display = 'none';
                 }
                 
-                // Remove class to fade/scale image back in
                 lbWrapper.classList.remove('lightbox-animating');
             }, 150); 
         };
 
-        // Swipe Logic for Mobile
         const handleSwipe = () => {
             const swipeThreshold = 50;
             if (touchEndX < touchStartX - swipeThreshold) nextBtn.click();
@@ -120,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
             handleSwipe();
         }, { passive: true });
 
-        // Delegated click listener
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
