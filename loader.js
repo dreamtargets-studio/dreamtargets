@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.5
+   THINKAMIGO UNIFIED LOADER & INJECTOR v21.7
    Features: Context-Aware Injection, Persistent DOM Lightbox
-   Architecture: High-Fidelity Kinetic Cross-Fade
-   Updates: Aspect-Ratio Lock, Zero-Jump Footer, Target-Swapping
+   Architecture: Kinetic Slide (Mobile) | Hard Cut (Desktop)
+   Updates: UI Anchor Lock, DVH Support, Native Swipe Simulation
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,14 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Persistent Mode) ---
+    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Kinetic Build) ---
     const injectLightbox = () => {
         if (document.getElementById('lightbox-overlay')) return;
 
         const lb = document.createElement('div');
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
-        // Persistent structure: elements are created once, swapped later
         lb.innerHTML = `
             <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
@@ -69,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setupLightboxLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
-        const lbWrapper = document.querySelector('.lightbox-wrapper');
         const lbImg = document.getElementById('lb-main-img');
         const lbCap = document.getElementById('lb-cap');
         const lbCount = document.getElementById('lb-count');
@@ -79,50 +77,68 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentGallery = [];
         let currentIndex = 0;
         let touchStartX = 0;
-        let touchEndX = 0;
 
-        const updateLightbox = () => {
+        const updateLightbox = (isSwipe = false, direction = 1) => {
             const currentItem = currentGallery[currentIndex];
-            
-            // Trigger Fade Out/Scale via CSS
-            lbWrapper.classList.add('lightbox-animating');
+            if (!currentItem) return;
 
-            // Swap content during the transparent state
-            setTimeout(() => {
+            if (isSwipe) {
+                // MOBILE: Native Slide Displacement
+                lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s';
+                lbImg.style.transform = `translateX(${direction * -100}%)`;
+                lbImg.style.opacity = '0';
+
+                setTimeout(() => {
+                    lbImg.style.transition = 'none'; // Snap to entry point
+                    lbImg.style.transform = `translateX(${direction * 100}%)`;
+                    lbImg.src = currentItem.getAttribute('data-full');
+                    lbCap.textContent = currentItem.getAttribute('alt') || "";
+                    lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+
+                    lbImg.offsetHeight; // Force reflow
+
+                    lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s';
+                    lbImg.style.transform = 'translateX(0)';
+                    lbImg.style.opacity = '1';
+                }, 200);
+            } else {
+                // DESKTOP: Snappy Hard Cut (Instant Swap)
+                lbImg.style.transition = 'none';
+                lbImg.style.transform = 'translateX(0)';
+                lbImg.style.opacity = '1';
                 lbImg.src = currentItem.getAttribute('data-full');
                 lbCap.textContent = currentItem.getAttribute('alt') || "";
-                
-                if (currentGallery.length > 1) {
-                    lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
-                    lbCount.style.display = 'inline-block';
-                    prevBtn.style.display = 'block';
-                    nextBtn.style.display = 'block';
-                } else {
-                    lbCount.style.display = 'none';
-                    prevBtn.style.display = 'none';
-                    nextBtn.style.display = 'none';
-                }
-                
-                // Fade In
-                lbWrapper.classList.remove('lightbox-animating');
-            }, 150); 
+                lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+            }
+
+            // Sync Nav Buttons
+            if (currentGallery.length > 1) {
+                lbCount.style.display = 'inline-block';
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+            } else {
+                lbCount.style.display = 'none';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
         };
 
-        const handleSwipe = () => {
-            const swipeThreshold = 50;
-            if (touchEndX < touchStartX - swipeThreshold) nextBtn.click();
-            if (touchEndX > touchStartX + swipeThreshold) prevBtn.click();
-        };
-
+        // Swipe Handling
         overlay.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
         overlay.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+            const touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                const dir = diff > 0 ? 1 : -1;
+                currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+                updateLightbox(true, dir);
+            }
         }, { passive: true });
 
+        // Delegation for Gallery Images
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -136,36 +152,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIndex = 0;
             }
 
-            updateLightbox();
+            updateLightbox(false);
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
 
+        // Navigation Controls
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentGallery.length;
-            updateLightbox();
+            updateLightbox(false); // Hard cut on button click
         });
 
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-            updateLightbox();
+            updateLightbox(false); // Hard cut on button click
         });
 
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
-            lbImg.src = ''; // Clear image to free memory
+            lbImg.src = ''; 
             document.body.style.overflow = 'auto';
         };
 
-        const closeBtn = overlay.querySelector('.lightbox-close');
-        closeBtn.addEventListener('click', closeLB);
-
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) closeLB(e);
-        });
+        overlay.querySelector('.lightbox-close').addEventListener('click', closeLB);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLB(e); });
 
         document.addEventListener('keydown', (e) => {
             if (overlay.style.display === 'flex') {
@@ -193,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
-            // Videos still require innerHTML because of iframe instantiation
             lbWrapper.innerHTML = `
                 <div class="video-stage">
                     <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
