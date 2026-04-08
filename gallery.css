@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.86 [CONCERTINA FOOTER]
-   Architecture: Z-Indexed Pseudo-Box (Consulting Base)
-   Updates: Single-Line Footer | Split Opacity Hierarchy | Axis Lock
+   THINKAMIGO GALLERY ENGINE v6.87 [STABILITY PATCH]
+   Architecture: Persistent Frame & Viewport Anchor
+   Updates: Aspect-Ratio Lock | Zero-Jump Footer | Solid Assets
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -86,7 +86,7 @@
     }
 }
 
-/* --- 6. LIGHTBOX UI (Theater Mode - Solid Assets) --- */
+/* --- 6. LIGHTBOX UI (Theater Mode - Stability Build) --- */
 .lightbox { 
     display: none; 
     position: fixed; 
@@ -100,26 +100,31 @@
     align-items: center;
 }
 
-.lightbox-content { 
-    max-width: 90vw; 
-    max-height: 80vh; 
-    object-fit: contain; 
-    opacity: 1 !important;
-    margin-bottom: 70px; /* Buffer for fixed footer */
-}
-
-/* KINETIC TRANSITION WRAPPER */
+/* KINETIC TRANSITION WRAPPER - Persistent Frame */
 .lightbox-wrapper {
-    transition: opacity 0.15s ease, transform 0.15s ease;
-    width: 100%;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    opacity: 1;
 }
 
 .lightbox-animating {
     opacity: 0;
-    transform: scale(0.98);
+    transform: scale(0.99); /* Subtle breathe effect */
+}
+
+/* ASPECT-RATIO LOCK: The frame never changes size */
+.lightbox-content { 
+    width: 90vw; 
+    height: 80vh; 
+    object-fit: contain; 
+    opacity: 1 !important;
+    margin-bottom: 60px; /* Space for the fixed footer */
+    flex-shrink: 0;
 }
 
 /* SHARED BUTTON ARCHITECTURE */
@@ -131,11 +136,10 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 24px;
-    z-index: 120;
+    z-index: 150;
     background-color: transparent;
 }
 
-/* THE GHOST BOX: Locked behind the icon */
 .lightbox-close::before, 
 .lightbox-prev::before, 
 .lightbox-next::before {
@@ -156,22 +160,14 @@
     opacity: 0.4;
 }
 
-/* POSITIONING & SVG REFINEMENT */
+/* POSITIONING */
 .lightbox-close { 
-    top: 25px; 
-    right: 25px; 
-    width: 50px; 
-    height: 50px; 
+    top: 25px; right: 25px; width: 50px; height: 50px; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
 }
 
 .lightbox-prev, 
-.lightbox-next { 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 55px; 
-    height: 55px; 
-}
+.lightbox-next { top: 50%; transform: translateY(-50%); width: 55px; height: 55px; }
 
 .lightbox-prev { 
     left: 25px; 
@@ -183,10 +179,10 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
 }
 
-/* SINGLE-LINE FOOTER HIERARCHY */
+/* FIXED SINGLE-LINE FOOTER */
 .lightbox-info { 
     position: absolute; 
-    bottom: 35px; /* Pin to viewport bottom */
+    bottom: 35px; /* Locked to viewport bottom */
     left: 50%;
     transform: translateX(-50%);
     width: 100%; 
@@ -194,11 +190,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Concertina spacing */
+    gap: 15px;
     color: #ffffff; 
     font-family: 'Poppins', sans-serif;
     pointer-events: none;
-    z-index: 130;
+    z-index: 160;
 }
 
 .lightbox-caption {
@@ -217,11 +213,8 @@
 }
 
 @media (max-width: 768px) {
-    .lightbox-close, .lightbox-prev, .lightbox-next {
-        width: 44px;
-        height: 44px;
-        background-size: 20px;
-    }
+    .lightbox-content { width: 95vw; height: 75vh; }
+    .lightbox-close, .lightbox-prev, .lightbox-next { width: 44px; height: 44px; background-size: 20px; }
     .lightbox-prev { left: 15px; }
     .lightbox-next { right: 15px; }
     .lightbox-close { top: 15px; right: 15px; }
