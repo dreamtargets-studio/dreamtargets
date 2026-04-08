@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.0
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.1
    Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Transition: Kinetic Nudge (Mobile) | Hard Cut / Slide (Desktop)
-   Updates: Aspect-Lock Performance, Persistent Track Snapping
+   Transition: Kinetic Nudge (Mobile) | Filmstrip Slide (Desktop)
+   Updates: Counter-First Priority, Auto-Truncation Logic
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="lightbox-info">
                 <span class="lightbox-caption" id="lb-cap"></span>
-                <span class="lightbox-counter" id="lb-count"></span>
             </div>
         `;
         document.body.appendChild(lb);
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const slotCurr = document.getElementById('slot-curr');
         const slotNext = document.getElementById('slot-next');
         const lbCap = document.getElementById('lb-cap');
-        const lbCount = document.getElementById('lb-count');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         
@@ -88,9 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const getImg = (idx) => `<img src="${currentGallery[idx].getAttribute('data-full')}" class="lightbox-content">`;
 
+            // Update Main Slot
             slotCurr.innerHTML = getImg(currentIndex);
-            lbCap.textContent = currentGallery[currentIndex].getAttribute('alt') || "";
-            lbCount.textContent = `${currentIndex + 1} / ${total}`;
+            
+            // Construct Content-First Caption String
+            const rawCap = currentGallery[currentIndex].getAttribute('alt') || "";
+            const sep = rawCap ? ` &nbsp;—&nbsp; ` : "";
+            
+            // Injected as a single block for the CSS Truncator
+            lbCap.innerHTML = `<span class="lb-count-accent">${currentIndex + 1} / ${total}</span>${sep}${rawCap}`;
 
             if (total > 1) {
                 slotPrev.innerHTML = getImg(prevIdx);
@@ -109,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isAnimating || currentGallery.length <= 1) return;
             isAnimating = true;
 
-            // Define the slide: -66.66% is Next, 0% is Previous (Center is -33.33%)
             const targetTranslate = direction === 1 ? -66.66 : 0;
             
             track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -118,10 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
                 track.style.transition = 'none';
-                track.style.transform = 'translateX(-33.33%)'; // Snap back to center
+                track.style.transform = 'translateX(-33.33%)';
                 prepareSlots();
                 isAnimating = false;
-            }, 410); // Sync with CSS transition time
+            }, 410);
         };
 
         // Swipe Detection
@@ -134,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        // Initial Launch via Delegation
+        // Delegation
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -179,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. MODULE: VIDEO ENGINE ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
-        const track = document.getElementById('lb-track');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
 
@@ -193,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
-            // Video bypasses filmstrip and uses center slot directly
             document.getElementById('slot-curr').innerHTML = `
                 <div class="video-stage">
                     <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
