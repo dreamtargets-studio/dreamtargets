@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.3
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.4
    Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Updates: Scroll Lock Logic (.no-scroll) | Comic-Mode Ready
+   Updates: .no-scroll Fix | Fullscreen API "Nudge"
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
         
-        // Check if page is in Comic Mode to apply specialized viewer class
         if (document.body.classList.contains('comic-mode')) {
             lb.classList.add('comic-mode');
         }
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             slotCurr.innerHTML = getImg(currentIndex);
             
-            // UI Labels
             const rawCap = currentGallery[currentIndex].getAttribute('alt') || "";
             const isComic = document.body.classList.contains('comic-mode');
             const sep = rawCap ? (isComic ? ` &nbsp;/&nbsp; ` : ` &nbsp;—&nbsp; `) : "";
@@ -128,12 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 track.style.transform = 'translateX(-33.33%)';
                 prepareSlots();
                 isAnimating = false;
-                // Scroll to top of slot if in scrollable comic mode
                 slotCurr.scrollTop = 0;
             }, 410);
         };
 
-        // Interaction
         overlay.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
         overlay.addEventListener('touchend', e => {
             const touchEndX = e.changedTouches[0].screenX;
@@ -157,16 +153,27 @@ document.addEventListener('DOMContentLoaded', () => {
             prepareSlots();
             
             overlay.style.display = 'flex';
-            // SCROLL LOCK ACTIVE
             document.body.classList.add('no-scroll');
+
+            // FULLSCREEN NUDGE: Attempt to retract browser UI
+            if (overlay.requestFullscreen) {
+                overlay.requestFullscreen().catch(() => { /* Silent fail for security blocks */ });
+            } else if (overlay.webkitRequestFullscreen) {
+                overlay.webkitRequestFullscreen().catch(() => { });
+            }
         });
 
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
             [slotPrev, slotCurr, slotNext].forEach(s => s.innerHTML = '');
-            // SCROLL LOCK REMOVED
             document.body.classList.remove('no-scroll');
+
+            // Exit Fullscreen if active
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
         };
 
         nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
