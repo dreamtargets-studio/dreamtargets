@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v21.7
-   Features: Context-Aware Injection, Persistent DOM Lightbox
-   Architecture: Kinetic Slide (Mobile) | Hard Cut (Desktop)
-   Updates: UI Anchor Lock, DVH Support, Native Swipe Simulation
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.0
+   Architecture: Triple-Slot Filmstrip (Left | Center | Right)
+   Transition: Kinetic Nudge (Mobile) | Hard Cut / Slide (Desktop)
+   Updates: Aspect-Lock Performance, Persistent Track Snapping
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,10 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const needsGallery = document.querySelector('img[data-full]');
-            const needsVideo = document.querySelector('.video-item');
-            
-            if (needsGallery || needsVideo) {
+            if (document.querySelector('img[data-full]') || document.querySelector('.video-item')) {
                 injectLightbox();
             }
 
@@ -42,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Kinetic Build) ---
+    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Filmstrip Build) ---
     const injectLightbox = () => {
         if (document.getElementById('lightbox-overlay')) return;
 
@@ -53,12 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
             <div class="lightbox-next" id="next-btn"></div>
-            <div class="lightbox-wrapper">
-                <img class="lightbox-content" id="lb-main-img" src="">
-                <div class="lightbox-info">
-                    <span class="lightbox-caption" id="lb-cap"></span>
-                    <span class="lightbox-counter" id="lb-count"></span>
-                </div>
+            <div class="lightbox-track" id="lb-track">
+                <div class="lb-slot" id="slot-prev"></div>
+                <div class="lb-slot" id="slot-curr"></div>
+                <div class="lb-slot" id="slot-next"></div>
+            </div>
+            <div class="lightbox-info">
+                <span class="lightbox-caption" id="lb-cap"></span>
+                <span class="lightbox-counter" id="lb-count"></span>
             </div>
         `;
         document.body.appendChild(lb);
@@ -68,7 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setupLightboxLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
-        const lbImg = document.getElementById('lb-main-img');
+        const track = document.getElementById('lb-track');
+        const slotPrev = document.getElementById('slot-prev');
+        const slotCurr = document.getElementById('slot-curr');
+        const slotNext = document.getElementById('slot-next');
         const lbCap = document.getElementById('lb-cap');
         const lbCount = document.getElementById('lb-count');
         const prevBtn = document.getElementById('prev-btn');
@@ -77,103 +79,88 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentGallery = [];
         let currentIndex = 0;
         let touchStartX = 0;
+        let isAnimating = false;
 
-        const updateLightbox = (isSwipe = false, direction = 1) => {
-            const currentItem = currentGallery[currentIndex];
-            if (!currentItem) return;
+        const prepareSlots = () => {
+            const total = currentGallery.length;
+            const prevIdx = (currentIndex - 1 + total) % total;
+            const nextIdx = (currentIndex + 1) % total;
 
-            if (isSwipe) {
-                // MOBILE: Native Slide Displacement
-                lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s';
-                lbImg.style.transform = `translateX(${direction * -100}%)`;
-                lbImg.style.opacity = '0';
+            const getImg = (idx) => `<img src="${currentGallery[idx].getAttribute('data-full')}" class="lightbox-content">`;
 
-                setTimeout(() => {
-                    lbImg.style.transition = 'none'; // Snap to entry point
-                    lbImg.style.transform = `translateX(${direction * 100}%)`;
-                    lbImg.src = currentItem.getAttribute('data-full');
-                    lbCap.textContent = currentItem.getAttribute('alt') || "";
-                    lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+            slotCurr.innerHTML = getImg(currentIndex);
+            lbCap.textContent = currentGallery[currentIndex].getAttribute('alt') || "";
+            lbCount.textContent = `${currentIndex + 1} / ${total}`;
 
-                    lbImg.offsetHeight; // Force reflow
-
-                    lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s';
-                    lbImg.style.transform = 'translateX(0)';
-                    lbImg.style.opacity = '1';
-                }, 200);
-            } else {
-                // DESKTOP: Snappy Hard Cut (Instant Swap)
-                lbImg.style.transition = 'none';
-                lbImg.style.transform = 'translateX(0)';
-                lbImg.style.opacity = '1';
-                lbImg.src = currentItem.getAttribute('data-full');
-                lbCap.textContent = currentItem.getAttribute('alt') || "";
-                lbCount.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
-            }
-
-            // Sync Nav Buttons
-            if (currentGallery.length > 1) {
-                lbCount.style.display = 'inline-block';
+            if (total > 1) {
+                slotPrev.innerHTML = getImg(prevIdx);
+                slotNext.innerHTML = getImg(nextIdx);
                 prevBtn.style.display = 'block';
                 nextBtn.style.display = 'block';
             } else {
-                lbCount.style.display = 'none';
+                slotPrev.innerHTML = '';
+                slotNext.innerHTML = '';
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
             }
         };
 
-        // Swipe Handling
-        overlay.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+        const navigate = (direction) => {
+            if (isAnimating || currentGallery.length <= 1) return;
+            isAnimating = true;
 
+            // Define the slide: -66.66% is Next, 0% is Previous (Center is -33.33%)
+            const targetTranslate = direction === 1 ? -66.66 : 0;
+            
+            track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            track.style.transform = `translateX(${targetTranslate}%)`;
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(-33.33%)'; // Snap back to center
+                prepareSlots();
+                isAnimating = false;
+            }, 410); // Sync with CSS transition time
+        };
+
+        // Swipe Detection
+        overlay.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
         overlay.addEventListener('touchend', e => {
             const touchEndX = e.changedTouches[0].screenX;
             const diff = touchStartX - touchEndX;
             if (Math.abs(diff) > 50) {
-                const dir = diff > 0 ? 1 : -1;
-                currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
-                updateLightbox(true, dir);
+                navigate(diff > 0 ? 1 : -1);
             }
         }, { passive: true });
 
-        // Delegation for Gallery Images
+        // Initial Launch via Delegation
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
 
             const galleryTag = clicked.getAttribute('data-gallery');
-            if (galleryTag) {
-                currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryTag}"]`));
-                currentIndex = currentGallery.indexOf(clicked);
-            } else {
-                currentGallery = [clicked];
-                currentIndex = 0;
-            }
-
-            updateLightbox(false);
+            currentGallery = galleryTag 
+                ? Array.from(document.querySelectorAll(`img[data-gallery="${galleryTag}"]`))
+                : [clicked];
+            
+            currentIndex = currentGallery.indexOf(clicked);
+            
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(-33.33%)';
+            prepareSlots();
+            
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
 
-        // Navigation Controls
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % currentGallery.length;
-            updateLightbox(false); // Hard cut on button click
-        });
-
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-            updateLightbox(false); // Hard cut on button click
-        });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
 
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
-            lbImg.src = ''; 
+            [slotPrev, slotCurr, slotNext].forEach(s => s.innerHTML = '');
             document.body.style.overflow = 'auto';
         };
 
@@ -183,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', (e) => {
             if (overlay.style.display === 'flex') {
                 if (e.key === 'Escape') closeLB();
-                if (e.key === 'ArrowRight' && currentGallery.length > 1) nextBtn.click();
-                if (e.key === 'ArrowLeft' && currentGallery.length > 1) prevBtn.click();
+                if (e.key === 'ArrowRight') navigate(1);
+                if (e.key === 'ArrowLeft') navigate(-1);
             }
         });
     };
@@ -192,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. MODULE: VIDEO ENGINE ---
     const setupVideoLogic = () => {
         const overlay = document.getElementById('lightbox-overlay');
-        const lbWrapper = document.querySelector('.lightbox-wrapper');
+        const track = document.getElementById('lb-track');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
 
@@ -206,11 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
 
-            lbWrapper.innerHTML = `
+            // Video bypasses filmstrip and uses center slot directly
+            document.getElementById('slot-curr').innerHTML = `
                 <div class="video-stage">
                     <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
             `;
+            document.getElementById('slot-prev').innerHTML = '';
+            document.getElementById('slot-next').innerHTML = '';
             
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
