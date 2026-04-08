@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.4
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.5
    Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Updates: .no-scroll Fix | Fullscreen API "Nudge"
+   Updates: Mobile-Only Fullscreen | Fixed Close Box Logic
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -155,11 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'flex';
             document.body.classList.add('no-scroll');
 
-            // FULLSCREEN NUDGE: Attempt to retract browser UI
-            if (overlay.requestFullscreen) {
-                overlay.requestFullscreen().catch(() => { /* Silent fail for security blocks */ });
-            } else if (overlay.webkitRequestFullscreen) {
-                overlay.webkitRequestFullscreen().catch(() => { });
+            // --- MOBILE-ONLY FULLSCREEN NUDGE ---
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            if (isTouch) {
+                if (overlay.requestFullscreen) {
+                    overlay.requestFullscreen().catch(() => { });
+                } else if (overlay.webkitRequestFullscreen) {
+                    overlay.webkitRequestFullscreen().catch(() => { });
+                }
             }
         });
 
@@ -238,28 +241,3 @@ document.addEventListener('DOMContentLoaded', () => {
                 engine.play();
                 masterBtn.classList.add('playing');
             });
-        });
-
-        masterBtn.addEventListener('click', () => {
-            engine.paused ? engine.play() : engine.pause();
-            masterBtn.classList.toggle('playing');
-        });
-    };
-
-    // --- 6. MODULE: UI UTILITIES ---
-    const setupUI = () => {
-        const topBtn = document.getElementById('backToTop');
-        if (!topBtn) return;
-        window.addEventListener('scroll', () => {
-            window.scrollY > 400 ? topBtn.classList.add('show') : topBtn.classList.remove('show');
-        }, { passive: true });
-        topBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    };
-
-    loadPartials();
-    setupAudioPlayer();
-
-});
