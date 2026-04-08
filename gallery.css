@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.83 [SOLID ASSET BUILD]
+   THINKAMIGO GALLERY ENGINE v6.86 [CONCERTINA FOOTER]
    Architecture: Z-Indexed Pseudo-Box (Consulting Base)
-   Updates: Removed Global Opacity (Solid Images) | Kinetic Support
+   Updates: Single-Line Footer | Split Opacity Hierarchy | Axis Lock
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -95,7 +95,6 @@
     left: 0; 
     width: 100vw; 
     height: 100vh; 
-    /* Use solid HEX to prevent image transparency inheritance */
     background-color: #0A0A0A; 
     justify-content: center; 
     align-items: center;
@@ -105,7 +104,8 @@
     max-width: 90vw; 
     max-height: 80vh; 
     object-fit: contain; 
-    opacity: 1 !important; /* Forces image to stay solid */
+    opacity: 1 !important;
+    margin-bottom: 70px; /* Buffer for fixed footer */
 }
 
 /* KINETIC TRANSITION WRAPPER */
@@ -117,7 +117,6 @@
     align-items: center;
 }
 
-/* Pseudo-swipe animation state */
 .lightbox-animating {
     opacity: 0;
     transform: scale(0.98);
@@ -184,32 +183,37 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
 }
 
-/* TYPOGRAPHY */
+/* SINGLE-LINE FOOTER HIERARCHY */
 .lightbox-info { 
     position: absolute; 
-    bottom: 30px; 
+    bottom: 35px; /* Pin to viewport bottom */
     left: 50%;
     transform: translateX(-50%);
     width: 100%; 
     max-width: 90%;
-    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Concertina spacing */
     color: #ffffff; 
     font-family: 'Poppins', sans-serif;
     pointer-events: none;
-    z-index: 110;
+    z-index: 130;
 }
 
 .lightbox-caption {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px; 
+    font-size: 13px; 
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    opacity: 1;
+    margin: 0;
 }
 
 .lightbox-counter {
-    opacity: 0.5;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.4;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {
@@ -221,4 +225,5 @@
     .lightbox-prev { left: 15px; }
     .lightbox-next { right: 15px; }
     .lightbox-close { top: 15px; right: 15px; }
+    .lightbox-info { bottom: 25px; gap: 10px; }
 }
