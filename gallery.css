@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.24
+   THINKAMIGO GALLERY ENGINE v7.25
    Architecture: Triple-Slot Filmstrip (300vw Track)
-   Standards: STRICT 6-Digit Hex | No RGB | No 8-Digit Hex
-   Updates: Fixed Close Anchor | Safe Area Awareness | Branded Blue
+   Philosophy: Static Frame / Owning the Viewport
+   Updates: Fixed UI Landmarks | 15px Tight Anchor | 92dvh Lift
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -12,13 +12,13 @@
     box-sizing: border-box;
 }
 
-/* Scroll Lock: Prevents background jumping/shifting when Lightbox is open */
+/* Scroll Lock */
 .no-scroll {
     overflow: hidden !important;
     height: 100dvh;
 }
 
-/* --- 1. THE GRID SUITE (Rail-Nested) --- */
+/* --- 1. THE GRID SUITE --- */
 .gallery-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px 0; width: 100%; }
 .video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 30px 0; width: 100%; }
 .gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0; width: 100%; }
@@ -54,11 +54,11 @@
     border-left: 12px solid #FFFFFF; margin-left: 4px;
 }
 
-/* --- 4. LIGHTBOX UI (Theater Mode) --- */
+/* --- 4. LIGHTBOX UI (Static Frame Mode) --- */
 .lightbox { 
     display: none; position: fixed; z-index: 9999999; 
     top: 0; left: 0; width: 100vw; height: 100dvh; 
-    background-color: #0A254A; /* Branded Footer Blue from chassis.css */
+    background-color: #0A254A; 
     overflow: hidden;
 }
 
@@ -73,43 +73,59 @@
 }
 
 .lightbox-content { 
-    max-width: 90vw; 
-    max-height: 70dvh; 
+    max-width: 95vw; 
+    max-height: 92dvh; /* Max real estate for portrait comics */
     object-fit: contain; 
-    margin-bottom: 80px; 
+    margin: 0; 
 }
 
-/* UI NAVIGATION ELEMENTS */
+/* STATIC UI LANDMARKS (Uppermost Layer) */
 .lightbox-close { 
     position: fixed; 
     top: 15px; 
     right: 15px; 
-    width: 44px; /* Hit area */
-    height: 44px; 
+    width: 40px; /* 40px Hit Area */
+    height: 40px; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 22px; /* Visual icon size */
-    z-index: 9999999;
+    background-size: 22px; /* Visual Icon */
+    z-index: 99999999;
     cursor: pointer;
 }
 
 .lightbox-prev, .lightbox-next { 
-    position: absolute; cursor: pointer; background-repeat: no-repeat;
-    background-position: center; background-size: 24px; z-index: 200;
-    top: 45%; transform: translateY(-50%); width: 55px; height: 55px; opacity: 0.4;
+    position: fixed; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 40px; /* 40px Hit Area */
+    height: 40px; 
+    z-index: 99999999;
+    cursor: pointer; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: 24px;
+    opacity: 0.6;
 }
-.lightbox-prev { left: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
-.lightbox-next { right: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 
-/* CONCERTINA FOOTER (Standard Mode) */
+.lightbox-prev { 
+    left: 15px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
+
+.lightbox-next { 
+    right: 15px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
+
+/* OVERLAY CAPTION */
 .lightbox-info { 
-    position: absolute; 
-    bottom: 30px; 
+    position: fixed; 
+    bottom: 15px; 
     left: 50%; transform: translateX(-50%);
-    width: 90%; text-align: center;
+    width: 80%; text-align: center;
     color: #FFFFFF; font-family: 'Poppins', sans-serif;
-    pointer-events: none; z-index: 210;
+    pointer-events: none; z-index: 99999998;
     text-shadow: 1px 1px 3px #000000;
 }
 
@@ -120,9 +136,7 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.lb-count-accent {
-    opacity: 0.5; font-weight: 400; margin-right: 2px;
-}
+.lb-count-accent { opacity: 0.5; font-weight: 400; margin-right: 2px; }
 
 /* --- 5. RESPONSIVE REFINEMENTS --- */
 @media (max-width: 1024px) {
@@ -132,14 +146,18 @@
 }
 
 @media (max-width: 768px) {
+    /* Safe Area Awareness for Notched Screens */
     .lightbox-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
     }
+    .lightbox-prev { left: max(10px, env(safe-area-inset-left)); }
+    .lightbox-next { right: max(10px, env(safe-area-inset-right)); }
+
     .lb-slot .lightbox-content { 
-        max-height: 82dvh; 
-        margin-bottom: 40px; 
+        max-height: 92dvh; /* Maximum vertical span for portrait */
+        max-width: 95vw;
+        margin-bottom: 0; 
     }
-    .lightbox-info { bottom: 25px; }
-    .lightbox-prev, .lightbox-next { display: none !important; }
+    .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
 }
