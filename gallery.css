@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.23
+   THINKAMIGO GALLERY ENGINE v7.24
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Standards: STRICT 6-Digit Hex | No RGB | No 8-Digit Hex
-   Updates: Branded Footer Background (#0A254A) | Scroll Lock
+   Updates: Fixed Close Anchor | Safe Area Awareness | Branded Blue
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -58,7 +58,7 @@
 .lightbox { 
     display: none; position: fixed; z-index: 9999999; 
     top: 0; left: 0; width: 100vw; height: 100dvh; 
-    background-color: #0A254A; /* Branded Footer Blue */
+    background-color: #0A254A; /* Branded Footer Blue from chassis.css */
     overflow: hidden;
 }
 
@@ -80,17 +80,23 @@
 }
 
 /* UI NAVIGATION ELEMENTS */
-.lightbox-close, .lightbox-prev, .lightbox-next {
-    position: absolute; cursor: pointer; background-repeat: no-repeat;
-    background-position: center; background-size: 24px; z-index: 200;
-}
-
 .lightbox-close { 
-    top: 25px; right: 25px; width: 50px; height: 50px; 
+    position: fixed; 
+    top: 15px; 
+    right: 15px; 
+    width: 44px; /* Hit area */
+    height: 44px; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px; /* Visual icon size */
+    z-index: 9999999;
+    cursor: pointer;
 }
 
 .lightbox-prev, .lightbox-next { 
+    position: absolute; cursor: pointer; background-repeat: no-repeat;
+    background-position: center; background-size: 24px; z-index: 200;
     top: 45%; transform: translateY(-50%); width: 55px; height: 55px; opacity: 0.4;
 }
 .lightbox-prev { left: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
@@ -126,6 +132,10 @@
 }
 
 @media (max-width: 768px) {
+    .lightbox-close { 
+        top: max(15px, env(safe-area-inset-top)); 
+        right: max(15px, env(safe-area-inset-right)); 
+    }
     .lb-slot .lightbox-content { 
         max-height: 82dvh; 
         margin-bottom: 40px; 
