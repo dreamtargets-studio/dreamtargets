@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v6.82 [KINETIC BUILD]
+   THINKAMIGO GALLERY ENGINE v6.83 [SOLID ASSET BUILD]
    Architecture: Z-Indexed Pseudo-Box (Consulting Base)
-   Updates: Pseudo-Swipe States | Top-Layer Icons | Ghost Boxes
+   Updates: Removed Global Opacity (Solid Images) | Kinetic Support
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -86,15 +86,27 @@
     }
 }
 
-/* --- 6. LIGHTBOX UI (Theater Mode) --- */
+/* --- 6. LIGHTBOX UI (Theater Mode - Solid Assets) --- */
 .lightbox { 
-    display: none; position: fixed; z-index: 9999999; top: 0; left: 0; width: 100vw; height: 100vh; 
-    background-color: #000000;
-    opacity: 0.98; 
-    justify-content: center; align-items: center;
+    display: none; 
+    position: fixed; 
+    z-index: 9999999; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    /* Use solid HEX to prevent image transparency inheritance */
+    background-color: #0A0A0A; 
+    justify-content: center; 
+    align-items: center;
 }
 
-.lightbox-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
+.lightbox-content { 
+    max-width: 90vw; 
+    max-height: 80vh; 
+    object-fit: contain; 
+    opacity: 1 !important; /* Forces image to stay solid */
+}
 
 /* KINETIC TRANSITION WRAPPER */
 .lightbox-wrapper {
