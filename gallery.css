@@ -1,7 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.2 [THE TRUNCATOR]
+   THINKAMIGO GALLERY ENGINE v7.14 [COMICS VIEWER]
    Architecture: Triple-Slot Filmstrip (300vw Track)
-   Updates: Counter-First Priority | Truncation Rule | Portrait Max
+   Standards: STRICT 6-Digit Hex | No RGB | No 8-Digit Hex
+   Updates: Comics Full-Bleed | Portrait Max | Pure Hex
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -24,21 +25,21 @@
 
 /* --- 2. ASSET STYLING --- */
 .gallery-item img, .video-item img, .portrait-item img {
-    width: 100%; height: auto; display: block; border: 1px solid #dddddd;
+    width: 100%; height: auto; display: block; border: 1px solid #DDDDDD;
 }
 
 .featured-image-single {
-    width: 100%; margin: 35px 0; display: block; border: 1px solid #dddddd;
-    background-color: #e2dfd2; padding: 0;
+    width: 100%; margin: 35px 0; display: block; border: 1px solid #DDDDDD;
+    background-color: #E2DFD2; padding: 0;
 }
 
 .featured-image-single img { width: 100%; height: auto; display: block; border: none; margin: 0; }
 
 /* --- 3. THE CAPTION (In-Rail) --- */
 .featured-caption { 
-    display: block; width: 100%; margin: 0; background-color: #e2dfd2; 
+    display: block; width: 100%; margin: 0; background-color: #E2DFD2; 
     padding: 12px 18px; font-family: 'Poppins', sans-serif; 
-    font-size: 14px; color: #444444; border-top: 1px solid #dddddd;
+    font-size: 14px; color: #444444; border-top: 1px solid #DDDDDD;
 }
 
 /* --- 4. VIDEO UI OVERLAYS --- */
@@ -47,21 +48,21 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
     width: 44px; height: 44px; background-color: #000000; opacity: 0.6; 
     border-radius: 50%; display: flex; justify-content: center; align-items: center; 
-    pointer-events: none; border: 2px solid #ffffff;
+    pointer-events: none; border: 2px solid #FFFFFF;
 }
 .play-button-overlay::after {
     content: ''; border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-    border-left: 12px solid #ffffff; margin-left: 4px;
+    border-left: 12px solid #FFFFFF; margin-left: 4px;
 }
 
-/* --- 5. MOBILE ADAPTATION --- */
+/* --- 5. MOBILE ADAPTATION (Grids) --- */
 @media (max-width: 1024px) {
     .gallery-grid-3, .video-grid-4, .gallery-portrait-4 {
         grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0;
     }
 }
 
-/* --- 6. LIGHTBOX UI (Theater Mode - v7.2 Filmstrip Build) --- */
+/* --- 6. LIGHTBOX UI (Theater Mode - Filmstrip Build) --- */
 .lightbox { 
     display: none; position: fixed; z-index: 9999999; 
     top: 0; left: 0; width: 100vw; height: 100dvh; 
@@ -80,13 +81,13 @@
 
 .lightbox-content { 
     max-width: 90vw; 
-    max-height: 70dvh; /* Reserved gutter for footer anchor */
+    max-height: 70dvh; /* Standard gutter for non-comic galleries */
     object-fit: contain; 
     opacity: 1; 
     margin-bottom: 80px; 
 }
 
-/* UI BUTTONS */
+/* UI NAVIGATION ELEMENTS */
 .lightbox-close, .lightbox-prev, .lightbox-next {
     position: absolute; cursor: pointer; background-repeat: no-repeat;
     background-position: center; background-size: 24px; z-index: 200;
@@ -97,45 +98,81 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
 }
 
-.lightbox-prev, .lightbox-next { top: 45%; transform: translateY(-50%); width: 55px; height: 55px; }
+.lightbox-prev, .lightbox-next { 
+    top: 45%; transform: translateY(-50%); width: 55px; height: 55px; opacity: 0.4;
+}
 .lightbox-prev { left: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 .lightbox-next { right: 25px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); }
 
-/* CONCERTINA FOOTER WITH TRUNCATION */
+/* CONCERTINA FOOTER (Standard Mode) */
 .lightbox-info { 
     position: absolute; 
     bottom: 30px; 
     left: 50%; transform: translateX(-50%);
     width: 90%; text-align: center;
-    color: #ffffff; font-family: 'Poppins', sans-serif;
+    color: #FFFFFF; font-family: 'Poppins', sans-serif;
     pointer-events: none; z-index: 210;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 1px 1px 3px #000000;
 }
 
 .lightbox-caption {
     display: block;
-    font-size: 12px; font-weight: 500; letter-spacing: 1px;
+    font-size: 11px; font-weight: 500; letter-spacing: 1px;
     text-transform: uppercase;
-    /* TRUNCATION LOGIC */
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .lb-count-accent {
     opacity: 0.5; font-weight: 400; margin-right: 2px;
 }
 
-/* PORTRAIT MAXIMIZER (Mobile Refinement) */
+/* --- 7. COMICS VIEWER (.comic-mode Override) --- */
+
+/* Max vertical priority for Dawn of the Unread panels */
+.comic-mode .lb-slot .lightbox-content {
+    max-width: 100vw;
+    max-height: 100dvh; 
+    margin-bottom: 0; 
+    border: none;
+    box-shadow: 0 0 40px #000000; 
+}
+
+/* HUD Overlay: Standard Hex + Transparent Keyword */
+.comic-mode .lightbox-info {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    padding: 60px 25px 25px 25px; 
+    background: linear-gradient(to top, #0A0A0A 0%, transparent 100%);
+    text-align: left;
+    transform: none;
+    pointer-events: none;
+    z-index: 210;
+}
+
+/* MOBILE REFINEMENT (The Maximizer) */
 @media (max-width: 768px) {
+    /* Standard Portrait Maximizer */
     .lb-slot .lightbox-content { 
-        max-height: 82dvh; /* Lift portrait images significantly */
+        max-height: 82dvh; 
         margin-bottom: 40px; 
     }
-    .lightbox-info { bottom: 25px; width: 85%; }
-    .lightbox-caption { font-size: 11px; }
-    .lightbox-prev, .lightbox-next { top: 40%; }
-    .lightbox-prev { left: 10px; }
-    .lightbox-next { right: 10px; }
-    .lightbox-close { top: 15px; right: 15px; width: 44px; height: 44px; }
+    
+    /* Comics Viewer Maximizer (100% Height) */
+    .comic-mode .lb-slot .lightbox-content { 
+        max-height: 100dvh; 
+        width: auto;
+        margin-bottom: 0; 
+    }
+
+    .lightbox-info { bottom: 25px; }
+    
+    .comic-mode .lightbox-info { 
+        bottom: 0;
+        padding-bottom: env(safe-area-inset-bottom, 25px);
+    }
+
+    /* Remove arrows to prioritize the filmstrip swipe interaction */
+    .lightbox-prev, .lightbox-next { 
+        display: none !important; 
+    }
 }
