@@ -1,8 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.1
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.3
    Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Transition: Kinetic Nudge (Mobile) | Filmstrip Slide (Desktop)
-   Updates: Counter-First Priority, Auto-Truncation Logic
+   Updates: Scroll Lock Logic (.no-scroll) | Comic-Mode Ready
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,13 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE (Filmstrip Build) ---
+    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE ---
     const injectLightbox = () => {
         if (document.getElementById('lightbox-overlay')) return;
 
         const lb = document.createElement('div');
         lb.id = 'lightbox-overlay';
         lb.className = 'lightbox';
+        
+        // Check if page is in Comic Mode to apply specialized viewer class
+        if (document.body.classList.contains('comic-mode')) {
+            lb.classList.add('comic-mode');
+        }
+
         lb.innerHTML = `
             <div class="lightbox-close"></div>
             <div class="lightbox-prev" id="prev-btn"></div>
@@ -86,14 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const getImg = (idx) => `<img src="${currentGallery[idx].getAttribute('data-full')}" class="lightbox-content">`;
 
-            // Update Main Slot
             slotCurr.innerHTML = getImg(currentIndex);
             
-            // Construct Content-First Caption String
+            // UI Labels
             const rawCap = currentGallery[currentIndex].getAttribute('alt') || "";
-            const sep = rawCap ? ` &nbsp;—&nbsp; ` : "";
+            const isComic = document.body.classList.contains('comic-mode');
+            const sep = rawCap ? (isComic ? ` &nbsp;/&nbsp; ` : ` &nbsp;—&nbsp; `) : "";
             
-            // Injected as a single block for the CSS Truncator
             lbCap.innerHTML = `<span class="lb-count-accent">${currentIndex + 1} / ${total}</span>${sep}${rawCap}`;
 
             if (total > 1) {
@@ -124,20 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 track.style.transform = 'translateX(-33.33%)';
                 prepareSlots();
                 isAnimating = false;
+                // Scroll to top of slot if in scrollable comic mode
+                slotCurr.scrollTop = 0;
             }, 410);
         };
 
-        // Swipe Detection
+        // Interaction
         overlay.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
         overlay.addEventListener('touchend', e => {
             const touchEndX = e.changedTouches[0].screenX;
             const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                navigate(diff > 0 ? 1 : -1);
-            }
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
         }, { passive: true });
 
-        // Delegation
         document.addEventListener('click', (e) => {
             const clicked = e.target.closest('img[data-full]');
             if (!clicked) return;
@@ -154,19 +157,20 @@ document.addEventListener('DOMContentLoaded', () => {
             prepareSlots();
             
             overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            // SCROLL LOCK ACTIVE
+            document.body.classList.add('no-scroll');
         });
-
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
 
         const closeLB = (e) => {
             if (e) e.stopPropagation(); 
             overlay.style.display = 'none';
             [slotPrev, slotCurr, slotNext].forEach(s => s.innerHTML = '');
-            document.body.style.overflow = 'auto';
+            // SCROLL LOCK REMOVED
+            document.body.classList.remove('no-scroll');
         };
 
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
         overlay.querySelector('.lightbox-close').addEventListener('click', closeLB);
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLB(e); });
 
@@ -200,11 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <iframe src="${url}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
             `;
-            document.getElementById('slot-prev').innerHTML = '';
-            document.getElementById('slot-next').innerHTML = '';
             
             overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('no-scroll');
         });
     };
 
