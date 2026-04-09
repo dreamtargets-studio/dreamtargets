@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.10
+   THINKAMIGO UNIFIED LOADER & INJECTOR v22.11
    Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Updates: STABLE BUILD | Removed Experimental UI Retraction
+   Updates: STABLE BUILD | Keyboard Navigation Added (Haptic Bridge)
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -127,6 +127,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 410);
         };
 
+        const closeLB = (e) => {
+            if (e) e.stopPropagation(); 
+            overlay.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        };
+
+        // KEYBOARD NAVIGATION (The Haptic Bridge)
+        document.addEventListener('keydown', (e) => {
+            // Only fire if the lightbox is actually visible
+            if (overlay.style.display === 'flex') {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault(); // Stop spacebar from scrolling page
+                    navigate(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigate(-1);
+                } else if (e.key === 'Escape') {
+                    closeLB();
+                }
+            }
+        });
+
         overlay.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
         overlay.addEventListener('touchend', e => {
             const diff = touchStartX - e.changedTouches[0].screenX;
@@ -149,12 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'flex';
             document.body.classList.add('no-scroll');
         });
-
-        const closeLB = (e) => {
-            if (e) e.stopPropagation(); 
-            overlay.style.display = 'none';
-            document.body.classList.remove('no-scroll');
-        };
 
         nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
         prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
