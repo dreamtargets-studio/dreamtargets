@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.80
+   THINKAMIGO GALLERY ENGINE v7.90
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Philosophy: STATIC FRAME / NATIVE SYSTEM CURSOR ONLY
-   Updates: Baseline Alignment | 10px Discrete Type | Blue-to-Orange links
+   Updates: Fixed Baseline Rail | Brand Blue (#004fcf) | 10px Type
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -21,7 +21,7 @@
 /* --- 1. THE GRID SUITE --- */
 .gallery-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px 0; width: 100%; }
 
-/* Isolated Resource Grid with Vertical Alignment Protection */
+/* Isolated Resource Grid with Alignment Protection */
 .resource-grid { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -46,11 +46,10 @@
     transition: none; 
 }
 
-/* Video item pointer */
 .video-item { position: relative; cursor: pointer; }
 .video-item img { width: 100%; height: auto; display: block; border: 1px solid #DDDDDD; }
 
-/* --- 3. RESOURCE CARDS (Fixed Baseline & Discrete Type) --- */
+/* --- 3. RESOURCE CARDS (Baseline & Type Refinement) --- */
 .resource-card { 
     display: flex; 
     flex-direction: column; 
@@ -58,7 +57,7 @@
 }
 
 .resource-caption { 
-    background-color: #F9F8F4; /* Lightened Off-White Stone */
+    background-color: #F9F8F4; /* Discrete Off-White Stone */
     padding: 10px 12px; 
     border: 1px solid #DDDDDD;
     border-top: none; 
@@ -68,30 +67,30 @@
 }
 
 .resource-desc { 
-    font-size: 10px; /* Reduced discrete size */
+    font-size: 10px; /* Footnote scale */
     color: #555555; 
-    line-height: 1.2; /* Tighter professional leading */
+    line-height: 1.1; /* Extra tight professional leading */
     margin: 0 0 10px 0; 
     font-weight: 400;
-    /* Enforces horizontal baseline for links across the row */
-    min-height: 38px; 
+    /* Enforces horizontal baseline for the action rail across the row */
+    min-height: 34px; 
     display: block;
 }
 
 .resource-actions { 
     display: flex; 
-    gap: 15px; 
+    gap: 12px; 
     align-items: center; 
     margin-top: 5px;
     padding-top: 8px;
-    border-top: 1px solid rgba(221, 221, 221, 0.4);
+    border-top: 1px solid rgba(221, 221, 221, 0.4); /* Rail separation line */
 }
 
 .res-link, .res-download { 
-    font-size: 10px; 
+    font-size: 11px; /* Slightly larger for action legibility */
     font-weight: 600; 
     text-decoration: none; 
-    color: #0A254A; /* Static State: Brand Blue */
+    color: #004fcf; /* Brand Blue */
     transition: color 0.2s ease;
 }
 
@@ -178,7 +177,7 @@
 
 @media (max-width: 768px) {
     .gallery-grid-3, .resource-grid { grid-template-columns: 1fr; }
-    .resource-desc { min-height: 0; } /* Reset height for mobile stack */
+    .resource-desc { min-height: 0; } 
     .lightbox-close { top: max(15px, env(safe-area-inset-top)); right: max(15px, env(safe-area-inset-right)); }
     .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
 }
