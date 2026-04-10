@@ -68,7 +68,7 @@
 
 /* VALVE A: The Descriptive Text */
 .resource-grid .resource-desc { 
-    font-size: 12px;       /* <--- ADJUST CAPTION SIZE HERE */
+    font-size: 14px;       /* <--- ADJUST CAPTION SIZE HERE */
     line-height: 1.3;      /* Balanced spacing for legibility */
     color: #555555; 
     margin: 0 0 10px 0; 
@@ -87,7 +87,7 @@
 /* VALVE B: The Action Links */
 .resource-grid .res-link, 
 .resource-grid .res-download { 
-    font-size: 13px;       /* <--- ADJUST LINK SIZE HERE */
+    font-size: 14px;       /* <--- ADJUST LINK SIZE HERE */
     color: #004fcf;        /* Brand Blue */
     font-weight: 600; 
     text-decoration: none;
