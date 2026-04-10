@@ -1,8 +1,7 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v8.0 - INDEPENDENT MODULE
+   THINKAMIGO GALLERY ENGINE v8.3
    Architecture: Triple-Slot Filmstrip (300vw Track)
-   Philosophy: STATIC FRAME / NO !IMPORTANT / HIGH SPECIFICITY
-   Isolation: Scoped to .resource-grid and .gallery-grid containers
+   Updates: Mobile 2-up Grid | Unified Resource Labels | Spacing+
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -19,21 +18,16 @@
 }
 
 /* --- 1. THE GRID SYSTEM --- */
-.gallery-grid-3 { 
+.gallery-grid-3, .resource-grid { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
-    margin: 30px 0; 
+    margin: 45px 0; /* Increased margin for better separation of grid blocks */
     width: 100%; 
 }
 
 /* Isolated Resource Grid with Alignment Protection */
 .resource-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; 
-    margin: 30px 0; 
-    width: 100%; 
     align-items: start; 
 }
 
@@ -57,45 +51,52 @@
 
 /* --- 3. RESOURCE CARDS (Precision Control) --- */
 
-/* The Container */
+.resource-grid .resource-card { 
+    display: flex; 
+    flex-direction: column; 
+    margin-bottom: 40px; /* Increased vertical breathing room between rows/stacks */
+}
+
 .resource-grid .resource-caption { 
-    background-color: #F9F8F4; 
-    padding: 12px; 
+    background-color: #F9F8F4; /* Discrete Off-White Stone */
+    padding: 15px; 
     border: 1px solid #DDDDDD;
     border-top: none; 
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
-/* VALVE A: The Descriptive Text */
+/* Fixed Baseline Lock: Ensuring the links always align horizontally */
 .resource-grid .resource-desc { 
-    font-size: 14px;       /* <--- ADJUST CAPTION SIZE HERE */
-    line-height: 1.3;      /* Balanced spacing for legibility */
+    font-size: 13px; 
+    line-height: 1.3; 
     color: #555555; 
-    margin: 0 0 10px 0; 
-    min-height: 48px;      /* Enforces the baseline alignment */
+    margin: 0 0 12px 0; 
+    min-height: 52px; /* Adjusted for 13px text to keep baseline locked */
     display: block;
 }
 
-/* The Horizontal Rail Separator */
+/* Actions Rail (Dividing line removed to unify the label) */
 .resource-grid .resource-actions { 
     display: flex; 
-    gap: 15px; 
-    padding-top: 10px;
-    border-top: 1px solid rgba(221, 221, 221, 0.4);
+    gap: 18px; 
+    align-items: center; 
+    margin-top: 5px;
 }
 
-/* VALVE B: The Action Links */
 .resource-grid .res-link, 
 .resource-grid .res-download { 
-    font-size: 14px;       /* <--- ADJUST LINK SIZE HERE */
-    color: #004fcf;        /* Brand Blue */
+    font-size: 13px; 
+    color: #004fcf; /* Brand Blue */
     font-weight: 600; 
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .resource-grid .res-link:hover, 
 .resource-grid .res-download:hover { 
-    color: #f39c12;        /* Brand Orange */
+    color: #f39c12; /* Brand Orange */
 }
 
 /* --- 4. LIGHTBOX UI (FULL RESTORATION) --- */
@@ -154,17 +155,30 @@
     text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.lb-count-accent { opacity: 0.5; font-weight: 400; margin-right: 2px; }
-
 /* --- 5. RESPONSIVE REFINEMENTS --- */
 @media (max-width: 1024px) {
-    .gallery-grid-3, .resource-grid, .video-grid-4 {
+    .gallery-grid-3, .resource-grid {
         grid-template-columns: repeat(2, 1fr); gap: 10px;
     }
 }
 
 @media (max-width: 768px) {
-    .gallery-grid-3, .resource-grid { grid-template-columns: 1fr; }
+    /* Standard gallery flips to 2-up for better asset visibility */
+    .gallery-grid-3 { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+        margin: 25px 0;
+    }
+
+    /* Resource grid stacks 1-up to accommodate text/links comfortably */
+    .resource-grid { 
+        grid-template-columns: 1fr; 
+        margin: 25px 0;
+    }
+    
+    .gallery-item { margin-bottom: 12px; }
+    .resource-card { margin-bottom: 30px; }
+
     .resource-grid .resource-desc { min-height: 0; } 
     .lightbox-close { top: max(15px, env(safe-area-inset-top)); right: max(15px, env(safe-area-inset-right)); }
     .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
