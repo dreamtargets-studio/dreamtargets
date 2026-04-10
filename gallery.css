@@ -55,55 +55,47 @@
 .video-item { position: relative; cursor: pointer; }
 .video-item img { width: 100%; height: auto; display: block; border: 1px solid #DDDDDD; }
 
-/* --- 3. RESOURCE CARDS (Surgical Specificity / Isolated) --- */
-.resource-grid .resource-card { 
-    display: flex; 
-    flex-direction: column; 
-    margin-bottom: 25px; 
-}
+/* --- 3. RESOURCE CARDS (Precision Control) --- */
 
+/* The Container */
 .resource-grid .resource-caption { 
-    background-color: #F9F8F4; /* Discrete Off-White Stone */
-    padding: 10px 12px; 
+    background-color: #F9F8F4; 
+    padding: 12px; 
     border: 1px solid #DDDDDD;
     border-top: none; 
-    font-family: 'Poppins', sans-serif; 
-    display: flex;
-    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Fixed Baseline Lock: Ensuring the links always align horizontally */
+/* VALVE A: The Descriptive Text */
 .resource-grid .resource-desc { 
-    font-size: 10px; 
+    font-size: 12px;       /* <--- ADJUST CAPTION SIZE HERE */
+    line-height: 1.3;      /* Balanced spacing for legibility */
     color: #555555; 
-    line-height: 1.1; 
     margin: 0 0 10px 0; 
-    font-weight: 400;
-    min-height: 34px; /* Space reserved for 3 lines of text */
+    min-height: 48px;      /* Enforces the baseline alignment */
     display: block;
 }
 
+/* The Horizontal Rail Separator */
 .resource-grid .resource-actions { 
     display: flex; 
-    gap: 12px; 
-    align-items: center; 
-    margin-top: 5px;
-    padding-top: 8px;
+    gap: 15px; 
+    padding-top: 10px;
     border-top: 1px solid rgba(221, 221, 221, 0.4);
 }
 
+/* VALVE B: The Action Links */
 .resource-grid .res-link, 
 .resource-grid .res-download { 
-    font-size: 11px; 
+    font-size: 13px;       /* <--- ADJUST LINK SIZE HERE */
+    color: #004fcf;        /* Brand Blue */
     font-weight: 600; 
-    text-decoration: none; 
-    color: #004fcf; /* Brand Blue */
-    transition: color 0.2s ease;
+    text-decoration: none;
 }
 
 .resource-grid .res-link:hover, 
 .resource-grid .res-download:hover { 
-    color: #f39c12; /* Brand Orange */
+    color: #f39c12;        /* Brand Orange */
 }
 
 /* --- 4. LIGHTBOX UI (FULL RESTORATION) --- */
