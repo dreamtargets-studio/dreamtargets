@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v7.55
+   THINKAMIGO GALLERY ENGINE v7.60
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Philosophy: STATIC FRAME / NATIVE SYSTEM CURSOR ONLY
-   Updates: Isolated Resource Grid | Stone Caption Logic
+   Updates: FULL RESTORATION of Nav UI & Captions
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -19,10 +19,9 @@
 }
 
 /* --- 1. THE GRID SUITE --- */
-/* Standard Protected Gallery */
 .gallery-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px 0; width: 100%; }
 
-/* Functional Resource Gallery (Isolated for Publications) */
+/* Isolated Resource Grid for Publications */
 .resource-grid { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -33,56 +32,38 @@
 }
 
 .video-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 30px 0; width: 100%; }
-.gallery-portrait-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0; width: 100%; }
 
 /* --- 2. ASSET STYLING & NATIVE CURSOR --- */
-.gallery-item, .featured-image-single, .resource-thumb { 
-    position: relative; 
-    overflow: hidden; 
-}
+.gallery-item, .featured-image-single, .resource-thumb { position: relative; overflow: hidden; }
 
-/* Internal Border Logic (outline-offset) prevents alignment jumps */
 .gallery-item img, 
 .featured-image-single img, 
 .resource-thumb img {
     width: 100%; height: auto; display: block; 
     outline: 1px solid #DDDDDD;
     outline-offset: -1px;
-    cursor: zoom-in; /* Native System Magnifier Only */
+    cursor: zoom-in; 
     transition: none; 
 }
 
-/* Video remains a standard pointer for playback */
+/* Video item pointer */
 .video-item { position: relative; cursor: pointer; }
 .video-item img { width: 100%; height: auto; display: block; border: 1px solid #DDDDDD; }
 
-/* --- 3. RESOURCE CARDS (Publications Logic) --- */
-.resource-card { 
-    display: flex; 
-    flex-direction: column; 
-    margin-bottom: 25px; 
-}
+/* --- 3. RESOURCE CARDS (Stone Caption Logic) --- */
+.resource-card { display: flex; flex-direction: column; margin-bottom: 25px; }
 
 .resource-caption { 
-    background-color: #E2DFD2; /* Stone Background */
+    background-color: #E2DFD2; 
     padding: 12px 15px; 
     border: 1px solid #DDDDDD;
-    border-top: none; /* Joins seamless with image outline */
+    border-top: none; 
     font-family: 'Poppins', sans-serif; 
 }
 
-.resource-desc { 
-    font-size: 13px; color: #444444; line-height: 1.4; margin-bottom: 10px; 
-}
-
+.resource-desc { font-size: 13px; color: #444444; line-height: 1.4; margin-bottom: 10px; }
 .resource-actions { display: flex; gap: 15px; align-items: center; }
-
-.res-link, .res-download {
-    font-size: 12px; font-weight: 500;
-    text-decoration: none; color: #f39c12; 
-    transition: color 0.3s ease;
-}
-
+.res-link, .res-download { font-size: 12px; font-weight: 500; text-decoration: none; color: #f39c12; }
 .res-link:hover, .res-download:hover { color: #0A254A; }
 
 /* --- 4. VIDEO UI OVERLAYS --- */
@@ -97,7 +78,7 @@
     border-left: 12px solid #FFFFFF; margin-left: 4px;
 }
 
-/* --- 5. LIGHTBOX UI (Static Frame Mode) --- */
+/* --- 5. LIGHTBOX UI (FULL RESTORATION) --- */
 .lightbox { 
     display: none; position: fixed; z-index: 9999999; 
     top: 0; left: 0; width: 100vw; height: 100dvh; 
@@ -119,6 +100,7 @@
     max-width: 95vw; max-height: 92dvh; object-fit: contain; margin: 0; 
 }
 
+/* Navigation Landmarks */
 .lightbox-close { 
     position: fixed; top: 15px; right: 15px; width: 40px; height: 40px; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
@@ -134,4 +116,37 @@
 
 .lightbox-prev { 
     left: 15px; 
-    background-image
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
+
+.lightbox-next { 
+    right: 15px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); 
+}
+
+/* Caption Restoration */
+.lightbox-info { 
+    position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+    width: 80%; text-align: center; color: #FFFFFF; font-family: 'Poppins', sans-serif;
+    pointer-events: none; z-index: 99999998; text-shadow: 1px 1px 3px #000000;
+}
+
+.lightbox-caption {
+    display: block; font-size: 11px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.lb-count-accent { opacity: 0.5; font-weight: 400; margin-right: 2px; }
+
+/* --- 6. RESPONSIVE REFINEMENTS --- */
+@media (max-width: 1024px) {
+    .gallery-grid-3, .resource-grid, .video-grid-4 {
+        grid-template-columns: repeat(2, 1fr); gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid-3, .resource-grid { grid-template-columns: 1fr; }
+    .lightbox-close { top: max(15px, env(safe-area-inset-top)); right: max(15px, env(safe-area-inset-right)); }
+    .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
+}
