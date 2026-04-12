@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v4.0
+   THINKAMIGO THEATRE ENGINE v4.3
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: RESTORED Play Triangle | DNA Sync H1 900 | SVG Close
+   Updates: Font-Variation Fix (Anti-Bloat) | Play Triangle Restore
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -37,11 +37,13 @@
     text-align: left;
 }
 
-/* SPECIFICITY BOOST: Prevents Chassis.css from bloating the weight */
+/* ANTI-BLOAT LOCK: High-specificity selector with Variation Settings */
 body.content-page .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 900; 
+    font-weight: 900;
+    /* Direct instruction to font engine to prevent "obese" faux-bolding */
+    font-variation-settings: "wght" 900; 
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
@@ -64,6 +66,7 @@ body.content-page .theatre-grid-charcoal h1 {
     margin: 0;
     padding: 0;
     letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* --- 4. THE GRID --- */
@@ -90,7 +93,7 @@ body.content-page .theatre-grid-charcoal h1 {
     border-radius: 4px;
 }
 
-/* RESTORED: THE GHOST PLAY TRIANGLE */
+/* RESTORED: THE GHOST PLAY TRIANGLE (30% Opacity) */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -148,7 +151,7 @@ body.content-page .theatre-grid-charcoal h1 {
     color: #ff6600; 
 }
 
-/* --- 6. THE PROJECTOR (MIDNIGHT BLUE) --- */
+/* --- 6. THE PROJECTOR --- */
 #video-theatre-projector {
     position: fixed;
     top: 0;
@@ -170,7 +173,6 @@ body.content-page .theatre-grid-charcoal h1 {
     background: #000;
 }
 
-/* SYNCED: GALLERY-STYLE CLOSE BOX */
 .projector-close {
     position: fixed; 
     top: 15px; 
