@@ -45,10 +45,18 @@
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
+
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.1; 
+    color: #FFFFFF;
+    margin: 0;
+}
+
 
 .theatre-grid-charcoal .orange-rule {
     width: 250px;
