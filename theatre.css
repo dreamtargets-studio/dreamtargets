@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.0
+   THINKAMIGO THEATRE ENGINE v2.1
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: H2 Weight 100 Sync, Static Rim-Light Hover Border
+   Updates: H2 Weight 100, Rim-Light Hover, 4px Vintage TV Radius
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -83,20 +83,22 @@
 .theatre-thumb {
     position: relative;
     aspect-ratio: 16 / 9;
-    overflow: hidden;
+    overflow: hidden;         /* Clips image to radius */
     line-height: 0;
     background-color: #000;
+    border-radius: 4px;       /* Subtle Vintage TV Suggestion */
 }
 
 .theatre-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 4px;       /* Mirrored radius */
     /* Static Rim: Subtle 12% White */
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
     pointer-events: none;
-    transition: outline 0.2s ease; /* Smooth light transition */
+    transition: outline 0.2s ease; 
 }
 
 /* Hover State: The 1px border lightens to 50% white */
