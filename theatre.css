@@ -1,0 +1,87 @@
+/* ============================================================
+   THINKAMIGO THEATER ENGINE v1.0
+   Architecture: Sovereign Cinema Environment
+   Atmosphere: Midnight Blue (#0A254A) / White Type
+   Isolation: Scoped to .theater-env
+   ============================================================ */
+
+/* --- 1. THE ENVIRONMENT --- */
+.theater-env {
+    background-color: #0A254A; /* Midnight Blue */
+    padding: 60px 0;
+    min-height: 80vh;
+    color: #FFFFFF;
+}
+
+/* --- 2. THE GRID (4-UP) --- */
+.video-theater-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* High-density Desktop */
+    gap: 20px;
+    width: 100%;
+}
+
+/* --- 3. THE VIDEO CARD --- */
+.theater-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.theater-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9; /* Cinematic standard */
+    overflow: hidden;
+    line-height: 0;
+    background-color: #000; /* Pre-loader black */
+}
+
+.theater-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    outline: 1px solid rgba(255, 255, 255, 0.15); /* Subtle rim light */
+    outline-offset: -1px;
+}
+
+.theater-caption {
+    padding: 15px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.theater-desc {
+    font-size: 14px; /* Dialed to your preferred size */
+    color: #CCCCCC; /* Softer grey for descriptions */
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+}
+
+/* --- 4. THE ACTION LINKS --- */
+.theater-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.theater-actions .res-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF; /* High contrast for actions */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.theater-actions .res-link:hover {
+    color: #f39c12; /* Brand Orange pop */
+}
+
+/* --- 5. MOBILE REFINEMENTS --- */
+@media (max-width: 1024px) {
+    .video-theater-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .video-theater-grid { 
+        grid-template-columns: 1fr; /* Cinematic 1-up stack */
+        gap: 40px; /* Generous vertical breathing room */
+    }
+}
