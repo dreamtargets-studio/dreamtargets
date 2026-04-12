@@ -325,3 +325,23 @@ blockquote + p {
     background-color: var(--btn-bg) !important;
     transform: none !important;
 }
+
+/* ============================================================
+   CONTACT FORM MOBILE REFINEMENT
+   Ensures fields align with Editorial margins
+   ============================================================ */
+
+@media (max-width: 768px) {
+    /* Target the rail to provide the consistent side gutters */
+    .contact-form-refined {
+        padding-right: 20px;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Ensure the button doesn't stretch and stays pill-shaped */
+    .contact-form-refined .btn-pill {
+        width: auto;
+        min-width: 200px;
+    }
+}
