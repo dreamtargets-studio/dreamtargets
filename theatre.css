@@ -1,57 +1,11 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v3.4
+   THINKAMIGO THEATRE ENGINE - RESTORATION v3.9
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: Chassis Font-Leak Fix | H1 Weight 900 Recovery
+   Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
+   Status: Total Structural Clean | H1 DNA Sync
    ============================================================ */
 
-/* --- 1. CHASSIS IMMUNITY --- */
-
-/* High-specificity body reset to purge Segoe UI from the Theatre environment */
-body.content-page {
-    font-family: 'Poppins', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* --- 2. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
-
-.theatre-grid-charcoal header {
-    margin-bottom: 60px;
-    text-align: left;
-}
-
-.theatre-grid-charcoal h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 48px;
-    font-weight: 800;        /* Hard DNA Match to Publications */
-    line-height: 1.1; 
-    color: #FFFFFF;
-    margin: 0;
-    
-    /* Anti-Bleed Rendering */
-    text-rendering: optimizeLegibility;
-    letter-spacing: -0.015em; 
-}
-
-.theatre-grid-charcoal .orange-rule {
-    width: 250px;
-    height: 1px;
-    background-color: #ff6600; 
-    margin: 18px 0 35px 0;   
-}
-
-.theatre-grid-charcoal h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: 100;        /* Sovereign Hairline */
-    color: #BBBBBB;          
-    margin: 0;
-    padding: 0;
-    letter-spacing: 0.03em;
-}
-
-/* --- 3. THE MAIN STAGE (THE VOID) --- */
-
+/* --- 1. THE MAIN STAGE (THE VOID) --- */
 .theatre-env {
     background-color: #000000;
     padding: 0; 
@@ -60,6 +14,7 @@ body.content-page {
     color: #FFFFFF;
 }
 
+/* --- 2. THE GRID STAGE (1250px CHARCOAL) --- */
 .theatre-grid-charcoal {
     background-color: #1A1A1A;
     padding: 60px 0; 
@@ -76,8 +31,41 @@ body.content-page {
     box-sizing: border-box;
 }
 
-/* --- 4. THE GRID (4-UP) --- */
+/* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
+.theatre-grid-charcoal header {
+    margin-bottom: 60px;
+    text-align: left;
+}
 
+.theatre-grid-charcoal h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1; 
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.theatre-grid-charcoal .orange-rule {
+    width: 250px;
+    height: 1px;
+    background-color: #ff6600; 
+    margin: 18px 0 35px 0;   
+}
+
+.theatre-grid-charcoal h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 100;
+    color: #BBBBBB;          
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 4. THE GRID --- */
 .video-theatre-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -86,7 +74,6 @@ body.content-page {
 }
 
 /* --- 5. THE VIDEO CARD --- */
-
 .theatre-card {
     display: flex;
     flex-direction: column;
@@ -102,28 +89,6 @@ body.content-page {
     border-radius: 4px;
 }
 
-/* GHOST PLAY ICON (30% OPACITY) */
-.theatre-thumb::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -50%);
-    width: 0; 
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.3);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.theatre-card:hover .theatre-thumb::after { 
-    opacity: 1; 
-}
-
 .theatre-thumb img {
     width: 100%;
     height: 100%;
@@ -134,35 +99,34 @@ body.content-page {
     transition: outline 0.2s ease;
 }
 
-.theatre-card:hover .theatre-thumb img { 
-    outline: 1px solid rgba(255, 255, 255, 0.5); 
+.theatre-card:hover .theatre-thumb img {
+    outline: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.theatre-caption { 
-    padding: 18px 0 0 0; 
-    font-family: 'Poppins', sans-serif; 
-    pointer-events: none; 
+.theatre-caption {
+    padding: 18px 0 0 0;
+    font-family: 'Poppins', sans-serif;
+    pointer-events: none;
 }
 
-.theatre-desc { 
+.theatre-desc {
     font-size: 14px; 
     color: #BBBBBB; 
-    line-height: 1.45; 
-    margin: 0 0 12px 0; 
+    line-height: 1.45;
+    margin: 0 0 12px 0;
 }
 
-.theatre-actions .res-link { 
-    font-size: 14px; 
-    font-weight: 600; 
-    color: #FFFFFF; 
+.theatre-actions .res-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF;
 }
 
-.theatre-card:hover .res-link { 
+.theatre-card:hover .res-link {
     color: #ff6600; 
 }
 
-/* --- 6. THE PROJECTOR (MIDNIGHT BLUE) --- */
-
+/* --- 6. THE PROJECTOR --- */
 #video-theatre-projector {
     position: fixed;
     top: 0; 
@@ -177,11 +141,11 @@ body.content-page {
     overflow: hidden;
 }
 
-.projector-stage { 
-    width: 95vw; 
-    max-width: 1920px; 
-    aspect-ratio: 16 / 9; 
-    background: #000; 
+.projector-stage {
+    width: 95vw;
+    max-width: 1920px;
+    aspect-ratio: 16 / 9;
+    background: #000;
 }
 
 .projector-close {
@@ -198,17 +162,16 @@ body.content-page {
     cursor: pointer;
 }
 
-.video-container, .video-container iframe { 
-    width: 100%; 
-    height: 100%; 
-    border: none; 
+.video-container, 
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 /* --- 7. MOBILE --- */
-
 @media (max-width: 768px) {
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
-    .theatre-thumb::after { display: none; } 
     .projector-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
