@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.1
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.2
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
-   Updates: Integrated Cinematic Theatre Engine (Esc Support)
+   Updates: Hybrid Video Detection (MP4/YouTube/Vimeo Sync)
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. THE INJECTOR ENGINE ---
     const loadPartials = async () => {
         try {
-            // Load Header
             const hRes = await fetch('header.html');
             if (hRes.ok) {
                 const hData = await hRes.text();
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Load Footer
             const fRes = await fetch('footer.html');
             if (fRes.ok) {
                 const fData = await fRes.text();
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Route Logic based on Page Content
             if (document.querySelector('img[data-full]') || document.querySelector('.video-item')) {
                 injectLightbox();
             }
@@ -46,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: CINEMATIC THEATRE PROJECTOR ---
+    // --- 2. MODULE: CINEMATIC THEATRE PROJECTOR (HYBRID ENGINE) ---
     const setupProjectorLogic = () => {
         const projector = document.getElementById('video-theatre-projector');
         const target = document.getElementById('projector-target');
@@ -55,33 +52,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!projector || !target) return;
 
-        const openProjector = (videoId) => {
-            // Vimeo logic with 1920-optimized parameters
-            const url = `https://player.vimeo.com/video/${videoId}?autoplay=1&color=ff6600&title=0&byline=0&portrait=0`;
-            target.innerHTML = `<iframe src="${url}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-            
+        const openProjector = (videoData) => {
+            let finalHtml = "";
+
+            // DETECTOR LOGIC: Identify content type
+            if (videoData.includes('.mp4')) {
+                // TYPE A: Local Self-Hosted File
+                finalHtml = `
+                    <div class="video-container">
+                        <video controls autoplay playsinline controlsList="nodownload">
+                            <source src="${videoData}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>`;
+            } 
+            else if (videoData.includes('youtube.com') || videoData.includes('youtu.be')) {
+                // TYPE B: YouTube Embed (Expects full embed URL)
+                finalHtml = `
+                    <div class="video-container">
+                        <iframe src="${videoData}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    </div>`;
+            }
+            else {
+                // TYPE C: Legacy/Standard Vimeo ID
+                const vimeoUrl = `https://player.vimeo.com/video/${videoData}?autoplay=1&color=ff6600&title=0&byline=0&portrait=0`;
+                finalHtml = `
+                    <div class="video-container">
+                        <iframe src="${vimeoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>`;
+            }
+
+            target.innerHTML = finalHtml;
             projector.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Lock grid scroll
+            document.body.style.overflow = 'hidden'; 
         };
 
         const closeProjector = () => {
             projector.style.display = 'none';
-            target.innerHTML = ''; // Kill stream
-            document.body.style.overflow = 'auto'; // Unlock scroll
+            target.innerHTML = ''; 
+            document.body.style.overflow = 'auto'; 
         };
 
-        // Delegate click for Theatre Cards
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                const id = card.getAttribute('data-video');
-                if (id) openProjector(id);
+                const data = card.getAttribute('data-video');
+                if (data) openProjector(data);
             });
         });
 
-        // Close via Box
         if (closeBtn) closeBtn.addEventListener('click', closeProjector);
 
-        // Global Escape Listener (The Emergency Exit)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && projector.style.display === 'flex') {
                 closeProjector();
@@ -180,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('no-scroll');
         };
 
-        // KEYBOARD NAVIGATION
         document.addEventListener('keydown', (e) => {
             if (overlay.style.display === 'flex') {
                 if (e.key === 'ArrowRight' || e.key === ' ') {
