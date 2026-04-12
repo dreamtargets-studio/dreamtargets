@@ -265,15 +265,21 @@ blockquote + p {
 
 /* ============================================================
    12. CONTACT FORM SANDBOX (ISOLATED)
-   Ensures zero contagion with Editorial Rail elements
+   Updates: Desktop Split-Row (Email/Subject) | Increased Textarea Height
    ============================================================ */
 
-/* Container: Stripped padding to align flush with H1/H2 */
 .contact-form-refined {
     display: block;
     width: 100%;
     padding: 0; 
     margin: 40px 0;
+    box-sizing: border-box;
+}
+
+/* DESKTOP ROW LOGIC: Email field takes 50% width */
+.contact-form-refined .form-group.half-width {
+    width: 50%;
+    padding-right: 20px; /* Gutter between fields if you add a second half-width */
     box-sizing: border-box;
 }
 
@@ -301,7 +307,13 @@ blockquote + p {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     background-color: #ffffff;
-    box-sizing: border-box; /* Anchors the 100% width internally */
+    box-sizing: border-box;
+}
+
+/* INCREASED MESSAGE HEIGHT */
+.contact-form-refined textarea {
+    height: 220px; /* From 160px to 220px for better presence */
+    resize: vertical;
 }
 
 /* STATIC HEX-6 BUTTON LAB */
@@ -309,7 +321,6 @@ blockquote + p {
     --btn-bg: #0054DC;          
     --btn-glow: #1A73FF;        
     --btn-border: #D1D1D1;      
-    
     display: inline-block;
     background-color: var(--btn-bg) !important;
     color: #FFFFFF !important;
@@ -324,7 +335,7 @@ blockquote + p {
     appearance: none;
     outline: none;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    transform: none !important; /* Zero movement lock */
+    transform: none !important; 
 }
 
 .contact-form-refined .btn-pill:hover {
@@ -333,14 +344,14 @@ blockquote + p {
     transform: none !important;
 }
 
-.contact-form-refined .btn-pill:active {
-    background-color: var(--btn-bg) !important;
-    transform: none !important;
-}
-
-/* MOBILE FORM SYNC: Stays flush with mobile rail gutters */
+/* MOBILE FORM SYNC */
 @media (max-width: 768px) {
     .contact-form-refined {
         padding: 0; 
+    }
+    /* Stack half-width fields back to 100% on mobile */
+    .contact-form-refined .form-group.half-width {
+        width: 100%;
+        padding-right: 0;
     }
 }
