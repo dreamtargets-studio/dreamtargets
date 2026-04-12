@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v22.11
-   Architecture: Triple-Slot Filmstrip (Left | Center | Right)
-   Updates: STABLE BUILD | Keyboard Navigation Added (Haptic Bridge)
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.1
+   Architecture: Triple-Slot Filmstrip + Sovereign Projector
+   Updates: Integrated Cinematic Theatre Engine (Esc Support)
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,9 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Lightbox check for images/videos
+            // Route Logic based on Page Content
             if (document.querySelector('img[data-full]') || document.querySelector('.video-item')) {
                 injectLightbox();
+            }
+
+            if (document.querySelector('.theatre-card')) {
+                setupProjectorLogic();
             }
 
         } catch (err) {
@@ -42,7 +46,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: LIGHTBOX INJECTOR & ENGINE ---
+    // --- 2. MODULE: CINEMATIC THEATRE PROJECTOR ---
+    const setupProjectorLogic = () => {
+        const projector = document.getElementById('video-theatre-projector');
+        const target = document.getElementById('projector-target');
+        const closeBtn = document.querySelector('.projector-close');
+        const cards = document.querySelectorAll('.theatre-card');
+
+        if (!projector || !target) return;
+
+        const openProjector = (videoId) => {
+            // Vimeo logic with 1920-optimized parameters
+            const url = `https://player.vimeo.com/video/${videoId}?autoplay=1&color=ff6600&title=0&byline=0&portrait=0`;
+            target.innerHTML = `<iframe src="${url}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            
+            projector.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Lock grid scroll
+        };
+
+        const closeProjector = () => {
+            projector.style.display = 'none';
+            target.innerHTML = ''; // Kill stream
+            document.body.style.overflow = 'auto'; // Unlock scroll
+        };
+
+        // Delegate click for Theatre Cards
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.getAttribute('data-video');
+                if (id) openProjector(id);
+            });
+        });
+
+        // Close via Box
+        if (closeBtn) closeBtn.addEventListener('click', closeProjector);
+
+        // Global Escape Listener (The Emergency Exit)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projector.style.display === 'flex') {
+                closeProjector();
+            }
+        });
+    };
+
+    // --- 3. MODULE: LIGHTBOX INJECTOR & ENGINE (IMAGES) ---
     const injectLightbox = () => {
         if (document.getElementById('lightbox-overlay')) return;
 
@@ -69,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.body.appendChild(lb);
         setupLightboxLogic();
-        setupVideoLogic(); 
+        setupLegacyVideoLogic(); 
     };
 
     const setupLightboxLogic = () => {
@@ -133,12 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('no-scroll');
         };
 
-        // KEYBOARD NAVIGATION (The Haptic Bridge)
+        // KEYBOARD NAVIGATION
         document.addEventListener('keydown', (e) => {
-            // Only fire if the lightbox is actually visible
             if (overlay.style.display === 'flex') {
                 if (e.key === 'ArrowRight' || e.key === ' ') {
-                    e.preventDefault(); // Stop spacebar from scrolling page
+                    e.preventDefault();
                     navigate(1);
                 } else if (e.key === 'ArrowLeft') {
                     navigate(-1);
@@ -177,8 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLB(e); });
     };
 
-    // --- 3. MODULE: VIDEO/AUDIO/UI ENGINE ---
-    const setupVideoLogic = () => {
+    // --- 4. MODULE: UTILITY & UI ---
+    const setupLegacyVideoLogic = () => {
         document.addEventListener('click', (e) => {
             const trigger = e.target.closest('.video-item');
             if (!trigger) return;
