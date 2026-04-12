@@ -36,11 +36,11 @@
     text-align: left;
 }
 
-/* Using a DIV class instead of H1 to stop the global CSS contagion */
+/* Using a DIV class instead of H1 to stop the global CSS contagion ADJUSTED TO 700 from 900*/
 .theatre-headline {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 900; 
+    font-weight: 700; 
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
