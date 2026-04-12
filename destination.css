@@ -327,21 +327,33 @@ blockquote + p {
 }
 
 /* ============================================================
-   CONTACT FORM MOBILE REFINEMENT
-   Ensures fields align with Editorial margins
+   CONTACT FORM MOBILE ALIGNMENT SYNC
+   Symmetrical Gutters | Zero Movement | Clean Cascade
    ============================================================ */
 
 @media (max-width: 768px) {
-    /* Target the rail to provide the consistent side gutters */
+    
+    /* 1. Ensure the container has zero margin-drift and even padding */
     .contact-form-refined {
-        padding-right: 20px;
-        padding-left: 20px;
-        box-sizing: border-box;
+        padding: 0 20px;
+        margin: 0;
+        width: 100%;
+        display: block;
     }
 
-    /* Ensure the button doesn't stretch and stays pill-shaped */
+    /* 2. The Box Model Fix: Padding included in the 100% width */
+    .contact-form-refined .form-group input, 
+    .contact-form-refined .form-group textarea {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-sizing: border-box; /* The fundamental fix for the right-side bleed */
+    }
+
+    /* 3. Button alignment reset */
     .contact-form-refined .btn-pill {
+        margin: 0;
         width: auto;
-        min-width: 200px;
+        display: inline-block;
     }
 }
