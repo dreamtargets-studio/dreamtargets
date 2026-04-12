@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.0
+   THINKAMIGO THEATRE ENGINE v5.1
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: H1/H2 Weight Sync | Action Link Alignment
+   Updates: Hybrid Player Support (HTML5 Video + Iframe)
    Features: Flex-Anchored "Play" Link | Brand Blue/Orange Sync
    ============================================================ */
 
@@ -37,7 +37,6 @@
     text-align: left;
 }
 
-/* SYNCED WEIGHT: Matches the calibrated 600 weight of the rest of the OS */
 h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -54,7 +53,6 @@ h1 {
     margin: 18px 0 30px 0;   
 }
 
-/* SYNCED WEIGHT: Matches the 200 light editorial weight */
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
@@ -78,7 +76,7 @@ h1 {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    height: 100%; /* Ensures cards in a row have equal height */
+    height: 100%; 
 }
 
 .theatre-thumb {
@@ -90,7 +88,6 @@ h1 {
     border-radius: 4px;
 }
 
-/* PLAY TRIANGLE */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -126,7 +123,6 @@ h1 {
     outline: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* CAPTION AREA: Forces content to fill vertical space */
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
@@ -142,13 +138,11 @@ h1 {
     margin: 0 0 15px 0;
 }
 
-/* ACTIONS: Anchors link to the bottom of the card */
 .theatre-actions {
     margin-top: auto; 
     padding-top: 5px;
 }
 
-/* SYNCED LINK STYLE: Matches Resource/Publication blue */
 .theatre-actions .res-link {
     font-size: 14px;
     font-weight: 600;
@@ -158,12 +152,11 @@ h1 {
     display: inline-block;
 }
 
-/* SYNCED HOVER: Matches Resource/Publication orange */
 .theatre-card:hover .res-link {
     color: #ff6600; 
 }
 
-/* --- 6. THE PROJECTOR --- */
+/* --- 6. THE PROJECTOR (HYBRID SUPPORT) --- */
 #video-theatre-projector {
     position: fixed;
     top: 0;
@@ -199,10 +192,20 @@ h1 {
     cursor: pointer;
 }
 
-.video-container, .video-container iframe {
+/* Unified Container for Iframe and HTML5 Video */
+.video-container, 
+.video-container iframe,
+.video-container video {
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
+}
+
+/* Specific centering for local video tag */
+.video-container video {
+    object-fit: contain; 
+    background: #000;
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
