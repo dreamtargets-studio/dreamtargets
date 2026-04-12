@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.1
+   THINKAMIGO THEATRE ENGINE v2.2
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: H2 Weight 100, Rim-Light Hover, 4px Vintage TV Radius
+   Updates: CSS Play Icon Overlay, 4px Radius, v4.19 Type Sync
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -33,34 +33,34 @@
 
 /* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
 .theatre-grid-charcoal header {
-    margin-bottom: 60px; /* Editorial breathing room */
+    margin-bottom: 60px;
     text-align: left;
 }
 
 .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 48px;         /* Match v4.19 .text-rail h1 */
-    font-weight: 900;        /* Match v4.19 .text-rail h1 */
+    font-size: 48px;
+    font-weight: 900;
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
 }
 
 .theatre-grid-charcoal .orange-rule {
-    width: 250px;            /* Match v4.19 .orange-rule */
-    height: 1px;             /* Match v4.19 .orange-rule (Hairline) */
-    background-color: #ff6600; /* Match v4.19 --brand-orange */
+    width: 250px;
+    height: 1px;
+    background-color: #ff6600; 
     margin: 18px 0 35px 0;   
 }
 
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 28px;         
-    font-weight: 100;        /* Precise hairline weight */
+    font-size: 28px;
+    font-weight: 100;
     color: #BBBBBB;          
     margin: 0;
     padding: 0;
-    letter-spacing: 0.03em;  /* Airy spacing for thin weight */
+    letter-spacing: 0.03em;
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
 }
@@ -83,27 +83,50 @@
 .theatre-thumb {
     position: relative;
     aspect-ratio: 16 / 9;
-    overflow: hidden;         /* Clips image to radius */
+    overflow: hidden;
     line-height: 0;
     background-color: #000;
-    border-radius: 4px;       /* Subtle Vintage TV Suggestion */
+    border-radius: 4px;
+}
+
+/* THE SUBTLE PLAY ICON (CENTRED TRIANGLE) */
+.theatre-thumb::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Offset by 40% for optical centering of a triangle */
+    transform: translate(-40%, -50%);
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.theatre-card:hover .theatre-thumb::after {
+    opacity: 1;
 }
 
 .theatre-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;       /* Mirrored radius */
-    /* Static Rim: Subtle 12% White */
+    border-radius: 4px;
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
     pointer-events: none;
-    transition: outline 0.2s ease; 
+    transition: outline 0.2s ease, filter 0.2s ease; 
 }
 
-/* Hover State: The 1px border lightens to 50% white */
+/* Hover State: Image dims slightly to make the white icon pop */
 .theatre-card:hover .theatre-thumb img {
     outline: 1px solid rgba(255, 255, 255, 0.5);
+    filter: brightness(0.7);
 }
 
 .theatre-caption {
@@ -127,19 +150,16 @@
     text-decoration: none;
 }
 
-/* Hover logic: Match brand orange */
 .theatre-card:hover .res-link {
     color: #ff6600; 
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
-@media (max-width: 1024px) {
-    .video-theatre-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 768px) {
     .theatre-grid-charcoal { padding: 40px 0; }
     .theatre-grid-charcoal h1 { font-size: 38px; } 
     .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
+    /* Hide play icon on mobile to avoid cluttering touch-scroll */
+    .theatre-thumb::after { display: none; } 
 }
