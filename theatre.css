@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.2
+   THINKAMIGO THEATRE ENGINE v2.3
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: CSS Play Icon Overlay, 4px Radius, v4.19 Type Sync
+   Updates: Ghost-Opacity Play Icon (30%), Filter Removed
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -39,24 +39,24 @@
 
 .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 48px;
-    font-weight: 900;
+    font-size: 48px;         /* Match v4.19 destination.css */
+    font-weight: 900;        /* Match v4.19 destination.css */
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
 }
 
 .theatre-grid-charcoal .orange-rule {
-    width: 250px;
-    height: 1px;
-    background-color: #ff6600; 
+    width: 250px;            /* Match v4.19 destination.css */
+    height: 1px;             /* Match v4.19 destination.css (Hairline) */
+    background-color: #ff6600; /* Match v4.19 destination.css */
     margin: 18px 0 35px 0;   
 }
 
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    font-weight: 100;
+    font-weight: 100;        /* Precise hairline weight */
     color: #BBBBBB;          
     margin: 0;
     padding: 0;
@@ -86,10 +86,10 @@
     overflow: hidden;
     line-height: 0;
     background-color: #000;
-    border-radius: 4px;
+    border-radius: 4px;       /* 4px Vintage TV Radius */
 }
 
-/* THE SUBTLE PLAY ICON (CENTRED TRIANGLE) */
+/* THE GHOST PLAY ICON (30% OPACITY SUGGESTION) */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -101,9 +101,9 @@
     height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.8);
+    border-left: 20px solid rgba(255, 255, 255, 0.3); /* 30% Opacity watermark */
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
     z-index: 2;
     pointer-events: none;
 }
@@ -117,16 +117,16 @@
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
+    /* Static Rim: Subtle 12% White */
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
     pointer-events: none;
-    transition: outline 0.2s ease, filter 0.2s ease; 
+    transition: outline 0.2s ease; /* Filter removed for visual purity */
 }
 
-/* Hover State: Image dims slightly to make the white icon pop */
+/* Hover State: Only the 1px border lightens */
 .theatre-card:hover .theatre-thumb img {
     outline: 1px solid rgba(255, 255, 255, 0.5);
-    filter: brightness(0.7);
 }
 
 .theatre-caption {
@@ -150,16 +150,21 @@
     text-decoration: none;
 }
 
+/* Hover logic: Match brand orange */
 .theatre-card:hover .res-link {
     color: #ff6600; 
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
+@media (max-width: 1024px) {
+    .video-theatre-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
     .theatre-grid-charcoal { padding: 40px 0; }
     .theatre-grid-charcoal h1 { font-size: 38px; } 
     .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
-    /* Hide play icon on mobile to avoid cluttering touch-scroll */
+    /* Hide play icon on mobile to keep touch interface clean */
     .theatre-thumb::after { display: none; } 
 }
