@@ -19,7 +19,7 @@
 /* --- 1. CORE RESET --- */
 html, body { 
     margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
-    font-family: 'Segoe UI', Tahoma, sans-serif; background: #ffffff; 
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif; background: #ffffff; 
 }
 
 /* Precision Asset Reset: Fixes 'Stone Gap' and 'Huge Margin' issues across all browsers */
