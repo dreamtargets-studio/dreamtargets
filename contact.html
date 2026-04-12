@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="DIGITAL CONSULTING VERSION 4.9 - SYNCED 1250px HERO & WHITE PAPER SHEET">
+    <meta name="version" content="DIGITAL CONSULTING VERSION 5.0 - CLEAN CSS SYNC">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Thinkamigo</title>
     
@@ -29,26 +29,25 @@
 
                 <form action="contact-engine.php" method="POST" class="contact-form-refined">
                     
-                    <div style="display:none;">
+                    <div class="hp-gate" style="display:none;">
                         <label>Keep this field blank</label>
                         <input type="text" name="honeypot">
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Email</label>
-                        <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
                     </div>
                     
-                    <div class="form-group" style="margin-bottom: 30px;">
-                        <label style="display:block; font-size: 0.9rem; margin-bottom: 8px; color: #666;">Message</label>
-                        <textarea name="message" required style="width: 100%; height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="How can I help?"></textarea>
                     </div>
 
                     <button type="submit" class="btn-pill">
                         Send Message
                     </button>
                 </form>
-
 
             </article> 
         </div> 
