@@ -276,15 +276,15 @@ blockquote + p {
 }
 
 /* ============================================================
-   CONTACT FORM BUTTON LAB v1.4
-   Focus: Strict Hex-6 | Solid Interior Glow | Border Control
+   CONTACT FORM BUTTON LAB v1.5
+   Focus: Static Stability | Hex-6 Only | Zero Movement
    ============================================================ */
 
 .contact-form-refined .btn-pill {
     /* --- HEX-6 PALETTE --- */
-    --btn-bg: #0054DC;          /* Thinkamigo Brand Blue */
-    --btn-glow: #1A73FF;        /* Vibrant Blue (The Glow) */
-    --btn-border: #D1D1D1;      /* Light Grey Frame */
+    --btn-bg: #0054DC;          /* Brand Blue */
+    --btn-glow: #1A73FF;        /* Calibrated Interior Glow */
+    --btn-border: #D1D1D1;      /* Initial Static Border */
     
     display: inline-block;
     background-color: var(--btn-bg) !important;
@@ -300,26 +300,28 @@ blockquote + p {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     text-align: center;
     appearance: none;
     outline: none;
+
+    /* Transition limited to color and border to keep the box-model static */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    
+    /* Hard reset to ensure no inherited chassis movement */
+    transform: none !important;
 }
 
-/* --- THE HOVER: SOLID INTERIOR BRIGHTENING --- */
+/* --- HOVER STATE: STATIONARY GLOW --- */
 .contact-form-refined .btn-pill:hover {
-    /* Swaps the base blue for the glow blue - no transparency used */
     background-color: var(--btn-glow) !important; 
-    
-    /* Brighten the border slightly on hover */
     border-color: #BDBDBD; 
     
-    transform: translateY(-2px);
-    /* Note: Removed Box Shadow to avoid Hex-8/RGBA requirements */
+    /* Absolute stability lock */
+    transform: none !important;
 }
 
-/* --- THE CLICK --- */
+/* --- ACTIVE STATE: STATIONARY CLICK --- */
 .contact-form-refined .btn-pill:active {
-    transform: translateY(1px);
     background-color: var(--btn-bg) !important;
+    transform: none !important;
 }
