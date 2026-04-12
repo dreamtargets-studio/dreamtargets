@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.5
+   THINKAMIGO THEATRE ENGINE v2.7
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Close Box DNA Sync with gallery.css v8.3
+   Updates: Recovery Build | H1 Sync (900) | SVG Close Box Sync
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,7 +31,7 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
+/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL SYNC) --- */
 .theatre-grid-charcoal header {
     margin-bottom: 60px;
     text-align: left;
@@ -40,10 +40,12 @@
 .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 900;
+    font-weight: 900;        /* Restored to Editorial Black */
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .theatre-grid-charcoal .orange-rule {
@@ -56,13 +58,12 @@
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    font-weight: 100;
+    font-weight: 100;        /* Restored to Precise Hairline */
     color: #BBBBBB;          
     margin: 0;
     padding: 0;
     letter-spacing: 0.03em;
     -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- 4. THE GRID (4-UP) --- */
@@ -73,7 +74,7 @@
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD (FULL INTERACTION) --- */
+/* --- 5. THE VIDEO CARD --- */
 .theatre-card {
     display: flex;
     flex-direction: column;
@@ -118,7 +119,6 @@
     border-radius: 4px;
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
-    pointer-events: none;
     transition: outline 0.2s ease;
 }
 
@@ -155,8 +155,8 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100dvh; /* Dynamic viewport for mobile UI */
-    background-color: #001a33; /* Midnight Blue Saturation Lock */
+    height: 100dvh;
+    background-color: #001a33; 
     display: none;
     z-index: 10000;
     justify-content: center;
@@ -171,7 +171,7 @@
     background: #000;
 }
 
-/* Close Box: Synced with gallery.css v8.3 */
+/* Close Box: Synced with gallery.css SVG Data-URI */
 .projector-close {
     position: fixed; 
     top: 15px; 
