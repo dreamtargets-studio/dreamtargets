@@ -67,7 +67,7 @@ body.content-page {
 /* 6. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
     font-size: 48px;         
-    font-weight: 900; 
+    font-weight: 700; 
     line-height: 1.1; 
     margin-bottom: 18px;
     color: var(--brand-blue);
@@ -82,7 +82,7 @@ body.content-page {
 
 .text-rail h2 {
     font-size: 28px;         
-    font-weight: 100;
+    font-weight: 200;
     color: var(--charcoal);
     margin: 45px 0 20px 0;
 }
