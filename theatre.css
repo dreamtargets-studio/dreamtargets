@@ -1,32 +1,29 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.3
+   THINKAMIGO THEATRE ENGINE v1.4
    Architecture: Sovereign Cinema Environment (Seamless Stage)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Isolation: Scoped to .theatre-env
-   Updates: Removed 80vh gap to snap Footer to Stage
+   Updates: Full-Card Interaction, Pointer-Pass-Through, Hover-Lift
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
 .theatre-env {
     background-color: #000000; /* Pure Black - The Void */
-    padding: 0; /* FLUSH: No black margins above or below the stage */
+    padding: 0; 
     margin: 0;
-    min-height: 0; /* REMOVED: Snaps to content height to prevent footer gaps */
+    min-height: 0; 
     color: #FFFFFF;
 }
 
 /* --- 2. THE GRID STAGE (1250px CHARCOAL) --- */
-/* The background stretches 100%, but content stays on the 1250px rail */
 .theatre-grid-charcoal {
     background-color: #1A1A1A; /* Deep Charcoal Stage */
-    padding: 60px 0; /* Vertical breathing room inside the stage */
+    padding: 60px 0; 
     width: 100%;
-    margin: 0; /* Ensures no margin pushes the footer away */
+    margin: 0;
     border-top: 1px solid #222222;
     border-bottom: 1px solid #222222;
 }
 
-/* Internal rail alignment for the 1250px guide */
 .theatre-grid-charcoal .chassis-container {
     max-width: 1250px;
     margin: 0 auto;
@@ -42,15 +39,21 @@
     width: 100%;
 }
 
-/* --- 4. THE VIDEO CARD --- */
+/* --- 4. THE VIDEO CARD (FULL INTERACTION) --- */
 .theatre-card {
     display: flex;
     flex-direction: column;
+    cursor: pointer; /* Pointer hand for the entire card */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.theatre-card:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
 }
 
 .theatre-thumb {
     position: relative;
-    aspect-ratio: 16 / 9; /* Strict Cinematic Standard */
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     line-height: 0;
     background-color: #000;
@@ -62,11 +65,19 @@
     object-fit: cover;
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
+    transition: filter 0.25s ease, outline 0.25s ease;
+    pointer-events: none; /* Allows click to pass through to .theatre-card */
+}
+
+.theatre-card:hover .theatre-thumb img {
+    outline: 1px solid rgba(255, 255, 255, 0.3); /* Brighten rim on hover */
+    filter: brightness(1.1);
 }
 
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
+    pointer-events: none; /* Allows click to pass through to .theatre-card */
 }
 
 .theatre-desc {
@@ -74,6 +85,11 @@
     color: #BBBBBB; 
     line-height: 1.45;
     margin: 0 0 12px 0;
+    transition: color 0.25s ease;
+}
+
+.theatre-card:hover .theatre-desc {
+    color: #FFFFFF; /* Text brightens when card is hovered */
 }
 
 /* --- 5. THE ACTION LINKS --- */
@@ -87,11 +103,11 @@
     font-weight: 600;
     color: #FFFFFF;
     text-decoration: none;
-    transition: color 0.2s ease;
-    cursor: pointer;
+    transition: color 0.25s ease;
 }
 
-.theatre-actions .res-link:hover {
+/* Action Link responds to Parent Card Hover */
+.theatre-card:hover .res-link {
     color: #f39c12; /* Brand Orange pop */
 }
 
@@ -108,11 +124,11 @@
     }
     
     .video-theatre-grid { 
-        grid-template-columns: 1fr; /* Cinematic 1-up stack */
+        grid-template-columns: 1fr; 
         gap: 40px;
     }
 
-    .theatre-desc {
-        font-size: 14px;
+    .theatre-card:hover {
+        transform: none; /* Disable lift on touch to prevent stutter */
     }
 }
