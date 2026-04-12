@@ -1,9 +1,8 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.21
+   THINKAMIGO DESTINATION ENGINE v4.23
    Architecture: 1250px Horizon | 960px Editorial Rail
-   Typography: Px-Precision (No REM)
+   Updates: Refined Fixed-Width Form Sandbox (450px/750px)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
-   Updates: FLUSH Contact Form Sandbox | Zero-Contagion isolation
    ============================================================ */
 
 :root {
@@ -230,42 +229,17 @@ blockquote + p {
 }
 
 @media (max-width: 768px) {
-    .text-rail { 
-        width: 92%; 
-        padding: 30px 0 40px 0; 
-    }
-    
+    .text-rail { width: 92%; padding: 30px 0 40px 0; }
     .text-rail h1 { font-size: 38px; }
-
-    .text-rail blockquote {
-        padding: 40px 0 15px 30px; 
-        margin: 40px 0 10px 0; 
-        border-left: 4px solid var(--brand-blue); 
-        max-width: 100%;
-    }
-
+    .text-rail blockquote { padding: 40px 0 15px 30px; margin: 40px 0 10px 0; border-left: 4px solid var(--brand-blue); max-width: 100%; }
     .text-rail blockquote p { font-size: 24px; }
-
-    .text-rail blockquote p::before {
-        left: 8px;                  
-        top: 50px;       
-        font-size: 36px;             
-    }
-
-    .text-rail blockquote p::after {
-        font-size: 36px;
-        transform: translateY(8px);
-    }
-
-    .text-rail blockquote footer {
-        margin-top: 25px;
-        font-size: 16px;
-    }
+    .text-rail blockquote p::before { left: 8px; top: 50px; font-size: 36px; }
+    .text-rail blockquote p::after { font-size: 36px; transform: translateY(8px); }
+    .text-rail blockquote footer { margin-top: 25px; font-size: 16px; }
 }
 
 /* ============================================================
-   12. CONTACT FORM SANDBOX (ISOLATED)
-   Updates: Desktop Split-Row (Email/Subject) | Increased Textarea Height
+   12. CONTACT FORM SANDBOX (ISOLATED & FIXED WIDTH)
    ============================================================ */
 
 .contact-form-refined {
@@ -273,13 +247,6 @@ blockquote + p {
     width: 100%;
     padding: 0; 
     margin: 40px 0;
-    box-sizing: border-box;
-}
-
-/* DESKTOP ROW LOGIC: Email field takes 50% width */
-.contact-form-refined .form-group.half-width {
-    width: 50%;
-    padding-right: 20px; /* Gutter between fields if you add a second half-width */
     box-sizing: border-box;
 }
 
@@ -296,11 +263,11 @@ blockquote + p {
     text-align: left;
 }
 
-.contact-form-refined input, 
-.contact-form-refined textarea {
+/* FIXED DESKTOP WIDTH: Email/Inputs */
+.contact-form-refined input {
     display: block;
-    width: 100%;             
-    max-width: 100%;
+    width: 450px;            
+    max-width: 100%;         
     padding: 12px;
     border: 1px solid #dddddd;
     border-radius: 4px;
@@ -310,9 +277,19 @@ blockquote + p {
     box-sizing: border-box;
 }
 
-/* INCREASED MESSAGE HEIGHT */
+/* FIXED DESKTOP WIDTH: Message Area */
 .contact-form-refined textarea {
-    height: 220px; /* From 160px to 220px for better presence */
+    display: block;
+    width: 750px;            
+    max-width: 100%;
+    height: 220px;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
+    box-sizing: border-box;
     resize: vertical;
 }
 
@@ -344,14 +321,16 @@ blockquote + p {
     transform: none !important;
 }
 
+.contact-form-refined .btn-pill:active {
+    background-color: var(--btn-bg) !important;
+    transform: none !important;
+}
+
 /* MOBILE FORM SYNC */
 @media (max-width: 768px) {
-    .contact-form-refined {
-        padding: 0; 
-    }
-    /* Stack half-width fields back to 100% on mobile */
-    .contact-form-refined .form-group.half-width {
-        width: 100%;
-        padding-right: 0;
+    .contact-form-refined { padding: 0; }
+    .contact-form-refined input,
+    .contact-form-refined textarea {
+        width: 100%; /* Resets to fluid width for mobile gutters */
     }
 }
