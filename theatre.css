@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.7
+   THINKAMIGO THEATRE ENGINE v2.8
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Recovery Build | H1 Sync (900) | SVG Close Box Sync
+   Updates: Final DNA Sync | H1 Weight 900 | SVG Close Box
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,7 +31,7 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL SYNC) --- */
+/* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
 .theatre-grid-charcoal header {
     margin-bottom: 60px;
     text-align: left;
@@ -40,7 +40,7 @@
 .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 900;        /* Restored to Editorial Black */
+    font-weight: 900;        /* Restored: Exact Match to Publications H1 */
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
@@ -58,7 +58,7 @@
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    font-weight: 100;        /* Restored to Precise Hairline */
+    font-weight: 100;        /* Restored: Sovereign Hairline */
     color: #BBBBBB;          
     margin: 0;
     padding: 0;
@@ -74,7 +74,7 @@
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD --- */
+/* --- 5. THE VIDEO CARD (FULL INTERACTION) --- */
 .theatre-card {
     display: flex;
     flex-direction: column;
@@ -171,7 +171,7 @@
     background: #000;
 }
 
-/* Close Box: Synced with gallery.css SVG Data-URI */
+/* Close Box: Fully Synced SVG Logic */
 .projector-close {
     position: fixed; 
     top: 15px; 
@@ -199,17 +199,9 @@
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
-@media (max-width: 1024px) {
-    .video-theatre-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 768px) {
-    .theatre-grid-charcoal { padding: 40px 0; }
-    .theatre-grid-charcoal h1 { font-size: 38px; } 
-    .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
     .theatre-thumb::after { display: none; } 
-    
     .projector-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
