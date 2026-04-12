@@ -1,9 +1,9 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.19
+   THINKAMIGO DESTINATION ENGINE v4.21
    Architecture: 1250px Horizon | 960px Editorial Rail
    Typography: Px-Precision (No REM)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
-   Updates: Internal Divider, Archival Links, Quote Spacing Fix
+   Updates: FLUSH Contact Form Sandbox | Zero-Contagion isolation
    ============================================================ */
 
 :root {
@@ -133,8 +133,6 @@ body.content-page {
 }
 
 /* 9. PAGE ELEMENTS: INTERNAL DIVIDERS & LINKS */
-
-/* THE PAPER-CONSTRAINED RULE (Strict Pixels) */
 .rule-grey-paper {
     width: 100%;
     height: 1px;
@@ -145,7 +143,6 @@ body.content-page {
     display: block;
 }
 
-/* THE ARCHIVAL LINK LIST (Strict Pixels) */
 .link-list {
     list-style: none;
     padding: 0;
@@ -158,15 +155,12 @@ body.content-page {
 }
 
 .link-list a {
-    color: var(--brand-blue); /* Active Blue Affordance */
+    color: var(--brand-blue); 
     text-decoration: none !important;
     border: none !important;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
-    
-    /* MANUAL WEIGHT TOGGLE: 400 (Regular), 500 (Medium), 600 (Bold) */
     font-weight: 600; 
-    
     transition: color 0.3s ease;
 }
 
@@ -175,9 +169,9 @@ body.content-page {
     text-decoration: none !important;
 }
 
-/* 10. THE TYPOGRAPHIC BLOCKQUOTE (DESKTOP) */
+/* 10. THE TYPOGRAPHIC BLOCKQUOTE */
 .text-rail blockquote {
-    margin: 80px 0 20px 0; /* TIGHTENED BOTTOM: From 80px to 20px */
+    margin: 80px 0 20px 0; 
     padding: 40px 0 15px 60px;       
     max-width: 640px;                
     position: relative;              
@@ -185,7 +179,6 @@ body.content-page {
     border-left: 4px solid var(--brand-blue);
 }
 
-/* KILL TOP MARGIN ON TEXT FOLLOWING QUOTE */
 blockquote + p {
     margin-top: 0 !important;
 }
@@ -231,7 +224,7 @@ blockquote + p {
     font-family: 'Poppins', sans-serif; 
 }
 
-/* 11. RESPONSIVE ENGINE (CONSOLIDATED) */
+/* 11. RESPONSIVE ENGINE (EDITORIAL CORE) */
 @media (max-width: 1250px) {
     .paper-sheet { box-shadow: none; }
 }
@@ -242,21 +235,16 @@ blockquote + p {
         padding: 30px 0 40px 0; 
     }
     
-    .text-rail h1 { 
-        font-size: 38px; 
-    }
+    .text-rail h1 { font-size: 38px; }
 
-    /* MOBILE BLOCKQUOTE: FIXED SINGLE INSTANCE */
     .text-rail blockquote {
         padding: 40px 0 15px 30px; 
-        margin: 40px 0 10px 0; /* TIGHTENED FOR MOBILE */
+        margin: 40px 0 10px 0; 
         border-left: 4px solid var(--brand-blue); 
         max-width: 100%;
     }
 
-    .text-rail blockquote p {
-        font-size: 24px;             
-    }
+    .text-rail blockquote p { font-size: 24px; }
 
     .text-rail blockquote p::before {
         left: 8px;                  
@@ -276,24 +264,56 @@ blockquote + p {
 }
 
 /* ============================================================
-   CONTACT FORM BUTTON LAB v1.5
-   Focus: Static Stability | Hex-6 Only | Zero Movement
+   12. CONTACT FORM SANDBOX (ISOLATED)
+   Ensures zero contagion with Editorial Rail elements
    ============================================================ */
 
+/* Container: Stripped padding to align flush with H1/H2 */
+.contact-form-refined {
+    display: block;
+    width: 100%;
+    padding: 0; 
+    margin: 40px 0;
+    box-sizing: border-box;
+}
+
+.contact-form-refined .form-group {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.contact-form-refined label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #666666;
+    text-align: left;
+}
+
+.contact-form-refined input, 
+.contact-form-refined textarea {
+    display: block;
+    width: 100%;             
+    max-width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
+    box-sizing: border-box; /* Anchors the 100% width internally */
+}
+
+/* STATIC HEX-6 BUTTON LAB */
 .contact-form-refined .btn-pill {
-    /* --- HEX-6 PALETTE --- */
-    --btn-bg: #0054DC;          /* Brand Blue */
-    --btn-glow: #1A73FF;        /* Calibrated Interior Glow */
-    --btn-border: #D1D1D1;      /* Initial Static Border */
+    --btn-bg: #0054DC;          
+    --btn-glow: #1A73FF;        
+    --btn-border: #D1D1D1;      
     
     display: inline-block;
     background-color: var(--btn-bg) !important;
     color: #FFFFFF !important;
-    
-    /* --- THE BORDER --- */
     border: 2px solid var(--btn-border); 
-    
-    /* --- STRUCTURE --- */
     padding: 12px 45px;
     border-radius: 50px;
     font-family: 'Poppins', sans-serif;
@@ -303,78 +323,24 @@ blockquote + p {
     text-align: center;
     appearance: none;
     outline: none;
-
-    /* Transition limited to color and border to keep the box-model static */
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    
-    /* Hard reset to ensure no inherited chassis movement */
-    transform: none !important;
+    transform: none !important; /* Zero movement lock */
 }
 
-/* --- HOVER STATE: STATIONARY GLOW --- */
 .contact-form-refined .btn-pill:hover {
     background-color: var(--btn-glow) !important; 
     border-color: #BDBDBD; 
-    
-    /* Absolute stability lock */
     transform: none !important;
 }
 
-/* --- ACTIVE STATE: STATIONARY CLICK --- */
 .contact-form-refined .btn-pill:active {
     background-color: var(--btn-bg) !important;
     transform: none !important;
 }
 
-/* ============================================================
-   CONTACT FORM RECONSTRUCTION
-   Fixes: Tiny Desktop Boxes & Mobile Right-Side Bleed
-   ============================================================ */
-
-/* 1. The Container: Symmetrical gutters for all screens */
-.contact-form-refined {
-    display: block;
-    width: 100%;
-    padding: 0 20px;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-/* 2. The Group: Vertical spacing */
-.contact-form-refined .form-group {
-    margin-bottom: 25px;
-    width: 100%;
-}
-
-/* 3. The Fields: Forced Full-Width & Box-Model Fix */
-.contact-form-refined input, 
-.contact-form-refined textarea {
-    display: block;
-    width: 100%;             /* Restores the width lost from the HTML */
-    max-width: 100%;
-    padding: 12px;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    background-color: #ffffff;
-    
-    /* THE CRITICAL LINE: Includes padding inside the 100% width */
-    box-sizing: border-box; 
-}
-
-/* 4. The Labels: Clean Alignment */
-.contact-form-refined label {
-    display: block;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    color: #666666;
-    text-align: left;
-}
-
-/* 5. Mobile Specifics: Ensure gutters stay locked */
+/* MOBILE FORM SYNC: Stays flush with mobile rail gutters */
 @media (max-width: 768px) {
     .contact-form-refined {
-        padding: 0 15px; /* Slightly tighter for small screens */
+        padding: 0; 
     }
 }
