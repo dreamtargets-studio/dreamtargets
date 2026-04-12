@@ -55,12 +55,14 @@
 
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 28px;         /* Match v4.19 .text-rail h2 */
-    font-weight: 200;        /* Match v4.19 .text-rail h2 (Lightweight) */
-    color: #BBBBBB;          /* Silver pivot from charcoal */
+    font-size: 28px;         
+    font-weight: 200;        /* Exact destination.css sync */
+    color: #BBBBBB;          
     margin: 0;
-    letter-spacing: normal;
     padding: 0;
+    letter-spacing: 0.02em;  /* Slight air to prevent charcoal bleed */
+    -webkit-font-smoothing: antialiased; /* Critical for light-on-dark thin weights */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- 4. THE GRID (4-UP) --- */
