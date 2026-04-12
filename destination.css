@@ -291,7 +291,7 @@ blockquote + p {
     color: #ffffff;
     
     /* --- BORDER EXPERIMENT --- */
-    border: 2px solid var(--btn-border); 
+    border: 4px solid var(--btn-border); 
     
     padding: 12px 45px;
     border-radius: 50px;
