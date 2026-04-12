@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.7
+   THINKAMIGO THEATRE ENGINE v1.8
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Synced H1/Orange-Rule/H2 Header DNA from Service Pages
+   Updates: Exact Sync with destination.css v4.19 Typography
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,37 +31,36 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL HEADER DNA) --- */
+/* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
 .theatre-grid-charcoal header {
-    margin-bottom: 50px; /* Gap before grid starts */
+    margin-bottom: 60px; /* Editorial breathing room */
     text-align: left;
 }
 
 .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 32px; /* Service Page H1 size */
-    font-weight: 600;
-    color: #FFFFFF;
+    font-size: 48px;         /* Match v4.19 .text-rail h1 */
+    font-weight: 900;        /* Match v4.19 .text-rail h1 */
+    line-height: 1.1; 
+    color: #FFFFFF;          /* Pivot to white for dark stage */
     margin: 0;
-    line-height: 1.2;
 }
 
 .theatre-grid-charcoal .orange-rule {
-    width: 60px;
-    height: 3px;
-    background-color: #f39c12; /* Brand Orange */
-    margin: 15px 0;
+    width: 250px;            /* Match v4.19 .orange-rule */
+    height: 1px;             /* Match v4.19 .orange-rule (Hairline) */
+    background-color: #ff6600; /* Match v4.19 --brand-orange */
+    margin: 18px 0 35px 0;   /* Precision vertical rhythm */
 }
 
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 18px; /* Service Page H2 Sub-header style */
-    font-weight: 400;
-    color: #BBBBBB; /* Silver grey sub-text */
+    font-size: 28px;         /* Match v4.19 .text-rail h2 */
+    font-weight: 200;        /* Match v4.19 .text-rail h2 (Lightweight) */
+    color: #BBBBBB;          /* Silver pivot from charcoal */
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: normal;
     padding: 0;
-    position: static; /* Resetting any pseudo-element logic */
 }
 
 /* --- 4. THE GRID (4-UP) --- */
@@ -110,11 +109,6 @@
 }
 
 /* --- 6. THE ACTION LINKS --- */
-.theatre-actions {
-    display: flex;
-    gap: 15px;
-}
-
 .theatre-actions .res-link {
     font-size: 14px;
     font-weight: 600;
@@ -122,9 +116,9 @@
     text-decoration: none;
 }
 
-/* Hover logic: Only the action text changes color */
+/* Hover logic: Match brand orange */
 .theatre-card:hover .res-link {
-    color: #f39c12;
+    color: #ff6600; 
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
@@ -134,7 +128,7 @@
 
 @media (max-width: 768px) {
     .theatre-grid-charcoal { padding: 40px 0; }
-    .theatre-grid-charcoal h1 { font-size: 28px; }
-    .theatre-grid-charcoal h2 { font-size: 16px; }
+    .theatre-grid-charcoal h1 { font-size: 38px; } /* Mobile sync v4.19 */
+    .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
 }
