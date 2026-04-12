@@ -266,7 +266,7 @@ blockquote + p {
 /* FIXED DESKTOP WIDTH: Email/Inputs */
 .contact-form-refined input {
     display: block;
-    width: 450px;            
+    width: 500px;            
     max-width: 100%;         
     padding: 12px;
     border: 1px solid #dddddd;
