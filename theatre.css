@@ -1,24 +1,27 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.2
+   THINKAMIGO THEATRE ENGINE v1.3
    Architecture: Sovereign Cinema Environment (Seamless Stage)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
    Isolation: Scoped to .theatre-env
+   Updates: Removed 80vh gap to snap Footer to Stage
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
 .theatre-env {
     background-color: #000000; /* Pure Black - The Void */
     padding: 0; /* FLUSH: No black margins above or below the stage */
-    min-height: 80vh;
+    margin: 0;
+    min-height: 0; /* REMOVED: Snaps to content height to prevent footer gaps */
     color: #FFFFFF;
 }
 
 /* --- 2. THE GRID STAGE (1250px CHARCOAL) --- */
-/* Stretches 100% width, but content stays on the 1250px rail */
+/* The background stretches 100%, but content stays on the 1250px rail */
 .theatre-grid-charcoal {
     background-color: #1A1A1A; /* Deep Charcoal Stage */
     padding: 60px 0; /* Vertical breathing room inside the stage */
     width: 100%;
+    margin: 0; /* Ensures no margin pushes the footer away */
     border-top: 1px solid #222222;
     border-bottom: 1px solid #222222;
 }
