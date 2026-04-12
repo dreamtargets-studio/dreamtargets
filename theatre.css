@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.4
-   Architecture: Sovereign Cinema Environment (Seamless Stage)
+   THINKAMIGO THEATRE ENGINE v1.5
+   Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Full-Card Interaction, Pointer-Pass-Through, Hover-Lift
+   Updates: Stripped all movement/bloat. Clean Full-Card Logic.
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -43,17 +43,12 @@
 .theatre-card {
     display: flex;
     flex-direction: column;
-    cursor: pointer; /* Pointer hand for the entire card */
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.theatre-card:hover {
-    transform: translateY(-5px); /* Subtle lift on hover */
+    cursor: pointer; /* Makes the entire card active */
 }
 
 .theatre-thumb {
     position: relative;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 9; /* Cinematic standard */
     overflow: hidden;
     line-height: 0;
     background-color: #000;
@@ -63,21 +58,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    outline: 1px solid rgba(255, 255, 255, 0.12);
+    outline: 1px solid rgba(255, 255, 255, 0.12); /* Subtle rim */
     outline-offset: -1px;
-    transition: filter 0.25s ease, outline 0.25s ease;
-    pointer-events: none; /* Allows click to pass through to .theatre-card */
-}
-
-.theatre-card:hover .theatre-thumb img {
-    outline: 1px solid rgba(255, 255, 255, 0.3); /* Brighten rim on hover */
-    filter: brightness(1.1);
+    pointer-events: none; /* Passes click to parent .theatre-card */
 }
 
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
-    pointer-events: none; /* Allows click to pass through to .theatre-card */
+    pointer-events: none; /* Passes click to parent .theatre-card */
 }
 
 .theatre-desc {
@@ -85,11 +74,6 @@
     color: #BBBBBB; 
     line-height: 1.45;
     margin: 0 0 12px 0;
-    transition: color 0.25s ease;
-}
-
-.theatre-card:hover .theatre-desc {
-    color: #FFFFFF; /* Text brightens when card is hovered */
 }
 
 /* --- 5. THE ACTION LINKS --- */
@@ -103,12 +87,11 @@
     font-weight: 600;
     color: #FFFFFF;
     text-decoration: none;
-    transition: color 0.25s ease;
 }
 
-/* Action Link responds to Parent Card Hover */
+/* Subtle feedback: only the 'Play' text color changes on card hover */
 .theatre-card:hover .res-link {
-    color: #f39c12; /* Brand Orange pop */
+    color: #f39c12; /* Brand Orange */
 }
 
 /* --- 6. MOBILE REFINEMENTS --- */
@@ -126,9 +109,5 @@
     .video-theatre-grid { 
         grid-template-columns: 1fr; 
         gap: 40px;
-    }
-
-    .theatre-card:hover {
-        transform: none; /* Disable lift on touch to prevent stutter */
     }
 }
