@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.6
+   THINKAMIGO THEATRE ENGINE v1.7
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Added Editorial H2 with Brand Orange Rule
+   Updates: Synced H1/Orange-Rule/H2 Header DNA from Service Pages
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,27 +31,37 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL DNA) --- */
-.theatre-grid-charcoal h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px; /* Match Service Page H2 */
-    font-weight: 600;
-    color: #FFFFFF; /* White for dark environment */
-    margin: 0 0 45px 0;
-    padding-bottom: 15px;
-    position: relative;
-    display: inline-block; /* Bounds rule to text width */
+/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL HEADER DNA) --- */
+.theatre-grid-charcoal header {
+    margin-bottom: 50px; /* Gap before grid starts */
+    text-align: left;
 }
 
-/* The Orange Rule */
-.theatre-grid-charcoal h2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
+.theatre-grid-charcoal h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px; /* Service Page H1 size */
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.theatre-grid-charcoal .orange-rule {
     width: 60px;
     height: 3px;
     background-color: #f39c12; /* Brand Orange */
+    margin: 15px 0;
+}
+
+.theatre-grid-charcoal h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; /* Service Page H2 Sub-header style */
+    font-weight: 400;
+    color: #BBBBBB; /* Silver grey sub-text */
+    margin: 0;
+    letter-spacing: 0.5px;
+    padding: 0;
+    position: static; /* Resetting any pseudo-element logic */
 }
 
 /* --- 4. THE GRID (4-UP) --- */
@@ -124,6 +134,7 @@
 
 @media (max-width: 768px) {
     .theatre-grid-charcoal { padding: 40px 0; }
-    .theatre-grid-charcoal h2 { font-size: 24px; margin-bottom: 35px; }
+    .theatre-grid-charcoal h1 { font-size: 28px; }
+    .theatre-grid-charcoal h2 { font-size: 16px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
 }
