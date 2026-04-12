@@ -77,21 +77,21 @@ body.content-page {
     width: 250px;            
     height: 1px;             
     background-color: var(--brand-orange); 
-    margin-bottom: 35px; 
+    margin-bottom: 20px; 
 }
 
 .text-rail h2 {
     font-size: 28px;         
     font-weight: 200;
     color: var(--charcoal);
-    margin: 45px 0 20px 0;
+    margin: 20px 0 20px 0;
 }
 
 .text-rail h3 {
     font-size: 24px;         
     font-weight: 600;
     color: var(--brand-blue);
-    margin: 45px 0 20px 0;
+    margin: 30px 0 20px 0;
 }
 
 .text-rail p {
