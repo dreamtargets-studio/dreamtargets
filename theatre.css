@@ -1,13 +1,13 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.3
+   THINKAMIGO THEATRE ENGINE v2.4
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Ghost-Opacity Play Icon (30%), Filter Removed
+   Updates: v4.19 Type Sync, Ghost Play Icon, Projector State
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
 .theatre-env {
-    background-color: #000000; /* Pure Black - The Void */
+    background-color: #000000;
     padding: 0; 
     margin: 0;
     min-height: 0; 
@@ -16,7 +16,7 @@
 
 /* --- 2. THE GRID STAGE (1250px CHARCOAL) --- */
 .theatre-grid-charcoal {
-    background-color: #1A1A1A; /* Deep Charcoal Stage */
+    background-color: #1A1A1A;
     padding: 60px 0; 
     width: 100%;
     margin: 0;
@@ -49,7 +49,7 @@
 .theatre-grid-charcoal .orange-rule {
     width: 250px;            /* Match v4.19 destination.css */
     height: 1px;             /* Match v4.19 destination.css (Hairline) */
-    background-color: #ff6600; /* Match v4.19 destination.css */
+    background-color: #ff6600; 
     margin: 18px 0 35px 0;   
 }
 
@@ -95,13 +95,12 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* Offset by 40% for optical centering of a triangle */
-    transform: translate(-40%, -50%);
+    transform: translate(-40%, -50%); /* Optical center adjustment */
     width: 0;
     height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.3); /* 30% Opacity watermark */
+    border-left: 20px solid rgba(255, 255, 255, 0.3); /* 30% watermark */
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 2;
@@ -121,10 +120,10 @@
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
     pointer-events: none;
-    transition: outline 0.2s ease; /* Filter removed for visual purity */
+    transition: outline 0.2s ease;
 }
 
-/* Hover State: Only the 1px border lightens */
+/* Hover State: The 1px border lightens */
 .theatre-card:hover .theatre-thumb img {
     outline: 1px solid rgba(255, 255, 255, 0.5);
 }
@@ -147,7 +146,6 @@
     font-size: 14px;
     font-weight: 600;
     color: #FFFFFF;
-    text-decoration: none;
 }
 
 /* Hover logic: Match brand orange */
@@ -155,7 +153,64 @@
     color: #ff6600; 
 }
 
-/* --- 7. MOBILE REFINEMENTS --- */
+/* --- 7. THE PROJECTOR (MIDNIGHT BLUE) --- */
+#video-theatre-projector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #001a33; /* Midnight Blue Saturation Lock */
+    display: none;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.projector-stage {
+    width: 95%;
+    max-width: 1920px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.projector-close {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.projector-close::before,
+.projector-close::after {
+    content: '';
+    position: absolute;
+    top: 19px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #FFFFFF;
+}
+
+.projector-close::before { transform: rotate(45deg); }
+.projector-close::after { transform: rotate(-45deg); }
+
+.projector-close:hover::before,
+.projector-close:hover::after {
+    background-color: #ff6600;
+}
+
+.video-container, 
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- 8. MOBILE REFINEMENTS --- */
 @media (max-width: 1024px) {
     .video-theatre-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -165,6 +220,6 @@
     .theatre-grid-charcoal h1 { font-size: 38px; } 
     .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
-    /* Hide play icon on mobile to keep touch interface clean */
     .theatre-thumb::after { display: none; } 
+    .projector-close { top: 20px; right: 20px; }
 }
