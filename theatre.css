@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v4.9
+   THINKAMIGO THEATRE ENGINE v5.0
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: .theatre-headline Optical Weight Sync (700)
-   Features: Persistent Play Triangle | SVG Close Box Sync
+   Updates: H1/H2 Weight Sync | Action Link Alignment
+   Features: Flex-Anchored "Play" Link | Brand Blue/Orange Sync
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,23 +31,13 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (ISOLATED CLASS) --- */
+/* --- 3. THEATRE TYPOGRAPHY --- */
 .theatre-grid-charcoal header {
     margin-bottom: 60px;
     text-align: left;
 }
 
-/* OPTICAL SYNC: Set to 700 to match the 'thinner' look of Service Page headers */
-.theatre-headline {
-    font-family: 'Poppins', sans-serif;
-    font-size: 48px;
-    font-weight: 700; 
-    line-height: 1.1; 
-    color: #FFFFFF;
-    margin: 0;
-}
-
-
+/* SYNCED WEIGHT: Matches the calibrated 600 weight of the rest of the OS */
 h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -57,7 +47,6 @@ h1 {
     margin: 0;
 }
 
-
 .theatre-grid-charcoal .orange-rule {
     width: 250px;
     height: 1px;
@@ -65,6 +54,7 @@ h1 {
     margin: 18px 0 30px 0;   
 }
 
+/* SYNCED WEIGHT: Matches the 200 light editorial weight */
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
@@ -88,6 +78,7 @@ h1 {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    height: 100%; /* Ensures cards in a row have equal height */
 }
 
 .theatre-thumb {
@@ -99,7 +90,7 @@ h1 {
     border-radius: 4px;
 }
 
-/* PERSISTENT: THE GHOST PLAY TRIANGLE */
+/* PLAY TRIANGLE */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -135,24 +126,39 @@ h1 {
     outline: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+/* CAPTION AREA: Forces content to fill vertical space */
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
 }
 
 .theatre-desc {
     font-size: 14px; 
     color: #BBBBBB; 
     line-height: 1.45;
-    margin: 0 0 12px 0;
+    margin: 0 0 15px 0;
 }
 
+/* ACTIONS: Anchors link to the bottom of the card */
+.theatre-actions {
+    margin-top: auto; 
+    padding-top: 5px;
+}
+
+/* SYNCED LINK STYLE: Matches Resource/Publication blue */
 .theatre-actions .res-link {
     font-size: 14px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #0054dc; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
 }
 
+/* SYNCED HOVER: Matches Resource/Publication orange */
 .theatre-card:hover .res-link {
     color: #ff6600; 
 }
