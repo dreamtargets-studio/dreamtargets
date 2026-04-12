@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v2.8
+   THINKAMIGO THEATRE ENGINE v2.9
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Final DNA Sync | H1 Weight 900 | SVG Close Box
+   Updates: H1 Rendering Antidote (Anti-Bloat 900) | Full DNA Lock
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -44,8 +44,12 @@
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
+    
+    /* THE ANTI-BLOAT ANTIDOTE */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.01em; /* Tightens the 900 glyphs to stop the 'bleed' */
 }
 
 .theatre-grid-charcoal .orange-rule {
