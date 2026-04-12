@@ -110,8 +110,9 @@
 }
 
 /* --- 4. SPECIFIC CARD TYPOGRAPHY --- */
-.featured-card .card-content h2 { font-family: 'Poppins', sans-serif; font-size: 28px; color: var(--brand-blue); margin: 0 0 10px 0; }
-.featured-card .card-content h3 { font-family: 'Poppins', sans-serif; font-size: 20px; margin: 0 0 15px 0; color: #333; }
+.featured-card .card-content h2 { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 200;color: var(--brand-blue); margin: 0 0 10px 0; }
+.featured-card .card-content h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 200;
+margin: 0 0 15px 0; color: #333; }
 .featured-card .card-content p { font-family: 'Poppins', sans-serif; font-size: 16px; margin: 0 0 15px 0; color: #333; line-height: 1.5; }
 
 .service-card h3, .blog-card h3 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; margin: 0 0 10px 0; color: var(--brand-blue); }
