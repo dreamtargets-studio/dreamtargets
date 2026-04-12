@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE - RESTORATION v3.9
+   THINKAMIGO THEATRE ENGINE v4.0
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Status: Total Structural Clean | H1 DNA Sync
+   Updates: RESTORED Play Triangle | DNA Sync H1 900 | SVG Close
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -31,19 +31,22 @@
     box-sizing: border-box;
 }
 
-/* --- 3. THEATRE TYPOGRAPHY (v4.19 EDITORIAL SYNC) --- */
+/* --- 3. THEATRE TYPOGRAPHY (EDITORIAL DNA SYNC) --- */
 .theatre-grid-charcoal header {
     margin-bottom: 60px;
     text-align: left;
 }
 
-.theatre-grid-charcoal h1 {
+/* SPECIFICITY BOOST: Prevents Chassis.css from bloating the weight */
+body.content-page .theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 900;
+    font-weight: 900; 
     line-height: 1.1; 
     color: #FFFFFF;
     margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .theatre-grid-charcoal .orange-rule {
@@ -61,8 +64,6 @@
     margin: 0;
     padding: 0;
     letter-spacing: 0.03em;
-    -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- 4. THE GRID --- */
@@ -73,7 +74,7 @@
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD --- */
+/* --- 5. THE VIDEO CARD (RESTORED TRIANGLE) --- */
 .theatre-card {
     display: flex;
     flex-direction: column;
@@ -89,6 +90,28 @@
     border-radius: 4px;
 }
 
+/* RESTORED: THE GHOST PLAY TRIANGLE */
+.theatre-thumb::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.theatre-card:hover .theatre-thumb::after {
+    opacity: 1;
+}
+
 .theatre-thumb img {
     width: 100%;
     height: 100%;
@@ -96,7 +119,7 @@
     border-radius: 4px;
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
-    transition: outline 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .theatre-card:hover .theatre-thumb img {
@@ -106,7 +129,6 @@
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
-    pointer-events: none;
 }
 
 .theatre-desc {
@@ -126,12 +148,12 @@
     color: #ff6600; 
 }
 
-/* --- 6. THE PROJECTOR --- */
+/* --- 6. THE PROJECTOR (MIDNIGHT BLUE) --- */
 #video-theatre-projector {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100dvh;
     background-color: #001a33; 
     display: none;
@@ -148,6 +170,7 @@
     background: #000;
 }
 
+/* SYNCED: GALLERY-STYLE CLOSE BOX */
 .projector-close {
     position: fixed; 
     top: 15px; 
@@ -162,16 +185,16 @@
     cursor: pointer;
 }
 
-.video-container, 
-.video-container iframe {
+.video-container, .video-container iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
-/* --- 7. MOBILE --- */
+/* --- 7. MOBILE REFINEMENTS --- */
 @media (max-width: 768px) {
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
+    .theatre-thumb::after { display: none; } 
     .projector-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
