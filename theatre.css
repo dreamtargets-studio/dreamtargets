@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v1.8
+   THINKAMIGO THEATRE ENGINE v2.0
    Architecture: Sovereign Cinema Environment (Grounded)
    Atmosphere: Pure Black Void (#000000) / 1250px Charcoal Stage
-   Updates: Exact Sync with destination.css v4.19 Typography
+   Updates: H2 Weight 100 Sync, Static Rim-Light Hover Border
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -42,7 +42,7 @@
     font-size: 48px;         /* Match v4.19 .text-rail h1 */
     font-weight: 900;        /* Match v4.19 .text-rail h1 */
     line-height: 1.1; 
-    color: #FFFFFF;          /* Pivot to white for dark stage */
+    color: #FFFFFF;
     margin: 0;
 }
 
@@ -50,18 +50,18 @@
     width: 250px;            /* Match v4.19 .orange-rule */
     height: 1px;             /* Match v4.19 .orange-rule (Hairline) */
     background-color: #ff6600; /* Match v4.19 --brand-orange */
-    margin: 18px 0 35px 0;   /* Precision vertical rhythm */
+    margin: 18px 0 35px 0;   
 }
 
 .theatre-grid-charcoal h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 28px;         
-    font-weight: 100;        /* lightweight text */
+    font-weight: 100;        /* Precise hairline weight */
     color: #BBBBBB;          
     margin: 0;
     padding: 0;
-    letter-spacing: 0.02em;  /* Slight air to prevent charcoal bleed */
-    -webkit-font-smoothing: antialiased; /* Critical for light-on-dark thin weights */
+    letter-spacing: 0.03em;  /* Airy spacing for thin weight */
+    -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -92,9 +92,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Static Rim: Subtle 12% White */
     outline: 1px solid rgba(255, 255, 255, 0.12);
     outline-offset: -1px;
     pointer-events: none;
+    transition: outline 0.2s ease; /* Smooth light transition */
+}
+
+/* Hover State: The 1px border lightens to 50% white */
+.theatre-card:hover .theatre-thumb img {
+    outline: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .theatre-caption {
@@ -130,7 +137,7 @@
 
 @media (max-width: 768px) {
     .theatre-grid-charcoal { padding: 40px 0; }
-    .theatre-grid-charcoal h1 { font-size: 38px; } /* Mobile sync v4.19 */
+    .theatre-grid-charcoal h1 { font-size: 38px; } 
     .theatre-grid-charcoal h2 { font-size: 24px; }
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
 }
