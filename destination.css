@@ -327,33 +327,54 @@ blockquote + p {
 }
 
 /* ============================================================
-   CONTACT FORM MOBILE ALIGNMENT SYNC
-   Symmetrical Gutters | Zero Movement | Clean Cascade
+   CONTACT FORM RECONSTRUCTION
+   Fixes: Tiny Desktop Boxes & Mobile Right-Side Bleed
    ============================================================ */
 
-@media (max-width: 768px) {
+/* 1. The Container: Symmetrical gutters for all screens */
+.contact-form-refined {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* 2. The Group: Vertical spacing */
+.contact-form-refined .form-group {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* 3. The Fields: Forced Full-Width & Box-Model Fix */
+.contact-form-refined input, 
+.contact-form-refined textarea {
+    display: block;
+    width: 100%;             /* Restores the width lost from the HTML */
+    max-width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
     
-    /* 1. Ensure the container has zero margin-drift and even padding */
+    /* THE CRITICAL LINE: Includes padding inside the 100% width */
+    box-sizing: border-box; 
+}
+
+/* 4. The Labels: Clean Alignment */
+.contact-form-refined label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #666666;
+    text-align: left;
+}
+
+/* 5. Mobile Specifics: Ensure gutters stay locked */
+@media (max-width: 768px) {
     .contact-form-refined {
-        padding: 0 20px;
-        margin: 0;
-        width: 100%;
-        display: block;
-    }
-
-    /* 2. The Box Model Fix: Padding included in the 100% width */
-    .contact-form-refined .form-group input, 
-    .contact-form-refined .form-group textarea {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        box-sizing: border-box; /* The fundamental fix for the right-side bleed */
-    }
-
-    /* 3. Button alignment reset */
-    .contact-form-refined .btn-pill {
-        margin: 0;
-        width: auto;
-        display: inline-block;
+        padding: 0 15px; /* Slightly tighter for small screens */
     }
 }
