@@ -183,3 +183,30 @@
     .lightbox-close { top: max(15px, env(safe-area-inset-top)); right: max(15px, env(safe-area-inset-right)); }
     .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
 }
+
+/* --- 6. EDITORIAL INLINE IMAGES (960px) --- */
+/* Stone background, grey border, no orange line */
+.story-inline-image {
+    margin: 45px 0;
+    width: 100%;
+}
+
+.story-inline-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #DDDDDD;
+    cursor: zoom-in;
+}
+
+.stone-caption {
+    background-color: #F9F8F4; /* Discrete Off-White Stone */
+    padding: 15px 20px;
+    border: 1px solid #DDDDDD;
+    border-top: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #555555;
+    display: block;
+}
