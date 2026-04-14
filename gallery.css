@@ -184,41 +184,40 @@
     .lightbox-info { bottom: max(15px, env(safe-area-inset-bottom)); }
 }
 
-/* --- 6. EDITORIAL INLINE IMAGES (960px) --- */
+/* --- 6. EDITORIAL INLINE IMAGES (960px No-Border Caption) --- */
 .story-inline-image {
     margin: 45px 0;
     width: 100%;
-    /* Ensure no extra padding disrupts the border alignment */
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    display: block;
+    line-height: 0; 
+    box-sizing: border-box;
 }
 
 .story-inline-image img {
     width: 100%;
     height: auto;
-    display: block;
-    /* Using border instead of outline for perfect stacking with the caption */
-    border: 1px solid #DDDDDD;
+    display: block; 
+    border: 1px solid #DDDDDD; /* Image keeps its frame */
+    box-sizing: border-box; 
     cursor: zoom-in;
 }
 
 .stone-caption {
     background-color: #F9F8F4; /* Discrete Off-White Stone */
-    /* Match the 1px border of the image exactly */
-    border: 1px solid #DDDDDD;
-    border-top: none; /* Dock to image */
+    border: none;              /* REMOVED ALL BORDERS */
     
-    /* Tighten internal spacing */
+    /* Precision Padding */
     padding: 12px 15px; 
     
+    /* Text Styling */
     font-family: 'Poppins', sans-serif;
-    font-size: 13px;
+    font-size: 13px; 
     line-height: 1.4;
     color: #555555;
     
-    /* Remove any eroneous margins from container */
     margin: 0; 
     display: block;
     box-sizing: border-box;
+    text-align: left;
 }
