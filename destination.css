@@ -128,7 +128,6 @@ body.content-page {
     margin-bottom: 25px;
     font-size: 15px;         
     color: #666;
-    border-left: 3px solid var(--brand-orange);
 }
 
 /* 9. PAGE ELEMENTS: INTERNAL DIVIDERS & LINKS */
