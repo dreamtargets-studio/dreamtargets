@@ -101,6 +101,12 @@ body.content-page {
     margin-bottom: 24px;
 }
 
+/* This "glues" the paragraph to the header by removing the top gap */
+.text-rail h3 + p {
+    margin-top: 0;
+}
+
+
 /* 7. THE GALLERY GRID (3-UP) */
 .gallery-grid-3 {
     display: flex;
