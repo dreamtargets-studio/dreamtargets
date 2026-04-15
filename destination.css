@@ -91,7 +91,8 @@ body.content-page {
     font-size: 24px;         
     font-weight: 600;
     color: var(--brand-blue);
-    margin: 60px 0 8px 0;
+    margin: 60px 0 0px 0;
+
 }
 
 .text-rail p {
