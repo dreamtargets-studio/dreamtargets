@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="DIGITAL STORIES v9.2 - 1250px PAPER ALIGNMENT">
+    <meta name="version" content="DIGITAL STORIES v9.3 - AUDIO PROTOTYPE">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story Think QR | Thinkamigo</title>
+    <title>Story Audio Prototype | Thinkamigo</title>
     
     <link rel="stylesheet" href="chassis.css">
     <link rel="stylesheet" href="destination.css">
@@ -55,12 +55,54 @@
                     <footer>Credit</footer>
                 </blockquote>
 
-                <h3>Inline title</h3>
+                <h3>Listen to the music</h3>
                 <p>
-                    Lorem Ipsum again.
+                    Try our great audio player.
                 </p>
 
-            </article> 
+                <div class="audio-playlist-container">
+                    <div class="album-header">
+                        <img src="assets/img/smart-cookies-album-art.jpg" class="album-art" alt="Finance and Sky Cover">
+                        <div class="album-meta">
+                            <h2 class="short-description" style="margin:0; border:none; padding:0; font-size: 1.2rem;">Smart Cookies</h2>
+                            <p style="margin:0; color: #666; font-family: 'Poppins';">Finance and Sky EP</p>
+                        </div>
+                    </div>
+
+                    <div class="audio-controls">
+                        <button class="play-pause" id="masterPlayBtn"></button>
+
+                        <div class="track-info">
+                            <div class="led-title-row">
+                                <span id="now-playing">Select a track</span>
+                            </div>
+
+                            <div class="progress-container" style="background: #333; height: 4px; width: 100%; position: relative;">
+                                <div id="master-progress" class="progress-bar" style="background: #ff6600; height: 100%; width: 0%;"></div>
+                            </div>
+
+                            <div class="led-time-row" style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span id="master-time" class="time-display">00:00</span>
+                                <span id="master-duration" class="time-display">00:00</span>
+                            </div>
+                        </div>
+
+                        <audio id="main-audio-engine" src=""></audio>
+                    </div>
+
+                    <ul class="tracklist">
+                        <li class="track-item" data-src="media/01-sc-skymonkey.mp3" data-title="Sky Monkey Music">
+                            <span class="track-number">01</span> Sky Monkey Music
+                        </li>
+                        <li class="track-item" data-src="media/02-sc-finance.mp3" data-title="Finance of Romance">
+                            <span class="track-number">02</span> Finance of Romance
+                        </li>
+                        <li class="track-item" data-src="media/03-sc-satellite-bonus.mp3" data-title="Satellite">
+                            <span class="track-number">03</span> Satellite
+                        </li>    
+                    </ul>
+                </div>
+                </article> 
 
             <hr style="border: 0; border-top: 1px solid #EDEDED; margin: 0; width: 100%;">
 
@@ -75,6 +117,7 @@
         </div> </main> 
 
     <footer id="main-footer"></footer>
+    
     <script src="loader.js"></script>
 
 </body>
