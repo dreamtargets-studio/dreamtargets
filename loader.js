@@ -55,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const openProjector = (videoData) => {
             let finalHtml = "";
 
-            // DETECTOR LOGIC: Identify content type
             if (videoData.includes('.mp4')) {
-                // TYPE A: Local Self-Hosted File
                 finalHtml = `
                     <div class="video-container">
                         <video controls autoplay playsinline controlsList="nodownload">
@@ -67,14 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>`;
             } 
             else if (videoData.includes('youtube.com') || videoData.includes('youtu.be')) {
-                // TYPE B: YouTube Embed (Expects full embed URL)
                 finalHtml = `
                     <div class="video-container">
                         <iframe src="${videoData}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     </div>`;
             }
             else {
-                // TYPE C: Legacy/Standard Vimeo ID
                 const vimeoUrl = `https://player.vimeo.com/video/${videoData}?autoplay=1&color=ff6600&title=0&byline=0&portrait=0`;
                 finalHtml = `
                     <div class="video-container">
@@ -267,12 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const engine = document.getElementById('main-audio-engine');
         const masterBtn = document.getElementById('masterPlayBtn');
         const ledTitle = document.getElementById('now-playing');
+        const timeElapsed = document.getElementById('master-time');
+        const timeTotal = document.getElementById('master-duration');
+        const progressBar = document.getElementById('master-progress');
 
         if (!engine || !masterBtn) return;
 
+        // Digital Clock Helper
+        const formatTime = (secs) => {
+            if (isNaN(secs)) return "00:00";
+            const mins = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        };
+
         document.querySelectorAll('.track-item').forEach(track => {
             track.addEventListener('click', () => {
-                // Bridge to LED Display
                 if (ledTitle) {
                     ledTitle.innerText = track.getAttribute('data-title');
                 }
@@ -286,6 +292,21 @@ document.addEventListener('DOMContentLoaded', () => {
         masterBtn.addEventListener('click', () => {
             engine.paused ? engine.play() : engine.pause();
             masterBtn.classList.toggle('playing');
+        });
+
+        // The Pulse: Time and Progress updates
+        engine.addEventListener('timeupdate', () => {
+            if (timeElapsed) timeElapsed.innerText = formatTime(engine.currentTime);
+            
+            if (progressBar && engine.duration) {
+                const perc = (engine.currentTime / engine.duration) * 100;
+                progressBar.style.width = perc + '%';
+            }
+        });
+
+        // The Handshake: Load duration on metadata arrival
+        engine.addEventListener('loadedmetadata', () => {
+            if (timeTotal) timeTotal.innerText = formatTime(engine.duration);
         });
     };
 
