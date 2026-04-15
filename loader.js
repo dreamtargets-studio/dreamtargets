@@ -266,14 +266,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const setupAudioPlayer = () => {
         const engine = document.getElementById('main-audio-engine');
         const masterBtn = document.getElementById('masterPlayBtn');
+        const ledTitle = document.getElementById('now-playing');
+
         if (!engine || !masterBtn) return;
+
         document.querySelectorAll('.track-item').forEach(track => {
             track.addEventListener('click', () => {
+                // Bridge to LED Display
+                if (ledTitle) {
+                    ledTitle.innerText = track.getAttribute('data-title');
+                }
+                
                 engine.src = track.getAttribute('data-src');
                 engine.play();
                 masterBtn.classList.add('playing');
             });
         });
+
         masterBtn.addEventListener('click', () => {
             engine.paused ? engine.play() : engine.pause();
             masterBtn.classList.toggle('playing');
