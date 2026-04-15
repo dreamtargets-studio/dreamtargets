@@ -70,14 +70,27 @@
     margin-left: 2px; 
 }
 
-/* STATE: PAUSE (Double Bars) */
+/* STATE: PAUSE (Double Bars) OLD VERSION
 .audio-playlist-container .play-pause.playing::after {
     width: 15px; height: 16px;
     border-style: double;
     border-width: 0 0 0 15px; 
     border-color: #fff;
     margin-left: 0; 
+}*/
+
+
+/* STATE: PAUSE (Double Bars) */
+.audio-playlist-container .play-pause.playing::after {
+    width: 16px;               /* Defines the total width of the icon */
+    height: 16px;
+    border-style: double;
+    border-width: 0px 0px 0px 16px; /* Creates the two bars using the 'double' border */
+    border-color: #fff;
+    margin-left: 0;            /* Removes the 'Play' offset to achieve perfect center */
+    transform: translate(-50%, -50%); /* Re-asserts absolute centering */
 }
+
 
 /* 5. LED DASHBOARD (The "Black Screen") */
 .audio-playlist-container .track-info {
