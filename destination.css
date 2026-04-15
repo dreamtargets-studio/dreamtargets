@@ -340,3 +340,28 @@ blockquote + p {
         width: 100%; /* Resets to fluid width for mobile gutters */
     }
 }
+
+/* Dedicated Links Block - No Paper Sheet reliance */
+.links-footer-block {
+    width: 960px;
+    margin: 0 auto;        /* Centers the block */
+    padding: 40px 40px 0 40px; /* Aligns text with the story above */
+    box-sizing: border-box;
+    background-color: #FFFFFF; /* Matches the paper sheet */
+}
+
+.links-footer-block h2 {
+    color: var(--brand-blue);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.links-footer-block p {
+    margin-bottom: 10px;
+}
+
+.links-footer-block p:last-child {
+    margin-bottom: 20px; /* Final breathing room before the footer */
+}
