@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO AUDIO MODULE v18.5
+   THINKAMIGO AUDIO MODULE v18.5 - FLAT UI UPDATE
    Contains: Player Faceplate, LED Dashboard, Scoped Tracklist
    ============================================================ */
 
@@ -46,18 +46,18 @@
 .audio-playlist-container .play-pause {
     width: 48px; height: 48px;
     background: #333;
+    border: none; /* Flat appearance */
     border-radius: 4px;
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
 }
 
-/* 4. PRECISION ICON CENTERING (The Fix for the "Wobbly" Play Button) */
+/* 4. PRECISION ICON CENTERING (Flat Design - JS Compatible) */
 .audio-playlist-container .play-pause::after {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%); /* Mathematical centering */
     transition: all 0.1s ease;
 }
 
@@ -67,30 +67,24 @@
     border-style: solid;
     border-width: 8px 0 8px 14px; 
     border-color: transparent transparent transparent #fff;
-    margin-left: 2px; 
+    /* Optical centering for triangle point */
+    transform: translate(-35%, -50%); 
 }
 
-/* STATE: PAUSE (Double Bars) OLD VERSION
+/* STATE: PAUSE (Double Bars - Flat Gradient) */
 .audio-playlist-container .play-pause.playing::after {
-    width: 15px; height: 16px;
-    border-style: double;
-    border-width: 0 0 0 15px; 
-    border-color: #fff;
-    margin-left: 0; 
-}*/
-
-
-/* STATE: PAUSE (Double Bars) */
-.audio-playlist-container .play-pause.playing::after {
-    width: 16px;               /* Defines the total width of the icon */
+    width: 14px;               
     height: 16px;
-    border-style: double;
-    border-width: 0px 0px 0px 16px; /* Creates the two bars using the 'double' border */
-    border-color: #fff;
-    margin-left: 0;            /* Removes the 'Play' offset to achieve perfect center */
-    transform: translate(-50%, -50%); /* Re-asserts absolute centering */
+    border: none;
+    /* Paint two flat 5px bars with a 4px center gap */
+    background: linear-gradient(to right, 
+        #fff 0, #fff 5px, 
+        transparent 5px, transparent 9px, 
+        #fff 9px, #fff 14px
+    );
+    margin-left: 0;            
+    transform: translate(-50%, -50%); 
 }
-
 
 /* 5. LED DASHBOARD (The "Black Screen") */
 .audio-playlist-container .track-info {
