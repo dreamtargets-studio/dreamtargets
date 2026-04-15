@@ -195,8 +195,13 @@
     box-sizing: border-box;
 }
 
-/* Specificity win: Higher priority than base <h3> without using !important */
+/* Specificity win: Normalize H3 spacing after images */
 .text-rail .story-inline-image + h3 {
+    margin-top: 60px;
+}
+
+/* Specificity win: Normalize H3 spacing after blockquotes */
+.text-rail blockquote + h3 {
     margin-top: 60px;
 }
 
