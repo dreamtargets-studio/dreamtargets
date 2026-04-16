@@ -151,8 +151,7 @@
 }
 
 .lightbox-caption {
-    display: block; font-size: 11px; font-weight: 500; letter-spacing: 1px;
-    text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: block; font-size: 11px; font-weight: 500; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* --- 5. RESPONSIVE REFINEMENTS --- */
