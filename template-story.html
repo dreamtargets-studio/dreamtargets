@@ -2,270 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="version" content="DIGITAL STORIES v6.1 - FULL ARCHITECTURE RESTORED">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story template | Thinkamigo</title>
-<link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Adding this here as well to ensure it works immediately */
-        .content-column-narrow {
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-    </style>
+    <title>Story Template | Thinkamigo</title>
+    
+    <link rel="stylesheet" href="chassis.css">
+    <link rel="stylesheet" href="destination.css">
+    <link rel="stylesheet" href="gallery.css"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="content-page" style="background-color: #f0ead6; margin: 0; padding: 0;">
+<body class="content-page">
 
-   <header id="main-nav"></header>
+    <header id="main-nav"></header>
 
-<main class="editorial-post">
-    <div class="paper">
+    <main class="editorial-post">
         
-        <section class="hero-rail">
-            <img src="assets/img/placeholder-muted-960x540.jpg" alt="Hero Alt Text">
-            <div class="caption">
-                <p>Enter your hero image caption here.</p>
-            </div>
+        <section class="story-hero-wrapper">
+            <img src="assets/img/placeholder-cinematic-1280x414.jpg" 
+                 alt="Digital Stories" 
+                 class="panoramic-hero">
         </section>
 
-        <article class="text-rail">
-            <header>
-                <h1>Gallery template</h1>
-                <div class="orange-rule"></div>
-                <p class="metadata">Author Name, Month 2026</p>
-            </header>
+        <div class="paper-sheet">
+            
+            <article class="text-rail">
+                <header>
+                    <h1>Title</h1>
+                    <div class="orange-rule"></div>
+                    <h2>Subtitle</h2>
+                </header>
 
-            <h2 class="short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sollicitudin non mi at hendrerit. Sed lobortis laoreet est, ut malesuada purus fermentum vitae. </h2>
+                <h3>Landscape Gallery</h3>
 
-            <h3>Section Heading</h3>
-            <p>Main narrative continues here. Use standard paragraph tags for the majority of the text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sollicitudin non mi at hendrerit. Sed lobortis laoreet est, ut malesuada purus fermentum vitae. Maecenas tincidunt metus et lorem interdum blandit. Curabitur id dapibus enim. Integer mauris justo, elementum quis sapien egestas, lacinia lobortis velit. Aliquam erat volutpat. Maecenas sodales augue gravida suscipit ullamcorper. Cras in tincidunt erat. Duis ac auctor nunc. Pellentesque vulputate augue vel justo efficitur condimentum. Integer hendrerit rhoncus vestibulum. Nunc pulvinar vestibulum tincidunt. Sed vitae rhoncus tortor, nec tristique nunc. Phasellus vitae pulvinar erat. Vestibulum finibus odio eu mi dictum, porttitor dictum sem scelerisque. </p>
+                <div class="gallery-grid-3">
+                    <figure class="gallery-item">
+                        <img src="assets/img/placeholder-muted-640x360.jpg" 
+                             data-full="assets/img/placeholder-muted-1280x720" 
+                             data-gallery="story-gallery" 
+                             alt="Image title">
+                    </figure>             
+                    <figure class="gallery-item">
+                        <img src="assets/img/placeholder-muted-640x360.jpg" 
+                             data-full="assets/img/placeholder-muted-1280x720" 
+                             data-gallery="story-gallery" 
+                             alt="Image title">
+                    </figure>               
+                    <figure class="gallery-item">
+                        <img src="assets/img/placeholder-muted-640x360.jpg" 
+                             data-full="assets/img/placeholder-muted-1280x720" 
+                             data-gallery="story-gallery" 
+                             alt="Image title">
+                    </figure>  
+                </div>
 
-                <figure style="margin: 40px 0;">
-                    <img src="assets/img/placeholder-muted-960x540.jpg"
-                    data-full="assets/img/placeholder-muted-1280x720.jpg"
-                    alt="Inline image" 
-                    style="cursor: zoom-in;"> 
-                    <figcaption class="caption">
-                        <p>Inline image</p>
-                    </figcaption>
-                </figure>
+                <h3>Section heading</h3>
 
-            <blockquote>
-                "Insert a quote here. The blue axis and light italics are ready to go"
-            </blockquote>
-
-            <!--Double image gallery-->
-            <div class="gallery-grid">
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="template-set" 
-                    alt="Description for Image 1">
-                </figure>
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="template-set" 
-                    alt="Description for Image 2">
-                </figure>    
-            </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum laoreet quam, non maximus diam imperdiet vulputate. Vivamus id ante semper, aliquam ante eget, iaculis ipsum. Maecenas congue massa a egestas feugiat. Pellentesque et nibh gravida, aliquet mi sit amet, mollis ipsum. Nunc efficitur mollis lacus vitae vulputate. </p>
 
 
-            <h3>Section Heading</h3>
-            <p>Main narrative continues here. Use standard paragraph tags for the majority of the text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sollicitudin non mi at hendrerit. Sed lobortis laoreet est, ut malesuada purus fermentum vitae. Maecenas tincidunt metus et lorem interdum blandit. Curabitur id dapibus enim. Integer mauris justo, elementum quis sapien egestas, lacinia lobortis velit. Aliquam erat volutpat. Maecenas sodales augue gravida suscipit ullamcorper. Cras in tincidunt erat. Duis ac auctor nunc. Pellentesque vulputate augue vel justo efficitur condimentum. Integer hendrerit rhoncus vestibulum. Nunc pulvinar vestibulum tincidunt. Sed vitae rhoncus tortor, nec tristique nunc. Phasellus vitae pulvinar erat. Vestibulum finibus odio eu mi dictum, porttitor dictum sem scelerisque. </p>
+                <p>Supported by the BBC, Arts Council England, and Nottingham Trent University, our collaborations have helped creative practitioners find their digital voice. From the cinematic, site-specific exploration of the <b><i>Sillitoe Trail</i></b> to the zombie-genre digital comic <b><i>Dawn of the Unread</i></b> designed to engage reluctant readers. We blend the written word with video, social and live events to create 'Living Literature'.</p>
 
-            <!--Triple image gallery-->
+                <p>This commitment to creative rebellion earned us the <b>Guardian Award for Teaching Excellence </b>in 2015. More importantly, these case studies served as the strategic backbone for the bid that secured Nottingham’s status as a <b>UNESCO City of Literature</b> proving that the future of the word is as radical as its past.</p>
 
-            <div class="gallery-grid-3">
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="triple-gallery" 
-                    alt="Description for Image 1">
-                </figure>             
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="triple-gallery" 
-                    alt="Description for Image 2">
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="triple-gallery" 
-                    alt="Description for Image 3">
-                </figure>  
-            </div>
+                 <blockquote>
+                    <p>These projects are informed by the discipline of the Bauhaus and the free spirit of creative counterculture.</p>
+                    <footer>Paul Fillingham</footer>
+                </blockquote>    
 
-            <h3>Section Heading</h3>
-            <p>Main narrative continues here. Use standard paragraph tags for the majority of the text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sollicitudin non mi at hendrerit. Sed lobortis laoreet est, ut malesuada purus fermentum vitae. Maecenas tincidunt metus et lorem interdum blandit. Curabitur id dapibus enim. Integer mauris justo, elementum quis sapien egestas, lacinia lobortis velit. Aliquam erat volutpat. Maecenas sodales augue gravida suscipit ullamcorper. Cras in tincidunt erat. Duis ac auctor nunc. Pellentesque vulputate augue vel justo efficitur condimentum. Integer hendrerit rhoncus vestibulum. Nunc pulvinar vestibulum tincidunt. Sed vitae rhoncus tortor, nec tristique nunc. Phasellus vitae pulvinar erat. Vestibulum finibus odio eu mi dictum, porttitor dictum sem scelerisque. </p>
+                <p>&nbsp;</p>
+                <p>My creative foundation remains a deliberate contradiction: the rigorous functionalism of the Bauhaus meeting the subversive energy of sixties counterculture. An ethos cultivated in the multidisciplinary art practice at Leeds Polytechnic School of Fine Art in the 1980s, where I was mentored by the writer Jeff Nuttall (<i>Bomb Culture </i>1968) and abstract expressionist Willy Tirr, a German emigre who was among the WWII liberators who uncovered the horrors of Bergen-Belsen concentration camp. 
 
-            <!--Extendable triple image gallery-->
+                  <blockquote>
+                    <p>The artist is a catalyst for ideas and a kind of touchstone for the values of society.</p>
+                    <footer>Willy Tirr</footer>
+                </blockquote>                      
+                <p>&nbsp;</p>
 
-            <div class="gallery-grid-3">
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 1">
-                </figure>             
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 2">
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 3">
-                </figure>  
+                <p>Leeds Fine Art was an incubator of "controlled rebellion" as recently documented in the academic research of Professor Gavin Butt - <i>No Machos or Pop Stars: When the Leeds Art Experiment went Punk</i> (2022), and the Nottingham Contemporary exhibition <b><i>Still Undead: Popular Culture in Britain Beyond the Bauhaus.</i> </b> </p>
+                    
+                <p>Today, I continue to apply the design discipline and intellectual courage to push digital storytelling beyond its current boundaries, establishing a blueprint for future endeavours.</p>
 
-                <!--Row-->
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 4">
-                </figure>             
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 5">
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 6">
-                </figure>  
+                <h3>Projects</h3>
 
-                <!--Row-->
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 7">
-                </figure>             
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 8">
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    data-gallery="extended-triple-gallery" 
-                    alt="Description for Image 9">
-                </figure>  
-            </div>
+                <ul>
+                    <li>Whatever People Say I Am - Digital comic (2020 - present)</li>
+                    <li>Memory Theatre - DH Lawrence Pilgrimage (2015 - present)</li>
+                    <li>Nottingham UNESCO City of Literature Bid (2015)</li>
+                    <li>Being Arthur - National festival of Humanities (2014)</li>
+                    <li>Dawn of the Unread - Guardian Award Winner (2014 - 2015)</li>
+                    <li>The Space Arts - Sillitoe Trail (2012 - 2013)</li>
+                </ul>
 
-            <h3>Portrait gallery</h3>
-            <p>Main narrative continues here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sollicitudin non mi at hendrerit. Sed lobortis laoreet est, ut malesuada purus fermentum vitae. Maecenas tincidunt metus et lorem interdum blandit. Curabitur id dapibus enim. Integer mauris justo, elementum quis sapien egestas, lacinia lobortis velit. Aliquam erat volutpat. Maecenas sodales augue gravida suscipit ullamcorper. Cras in tincidunt erat. Duis ac auctor nunc. Pellentesque vulputate augue vel justo efficitur condimentum. Integer hendrerit rhoncus vestibulum. Nunc pulvinar vestibulum tincidunt. Sed vitae rhoncus tortor, nec tristique nunc. Phasellus vitae pulvinar erat. Vestibulum finibus odio eu mi dictum, porttitor dictum sem scelerisque. </p>
+            </article> 
 
 
-            <div class="portrait-gallery-grid-3">
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery"
-                    alt="portrait caption">
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery"
-                    alt="portrait caption">
+           <hr style="border: 0; border-top: 1px solid #EDEDED; margin: 0; width: 100%;">
 
-                </figure>               
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery"
-                    alt="portrait caption">
+            <article class="text-rail">
+                <section class="links-section" style="padding: 40px 0 10px 0;">
+                    <h2 style="color: var(--brand-blue); font-size: 24px; font-weight: 600; margin-bottom: 20px; margin-top: 0;">Links</h2>
 
-                </figure>
-            </div>
+                <ul>
+                    <li><a href="https://sillitoetrail.com" target="_blank">The Space Arts - Sillitoe Trail </a></li>
+                    <li><a href="https://dawnoftheunread.com" target="_blank">Dawn of the Unread - 'When the dead go unread, there's gonna be trouble' </a></li>
+                    <li><a href="https://memorytheatre.co.uk" target="_blank">Memory Theatre - DH Lawrence's Cabinet of Curiosities </a></li>
+                    <li><a href="https://whateverpeoplesayIam.co.uk" target="_blank">Whatever People Say I Am - Challenging Stereotypes through Comics </a></li>
+                    <li><a href="https://www.nottinghamcontemporary.org/whats-on/undead-pop-culture-in-britain-beyond-the-bauhaus/" target="_blank">Nottingham Contemporary - Still undead: Pop Culture in Britain, Beyond the Bauhaus </a></li>
+                </ul>
+                </section>
+            </article> 
 
-            <div class="portrait-gallery-grid-4">
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery-4"
-                    alt="portrait caption 1">
-                </figure>             
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery-4"
-                    alt="portrait caption 2">
-                </figure>                
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery-4"
-                    alt="portrait caption 3">
-                </figure>   
-                <figure>
-                    <img src="assets/img/placeholder-portrait-300x425.jpg" 
-                    data-full="assets/img/placeholder-portrait-1190x1684.jpg" 
-                    data-gallery="portrait-gallery-4"
-                    alt="portrait caption 4">
-                </figure>   
-            </div>    
-
-                <figure>
-                    <img src="assets/img/placeholder-muted-640x360.jpg" 
-                    data-full="assets/img/placeholder-muted-1280x720.jpg" 
-                    alt="Description for Image">
-                </figure>  
-
-
-            <p>Concluding thoughts or final paragraph for this section.</p>
-        </article>
-
-        <div style="height: 1px; background: #eee; margin: 80px 0 40px;"></div>
-
-        <section class="text-rail" style="padding-bottom: 80px;">
-            <h3>Links</h3>
-            <ul style="list-style: none;">
-                <li style="margin-bottom: 15px;">
-                    <a href="#" target="_blank" style="color: #0056b3; text-decoration: none; border-bottom: 1px solid #ccc;">
-                        Link Title Here
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </div>
-</main>
-
-   <footer id="main-footer"></footer>
-   
-<div id="lightbox-overlay">
-    <span class="lightbox-close"></span>
-
-    <img class="lightbox-content" id="lightbox-img" src="">
-
-    <div class="lightbox-info">
-        <span class="lightbox-prev"></span>
-        
-        <div class="text-group">
-            <div id="lightbox-caption" class="lightbox-caption"></div>
-            <div id="lightbox-counter" class="lightbox-counter"></div>
-        </div>
-
-        <span class="lightbox-next"></span>
-    </div>
-</div>
-
-<script src="loader.js"></script>
-
+        </div> </main> 
+    
+    <footer id="main-footer"></footer>
+    <script src="loader.js"></script>
 
 </body>
 </html>
