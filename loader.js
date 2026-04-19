@@ -1,14 +1,15 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.2
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.3
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
-   Updates: Hybrid Video Detection (MP4/YouTube/Vimeo Sync)
+   Updates: Footer-First Handshake | story-inline-video Sync
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. THE INJECTOR ENGINE ---
+    // --- 1. THE INJECTOR ENGINE (ASYNCHRONOUS) ---
     const loadPartials = async () => {
         try {
+            // 1a. Inject Header
             const hRes = await fetch('header.html');
             if (hRes.ok) {
                 const hData = await hRes.text();
@@ -19,23 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // 1b. Inject Footer (CONTAINING THE PROJECTOR)
             const fRes = await fetch('footer.html');
             if (fRes.ok) {
                 const fData = await fRes.text();
                 const fSocket = document.getElementById('main-footer');
                 if (fSocket) { 
                     fSocket.innerHTML = fData; 
+                    
+                    // --- THE HANDSHAKE ---
+                    // Now that footer is physically in the DOM, we can bind video events
                     setupUI(); 
                     setupAudioPlayer(); 
+                    
+                    if (document.querySelector('.theatre-card')) {
+                        setupProjectorLogic();
+                    }
                 }
             }
 
+            // 1c. Global Lightbox (Images)
             if (document.querySelector('img[data-full]') || document.querySelector('.video-item')) {
                 injectLightbox();
-            }
-
-            if (document.querySelector('.theatre-card')) {
-                setupProjectorLogic();
             }
 
         } catch (err) {
@@ -43,18 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 2. MODULE: CINEMATIC THEATRE PROJECTOR (HYBRID ENGINE) ---
+    // --- 2. MODULE: CINEMATIC THEATRE PROJECTOR (v5.4 SYNC) ---
     const setupProjectorLogic = () => {
         const projector = document.getElementById('video-theatre-projector');
-        const target = document.getElementById('projector-target');
+        // ID updated to match footer.html container
+        const target = document.getElementById('projector-video-container');
         const closeBtn = document.querySelector('.projector-close');
         const cards = document.querySelectorAll('.theatre-card');
 
-        if (!projector || !target) return;
+        if (!projector || !target) {
+            console.warn("Projector structure missing from Footer.");
+            return;
+        }
 
         const openProjector = (videoData) => {
             let finalHtml = "";
 
+            // Handle Local MP4
             if (videoData.includes('.mp4')) {
                 finalHtml = `
                     <div class="video-container">
@@ -64,12 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         </video>
                     </div>`;
             } 
+            // Handle YouTube
             else if (videoData.includes('youtube.com') || videoData.includes('youtu.be')) {
                 finalHtml = `
                     <div class="video-container">
                         <iframe src="${videoData}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     </div>`;
             }
+            // Default to Vimeo (Project ID)
             else {
                 const vimeoUrl = `https://player.vimeo.com/video/${videoData}?autoplay=1&color=ff6600&title=0&byline=0&portrait=0`;
                 finalHtml = `
@@ -89,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'auto'; 
         };
 
+        // Bind events to cards (now that they are physically in the DOM)
         cards.forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
                 const data = card.getAttribute('data-video');
                 if (data) openProjector(data);
             });
@@ -98,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (closeBtn) closeBtn.addEventListener('click', closeProjector);
 
+        // Escape Key Support
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && projector.style.display === 'flex') {
                 closeProjector();
@@ -269,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!engine || !masterBtn) return;
 
-        // Digital Clock Helper
         const formatTime = (secs) => {
             if (isNaN(secs)) return "00:00";
             const mins = Math.floor(secs / 60);
@@ -279,10 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.track-item').forEach(track => {
             track.addEventListener('click', () => {
-                if (ledTitle) {
-                    ledTitle.innerText = track.getAttribute('data-title');
-                }
-                
+                if (ledTitle) ledTitle.innerText = track.getAttribute('data-title');
                 engine.src = track.getAttribute('data-src');
                 engine.play();
                 masterBtn.classList.add('playing');
@@ -294,17 +306,14 @@ document.addEventListener('DOMContentLoaded', () => {
             masterBtn.classList.toggle('playing');
         });
 
-        // The Pulse: Time and Progress updates
         engine.addEventListener('timeupdate', () => {
             if (timeElapsed) timeElapsed.innerText = formatTime(engine.currentTime);
-            
             if (progressBar && engine.duration) {
                 const perc = (engine.currentTime / engine.duration) * 100;
                 progressBar.style.width = perc + '%';
             }
         });
 
-        // The Handshake: Load duration on metadata arrival
         engine.addEventListener('loadedmetadata', () => {
             if (timeTotal) timeTotal.innerText = formatTime(engine.duration);
         });
