@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.4 (FINAL RESTORATION)
+   THINKAMIGO THEATRE ENGINE v5.4 (UI PARITY LOCK)
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: story-inline-video | Breakout Fix | Brand Color Lock
-   Functionality: #0A254A Midnight Blue Restore
+   Updates: story-inline-video | Breakout Fix | Gallery Sync
+   Functionality: #0A254A Match (Gallery Lightbox Parity)
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -117,7 +117,7 @@
     pointer-events: none;
 }
 
-/* Scale up the triangle for the 960px Editorial Rail feature */
+/* Scale up the triangle specifically for the 960px Editorial Rail feature */
 .story-inline-video .theatre-thumb::after {
     border-top-width: 20px;
     border-bottom-width: 20px;
@@ -178,14 +178,14 @@
     color: #FF6600; 
 }
 
-/* --- 6. THE PROJECTOR (GLOBAL BREAKOUT) --- */
+/* --- 6. THE PROJECTOR (GLOBAL BREAKOUT & GALLERY PARITY) --- */
 #video-theatre-projector {
     position: fixed; /* Bypasses editorial rail width constraints */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background-color: #0A254A; /* Midnight Thinkamigo Blue restored */
+    background-color: #0A254A; /* SYNCED: Matches Gallery Lightbox Background */
     display: none;
     z-index: 1000000; 
     justify-content: center;
