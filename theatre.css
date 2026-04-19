@@ -1,7 +1,7 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.1
+   THINKAMIGO THEATRE ENGINE v5.2
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: Hybrid Player Support (HTML5 Video + Iframe)
+   Updates: Unified Inline Video Interaction | Bauhaus Sync
    Features: Flex-Anchored "Play" Link | Brand Blue/Orange Sync
    ============================================================ */
 
@@ -37,7 +37,7 @@
     text-align: left;
 }
 
-h1 {
+.theatre-grid-charcoal h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
     font-weight: 600;
@@ -71,15 +71,20 @@ h1 {
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD --- */
-.theatre-card {
+/* --- 5. THE VIDEO CARD & INLINE FEATURES --- */
+
+/* Unified interaction triggers for cards and editorial inline videos */
+.theatre-card, 
+.story-inline-image.video-item {
     display: flex;
     flex-direction: column;
     cursor: pointer;
     height: 100%; 
 }
 
-.theatre-thumb {
+/* Share the Thumb Logic: Respects the 16:9 ratio for all cinematic assets */
+.theatre-thumb,
+.story-inline-image.video-item .theatre-thumb {
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
@@ -88,6 +93,7 @@ h1 {
     border-radius: 4px;
 }
 
+/* SHARED PLAY TRIANGLE (The Sovereign Icon) */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -105,7 +111,16 @@ h1 {
     pointer-events: none;
 }
 
-.theatre-card:hover .theatre-thumb::after {
+/* Editorial Scale: Larger triangle for the 960px rail feature */
+.story-inline-image.video-item .theatre-thumb::after {
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+    border-left-width: 32px;
+}
+
+/* Universal Hover States */
+.theatre-card:hover .theatre-thumb::after,
+.story-inline-image.video-item:hover .theatre-thumb::after {
     opacity: 1;
 }
 
@@ -119,10 +134,13 @@ h1 {
     transition: all 0.2s ease;
 }
 
-.theatre-card:hover .theatre-thumb img {
+/* Hover Outline Handshake */
+.theatre-card:hover .theatre-thumb img,
+.story-inline-image.video-item:hover .theatre-thumb img {
     outline: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+/* Caption Sync */
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
@@ -192,7 +210,6 @@ h1 {
     cursor: pointer;
 }
 
-/* Unified Container for Iframe and HTML5 Video */
 .video-container, 
 .video-container iframe,
 .video-container video {
@@ -202,7 +219,6 @@ h1 {
     display: block;
 }
 
-/* Specific centering for local video tag */
 .video-container video {
     object-fit: contain; 
     background: #000;
@@ -211,7 +227,10 @@ h1 {
 /* --- 7. MOBILE REFINEMENTS --- */
 @media (max-width: 768px) {
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
+    
+    /* Thumb interactions disabled for mobile to respect touch conventions */
     .theatre-thumb::after { display: none; } 
+    
     .projector-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
