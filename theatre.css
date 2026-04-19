@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.2
+   THINKAMIGO THEATRE ENGINE v5.3 (MASTER EDITION)
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: Unified Inline Video Interaction | Bauhaus Sync
-   Features: Flex-Anchored "Play" Link | Brand Blue/Orange Sync
+   Updates: story-inline-video | Hex Only | Projector Breakout
+   Functionality: 100% v5.2 Parity + Inline Integration
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -49,7 +49,7 @@
 .theatre-grid-charcoal .orange-rule {
     width: 250px;
     height: 1px;
-    background-color: #ff6600; 
+    background-color: #FF6600; 
     margin: 18px 0 30px 0;   
 }
 
@@ -71,29 +71,35 @@
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD & INLINE FEATURES --- */
+/* --- 5. THE VIDEO CARD & STORY FEATURES --- */
 
-/* Unified interaction triggers for cards and editorial inline videos */
+/* Semantic triggers for Grid Cards and Editorial Inline Videos */
 .theatre-card, 
-.story-inline-image.video-item {
+.story-inline-video .theatre-card {
     display: flex;
     flex-direction: column;
     cursor: pointer;
     height: 100%; 
 }
 
-/* Share the Thumb Logic: Respects the 16:9 ratio for all cinematic assets */
-.theatre-thumb,
-.story-inline-image.video-item .theatre-thumb {
+/* Editorial Container logic to respect the 960px rail */
+.story-inline-video {
+    margin: 45px 0;
+    width: 100%;
+    display: block;
+}
+
+/* The Theatre Thumb: 16:9 Cinematic Lock */
+.theatre-thumb {
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     line-height: 0;
-    background-color: #000;
+    background-color: #000000;
     border-radius: 4px;
 }
 
-/* SHARED PLAY TRIANGLE (The Sovereign Icon) */
+/* THE SOVEREIGN ICON (Hex White) */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -104,23 +110,22 @@
     height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.3);
-    opacity: 0;
+    border-left: 20px solid #FFFFFF; 
+    opacity: 0.3; /* Opacity controlled by machine, not color value */
     transition: opacity 0.3s ease;
     z-index: 2;
     pointer-events: none;
 }
 
-/* Editorial Scale: Larger triangle for the 960px rail feature */
-.story-inline-image.video-item .theatre-thumb::after {
+/* Scale up the triangle specifically for the 960px Editorial Rail feature */
+.story-inline-video .theatre-thumb::after {
     border-top-width: 20px;
     border-bottom-width: 20px;
     border-left-width: 32px;
 }
 
 /* Universal Hover States */
-.theatre-card:hover .theatre-thumb::after,
-.story-inline-image.video-item:hover .theatre-thumb::after {
+.theatre-card:hover .theatre-thumb::after {
     opacity: 1;
 }
 
@@ -129,18 +134,17 @@
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
-    outline: 1px solid rgba(255, 255, 255, 0.12);
+    outline: 1px solid #333333; /* Baseline outline */
     outline-offset: -1px;
     transition: all 0.2s ease;
 }
 
 /* Hover Outline Handshake */
-.theatre-card:hover .theatre-thumb img,
-.story-inline-image.video-item:hover .theatre-thumb img {
-    outline: 1px solid rgba(255, 255, 255, 0.5);
+.theatre-card:hover .theatre-thumb img {
+    outline: 1px solid #BBBBBB; /* Visual confirmation */
 }
 
-/* Caption Sync */
+/* Grid Typography (Preserved from v5.2) */
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
@@ -164,26 +168,26 @@
 .theatre-actions .res-link {
     font-size: 14px;
     font-weight: 600;
-    color: #0054dc; 
+    color: #0054DC; 
     text-decoration: none;
     transition: color 0.3s ease;
     display: inline-block;
 }
 
 .theatre-card:hover .res-link {
-    color: #ff6600; 
+    color: #FF6600; 
 }
 
-/* --- 6. THE PROJECTOR (HYBRID SUPPORT) --- */
+/* --- 6. THE PROJECTOR (GLOBAL BREAKOUT) --- */
 #video-theatre-projector {
-    position: fixed;
+    position: fixed; /* Kills the postage stamp by ignoring parent containers */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background-color: #001a33; 
+    background-color: #001A33; /* Solid Midnight Hex */
     display: none;
-    z-index: 10000;
+    z-index: 1000000; 
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -191,9 +195,11 @@
 
 .projector-stage {
     width: 95vw;
-    max-width: 1920px;
+    max-width: 1600px; /* Aligned with High-Fidelity display */
     aspect-ratio: 16 / 9;
-    background: #000;
+    background-color: #000000;
+    position: relative;
+    box-shadow: 0 0 100px #000000;
 }
 
 .projector-close {
@@ -206,31 +212,23 @@
     background-repeat: no-repeat; 
     background-position: center; 
     background-size: 22px; 
-    z-index: 10001; 
+    z-index: 1000001; 
     cursor: pointer;
 }
 
 .video-container, 
 .video-container iframe,
 .video-container video {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     border: none;
     display: block;
-}
-
-.video-container video {
-    object-fit: contain; 
-    background: #000;
 }
 
 /* --- 7. MOBILE REFINEMENTS --- */
 @media (max-width: 768px) {
     .video-theatre-grid { grid-template-columns: 1fr; gap: 40px; }
-    
-    /* Thumb interactions disabled for mobile to respect touch conventions */
     .theatre-thumb::after { display: none; } 
-    
     .projector-close { 
         top: max(15px, env(safe-area-inset-top)); 
         right: max(15px, env(safe-area-inset-right)); 
