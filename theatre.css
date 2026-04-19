@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.3 (MASTER EDITION)
+   THINKAMIGO THEATRE ENGINE v5.4 (FINAL RESTORATION)
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: story-inline-video | Hex Only | Projector Breakout
-   Functionality: 100% v5.2 Parity + Inline Integration
+   Updates: story-inline-video | Breakout Fix | Brand Color Lock
+   Functionality: #0A254A Midnight Blue Restore
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -111,13 +111,13 @@
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     border-left: 20px solid #FFFFFF; 
-    opacity: 0.3; /* Opacity controlled by machine, not color value */
+    opacity: 0.3; 
     transition: opacity 0.3s ease;
     z-index: 2;
     pointer-events: none;
 }
 
-/* Scale up the triangle specifically for the 960px Editorial Rail feature */
+/* Scale up the triangle for the 960px Editorial Rail feature */
 .story-inline-video .theatre-thumb::after {
     border-top-width: 20px;
     border-bottom-width: 20px;
@@ -134,17 +134,17 @@
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
-    outline: 1px solid #333333; /* Baseline outline */
+    outline: 1px solid #333333;
     outline-offset: -1px;
     transition: all 0.2s ease;
 }
 
 /* Hover Outline Handshake */
 .theatre-card:hover .theatre-thumb img {
-    outline: 1px solid #BBBBBB; /* Visual confirmation */
+    outline: 1px solid #BBBBBB;
 }
 
-/* Grid Typography (Preserved from v5.2) */
+/* Grid Typography */
 .theatre-caption {
     padding: 18px 0 0 0;
     font-family: 'Poppins', sans-serif;
@@ -180,12 +180,12 @@
 
 /* --- 6. THE PROJECTOR (GLOBAL BREAKOUT) --- */
 #video-theatre-projector {
-    position: fixed; /* Kills the postage stamp by ignoring parent containers */
+    position: fixed; /* Bypasses editorial rail width constraints */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background-color: #001A33; /* Solid Midnight Hex */
+    background-color: #0A254A; /* Midnight Thinkamigo Blue restored */
     display: none;
     z-index: 1000000; 
     justify-content: center;
@@ -195,7 +195,7 @@
 
 .projector-stage {
     width: 95vw;
-    max-width: 1600px; /* Aligned with High-Fidelity display */
+    max-width: 1600px;
     aspect-ratio: 16 / 9;
     background-color: #000000;
     position: relative;
