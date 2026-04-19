@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO THEATRE ENGINE v5.4 (UI PARITY LOCK)
+   THINKAMIGO THEATRE ENGINE v5.5
    Architecture: Sovereign Cinema Environment (Grounded)
-   Updates: story-inline-video | Breakout Fix | Gallery Sync
-   Functionality: #0A254A Match (Gallery Lightbox Parity)
+   Updates: Keyline Icon | YouTube a-tag Sync | Gallery Parity
+   Functionality: #0A254A Midnight Blue | Fixed Breakout
    ============================================================ */
 
 /* --- 1. THE MAIN STAGE (THE VOID) --- */
@@ -71,18 +71,21 @@
     width: 100%;
 }
 
-/* --- 5. THE VIDEO CARD & STORY FEATURES --- */
+/* --- 5. THE VIDEO CARD & INLINE FEATURES --- */
 
-/* Semantic triggers for Grid Cards and Editorial Inline Videos */
+/* Semantic triggers for internal and external (a-tag) video cards */
 .theatre-card, 
+a.theatre-card,
 .story-inline-video .theatre-card {
     display: flex;
     flex-direction: column;
     cursor: pointer;
     height: 100%; 
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
-/* Editorial Container logic to respect the 960px rail */
+/* Editorial Container for Story Pages */
 .story-inline-video {
     margin: 45px 0;
     width: 100%;
@@ -99,7 +102,7 @@
     border-radius: 4px;
 }
 
-/* THE SOVEREIGN ICON (Hex White) */
+/* THE SOVEREIGN ICON (Hex White with Keyline Filter) */
 .theatre-thumb::after {
     content: '';
     position: absolute;
@@ -111,13 +114,17 @@
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     border-left: 20px solid #FFFFFF; 
+    
+    /* KEYLINE: Ensures visibility against bright/white backgrounds */
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.8));
+    
     opacity: 0.3; 
     transition: opacity 0.3s ease;
     z-index: 2;
     pointer-events: none;
 }
 
-/* Scale up the triangle specifically for the 960px Editorial Rail feature */
+/* Scale up for 960px rail features */
 .story-inline-video .theatre-thumb::after {
     border-top-width: 20px;
     border-bottom-width: 20px;
@@ -142,6 +149,7 @@
 /* Hover Outline Handshake */
 .theatre-card:hover .theatre-thumb img {
     outline: 1px solid #BBBBBB;
+    filter: brightness(1.05);
 }
 
 /* Grid Typography */
@@ -180,12 +188,12 @@
 
 /* --- 6. THE PROJECTOR (GLOBAL BREAKOUT & GALLERY PARITY) --- */
 #video-theatre-projector {
-    position: fixed; /* Bypasses editorial rail width constraints */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background-color: #0A254A; /* SYNCED: Matches Gallery Lightbox Background */
+    background-color: #0A254A; /* SYNCED: Gallery Lightbox Background */
     display: none;
     z-index: 1000000; 
     justify-content: center;
@@ -199,6 +207,7 @@
     aspect-ratio: 16 / 9;
     background-color: #000000;
     position: relative;
+    /* Box shadow removed for clean gallery parity */
 }
 
 .projector-close {
