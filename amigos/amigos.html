@@ -24,6 +24,34 @@
             padding: 0 40px;
         }
 
+        .amigos-page-header {
+            padding: 40px 0 30px 0;
+        }
+
+        .amigos-page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--brand-blue);
+            margin: 0 0 0 0;
+            line-height: 1.1;
+        }
+
+        .amigos-page-header .orange-rule {
+            width: 250px;
+            height: 1px;
+            background: var(--brand-orange);
+            margin: 16px 0 18px 0;
+        }
+
+        .amigos-page-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 200;
+            color: #191919;
+            margin: 0;
+        }
+
         /* Project sections */
         .project-section { margin-bottom: 40px; }
 
@@ -119,6 +147,12 @@
         .status-wip  { background: #fff8e6; color: #e65100; }
         .status-soon { background: #f0f0f0; color: #666666; }
 
+        /* Override destination.css min-height on paper-sheet */
+        .paper-sheet {
+            min-height: 0;
+            padding-bottom: 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .amigos-grid-inner { padding: 0 20px; }
@@ -135,19 +169,15 @@
 
     <header id="main-nav"></header>
 
-    <main class="editorial-post">
-        <div class="paper-sheet">
-            <article class="text-rail">
-                <header>
+    <main>
+        <div class="amigos-grid-wrapper">
+            <div class="amigos-grid-inner">
+
+                <header class="amigos-page-header">
                     <h1>Amigos</h1>
                     <div class="orange-rule"></div>
                     <h2>Studio resources, prototypes and working documents</h2>
                 </header>
-            </article>
-        </div>
-
-        <div class="amigos-grid-wrapper">
-            <div class="amigos-grid-inner">
 
                 <!-- HOUDINI WINDOW -->
                 <div class="project-section">
