@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amigos — Thinkamigo studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand-blue: #0054dc;
+    --brand-orange: #ff6600;
+    --footer-bg: #0a254a;
+    --stone-bg: #f5f5ef;
+    --charcoal: #191919;
+    --rule: #dddddd;
+    --muted: #666666;
+    --paper: #ffffff;
+  }
+
+  body {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    background: var(--stone-bg);
+    color: var(--charcoal);
+    margin: 0;
+  }
+
+  /* HEADER */
+  .amigos-header {
+    background: var(--footer-bg);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .amigos-header-brand {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .amigos-header-lock {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff50;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .amigos-header-lock:hover { color: var(--brand-orange); }
+
+  /* HERO */
+  .amigos-hero {
+    background: var(--brand-blue);
+    padding: 60px 40px 50px;
+    color: #ffffff;
+  }
+
+  .amigos-hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .amigos-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 200;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .orange-rule {
+    width: 250px;
+    height: 1px;
+    background: var(--brand-orange);
+    margin: 16px 0 20px;
+  }
+
+  .amigos-hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: #ffffff80;
+  }
+
+  /* MAIN */
+  .amigos-main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+  }
+
+  /* PROJECT SECTIONS */
+  .project-section {
+    margin-bottom: 60px;
+  }
+
+  .project-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .project-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--brand-blue);
+  }
+
+  .project-section-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  /* CARD GRID */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 20px 22px;
+    text-decoration: none;
+    color: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--brand-blue);
+  }
+
+  .card:hover .card-title {
+    color: var(--brand-blue);
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--brand-orange);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+    transition: color 0.2s;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .card-status {
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 14px;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 2px;
+    align-self: flex-start;
+  }
+
+  .status-live { background: #e8f5e9; color: #2e7d32; }
+  .status-wip  { background: #fff8e6; color: #e65100; }
+  .status-soon { background: #f0f0f0; color: #999999; }
+
+  /* FOOTER */
+  .amigos-footer {
+    background: var(--footer-bg);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff30;
+    letter-spacing: 0.08em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .amigos-hero { padding: 40px 24px 36px; }
+    .amigos-main { padding: 40px 24px 80px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .amigos-header { padding: 16px 24px; }
+    .project-section-header { flex-direction: column; gap: 4px; }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header class="amigos-header">
+  <a href="/" class="amigos-header-brand">Thinkamigo</a>
+  <span class="amigos-header-lock" onclick="sessionStorage.removeItem('amigos_auth'); window.location.href='hello-amigos.html'">Lock</span>
+</header>
+
+<div class="amigos-hero">
+  <div class="amigos-hero-inner">
+    <h1>Amigos</h1>
+    <div class="orange-rule"></div>
+    <p class="amigos-hero-sub">Studio resources, prototypes and working documents — for collaborators only.</p>
+  </div>
+</div>
+
+<main class="amigos-main">
+
+  <!-- HOUDINI WINDOW -->
+  <div class="project-section">
+    <div class="project-section-header">
+      <span class="project-section-title">Houdini Window</span>
+      <span class="project-section-desc">Novel, production diary, AI creative practice</span>
+    </div>
+    <div class="card-grid">
+      <a href="houdini/overview.html" class="card">
+        <span class="card-tag">Overview</span>
+        <span class="card-title">Project overview</span>
+        <span class="card-desc">Synopsis, structure, dual timeline, character notes.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+      <a href="houdini/production-diary.html" class="card">
+        <span class="card-tag">Diary</span>
+        <span class="card-title">Production diary</span>
+        <span class="card-desc">AI-assisted writing process, sessions, decisions made.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+      <a href="houdini/prototypes.html" class="card">
+        <span class="card-tag">Prototypes</span>
+        <span class="card-title">Experimental builds</span>
+        <span class="card-desc">Cover concepts, layout explorations, excerpt layouts.</span>
+        <span class="card-status status-soon">Coming soon</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- HERITAGE -->
+  <div class="project-section">
+    <div class="project-section-header">
+      <span class="project-section-title">Heritage</span>
+      <span class="project-section-desc">Sillitoe Trail, Dawn of the Unread, BBC Civilisations</span>
+    </div>
+    <div class="card-grid">
+      <a href="heritage/sillitoe.html" class="card">
+        <span class="card-tag">Trail</span>
+        <span class="card-title">Sillitoe Trail</span>
+        <span class="card-desc">Project documentation, assets, trail map reference.</span>
+        <span class="card-status status-live">Live</span>
+      </a>
+      <a href="heritage/dawn.html" class="card">
+        <span class="card-tag">Education</span>
+        <span class="card-title">Dawn of the Unread</span>
+        <span class="card-desc">Guardian award project. NTU. UNESCO City of Literature.</span>
+        <span class="card-status status-live">Live</span>
+      </a>
+      <a href="heritage/bbc.html" class="card">
+        <span class="card-tag">Broadcast</span>
+        <span class="card-title">BBC Civilisations</span>
+        <span class="card-desc">The Art of Mining — 2018. Reference and assets.</span>
+        <span class="card-status status-live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ARTS -->
+  <div class="project-section">
+    <div class="project-section-header">
+      <span class="project-section-title">Arts</span>
+      <span class="project-section-desc">Seaside Sci-fi, installation, community platforms</span>
+    </div>
+    <div class="card-grid">
+      <a href="arts/seaside-scifi.html" class="card">
+        <span class="card-tag">Platform</span>
+        <span class="card-title">Seaside Sci-fi</span>
+        <span class="card-desc">North West creative community platform. Morecambe.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+      <a href="arts/installation.html" class="card">
+        <span class="card-tag">Practice</span>
+        <span class="card-title">Installation work</span>
+        <span class="card-desc">Gallery-based and locative projects. Reference archive.</span>
+        <span class="card-status status-soon">Coming soon</span>
+      </a>
+      <a href="arts/prototypes.html" class="card">
+        <span class="card-tag">Prototypes</span>
+        <span class="card-title">Arts prototypes</span>
+        <span class="card-desc">Work-in-progress builds and experimental interfaces.</span>
+        <span class="card-status status-soon">Coming soon</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ENQUIRE WITHIN -->
+  <div class="project-section">
+    <div class="project-section-header">
+      <span class="project-section-title">Enquire Within</span>
+      <span class="project-section-desc">Methodology, workshop materials, keynote</span>
+    </div>
+    <div class="card-grid">
+      <a href="enquire/methodology.html" class="card">
+        <span class="card-tag">Methodology</span>
+        <span class="card-title">The framework</span>
+        <span class="card-desc">Four-step model. Four registers. The heartbeat cadence.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+      <a href="enquire/workshop.html" class="card">
+        <span class="card-tag">Workshop</span>
+        <span class="card-title">Workshop materials</span>
+        <span class="card-desc">Six thinking hats (Thinkamigo version). Colour taxonomy.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+      <a href="enquire/keynote.html" class="card">
+        <span class="card-tag">Keynote</span>
+        <span class="card-title">Speaking deck</span>
+        <span class="card-desc">Slide structure, narrative arc, Make Magic Real close.</span>
+        <span class="card-status status-soon">Coming soon</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="project-section">
+    <div class="project-section-header">
+      <span class="project-section-title">Resources</span>
+      <span class="project-section-desc">Design system, CSS modules, brand documentation</span>
+    </div>
+    <div class="card-grid">
+      <a href="../thinkamigo-framework-spec-v2.html" class="card">
+        <span class="card-tag">Documentation</span>
+        <span class="card-title">Framework specification</span>
+        <span class="card-desc">Brand rules, CSS variables, components, usage examples.</span>
+        <span class="card-status status-live">Live</span>
+      </a>
+      <a href="resources/brand-brief.html" class="card">
+        <span class="card-tag">Brand</span>
+        <span class="card-title">Identity brief</span>
+        <span class="card-desc">Full identity context document for AI and collaborator use.</span>
+        <span class="card-status status-live">Live</span>
+      </a>
+      <a href="resources/prototypes.html" class="card">
+        <span class="card-tag">Prototypes</span>
+        <span class="card-title">UI prototypes</span>
+        <span class="card-desc">Component experiments, layout explorations, test builds.</span>
+        <span class="card-status status-wip">Work in progress</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="amigos-footer">
+  Thinkamigo — amigos only — paulfillingham.com
+</footer>
+
+</body>
+</html>

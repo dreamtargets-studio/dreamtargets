@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>enquire within — four registers</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:         #1c1c1c;
+    --paper:       #f7f7f5;
+    --rule:        #d8d5ce;
+    --muted:       #9a9690;
+    --essay:       #2a4a7f;
+    --arts:        #8a3020;
+    --connections: #2a6040;
+    --dispatch:    #5a4a1c;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 3rem 2rem 5rem;
+  }
+
+  header {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .label {
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+
+  .strapline {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .timeline { max-width: 700px; margin: 0 auto; }
+
+  .month-header {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    margin-bottom: 0.75rem;
+  }
+
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
+    padding-left: 1rem;
+  }
+
+  .month-label {
+    font-size: 0.5rem;
+    font-weight: 400;
+    color: var(--rule);
+    text-align: center;
+  }
+
+  .register {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    margin-bottom: 2rem;
+  }
+
+  .meta { padding-right: 1rem; padding-top: 0.15rem; }
+
+  .reg-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: block;
+    line-height: 1.3;
+  }
+
+  .reg-freq {
+    font-size: 0.55rem;
+    font-weight: 300;
+    color: var(--muted);
+    display: block;
+    margin-top: 0.1rem;
+  }
+
+  .content {
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .blocks {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
+    margin-bottom: 0.6rem;
+  }
+
+  .block { height: 24px; border-radius: 2px; }
+  .block.on  { opacity: 1; }
+  .block.off { opacity: 0.1; }
+
+  .reg-desc {
+    font-size: 0.62rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 42ch;
+    margin-bottom: 0.3rem;
+  }
+
+  .reg-eg { font-size: 0.58rem; font-weight: 300; color: var(--muted); }
+  .reg-eg::before { content: '→ '; }
+
+  .essay    .block { background: var(--essay); }
+  .arts     .block { background: var(--arts); }
+  .conn     .block { background: var(--connections); }
+  .dispatch .block { background: var(--dispatch); }
+
+  .essay    .reg-name { color: var(--essay); }
+  .arts     .reg-name { color: var(--arts); }
+  .conn     .reg-name { color: var(--connections); }
+  .dispatch .reg-name { color: var(--dispatch); }
+
+  .divider { display: grid; grid-template-columns: 8rem 1fr; margin-bottom: 2rem; margin-top: -1rem; }
+  .divider-line { border-top: 1px dashed var(--rule); }
+
+  footer {
+    max-width: 700px;
+    margin: 2.5rem auto 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    align-items: center;
+  }
+
+  .leg { display: flex; align-items: center; gap: 0.4rem; font-size: 0.58rem; font-weight: 300; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 1px; flex-shrink: 0; }
+  .version { margin-left: auto; font-size: 0.52rem; font-weight: 300; color: var(--rule); }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="label">enquire within — paul fillingham</p>
+  <h1>the four registers</h1>
+  <p class="strapline">success in a heartbeat</p>
+</header>
+
+<div class="timeline">
+
+  <div class="month-header">
+    <div></div>
+    <div class="month-grid">
+      <div class="month-label">jan</div><div class="month-label">feb</div><div class="month-label">mar</div>
+      <div class="month-label">apr</div><div class="month-label">may</div><div class="month-label">jun</div>
+      <div class="month-label">jul</div><div class="month-label">aug</div><div class="month-label">sep</div>
+      <div class="month-label">oct</div><div class="month-label">nov</div><div class="month-label">dec</div>
+    </div>
+  </div>
+
+  <div class="register essay">
+    <div class="meta">
+      <span class="reg-name">essay</span>
+      <span class="reg-freq">quarterly</span>
+    </div>
+    <div class="content">
+      <div class="blocks">
+        <div class="block on"></div><div class="block off"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block off"></div>
+      </div>
+      <p class="reg-desc">long form. memoir, influence, cultural excavation. written at depth, cannot be forced. finds new readers, gets shared.</p>
+      <span class="reg-eg">'skegness. its part in my downfall'</span>
+    </div>
+  </div>
+
+  <div class="divider"><div></div><div class="divider-line"></div></div>
+
+  <div class="register arts">
+    <div class="meta">
+      <span class="reg-name">arts essay</span>
+      <span class="reg-freq">monthly (alternating)</span>
+    </div>
+    <div class="content">
+      <div class="blocks">
+        <div class="block on"></div><div class="block off"></div><div class="block on"></div>
+        <div class="block off"></div><div class="block on"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block on"></div>
+        <div class="block off"></div><div class="block on"></div><div class="block off"></div>
+      </div>
+      <p class="reg-desc">houdini window production diary. ai and serious creative practice. honest about the struggle, practically useful.</p>
+      <span class="reg-eg">'back in the room'</span>
+    </div>
+  </div>
+
+  <div class="divider"><div></div><div class="divider-line"></div></div>
+
+  <div class="register conn">
+    <div class="meta">
+      <span class="reg-name">connections</span>
+      <span class="reg-freq">monthly (alternating)</span>
+    </div>
+    <div class="content">
+      <div class="blocks">
+        <div class="block off"></div><div class="block on"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block on"></div>
+        <div class="block off"></div><div class="block on"></div><div class="block off"></div>
+        <div class="block on"></div><div class="block off"></div><div class="block on"></div>
+      </div>
+      <p class="reg-desc">the associative essay. gallery-minded, culturally promiscuous. following the thread without announcing the destination.</p>
+      <span class="reg-eg">'when the written word is not enough'</span>
+    </div>
+  </div>
+
+  <div class="divider"><div></div><div class="divider-line"></div></div>
+
+  <div class="register dispatch">
+    <div class="meta">
+      <span class="reg-name">dispatch</span>
+      <span class="reg-freq">weekly</span>
+    </div>
+    <div class="content">
+      <div class="blocks">
+        <div class="block on"></div><div class="block on"></div><div class="block on"></div>
+        <div class="block on"></div><div class="block on"></div><div class="block on"></div>
+        <div class="block on"></div><div class="block on"></div><div class="block on"></div>
+        <div class="block on"></div><div class="block on"></div><div class="block on"></div>
+      </div>
+      <p class="reg-desc">200–300 words. an observation, a discovery, a line that won't leave you alone. low threshold to write. the pulse.</p>
+      <span class="reg-eg">something from the walk.</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="leg"><div class="leg-dot" style="background:var(--essay)"></div>essay</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--arts)"></div>arts essay</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--connections)"></div>connections</div>
+  <div class="leg"><div class="leg-dot" style="background:var(--dispatch)"></div>dispatch</div>
+  <span class="version">v0.2 — april 2026</span>
+</footer>
+
+</body>
+</html>
