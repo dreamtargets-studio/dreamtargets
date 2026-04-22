@@ -1,278 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thinkamigo web framework — brand & technical specification</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand & technical specification | Thinkamigo</title>
 
-  :root {
-    --brand-blue: #0054dc;
-    --brand-orange: #ff6600;
-    --footer-bg: #0a254a;
-    --stone-bg: #f5f5ef;
-    --charcoal: #191919;
-    --white: #ffffff;
-    --rule: #dddddd;
-    --muted: #666666;
-    --paper: #ffffff;
-  }
+    <link rel="stylesheet" href="../chassis.css">
+    <link rel="stylesheet" href="../destination.css">
 
-  body {
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--charcoal);
-    background: var(--stone-bg);
-    margin: 0;
-  }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  /* NAV */
-  .doc-nav {
-    background: var(--footer-bg);
-    padding: 16px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+    <style>
+        /* Spec document overrides */
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .swatch { border-radius: 4px; overflow: hidden; border: 1px solid #dddddd; }
+        .swatch-colour { height: 80px; }
+        .swatch-info { padding: 10px 12px; background: #f5f5ef; }
+        .swatch-name { font-size: 14px; font-weight: 500; display: block; margin-bottom: 2px; }
+        .swatch-hex { font-size: 13px; font-weight: 300; color: #666666; font-family: 'Courier New', monospace; }
+        .swatch-var { font-size: 12px; color: #0054dc; font-family: 'Courier New', monospace; display: block; margin-top: 2px; }
 
-  .doc-nav-brand {
-    color: var(--white);
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
+        .rule-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+        .rule-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.12em; color: #666666; padding: 10px 12px; border-bottom: 1px solid #dddddd; background: #f5f5ef; }
+        .rule-table td { padding: 12px; border-bottom: 1px solid #eeeeee; vertical-align: top; font-size: 15px; }
+        .rule-table td:first-child { font-weight: 500; white-space: nowrap; color: #0054dc; font-family: 'Courier New', monospace; font-size: 14px; }
 
-  .doc-nav-version {
-    color: #ffffff90;
-    font-size: 14px;
-    font-weight: 300;
-  }
+        .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+        .do-box, .dont-box { padding: 20px; border-radius: 4px; }
+        .do-box { background: #f0f8f0; border: 1px solid #c8e6c9; }
+        .dont-box { background: #fdf0f0; border: 1px solid #ffcdd2; }
+        .do-label, .dont-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
+        .do-label { color: #2e7d32; }
+        .dont-label { color: #c62828; }
+        .do-box p, .dont-box p { font-size: 15px; margin: 0; }
 
-  /* HERO */
-  .doc-hero {
-    background: var(--brand-blue);
-    padding: 80px 40px;
-    color: var(--white);
-  }
+        .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+        .module-card { border: 1px solid #dddddd; padding: 20px 24px; background: #f5f5ef; }
+        .module-card-name { font-size: 15px; font-weight: 600; color: #0054dc; display: block; margin-bottom: 4px; }
+        .module-card-version { font-size: 13px; color: #666666; font-family: 'Courier New', monospace; display: block; margin-bottom: 10px; }
+        .module-card p { font-size: 14px; color: #666666; margin: 0; }
 
-  .doc-hero-inner {
-    max-width: 960px;
-    margin: 0 auto;
-  }
+        .alert { padding: 14px 18px; margin: 16px 0; border-left: 3px solid; font-size: 15px; }
+        .alert-rule { background: #fff8e6; border-color: #ff6600; }
+        .alert-rule strong { color: #ff6600; }
 
-  .doc-hero h1 {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 200;
-    line-height: 1.1;
-    margin-bottom: 12px;
-    letter-spacing: -0.02em;
-  }
+        .doc-toc { background: #f5f5ef; border-left: 3px solid #0054dc; padding: 32px 40px; margin-bottom: 60px; }
+        .doc-toc-title { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; color: #666666; display: block; margin-bottom: 20px; }
+        .doc-toc ol { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 40px; }
+        .doc-toc li { margin-bottom: 8px; break-inside: avoid; }
+        .doc-toc a { color: #0054dc; text-decoration: none; font-size: 15px; font-weight: 300; }
+        .doc-toc a:hover { color: #ff6600; }
+        .doc-toc .toc-section-label { font-size: 11px; font-weight: 500; color: #666666; letter-spacing: 0.1em; display: block; margin-top: 16px; margin-bottom: 4px; }
 
-  .doc-hero-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: #ffffff90;
-    margin-bottom: 32px;
-  }
+        .section-tag { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #ff6600; display: block; margin-bottom: 10px; }
 
-  .orange-rule {
-    width: 250px;
-    height: 1px;
-    background: var(--brand-orange);
-  }
+        pre { background: #f0f0ec; border: 1px solid #dddddd; border-left: 3px solid #0054dc; padding: 20px 24px; overflow-x: auto; margin: 16px 0 24px; border-radius: 0 4px 4px 0; }
+        code { font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.7; color: #2a2a2a; }
+        p code, li code { background: #f0f0ec; padding: 1px 6px; border-radius: 2px; font-size: 14px; }
 
-  /* LAYOUT */
-  .doc-body {
-    max-width: 960px;
-    margin: 0 auto;
-    background: var(--paper);
-  }
+        .doc-section { margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid #dddddd; }
+        .doc-section:last-child { border-bottom: none; }
 
-  .doc-main {
-    background: var(--paper);
-    padding: 60px 60px 120px;
-  }
-
-  /* SECTIONS */
-  .doc-section {
-    margin-bottom: 80px;
-    padding-bottom: 80px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .doc-section:last-child { border-bottom: none; }
-
-  .section-tag {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--brand-orange);
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-size: 2rem;
-    font-weight: 200;
-    color: var(--brand-blue);
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    margin: 40px 0 12px;
-  }
-
-  h4 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--muted);
-    margin: 24px 0 8px;
-  }
-
-  p {
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-
-  /* COLOUR SWATCHES */
-  .swatch-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
-  }
-
-  .swatch { border-radius: 4px; overflow: hidden; border: 1px solid var(--rule); }
-  .swatch-colour { height: 80px; }
-  .swatch-info { padding: 10px 12px; background: var(--stone-bg); }
-
-  .swatch-name { font-size: 14px; font-weight: 500; display: block; margin-bottom: 2px; }
-  .swatch-hex { font-size: 13px; font-weight: 300; color: var(--muted); font-family: 'Courier New', monospace; }
-  .swatch-var { font-size: 12px; color: var(--brand-blue); font-family: 'Courier New', monospace; display: block; margin-top: 2px; }
-
-  /* TYPE SPECIMEN */
-  .type-specimen {
-    background: var(--stone-bg);
-    padding: 24px 28px;
-    margin: 12px 0;
-    border-left: 3px solid var(--brand-blue);
-  }
-
-  .type-meta { font-size: 13px; font-weight: 400; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.08em; }
-
-  /* CODE */
-  pre {
-    background: #f0f0ec;
-    border: 1px solid var(--rule);
-    border-left: 3px solid var(--brand-blue);
-    padding: 20px 24px;
-    overflow-x: auto;
-    margin: 16px 0 24px;
-    border-radius: 0 4px 4px 0;
-  }
-
-  code { font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.7; color: #2a2a2a; }
-  p code, li code { background: #f0f0ec; padding: 1px 6px; border-radius: 2px; font-size: 14px; }
-
-  /* TABLES */
-  .rule-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
-  .rule-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.12em; color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--rule); background: var(--stone-bg); }
-  .rule-table td { padding: 12px 12px; border-bottom: 1px solid #eeeeee; vertical-align: top; }
-  .rule-table td:first-child { font-weight: 500; white-space: nowrap; color: var(--brand-blue); font-family: 'Courier New', monospace; font-size: 14px; }
-
-  /* DO / DON'T */
-  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
-  .do-box, .dont-box { padding: 20px; border-radius: 4px; }
-  .do-box { background: #f0f8f0; border: 1px solid #c8e6c9; }
-  .dont-box { background: #fdf0f0; border: 1px solid #ffcdd2; }
-  .do-label, .dont-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
-  .do-label { color: #2e7d32; }
-  .dont-label { color: #c62828; }
-  .do-box p, .dont-box p { font-size: 15px; margin: 0; }
-
-  /* MODULE CARDS */
-  .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
-  .module-card { border: 1px solid var(--rule); padding: 20px 24px; background: var(--stone-bg); }
-  .module-card-name { font-size: 15px; font-weight: 600; color: var(--brand-blue); display: block; margin-bottom: 4px; }
-  .module-card-version { font-size: 13px; color: var(--muted); font-family: 'Courier New', monospace; display: block; margin-bottom: 10px; }
-  .module-card p { font-size: 14px; color: var(--muted); margin: 0; }
-
-  /* ALERT */
-  .alert { padding: 14px 18px; margin: 16px 0; border-left: 3px solid; font-size: 15px; }
-  .alert-rule { background: #fff8e6; border-color: var(--brand-orange); }
-  .alert-rule strong { color: var(--brand-orange); }
-
-  /* TOC */
-  .doc-toc {
-    background: var(--stone-bg);
-    border-left: 3px solid var(--brand-blue);
-    padding: 32px 40px;
-    margin-bottom: 60px;
-  }
-
-  .doc-toc-title {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .doc-toc ol { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 40px; }
-  .doc-toc li { margin-bottom: 8px; break-inside: avoid; }
-  .doc-toc a { color: var(--brand-blue); text-decoration: none; font-size: 15px; font-weight: 300; transition: color 0.2s; }
-  .doc-toc a:hover { color: var(--brand-orange); }
-
-  .doc-toc .toc-section-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    display: block;
-    margin-top: 16px;
-    margin-bottom: 4px;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 700px) {
-    .doc-main { padding: 40px 24px 80px; }
-    .do-dont { grid-template-columns: 1fr; }
-    .module-grid { grid-template-columns: 1fr; }
-    .doc-toc ol { columns: 1; }
-  }
-</style>
+        @media (max-width: 768px) {
+            .do-dont { grid-template-columns: 1fr; }
+            .module-grid { grid-template-columns: 1fr; }
+            .doc-toc ol { columns: 1; }
+        }
+    </style>
 </head>
-<body>
+<body class="content-page" data-base="../">
 
-<nav class="doc-nav">
-  <span class="doc-nav-brand">Thinkamigo — web framework</span>
-  <span class="doc-nav-version">Brand & technical specification — v1.0 — April 2026</span>
-</nav>
+    <header id="main-nav"></header>
 
-<div class="doc-hero">
-  <div class="doc-hero-inner">
-    <h1>Brand & technical<br>specification</h1>
-    <p class="doc-hero-sub">Thinkamigo chassis v6.4 — destination engine v4.23 — gallery engine v9.0 — theatre engine v5.5</p>
-    <div class="orange-rule"></div>
-  </div>
-</div>
+    <main class="editorial-post">
+        <div class="paper-sheet">
+            <article class="text-rail">
+                <header>
+                    <h1>Brand & technical specification</h1>
+                    <div class="orange-rule"></div>
+                    <h2>Thinkamigo chassis v6.4 — destination engine v4.23 — gallery engine v9.0 — theatre engine v5.5</h2>
+                </header>
 
-<div class="doc-body">
-  <main class="doc-main">
-
-    <div class="doc-toc">
+<div class="doc-toc">
       <span class="doc-toc-title">Contents</span>
       <ol>
         <li><span class="toc-section-label">Brand rules</span></li>
@@ -861,8 +675,12 @@ transition: none;            /* No hover transitions on images */
       </div>
     </section>
 
-  </main>
-</div>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="../loader.js"></script>
 
 </body>
 </html>
