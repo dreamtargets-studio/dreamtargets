@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigos — Thinkamigo</title>
+
+    <link rel="stylesheet" href="../chassis.css">
+    <link rel="stylesheet" href="../destination.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body.content-page {
+            background: var(--footer-bg);
+        }
+
+        .gate-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            min-height: 60vh;
+        }
+
+        .gate {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .gate-logo {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            color: #ffffff60;
+            margin-bottom: 48px;
+            display: block;
+        }
+
+        .gate h1 {
+            font-size: 2.4rem;
+            font-weight: 200;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .orange-rule {
+            width: 60px;
+            height: 1px;
+            background: var(--brand-orange);
+            margin: 0 auto 32px;
+        }
+
+        .gate-desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: #ffffff70;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .gate-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .gate-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: #ffffff10;
+            border: 1px solid #ffffff20;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            text-align: center;
+            letter-spacing: 0.1em;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .gate-input::placeholder { color: #ffffff30; letter-spacing: 0.05em; }
+        .gate-input:focus { border-color: #ffffff50; }
+        .gate-input.error { border-color: var(--brand-orange); }
+
+        .gate-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: transparent;
+            border: 2px solid #ffffff40;
+            border-radius: 50px;
+            color: #ffffff;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .gate-btn:hover { background: #ffffff15; border-color: #ffffff80; }
+
+        .gate-error {
+            font-size: 13px;
+            color: var(--brand-orange);
+            min-height: 20px;
+        }
+
+        .gate-footer {
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #ffffff25;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body class="content-page">
+
+    <header id="main-nav"></header>
+
+    <main>
+    <div class="gate-wrapper">
+        <div class="gate">
+            <span class="gate-logo">Thinkamigo</span>
+            <h1>Amigos</h1>
+            <div class="orange-rule"></div>
+            <p class="gate-desc">Studio resources, design system documentation and shared working files for collaborators.</p>
+
+            <div class="gate-form">
+                <input
+                    type="password"
+                    class="gate-input"
+                    id="password-input"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                >
+                <p class="gate-error" id="gate-error"></p>
+                <button class="gate-btn" onclick="checkPassword()">Enter</button>
+            </div>
+        </div>
+    </div>
+
+
+    <footer id="main-footer"></footer>
+    <script src="../loader.js"></script>
+
+    <script>
+        const AMIGOS_PASSWORD = 'amigogogo';
+        const SESSION_KEY = 'amigos_auth';
+
+        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+            goIn();
+        }
+
+        document.getElementById('password-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function checkPassword() {
+            const input = document.getElementById('password-input');
+            const error = document.getElementById('gate-error');
+            const val = input.value.trim();
+
+            if (val === AMIGOS_PASSWORD) {
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                goIn();
+            } else {
+                input.classList.add('error');
+                error.textContent = 'Not quite — try again.';
+                input.value = '';
+                input.focus();
+                setTimeout(() => {
+                    input.classList.remove('error');
+                    error.textContent = '';
+                }, 3000);
+            }
+        }
+
+        function goIn() {
+            window.location.href = 'amigos.html';
+        }
+    </script>
+
+</body>
+</html>

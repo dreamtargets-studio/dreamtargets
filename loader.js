@@ -1,7 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.3
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.4
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
    Updates: Footer-First Handshake | story-inline-video Sync
+            Amigos Authentication Module
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -331,5 +332,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // --- 5. MODULE: AMIGOS AUTHENTICATION ---
+    const AMIGOS_PASSWORD = 'amigogogo';
+    const AMIGOS_SESSION_KEY = 'amigos_auth';
+
+    const setupAmigosGate = () => {
+        const input = document.getElementById('password-input');
+        const error = document.getElementById('gate-error');
+        const btn = document.getElementById('gate-btn');
+
+        if (!input) return;
+
+        const checkPassword = () => {
+            const val = input.value.trim();
+            if (val === AMIGOS_PASSWORD) {
+                sessionStorage.setItem(AMIGOS_SESSION_KEY, 'true');
+                window.location.href = 'amigos.html';
+            } else {
+                input.classList.add('error');
+                if (error) error.textContent = 'Not quite — try again.';
+                input.value = '';
+                input.focus();
+                setTimeout(() => {
+                    input.classList.remove('error');
+                    if (error) error.textContent = '';
+                }, 3000);
+            }
+        };
+
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPassword(); });
+        if (btn) btn.addEventListener('click', checkPassword);
+    };
+
+    const setupAmigosGuard = () => {
+        // Protects amigos.html — redirects to gate if not authenticated
+        if (document.body.classList.contains('amigos-protected')) {
+            if (sessionStorage.getItem(AMIGOS_SESSION_KEY) !== 'true') {
+                window.location.href = 'hello-amigos.html';
+            }
+        }
+    };
+
+    const setupAmigosLock = () => {
+        // Binds the Lock button on amigos.html
+        const lockBtn = document.getElementById('amigos-lock');
+        if (!lockBtn) return;
+        lockBtn.addEventListener('click', () => {
+            sessionStorage.removeItem(AMIGOS_SESSION_KEY);
+            window.location.href = 'hello-amigos.html';
+        });
+    };
+
+    setupAmigosGuard();
+    setupAmigosGate();
+    setupAmigosLock();
     loadPartials();
+
 });
