@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.5
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.6
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
    Updates: Footer-First Handshake | story-inline-video Sync
-            Amigos Authentication Module
+            Amigos Authentication Module | External Link Fix
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Bind events to cards (now that they are physically in the DOM)
+        // External link cards (a tags with href) open naturally — do not intercept
         cards.forEach(card => {
+            if (card.tagName === 'A' && card.getAttribute('href')) return;
             card.addEventListener('click', (e) => {
                 e.preventDefault();
                 const data = card.getAttribute('data-video');
