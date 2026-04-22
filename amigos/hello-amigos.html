@@ -3,138 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello amigos — Thinkamigo</title>
+    <title>Amigos | Thinkamigo</title>
 
     <link rel="stylesheet" href="../chassis.css">
     <link rel="stylesheet" href="../destination.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        .gate-hero {
-            background: var(--brand-blue);
-            padding: 60px 40px 50px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .gate-hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 200;
-            line-height: 1.1;
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
-            color: #ffffff;
-        }
-
-        .gate-hero .orange-rule {
-            width: 60px;
-            height: 1px;
-            background: var(--brand-orange);
-            margin: 16px auto 20px;
-        }
-
-        .gate-hero-sub {
-            font-size: 15px;
-            font-weight: 300;
-            color: #ffffff80;
-        }
-
-        .gate-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 60px 20px 80px;
-            background: var(--stone-bg);
-        }
-
-        .gate-panel {
-            background: #ffffff;
-            padding: 40px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .gate-panel label {
-            display: block;
-            font-size: 14px;
-            font-weight: 400;
-            color: #666666;
-            margin-bottom: 8px;
-        }
-
-        .gate-panel input[type="password"] {
-            display: block;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            padding: 12px;
-            border: 1px solid #dddddd;
-            border-radius: 4px;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 16px;
-            background-color: #ffffff;
-            margin-bottom: 16px;
-        }
-
-        .gate-panel input[type="password"].error {
-            border-color: var(--brand-orange);
-        }
-
-        .gate-error {
-            font-size: 14px;
-            color: var(--brand-orange);
-            min-height: 20px;
-            margin-bottom: 16px;
-        }
-
-        .gate-panel .btn-pill {
-            background-color: var(--brand-blue);
-            color: #ffffff;
-            border: 2px solid #dddddd;
-            padding: 12px 45px;
-            border-radius: 50px;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-block;
-            transition: background-color 0.2s ease;
-        }
-
-        .gate-panel .btn-pill:hover {
-            background-color: #1a73ff;
-        }
-
-        @media (max-width: 768px) {
-            .gate-hero { padding: 40px 24px 36px; }
-            .gate-panel { padding: 28px 24px; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="content-page" data-base="../">
 
     <header id="main-nav"></header>
 
-    <div class="gate-hero">
-        <h1>Amigos</h1>
-        <div class="orange-rule"></div>
-        <p class="gate-hero-sub">Studio resources for collaborators</p>
-    </div>
-
-    <main>
-        <div class="gate-wrapper">
-            <div class="gate-panel">
-                <label for="password-input">Password</label>
-                <input
-                    type="password"
-                    id="password-input"
-                    placeholder="Enter password"
-                    autocomplete="current-password"
-                >
-                <p class="gate-error" id="gate-error"></p>
-                <button type="button" class="btn-pill" id="gate-btn">Enter</button>
-            </div>
+    <main class="editorial-post">
+        <div class="paper-sheet">
+            <article class="text-rail">
+                <header>
+                    <h1>Amigos</h1>
+                    <div class="orange-rule"></div>
+                    <h2>Studio resources for collaborators</h2>
+                </header>
+                <div class="contact-form-refined">
+                    <div class="form-group">
+                        <label for="password-input">Password</label>
+                        <input
+                            type="password"
+                            id="password-input"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                        >
+                    </div>
+                    <p id="gate-error" style="color: var(--brand-orange); font-size: 14px; min-height: 20px; margin-bottom: 16px;"></p>
+                    <button type="button" class="btn-pill" id="gate-btn">Enter</button>
+                </div>
+            </article>
         </div>
     </main>
 
