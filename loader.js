@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.4
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.5
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
    Updates: Footer-First Handshake | story-inline-video Sync
             Amigos Authentication Module
@@ -8,10 +8,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. THE INJECTOR ENGINE (ASYNCHRONOUS) ---
+    const base = document.body.getAttribute('data-base') || '';
+
     const loadPartials = async () => {
         try {
             // 1a. Inject Header
-            const hRes = await fetch('header.html');
+            const hRes = await fetch(`${base}header.html`);
             if (hRes.ok) {
                 const hData = await hRes.text();
                 const hSocket = document.getElementById('main-nav');
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 1b. Inject Footer (CONTAINING THE PROJECTOR)
-            const fRes = await fetch('footer.html');
+            const fRes = await fetch(`${base}footer.html`);
             if (fRes.ok) {
                 const fData = await fRes.text();
                 const fSocket = document.getElementById('main-footer');
