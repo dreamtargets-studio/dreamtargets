@@ -1,8 +1,8 @@
 /* ============================================================
-   THINKAMIGO UNIFIED LOADER & INJECTOR v23.6
+   THINKAMIGO UNIFIED LOADER & INJECTOR v23.7
    Architecture: Triple-Slot Filmstrip + Sovereign Projector
    Updates: Footer-First Handshake | story-inline-video Sync
-            Amigos Authentication Module | External Link Fix
+            Amigos Authentication Module | External Link Fix | Lock Removed
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -377,19 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const setupAmigosLock = () => {
-        // Binds the Lock button on amigos.html
-        const lockBtn = document.getElementById('amigos-lock');
-        if (!lockBtn) return;
-        lockBtn.addEventListener('click', () => {
-            sessionStorage.removeItem(AMIGOS_SESSION_KEY);
-            window.location.href = 'hello-amigos.html';
-        });
-    };
-
     setupAmigosGuard();
     setupAmigosGate();
-    setupAmigosLock();
     loadPartials();
 
 });
