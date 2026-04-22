@@ -3,63 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amigos — Thinkamigo studio</title>
+    <title>Amigos | Thinkamigo</title>
 
     <link rel="stylesheet" href="../chassis.css">
     <link rel="stylesheet" href="../destination.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Hero */
-        .amigos-hero {
-            background: var(--brand-blue);
-            padding: 60px 40px 50px;
-            color: #ffffff;
-        }
-
-        .amigos-hero-inner {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .amigos-hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 200;
-            line-height: 1.1;
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
-            color: #ffffff;
-        }
-
-        .amigos-hero .orange-rule {
-            width: 250px;
-            height: 1px;
-            background: var(--brand-orange);
-            margin: 16px 0 20px;
-        }
-
-        .amigos-hero-sub {
-            font-size: 15px;
-            font-weight: 300;
-            color: #ffffff80;
-        }
-
-        /* Lock link */
-        .amigos-lock {
-            font-size: 13px;
-            font-weight: 300;
-            color: #ffffff50;
-            cursor: pointer;
-            transition: color 0.2s;
-            background: none;
-            border: none;
-            font-family: 'Poppins', Arial, sans-serif;
-            padding: 0;
-        }
-
-        .amigos-lock:hover { color: var(--brand-orange); }
-
         /* Main */
         .amigos-main {
             max-width: 960px;
@@ -86,7 +37,7 @@
         }
 
         .project-section-desc {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 300;
             color: #666666;
         }
@@ -113,16 +64,16 @@
         .card:hover .card-title { color: var(--brand-blue); }
 
         .card-tag {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.15em;
             color: var(--brand-orange);
             display: block;
             margin-bottom: 6px;
         }
 
         .card-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
             display: block;
             margin-bottom: 6px;
@@ -131,7 +82,7 @@
         }
 
         .card-desc {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 300;
             color: #666666;
             line-height: 1.5;
@@ -139,7 +90,7 @@
         }
 
         .card-status {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 400;
             margin-top: 14px;
             display: inline-block;
@@ -154,7 +105,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .amigos-hero { padding: 40px 24px 36px; }
             .amigos-main { padding: 40px 24px 80px; }
             .card-grid { grid-template-columns: 1fr; }
             .project-section-header { flex-direction: column; gap: 4px; }
@@ -169,161 +119,165 @@
 
     <header id="main-nav"></header>
 
-    <div class="amigos-hero">
-        <div class="amigos-hero-inner">
-            <h1>Amigos</h1>
-            <div class="orange-rule"></div>
-            <p class="amigos-hero-sub">Studio resources, prototypes and working documents — for collaborators only. <button class="amigos-lock" id="amigos-lock">Lock</button></p>
+    <main class="editorial-post">
+        <div class="paper-sheet">
+            <article class="text-rail">
+                <header>
+                    <h1>Amigos</h1>
+                    <div class="orange-rule"></div>
+                    <h2>Studio resources, prototypes and working documents</h2>
+                </header>
+
+                <div class="amigos-main">
+
+                    <!-- HOUDINI WINDOW -->
+                    <div class="project-section">
+                        <div class="project-section-header">
+                            <span class="project-section-title">Houdini Window</span>
+                            <span class="project-section-desc">Novel, production diary, AI creative practice</span>
+                        </div>
+                        <div class="card-grid">
+                            <a href="houdini/overview.html" class="card">
+                                <span class="card-tag">Overview</span>
+                                <span class="card-title">Project overview</span>
+                                <span class="card-desc">Synopsis, structure, dual timeline, character notes.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                            <a href="houdini/production-diary.html" class="card">
+                                <span class="card-tag">Diary</span>
+                                <span class="card-title">Production diary</span>
+                                <span class="card-desc">AI-assisted writing process, sessions, decisions made.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                            <a href="houdini/prototypes.html" class="card">
+                                <span class="card-tag">Prototypes</span>
+                                <span class="card-title">Experimental builds</span>
+                                <span class="card-desc">Cover concepts, layout explorations, excerpt layouts.</span>
+                                <span class="card-status status-soon">Coming soon</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- HERITAGE -->
+                    <div class="project-section">
+                        <div class="project-section-header">
+                            <span class="project-section-title">Heritage</span>
+                            <span class="project-section-desc">Sillitoe Trail, Dawn of the Unread, BBC Civilisations</span>
+                        </div>
+                        <div class="card-grid">
+                            <a href="heritage/sillitoe.html" class="card">
+                                <span class="card-tag">Trail</span>
+                                <span class="card-title">Sillitoe Trail</span>
+                                <span class="card-desc">Project documentation, assets, trail map reference.</span>
+                                <span class="card-status status-live">Live</span>
+                            </a>
+                            <a href="heritage/dawn.html" class="card">
+                                <span class="card-tag">Education</span>
+                                <span class="card-title">Dawn of the Unread</span>
+                                <span class="card-desc">Guardian award project. NTU. UNESCO City of Literature.</span>
+                                <span class="card-status status-live">Live</span>
+                            </a>
+                            <a href="heritage/bbc.html" class="card">
+                                <span class="card-tag">Broadcast</span>
+                                <span class="card-title">BBC Civilisations</span>
+                                <span class="card-desc">The Art of Mining — 2018. Reference and assets.</span>
+                                <span class="card-status status-live">Live</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ARTS -->
+                    <div class="project-section">
+                        <div class="project-section-header">
+                            <span class="project-section-title">Arts</span>
+                            <span class="project-section-desc">Seaside Sci-fi, installation, community platforms</span>
+                        </div>
+                        <div class="card-grid">
+                            <a href="arts/seaside-scifi.html" class="card">
+                                <span class="card-tag">Platform</span>
+                                <span class="card-title">Seaside Sci-fi</span>
+                                <span class="card-desc">North West creative community platform. Morecambe.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                            <a href="arts/installation.html" class="card">
+                                <span class="card-tag">Practice</span>
+                                <span class="card-title">Installation work</span>
+                                <span class="card-desc">Gallery-based and locative projects. Reference archive.</span>
+                                <span class="card-status status-soon">Coming soon</span>
+                            </a>
+                            <a href="arts/prototypes.html" class="card">
+                                <span class="card-tag">Prototypes</span>
+                                <span class="card-title">Arts prototypes</span>
+                                <span class="card-desc">Work-in-progress builds and experimental interfaces.</span>
+                                <span class="card-status status-soon">Coming soon</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ENQUIRE WITHIN -->
+                    <div class="project-section">
+                        <div class="project-section-header">
+                            <span class="project-section-title">Enquire Within</span>
+                            <span class="project-section-desc">Methodology, workshop materials, keynote</span>
+                        </div>
+                        <div class="card-grid">
+                            <a href="enquire/methodology.html" class="card">
+                                <span class="card-tag">Methodology</span>
+                                <span class="card-title">The framework</span>
+                                <span class="card-desc">Four-step model. Four registers. The heartbeat cadence.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                            <a href="enquire/workshop.html" class="card">
+                                <span class="card-tag">Workshop</span>
+                                <span class="card-title">Workshop materials</span>
+                                <span class="card-desc">Six thinking hats (Thinkamigo version). Colour taxonomy.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                            <a href="enquire/keynote.html" class="card">
+                                <span class="card-tag">Keynote</span>
+                                <span class="card-title">Speaking deck</span>
+                                <span class="card-desc">Slide structure, narrative arc, Make Magic Real close.</span>
+                                <span class="card-status status-soon">Coming soon</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- RESOURCES -->
+                    <div class="project-section">
+                        <div class="project-section-header">
+                            <span class="project-section-title">Resources</span>
+                            <span class="project-section-desc">Design system, CSS modules, brand documentation</span>
+                        </div>
+                        <div class="card-grid">
+                            <a href="resources/framework-spec.html" class="card">
+                                <span class="card-tag">Documentation</span>
+                                <span class="card-title">Framework specification</span>
+                                <span class="card-desc">Brand rules, CSS variables, components, usage examples.</span>
+                                <span class="card-status status-live">Live</span>
+                            </a>
+                            <a href="resources/brand-brief.html" class="card">
+                                <span class="card-tag">Brand</span>
+                                <span class="card-title">Identity brief</span>
+                                <span class="card-desc">Full identity context document for AI and collaborator use.</span>
+                                <span class="card-status status-live">Live</span>
+                            </a>
+                            <a href="resources/prototypes.html" class="card">
+                                <span class="card-tag">Prototypes</span>
+                                <span class="card-title">UI prototypes</span>
+                                <span class="card-desc">Component experiments, layout explorations, test builds.</span>
+                                <span class="card-status status-wip">Work in progress</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </article>
         </div>
-    </div>
-
-    <main class="amigos-main">
-
-        <!-- HOUDINI WINDOW -->
-        <div class="project-section">
-            <div class="project-section-header">
-                <span class="project-section-title">Houdini Window</span>
-                <span class="project-section-desc">Novel, production diary, AI creative practice</span>
-            </div>
-            <div class="card-grid">
-                <a href="houdini/overview.html" class="card">
-                    <span class="card-tag">Overview</span>
-                    <span class="card-title">Project overview</span>
-                    <span class="card-desc">Synopsis, structure, dual timeline, character notes.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-                <a href="houdini/production-diary.html" class="card">
-                    <span class="card-tag">Diary</span>
-                    <span class="card-title">Production diary</span>
-                    <span class="card-desc">AI-assisted writing process, sessions, decisions made.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-                <a href="houdini/prototypes.html" class="card">
-                    <span class="card-tag">Prototypes</span>
-                    <span class="card-title">Experimental builds</span>
-                    <span class="card-desc">Cover concepts, layout explorations, excerpt layouts.</span>
-                    <span class="card-status status-soon">Coming soon</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- HERITAGE -->
-        <div class="project-section">
-            <div class="project-section-header">
-                <span class="project-section-title">Heritage</span>
-                <span class="project-section-desc">Sillitoe Trail, Dawn of the Unread, BBC Civilisations</span>
-            </div>
-            <div class="card-grid">
-                <a href="heritage/sillitoe.html" class="card">
-                    <span class="card-tag">Trail</span>
-                    <span class="card-title">Sillitoe Trail</span>
-                    <span class="card-desc">Project documentation, assets, trail map reference.</span>
-                    <span class="card-status status-live">Live</span>
-                </a>
-                <a href="heritage/dawn.html" class="card">
-                    <span class="card-tag">Education</span>
-                    <span class="card-title">Dawn of the Unread</span>
-                    <span class="card-desc">Guardian award project. NTU. UNESCO City of Literature.</span>
-                    <span class="card-status status-live">Live</span>
-                </a>
-                <a href="heritage/bbc.html" class="card">
-                    <span class="card-tag">Broadcast</span>
-                    <span class="card-title">BBC Civilisations</span>
-                    <span class="card-desc">The Art of Mining — 2018. Reference and assets.</span>
-                    <span class="card-status status-live">Live</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- ARTS -->
-        <div class="project-section">
-            <div class="project-section-header">
-                <span class="project-section-title">Arts</span>
-                <span class="project-section-desc">Seaside Sci-fi, installation, community platforms</span>
-            </div>
-            <div class="card-grid">
-                <a href="arts/seaside-scifi.html" class="card">
-                    <span class="card-tag">Platform</span>
-                    <span class="card-title">Seaside Sci-fi</span>
-                    <span class="card-desc">North West creative community platform. Morecambe.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-                <a href="arts/installation.html" class="card">
-                    <span class="card-tag">Practice</span>
-                    <span class="card-title">Installation work</span>
-                    <span class="card-desc">Gallery-based and locative projects. Reference archive.</span>
-                    <span class="card-status status-soon">Coming soon</span>
-                </a>
-                <a href="arts/prototypes.html" class="card">
-                    <span class="card-tag">Prototypes</span>
-                    <span class="card-title">Arts prototypes</span>
-                    <span class="card-desc">Work-in-progress builds and experimental interfaces.</span>
-                    <span class="card-status status-soon">Coming soon</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- ENQUIRE WITHIN -->
-        <div class="project-section">
-            <div class="project-section-header">
-                <span class="project-section-title">Enquire Within</span>
-                <span class="project-section-desc">Methodology, workshop materials, keynote</span>
-            </div>
-            <div class="card-grid">
-                <a href="enquire/methodology.html" class="card">
-                    <span class="card-tag">Methodology</span>
-                    <span class="card-title">The framework</span>
-                    <span class="card-desc">Four-step model. Four registers. The heartbeat cadence.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-                <a href="enquire/workshop.html" class="card">
-                    <span class="card-tag">Workshop</span>
-                    <span class="card-title">Workshop materials</span>
-                    <span class="card-desc">Six thinking hats (Thinkamigo version). Colour taxonomy.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-                <a href="enquire/keynote.html" class="card">
-                    <span class="card-tag">Keynote</span>
-                    <span class="card-title">Speaking deck</span>
-                    <span class="card-desc">Slide structure, narrative arc, Make Magic Real close.</span>
-                    <span class="card-status status-soon">Coming soon</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- RESOURCES -->
-        <div class="project-section">
-            <div class="project-section-header">
-                <span class="project-section-title">Resources</span>
-                <span class="project-section-desc">Design system, CSS modules, brand documentation</span>
-            </div>
-            <div class="card-grid">
-                <a href="resources/framework-spec.html" class="card">
-                    <span class="card-tag">Documentation</span>
-                    <span class="card-title">Framework specification</span>
-                    <span class="card-desc">Brand rules, CSS variables, components, usage examples.</span>
-                    <span class="card-status status-live">Live</span>
-                </a>
-                <a href="resources/brand-brief.html" class="card">
-                    <span class="card-tag">Brand</span>
-                    <span class="card-title">Identity brief</span>
-                    <span class="card-desc">Full identity context document for AI and collaborator use.</span>
-                    <span class="card-status status-live">Live</span>
-                </a>
-                <a href="resources/prototypes.html" class="card">
-                    <span class="card-tag">Prototypes</span>
-                    <span class="card-title">UI prototypes</span>
-                    <span class="card-desc">Component experiments, layout explorations, test builds.</span>
-                    <span class="card-status status-wip">Work in progress</span>
-                </a>
-            </div>
-        </div>
-
     </main>
 
     <footer id="main-footer"></footer>
     <script src="../loader.js"></script>
-
 
 </body>
 </html>
