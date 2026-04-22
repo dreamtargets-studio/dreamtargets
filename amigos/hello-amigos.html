@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amigos — Thinkamigo</title>
+    <title>Hello amigos! — Thinkamigo</title>
 
     <link rel="stylesheet" href="../chassis.css">
     <link rel="stylesheet" href="../destination.css">
@@ -142,7 +142,7 @@
                     autocomplete="current-password"
                 >
                 <p class="gate-error" id="gate-error"></p>
-                <button class="gate-btn" onclick="checkPassword()">Enter</button>
+                <button class="gate-btn" id="gate-btn">Enter</button>
             </div>
         </div>
     </div>
@@ -151,42 +151,6 @@
     <footer id="main-footer"></footer>
     <script src="../loader.js"></script>
 
-    <script>
-        const AMIGOS_PASSWORD = 'amigogogo';
-        const SESSION_KEY = 'amigos_auth';
-
-        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
-            goIn();
-        }
-
-        document.getElementById('password-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        function checkPassword() {
-            const input = document.getElementById('password-input');
-            const error = document.getElementById('gate-error');
-            const val = input.value.trim();
-
-            if (val === AMIGOS_PASSWORD) {
-                sessionStorage.setItem(SESSION_KEY, 'true');
-                goIn();
-            } else {
-                input.classList.add('error');
-                error.textContent = 'Not quite — try again.';
-                input.value = '';
-                input.focus();
-                setTimeout(() => {
-                    input.classList.remove('error');
-                    error.textContent = '';
-                }, 3000);
-            }
-        }
-
-        function goIn() {
-            window.location.href = 'amigos.html';
-        }
-    </script>
 
 </body>
 </html>
