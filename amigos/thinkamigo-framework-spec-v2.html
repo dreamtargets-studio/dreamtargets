@@ -135,7 +135,7 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><td>400</td><td>Regular</td><td>Navigation links, labels, ui text</td></tr>
         <tr><td>500</td><td>Medium</td><td>Nav links, button text, register names</td></tr>
         <tr><td>600</td><td>Semi-bold</td><td>h1, h3, link lists, strong emphasis</td></tr>
-        <tr><td>700–900</td><td>Bold–black</td><td>Reserved — use sparingly for maximum contrast moments. People biog person name uses 700.</td></tr>
+        <tr><td>700–900</td><td>Bold–black</td><td>Reserved — use sparingly for maximum contrast moments.</td></tr>
       </table>
 
       <h3>Typographic scale — destination engine</h3>
@@ -149,7 +149,6 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><td>caption</td><td>15px</td><td>300</td><td>#666666</td></tr>
         <tr><td>nav links</td><td>13px</td><td>500</td><td>#ffffff</td></tr>
         <tr><td>footer links</td><td>14px</td><td>300</td><td>#ffffffb3</td></tr>
-        <tr><td>.person-name (biog)</td><td>32px</td><td>700</td><td>--charcoal #191919</td></tr>
       </table>
 
       <h3>Absolute rules</h3>
@@ -231,9 +230,9 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><th>Hex</th><th>Usage</th></tr>
         <tr><td>#ffffff</td><td>Paper sheet background, primary white</td></tr>
         <tr><td>#dddddd</td><td>Standard rule, image outlines, borders</td></tr>
-        <tr><td>#f4f3ef / #f9f8f4</td><td>Caption backgrounds, resource card backgrounds</td></tr>
+        <tr><td>#f4f3ef / #f9f8f4</td><td>Caption backgrounds, resource card backgrounds, collab card caption background</td></tr>
         <tr><td>#666666</td><td>Caption text, label text, biog contact meta label</td></tr>
-        <tr><td>#555555</td><td>Resource description text</td></tr>
+        <tr><td>#555555</td><td>Resource description text, collab card caption text</td></tr>
         <tr><td>#333333</td><td>Body text default</td></tr>
         <tr><td>#888888</td><td>Blockquote attribution, quotation marks</td></tr>
         <tr><td>#bbbbbb</td><td>Theatre environment text, hover outlines</td></tr>
@@ -308,7 +307,7 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <div class="module-card">
           <span class="module-card-name">Gallery engine</span>
           <span class="module-card-version">gallery.css — v9.0</span>
-          <p>Image grid system. Lightbox, portrait grid, full-bleed breakout, resource cards, inline story images.</p>
+          <p>Image grid system. Lightbox, portrait grid, full-bleed breakout, resource cards, inline story images. People page grids.</p>
         </div>
         <div class="module-card">
           <span class="module-card-name">Theatre engine</span>
@@ -392,10 +391,12 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
       <h3>Gallery grids</h3>
       <table class="rule-table">
         <tr><th>Class</th><th>Columns</th><th>Usage</th></tr>
-        <tr><td>.gallery-grid-3</td><td>3-up (→ 2-up at 1024px → 2-up at 768px)</td><td>Landscape images, standard grid</td></tr>
-        <tr><td>.gallery-portrait-4</td><td>4-up (→ 3-up at 1024px → 2-up at 768px)</td><td>Portrait images, 2:3 aspect ratio enforced</td></tr>
-        <tr><td>.video-grid-4</td><td>4-up (→ 1-up at 768px)</td><td>Video thumbnails in theatre environment</td></tr>
-        <tr><td>.gallery-full-bleed</td><td>Full viewport width breakout</td><td>Overrides the text rail for dramatic presentation</td></tr>
+        <tr><td>.gallery-grid-3</td><td>3-up (→ 2-up at 1024px → 2-up at 768px)</td><td>Landscape images, standard grid. Lightbox enabled.</td></tr>
+        <tr><td>.gallery-portrait-4</td><td>4-up (→ 3-up at 1024px → 2-up at 768px)</td><td>Portrait images, 2:3 aspect ratio enforced. Lightbox enabled.</td></tr>
+        <tr><td>.video-grid-4</td><td>4-up (→ 1-up at 768px)</td><td>Video thumbnails in theatre environment.</td></tr>
+        <tr><td>.gallery-full-bleed</td><td>Full viewport width breakout</td><td>Overrides the text rail for dramatic presentation.</td></tr>
+        <tr><td>.people-intro-grid</td><td>3-col: 1 portrait + 2-col body copy</td><td>People page only. No lightbox. Portrait cursor: default.</td></tr>
+        <tr><td>.people-collab-grid</td><td>3-up (→ 2-up at 768px → 1-up at 480px)</td><td>People page collaborator cards. No lightbox. Links to individual biog pages.</td></tr>
       </table>
 
       <h3>Full-bleed breakout</h3>
@@ -418,29 +419,11 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
 
       <h3>The orange rule</h3>
       <p>A 250px × 1px horizontal accent line in brand orange. Used below h1 headings on content pages and in the theatre environment.</p>
-      <pre><code>&lt;div class="orange-rule"&gt;&lt;/div&gt;
-
-.orange-rule {
-  width: 250px;
-  height: 1px;
-  background-color: var(--brand-orange);
-  margin-bottom: 20px;
-}</code></pre>
+      <pre><code>&lt;div class="orange-rule"&gt;&lt;/div&gt;</code></pre>
 
       <h3>Pill button</h3>
-      <pre><code>&lt;a href="#" class="btn-pill"&gt;Label&lt;/a&gt;
-
-/* Default: white outline for use on dark/blue backgrounds */
-.btn-pill {
-  display: inline-block;
-  padding: 12px 45px;
-  border: 4px solid #ffffff;
-  border-radius: 50px;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-}</code></pre>
+      <pre><code>&lt;a href="#" class="btn-pill"&gt;Label&lt;/a&gt;</code></pre>
+      <p>White outline for use on dark/blue backgrounds. 12px/45px padding. 50px border-radius. 18px Poppins weight 500.</p>
 
       <h3>Blockquote</h3>
       <pre><code>&lt;blockquote&gt;
@@ -491,20 +474,16 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
   &lt;p class="biog-contact-label"&gt;Contact&lt;/p&gt;
   &lt;a href="mailto:email@domain.com" class="biog-contact-link"&gt;email@domain.com&lt;/a&gt;
 &lt;/div&gt;</code></pre>
-      <p>Portrait image full width of column. <code>outline: 1px solid #dddddd</code>. Contact label: 14px / weight 300 / <code>#666666</code>. Contact link: 14px / weight 300 / brand blue. Defined in destination.css.</p>
+      <p>Sits inside <code>.people-intro-grid</code> as the first column. Image full width, <code>cursor: default</code>. Contact label: 14px / weight 300 / <code>#666666</code>. Contact link: brand blue, hover → brand orange. Defined in destination.css.</p>
 
-      <h3>Biog two-col layout</h3>
-      <pre><code>&lt;div class="biog-two-col"&gt;
-  &lt;div class="biog-portrait"&gt;...&lt;/div&gt;
-  &lt;div class="biog-body"&gt;
-    &lt;p&gt;...&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      <p>CSS grid. 280px portrait column / fluid body column. 40px gap. <code>align-items: start</code>. Collapses to single column at 768px. Portrait image max-width 260px on mobile. Defined in destination.css.</p>
-
-      <h3>Person name</h3>
-      <pre><code>&lt;h3 class="person-name"&gt;Full Name&lt;/h3&gt;</code></pre>
-      <p>32px / weight 700 / charcoal (<code>#191919</code>). Overrides default h3 blue on biog pages only. Used immediately above <code>.biog-two-col</code>. Defined in destination.css.</p>
+      <h3>Collaborator card</h3>
+      <pre><code>&lt;a href="amigos/name.html" class="biog-collab-card"&gt;
+  &lt;figure class="gallery-item"&gt;
+    &lt;img src="assets/img/amigo-name.jpg" alt="Name"&gt;
+  &lt;/figure&gt;
+  &lt;span class="biog-collab-caption"&gt;Name&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+      <p>Sits inside <code>.people-collab-grid</code>. Entire card is a link to the individual biog page. No lightbox — <code>data-full</code> and <code>data-gallery</code> attributes must not be added. Cursor: pointer. Caption hover → brand orange. Defined in gallery.css.</p>
     </section>
 
     <section class="doc-section" id="responsive">
@@ -518,6 +497,7 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><td>max-width: 1100px</td><td>Nav collapses to hamburger menu (CSS checkbox toggle — no JS)</td></tr>
         <tr><td>max-width: 1024px</td><td>gallery-grid-3 → 2 columns. portrait-4 → 3 columns</td></tr>
         <tr><td>max-width: 768px</td><td>Primary mobile breakpoint — all major layout changes</td></tr>
+        <tr><td>max-width: 480px</td><td>people-collab-grid → single column</td></tr>
       </table>
 
       <h3>Mobile behaviour at 768px</h3>
@@ -532,7 +512,8 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><td>blockquote</td><td>32px → 24px. Reduced padding.</td></tr>
         <tr><td>form inputs</td><td>500px fixed → 100% fluid</td></tr>
         <tr><td>Theatre play icon</td><td>Hidden on mobile (::after display: none)</td></tr>
-        <tr><td>.biog-two-col</td><td>Single column. Portrait image max-width 260px.</td></tr>
+        <tr><td>.people-intro-grid</td><td>Single column. Portrait image full width.</td></tr>
+        <tr><td>.people-collab-grid</td><td>2-up grid</td></tr>
       </table>
 
       <h3>Mobile nav (CSS-only toggle)</h3>
@@ -579,29 +560,16 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
         <tr><td>Caption / stone-caption</td><td>Stone background editorial captions.</td></tr>
         <tr><td>Link-list</td><td>Styled navigation lists.</td></tr>
         <tr><td>Contact form</td><td>500px fixed-width desktop, 100% mobile. Pill button submit.</td></tr>
-        <tr><td>People biog</td><td>Two-col portrait/body layout. Person name display. Contact meta. Work gallery. Classes: .biog-two-col, .biog-portrait, .biog-body, .biog-contact-label, .biog-contact-link, .person-name.</td></tr>
+        <tr><td>People biog</td><td>Portrait block and contact meta. Classes: .biog-portrait, .biog-body, .biog-contact-label, .biog-contact-link. Grid layout handled by gallery.css people grids.</td></tr>
       </table>
 
-      <h3>People biog CSS</h3>
-      <pre><code>.person-name {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--charcoal);
-  margin: 4px 0 32px 0;
-}
-
-.biog-two-col {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 40px;
-  align-items: start;
-  margin-bottom: 40px;
-}
-
-.biog-portrait img {
+      <h3>People biog CSS (destination.css)</h3>
+      <pre><code>.biog-portrait img {
   width: 100%;
+  display: block;
   outline: 1px solid #dddddd;
   outline-offset: -1px;
+  cursor: default;
 }
 
 .biog-contact-label {
@@ -615,38 +583,60 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
   font-size: 14px;
   font-weight: 300;
   color: var(--brand-blue);
+  text-decoration: none;
 }
 
-@media (max-width: 768px) {
-  .biog-two-col {
-    grid-template-columns: 1fr;
-  }
-  .biog-portrait img {
-    max-width: 260px;
-  }
+.biog-contact-link:hover {
+  color: var(--brand-orange);
+}
+
+.biog-body {
+  padding-top: 0;
+}
+
+.biog-body p:first-child {
+  margin-top: 0;
 }</code></pre>
     </section>
 
     <section class="doc-section" id="gallery">
       <span class="section-tag">Module — gallery engine</span>
       <h2>Gallery engine v9.0</h2>
-      <p>The image presentation system. Includes lightbox, multiple grid types and the full-bleed breakout.</p>
+      <p>The image presentation system. Includes lightbox, multiple grid types, full-bleed breakout, and the self-contained people page grids.</p>
 
       <h3>Lightbox</h3>
       <p>Midnight blue (#0a254a) background — synced with the theatre projector. Triple-slot filmstrip architecture (300vw track) for smooth prev/next transitions. SVG close/prev/next icons embedded as data-uris. Fixed position, z-index 9999999. Scroll locked via <code>.no-scroll</code> on body.</p>
 
       <h3>Image rules</h3>
-      <pre><code>/* All gallery images */
-cursor: zoom-in;            /* Native cursor signal */
-outline: 1px solid #dddddd; /* Inset border — no box model impact */
+      <pre><code>/* Lightbox-enabled gallery images */
+cursor: zoom-in;
+outline: 1px solid #dddddd;
 outline-offset: -1px;
-transition: none;            /* No hover transitions on images */
+transition: none;</code></pre>
 
-/* Portrait grid: aspect ratio enforced */
-.gallery-portrait-4 .gallery-item img {
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+      <h3>People grids</h3>
+      <p>Two self-contained grid classes exclusive to people.html. They do not inherit from <code>.gallery-grid-3</code> and have no lightbox behaviour.</p>
+      <pre><code>/* Intro row — portrait col aligns pixel-perfect with collab cards below */
+.people-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 0 0 15px 0;
+  align-items: start;
+}
+
+/* .biog-body spans the remaining two columns */
+.people-intro-grid .biog-body {
+  grid-column: span 2;
+}
+
+/* Collaborator cards — navigation only, no lightbox */
+.people-collab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }</code></pre>
+      <p>Both grids use <code>grid-template-columns: repeat(3, 1fr)</code> with <code>gap: 15px</code> — portrait image and collaborator card columns are identical width by definition.</p>
     </section>
 
     <section class="doc-section" id="theatre">
@@ -718,64 +708,44 @@ transition: none;            /* No hover transitions on images */
   &lt;!-- Repeat for each image --&gt;
 &lt;/div&gt;</code></pre>
 
-      <h3>People biog page</h3>
-      <p>No panoramic hero — paper sheet sits directly below nav. Requires gallery.css for the work gallery lightbox.</p>
+      <h3>People page</h3>
+      <p>No panoramic hero — paper sheet sits directly below nav. No lightbox. Requires gallery.css for people grid classes.</p>
       <pre><code>&lt;body class="content-page"&gt;
 
   &lt;header id="main-nav"&gt;&lt;/header&gt;
 
   &lt;div class="paper-sheet"&gt;
     &lt;article class="text-rail"&gt;
+
       &lt;header&gt;
         &lt;h1&gt;People&lt;/h1&gt;
         &lt;div class="orange-rule"&gt;&lt;/div&gt;
-        &lt;h2&gt;Thinkamigos&lt;/h2&gt;
+        &lt;h2&gt;Paul Fillingham&lt;/h2&gt;
       &lt;/header&gt;
 
-      &lt;h3 class="person-name"&gt;Full Name&lt;/h3&gt;
-
-      &lt;div class="biog-two-col"&gt;
+      &lt;!-- intro row: portrait + bio copy --&gt;
+      &lt;div class="people-intro-grid"&gt;
         &lt;div class="biog-portrait"&gt;
-          &lt;img src="assets/img/portrait.jpg" alt="Full Name"&gt;
+          &lt;img src="assets/img/amigo-paul-fillingham.jpg" alt="Paul Fillingham"&gt;
           &lt;p class="biog-contact-label"&gt;Contact&lt;/p&gt;
-          &lt;a href="mailto:email@domain.com" class="biog-contact-link"&gt;email@domain.com&lt;/a&gt;
+          &lt;a href="mailto:paul@thinkamigo.com" class="biog-contact-link"&gt;paul@thinkamigo.com&lt;/a&gt;
         &lt;/div&gt;
         &lt;div class="biog-body"&gt;
           &lt;p&gt;Biography text...&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class="gallery-grid-3"&gt;
-        &lt;figure class="gallery-item"&gt;
-          &lt;img src="assets/img/work-1.jpg"
-               data-full="assets/img/work-1-full.jpg"
-               data-gallery="biog-gallery"
-               alt="Work sample 1"&gt;
-        &lt;/figure&gt;
-        &lt;figure class="gallery-item"&gt;
-          &lt;img src="assets/img/work-2.jpg"
-               data-full="assets/img/work-2-full.jpg"
-               data-gallery="biog-gallery"
-               alt="Work sample 2"&gt;
-        &lt;/figure&gt;
-        &lt;figure class="gallery-item"&gt;
-          &lt;img src="assets/img/work-3.jpg"
-               data-full="assets/img/work-3-full.jpg"
-               data-gallery="biog-gallery"
-               alt="Work sample 3"&gt;
-        &lt;/figure&gt;
+      &lt;!-- collaborator cards: links to individual biog pages --&gt;
+      &lt;div class="people-collab-grid"&gt;
+        &lt;a href="amigos/name.html" class="biog-collab-card"&gt;
+          &lt;figure class="gallery-item"&gt;
+            &lt;img src="assets/img/amigo-name.jpg" alt="Name"&gt;
+          &lt;/figure&gt;
+          &lt;span class="biog-collab-caption"&gt;Name&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;!-- repeat for each collaborator --&gt;
       &lt;/div&gt;
-    &lt;/article&gt;
 
-    &lt;hr style="border: 0; border-top: 1px solid #ededed; margin: 0; width: 100%;"&gt;
-
-    &lt;article class="text-rail"&gt;
-      &lt;section class="links-section" style="padding: 40px 0 10px 0;"&gt;
-        &lt;h2 style="color: var(--brand-blue); font-size: 24px; font-weight: 600; margin-bottom: 20px; margin-top: 0;"&gt;Links&lt;/h2&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href="#" target="_blank"&gt;Linked item&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/section&gt;
     &lt;/article&gt;
   &lt;/div&gt;
 
@@ -783,7 +753,6 @@ transition: none;            /* No hover transitions on images */
   &lt;script src="loader.js"&gt;&lt;/script&gt;
 
 &lt;/body&gt;</code></pre>
-      <p><code>data-gallery="biog-gallery"</code> groups the work images as a discrete lightbox set, separate from any other galleries on the page.</p>
     </section>
 
     <section class="doc-section" id="rules">
@@ -803,6 +772,7 @@ transition: none;            /* No hover transitions on images */
         <tr><td>8</td><td>The text rail is 960px. Do not widen it.</td><td>~96 characters per line maximum is the editorial standard.</td></tr>
         <tr><td>9</td><td>Gallery image transitions: none.</td><td>Zoom-in cursor signals interactivity. Animation on hover is visual noise.</td></tr>
         <tr><td>10</td><td>Lightbox and projector share #0a254a background.</td><td>Visual parity between image and video full-screen environments.</td></tr>
+        <tr><td>11</td><td>People grid images must not have data-full or data-gallery attributes.</td><td>These grids are navigation-only. Lightbox must not be triggered on people.html.</td></tr>
       </table>
 
       <div class="alert alert-rule" style="margin-top: 32px">
