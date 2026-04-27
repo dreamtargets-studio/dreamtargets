@@ -359,7 +359,7 @@
         grid-template-columns: 1fr;
     }
     .people-intro-grid .biog-portrait img {
-        max-width: 260px;
+        max-width: 100%;
     }
     .people-intro-grid .biog-body {
         grid-column: span 1;
