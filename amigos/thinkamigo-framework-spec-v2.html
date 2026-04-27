@@ -1,404 +1,257 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand & technical specification | Thinkamigo</title>
+# thinkamigo web framework
+## brand & technical specification
 
-    <link rel="stylesheet" href="../chassis.css">
-    <link rel="stylesheet" href="../destination.css">
+> chassis v6.4 | destination engine v4.23 | gallery engine v9.0 | theatre engine v5.5
+> version 1.1 — april 2026 | maintained in github: dreamtargets-studio
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+---
 
-    <style>
-        /* Spec document overrides */
-        .swatch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
-        }
-        .swatch { border-radius: 4px; overflow: hidden; border: 1px solid #dddddd; }
-        .swatch-colour { height: 80px; }
-        .swatch-info { padding: 10px 12px; background: #f5f5ef; }
-        .swatch-name { font-size: 14px; font-weight: 500; display: block; margin-bottom: 2px; }
-        .swatch-hex { font-size: 13px; font-weight: 300; color: #666666; font-family: 'Courier New', monospace; }
-        .swatch-var { font-size: 12px; color: #0054dc; font-family: 'Courier New', monospace; display: block; margin-top: 2px; }
+## contents
 
-        .rule-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
-        .rule-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.12em; color: #666666; padding: 10px 12px; border-bottom: 1px solid #dddddd; background: #f5f5ef; }
-        .rule-table td { padding: 12px; border-bottom: 1px solid #eeeeee; vertical-align: top; font-size: 15px; }
-        .rule-table td:first-child { font-weight: 500; white-space: nowrap; color: #0054dc; font-family: 'Courier New', monospace; font-size: 14px; }
+1. [brand rules — typography](#typography)
+2. [brand rules — colour palette](#colour-palette)
+3. [brand rules — voice & tone](#voice--tone)
+4. [tech spec — architecture](#architecture)
+5. [tech spec — css variables](#css-variables)
+6. [tech spec — layout & grid](#layout--grid)
+7. [tech spec — components](#components)
+8. [tech spec — responsive engine](#responsive-engine)
+9. [module — chassis v6.4](#chassis-v64)
+10. [module — destination engine v4.23](#destination-engine-v423)
+11. [module — gallery engine v9.0](#gallery-engine-v90)
+12. [module — theatre engine v5.5](#theatre-engine-v55)
+13. [usage examples](#usage-examples)
+14. [absolute rules](#absolute-rules)
 
-        .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
-        .do-box, .dont-box { padding: 20px; border-radius: 4px; }
-        .do-box { background: #f0f8f0; border: 1px solid #c8e6c9; }
-        .dont-box { background: #fdf0f0; border: 1px solid #ffcdd2; }
-        .do-label, .dont-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
-        .do-label { color: #2e7d32; }
-        .dont-label { color: #c62828; }
-        .do-box p, .dont-box p { font-size: 15px; margin: 0; }
+---
 
-        .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
-        .module-card { border: 1px solid #dddddd; padding: 20px 24px; background: #f5f5ef; }
-        .module-card-name { font-size: 15px; font-weight: 600; color: #0054dc; display: block; margin-bottom: 4px; }
-        .module-card-version { font-size: 13px; color: #666666; font-family: 'Courier New', monospace; display: block; margin-bottom: 10px; }
-        .module-card p { font-size: 14px; color: #666666; margin: 0; }
+## typography
 
-        .alert { padding: 14px 18px; margin: 16px 0; border-left: 3px solid; font-size: 15px; }
-        .alert-rule { background: #fff8e6; border-color: #ff6600; }
-        .alert-rule strong { color: #ff6600; }
+### primary typeface
 
-        .doc-toc { background: #f5f5ef; border-left: 3px solid #0054dc; padding: 32px 40px; margin-bottom: 60px; }
-        .doc-toc-title { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; color: #666666; display: block; margin-bottom: 20px; }
-        .doc-toc ol { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 40px; }
-        .doc-toc li { margin-bottom: 8px; break-inside: avoid; }
-        .doc-toc a { color: #0054dc; text-decoration: none; font-size: 15px; font-weight: 300; }
-        .doc-toc a:hover { color: #ff6600; }
-        .doc-toc .toc-section-label { font-size: 11px; font-weight: 500; color: #666666; letter-spacing: 0.1em; display: block; margin-top: 16px; margin-bottom: 4px; }
+**poppins** — google fonts — loaded via @import in chassis.css
 
-        .section-tag { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: #ff6600; display: block; margin-bottom: 10px; }
+```css
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-        pre { background: #f0f0ec; border: 1px solid #dddddd; border-left: 3px solid #0054dc; padding: 20px 24px; overflow-x: auto; margin: 16px 0 24px; border-radius: 0 4px 4px 0; }
-        code { font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.7; color: #2a2a2a; }
-        p code, li code { background: #f0f0ec; padding: 1px 6px; border-radius: 2px; font-size: 14px; }
+font-family: 'Poppins', Arial, Helvetica, sans-serif;
+```
 
-        .doc-section { margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid #dddddd; }
-        .doc-section:last-child { border-bottom: none; }
+fallback stack: `Arial, Helvetica, sans-serif`. all nine weights imported.
 
-        @media (max-width: 768px) {
-            .do-dont { grid-template-columns: 1fr; }
-            .module-grid { grid-template-columns: 1fr; }
-            .doc-toc ol { columns: 1; }
-        }
-    </style>
-</head>
-<body class="content-page" data-base="../">
+### weight usage
 
-    <header id="main-nav"></header>
+| weight | name | usage |
+|--------|------|-------|
+| 100–200 | thin / extra-light | large display headlines, hero h2 |
+| 300 | light | body text, captions, descriptions — default reading weight |
+| 400 | regular | navigation links, labels, ui text |
+| 500 | medium | nav links, button text |
+| 600 | semi-bold | h1, h3, link lists, strong emphasis |
+| 700–900 | bold–black | reserved — sparingly for maximum contrast moments. people biog person name uses 700. |
 
-    <main class="editorial-post">
-        <div class="paper-sheet">
-            <article class="text-rail">
-                <header>
-                    <h1>Brand & technical specification</h1>
-                    <div class="orange-rule"></div>
-                    <h2>Thinkamigo chassis v6.4 — destination engine v4.23 — gallery engine v9.0 — theatre engine v5.5</h2>
-                </header>
+### typographic scale — destination engine
 
-<div class="doc-toc">
-      <span class="doc-toc-title">Contents</span>
-      <ol>
-        <li><span class="toc-section-label">Brand rules</span></li>
-        <li><a href="#typography">01 — Typography</a></li>
-        <li><a href="#colour">02 — Colour palette</a></li>
-        <li><a href="#voice">03 — Voice & tone</a></li>
-        <li><span class="toc-section-label">Tech spec</span></li>
-        <li><a href="#architecture">04 — Architecture</a></li>
-        <li><a href="#variables">05 — CSS variables</a></li>
-        <li><a href="#layout">06 — Layout & grid</a></li>
-        <li><a href="#components">07 — Components</a></li>
-        <li><a href="#responsive">08 — Responsive engine</a></li>
-        <li><span class="toc-section-label">Modules</span></li>
-        <li><a href="#chassis">09 — Chassis v6.4</a></li>
-        <li><a href="#destination">10 — Destination engine v4.23</a></li>
-        <li><a href="#gallery">11 — Gallery engine v9.0</a></li>
-        <li><a href="#theatre">12 — Theatre engine v5.5</a></li>
-        <li><span class="toc-section-label">Usage</span></li>
-        <li><a href="#examples">13 — Usage examples</a></li>
-        <li><a href="#rules">14 — Absolute rules</a></li>
-      </ol>
-    </div>
+| element | size | weight | colour |
+|---------|------|--------|--------|
+| h1 (.text-rail) | 48px / 38px mobile | 600 | #0054dc |
+| h2 (.text-rail) | 28px | 200 | #191919 |
+| h3 (.text-rail) | 24px | 600 | #0054dc |
+| body (p) | 18px | 300 | #333333 |
+| blockquote | 32px / 24px mobile | 300 | #444444 |
+| caption | 15px | 300 | #666666 |
+| nav links | 13px | 500 | #ffffff |
+| footer links | 14px | 300 | #ffffffb3 |
+| .person-name (biog) | 32px | 700 | #191919 |
 
-    <section class="doc-section" id="typography">
-      <span class="section-tag">Brand rules — 01</span>
-      <h2>Typography</h2>
-      <p>The framework uses a single typeface family throughout. Consistency and clarity over decoration.</p>
+### absolute typography rules
 
-      <h3>Primary typeface</h3>
-      <div class="type-specimen">
-        <p class="type-meta">Poppins — Google Fonts — primary typeface</p>
-        <p style="font-family:'Poppins',sans-serif; font-size:2.4rem; font-weight:200; line-height:1.1; margin:0">The quick brown fox</p>
-      </div>
+- **no serif typefaces anywhere in the framework.** poppins only.
+- the blockquote quotation marks use `font-family: Georgia, serif` for the decorative glyph only — this is the sole exception and must not be extended.
+- **no uppercase text** in ui, navigation or body copy. lowercase is a deliberate design decision.
+- hierarchy through weight, scale and space only.
 
-      <pre><code>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+---
 
-font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
+## colour palette
 
-      <p>Poppins is a geometric sans-serif with a comprehensive weight range. Fallback stack: <code>Arial, Helvetica, sans-serif</code>. All nine weights imported.</p>
+the palette is deliberately restrained. two brand colours, one dark ground, one light ground. all other values are neutrals.
 
-      <h3>Weight usage</h3>
-      <table class="rule-table">
-        <tr><th>Weight</th><th>Name</th><th>Usage</th></tr>
-        <tr><td>100–200</td><td>Thin / extra-light</td><td>Large display headlines, hero h2</td></tr>
-        <tr><td>300</td><td>Light</td><td>Body text, captions, descriptions — default reading weight</td></tr>
-        <tr><td>400</td><td>Regular</td><td>Navigation links, labels, ui text</td></tr>
-        <tr><td>500</td><td>Medium</td><td>Nav links, button text, register names</td></tr>
-        <tr><td>600</td><td>Semi-bold</td><td>h1, h3, link lists, strong emphasis</td></tr>
-        <tr><td>700–900</td><td>Bold–black</td><td>Reserved — use sparingly for maximum contrast moments</td></tr>
-      </table>
+**strict hex-only — no rgb() or rgba() in production code. use hex-8 for transparency.**
 
-      <h3>Typographic scale — destination engine</h3>
-      <table class="rule-table">
-        <tr><th>Element</th><th>Size</th><th>Weight</th><th>Colour</th></tr>
-        <tr><td>h1 (.text-rail)</td><td>48px / 38px mobile</td><td>600</td><td>--brand-blue #0054dc</td></tr>
-        <tr><td>h2 (.text-rail)</td><td>28px</td><td>200</td><td>--charcoal #191919</td></tr>
-        <tr><td>h3 (.text-rail)</td><td>24px</td><td>600</td><td>--brand-blue #0054dc</td></tr>
-        <tr><td>body (p)</td><td>18px</td><td>300</td><td>#333333</td></tr>
-        <tr><td>blockquote</td><td>32px / 24px mobile</td><td>300</td><td>#444444</td></tr>
-        <tr><td>caption</td><td>15px</td><td>300</td><td>#666666</td></tr>
-        <tr><td>nav links</td><td>13px</td><td>500</td><td>#ffffff</td></tr>
-        <tr><td>footer links</td><td>14px</td><td>300</td><td>#ffffffb3</td></tr>
-      </table>
+### brand colours
 
-      <h3>Absolute rules</h3>
-      <div class="alert alert-rule">
-        <strong>Rule:</strong> No serif typefaces anywhere in the framework. Poppins only. The blockquote quotation marks use a font-family override (Georgia) for the decorative glyph only — this is the sole exception and must not be extended.
-      </div>
+| name | hex | css variable | usage |
+|------|-----|-------------|-------|
+| brand blue | `#0054dc` | `--brand-blue` | primary brand, nav bg, headings, links |
+| brand orange | `#ff6600` | `--brand-orange` | hover states, orange rule, interactive feedback |
+| midnight blue | `#0a254a` | `--footer-bg` | footer, lightbox bg, projector bg |
+| stone | `#f5f5ef` | `--stone-bg` | page background, caption backgrounds |
+| charcoal | `#191919` | `--charcoal` | h2, body text baseline |
 
-      <div class="do-dont">
-        <div class="do-box">
-          <span class="do-label">Do</span>
-          <p>Poppins for all text. Sentence case for ui labels and navigation. Hierarchy through weight, scale and space only.</p>
-        </div>
-        <div class="dont-box">
-          <span class="dont-label">Don't</span>
-          <p>No serif fonts. No all-uppercase text in body copy, navigation or ui labels. No decorative or display typefaces.</p>
-        </div>
-      </div>
-    </section>
+### supporting neutrals
 
-    <section class="doc-section" id="colour">
-      <span class="section-tag">Brand rules — 02</span>
-      <h2>Colour palette</h2>
-      <p>The palette is deliberately restrained. Two brand colours, one dark ground, one light ground. All other values are neutrals. Strict hex-only — no rgb() or rgba() in production code.</p>
+| hex | usage |
+|-----|-------|
+| `#ffffff` | paper sheet, primary white |
+| `#dddddd` | standard rule, image outlines, borders |
+| `#f4f3ef` / `#f9f8f4` | caption bg, resource card bg |
+| `#666666` | caption text, label text, biog contact meta label |
+| `#555555` | resource description text |
+| `#333333` | body text default |
+| `#888888` | blockquote attribution |
+| `#bbbbbb` | theatre environment text |
+| `#ffffff80` | footer address (hex-8: 50% opacity) |
+| `#ffffffb3` | footer nav links (hex-8: 70% opacity) |
+| `#ffffff26` | brand-blue-light (hex-8: 15% opacity) |
 
-      <h3>Brand colours</h3>
-      <div class="swatch-grid">
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#0054dc"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Brand blue</span>
-            <span class="swatch-hex">#0054dc</span>
-            <span class="swatch-var">--brand-blue</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#ff6600"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Brand orange</span>
-            <span class="swatch-hex">#ff6600</span>
-            <span class="swatch-var">--brand-orange</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#0a254a"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Midnight blue</span>
-            <span class="swatch-hex">#0a254a</span>
-            <span class="swatch-var">--footer-bg</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#f5f5ef; border:1px solid #ddd"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Stone</span>
-            <span class="swatch-hex">#f5f5ef</span>
-            <span class="swatch-var">--stone-bg</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#191919"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Charcoal</span>
-            <span class="swatch-hex">#191919</span>
-            <span class="swatch-var">--charcoal</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-colour" style="background:#1a1a1a"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Theatre dark</span>
-            <span class="swatch-hex">#1a1a1a</span>
-            <span class="swatch-var">theatre-grid-charcoal</span>
-          </div>
-        </div>
-      </div>
+### known issue
 
-      <h3>Supporting neutrals</h3>
-      <table class="rule-table">
-        <tr><th>Hex</th><th>Usage</th></tr>
-        <tr><td>#ffffff</td><td>Paper sheet background, primary white</td></tr>
-        <tr><td>#dddddd</td><td>Standard rule, image outlines, borders</td></tr>
-        <tr><td>#f4f3ef / #f9f8f4</td><td>Caption backgrounds, resource card backgrounds</td></tr>
-        <tr><td>#666666</td><td>Caption text, label text</td></tr>
-        <tr><td>#555555</td><td>Resource description text</td></tr>
-        <tr><td>#333333</td><td>Body text default</td></tr>
-        <tr><td>#888888</td><td>Blockquote attribution, quotation marks</td></tr>
-        <tr><td>#bbbbbb</td><td>Theatre environment text, hover outlines</td></tr>
-        <tr><td>#ffffff80</td><td>Footer address (hex-8: 50% opacity)</td></tr>
-        <tr><td>#ffffffb3</td><td>Footer nav links (hex-8: 70% opacity)</td></tr>
-      </table>
+brand orange has two values across modules: `#ff8c00` in chassis, `#ff6600` in destination and theatre. destination takes precedence on content pages. resolve to `#ff6600` in next major version.
 
-      <div class="alert alert-rule">
-        <strong>Saturation lock:</strong> Brand blue is fixed at <code>#0054dc</code>. This value is enforced with <code>!important</code> on the nav element to prevent inheritance corruption. Do not modify.
-      </div>
+### saturation lock
 
-      <div class="do-dont">
-        <div class="do-box">
-          <span class="do-label">Do</span>
-          <p>Hex-only throughout. Use hex-8 (8-digit hex) for transparency values. Brand blue on white or stone. Brand orange for hover states, accent rules, and interactive feedback.</p>
-        </div>
-        <div class="dont-box">
-          <span class="dont-label">Don't</span>
-          <p>No rgb() or rgba() in production. No additional brand colours. Do not alter the saturation or brightness of --brand-blue.</p>
-        </div>
-      </div>
-    </section>
+brand blue is fixed at `#0054dc` and enforced with `!important` on the nav element. do not modify.
 
-    <section class="doc-section" id="voice">
-      <span class="section-tag">Brand rules — 03</span>
-      <h2>Voice & tone</h2>
-      <p>The voice of Paul Fillingham / Thinkamigo applied consistently across all content on the framework.</p>
+---
 
-      <h3>What the voice is</h3>
-      <table class="rule-table">
-        <tr><th>Quality</th><th>In practice</th></tr>
-        <tr><td>Direct and considered</td><td>No waffle. Say the thing. Then stop.</td></tr>
-        <tr><td>Warmth without sentimentality</td><td>Human, not corporate. Engaged, not gushing.</td></tr>
-        <tr><td>Intellectual curiosity without jargon</td><td>The idea matters more than demonstrating you know the vocabulary.</td></tr>
-        <tr><td>Craft visible but worn lightly</td><td>The work speaks. You don't need to explain it.</td></tr>
-        <tr><td>Serious about the work, not precious</td><td>Rigour without reverence. It's allowed to be funny.</td></tr>
-        <tr><td>Humour earned, not performed</td><td>De Bono was right — wit is a marker of intelligence. But it must land naturally.</td></tr>
-      </table>
+## voice & tone
 
-      <h3>What to avoid</h3>
-      <div class="dont-box" style="margin: 16px 0">
-        <span class="dont-label">Avoid</span>
-        <p>Corporate language. Breathless enthusiasm about technology for its own sake. Over-explaining what the work is trying to do. Nostalgia as a destination (the past is load-bearing, not load-limiting). Consolation dressed as strategy.</p>
-      </div>
+### the voice
 
-      <h3>The four registers</h3>
-      <table class="rule-table">
-        <tr><th>Register</th><th>Cadence</th><th>Character</th></tr>
-        <tr><td>Essay</td><td>Quarterly</td><td>Long form. Memoir, influence, cultural excavation. Cannot be forced.</td></tr>
-        <tr><td>Arts essay</td><td>Monthly (alternating)</td><td>Houdini Window production diary. Honest about the struggle.</td></tr>
-        <tr><td>Connections</td><td>Monthly (alternating)</td><td>Associative. Gallery-minded. Following the thread without announcing the destination.</td></tr>
-        <tr><td>Dispatch</td><td>Weekly</td><td>200–300 words. Low threshold. The pulse.</td></tr>
-      </table>
-    </section>
+| quality | in practice |
+|---------|------------|
+| direct and considered | no waffle. say the thing. then stop. |
+| warmth without sentimentality | human, not corporate. engaged, not gushing. |
+| intellectual curiosity without jargon | the idea matters more than demonstrating the vocabulary. |
+| craft visible but worn lightly | the work speaks. you don't need to explain it. |
+| serious about the work, not precious | rigour without reverence. it's allowed to be funny. |
+| humour earned, not performed | wit is a marker of intelligence — but it must land naturally. |
 
-    <section class="doc-section" id="architecture">
-      <span class="section-tag">Tech spec — 01</span>
-      <h2>Architecture</h2>
-      <p>The framework is built as four discrete CSS modules, each with a distinct responsibility. Hand-rolled HTML/CSS/JS — no framework dependencies.</p>
+### what to avoid
 
-      <div class="module-grid">
-        <div class="module-card">
-          <span class="module-card-name">Chassis</span>
-          <span class="module-card-version">chassis.css — v6.4</span>
-          <p>Global shell. Navigation, footer, core reset, ui components, responsive engine. Loads first on every page.</p>
-        </div>
-        <div class="module-card">
-          <span class="module-card-name">Destination engine</span>
-          <span class="module-card-version">destination.css — v4.23</span>
-          <p>Editorial content pages. The paper sheet, the text rail, typography, blockquotes, gallery grid, contact form.</p>
-        </div>
-        <div class="module-card">
-          <span class="module-card-name">Gallery engine</span>
-          <span class="module-card-version">gallery.css — v9.0</span>
-          <p>Image grid system. Lightbox, portrait grid, full-bleed breakout, resource cards, inline story images.</p>
-        </div>
-        <div class="module-card">
-          <span class="module-card-name">Theatre engine</span>
-          <span class="module-card-version">theatre.css — v5.5</span>
-          <p>Video environment. Sovereign cinema projector, 4-up grid, thumbnail system, inline video for story pages.</p>
-        </div>
-      </div>
+- corporate language
+- breathless enthusiasm about technology for its own sake
+- over-explaining what the work is trying to do
+- nostalgia as a destination (the past is load-bearing, not load-limiting)
+- consolation dressed as strategy
 
-      <h3>Load order</h3>
-      <pre><code>&lt;!-- Always load in this order --&gt;
-&lt;link rel="stylesheet" href="assets/css/chassis.css"&gt;
-&lt;link rel="stylesheet" href="assets/css/destination.css"&gt;  &lt;!-- content pages --&gt;
-&lt;link rel="stylesheet" href="assets/css/gallery.css"&gt;       &lt;!-- if galleries present --&gt;
-&lt;link rel="stylesheet" href="assets/css/theatre.css"&gt;       &lt;!-- if video present --&gt;</code></pre>
+### the four registers
 
-      <h3>Page body class</h3>
-      <pre><code>&lt;!-- Content pages require this class on body --&gt;
-&lt;body class="content-page"&gt;</code></pre>
-    </section>
+| register | cadence | character |
+|----------|---------|-----------|
+| essay | quarterly | long form. memoir, influence, cultural excavation. cannot be forced. |
+| arts essay | monthly (alternating) | houdini window production diary. honest about the struggle. |
+| connections | monthly (alternating) | associative. gallery-minded. following the thread without announcing the destination. |
+| dispatch | weekly | 200–300 words. low threshold. the pulse. |
 
-    <section class="doc-section" id="variables">
-      <span class="section-tag">Tech spec — 02</span>
-      <h2>CSS variables</h2>
-      <p>All root variables are declared in chassis.css and destination.css. Destination overrides chassis where both declare the same variable — this is intentional.</p>
+---
 
-      <h3>Chassis :root</h3>
-      <pre><code>:root {
+## architecture
+
+four discrete css modules. hand-rolled html/css/js — no framework dependencies.
+
+| module | file | version | responsibility |
+|--------|------|---------|----------------|
+| chassis | chassis.css | v6.4 | global shell — nav, footer, reset, ui components |
+| destination engine | destination.css | v4.23 | editorial content pages |
+| gallery engine | gallery.css | v9.0 | image grids, lightbox, full-bleed |
+| theatre engine | theatre.css | v5.5 | video environment, projector |
+
+### load order
+
+```html
+<!-- always load in this order -->
+<link rel="stylesheet" href="assets/css/chassis.css">
+<link rel="stylesheet" href="assets/css/destination.css">  <!-- content pages -->
+<link rel="stylesheet" href="assets/css/gallery.css">       <!-- if galleries present -->
+<link rel="stylesheet" href="assets/css/theatre.css">       <!-- if video present -->
+```
+
+### page body class
+
+content pages require `class="content-page"` on the body element. this scopes destination engine styles.
+
+```html
+<body class="content-page">
+```
+
+---
+
+## css variables
+
+### chassis :root
+
+```css
+:root {
   --brand-blue:       #0054dc;
   --brand-blue-light: #ffffff26;  /* 15% opacity hex-8 */
   --brand-orange:     #ff8c00;
   --footer-bg:        #0a254a;
   --white:            #ffffff;
   --stone-bg:         #f5f5ef;
-}</code></pre>
+}
+```
 
-      <h3>Destination :root (overrides)</h3>
-      <pre><code>:root {
-  --brand-blue:   #0054dc;   /* Saturation lock — enforced */
-  --brand-orange: #ff6600;   /* Destination uses #ff6600, chassis uses #ff8c00 */
+### destination :root (overrides chassis)
+
+```css
+:root {
+  --brand-blue:   #0054dc;   /* saturation lock — enforced */
+  --brand-orange: #ff6600;   /* destination uses #ff6600, chassis uses #ff8c00 */
   --stone-bg:     #f5f5ef;
   --charcoal:     #191919;
-}</code></pre>
+}
+```
 
-      <div class="alert alert-rule">
-        <strong>Note:</strong> Brand orange has two values across modules — <code>#ff8c00</code> in chassis and <code>#ff6600</code> in destination/theatre. Destination takes precedence on content pages. Resolve to a single value in next refactor.
-      </div>
-    </section>
+---
 
-    <section class="doc-section" id="layout">
-      <span class="section-tag">Tech spec — 03</span>
-      <h2>Layout & grid</h2>
+## layout & grid
 
-      <h3>The three widths</h3>
-      <table class="rule-table">
-        <tr><th>Width</th><th>Name</th><th>Usage</th></tr>
-        <tr><td>1250px</td><td>Horizon / chassis</td><td>Max-width for the panoramic hero image and paper sheet. The outermost container.</td></tr>
-        <tr><td>1280px</td><td>Chassis container</td><td>Max-width for the global nav container</td></tr>
-        <tr><td>960px</td><td>Editorial rail</td><td>The text rail for all body content. 90% width with auto margins.</td></tr>
-      </table>
+### the three widths
 
-      <h3>The paper sheet</h3>
-      <pre><code>/* The white content surface — sits inside the 1250px horizon */
+| width | name | usage |
+|-------|------|-------|
+| 1280px | chassis container | global nav max-width |
+| 1250px | horizon | paper sheet, panoramic hero image |
+| 960px | editorial rail | text rail — all body content |
+
+### the paper sheet
+
+```css
 .paper-sheet {
   background-color: #ffffff;
   max-width: 1250px;
   margin: 0 auto;
   min-height: 600px;
   padding-bottom: 80px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);  /* removed below 1250px breakpoint */
-}</code></pre>
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* removed below 1250px */
+}
+```
 
-      <h3>The text rail</h3>
-      <pre><code>/* Editorial content runs inside this rail */
+### the text rail
+
+```css
 .text-rail {
   max-width: 960px;
   margin: 0 auto;
   width: 90%;
   padding: 20px 0 80px 0;
-}</code></pre>
+}
+```
 
-      <h3>Gallery grids</h3>
-      <table class="rule-table">
-        <tr><th>Class</th><th>Columns</th><th>Usage</th></tr>
-        <tr><td>.gallery-grid-3</td><td>3-up (→ 2-up at 1024px → 2-up at 768px)</td><td>Landscape images, standard grid</td></tr>
-        <tr><td>.gallery-portrait-4</td><td>4-up (→ 3-up at 1024px → 2-up at 768px)</td><td>Portrait images, 2:3 aspect ratio enforced</td></tr>
-        <tr><td>.video-grid-4</td><td>4-up (→ 1-up at 768px)</td><td>Video thumbnails in theatre environment</td></tr>
-        <tr><td>.gallery-full-bleed</td><td>Full viewport width breakout</td><td>Overrides the text rail for dramatic presentation</td></tr>
-      </table>
+### gallery grids
 
-      <h3>Full-bleed breakout</h3>
-      <pre><code>/* Breaks out of the text rail to fill the viewport */
+| class | columns | mobile |
+|-------|---------|--------|
+| `.gallery-grid-3` | 3-up | 2-up at 1024px / 768px |
+| `.gallery-portrait-4` | 4-up | 3-up at 1024px / 2-up at 768px |
+| `.video-grid-4` | 4-up | 1-up at 768px |
+| `.gallery-full-bleed` | 100vw breakout | padded at mobile |
+
+### full-bleed breakout
+
+```css
 .gallery-full-bleed {
   width: 100vw;
   position: relative;
@@ -408,279 +261,463 @@ font-family: 'Poppins', Arial, Helvetica, sans-serif;</code></pre>
   margin-right: -50vw;
   background-color: #f9f8f4;
   padding: 60px 0;
-}</code></pre>
-    </section>
+}
+```
 
-    <section class="doc-section" id="components">
-      <span class="section-tag">Tech spec — 04</span>
-      <h2>Components</h2>
+---
 
-      <h3>The orange rule</h3>
-      <p>A 250px × 1px horizontal accent line in brand orange. Used below h1 headings on content pages and in the theatre environment.</p>
-      <pre><code>&lt;div class="orange-rule"&gt;&lt;/div&gt;
+## components
 
-.orange-rule {
-  width: 250px;
-  height: 1px;
-  background-color: var(--brand-orange);
-  margin-bottom: 20px;
-}</code></pre>
+### orange rule
 
-      <h3>Pill button</h3>
-      <pre><code>&lt;a href="#" class="btn-pill"&gt;Label&lt;/a&gt;
+```html
+<div class="orange-rule"></div>
+```
+250px × 1px. brand orange. used below h1 headings.
 
-/* Default: white outline for use on dark/blue backgrounds */
-.btn-pill {
-  display: inline-block;
-  padding: 12px 45px;
-  border: 4px solid #ffffff;
-  border-radius: 50px;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-}</code></pre>
+### pill button
 
-      <h3>Blockquote</h3>
-      <pre><code>&lt;blockquote&gt;
-  &lt;p&gt;Quote text here&lt;/p&gt;
-  &lt;footer&gt;Attribution name&lt;/footer&gt;
-&lt;/blockquote&gt;</code></pre>
-      <p>Blue left border, 4px. Quotation marks generated via CSS <code>::before</code> and <code>::after</code> pseudo-elements using Georgia for the glyph only. Max-width 640px. 80px top margin.</p>
+```html
+<a href="#" class="btn-pill">label</a>
+```
+50px border-radius. 12px/45px padding. 18px poppins weight 500. white outline on dark backgrounds. hover → 15% blue fill.
 
-      <h3>Editorial caption</h3>
-      <pre><code>&lt;figure class="story-inline-image"&gt;
-  &lt;img src="..." alt="..."&gt;
-&lt;/figure&gt;
-&lt;span class="stone-caption"&gt;Caption text&lt;/span&gt;</code></pre>
+### blockquote
 
-      <h3>Link list</h3>
-      <pre><code>&lt;ul class="link-list"&gt;
-  &lt;li&gt;&lt;a href="#"&gt;Linked item&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-      <p>No list-style. 40px line-height. Brand blue, weight 600. Hover → brand orange.</p>
+```html
+<blockquote>
+  <p>quote text here</p>
+  <footer>attribution name</footer>
+</blockquote>
+```
+32px / weight 300. blue left border 4px. css quotation marks (georgia glyph only). max-width 640px. 80px top margin.
 
-      <h3>Grey rule</h3>
-      <pre><code>&lt;hr class="rule-grey-paper"&gt;</code></pre>
-      <p>1px, <code>#dddddd</code>, full width. No margin — add spacing via surrounding elements.</p>
+### editorial caption
 
-      <h3>Back to top</h3>
-      <pre><code>&lt;button class="back-to-top" id="back-to-top"&gt;
-  &lt;span class="chevron-up"&gt;&lt;/span&gt;
-&lt;/button&gt;</code></pre>
-      <p>Fixed position. Bottom 250px, right 25px. 46×46px. 30% opacity grey (<code>#e0e0e04d</code>). JS adds <code>.show</code> class on scroll.</p>
+```html
+<span class="stone-caption">caption text</span>
+```
+stone background (`#f9f8f4`). poppins 14px / weight 300. `#555555`.
 
-      <h3>Theatre video card</h3>
-      <pre><code>&lt;div class="theatre-card"&gt;
-  &lt;div class="theatre-thumb"&gt;
-    &lt;img src="thumbnail.jpg" alt="..."&gt;
-  &lt;/div&gt;
-  &lt;div class="theatre-caption"&gt;
-    &lt;p class="theatre-desc"&gt;Description&lt;/p&gt;
-    &lt;div class="theatre-actions"&gt;
-      &lt;a href="#" class="res-link"&gt;Watch&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      <p>16:9 aspect ratio enforced. Play icon via CSS <code>::after</code> pseudo-element. Opacity 0.3, rises to 1 on hover.</p>
-    </section>
+### link list
 
-    <section class="doc-section" id="responsive">
-      <span class="section-tag">Tech spec — 05</span>
-      <h2>Responsive engine</h2>
+```html
+<ul class="link-list">
+  <li><a href="#">linked item</a></li>
+</ul>
+```
+no list-style. 40px line-height. brand blue / weight 600. hover → brand orange.
 
-      <h3>Breakpoints</h3>
-      <table class="rule-table">
-        <tr><th>Breakpoint</th><th>Behaviour</th></tr>
-        <tr><td>max-width: 1250px</td><td>Paper-sheet box-shadow removed</td></tr>
-        <tr><td>max-width: 1100px</td><td>Nav collapses to hamburger menu (CSS checkbox toggle — no JS)</td></tr>
-        <tr><td>max-width: 1024px</td><td>gallery-grid-3 → 2 columns. portrait-4 → 3 columns</td></tr>
-        <tr><td>max-width: 768px</td><td>Primary mobile breakpoint — all major layout changes</td></tr>
-      </table>
+### grey rule
 
-      <h3>Mobile behaviour at 768px</h3>
-      <table class="rule-table">
-        <tr><th>Element</th><th>Mobile behaviour</th></tr>
-        <tr><td>footer</td><td>Stacks vertically, centred</td></tr>
-        <tr><td>gallery-grid-3</td><td>2-up grid</td></tr>
-        <tr><td>gallery-portrait-4</td><td>2-up grid (max real estate principle)</td></tr>
-        <tr><td>resource-grid</td><td>Single column</td></tr>
-        <tr><td>video-theatre-grid</td><td>Single column, 40px gap</td></tr>
-        <tr><td>text-rail h1</td><td>38px</td></tr>
-        <tr><td>blockquote</td><td>32px → 24px. Reduced padding.</td></tr>
-        <tr><td>form inputs</td><td>500px fixed → 100% fluid</td></tr>
-        <tr><td>Theatre play icon</td><td>Hidden on mobile (::after display: none)</td></tr>
-      </table>
+```html
+<hr class="rule-grey-paper">
+```
+1px / `#dddddd` / full width.
 
-      <h3>Mobile nav (CSS-only toggle)</h3>
-      <pre><code>&lt;!-- No JavaScript required --&gt;
-&lt;input type="checkbox" id="menu-toggle" class="menu-toggle"&gt;
-&lt;label for="menu-toggle" class="hamburger"&gt;
-  &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
-&lt;/label&gt;
-&lt;ul class="nav-links"&gt;...&lt;/ul&gt;</code></pre>
-    </section>
+### back to top
 
-    <section class="doc-section" id="chassis">
-      <span class="section-tag">Module — chassis</span>
-      <h2>Chassis v6.4</h2>
-      <p>The global shell. Must be loaded on every page. Establishes the reset, navigation, footer, ui components and responsive engine.</p>
+```html
+<button class="back-to-top" id="back-to-top">
+  <span class="chevron-up"></span>
+</button>
+```
+fixed. bottom 250px / right 25px. 46×46px. `#e0e0e04d` (30% opacity). js adds `.show` class on scroll.
 
-      <h3>Responsibilities</h3>
-      <table class="rule-table">
-        <tr><th>Section</th><th>What it does</th></tr>
-        <tr><td>Core reset</td><td>html/body margin/padding zero. Overflow-x hidden. Global figure reset eliminating the "stone gap" and "huge margin" browser bugs. img as display:block.</td></tr>
-        <tr><td>.container</td><td>1280px max-width, 20px padding, centred.</td></tr>
-        <tr><td>Global nav</td><td>Brand-blue background. Flex layout. Poppins 13px / weight 500 nav links. CSS-only mobile hamburger. z-index 3000.</td></tr>
-        <tr><td>Master footer</td><td>Midnight blue (#0a254a) background. 3-column flex layout with visual, nav and cta columns. Social strip with icon grid. Responsive to single column on mobile.</td></tr>
-        <tr><td>btn-pill</td><td>See components section.</td></tr>
-        <tr><td>back-to-top</td><td>See components section.</td></tr>
-      </table>
-    </section>
+### theatre video card
 
-    <section class="doc-section" id="destination">
-      <span class="section-tag">Module — destination engine</span>
-      <h2>Destination engine v4.23</h2>
-      <p>The editorial content engine. Applied to all story and content pages via <code>body.content-page</code>.</p>
+```html
+<div class="theatre-card" data-video-id="YOUTUBE_ID">
+  <div class="theatre-thumb">
+    <img src="thumbnail.jpg" alt="...">
+  </div>
+  <div class="theatre-caption">
+    <p class="theatre-desc">description</p>
+    <div class="theatre-actions">
+      <a href="#" class="res-link">watch</a>
+    </div>
+  </div>
+</div>
+```
+16:9 aspect ratio enforced. css play icon (opacity 0.3 → 1 on hover).
 
-      <h3>Responsibilities</h3>
-      <table class="rule-table">
-        <tr><th>Section</th><th>What it does</th></tr>
-        <tr><td>Page base</td><td>Stone-bg (#f5f5ef) body background. Poppins 18px / weight 300 / #333 body text.</td></tr>
-        <tr><td>Cinematic hero</td><td>1250px max-width panoramic image. Centred in stone wrapper. Border-top white line separating from nav.</td></tr>
-        <tr><td>Paper sheet</td><td>White (#ffffff) content surface. 1250px max. Subtle shadow (removed at 1250px breakpoint).</td></tr>
-        <tr><td>Text rail</td><td>960px editorial column. 90% width. Centred.</td></tr>
-        <tr><td>Typography</td><td>Full heading/body scale. See typography section.</td></tr>
-        <tr><td>Blockquote</td><td>32px pull quote with blue left border and CSS quotation marks.</td></tr>
-        <tr><td>gallery-grid-3</td><td>3-up landscape grid with 1px ddd border on images.</td></tr>
-        <tr><td>Caption / stone-caption</td><td>Stone background editorial captions.</td></tr>
-        <tr><td>Link-list</td><td>Styled navigation lists.</td></tr>
-        <tr><td>Contact form</td><td>500px fixed-width desktop, 100% mobile. Pill button submit.</td></tr>
-      </table>
-    </section>
+### biog portrait block
 
-    <section class="doc-section" id="gallery">
-      <span class="section-tag">Module — gallery engine</span>
-      <h2>Gallery engine v9.0</h2>
-      <p>The image presentation system. Includes lightbox, multiple grid types and the full-bleed breakout.</p>
+```html
+<div class="biog-portrait">
+  <img src="portrait.jpg" alt="Person Name">
+  <p class="biog-contact-label">Contact</p>
+  <a href="mailto:email@domain.com" class="biog-contact-link">email@domain.com</a>
+</div>
+```
+portrait image: full width of column, `outline: 1px solid #dddddd`. contact label: 14px / weight 300 / `#666666`. contact link: 14px / weight 300 / brand blue. defined in destination.css.
 
-      <h3>Lightbox</h3>
-      <p>Midnight blue (#0a254a) background — synced with the theatre projector. Triple-slot filmstrip architecture (300vw track) for smooth prev/next transitions. SVG close/prev/next icons embedded as data-uris. Fixed position, z-index 9999999. Scroll locked via <code>.no-scroll</code> on body.</p>
+### biog two-col layout
 
-      <h3>Image rules</h3>
-      <pre><code>/* All gallery images */
-cursor: zoom-in;            /* Native cursor signal */
-outline: 1px solid #dddddd; /* Inset border — no box model impact */
+```html
+<div class="biog-two-col">
+  <div class="biog-portrait">...</div>
+  <div class="biog-body">
+    <p>...</p>
+  </div>
+</div>
+```
+css grid. 280px portrait column / fluid body column. 40px gap. `align-items: start`. collapses to single column at 768px. defined in destination.css.
+
+### person name
+
+```html
+<h3 class="person-name">Full Name</h3>
+```
+32px / weight 700 / charcoal (`#191919`). overrides default h3 blue on biog pages only. used immediately above `.biog-two-col`. defined in destination.css.
+
+---
+
+## responsive engine
+
+### breakpoints
+
+| breakpoint | behaviour |
+|------------|-----------|
+| max-width: 1250px | paper-sheet shadow removed |
+| max-width: 1100px | nav → hamburger (css checkbox toggle, no js) |
+| max-width: 1024px | gallery-grid-3 → 2 col / portrait-4 → 3 col |
+| max-width: 768px | primary mobile breakpoint |
+
+### mobile (768px) behaviour
+
+| element | mobile |
+|---------|--------|
+| footer | vertical stack, centred |
+| gallery-grid-3 | 2-up |
+| gallery-portrait-4 | 2-up (max real estate) |
+| resource-grid | single column |
+| video-theatre-grid | single column |
+| text-rail h1 | 48px → 38px |
+| blockquote | 32px → 24px, reduced padding |
+| form inputs | 500px → 100% fluid |
+| theatre play icon | hidden |
+| .biog-two-col | single column, portrait max-width 260px |
+
+### css-only mobile nav
+
+```html
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="hamburger">
+  <span></span><span></span><span></span>
+</label>
+<ul class="nav-links">...</ul>
+```
+
+---
+
+## chassis v6.4
+
+**file:** `chassis.css` — loads on every page
+
+| section | responsibility |
+|---------|---------------|
+| core reset | zero margin/padding. overflow-x hidden. figure reset (eliminates stone gap / huge margin browser bugs). img display:block. |
+| .container | 1280px max-width / 20px padding / centred |
+| #main-nav | brand-blue bg. flex layout. poppins 13px/500 links. z-index 3000. |
+| mobile nav | css checkbox toggle. hamburger at 1100px. full-width dropdown. |
+| #main-footer | midnight-blue bg. 3-col flex (visual / nav / cta). social strip. |
+| .btn-pill | white outline button for dark backgrounds |
+| .back-to-top | fixed scroll-to-top with chevron icon |
+
+---
+
+## destination engine v4.23
+
+**file:** `destination.css` — content pages only (`body.content-page`)
+
+| section | responsibility |
+|---------|---------------|
+| page base | stone-bg body. poppins 18px/300. |
+| cinematic hero | 1250px panoramic img. stone wrapper. white border-top separator. |
+| paper sheet | white content surface. 1250px. subtle shadow. |
+| text rail | 960px editorial column. 90% width. |
+| typography | full heading/body scale — see typography section |
+| blockquote | 32px pull quote. blue left border. css quotation marks. |
+| gallery-grid-3 | 3-up landscape grid. 1px ddd image borders. |
+| stone-caption | stone-background editorial captions. |
+| link-list | styled nav lists. blue/orange. |
+| contact form | 500px desktop / 100% mobile. pill button submit. |
+| links-footer-block | 960px width. white bg. post-content link block. |
+| people biog | two-col portrait/body layout. person name display. contact meta. work gallery. |
+
+### people biog css
+
+```css
+.person-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin: 4px 0 32px 0;
+}
+
+.biog-two-col {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+.biog-portrait img {
+  width: 100%;
+  outline: 1px solid #dddddd;
+  outline-offset: -1px;
+}
+
+.biog-contact-label {
+  font-size: 14px;
+  font-weight: 300;
+  color: #666666;
+  margin: 12px 0 2px 0;
+}
+
+.biog-contact-link {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--brand-blue);
+}
+
+@media (max-width: 768px) {
+  .biog-two-col {
+    grid-template-columns: 1fr;
+  }
+  .biog-portrait img {
+    max-width: 260px;
+  }
+}
+```
+
+---
+
+## gallery engine v9.0
+
+**file:** `gallery.css` — load when galleries present
+
+### grid system
+
+| class | type | notes |
+|-------|------|-------|
+| `.gallery-grid-3` | 3-up landscape | standard image grid |
+| `.gallery-portrait-4` | 4-up portrait | 2:3 aspect ratio enforced via object-fit |
+| `.resource-grid` | 3-up with captions | align-items: start for variable height cards |
+| `.video-grid-4` | 4-up video | theatre thumbnails (chassis-only use) |
+| `.gallery-full-bleed` | 100vw breakout | stone backing, 60px padding |
+
+### lightbox
+
+midnight blue (#0a254a) full-screen overlay. triple-slot filmstrip (300vw track). svg icons as data-uris. z-index 9999999. scroll lock via `.no-scroll`.
+
+### image rules
+
+```css
+cursor: zoom-in;
+outline: 1px solid #dddddd;
 outline-offset: -1px;
-transition: none;            /* No hover transitions on images */
+transition: none;  /* no hover transitions */
+```
 
-/* Portrait grid: aspect ratio enforced */
-.gallery-portrait-4 .gallery-item img {
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-}</code></pre>
-    </section>
+---
 
-    <section class="doc-section" id="theatre">
-      <span class="section-tag">Module — theatre engine</span>
-      <h2>Theatre engine v5.5</h2>
-      <p>The sovereign cinema environment for video content. Two contexts: the full theatre grid page and inline video within story pages.</p>
+## theatre engine v5.5
 
-      <h3>The projector</h3>
-      <p>Midnight blue (#0a254a) full-screen overlay. 95vw × 16:9 stage. z-index 1000000. Synced background colour with gallery lightbox for visual consistency across media types.</p>
+**file:** `theatre.css` — load when video present
 
-      <h3>Theatre grid charcoal</h3>
-      <p>Charcoal (#1a1a1a) section background. 1250px container. 4-up video grid. White h1 (600 weight), 28px h2 (200 weight, #bbbbbb). Orange rule below h1.</p>
+### environments
 
-      <h3>Play icon</h3>
-      <p>CSS-only triangle via border trick. White with drop-shadow keyline for visibility on light backgrounds. 0.3 base opacity, rises to 1 on hover. Scaled up for inline story context (32px vs 20px border-left width).</p>
-    </section>
+| class | context |
+|-------|---------|
+| `.theatre-env` | black (#000000) main stage wrapper |
+| `.theatre-grid-charcoal` | charcoal (#1a1a1a) 4-up video grid section |
+| `.story-inline-video` | inline video within story pages (960px rail) |
 
-    <section class="doc-section" id="examples">
-      <span class="section-tag">Usage — 01</span>
-      <h2>Usage examples</h2>
+### the projector
 
-      <h3>Standard story page structure</h3>
-      <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;link rel="stylesheet" href="assets/css/chassis.css"&gt;
-  &lt;link rel="stylesheet" href="assets/css/destination.css"&gt;
-  &lt;link rel="stylesheet" href="assets/css/gallery.css"&gt;
-&lt;/head&gt;
-&lt;body class="content-page"&gt;
+midnight blue (#0a254a) full-screen overlay. 95vw × 16:9 stage. max-width 1600px. z-index 1000000. synced with gallery lightbox background.
 
-  &lt;nav id="main-nav"&gt;...&lt;/nav&gt;
+### play icon
 
-  &lt;div class="story-hero-wrapper"&gt;
-    &lt;img class="panoramic-hero" src="hero.jpg" alt="..."&gt;
-  &lt;/div&gt;
+css triangle via border trick. white with drop-shadow keyline. opacity 0.3 base → 1 on hover. hidden on mobile (`::after display: none`). larger scale for inline story context.
 
-  &lt;div class="paper-sheet"&gt;
-    &lt;div class="text-rail"&gt;
-      &lt;h1&gt;Title&lt;/h1&gt;
-      &lt;div class="orange-rule"&gt;&lt;/div&gt;
-      &lt;h2&gt;Subtitle&lt;/h2&gt;
-      &lt;p&gt;Body copy...&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+---
 
-  &lt;footer id="main-footer"&gt;...&lt;/footer&gt;
+## usage examples
 
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+### standard story page
 
-      <h3>Inline video in story page</h3>
-      <pre><code>&lt;div class="story-inline-video"&gt;
-  &lt;div class="theatre-card" data-video-id="YOUTUBE_ID"&gt;
-    &lt;div class="theatre-thumb"&gt;
-      &lt;img src="thumbnail.jpg" alt="Video title"&gt;
-    &lt;/div&gt;
-    &lt;div class="theatre-caption"&gt;
-      &lt;p class="theatre-desc"&gt;Video description&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="assets/css/chassis.css">
+  <link rel="stylesheet" href="assets/css/destination.css">
+  <link rel="stylesheet" href="assets/css/gallery.css">
+</head>
+<body class="content-page">
 
-      <h3>Portrait gallery with lightbox</h3>
-      <pre><code>&lt;div class="gallery-portrait-4"&gt;
-  &lt;div class="gallery-item"&gt;
-    &lt;img src="portrait-1.jpg" alt="..." data-full="portrait-1-full.jpg"&gt;
-  &lt;/div&gt;
-  &lt;!-- Repeat for each image --&gt;
-&lt;/div&gt;</code></pre>
-    </section>
+  <nav id="main-nav">...</nav>
 
-    <section class="doc-section" id="rules">
-      <span class="section-tag">Usage — 02</span>
-      <h2>Absolute rules</h2>
-      <p>These rules are non-negotiable. They define the framework and must not be overridden.</p>
+  <div class="story-hero-wrapper">
+    <img class="panoramic-hero" src="hero.jpg" alt="...">
+  </div>
 
-      <table class="rule-table">
-        <tr><th>#</th><th>Rule</th><th>Reason</th></tr>
-        <tr><td>1</td><td>Poppins only. No serif typefaces.</td><td>Bauhaus principle — geometric purity. The framework's typographic identity.</td></tr>
-        <tr><td>2</td><td>Sentence case throughout. No all-uppercase.</td><td>Sentence case is a deliberate design decision, not a convention.</td></tr>
-        <tr><td>3</td><td>Hex-only colour values. Hex-8 for transparency.</td><td>Consistency and predictability across browsers and modules.</td></tr>
-        <tr><td>4</td><td>--brand-blue: #0054dc is locked. Do not alter.</td><td>Saturation lock enforced via !important on nav. Modification corrupts the system.</td></tr>
-        <tr><td>5</td><td>Load chassis.css first on every page.</td><td>It establishes the reset and variables that all other modules depend on.</td></tr>
-        <tr><td>6</td><td>body.content-page required for destination engine styles to apply.</td><td>Scopes destination styles to prevent bleed onto non-content pages.</td></tr>
-        <tr><td>7</td><td>figure { margin: 0; padding: 0; } — do not override.</td><td>Prevents the "stone gap" and "huge margin" browser rendering bugs.</td></tr>
-        <tr><td>8</td><td>The text rail is 960px. Do not widen it.</td><td>~96 characters per line maximum is the editorial standard.</td></tr>
-        <tr><td>9</td><td>Gallery image transitions: none.</td><td>Zoom-in cursor signals interactivity. Animation on hover is visual noise.</td></tr>
-        <tr><td>10</td><td>Lightbox and projector share #0a254a background.</td><td>Visual parity between image and video full-screen environments.</td></tr>
-      </table>
+  <div class="paper-sheet">
+    <div class="text-rail">
+      <h1>title</h1>
+      <div class="orange-rule"></div>
+      <h2>subtitle</h2>
+      <p>body copy...</p>
+    </div>
+  </div>
 
-      <div class="alert alert-rule" style="margin-top: 32px">
-        <strong>Known issue to resolve:</strong> Brand orange has two values — <code>#ff8c00</code> in chassis and <code>#ff6600</code> in destination and theatre. Consolidate to <code>#ff6600</code> across all modules in next major version.
-      </div>
-    </section>
-
-            </article>
-        </div>
-    </main>
-
-    <footer id="main-footer"></footer>
-    <script src="../loader.js"></script>
+  <footer id="main-footer">...</footer>
 
 </body>
 </html>
+```
+
+### inline video in story
+
+```html
+<div class="story-inline-video">
+  <div class="theatre-card" data-video-id="YOUTUBE_ID">
+    <div class="theatre-thumb">
+      <img src="thumbnail.jpg" alt="video title">
+    </div>
+    <div class="theatre-caption">
+      <p class="theatre-desc">video description</p>
+    </div>
+  </div>
+</div>
+```
+
+### portrait gallery with lightbox
+
+```html
+<div class="gallery-portrait-4">
+  <div class="gallery-item">
+    <img src="portrait-1.jpg" alt="..." data-full="portrait-1-full.jpg">
+  </div>
+  <!-- repeat for each image -->
+</div>
+```
+
+### full-bleed gallery breakout
+
+```html
+<div class="gallery-full-bleed">
+  <div class="gallery-portrait-4">
+    <div class="gallery-item"><img src="..." alt="..."></div>
+    <!-- repeat -->
+  </div>
+</div>
+```
+
+### people biog page
+
+```html
+<body class="content-page">
+
+  <header id="main-nav"></header>
+
+  <div class="paper-sheet">
+    <article class="text-rail">
+      <header>
+        <h1>People</h1>
+        <div class="orange-rule"></div>
+        <h2>Thinkamigos</h2>
+      </header>
+
+      <h3 class="person-name">Full Name</h3>
+
+      <div class="biog-two-col">
+        <div class="biog-portrait">
+          <img src="assets/img/portrait.jpg" alt="Full Name">
+          <p class="biog-contact-label">Contact</p>
+          <a href="mailto:email@domain.com" class="biog-contact-link">email@domain.com</a>
+        </div>
+        <div class="biog-body">
+          <p>Biography text...</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid-3">
+        <figure class="gallery-item">
+          <img src="assets/img/work-1.jpg"
+               data-full="assets/img/work-1-full.jpg"
+               data-gallery="biog-gallery"
+               alt="Work sample 1">
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/img/work-2.jpg"
+               data-full="assets/img/work-2-full.jpg"
+               data-gallery="biog-gallery"
+               alt="Work sample 2">
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/img/work-3.jpg"
+               data-full="assets/img/work-3-full.jpg"
+               data-gallery="biog-gallery"
+               alt="Work sample 3">
+        </figure>
+      </div>
+    </article>
+
+    <hr style="border: 0; border-top: 1px solid #ededed; margin: 0; width: 100%;">
+
+    <article class="text-rail">
+      <section class="links-section" style="padding: 40px 0 10px 0;">
+        <h2 style="color: var(--brand-blue); font-size: 24px; font-weight: 600; margin-bottom: 20px; margin-top: 0;">Links</h2>
+        <ul>
+          <li><a href="#" target="_blank">Linked item</a></li>
+        </ul>
+      </section>
+    </article>
+  </div>
+
+  <footer id="main-footer"></footer>
+  <script src="loader.js"></script>
+
+</body>
+```
+
+**notes:**
+- no panoramic hero on biog pages — paper sheet sits directly below nav.
+- `gallery.css` required — biog work gallery uses `.gallery-grid-3` with lightbox.
+- `data-gallery="biog-gallery"` groups biog images as a discrete lightbox set.
+- links section pattern is identical to story template.
+
+---
+
+## absolute rules
+
+these rules are non-negotiable. they define the framework.
+
+| # | rule | reason |
+|---|------|--------|
+| 1 | poppins only. no serif typefaces. | bauhaus principle — geometric purity. |
+| 2 | no uppercase text in ui, nav or body copy. | lowercase is a deliberate design decision. |
+| 3 | hex-only colour values. hex-8 for transparency. | consistency across modules and browsers. |
+| 4 | `--brand-blue: #0054dc` is locked. do not alter. | saturation lock enforced with !important. |
+| 5 | load chassis.css first on every page. | establishes reset and variables all modules depend on. |
+| 6 | `body.content-page` required for destination engine. | scopes styles, prevents bleed. |
+| 7 | `figure { margin: 0; padding: 0; }` — do not override. | prevents stone gap and huge margin browser bugs. |
+| 8 | text rail is 960px. do not widen. | ~96 chars per line editorial standard. |
+| 9 | gallery image transitions: none. | zoom-in cursor signals interactivity. animation is noise. |
+| 10 | lightbox and projector share `#0a254a` background. | visual parity across image and video full-screen environments. |
+
+### known issues — next version
+
+- resolve brand orange to single value: `#ff6600` across all modules (chassis currently uses `#ff8c00`)
+
+---
+
+*thinkamigo web framework — brand & technical specification*
+*version 1.1 — april 2026*
+*maintained by paul fillingham*
+*github: dreamtargets-studio/dreamtargets*
