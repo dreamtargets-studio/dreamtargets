@@ -92,7 +92,6 @@ body.content-page {
     font-weight: 600;
     color: var(--brand-blue);
     margin: 60px 0 8px 0;
-
 }
 
 .text-rail p {
@@ -337,17 +336,17 @@ blockquote + p {
     .contact-form-refined { padding: 0; }
     .contact-form-refined input,
     .contact-form-refined textarea {
-        width: 100%; /* Resets to fluid width for mobile gutters */
+        width: 100%;
     }
 }
 
 /* Dedicated Links Block - No Paper Sheet reliance */
 .links-footer-block {
     width: 960px;
-    margin: 0 auto;        /* Centers the block */
-    padding: 40px 40px 0 40px; /* Aligns text with the story above */
+    margin: 0 auto;
+    padding: 40px 40px 0 40px;
     box-sizing: border-box;
-    background-color: #FFFFFF; /* Matches the paper sheet */
+    background-color: #ffffff;
 }
 
 .links-footer-block h2 {
@@ -363,17 +362,12 @@ blockquote + p {
 }
 
 .links-footer-block p:last-child {
-    margin-bottom: 20px; /* Final breathing room before the footer */
+    margin-bottom: 20px;
 }
 
-/* ── people biog page ── */
-
-.person-name {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--charcoal);
-    margin: 4px 0 32px 0;
-}
+/* ============================================================
+   13. PEOPLE BIOG PAGE
+   ============================================================ */
 
 .biog-two-col {
     display: grid;
@@ -400,7 +394,59 @@ blockquote + p {
     font-size: 14px;
     font-weight: 300;
     color: var(--brand-blue);
+    text-decoration: none;
 }
+
+.biog-contact-link:hover {
+    color: var(--brand-orange);
+}
+
+/* align first paragraph flush with top of portrait */
+.biog-body {
+    padding-top: 0;
+}
+
+.biog-body p:first-child {
+    margin-top: 0;
+}
+
+/* ── collaborator gallery cards ── */
+
+.biog-collab-card {
+    display: block;
+    text-decoration: none;
+    flex: 0 0 calc(33.333% - 14px);
+    outline: 1px solid #dddddd;
+    outline-offset: -1px;
+}
+
+.biog-collab-card figure {
+    margin: 0;
+}
+
+.biog-collab-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.biog-collab-caption {
+    display: block;
+    background-color: #f9f8f4;
+    font-size: 14px;
+    font-weight: 300;
+    color: #555555;
+    padding: 10px 12px;
+}
+
+.biog-collab-card:hover .biog-collab-caption {
+    color: var(--brand-orange);
+}
+
+/* ── responsive ── */
 
 @media (max-width: 768px) {
     .biog-two-col {
@@ -408,5 +454,14 @@ blockquote + p {
     }
     .biog-portrait img {
         max-width: 260px;
+    }
+    .biog-collab-card {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .biog-collab-card {
+        flex: 0 0 100%;
     }
 }
