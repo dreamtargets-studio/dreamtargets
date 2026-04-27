@@ -369,18 +369,25 @@ blockquote + p {
    13. PEOPLE BIOG PAGE
    ============================================================ */
 
-.biog-two-col {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
+/* portrait column — sits in gallery-grid-3 so width is identical
+   to the collaborator cards below. biog-intro-row overrides
+   the standard gallery margin. */
+
+.biog-intro-row {
+    margin-bottom: 0;
     align-items: start;
-    margin-bottom: 40px;
+}
+
+.biog-portrait {
+    flex: 0 0 calc(33.333% - 14px);
 }
 
 .biog-portrait img {
     width: 100%;
+    display: block;
     outline: 1px solid #dddddd;
     outline-offset: -1px;
+    cursor: default;
 }
 
 .biog-contact-label {
@@ -401,8 +408,9 @@ blockquote + p {
     color: var(--brand-orange);
 }
 
-/* align first paragraph flush with top of portrait */
+/* body copy spans the remaining two columns */
 .biog-body {
+    flex: 0 0 calc(66.666% - 7px);
     padding-top: 0;
 }
 
@@ -449,14 +457,13 @@ blockquote + p {
 /* ── responsive ── */
 
 @media (max-width: 768px) {
-    .biog-two-col {
-        grid-template-columns: 1fr;
+    .biog-portrait,
+    .biog-body,
+    .biog-collab-card {
+        flex: 0 0 100%;
     }
     .biog-portrait img {
         max-width: 260px;
-    }
-    .biog-collab-card {
-        flex: 0 0 calc(50% - 10px);
     }
 }
 
