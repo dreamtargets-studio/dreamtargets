@@ -418,17 +418,22 @@ p.breadcrumb {
 
 p.breadcrumb a {
     color: var(--brand-blue);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: #bbbbbb;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
 }
 
 p.breadcrumb a:hover {
     color: var(--brand-orange);
+    text-decoration-color: var(--brand-orange);
+    text-decoration-thickness: 3px;
 }
 
-.breadcrumb-spacer {
-    margin: 0 0 24px 0;
-    height: 21px; /* matches 14px font-size + line-height of p.breadcrumb */
-}
+
+
+
 
 
 /* ============================================================
