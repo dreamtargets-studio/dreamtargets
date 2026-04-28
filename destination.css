@@ -403,7 +403,49 @@ blockquote + p {
 }
 
 /* ============================================================
-   14. PEOPLE BIOG PAGE
+   14. BREADCRUMB
+   Use on second-level pages and deeper with no cinematic hero.
+   Do not use on top-level pages (Consulting, Storytelling etc)
+   that use the panoramic hero image.
+   ============================================================ */
+
+.breadcrumb {
+    margin: 0 0 24px 0;
+    padding: 0;
+}
+
+.breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.breadcrumb li {
+    font-size: 14px;
+    font-weight: 300;
+    color: #666666;
+}
+
+.breadcrumb li + li::before {
+    content: "›";
+    margin-right: 4px;
+    color: #999999;
+}
+
+.breadcrumb li a {
+    color: var(--brand-blue);
+    text-decoration: none;
+}
+
+.breadcrumb li a:hover {
+    color: var(--brand-orange);
+}
+
+/* ============================================================
+   15. PEOPLE BIOG PAGE
    ============================================================ */
 
 .biog-intro-row {
