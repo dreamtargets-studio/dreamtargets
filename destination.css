@@ -402,7 +402,7 @@ blockquote + p {
     color: var(--brand-orange);
 }
 
-/* ============================================================
+//* ============================================================
    14. BREADCRUMB
    Use on second-level pages and deeper with no cinematic hero.
    Do not use on top-level pages (Consulting, Storytelling etc)
@@ -411,37 +411,17 @@ blockquote + p {
 
 .breadcrumb {
     margin: 0 0 24px 0;
-    padding: 0;
-}
-
-.breadcrumb ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.breadcrumb li {
     font-size: 16px;
     font-weight: 300;
     color: #666666;
 }
 
-.breadcrumb li + li::before {
-    content: ">";
-    margin-right: 4px;
-    color: #999999;
-    font-size: 20px;
-}
-
-.breadcrumb li a {
+.breadcrumb a {
     color: var(--brand-blue);
     text-decoration: none;
 }
 
-.breadcrumb li a:hover {
+.breadcrumb a:hover {
     color: var(--brand-orange);
 }
 
