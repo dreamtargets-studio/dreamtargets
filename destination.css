@@ -425,6 +425,12 @@ p.breadcrumb a:hover {
     color: var(--brand-orange);
 }
 
+.breadcrumb-spacer {
+    margin: 0 0 24px 0;
+    height: 21px; /* matches 14px font-size + line-height of p.breadcrumb */
+}
+
+
 /* ============================================================
    15. PEOPLE BIOG PAGE
    ============================================================ */
