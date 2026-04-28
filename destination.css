@@ -424,15 +424,16 @@ blockquote + p {
 }
 
 .breadcrumb li {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     color: #666666;
 }
 
 .breadcrumb li + li::before {
-    content: "›";
+    content: ">";
     margin-right: 4px;
     color: #999999;
+    font-size: 20px;
 }
 
 .breadcrumb li a {
