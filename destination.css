@@ -366,12 +366,45 @@ blockquote + p {
 }
 
 /* ============================================================
-   13. PEOPLE BIOG PAGE
+   13. LINKS SECTION
    ============================================================ */
 
-/* portrait column — sits in gallery-grid-3 so width is identical
-   to the collaborator cards below. biog-intro-row overrides
-   the standard gallery margin. */
+.links-section {
+    padding: 40px 0 10px 0;
+}
+
+.links-section h2 {
+    color: var(--brand-blue);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.links-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-section ul li {
+    line-height: 2.2;
+}
+
+.links-section ul li a {
+    color: var(--brand-blue);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.links-section ul li a:hover {
+    color: var(--brand-orange);
+}
+
+/* ============================================================
+   14. PEOPLE BIOG PAGE
+   ============================================================ */
 
 .biog-intro-row {
     margin-bottom: 0;
@@ -408,7 +441,6 @@ blockquote + p {
     color: var(--brand-orange);
 }
 
-/* body copy spans the remaining two columns */
 .biog-body {
     flex: 0 0 calc(66.666% - 7px);
     padding-top: 0;
@@ -463,7 +495,7 @@ blockquote + p {
         flex: 0 0 100%;
     }
     .biog-portrait img {
-        max-width: 260px;
+        max-width: 100%;
     }
 }
 
