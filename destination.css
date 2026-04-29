@@ -64,6 +64,25 @@ body.content-page {
     padding: 20px 0 80px 0;  
 }
 
+
+.text-rail p a {
+    color: var(--brand-blue);
+    text-decoration: underline;
+    text-decoration-color: #bbbbbb;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+}
+
+.text-rail p a:hover {
+    color: var(--brand-orange);
+    text-decoration-color: var(--brand-orange);
+    text-decoration-thickness: 3px;
+}
+
+
+
+
 /* 6. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
     font-size: 48px;         
