@@ -246,14 +246,14 @@ a.theatre-card,
 
 /* --- 8. Breadcrumb --- */
 
-p.breadcrumb-dark {
+p.breadcrumb-white {
     margin: 20px 0 24px 0;
     font-size: 14px;
     font-weight: 300;
     color: #bbbbbb;
 }
 
-p.breadcrumb-dark a {
+p.breadcrumb-white a {
     color: #ffffff;
     text-decoration: underline;
     text-decoration-color: #ffffff40;
@@ -262,7 +262,7 @@ p.breadcrumb-dark a {
     transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
 }
 
-p.breadcrumb-dark a:hover {
+p.breadcrumb-white a:hover {
     color: var(--brand-orange);
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
