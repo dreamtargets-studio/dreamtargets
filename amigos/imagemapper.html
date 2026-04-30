@@ -1311,12 +1311,14 @@
   }
 
   function updateCoordDisplay(hs) {
+    const cxPct = (hs.xPct + hs.wPct / 2).toFixed(2);
+    const cyPct = (hs.yPct + hs.hPct / 2).toFixed(2);
+    const rPct  = (Math.min(hs.wPct, hs.hPct) / 2).toFixed(2);
     coordDisplay.innerHTML =
       '<span class="coord-key">id</span>   ' + hs.id + '<br>' +
-      '<span class="coord-key">x</span>    ' + hs.xPct.toFixed(2) + '%<br>' +
-      '<span class="coord-key">y</span>    ' + hs.yPct.toFixed(2) + '%<br>' +
-      '<span class="coord-key">w</span>    ' + hs.wPct.toFixed(2) + '%<br>' +
-      '<span class="coord-key">h</span>    ' + hs.hPct.toFixed(2) + '%';
+      '<span class="coord-key">cx</span>   ' + cxPct + '%<br>' +
+      '<span class="coord-key">cy</span>   ' + cyPct + '%<br>' +
+      '<span class="coord-key">r</span>    ' + rPct + '%';
   }
 
   // ── HOTSPOT LIST ──
@@ -1411,25 +1413,30 @@
       return;
     }
 
+    // For each hotspot, derive circle centre and radius from the marquee rectangle
     const areas = hs.map(h => {
+      const cxPct = (h.xPct + h.wPct / 2).toFixed(3);
+      const cyPct = (h.yPct + h.hPct / 2).toFixed(3);
+      const rPct  = (Math.min(h.wPct, h.hPct) / 2).toFixed(3);
       return `  <area
     id="${h.id}"
-    shape="rect"
-    data-x="${h.xPct.toFixed(3)}"
-    data-y="${h.yPct.toFixed(3)}"
-    data-w="${h.wPct.toFixed(3)}"
-    data-h="${h.hPct.toFixed(3)}"
+    shape="circle"
+    data-cx="${cxPct}"
+    data-cy="${cyPct}"
+    data-r="${rPct}"
     href="#"
     alt="${h.id}"
     title="${h.id}">`;
     }).join('\n');
 
     const markers = hs.filter(h => h.showMarker).map(h => {
+      const cxPct = (h.xPct + h.wPct / 2).toFixed(3);
+      const cyPct = (h.yPct + h.hPct / 2).toFixed(3);
       return `<img
   src="assets/img/hotspot-marker.png"
   class="hotspot-marker"
-  data-x="${h.xPct.toFixed(3)}"
-  data-y="${h.yPct.toFixed(3)}"
+  data-cx="${cxPct}"
+  data-cy="${cyPct}"
   alt="marker"
   aria-hidden="true">`;
     }).join('\n');
@@ -1463,6 +1470,7 @@ ${areas}
 }
 .imagemap-overlay {
   position: absolute;
+  border-radius: 50%;
   background: rgba(0,84,220,0.12);
   border: 1.5px solid rgba(0,84,220,0.5);
   box-sizing: border-box;
@@ -1470,6 +1478,7 @@ ${areas}
   transition: background 0.15s;
   text-decoration: none;
   display: block;
+  transform: translate(-50%, -50%);
 }
 .imagemap-overlay:hover {
   background: rgba(0,84,220,0.25);
@@ -1483,10 +1492,11 @@ ${areas}
   z-index: 10;
   opacity: 0.85;
   transition: opacity 0.2s, transform 0.2s;
+  transform: translate(-50%, -50%);
 }
 .hotspot-marker:hover {
   opacity: 1;
-  transform: scale(1.15);
+  transform: translate(-50%, -50%) scale(1.15);
 }`;
 
     generatedBlocks.js =
@@ -1504,40 +1514,38 @@ ${areas}
 
     var areas = map.querySelectorAll('area');
     areas.forEach(function (area) {
-      var xPct = parseFloat(area.getAttribute('data-x'));
-      var yPct = parseFloat(area.getAttribute('data-y'));
-      var wPct = parseFloat(area.getAttribute('data-w'));
-      var hPct = parseFloat(area.getAttribute('data-h'));
-      var href = area.getAttribute('href');
-      var id   = area.getAttribute('id');
+      var cxPct = parseFloat(area.getAttribute('data-cx'));
+      var cyPct = parseFloat(area.getAttribute('data-cy'));
+      var rPct  = parseFloat(area.getAttribute('data-r'));
+      var href  = area.getAttribute('href');
+      var id    = area.getAttribute('id');
 
-      var px = Math.round(xPct / 100 * w);
-      var py = Math.round(yPct / 100 * h);
-      var pw = Math.round(wPct / 100 * w);
-      var ph = Math.round(hPct / 100 * h);
+      var cx = Math.round(cxPct / 100 * w);
+      var cy = Math.round(cyPct / 100 * h);
+      var r  = Math.round(rPct  / 100 * w);
 
-      area.setAttribute('coords', px + ',' + py + ',' + (px + pw) + ',' + (py + ph));
+      // Update area coords: cx,cy,radius in pixels
+      area.setAttribute('coords', cx + ',' + cy + ',' + r);
 
+      // Overlay div — centred via transform: translate(-50%,-50%)
       var a = document.createElement('a');
       a.className = 'imagemap-overlay';
       a.setAttribute('href', href);
       a.setAttribute('aria-label', id);
-      a.style.left   = px + 'px';
-      a.style.top    = py + 'px';
-      a.style.width  = pw + 'px';
-      a.style.height = ph + 'px';
+      a.style.left   = cx + 'px';
+      a.style.top    = cy + 'px';
+      a.style.width  = (r * 2) + 'px';
+      a.style.height = (r * 2) + 'px';
       container.appendChild(a);
     });
 
-    // Position marker images by their data-x / data-y percentage attributes
+    // Position marker images — centred over circle centre
     var markers = container.querySelectorAll('.hotspot-marker');
     markers.forEach(function (marker) {
-      var xPct = parseFloat(marker.getAttribute('data-x'));
-      var yPct = parseFloat(marker.getAttribute('data-y'));
-      var px = Math.round(xPct / 100 * w);
-      var py = Math.round(yPct / 100 * h);
-      marker.style.left = px + 'px';
-      marker.style.top  = py + 'px';
+      var cxPct = parseFloat(marker.getAttribute('data-cx'));
+      var cyPct = parseFloat(marker.getAttribute('data-cy'));
+      marker.style.left = Math.round(cxPct / 100 * w) + 'px';
+      marker.style.top  = Math.round(cyPct / 100 * h) + 'px';
     });
   }
 
