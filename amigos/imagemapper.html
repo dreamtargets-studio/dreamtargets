@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagemapper studio | Thinkamigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand-blue: #0054dc;
+      --brand-orange: #ff6600;
+      --charcoal: #191919;
+      --stone-bg: #f5f5ef;
+      --footer-bg: #0a254a;
+      --white: #ffffff;
+      --rule: #dddddd;
+      --text-body: #333333;
+      --text-muted: #666666;
+      --panel-bg: #f5f5ef;
+      --panel-border: #dddddd;
+      --hotspot-fill: rgba(255,255,255,0.45);
+      --hotspot-stroke: #0054dc;
+      --hotspot-active: rgba(0,84,220,0.18);
+    }
+
+    body {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-body);
+      background: var(--stone-bg);
+      min-height: 100vh;
+    }
+
+    /* ── NAV STUB ── */
+    .studio-header {
+      background: var(--brand-blue);
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .studio-header-brand {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .studio-header-title {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── OUTER SHELL ── */
+    .studio-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    .studio-heading {
+      margin-bottom: 6px;
+    }
+    .studio-heading h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--brand-blue);
+      line-height: 1.1;
+    }
+    .orange-rule {
+      width: 250px;
+      height: 1px;
+      background: var(--brand-orange);
+      margin: 10px 0 6px;
+    }
+    .studio-heading p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 20px;
+      margin-top: 20px;
+      align-items: start;
+    }
+
+    /* ── CANVAS AREA ── */
+    .canvas-area {
+      background: var(--charcoal);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .canvas-drop-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 60px 40px;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+    }
+    .canvas-drop-zone:hover .drop-icon { border-color: var(--brand-orange); }
+    .canvas-drop-zone:hover .drop-text { color: var(--brand-orange); }
+
+    .drop-icon {
+      width: 72px;
+      height: 72px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .drop-icon svg { width: 32px; height: 32px; fill: none; stroke: rgba(255,255,255,0.5); stroke-width: 1.5; }
+    .drop-text {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      transition: color 0.2s;
+    }
+    .drop-subtext {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+
+    #file-input { display: none; }
+
+    /* ── IMAGE STAGE ── */
+    .image-stage {
+      position: relative;
+      display: none;
+      line-height: 0;
+      user-select: none;
+    }
+    .image-stage.active { display: block; }
+
+    #stage-image {
+      display: block;
+      max-width: 100%;
+      max-height: 72vh;
+      width: auto;
+      height: auto;
+    }
+
+    /* ── SVG OVERLAY ── */
+    #map-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    #map-overlay.mapping-mode { pointer-events: all; cursor: crosshair; }
+
+    /* ── MARQUEE ── */
+    .marquee-group { cursor: move; }
+    .marquee-rect {
+      fill: var(--hotspot-fill);
+      stroke: var(--hotspot-stroke);
+      stroke-width: 1.5;
+      stroke-dasharray: 6 3;
+    }
+    .marquee-rect.active-hotspot {
+      fill: var(--hotspot-active);
+      stroke: var(--brand-orange);
+      stroke-dasharray: none;
+    }
+    .marquee-label {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      fill: var(--brand-blue);
+      pointer-events: none;
+    }
+    .marquee-label.active-label { fill: var(--brand-orange); }
+
+    .handle {
+      fill: var(--white);
+      stroke: var(--brand-blue);
+      stroke-width: 1.5;
+      cursor: nwse-resize;
+    }
+    .handle.tl, .handle.br { cursor: nwse-resize; }
+    .handle.tr, .handle.bl { cursor: nesw-resize; }
+    .handle-group { cursor: nwse-resize; }
+
+    /* ── PANEL ── */
+    .studio-panel {
+      background: var(--white);
+      border: 1px solid var(--panel-border);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .panel-section {
+      padding: 18px 18px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .panel-section:last-child { border-bottom: none; }
+    .panel-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 9px 14px;
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 0;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-align: center;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+    }
+    .btn + .btn { margin-top: 8px; }
+    .btn-primary {
+      background: var(--brand-blue);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #003faa; }
+    .btn-primary:disabled { background: #aaa; cursor: default; }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--brand-blue);
+      border-color: var(--brand-blue);
+    }
+    .btn-secondary:hover { background: #eef3fd; }
+    .btn-secondary:disabled { color: #aaa; border-color: #aaa; cursor: default; }
+
+    .btn-accent {
+      background: var(--brand-orange);
+      color: var(--white);
+    }
+    .btn-accent:hover { background: #d95500; }
+    .btn-accent:disabled { background: #ccc; cursor: default; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: var(--panel-border);
+    }
+    .btn-ghost:hover { background: var(--stone-bg); color: var(--text-body); }
+
+    .btn-danger {
+      background: transparent;
+      color: #cc2200;
+      border-color: #cc2200;
+    }
+    .btn-danger:hover { background: #fff0ee; }
+    .btn-danger:disabled { color: #aaa; border-color: #aaa; cursor: default; }
+
+    /* ── HOTSPOT LIST ── */
+    .hotspot-list {
+      list-style: none;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .hotspot-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.12s;
+      border: 1px solid transparent;
+    }
+    .hotspot-item:hover { background: var(--stone-bg); }
+    .hotspot-item.active {
+      background: #eef3fd;
+      border-color: var(--brand-blue);
+    }
+    .hotspot-item-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      flex-shrink: 0;
+    }
+    .hotspot-item.active .hotspot-item-dot { background: var(--brand-orange); }
+    .hotspot-item-name {
+      font-size: 13px;
+      font-weight: 400;
+      flex: 1;
+      color: var(--text-body);
+    }
+    .hotspot-item-coords {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+    }
+    .hotspot-delete {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1;
+      padding: 2px 4px;
+      font-family: inherit;
+      transition: color 0.15s;
+    }
+    .hotspot-delete:hover { color: #cc2200; }
+
+    .empty-list {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    /* ── COORD DISPLAY ── */
+    .coord-display {
+      background: var(--stone-bg);
+      border: 1px solid var(--panel-border);
+      padding: 10px 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      min-height: 64px;
+    }
+    .coord-key { color: var(--brand-blue); font-weight: 600; }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--charcoal);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      flex-shrink: 0;
+    }
+    .status-dot.mapping { background: var(--brand-orange); }
+    .status-dot.ready { background: #55cc66; }
+
+    /* ── CODE OUTPUT ── */
+    .code-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,37,74,0.88);
+      z-index: 9999;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+    .code-modal-backdrop.open { display: flex; }
+    .code-modal {
+      background: var(--white);
+      width: 100%;
+      max-width: 860px;
+      padding: 0;
+    }
+    .code-modal-header {
+      background: var(--brand-blue);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .code-modal-header h2 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .code-modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.7);
+      font-size: 20px;
+      line-height: 1;
+      font-family: inherit;
+      transition: color 0.15s;
+    }
+    .code-modal-close:hover { color: var(--white); }
+
+    .code-modal-body { padding: 24px; }
+    .code-modal-note {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+      padding: 12px 14px;
+      background: var(--stone-bg);
+      border-left: 3px solid var(--brand-orange);
+    }
+    .code-modal-note strong { font-weight: 500; color: var(--text-body); }
+
+    .code-block {
+      background: #1a1a2e;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #c8d6f0;
+      white-space: pre;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .code-block .c-tag { color: #7ec8e3; }
+    .code-block .c-attr { color: #a8d8a8; }
+    .code-block .c-val { color: #ffd27f; }
+    .code-block .c-comment { color: #6a6a8a; font-style: italic; }
+
+    .code-modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .code-modal-actions .btn {
+      width: auto;
+      padding: 9px 24px;
+    }
+
+    /* ── MAPPING MODE INDICATOR ── */
+    .mapping-indicator {
+      display: none;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand-orange);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .mapping-indicator.visible { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .studio-layout { grid-template-columns: 1fr; }
+      .studio-panel { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .studio-shell { padding: 16px 12px 40px; }
+      .studio-heading h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="studio-header">
+  <a href="../" class="studio-header-brand">Thinkamigo</a>
+  <span class="studio-header-title">Imagemapper studio</span>
+</header>
+
+<div class="studio-shell">
+  <div class="studio-heading">
+    <h1>Imagemapper studio</h1>
+    <div class="orange-rule"></div>
+    <p>Define hotspot regions on any image. Generate responsive imagemap embedding code.</p>
+  </div>
+
+  <div class="studio-layout">
+
+    <!-- ── LEFT: CANVAS ── -->
+    <div>
+      <div class="canvas-area" id="canvas-area">
+
+        <!-- Drop zone (shown when no image loaded) -->
+        <label class="canvas-drop-zone" id="drop-zone" for="file-input">
+          <div class="drop-icon">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="5" width="26" height="22" rx="1"/>
+              <circle cx="10.5" cy="11.5" r="2"/>
+              <polyline points="3,24 11,16 16,20 21,14 29,22"/>
+              <line x1="16" y1="2" x2="16" y2="14"/>
+              <polyline points="12,6 16,2 20,6"/>
+            </svg>
+          </div>
+          <span class="drop-text">Click to load image<br><small>or drag and drop here</small></span>
+          <span class="drop-subtext">JPEG · PNG · GIF · WebP · SVG</span>
+        </label>
+
+        <input type="file" id="file-input" accept="image/*">
+
+        <!-- Image stage (shown once image loaded) -->
+        <div class="image-stage" id="image-stage">
+          <div class="mapping-indicator" id="mapping-indicator">Mapping mode — click to place marquee</div>
+          <img id="stage-image" alt="Loaded image">
+          <svg id="map-overlay" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+
+      </div>
+
+      <!-- Status bar -->
+      <div class="status-bar" id="status-bar">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">No image loaded. Use the panel to begin.</span>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: PANEL ── -->
+    <div class="studio-panel" id="studio-panel">
+
+      <div class="panel-section">
+        <span class="panel-label">Image</span>
+        <button class="btn btn-primary" id="btn-load-image">Load image</button>
+        <button class="btn btn-ghost" id="btn-close-session" disabled>Close session</button>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Mapping</span>
+        <button class="btn btn-secondary" id="btn-add-hotspot" disabled>Add hotspot</button>
+        <button class="btn btn-accent" id="btn-place-hotspot" disabled style="display:none">Place hotspot here</button>
+        <button class="btn btn-ghost" id="btn-cancel-mapping" disabled style="display:none">Cancel</button>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Active hotspot</span>
+        <div class="coord-display" id="coord-display">
+          <span style="color:var(--text-muted); font-style:italic; font-family:'Poppins',sans-serif; font-size:12px;">No hotspot selected</span>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Hotspots</span>
+        <ul class="hotspot-list" id="hotspot-list">
+          <li class="empty-list" id="empty-list-msg">No hotspots defined yet.</li>
+        </ul>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Selected hotspot</span>
+        <button class="btn btn-danger" id="btn-delete-hotspot" disabled>Delete selected</button>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Output</span>
+        <button class="btn btn-primary" id="btn-generate" disabled>Generate embedding code</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── CODE OUTPUT MODAL ── -->
+<div class="code-modal-backdrop" id="code-modal">
+  <div class="code-modal">
+    <div class="code-modal-header">
+      <h2>Embedding code</h2>
+      <button class="code-modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="code-modal-body">
+      <p class="code-modal-note">
+        <strong>Replace the # placeholder URLs</strong> with your destination page paths. The imagemap uses percentage-based coordinates for responsive scaling across viewport sizes including mobile. The wrapping container preserves aspect ratio automatically.
+      </p>
+      <div class="code-block" id="code-output"></div>
+      <div class="code-modal-actions">
+        <button class="btn btn-primary" id="btn-copy-code">Copy to clipboard</button>
+        <button class="btn btn-ghost" id="btn-close-modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  // ── STATE ──
+  const state = {
+    imageLoaded: false,
+    imageNaturalW: 0,
+    imageNaturalH: 0,
+    imageFile: null,
+    hotspots: [],
+    nextId: 1,
+    activeHotspot: null,
+    mappingMode: false,
+    dragState: null,
+    pendingMarquee: null
+  };
+
+  // ── DOM REFS ──
+  const dropZone       = document.getElementById('drop-zone');
+  const fileInput      = document.getElementById('file-input');
+  const imageStage     = document.getElementById('image-stage');
+  const stageImage     = document.getElementById('stage-image');
+  const mapOverlay     = document.getElementById('map-overlay');
+  const canvasArea     = document.getElementById('canvas-area');
+  const hotspotList    = document.getElementById('hotspot-list');
+  const emptyListMsg   = document.getElementById('empty-list-msg');
+  const coordDisplay   = document.getElementById('coord-display');
+  const statusDot      = document.getElementById('status-dot');
+  const statusText     = document.getElementById('status-text');
+  const mappingIndicator = document.getElementById('mapping-indicator');
+  const codeModal      = document.getElementById('code-modal');
+  const codeOutput     = document.getElementById('code-output');
+
+  const btnLoadImage   = document.getElementById('btn-load-image');
+  const btnClose       = document.getElementById('btn-close-session');
+  const btnAdd         = document.getElementById('btn-add-hotspot');
+  const btnPlace       = document.getElementById('btn-place-hotspot');
+  const btnCancelMap   = document.getElementById('btn-cancel-mapping');
+  const btnDelete      = document.getElementById('btn-delete-hotspot');
+  const btnGenerate    = document.getElementById('btn-generate');
+  const btnCopy        = document.getElementById('btn-copy-code');
+  const btnCloseModal  = document.getElementById('btn-close-modal');
+  const modalClose     = document.getElementById('modal-close');
+
+  // ── HELPERS ──
+  function padId(n) {
+    return 'hotspot-' + String(n).padStart(2, '0');
+  }
+
+  function setStatus(msg, mode) {
+    statusText.textContent = msg;
+    statusDot.className = 'status-dot' + (mode ? ' ' + mode : '');
+  }
+
+  function stageRect() {
+    return stageImage.getBoundingClientRect();
+  }
+
+  // Percentage coords relative to displayed image
+  function toPct(val, dimension) {
+    return parseFloat((val / dimension * 100).toFixed(3));
+  }
+
+  // ── IMAGE LOAD ──
+  btnLoadImage.addEventListener('click', () => fileInput.click());
+
+  fileInput.addEventListener('change', e => {
+    const f = e.target.files[0];
+    if (f) loadImageFile(f);
+    fileInput.value = '';
+  });
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.background = 'rgba(0,84,220,0.12)'; });
+  dropZone.addEventListener('dragleave', () => { dropZone.style.background = ''; });
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.background = '';
+    const f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) loadImageFile(f);
+  });
+
+  function loadImageFile(file) {
+    const url = URL.createObjectURL(file);
+    stageImage.onload = function () {
+      state.imageNaturalW = this.naturalWidth;
+      state.imageNaturalH = this.naturalHeight;
+      state.imageFile = file;
+      state.imageLoaded = true;
+      dropZone.style.display = 'none';
+      imageStage.classList.add('active');
+      canvasArea.style.background = '#111';
+      enableUI();
+      setStatus('Image loaded: ' + file.name, 'ready');
+    };
+    stageImage.src = url;
+  }
+
+  function enableUI() {
+    btnClose.disabled = false;
+    btnAdd.disabled = false;
+    btnGenerate.disabled = false;
+  }
+
+  // ── CLOSE SESSION ──
+  btnClose.addEventListener('click', () => {
+    if (state.hotspots.length && !confirm('Close session? All hotspots will be cleared.')) return;
+    resetSession();
+  });
+
+  function resetSession() {
+    state.imageLoaded = false;
+    state.hotspots = [];
+    state.nextId = 1;
+    state.activeHotspot = null;
+    state.mappingMode = false;
+    state.pendingMarquee = null;
+    stageImage.src = '';
+    imageStage.classList.remove('active');
+    dropZone.style.display = '';
+    canvasArea.style.background = '';
+    mapOverlay.innerHTML = '';
+    hotspotList.innerHTML = '';
+    hotspotList.appendChild(emptyListMsg);
+    emptyListMsg.style.display = '';
+    coordDisplay.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-family:\'Poppins\',sans-serif; font-size:12px;">No hotspot selected</span>';
+    btnClose.disabled = true;
+    btnAdd.disabled = true;
+    btnAdd.style.display = '';
+    btnPlace.disabled = true;
+    btnPlace.style.display = 'none';
+    btnCancelMap.disabled = true;
+    btnCancelMap.style.display = 'none';
+    btnDelete.disabled = true;
+    btnGenerate.disabled = true;
+    mapOverlay.classList.remove('mapping-mode');
+    mappingIndicator.classList.remove('visible');
+    setStatus('Session closed. Load a new image to begin.', '');
+  }
+
+  // ── ADD HOTSPOT (mapping mode) ──
+  btnAdd.addEventListener('click', enterMappingMode);
+
+  function enterMappingMode() {
+    state.mappingMode = true;
+    mapOverlay.classList.add('mapping-mode');
+    mappingIndicator.classList.add('visible');
+    btnAdd.style.display = 'none';
+    btnPlace.style.display = '';
+    btnPlace.disabled = true;
+    btnCancelMap.style.display = '';
+    btnCancelMap.disabled = false;
+
+    // Draw pending marquee centered
+    const r = stageRect();
+    const cx = r.width / 2;
+    const cy = r.height / 2;
+    const w = Math.min(100, r.width * 0.3);
+    const h = Math.min(100, r.height * 0.3);
+
+    state.pendingMarquee = {
+      x: cx - w / 2,
+      y: cy - h / 2,
+      w: w,
+      h: h
+    };
+
+    renderPendingMarquee();
+    setStatus('Drag the marquee into position. Resize using corner handles. Then click "Place hotspot here".', 'mapping');
+  }
+
+  btnCancelMap.addEventListener('click', () => {
+    cancelMappingMode();
+  });
+
+  function cancelMappingMode() {
+    state.mappingMode = false;
+    state.pendingMarquee = null;
+    mapOverlay.classList.remove('mapping-mode');
+    mappingIndicator.classList.remove('visible');
+    btnAdd.style.display = '';
+    btnAdd.disabled = false;
+    btnPlace.style.display = 'none';
+    btnCancelMap.style.display = 'none';
+    // Remove pending SVG
+    const pending = mapOverlay.querySelector('#pending-group');
+    if (pending) pending.remove();
+    setStatus('Mapping cancelled.', 'ready');
+  }
+
+  // ── PLACE HOTSPOT ──
+  btnPlace.addEventListener('click', () => {
+    if (!state.pendingMarquee) return;
+    const pm = state.pendingMarquee;
+    const r = stageRect();
+    const id = padId(state.nextId++);
+
+    const hs = {
+      id,
+      xPct: toPct(pm.x, r.width),
+      yPct: toPct(pm.y, r.height),
+      wPct: toPct(pm.w, r.width),
+      hPct: toPct(pm.h, r.height)
+    };
+
+    state.hotspots.push(hs);
+    const pending = mapOverlay.querySelector('#pending-group');
+    if (pending) pending.remove();
+    state.pendingMarquee = null;
+
+    renderHotspot(hs);
+    addToList(hs);
+    setActive(id);
+
+    cancelMappingMode();
+    updateListUI();
+    setStatus('Hotspot ' + id + ' placed. Add more or generate embedding code.', 'ready');
+  });
+
+  // ── RENDER HOTSPOT SVG ──
+  function renderHotspot(hs) {
+    const r = stageRect();
+    const x = hs.xPct / 100 * r.width;
+    const y = hs.yPct / 100 * r.height;
+    const w = hs.wPct / 100 * r.width;
+    const h = hs.hPct / 100 * r.height;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('id', 'hs-' + hs.id);
+    g.setAttribute('class', 'marquee-group');
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('class', 'marquee-rect');
+    rect.setAttribute('x', x); rect.setAttribute('y', y);
+    rect.setAttribute('width', w); rect.setAttribute('height', h);
+
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('class', 'marquee-label');
+    label.setAttribute('x', x + 4);
+    label.setAttribute('y', y - 4);
+    label.textContent = hs.id;
+
+    // Handles
+    const handles = createHandles(x, y, w, h);
+    g.appendChild(rect);
+    g.appendChild(label);
+    handles.forEach(hEl => g.appendChild(hEl));
+
+    setupDrag(g, hs);
+    mapOverlay.appendChild(g);
+  }
+
+  function createHandles(x, y, w, h) {
+    const positions = [
+      { cls: 'tl', cx: x,     cy: y     },
+      { cls: 'tr', cx: x + w, cy: y     },
+      { cls: 'bl', cx: x,     cy: y + h },
+      { cls: 'br', cx: x + w, cy: y + h }
+    ];
+    return positions.map(p => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('class', 'handle ' + p.cls);
+      c.setAttribute('cx', p.cx);
+      c.setAttribute('cy', p.cy);
+      c.setAttribute('r', 5);
+      return c;
+    });
+  }
+
+  function updateHotspotSVG(hs) {
+    const g = mapOverlay.querySelector('#hs-' + hs.id);
+    if (!g) return;
+    const r = stageRect();
+    const x = hs.xPct / 100 * r.width;
+    const y = hs.yPct / 100 * r.height;
+    const w = hs.wPct / 100 * r.width;
+    const h = hs.hPct / 100 * r.height;
+
+    const rect = g.querySelector('.marquee-rect');
+    rect.setAttribute('x', x); rect.setAttribute('y', y);
+    rect.setAttribute('width', w); rect.setAttribute('height', h);
+
+    const label = g.querySelector('.marquee-label');
+    label.setAttribute('x', x + 4);
+    label.setAttribute('y', y - 4);
+
+    const handles = g.querySelectorAll('.handle');
+    const pts = [
+      { cx: x, cy: y },
+      { cx: x + w, cy: y },
+      { cx: x, cy: y + h },
+      { cx: x + w, cy: y + h }
+    ];
+    handles.forEach((h, i) => {
+      h.setAttribute('cx', pts[i].cx);
+      h.setAttribute('cy', pts[i].cy);
+    });
+  }
+
+  // ── PENDING MARQUEE RENDER ──
+  function renderPendingMarquee() {
+    let pending = mapOverlay.querySelector('#pending-group');
+    if (pending) pending.remove();
+
+    const pm = state.pendingMarquee;
+    if (!pm) return;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('id', 'pending-group');
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('class', 'marquee-rect');
+    rect.setAttribute('x', pm.x); rect.setAttribute('y', pm.y);
+    rect.setAttribute('width', pm.w); rect.setAttribute('height', pm.h);
+
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('class', 'marquee-label');
+    label.setAttribute('x', pm.x + 4);
+    label.setAttribute('y', pm.y - 4);
+    label.textContent = padId(state.nextId);
+
+    const handles = createHandles(pm.x, pm.y, pm.w, pm.h);
+    g.appendChild(rect);
+    g.appendChild(label);
+    handles.forEach(h => g.appendChild(h));
+
+    setupPendingDrag(g, pm);
+    mapOverlay.appendChild(g);
+
+    btnPlace.disabled = false;
+  }
+
+  function updatePendingMarqueeSVG() {
+    const g = mapOverlay.querySelector('#pending-group');
+    if (!g || !state.pendingMarquee) return;
+    const pm = state.pendingMarquee;
+    const rect = g.querySelector('.marquee-rect');
+    rect.setAttribute('x', pm.x); rect.setAttribute('y', pm.y);
+    rect.setAttribute('width', pm.w); rect.setAttribute('height', pm.h);
+    const label = g.querySelector('.marquee-label');
+    label.setAttribute('x', pm.x + 4);
+    label.setAttribute('y', pm.y - 4);
+    const handles = g.querySelectorAll('.handle');
+    const pts = [
+      { cx: pm.x, cy: pm.y },
+      { cx: pm.x + pm.w, cy: pm.y },
+      { cx: pm.x, cy: pm.y + pm.h },
+      { cx: pm.x + pm.w, cy: pm.y + pm.h }
+    ];
+    handles.forEach((h, i) => {
+      h.setAttribute('cx', pts[i].cx);
+      h.setAttribute('cy', pts[i].cy);
+    });
+  }
+
+  // ── DRAG: PLACED HOTSPOT ──
+  function setupDrag(g, hs) {
+    const rect = g.querySelector('.marquee-rect');
+    const handles = g.querySelectorAll('.handle');
+
+    // Move whole rect
+    rect.addEventListener('mousedown', e => {
+      if (state.mappingMode) return;
+      e.preventDefault();
+      setActive(hs.id);
+      const r = stageRect();
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const origX = hs.xPct / 100 * r.width;
+      const origY = hs.yPct / 100 * r.height;
+
+      function onMove(e) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const nr = stageRect();
+        let nx = origX + dx;
+        let ny = origY + dy;
+        const w = hs.wPct / 100 * nr.width;
+        const h = hs.hPct / 100 * nr.height;
+        nx = Math.max(0, Math.min(nr.width - w, nx));
+        ny = Math.max(0, Math.min(nr.height - h, ny));
+        hs.xPct = toPct(nx, nr.width);
+        hs.yPct = toPct(ny, nr.height);
+        updateHotspotSVG(hs);
+        updateCoordDisplay(hs);
+        updateListCoords(hs);
+      }
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+
+    // Resize handles
+    handles.forEach((handle, i) => {
+      handle.addEventListener('mousedown', e => {
+        if (state.mappingMode) return;
+        e.preventDefault();
+        e.stopPropagation();
+        setActive(hs.id);
+        const r = stageRect();
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const origX = hs.xPct / 100 * r.width;
+        const origY = hs.yPct / 100 * r.height;
+        const origW = hs.wPct / 100 * r.width;
+        const origH = hs.hPct / 100 * r.height;
+
+        function onMove(e) {
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          const nr = stageRect();
+          const MIN = 30;
+
+          if (i === 0) { // tl
+            const nx = Math.min(origX + dx, origX + origW - MIN);
+            const ny = Math.min(origY + dy, origY + origH - MIN);
+            hs.xPct = toPct(Math.max(0, nx), nr.width);
+            hs.yPct = toPct(Math.max(0, ny), nr.height);
+            hs.wPct = toPct(Math.max(MIN, origW - dx), nr.width);
+            hs.hPct = toPct(Math.max(MIN, origH - dy), nr.height);
+          } else if (i === 1) { // tr
+            const ny = Math.min(origY + dy, origY + origH - MIN);
+            hs.yPct = toPct(Math.max(0, ny), nr.height);
+            hs.wPct = toPct(Math.max(MIN, origW + dx), nr.width);
+            hs.hPct = toPct(Math.max(MIN, origH - dy), nr.height);
+          } else if (i === 2) { // bl
+            const nx = Math.min(origX + dx, origX + origW - MIN);
+            hs.xPct = toPct(Math.max(0, nx), nr.width);
+            hs.wPct = toPct(Math.max(MIN, origW - dx), nr.width);
+            hs.hPct = toPct(Math.max(MIN, origH + dy), nr.height);
+          } else { // br
+            hs.wPct = toPct(Math.max(MIN, origW + dx), nr.width);
+            hs.hPct = toPct(Math.max(MIN, origH + dy), nr.height);
+          }
+          updateHotspotSVG(hs);
+          updateCoordDisplay(hs);
+          updateListCoords(hs);
+        }
+        function onUp() {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        }
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    });
+
+    // Click to select
+    g.addEventListener('click', e => {
+      e.stopPropagation();
+      if (state.mappingMode) return;
+      setActive(hs.id);
+    });
+  }
+
+  // ── DRAG: PENDING MARQUEE ──
+  function setupPendingDrag(g, pm) {
+    const rect = g.querySelector('.marquee-rect');
+    const handles = g.querySelectorAll('.handle');
+
+    rect.addEventListener('mousedown', e => {
+      e.preventDefault();
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const origX = pm.x; const origY = pm.y;
+
+      function onMove(e) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const r = stageRect();
+        pm.x = Math.max(0, Math.min(r.width - pm.w, origX + dx));
+        pm.y = Math.max(0, Math.min(r.height - pm.h, origY + dy));
+        updatePendingMarqueeSVG();
+      }
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+
+    handles.forEach((handle, i) => {
+      handle.addEventListener('mousedown', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const startX = e.clientX; const startY = e.clientY;
+        const origX = pm.x; const origY = pm.y;
+        const origW = pm.w; const origH = pm.h;
+        const MIN = 30;
+
+        function onMove(e) {
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          const r = stageRect();
+
+          if (i === 0) {
+            pm.x = Math.max(0, Math.min(origX + dx, origX + origW - MIN));
+            pm.y = Math.max(0, Math.min(origY + dy, origY + origH - MIN));
+            pm.w = Math.max(MIN, origW - dx);
+            pm.h = Math.max(MIN, origH - dy);
+          } else if (i === 1) {
+            pm.y = Math.max(0, Math.min(origY + dy, origY + origH - MIN));
+            pm.w = Math.max(MIN, origW + dx);
+            pm.h = Math.max(MIN, origH - dy);
+          } else if (i === 2) {
+            pm.x = Math.max(0, Math.min(origX + dx, origX + origW - MIN));
+            pm.w = Math.max(MIN, origW - dx);
+            pm.h = Math.max(MIN, origH + dy);
+          } else {
+            pm.w = Math.max(MIN, origW + dx);
+            pm.h = Math.max(MIN, origH + dy);
+          }
+          updatePendingMarqueeSVG();
+        }
+        function onUp() {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        }
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    });
+  }
+
+  // ── ACTIVE HOTSPOT ──
+  function setActive(id) {
+    state.activeHotspot = id;
+
+    // SVG visual state
+    mapOverlay.querySelectorAll('.marquee-rect').forEach(r => r.classList.remove('active-hotspot'));
+    mapOverlay.querySelectorAll('.marquee-label').forEach(l => l.classList.remove('active-label'));
+    const g = mapOverlay.querySelector('#hs-' + id);
+    if (g) {
+      g.querySelector('.marquee-rect').classList.add('active-hotspot');
+      g.querySelector('.marquee-label').classList.add('active-label');
+      mapOverlay.appendChild(g); // bring to front
+    }
+
+    // List
+    document.querySelectorAll('.hotspot-item').forEach(li => li.classList.remove('active'));
+    const li = document.querySelector('[data-id="' + id + '"]');
+    if (li) li.classList.add('active');
+
+    // Coords
+    const hs = state.hotspots.find(h => h.id === id);
+    if (hs) updateCoordDisplay(hs);
+
+    btnDelete.disabled = false;
+  }
+
+  function updateCoordDisplay(hs) {
+    coordDisplay.innerHTML =
+      '<span class="coord-key">id</span>   ' + hs.id + '<br>' +
+      '<span class="coord-key">x</span>    ' + hs.xPct.toFixed(2) + '%<br>' +
+      '<span class="coord-key">y</span>    ' + hs.yPct.toFixed(2) + '%<br>' +
+      '<span class="coord-key">w</span>    ' + hs.wPct.toFixed(2) + '%<br>' +
+      '<span class="coord-key">h</span>    ' + hs.hPct.toFixed(2) + '%';
+  }
+
+  // ── HOTSPOT LIST ──
+  function addToList(hs) {
+    const li = document.createElement('li');
+    li.className = 'hotspot-item';
+    li.setAttribute('data-id', hs.id);
+    li.innerHTML =
+      '<span class="hotspot-item-dot"></span>' +
+      '<span class="hotspot-item-name">' + hs.id + '</span>' +
+      '<span class="hotspot-item-coords" id="coords-' + hs.id + '">' + hs.xPct.toFixed(0) + '%, ' + hs.yPct.toFixed(0) + '%</span>' +
+      '<button class="hotspot-delete" data-id="' + hs.id + '" title="Delete">✕</button>';
+
+    li.addEventListener('click', e => {
+      if (e.target.classList.contains('hotspot-delete')) return;
+      setActive(hs.id);
+    });
+    li.querySelector('.hotspot-delete').addEventListener('click', e => {
+      e.stopPropagation();
+      deleteHotspot(hs.id);
+    });
+
+    hotspotList.appendChild(li);
+    updateListUI();
+  }
+
+  function updateListCoords(hs) {
+    const span = document.getElementById('coords-' + hs.id);
+    if (span) span.textContent = hs.xPct.toFixed(0) + '%, ' + hs.yPct.toFixed(0) + '%';
+  }
+
+  function updateListUI() {
+    const hasItems = state.hotspots.length > 0;
+    emptyListMsg.style.display = hasItems ? 'none' : '';
+  }
+
+  function deleteHotspot(id) {
+    state.hotspots = state.hotspots.filter(h => h.id !== id);
+    const g = mapOverlay.querySelector('#hs-' + id);
+    if (g) g.remove();
+    const li = document.querySelector('[data-id="' + id + '"]');
+    if (li) li.remove();
+    if (state.activeHotspot === id) {
+      state.activeHotspot = null;
+      btnDelete.disabled = true;
+      coordDisplay.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-family:\'Poppins\',sans-serif; font-size:12px;">No hotspot selected</span>';
+    }
+    updateListUI();
+    setStatus('Hotspot ' + id + ' deleted.', 'ready');
+  }
+
+  btnDelete.addEventListener('click', () => {
+    if (state.activeHotspot) deleteHotspot(state.activeHotspot);
+  });
+
+  // ── WINDOW RESIZE: reposition SVG elements ──
+  window.addEventListener('resize', () => {
+    if (!state.imageLoaded) return;
+    state.hotspots.forEach(hs => updateHotspotSVG(hs));
+    if (state.pendingMarquee) {
+      // Recalculate pending from same pct (use width)
+      const r = stageRect();
+      // Leave as-is — coordinates are already stored in px relative to displayed size
+    }
+  });
+
+  // ── GENERATE CODE ──
+  btnGenerate.addEventListener('click', generateCode);
+
+  function generateCode() {
+    const filename = state.imageFile ? state.imageFile.name : 'image.jpg';
+    const hs = state.hotspots;
+    if (!hs.length) {
+      alert('No hotspots defined. Add at least one hotspot before generating code.');
+      return;
+    }
+
+    const areas = hs.map(h => {
+      const x = h.xPct.toFixed(3);
+      const y = h.yPct.toFixed(3);
+      const w = h.wPct.toFixed(3);
+      const hh = h.hPct.toFixed(3);
+      return `    <area
+      id="${h.id}"
+      shape="rect"
+      data-x="${x}" data-y="${y}" data-w="${w}" data-h="${hh}"
+      href="#"
+      alt="${h.id}"
+      title="${h.id}">`;
+    }).join('\n');
+
+    const code = `<!-- Thinkamigo Imagemapper — responsive imagemap
+     Generated: ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}
+     Image: ${filename}
+     Hotspots: ${hs.length}
+     
+     Instructions:
+     1. Replace the href="#" values with your destination URLs.
+     2. Place this block where the image should appear in your page.
+     3. The JS below handles responsive coordinate recalculation.
+     4. The CSS wrapper preserves aspect ratio at any viewport width.
+-->
+
+<style>
+.imagemap-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  line-height: 0;
+}
+.imagemap-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.imagemap-container area {
+  cursor: pointer;
+}
+/* Hotspot overlay divs (created by JS) */
+.imagemap-overlay {
+  position: absolute;
+  background: rgba(0,84,220,0.12);
+  border: 1.5px solid rgba(0,84,220,0.5);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.imagemap-overlay:hover {
+  background: rgba(0,84,220,0.25);
+}
+</style>
+
+<div class="imagemap-container" id="imagemap-container">
+  <img
+    src="${filename}"
+    alt="Interactive image map"
+    usemap="#image-map"
+    id="imagemap-img">
+  <map name="image-map" id="image-map">
+${areas}
+  </map>
+</div>
+
+<script>
+(function () {
+  var container = document.getElementById('imagemap-container');
+  var img       = document.getElementById('imagemap-img');
+  var map       = document.getElementById('image-map');
+
+  function positionOverlays() {
+    var w = img.offsetWidth;
+    var h = img.offsetHeight;
+
+    // Remove old overlays
+    var old = container.querySelectorAll('.imagemap-overlay');
+    old.forEach(function(el){ el.remove(); });
+
+    // Remove old coords on areas (browser uses them but we use overlays)
+    var areas = map.querySelectorAll('area');
+    areas.forEach(function(area) {
+      var xPct = parseFloat(area.getAttribute('data-x'));
+      var yPct = parseFloat(area.getAttribute('data-y'));
+      var wPct = parseFloat(area.getAttribute('data-w'));
+      var hPct = parseFloat(area.getAttribute('data-h'));
+      var href = area.getAttribute('href');
+      var id   = area.getAttribute('id');
+
+      var px = Math.round(xPct / 100 * w);
+      var py = Math.round(yPct / 100 * h);
+      var pw = Math.round(wPct / 100 * w);
+      var ph = Math.round(hPct / 100 * h);
+
+      // Update area coords for accessibility/keyboard nav
+      area.setAttribute('coords', px + ',' + py + ',' + (px+pw) + ',' + (py+ph));
+
+      // Create clickable overlay div
+      var div = document.createElement('a');
+      div.className = 'imagemap-overlay';
+      div.setAttribute('href', href);
+      div.setAttribute('aria-label', id);
+      div.style.left   = px + 'px';
+      div.style.top    = py + 'px';
+      div.style.width  = pw + 'px';
+      div.style.height = ph + 'px';
+      container.appendChild(div);
+    });
+  }
+
+  if (img.complete) {
+    positionOverlays();
+  } else {
+    img.addEventListener('load', positionOverlays);
+  }
+
+  window.addEventListener('resize', positionOverlays);
+})();
+<\/script>`;
+
+    // Syntax highlight
+    const highlighted = code
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/(&lt;[\/!]?[\w]+)/g, '<span class="c-tag">$1</span>')
+      .replace(/([a-z-]+)=/g, '<span class="c-attr">$1</span>=')
+      .replace(/&gt;/g, '<span class="c-tag">&gt;</span>')
+      .replace(/(["'])([^"']*)\1/g, '<span class="c-val">$1$2$1</span>')
+      .replace(/(\/\*[\s\S]*?\*\/|\/\/.+)/g, '<span class="c-comment">$&</span>');
+
+    codeOutput.innerHTML = highlighted;
+    codeModal.classList.add('open');
+  }
+
+  btnCopy.addEventListener('click', () => {
+    const text = codeOutput.textContent || codeOutput.innerText;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => { btnCopy.textContent = 'Copy to clipboard'; }, 2000);
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => { btnCopy.textContent = 'Copy to clipboard'; }, 2000);
+    }
+  });
+
+  btnCloseModal.addEventListener('click', () => codeModal.classList.remove('open'));
+  modalClose.addEventListener('click', () => codeModal.classList.remove('open'));
+  codeModal.addEventListener('click', e => {
+    if (e.target === codeModal) codeModal.classList.remove('open');
+  });
+
+  // ── CLICK OVERLAY TO DESELECT ──
+  mapOverlay.addEventListener('click', e => {
+    if (e.target === mapOverlay && !state.mappingMode) {
+      state.activeHotspot = null;
+      mapOverlay.querySelectorAll('.marquee-rect').forEach(r => r.classList.remove('active-hotspot'));
+      mapOverlay.querySelectorAll('.marquee-label').forEach(l => l.classList.remove('active-label'));
+      document.querySelectorAll('.hotspot-item').forEach(li => li.classList.remove('active'));
+      btnDelete.disabled = true;
+      coordDisplay.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-family:\'Poppins\',sans-serif; font-size:12px;">No hotspot selected</span>';
+    }
+  });
+
+  // ── INITIAL STATE ──
+  setStatus('No image loaded. Click "Load image" or drag a file onto the canvas.', '');
+
+})();
+</script>
+
+</body>
+</html>
