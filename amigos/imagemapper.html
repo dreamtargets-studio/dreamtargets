@@ -460,6 +460,43 @@
       padding: 9px 24px;
     }
 
+    /* ── CODE TABS ── */
+    .code-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--panel-border);
+      margin-bottom: 0;
+    }
+    .code-tab {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border: none;
+      background: var(--stone-bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .code-tab:hover { color: var(--text-body); }
+    .code-tab.active {
+      background: var(--white);
+      color: var(--brand-blue);
+      border-bottom-color: var(--brand-blue);
+    }
+    .code-tab-note {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      background: var(--stone-bg);
+      border-left: 3px solid var(--panel-border);
+      margin-bottom: 0;
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    }
+
     /* ── MAPPING MODE INDICATOR ── */
     .mapping-indicator {
       display: none;
@@ -591,12 +628,20 @@
   <div class="code-modal">
     <div class="code-modal-header">
       <h2>Embedding code</h2>
-      <button class="code-modal-close" id="modal-close">✕</button>
+      <button class="code-modal-close" id="modal-close">&#x2715;</button>
     </div>
     <div class="code-modal-body">
       <p class="code-modal-note">
-        <strong>Replace the # placeholder URLs</strong> with your destination page paths. The imagemap uses percentage-based coordinates for responsive scaling across viewport sizes including mobile. The wrapping container preserves aspect ratio automatically.
+        Three separate blocks to paste into your page. <strong>Replace the href="#" placeholder URLs</strong> with your destination paths. Hotspot overlays scale responsively at any viewport width.
       </p>
+      <div class="code-tabs">
+        <button class="code-tab active" data-tab="html">HTML</button>
+        <button class="code-tab" data-tab="css">CSS</button>
+        <button class="code-tab" data-tab="js">JavaScript</button>
+      </div>
+      <div class="code-tab-note" id="tab-note-html">Paste inside your page &lt;body&gt; where the image should appear.</div>
+      <div class="code-tab-note" id="tab-note-css" style="display:none">Paste inside a &lt;style&gt; block in your &lt;head&gt;, or add to your stylesheet.</div>
+      <div class="code-tab-note" id="tab-note-js" style="display:none">Paste before the closing &lt;/body&gt; tag, wrapped in a &lt;script&gt; tag.</div>
       <div class="code-block" id="code-output"></div>
       <div class="code-modal-actions">
         <button class="btn btn-primary" id="btn-copy-code">Copy to clipboard</button>
@@ -1232,8 +1277,14 @@
     }
   });
 
+
+
   // ── GENERATE CODE ──
   btnGenerate.addEventListener('click', generateCode);
+
+  // Clean plain-text code stored separately from displayed HTML
+  const generatedBlocks = { html: '', css: '', js: '' };
+  let activeTab = 'html';
 
   function generateCode() {
     const filename = state.imageFile ? state.imageFile.name : 'image.jpg';
@@ -1244,33 +1295,32 @@
     }
 
     const areas = hs.map(h => {
-      const x = h.xPct.toFixed(3);
-      const y = h.yPct.toFixed(3);
-      const w = h.wPct.toFixed(3);
-      const hh = h.hPct.toFixed(3);
-      return `    <area
-      id="${h.id}"
-      shape="rect"
-      data-x="${x}" data-y="${y}" data-w="${w}" data-h="${hh}"
-      href="#"
-      alt="${h.id}"
-      title="${h.id}">`;
+      return `  <area
+    id="${h.id}"
+    shape="rect"
+    data-x="${h.xPct.toFixed(3)}"
+    data-y="${h.yPct.toFixed(3)}"
+    data-w="${h.wPct.toFixed(3)}"
+    data-h="${h.hPct.toFixed(3)}"
+    href="#"
+    alt="${h.id}"
+    title="${h.id}">`;
     }).join('\n');
 
-    const code = `<!-- Thinkamigo Imagemapper — responsive imagemap
-     Generated: ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}
-     Image: ${filename}
-     Hotspots: ${hs.length}
-     
-     Instructions:
-     1. Replace the href="#" values with your destination URLs.
-     2. Place this block where the image should appear in your page.
-     3. The JS below handles responsive coordinate recalculation.
-     4. The CSS wrapper preserves aspect ratio at any viewport width.
--->
+    generatedBlocks.html =
+`<div class="imagemap-container" id="imagemap-container">
+  <img
+    src="${filename}"
+    alt="Interactive image map"
+    usemap="#image-map"
+    id="imagemap-img">
+  <map name="image-map" id="image-map">
+${areas}
+  </map>
+</div>`;
 
-<style>
-.imagemap-container {
+    generatedBlocks.css =
+`.imagemap-container {
   position: relative;
   display: block;
   width: 100%;
@@ -1282,10 +1332,6 @@
   height: auto;
   display: block;
 }
-.imagemap-container area {
-  cursor: pointer;
-}
-/* Hotspot overlay divs (created by JS) */
 .imagemap-overlay {
   position: absolute;
   background: rgba(0,84,220,0.12);
@@ -1294,40 +1340,27 @@
   cursor: pointer;
   transition: background 0.15s;
   text-decoration: none;
+  display: block;
 }
 .imagemap-overlay:hover {
   background: rgba(0,84,220,0.25);
-}
-</style>
+}`;
 
-<div class="imagemap-container" id="imagemap-container">
-  <img
-    src="${filename}"
-    alt="Interactive image map"
-    usemap="#image-map"
-    id="imagemap-img">
-  <map name="image-map" id="image-map">
-${areas}
-  </map>
-</div>
-
-<script>
-(function () {
+    generatedBlocks.js =
+`(function () {
   var container = document.getElementById('imagemap-container');
-  var img       = document.getElementById('imagemap-img');
-  var map       = document.getElementById('image-map');
+  var img = document.getElementById('imagemap-img');
+  var map = document.getElementById('image-map');
 
   function positionOverlays() {
     var w = img.offsetWidth;
     var h = img.offsetHeight;
 
-    // Remove old overlays
     var old = container.querySelectorAll('.imagemap-overlay');
-    old.forEach(function(el){ el.remove(); });
+    old.forEach(function (el) { el.remove(); });
 
-    // Remove old coords on areas (browser uses them but we use overlays)
     var areas = map.querySelectorAll('area');
-    areas.forEach(function(area) {
+    areas.forEach(function (area) {
       var xPct = parseFloat(area.getAttribute('data-x'));
       var yPct = parseFloat(area.getAttribute('data-y'));
       var wPct = parseFloat(area.getAttribute('data-w'));
@@ -1340,19 +1373,17 @@ ${areas}
       var pw = Math.round(wPct / 100 * w);
       var ph = Math.round(hPct / 100 * h);
 
-      // Update area coords for accessibility/keyboard nav
-      area.setAttribute('coords', px + ',' + py + ',' + (px+pw) + ',' + (py+ph));
+      area.setAttribute('coords', px + ',' + py + ',' + (px + pw) + ',' + (py + ph));
 
-      // Create clickable overlay div
-      var div = document.createElement('a');
-      div.className = 'imagemap-overlay';
-      div.setAttribute('href', href);
-      div.setAttribute('aria-label', id);
-      div.style.left   = px + 'px';
-      div.style.top    = py + 'px';
-      div.style.width  = pw + 'px';
-      div.style.height = ph + 'px';
-      container.appendChild(div);
+      var a = document.createElement('a');
+      a.className = 'imagemap-overlay';
+      a.setAttribute('href', href);
+      a.setAttribute('aria-label', id);
+      a.style.left   = px + 'px';
+      a.style.top    = py + 'px';
+      a.style.width  = pw + 'px';
+      a.style.height = ph + 'px';
+      container.appendChild(a);
     });
   }
 
@@ -1363,24 +1394,43 @@ ${areas}
   }
 
   window.addEventListener('resize', positionOverlays);
-})();
-<\/script>`;
+})();`;
 
-    // Syntax highlight
-    const highlighted = code
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/(&lt;[\/!]?[\w]+)/g, '<span class="c-tag">$1</span>')
-      .replace(/([a-z-]+)=/g, '<span class="c-attr">$1</span>=')
-      .replace(/&gt;/g, '<span class="c-tag">&gt;</span>')
-      .replace(/(["'])([^"']*)\1/g, '<span class="c-val">$1$2$1</span>')
-      .replace(/(\/\*[\s\S]*?\*\/|\/\/.+)/g, '<span class="c-comment">$&</span>');
-
-    codeOutput.innerHTML = highlighted;
+    activeTab = 'html';
+    showTab('html');
     codeModal.classList.add('open');
   }
 
-  btnCopy.addEventListener('click', () => {
-    const text = codeOutput.textContent || codeOutput.innerText;
+  function showTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.code-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.getElementById('tab-note-html').style.display = tab === 'html' ? '' : 'none';
+    document.getElementById('tab-note-css').style.display  = tab === 'css'  ? '' : 'none';
+    document.getElementById('tab-note-js').style.display   = tab === 'js'   ? '' : 'none';
+    renderCodeBlock(generatedBlocks[tab], tab);
+  }
+
+  function renderCodeBlock(plainText, lang) {
+    var escaped = plainText
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    // Light syntax colouring
+    escaped = escaped
+      .replace(/(&lt;\/?[\w]+)/g, '<span class="c-tag">$1</span>')
+      .replace(/\b(data-[\w-]+|href|src|alt|id|class|usemap|shape|name|title|coords|type|aria-label)(?==)/g, '<span class="c-attr">$1</span>')
+      .replace(/("[^"]*")/g, '<span class="c-val">$1</span>')
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="c-comment">$1</span>')
+      .replace(/(\/\/.+)/g, '<span class="c-comment">$1</span>');
+    codeOutput.innerHTML = escaped;
+  }
+
+  document.querySelectorAll('.code-tab').forEach(btn => {
+    btn.addEventListener('click', () => showTab(btn.dataset.tab));
+  });
+
+  function copyCurrentTab() {
+    const text = generatedBlocks[activeTab];
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
         btnCopy.textContent = 'Copied!';
@@ -1396,8 +1446,9 @@ ${areas}
       btnCopy.textContent = 'Copied!';
       setTimeout(() => { btnCopy.textContent = 'Copy to clipboard'; }, 2000);
     }
-  });
+  }
 
+  btnCopy.addEventListener('click', copyCurrentTab);
   btnCloseModal.addEventListener('click', () => codeModal.classList.remove('open'));
   modalClose.addEventListener('click', () => codeModal.classList.remove('open'));
   codeModal.addEventListener('click', e => {
