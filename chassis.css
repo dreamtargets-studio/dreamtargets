@@ -73,9 +73,8 @@ img {
 .nav-links a {
     color: #ffffff !important;
     text-decoration: underline;
-    text-decoration-color: #dee6ff;
     text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 500;
@@ -142,7 +141,7 @@ img {
     text-decoration: underline;
     text-decoration-color: #dee6ff;
     text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
     font-size: 14px; 
     font-family: 'Poppins', sans-serif; 
     transition: color 0.3s ease, text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
