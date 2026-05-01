@@ -72,9 +72,6 @@ img {
 
 .nav-links a {
     color: #ffffff !important;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 500;
@@ -84,6 +81,7 @@ img {
 
 .nav-links a:hover {
     text-decoration-color: var(--brand-orange);
+    text-underline-offset: 4px;
     text-decoration-thickness: 2px;
 }
 
