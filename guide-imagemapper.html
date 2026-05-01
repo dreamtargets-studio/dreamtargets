@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imagemapper studio — user guide | Thinkamigo</title>
+<link rel="stylesheet" href="chassis.css">
+<link rel="stylesheet" href="destination.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+}
+
+.step-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0054dc;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.step-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0054dc;
+  margin-bottom: 4px;
+}
+
+.step-body p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #333333;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.step-body p + p {
+  margin-top: 8px;
+}
+
+.tip-box {
+  background: #f5f5ef;
+  border-left: 3px solid #ff6600;
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #555555;
+  line-height: 1.7;
+}
+
+.tip-box strong {
+  font-weight: 500;
+  color: #333333;
+}
+
+.code-inline {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  background: #eeeeea;
+  padding: 1px 6px;
+  border-radius: 2px;
+  color: #0054dc;
+}
+
+.section-rule {
+  border: none;
+  border-top: 1px solid #dddddd;
+  margin: 40px 0;
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 32px 0 0;
+  border-top: 1px solid #dddddd;
+  margin-top: 40px;
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: #0054dc;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #ff6600;
+}
+
+.tag-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  background: #0054dc;
+  padding: 3px 10px;
+  margin-bottom: 6px;
+}
+
+.output-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.output-card {
+  background: #f5f5ef;
+  border: 1px solid #dddddd;
+  padding: 14px 16px;
+}
+
+.output-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0054dc;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.output-card p {
+  font-size: 13px;
+  font-weight: 300;
+  color: #555555;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .output-grid { grid-template-columns: 1fr; }
+  .nav-footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+}
+</style>
+</head>
+<body class="content-page">
+
+<header id="main-nav"></header>
+
+<main class="editorial-post">
+<div class="paper-sheet">
+<article class="text-rail">
+
+  <p class="breadcrumb"><a href="index.html">Home</a> &gt; <a href="amigos.html">Amigos</a> &gt; Imagemapper studio guide</p>
+
+  <header>
+    <h1>Imagemapper studio</h1>
+    <div class="orange-rule"></div>
+    <h2>User guide</h2>
+  </header>
+
+  <p>The Imagemapper studio lets you define clickable regions — hotspots — on any image. It generates the code you need to make those regions interactive on a web page. No coding knowledge required to use the studio itself.</p>
+
+  <div class="tip-box">
+    <strong>What it's for.</strong> Defining interactive areas on comic pages, trail maps, diagrams, or any image where you want a click or tap to take the reader somewhere.
+  </div>
+
+  <hr class="section-rule">
+
+  <h3>Part 1 — Loading an image</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">1</span>
+      <div class="step-body">
+        <h3>Open the studio</h3>
+        <p>Open <span class="code-inline">imagemapper.html</span> in your browser. You will see a dark canvas area on the left and a control panel on the right.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">2</span>
+      <div class="step-body">
+        <h3>Load your image</h3>
+        <p>Click <strong>Load image</strong> in the panel, or drag your image file directly onto the dark canvas. JPEG, PNG, GIF, WebP and SVG files are all supported.</p>
+        <p>The image will appear in the canvas at full size. Portrait images — such as comic pages — will be tall. Scroll down to see the full image.</p>
+      </div>
+    </li>
+  </ol>
+
+  <hr class="section-rule">
+
+  <h3>Part 2 — Adding a marker image (optional)</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">3</span>
+      <div class="step-body">
+        <h3>Upload a marker PNG</h3>
+        <p>In the <strong>Marker image</strong> section of the panel, click <strong>Upload PNG marker</strong> and choose your star or icon file. A small preview will appear.</p>
+        <p>This is optional. Skip to step 4 if you don't need a visible marker on your hotspots.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">4</span>
+      <div class="step-body">
+        <h3>Place the file on your server</h3>
+        <p>Whatever PNG you upload for preview, the generated code will always reference it as <span class="code-inline">assets/img/hotspot-marker.png</span>. Place your chosen file at that path on your web server.</p>
+      </div>
+    </li>
+  </ol>
+
+  <hr class="section-rule">
+
+  <h3>Part 3 — Placing hotspots</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">5</span>
+      <div class="step-body">
+        <h3>Click Add hotspot</h3>
+        <p>Click <strong>Add hotspot</strong> in the Mapping section. An orange banner appears across the top of the canvas — you are now in mapping mode. A dashed rectangle appears centred on the image.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">6</span>
+      <div class="step-body">
+        <h3>Position the marquee</h3>
+        <p>Click and drag the rectangle to move it over the area you want to make clickable. In most cases, simply moving it into position is all you need to do.</p>
+        <p>If you need a larger or smaller hotspot, drag any of the four corner handles to resize.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">7</span>
+      <div class="step-body">
+        <h3>Place the hotspot</h3>
+        <p>Click <strong>Place hotspot here</strong>. The hotspot is confirmed and added to the list on the right. It is named automatically — hotspot-01, hotspot-02, and so on.</p>
+        <p>The hotspot will appear as a <strong>circle</strong> on your finished page, inscribed within the rectangle you drew.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">8</span>
+      <div class="step-body">
+        <h3>Show marker (optional)</h3>
+        <p>If you uploaded a marker image, tick the <strong>marker</strong> checkbox next to the hotspot in the list. The marker PNG will appear centred over the hotspot in the generated code.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">9</span>
+      <div class="step-body">
+        <h3>Add more hotspots</h3>
+        <p>Click <strong>Add hotspot</strong> again to place another. Repeat as many times as needed. Each one is added to the list and numbered in sequence.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">10</span>
+      <div class="step-body">
+        <h3>Adjust a hotspot</h3>
+        <p>Click any hotspot in the list to select it. Its marquee becomes active again — drag to reposition it, or drag the corners to resize. Changes are applied immediately.</p>
+        <p>To remove a hotspot, click the <strong>✕</strong> button next to it in the list.</p>
+      </div>
+    </li>
+  </ol>
+
+  <hr class="section-rule">
+
+  <h3>Part 4 — Generating the code</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">11</span>
+      <div class="step-body">
+        <h3>Click Generate embedding code</h3>
+        <p>Click the <strong>Generate embedding code</strong> button at the bottom of the panel. A window opens with three tabs.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="output-grid">
+    <div class="output-card">
+      <span class="output-card-title">HTML tab</span>
+      <p>The image and hotspot map. Paste this into your page <span class="code-inline">&lt;body&gt;</span> where the image should appear.</p>
+    </div>
+    <div class="output-card">
+      <span class="output-card-title">CSS tab</span>
+      <p>The styles for the hotspot overlays. Paste into a <span class="code-inline">&lt;style&gt;</span> block in your page <span class="code-inline">&lt;head&gt;</span> or your stylesheet.</p>
+    </div>
+    <div class="output-card">
+      <span class="output-card-title">JavaScript tab</span>
+      <p>The responsive positioning script. Paste before the closing <span class="code-inline">&lt;/body&gt;</span> tag, wrapped in a <span class="code-inline">&lt;script&gt;</span> tag.</p>
+    </div>
+  </div>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">12</span>
+      <div class="step-body">
+        <h3>Copy each tab to BBEdit</h3>
+        <p>Click <strong>Copy to clipboard</strong> on each tab in turn and paste into your page in BBEdit. The tab note tells you exactly where each block goes.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">13</span>
+      <div class="step-body">
+        <h3>Replace the placeholder URLs</h3>
+        <p>Each hotspot has <span class="code-inline">href="#"</span> as a placeholder. Replace the <span class="code-inline">#</span> with the actual URL or page you want the hotspot to link to.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="tip-box">
+    <strong>Starting a new image.</strong> Click <strong>Close session</strong> to clear the canvas and start fresh with a different image. All hotspots are cleared. The studio is ready to load again immediately.
+  </div>
+
+  <div class="nav-footer">
+    <a href="guide-comic-viewer.html" class="nav-link">Next: Comic viewer setup &#x2192;</a>
+  </div>
+
+</article>
+</div>
+</main>
+
+<footer id="main-footer"></footer>
+<script src="loader.js"></script>
+
+</body>
+</html>

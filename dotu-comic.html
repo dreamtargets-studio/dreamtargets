@@ -8,156 +8,8 @@
 <link rel="stylesheet" href="destination.css">
 <link rel="stylesheet" href="gallery.css">
 <link rel="stylesheet" href="theatre.css">
+<link rel="stylesheet" href="magazine.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-
-/* ── READER ENVIRONMENT ── */
-body.content-page {
-  background-color: #0a254a;
-  overflow-x: hidden;
-}
-
-.editorial-post {
-  background-color: #0a254a;
-}
-
-.paper-sheet {
-  background-color: transparent;
-  box-shadow: none;
-  padding-bottom: 0;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* ── READER STAGE ── */
-.comic-reader {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Slide track — holds three panels: prev, current, next */
-.comic-track {
-  display: flex;
-  width: 300%;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.comic-track.no-transition {
-  transition: none;
-}
-
-.comic-panel {
-  width: 33.333%;
-  flex-shrink: 0;
-  position: relative;
-  line-height: 0;
-}
-
-/* ── IMAGEMAP ── */
-.imagemap-container {
-  position: relative;
-  display: block;
-  width: 100%;
-  line-height: 0;
-}
-.imagemap-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.imagemap-overlay {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0,84,220,0.12);
-  border: 1.5px solid rgba(0,84,220,0.5);
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: background 0.15s;
-  text-decoration: none;
-  display: block;
-  transform: translate(-50%, -50%);
-}
-.imagemap-overlay:hover {
-  background: rgba(0,84,220,0.25);
-}
-.hotspot-marker {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0.85;
-  transition: opacity 0.2s, transform 0.2s;
-  transform: translate(-50%, -50%);
-}
-
-/* ── CHEVRONS ── */
-.comic-chevron {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  background: #0a254a;
-  border: 1.5px solid rgba(255,255,255,0.25);
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 0.7;
-  transition: opacity 0.2s, border-color 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.comic-chevron:hover {
-  opacity: 1;
-  border-color: rgba(255,255,255,0.7);
-}
-.comic-chevron.hidden {
-  display: none;
-}
-.comic-chevron-prev { left: 12px; }
-.comic-chevron-next { right: 12px; }
-
-/* SVG chevron arrows */
-.comic-chevron svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ── TOP MARGIN ── */
-.comic-reader-wrap {
-  padding: 20px 0 20px;
-}
-
-/* ── MOBILE ── */
-@media (max-width: 768px) {
-  .comic-reader-wrap {
-    padding: 12px 10px 12px;
-  }
-  .comic-chevron {
-    width: 36px;
-    height: 36px;
-    opacity: 0.5;
-  }
-  .comic-chevron svg {
-    width: 14px;
-    height: 14px;
-  }
-  .comic-chevron-prev { left: 4px; }
-  .comic-chevron-next { right: 4px; }
-}
-
-</style>
 </head>
 <body class="content-page">
 
@@ -178,11 +30,8 @@ body.content-page {
       <!-- Reader -->
       <div class="comic-reader" id="comic-reader">
         <div class="comic-track" id="comic-track">
-          <!-- prev panel -->
           <div class="comic-panel" id="panel-prev"></div>
-          <!-- current panel -->
           <div class="comic-panel" id="panel-current"></div>
-          <!-- next panel -->
           <div class="comic-panel" id="panel-next"></div>
         </div>
       </div>
@@ -249,7 +98,7 @@ body.content-page {
         ' href="' + s.href + '" alt="hotspot" title="hotspot">';
     }).join('');
 
-    var markers = spots.filter(function(s){ return s.marker; }).map(function(s, i){
+    var markers = spots.filter(function (s) { return s.marker; }).map(function (s) {
       return '<img src="assets/img/hotspot-marker.png" class="hotspot-marker"' +
         ' data-cx="' + s.cx + '" data-cy="' + s.cy + '" alt="" aria-hidden="true">';
     }).join('');
@@ -267,22 +116,21 @@ body.content-page {
     if (!imc) return;
     var img = document.getElementById('img-' + page);
     if (!img || !img.complete || img.naturalWidth === 0) {
-      img && img.addEventListener('load', function(){ positionOverlays(page); }, { once: true });
+      img && img.addEventListener('load', function () { positionOverlays(page); }, { once: true });
       return;
     }
 
     var w = img.offsetWidth;
     var h = img.offsetHeight;
 
-    // Remove old overlays
     var old = imc.querySelectorAll('.imagemap-overlay');
-    old.forEach(function(el){ el.remove(); });
+    old.forEach(function (el) { el.remove(); });
 
     var mapName = 'image-map-' + page;
     var map = document.getElementById(mapName);
     if (!map) return;
 
-    map.querySelectorAll('area').forEach(function(area) {
+    map.querySelectorAll('area').forEach(function (area) {
       var cxPct = parseFloat(area.getAttribute('data-cx'));
       var cyPct = parseFloat(area.getAttribute('data-cy'));
       var rPct  = parseFloat(area.getAttribute('data-r'));
@@ -306,7 +154,7 @@ body.content-page {
       imc.appendChild(a);
     });
 
-    imc.querySelectorAll('.hotspot-marker').forEach(function(marker) {
+    imc.querySelectorAll('.hotspot-marker').forEach(function (marker) {
       var cxPct = parseFloat(marker.getAttribute('data-cx'));
       var cyPct = parseFloat(marker.getAttribute('data-cy'));
       marker.style.left = Math.round(cxPct / 100 * w) + 'px';
@@ -320,10 +168,8 @@ body.content-page {
     panelCurrent.innerHTML = buildPanel(page);
     panelNext.innerHTML    = buildPanel(page + 1);
 
-    // Position track to show centre panel — no animation
     track.classList.add('no-transition');
     track.style.transform = 'translateX(-33.333%)';
-    // Force reflow
     track.offsetHeight;
     track.classList.remove('no-transition');
 
@@ -365,13 +211,13 @@ body.content-page {
   }
 
   // ── CHEVRON CLICKS ──
-  chevPrev.addEventListener('click', function(){ goTo(-1); });
-  chevNext.addEventListener('click', function(){ goTo(1); });
+  chevPrev.addEventListener('click', function () { goTo(-1); });
+  chevNext.addEventListener('click', function () { goTo(1); });
 
   // ── KEYBOARD ──
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  goTo(1);
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    goTo(-1);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(-1);
   });
 
   // ── SWIPE ──
@@ -379,12 +225,12 @@ body.content-page {
   var touchStartY = 0;
   var swipeThreshold = 40;
 
-  document.getElementById('comic-reader').addEventListener('touchstart', function(e) {
+  document.getElementById('comic-reader').addEventListener('touchstart', function (e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
 
-  document.getElementById('comic-reader').addEventListener('touchend', function(e) {
+  document.getElementById('comic-reader').addEventListener('touchend', function (e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     var dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold) {
@@ -392,8 +238,8 @@ body.content-page {
     }
   }, { passive: true });
 
-  // ── RESIZE: reposition overlays ──
-  window.addEventListener('resize', function() {
+  // ── RESIZE ──
+  window.addEventListener('resize', function () {
     positionOverlays(currentPage - 1);
     positionOverlays(currentPage);
     positionOverlays(currentPage + 1);

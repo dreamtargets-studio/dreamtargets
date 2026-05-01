@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comic viewer — user guide | Thinkamigo</title>
+<link rel="stylesheet" href="chassis.css">
+<link rel="stylesheet" href="destination.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+}
+
+.step-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0054dc;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.step-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0054dc;
+  margin-bottom: 4px;
+}
+
+.step-body p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #333333;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.step-body p + p {
+  margin-top: 8px;
+}
+
+.tip-box {
+  background: #f5f5ef;
+  border-left: 3px solid #ff6600;
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #555555;
+  line-height: 1.7;
+}
+
+.tip-box strong {
+  font-weight: 500;
+  color: #333333;
+}
+
+.code-inline {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  background: #eeeeea;
+  padding: 1px 6px;
+  border-radius: 2px;
+  color: #0054dc;
+}
+
+.code-block {
+  background: #1a1a2e;
+  padding: 20px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #c8d6f0;
+  margin: 16px 0 24px;
+  overflow-x: auto;
+}
+
+.code-block .c-comment { color: #6a6a8a; font-style: italic; }
+.code-block .c-key { color: #a8d8a8; }
+.code-block .c-val { color: #ffd27f; }
+
+.section-rule {
+  border: none;
+  border-top: 1px solid #dddddd;
+  margin: 40px 0;
+}
+
+.config-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.config-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #666666;
+  padding: 8px 12px;
+  background: #f5f5ef;
+  border-bottom: 1px solid #dddddd;
+}
+.config-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eeeeee;
+  vertical-align: top;
+  font-weight: 300;
+  color: #333333;
+}
+.config-table td:first-child {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #0054dc;
+  white-space: nowrap;
+}
+.config-table td:last-child {
+  color: #666666;
+  font-size: 13px;
+}
+
+.nav-header {
+  margin-bottom: 32px;
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 0 0;
+  border-top: 1px solid #dddddd;
+  margin-top: 40px;
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: #0054dc;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #ff6600;
+}
+
+.hotspot-example {
+  background: #f5f5ef;
+  border: 1px solid #dddddd;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: #555555;
+  line-height: 1.8;
+}
+
+.hotspot-example strong {
+  font-weight: 500;
+  color: #333333;
+}
+
+@media (max-width: 600px) {
+  .nav-footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+}
+</style>
+</head>
+<body class="content-page">
+
+<header id="main-nav"></header>
+
+<main class="editorial-post">
+<div class="paper-sheet">
+<article class="text-rail">
+
+  <p class="breadcrumb"><a href="index.html">Home</a> &gt; <a href="amigos.html">Amigos</a> &gt; Comic viewer guide</p>
+
+  <div class="nav-header">
+    <a href="guide-imagemapper.html" class="nav-link">&#x2190; Back: Imagemapper studio</a>
+  </div>
+
+  <header>
+    <h1>Comic viewer</h1>
+    <div class="orange-rule"></div>
+    <h2>Setup guide</h2>
+  </header>
+
+  <p>The comic viewer is a single HTML file that displays a full issue — cover, pages, video page — as a sliding reader. Readers navigate using chevrons, keyboard arrow keys, or by swiping on a phone or tablet.</p>
+
+  <div class="tip-box">
+    <strong>One file per issue.</strong> The viewer file contains everything — the navigation, the hotspot data for every page, and the three configuration values that tell it which images to load.
+  </div>
+
+  <hr class="section-rule">
+
+  <h3>Part 1 — The three configuration values</h3>
+
+  <p>Near the top of the script in <span class="code-inline">dotu-comic.html</span>, you will find a clearly marked configuration block. These are the only values you need to change when setting up a new issue or title.</p>
+
+  <div class="code-block">
+<span class="c-comment">// ── CONFIGURATION ──────────────────────────</span>
+<span class="c-key">var PREFIX</span>      = <span class="c-val">'dotu'</span>;   <span class="c-comment">// filename prefix</span>
+<span class="c-key">var ISSUE</span>       = <span class="c-val">'04'</span>;     <span class="c-comment">// issue number (two digits)</span>
+<span class="c-key">var TOTAL_PAGES</span> = <span class="c-val">11</span>;       <span class="c-comment">// total pages in this issue</span>
+<span class="c-comment">// ───────────────────────────────────────────</span>
+  </div>
+
+  <table class="config-table">
+    <tr>
+      <th>Value</th>
+      <th>What it does</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td>PREFIX</td>
+      <td>The filename prefix for this title. Must match your image filenames exactly.</td>
+      <td><span class="code-inline">dotu</span> for Dawn of the Unread</td>
+    </tr>
+    <tr>
+      <td>ISSUE</td>
+      <td>The issue number, always two digits.</td>
+      <td><span class="code-inline">04</span> for issue four</td>
+    </tr>
+    <tr>
+      <td>TOTAL_PAGES</td>
+      <td>The total number of pages in the issue, including cover, synopsis and final page.</td>
+      <td><span class="code-inline">11</span> for a typical issue</td>
+    </tr>
+  </table>
+
+  <div class="tip-box">
+    <strong>How filenames are built.</strong> The viewer constructs each image filename automatically from these three values. For PREFIX <span class="code-inline">dotu</span>, ISSUE <span class="code-inline">04</span>, page 1, it loads <span class="code-inline">assets/img/dotu-04-01.jpg</span>. Page 2 loads <span class="code-inline">assets/img/dotu-04-02.jpg</span>, and so on up to the total page count.
+  </div>
+
+  <hr class="section-rule">
+
+  <h3>Part 2 — Preparing your images</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">1</span>
+      <div class="step-body">
+        <h3>Name your files correctly</h3>
+        <p>All page images must follow the naming convention exactly: <span class="code-inline">prefix-issue-page.jpg</span>. For Dawn of the Unread issue 4, the files should be named <span class="code-inline">dotu-04-01.jpg</span>, <span class="code-inline">dotu-04-02.jpg</span>, and so on.</p>
+        <p>Page numbers are always two digits — 01, 02 ... 09, 10, 11.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">2</span>
+      <div class="step-body">
+        <h3>Place images in the correct folder</h3>
+        <p>All images go in <span class="code-inline">assets/img/</span> alongside your other site images. The viewer looks for them there automatically.</p>
+      </div>
+    </li>
+  </ol>
+
+  <hr class="section-rule">
+
+  <h3>Part 3 — Adding hotspot data</h3>
+
+  <p>Below the configuration block you will find the <span class="code-inline">HOTSPOTS</span> object. This is where you enter the hotspot coordinates generated by the Imagemapper studio for each page.</p>
+
+  <div class="code-block">
+<span class="c-comment">// ── HOTSPOT DATA ────────────────────────────</span>
+<span class="c-key">var HOTSPOTS</span> = {
+  <span class="c-val">1</span>: [
+    { cx: <span class="c-val">87.234</span>, cy: <span class="c-val">59.176</span>, r: <span class="c-val">5.319</span>, href: <span class="c-val">'#'</span>, marker: <span class="c-val">false</span> }
+  ],
+  <span class="c-val">3</span>: [
+    { cx: <span class="c-val">50.000</span>, cy: <span class="c-val">72.400</span>, r: <span class="c-val">4.800</span>, href: <span class="c-val">'bonus.html'</span>, marker: <span class="c-val">true</span> }
+  ]
+};
+<span class="c-comment">// ───────────────────────────────────────────</span>
+  </div>
+
+  <p>Each entry is keyed by page number. Pages with no hotspots do not need an entry — simply leave them out.</p>
+
+  <div class="hotspot-example">
+    <strong>Each hotspot has five values:</strong><br><br>
+    <strong>cx</strong> — horizontal centre of the hotspot, as a percentage of the image width.<br>
+    <strong>cy</strong> — vertical centre of the hotspot, as a percentage of the image height.<br>
+    <strong>r</strong> — radius of the circle, as a percentage of the image width.<br>
+    <strong>href</strong> — the URL the hotspot links to. Use <span class="code-inline">#</span> as a placeholder until you know the destination.<br>
+    <strong>marker</strong> — set to <span class="code-inline">true</span> to show the star marker image over this hotspot, <span class="code-inline">false</span> to keep it invisible.
+  </div>
+
+  <div class="tip-box">
+    <strong>Where do these numbers come from?</strong> The Imagemapper studio generates them for you. Use the studio to map each page, generate the code, and copy the <span class="code-inline">data-cx</span>, <span class="code-inline">data-cy</span> and <span class="code-inline">data-r</span> values from the HTML tab into the HOTSPOTS object here.
+  </div>
+
+  <div class="tip-box">
+    <strong>You do not need the CSS or JavaScript tabs from the studio.</strong> When using the comic viewer, all imagemap styles are already handled by <span class="code-inline">magazine.css</span> and all hotspot positioning is handled by the viewer's own script. Only the coordinate values from the HTML tab are needed — copy <span class="code-inline">data-cx</span>, <span class="code-inline">data-cy</span> and <span class="code-inline">data-r</span> into the HOTSPOTS object and you are done.
+  </div>
+
+  <hr class="section-rule">
+
+  <h3>Part 4 — Setting up a new title</h3>
+
+  <ol class="step-list">
+    <li class="step-item">
+      <span class="step-number">3</span>
+      <div class="step-body">
+        <h3>Duplicate the viewer file</h3>
+        <p>Make a copy of <span class="code-inline">dotu-comic.html</span> and rename it for your new title — for example <span class="code-inline">mytrail-01.html</span>.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">4</span>
+      <div class="step-body">
+        <h3>Update the configuration block</h3>
+        <p>Change PREFIX, ISSUE and TOTAL_PAGES to match your new title. Everything else — navigation, swipe, keyboard, hotspot positioning — works automatically.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">5</span>
+      <div class="step-body">
+        <h3>Clear the hotspot data</h3>
+        <p>Replace the contents of the HOTSPOTS object with your new hotspot data, or leave it as an empty object <span class="code-inline">var HOTSPOTS = {};</span> if the new title has no hotspots yet.</p>
+      </div>
+    </li>
+    <li class="step-item">
+      <span class="step-number">6</span>
+      <div class="step-body">
+        <h3>Update the page title</h3>
+        <p>Change the <span class="code-inline">&lt;title&gt;</span> tag in the <span class="code-inline">&lt;head&gt;</span> to reflect the new title and issue.</p>
+      </div>
+    </li>
+  </ol>
+
+  <hr class="section-rule">
+
+  <h3>How readers navigate</h3>
+
+  <div class="hotspot-example">
+    <strong>Desktop</strong> — click the left or right chevron floating over the comic, or use the left and right arrow keys on the keyboard.<br><br>
+    <strong>Mobile and tablet</strong> — swipe left to go forward, swipe right to go back. Chevrons are also visible but small.<br><br>
+    <strong>First and last pages</strong> — the back chevron disappears on the first page. The forward chevron disappears on the last page.
+  </div>
+
+  <div class="tip-box">
+    <strong>Hotspots on mobile.</strong> Circular hotspot overlays are always visible as a subtle blue circle. Hover effects do not apply on touchscreens, but the hotspot is fully tappable.
+  </div>
+
+  <div class="nav-footer">
+    <a href="guide-imagemapper.html" class="nav-link">&#x2190; Back: Imagemapper studio</a>
+    <a href="amigos.html" class="nav-link">Amigos &#x2192;</a>
+  </div>
+
+</article>
+</div>
+</main>
+
+<footer id="main-footer"></footer>
+<script src="loader.js"></script>
+
+</body>
+</html>
