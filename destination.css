@@ -64,7 +64,6 @@ body.content-page {
     padding: 20px 0 80px 0;  
 }
 
-
 .text-rail p a {
     color: var(--brand-blue);
     text-decoration: underline;
@@ -79,9 +78,6 @@ body.content-page {
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
 }
-
-
-
 
 /* 6. STORY HEADINGS & ACCENTS */
 .text-rail h1 { 
@@ -119,11 +115,9 @@ body.content-page {
     margin-bottom: 24px;
 }
 
-/* This "glues" the paragraph to the header by removing the top gap */
 .text-rail h3 + p {
     margin-top: 0;
 }
-
 
 /* 7. THE GALLERY GRID (3-UP) */
 .gallery-grid-3 {
@@ -287,7 +281,6 @@ blockquote + p {
     text-align: left;
 }
 
-/* FIXED DESKTOP WIDTH: Email/Inputs */
 .contact-form-refined input {
     display: block;
     width: 500px;            
@@ -301,7 +294,6 @@ blockquote + p {
     box-sizing: border-box;
 }
 
-/* FIXED DESKTOP WIDTH: Message Area */
 .contact-form-refined textarea {
     display: block;
     width: 500px;            
@@ -317,7 +309,6 @@ blockquote + p {
     resize: vertical;
 }
 
-/* STATIC HEX-6 BUTTON LAB */
 .contact-form-refined .btn-pill {
     --btn-bg: #0054DC;          
     --btn-glow: #1A73FF;        
@@ -350,7 +341,6 @@ blockquote + p {
     transform: none !important;
 }
 
-/* MOBILE FORM SYNC */
 @media (max-width: 768px) {
     .contact-form-refined { padding: 0; }
     .contact-form-refined input,
@@ -359,7 +349,6 @@ blockquote + p {
     }
 }
 
-/* Dedicated Links Block - No Paper Sheet reliance */
 .links-footer-block {
     width: 960px;
     margin: 0 auto;
@@ -425,10 +414,6 @@ blockquote + p {
     text-decoration-thickness: 3px;
 }
 
-
-
-
-
 /* ============================================================
    14. BREADCRUMB
    Use on second-level pages and deeper with no cinematic hero.
@@ -445,17 +430,15 @@ p.breadcrumb {
 
 p.breadcrumb a {
     color: var(--brand-blue);
-    text-decoration: #1f5fd7;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-decoration: none;
 }
 
 p.breadcrumb a:hover {
-    color: var(--brand-orange);
+    color: var(--brand-blue);
+    text-decoration: underline;
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
-    text-underline-offset: 3px;
-
+    text-underline-offset: 6px;
 }
 
 p.breadcrumb-white {
@@ -472,12 +455,11 @@ p.breadcrumb-white a {
 
 p.breadcrumb-white a:hover {
     color: var(--brand-orange);
+    text-decoration: underline;
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
 }
-
-
-
 
 /* ============================================================
    15. PEOPLE BIOG PAGE
