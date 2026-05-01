@@ -445,17 +445,15 @@ p.breadcrumb {
 
 p.breadcrumb a {
     color: var(--brand-blue);
-    text-decoration: underline;
-    text-decoration-color: #bbbbbb;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+    text-decoration: none;
 }
 
 p.breadcrumb a:hover {
     color: var(--brand-orange);
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+
 }
 
 p.breadcrumb-white {
@@ -467,11 +465,7 @@ p.breadcrumb-white {
 
 p.breadcrumb-white a {
     color: #ffffff;
-    text-decoration: underline;
-    text-decoration-color: #ffffff40;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+    text-decoration: none;
 }
 
 p.breadcrumb-white a:hover {
