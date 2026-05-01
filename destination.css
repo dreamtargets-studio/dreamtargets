@@ -409,9 +409,10 @@ blockquote + p {
 }
 
 .links-section ul li a:hover {
-    color: var(--brand-orange);
+    color: var(--brand-blue);
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
 }
 
 /* ============================================================
