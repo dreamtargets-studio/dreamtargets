@@ -76,12 +76,11 @@ img {
     font-size: 13px;
     font-weight: 500;
     white-space: nowrap;
-    transition: color 0.3s ease, text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
 }
 
 .nav-links a:hover {
     text-decoration-color: var(--brand-orange);
-    text-underline-offset: 4px;
+    text-underline-offset: 6px;
     text-decoration-thickness: 2px;
 }
 
@@ -147,6 +146,7 @@ img {
 
 .footer-nav-col a:hover {
     text-decoration-color: var(--brand-orange);
+    text-underline-offset: 6px;
     text-decoration-thickness: 2px;
 }
 
