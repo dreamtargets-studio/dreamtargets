@@ -1,10 +1,11 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.24
+   THINKAMIGO DESTINATION ENGINE v4.25
    Architecture: 1250px Horizon | 960px Editorial Rail
    Updates: Refined Fixed-Width Form Sandbox (450px/750px)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
    v4.24: Breadcrumb and links-section hover behaviour refined.
    Breadcrumb-white specificity fix for theatre environment.
+   v4.25: Inline link hover — text stays blue, orange underline.
    ============================================================ */
 
 :root {
@@ -76,9 +77,10 @@ body.content-page {
 }
 
 .text-rail p a:hover {
-    color: var(--brand-orange);
+    color: var(--brand-blue);
     text-decoration-color: var(--brand-orange);
     text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
 }
 
 /* 6. STORY HEADINGS & ACCENTS */
