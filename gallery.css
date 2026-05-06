@@ -308,6 +308,43 @@
     margin-top: 0;
 }
 
+/* Paul Fillingham intro card — matches biog-collab-caption styling */
+.people-intro-grid .biog-collab-card {
+    display: block;
+    text-decoration: none;
+    outline: 1px solid #dddddd;
+    outline-offset: -1px;
+}
+
+.people-intro-grid .biog-collab-card figure {
+    margin: 0;
+    overflow: hidden;
+}
+
+.people-intro-grid .biog-collab-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: none;
+}
+
+.people-intro-grid .biog-collab-caption {
+    display: block;
+    background-color: #f9f8f4;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555555;
+    padding: 10px 12px;
+}
+
+.people-intro-grid .biog-collab-card:hover .biog-collab-caption {
+    color: #ff6600;
+}
+
 /* collaborator cards row: 3-up, no lightbox */
 .people-collab-grid {
     display: grid;
