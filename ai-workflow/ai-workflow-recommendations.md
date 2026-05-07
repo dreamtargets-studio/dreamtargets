@@ -1,4 +1,4 @@
-Claude Workflow Recommendations
+## Claude Workflow Recommendations
 > Maintained in GitHub for version control.
 > Version 1.0 —  6 May 2026.
 

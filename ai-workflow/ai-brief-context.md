@@ -1,3 +1,5 @@
+## Context brief 
+
 > Context brief for use with AI assistants, particularly Claude.
 > Paste at the start of any session requiring brand, design, creative or commercial context.
 > Maintained in GitHub for version control.
@@ -44,7 +46,7 @@ Platform Development is how the stories get carried. It is not the overarching f
 
 ## The Making Impulse
 
-He drew comics from the age of seven. At thirteen he was making cine films. At fifteen — three years ahead of the normal age — he passed his A Level Art exam. Two years later, in 1978, he skipped an art history lesson and got on a train to London carrying paintings — a portrait submitted to the Mall Galleries, an abstract piece for Young Contemporaries. The portrait was selected. Young Contemporaries said no. The bravado was good either way. Nobody sent him. The history of art could wait. The making of it couldn't.
+He drew comics from the age of seven. At thirteen he was making cine films. At fifteen — three years ahead of the usual age — he passed his A Level Art exam. Two years later, in 1978, he skipped an art history lesson and got on a train to London carrying paintings — a portrait submitted to the Mall Galleries, an abstract piece for Young Contemporaries. The portrait was selected. Young Contemporaries said no. The bravado was good either way. Nobody sent him. The history of art could wait. The making of it couldn't.
 
 The National Union of Mineworkers commissioned a painting for their branch HQ — it appeared in A.R. Griffin's *The Nottinghamshire Coalfield, 1881–1981: A Century of Progress* (1981), alongside an honorary membership of the NUM. A CISWO scholarship followed — the Coal Industry Social Welfare Organisation investing in one of its own.
 
