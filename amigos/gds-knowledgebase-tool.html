@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="../chassis.css">
   <link rel="stylesheet" href="../destination.css">
   <style>
-    /* ── Tool-specific styles ── */
     .triage-intro {
       margin: 0 0 2rem 0;
       font-size: 18px;
@@ -19,7 +18,6 @@
       line-height: 1.7;
       max-width: 640px;
     }
-
     .triage-section-label {
       font-size: 13px;
       font-weight: 500;
@@ -28,14 +26,12 @@
       letter-spacing: 0.06em;
       margin: 0 0 10px 0;
     }
-
     .triage-pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 1.5rem;
     }
-
     .triage-pill {
       font-family: 'Poppins', Arial, Helvetica, sans-serif;
       font-size: 13px;
@@ -49,47 +45,25 @@
       transition: border-color 0.15s, background 0.15s, color 0.15s;
       line-height: 1.4;
     }
-
-    .triage-pill:hover {
-      border-color: #0054dc;
-      color: #0054dc;
-    }
-
-    .triage-pill.active {
-      background: #0054dc;
-      border-color: #0054dc;
-      color: #ffffff;
-      font-weight: 500;
-    }
-
-    .triage-pill.active.orange {
-      background: #ff6600;
-      border-color: #ff6600;
-      color: #ffffff;
-    }
-
-    .triage-divider {
-      height: 1px;
-      background: #dddddd;
-      margin: 0.5rem 0 1.5rem 0;
-    }
-
-    .handover-sub {
+    .triage-pill:hover { border-color: #0054dc; color: #0054dc; }
+    .triage-pill.active { background: #0054dc; border-color: #0054dc; color: #ffffff; font-weight: 500; }
+    .triage-pill.active.component { background: #ff6600; border-color: #ff6600; color: #ffffff; }
+    .triage-divider { height: 1px; background: #dddddd; margin: 0.5rem 0 1.5rem 0; }
+    .handover-sub { display: none; margin-bottom: 0; }
+    .handover-sub.visible { display: block; }
+    .component-note {
       display: none;
-      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 300;
+      color: #555555;
+      line-height: 1.7;
+      padding: 10px 16px;
+      border-left: 3px solid #ff6600;
+      background: #f5f5ef;
+      margin-bottom: 1.5rem;
     }
-
-    .handover-sub.visible {
-      display: block;
-    }
-
-    /* Results panel */
-    .triage-results {
-      border: 1px solid #dddddd;
-      background: #ffffff;
-      margin-top: 0.5rem;
-    }
-
+    .component-note.visible { display: block; }
+    .triage-results { border: 1px solid #dddddd; background: #ffffff; margin-top: 0.5rem; }
     .triage-results-empty {
       padding: 2.5rem 2rem;
       text-align: center;
@@ -97,7 +71,6 @@
       font-size: 16px;
       font-weight: 300;
     }
-
     .triage-results-header {
       background: #f5f5ef;
       padding: 12px 20px;
@@ -107,7 +80,6 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-
     .stage-badge {
       font-size: 12px;
       font-weight: 500;
@@ -116,25 +88,11 @@
       background: #0054dc;
       color: #ffffff;
     }
-
-    .persona-badge {
-      font-size: 13px;
-      font-weight: 300;
-      color: #666666;
-    }
-
-    .triage-results-body {
-      padding: 20px;
-    }
-
-    .triage-block {
-      margin-bottom: 1.5rem;
-    }
-
-    .triage-block:last-child {
-      margin-bottom: 0;
-    }
-
+    .stage-badge.component { background: #ff6600; }
+    .persona-badge { font-size: 13px; font-weight: 300; color: #666666; }
+    .triage-results-body { padding: 20px; }
+    .triage-block { margin-bottom: 1.5rem; }
+    .triage-block:last-child { margin-bottom: 0; }
     .triage-block-label {
       font-size: 12px;
       font-weight: 500;
@@ -143,13 +101,7 @@
       color: #666666;
       margin-bottom: 8px;
     }
-
-    .triage-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
+    .triage-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .triage-tag {
       font-family: 'Courier New', Courier, monospace;
       font-size: 12px;
@@ -158,13 +110,8 @@
       border: 1px solid #dddddd;
       padding: 4px 10px;
     }
-
-    .triage-tag.carry {
-      background: #e8f4e8;
-      color: #1a5c1a;
-      border-color: #a8d4a8;
-    }
-
+    .triage-tag.carry { background: #e8f4e8; color: #1a5c1a; border-color: #a8d4a8; }
+    .triage-tag.owner { background: #fff3e0; color: #7b3f00; border-color: #ffb74d; }
     .signal-box {
       font-size: 15px;
       font-weight: 300;
@@ -174,29 +121,19 @@
       border-left: 4px solid #dddddd;
       background: #f5f5ef;
     }
-
-    .signal-box.carry {
-      border-left-color: #1a7c1a;
-      background: #e8f4e8;
-      color: #1a3c1a;
+    .signal-box.carry { border-left-color: #1a7c1a; background: #e8f4e8; color: #1a3c1a; }
+    .signal-box.leave { border-left-color: #cc3300; background: #fdf0ed; color: #5c1a0a; }
+    .owner-block { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #dddddd; }
+    .owner-block-label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #ff6600;
+      margin-bottom: 8px;
     }
-
-    .signal-box.leave {
-      border-left-color: #cc3300;
-      background: #fdf0ed;
-      color: #5c1a0a;
-    }
-
-    /* Download button */
-    .triage-download-wrap {
-      margin-top: 1.5rem;
-      display: none;
-    }
-
-    .triage-download-wrap.visible {
-      display: block;
-    }
-
+    .triage-download-wrap { margin-top: 1.5rem; display: none; }
+    .triage-download-wrap.visible { display: block; }
     .btn-download {
       font-family: 'Poppins', Arial, Helvetica, sans-serif;
       font-size: 13px;
@@ -211,21 +148,10 @@
       text-decoration: none;
       display: inline-block;
     }
-
-    .btn-download:hover {
-      background: #0054dc;
-      color: #ffffff;
-    }
-
-    /* Responsive */
+    .btn-download:hover { background: #0054dc; color: #ffffff; }
     @media (max-width: 768px) {
-      .triage-pill {
-        font-size: 12px;
-        padding: 6px 14px;
-      }
-      .triage-results-body {
-        padding: 14px;
-      }
+      .triage-pill { font-size: 12px; padding: 6px 14px; }
+      .triage-results-body { padding: 14px; }
     }
   </style>
 </head>
@@ -242,7 +168,6 @@
 
       <p class="triage-intro">Select a developer persona and lifecycle stage to generate targeted search terms and document discrimination criteria. Use the carry-forward and leave-behind signals to identify durable guidance documents within an existing knowledge base.</p>
 
-      <!-- Persona selector -->
       <p class="triage-section-label">Developer persona</p>
       <div class="triage-pill-row" id="persona-row">
         <button class="triage-pill" data-val="onboarder">Onboarder</button>
@@ -250,7 +175,6 @@
         <button class="triage-pill" data-val="experienced">Experienced</button>
       </div>
 
-      <!-- Stage selector -->
       <p class="triage-section-label">Lifecycle stage</p>
       <div class="triage-pill-row" id="stage-row">
         <button class="triage-pill" data-val="discovery">Discovery</button>
@@ -263,7 +187,15 @@
         <button class="triage-pill" data-val="decommission">Decommissioning</button>
       </div>
 
-      <!-- Handover context (conditional) -->
+      <p class="triage-section-label">Platform — cross-role</p>
+      <div class="triage-pill-row" id="platform-row">
+        <button class="triage-pill" data-val="components">Component library</button>
+      </div>
+
+      <div class="component-note" id="component-note">
+        Component library documentation is owned by platform specialists and applies to all roles at every lifecycle stage. Persona selection is not required for this category.
+      </div>
+
       <div class="handover-sub" id="handover-sub">
         <p class="triage-section-label">Handover context</p>
         <div class="triage-pill-row" id="handover-row">
@@ -276,12 +208,10 @@
 
       <div class="triage-divider"></div>
 
-      <!-- Results panel -->
       <div class="triage-results" id="results">
         <div class="triage-results-empty">Select a persona and stage above to generate results</div>
       </div>
 
-      <!-- Download -->
       <div class="triage-download-wrap" id="download-wrap">
         <button class="btn-download" id="btn-download">Download results as markdown</button>
       </div>
@@ -296,20 +226,47 @@
     const state = { persona: null, stage: null, handover: null };
 
     const stageLabels = {
-      discovery: 'Discovery',
-      alpha: 'Alpha',
+      discovery: 'Discovery', alpha: 'Alpha',
       'alpha-assessment': 'Alpha assessment',
-      'beta-private': 'Beta — private',
-      'beta-public': 'Beta — public',
-      handover: 'Beta to Live handover',
-      live: 'Live service',
-      decommission: 'Decommissioning'
+      'beta-private': 'Beta — private', 'beta-public': 'Beta — public',
+      handover: 'Beta to Live handover', live: 'Live service',
+      decommission: 'Decommissioning', components: 'Component library'
     };
 
     const personaLabels = {
-      onboarder: 'Onboarder',
-      reboarder: 'Reboarder',
-      experienced: 'Experienced'
+      onboarder: 'Onboarder', reboarder: 'Reboarder', experienced: 'Experienced'
+    };
+
+    const componentData = {
+      terms: [
+        'component library','components','pattern library','UI components','design system',
+        'platform components','component catalogue','component index','available components',
+        'how to use','implementation guide','component setup','install component','component code',
+        'Nunjucks macro','Jinja2 macro','component parameters','component variants',
+        'accessibility component','differs from GOV.UK','overrides','platform variant',
+        'custom component','GOV.UK extension','not in GOV.UK','platform specific',
+        'approved components','component governance','approved patterns','deviation process',
+        'component deviation','unapproved component','component sign off','design review',
+        'contribute component','propose component','new component','component request',
+        'contribution process','component backlog','component roadmap',
+        'component version','component update','breaking change','component changelog',
+        'deprecated component','migration guide','component release','upgrade component',
+        'component accessibility','WCAG component','accessible pattern','screen reader',
+        'keyboard navigation','colour contrast','focus state','ARIA'
+      ],
+      carry: [
+        'Component implementation guide','Component catalogue','Platform component variants',
+        'Divergence from GOV.UK design system','Component governance process',
+        'Deviation request process','Contribution process',
+        'Component accessibility guidance','Component versioning and migration guide',
+        'Component ownership and contacts'
+      ],
+      ownerTerms: [
+        'platform team','component owner','design system team','platform specialist',
+        'component support','who to contact','component queries'
+      ],
+      carrySignals: 'Describes platform-specific components or variations from the GOV.UK design system. Owned by platform specialists rather than service teams. References component governance or contribution process. No service-team-specific content.',
+      leaveSignals: 'Records a team-level decision about component use on a specific service. Contains named individuals making component choices. Describes a workaround rather than an approved pattern. Version-specific without a migration path.'
     };
 
     const data = {
@@ -539,7 +496,9 @@
 
     function getResult() {
       const { persona, stage, handover } = state;
-      if (!persona || !stage) return null;
+      if (!stage) return null;
+      if (stage === 'components') return { type: 'components' };
+      if (!persona) return null;
       if (stage === 'handover') {
         if (!handover) return null;
         return data.handover?.[handover]?.[persona] || null;
@@ -553,11 +512,43 @@
       const r = getResult();
 
       if (!r) {
-        const msg = (state.stage === 'handover' && !state.handover)
-          ? 'Select a handover context to generate results'
-          : 'Select a persona and stage above to generate results';
+        let msg = 'Select a persona and stage above to generate results';
+        if (state.stage === 'handover' && !state.handover) msg = 'Select a handover context to generate results';
+        if (state.stage && state.stage !== 'components' && !state.persona) msg = 'Select a developer persona to generate results';
         el.innerHTML = '<div class="triage-results-empty">' + msg + '</div>';
         dl.classList.remove('visible');
+        return;
+      }
+
+      if (r.type === 'components') {
+        el.innerHTML =
+          '<div class="triage-results-header">' +
+            '<span class="stage-badge component">Component library</span>' +
+            '<span class="persona-badge">All roles — platform specialists own this domain</span>' +
+          '</div>' +
+          '<div class="triage-results-body">' +
+            '<div class="triage-block">' +
+              '<p class="triage-block-label">Search terms</p>' +
+              '<div class="triage-tags">' + componentData.terms.map(function(t) { return '<span class="triage-tag">' + t + '</span>'; }).join('') + '</div>' +
+            '</div>' +
+            '<div class="triage-block">' +
+              '<p class="triage-block-label">Likely carry-forward document types</p>' +
+              '<div class="triage-tags">' + componentData.carry.map(function(t) { return '<span class="triage-tag carry">' + t + '</span>'; }).join('') + '</div>' +
+            '</div>' +
+            '<div class="triage-block owner-block">' +
+              '<p class="owner-block-label">Platform specialist SME identification terms</p>' +
+              '<div class="triage-tags">' + componentData.ownerTerms.map(function(t) { return '<span class="triage-tag owner">' + t + '</span>'; }).join('') + '</div>' +
+            '</div>' +
+            '<div class="triage-block">' +
+              '<p class="triage-block-label">Carry-forward signals</p>' +
+              '<div class="signal-box carry">' + componentData.carrySignals + '</div>' +
+            '</div>' +
+            '<div class="triage-block">' +
+              '<p class="triage-block-label">Leave-behind signals</p>' +
+              '<div class="signal-box leave">' + componentData.leaveSignals + '</div>' +
+            '</div>' +
+          '</div>';
+        dl.classList.add('visible');
         return;
       }
 
@@ -567,60 +558,84 @@
         ? { creating: ' — creating', consuming: ' — consuming', completing: ' — completing', pra: ' — performance readiness assessment' }[state.handover]
         : '';
 
-      el.innerHTML = `
-        <div class="triage-results-header">
-          <span class="stage-badge">${stageLabel}${handoverLabel}</span>
-          <span class="persona-badge">${personaLabel}</span>
-        </div>
-        <div class="triage-results-body">
-          <div class="triage-block">
-            <p class="triage-block-label">Search terms</p>
-            <div class="triage-tags">
-              ${r.terms.map(t => `<span class="triage-tag">${t}</span>`).join('')}
-            </div>
-          </div>
-          <div class="triage-block">
-            <p class="triage-block-label">Likely carry-forward document types</p>
-            <div class="triage-tags">
-              ${r.carry.map(t => `<span class="triage-tag carry">${t}</span>`).join('')}
-            </div>
-          </div>
-          <div class="triage-block">
-            <p class="triage-block-label">Carry-forward signals</p>
-            <div class="signal-box carry">${r.carrySignals}</div>
-          </div>
-          <div class="triage-block">
-            <p class="triage-block-label">Leave-behind signals</p>
-            <div class="signal-box leave">${r.leaveSignals}</div>
-          </div>
-        </div>
-      `;
-
+      el.innerHTML =
+        '<div class="triage-results-header">' +
+          '<span class="stage-badge">' + stageLabel + handoverLabel + '</span>' +
+          '<span class="persona-badge">' + personaLabel + '</span>' +
+        '</div>' +
+        '<div class="triage-results-body">' +
+          '<div class="triage-block">' +
+            '<p class="triage-block-label">Search terms</p>' +
+            '<div class="triage-tags">' + r.terms.map(function(t) { return '<span class="triage-tag">' + t + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+          '<div class="triage-block">' +
+            '<p class="triage-block-label">Likely carry-forward document types</p>' +
+            '<div class="triage-tags">' + r.carry.map(function(t) { return '<span class="triage-tag carry">' + t + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+          '<div class="triage-block">' +
+            '<p class="triage-block-label">Carry-forward signals</p>' +
+            '<div class="signal-box carry">' + r.carrySignals + '</div>' +
+          '</div>' +
+          '<div class="triage-block">' +
+            '<p class="triage-block-label">Leave-behind signals</p>' +
+            '<div class="signal-box leave">' + r.leaveSignals + '</div>' +
+          '</div>' +
+        '</div>';
       dl.classList.add('visible');
     }
 
     function buildMarkdown() {
       const r = getResult();
       if (!r) return '';
+      if (r.type === 'components') {
+        return [
+          '# GDS knowledge base triage results',
+          '',
+          '**Category:** Component library',
+          '**Scope:** All roles — platform specialists own this domain',
+          '',
+          '## Search terms',
+          '',
+          componentData.terms.map(function(t) { return '- `' + t + '`'; }).join('\n'),
+          '',
+          '## Likely carry-forward document types',
+          '',
+          componentData.carry.map(function(t) { return '- ' + t; }).join('\n'),
+          '',
+          '## Platform specialist SME identification terms',
+          '',
+          componentData.ownerTerms.map(function(t) { return '- `' + t + '`'; }).join('\n'),
+          '',
+          '## Carry-forward signals',
+          '',
+          componentData.carrySignals,
+          '',
+          '## Leave-behind signals',
+          '',
+          componentData.leaveSignals,
+          '',
+          '---',
+          '_Generated by the GDS knowledge base triage tool — Thinkamigo_'
+        ].join('\n');
+      }
       const stageLabel = stageLabels[state.stage] || state.stage;
       const personaLabel = personaLabels[state.persona] || state.persona;
       const handoverLabel = state.handover
         ? { creating: ' — creating', consuming: ' — consuming', completing: ' — completing', pra: ' — performance readiness assessment' }[state.handover]
         : '';
-
       return [
         '# GDS knowledge base triage results',
         '',
-        `**Stage:** ${stageLabel}${handoverLabel}`,
-        `**Persona:** ${personaLabel}`,
+        '**Stage:** ' + stageLabel + handoverLabel,
+        '**Persona:** ' + personaLabel,
         '',
         '## Search terms',
         '',
-        r.terms.map(t => '- `' + t + '`').join('\n'),
+        r.terms.map(function(t) { return '- `' + t + '`'; }).join('\n'),
         '',
         '## Likely carry-forward document types',
         '',
-        r.carry.map(t => '- ' + t).join('\n'),
+        r.carry.map(function(t) { return '- ' + t; }).join('\n'),
         '',
         '## Carry-forward signals',
         '',
@@ -635,49 +650,74 @@
       ].join('\n');
     }
 
-    function setupPills(rowId, key) {
-      document.getElementById(rowId).addEventListener('click', function(e) {
-        const pill = e.target.closest('.triage-pill');
-        if (!pill) return;
-        document.querySelectorAll('#' + rowId + ' .triage-pill').forEach(function(p) {
-          p.classList.remove('active', 'orange');
-        });
-        pill.classList.add('active');
-        state[key] = pill.dataset.val;
-        if (key === 'stage') {
-          const sub = document.getElementById('handover-sub');
-          if (pill.dataset.val === 'handover') {
-            sub.classList.add('visible');
-          } else {
-            sub.classList.remove('visible');
-            state.handover = null;
-            document.querySelectorAll('#handover-row .triage-pill').forEach(function(p) {
-              p.classList.remove('active');
-            });
-          }
-        }
-        render();
-      });
+    function clearStages() {
+      document.querySelectorAll('#stage-row .triage-pill').forEach(function(p) { p.classList.remove('active'); });
+    }
+    function clearPlatform() {
+      document.querySelectorAll('#platform-row .triage-pill').forEach(function(p) { p.classList.remove('active','component'); });
     }
 
-    document.getElementById('btn-download').addEventListener('click', function() {
-      const md = buildMarkdown();
-      if (!md) return;
-      const stageSlug = (state.stage || 'stage').replace(/[^a-z0-9]/gi, '-');
-      const personaSlug = state.persona || 'persona';
-      const filename = 'kb-triage-' + stageSlug + '-' + personaSlug + '.md';
-      const blob = new Blob([md], { type: 'text/markdown' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
+    document.getElementById('persona-row').addEventListener('click', function(e) {
+      var pill = e.target.closest('.triage-pill');
+      if (!pill) return;
+      document.querySelectorAll('#persona-row .triage-pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      state.persona = pill.dataset.val;
+      render();
     });
 
-    setupPills('persona-row', 'persona');
-    setupPills('stage-row', 'stage');
-    setupPills('handover-row', 'handover');
+    document.getElementById('stage-row').addEventListener('click', function(e) {
+      var pill = e.target.closest('.triage-pill');
+      if (!pill) return;
+      clearStages(); clearPlatform();
+      pill.classList.add('active');
+      state.stage = pill.dataset.val;
+      state.handover = null;
+      document.getElementById('component-note').classList.remove('visible');
+      var sub = document.getElementById('handover-sub');
+      if (pill.dataset.val === 'handover') {
+        sub.classList.add('visible');
+      } else {
+        sub.classList.remove('visible');
+        document.querySelectorAll('#handover-row .triage-pill').forEach(function(p) { p.classList.remove('active'); });
+      }
+      render();
+    });
+
+    document.getElementById('platform-row').addEventListener('click', function(e) {
+      var pill = e.target.closest('.triage-pill');
+      if (!pill) return;
+      clearPlatform(); clearStages();
+      pill.classList.add('active','component');
+      state.stage = pill.dataset.val;
+      state.handover = null;
+      document.getElementById('handover-sub').classList.remove('visible');
+      document.getElementById('component-note').classList.add('visible');
+      document.querySelectorAll('#handover-row .triage-pill').forEach(function(p) { p.classList.remove('active'); });
+      render();
+    });
+
+    document.getElementById('handover-row').addEventListener('click', function(e) {
+      var pill = e.target.closest('.triage-pill');
+      if (!pill) return;
+      document.querySelectorAll('#handover-row .triage-pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      state.handover = pill.dataset.val;
+      render();
+    });
+
+    document.getElementById('btn-download').addEventListener('click', function() {
+      var md = buildMarkdown();
+      if (!md) return;
+      var stageSlug = (state.stage || 'stage').replace(/[^a-z0-9]/gi, '-');
+      var personaSlug = state.persona || 'all-roles';
+      var filename = 'kb-triage-' + stageSlug + '-' + personaSlug + '.md';
+      var blob = new Blob([md], { type: 'text/markdown' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    });
 
   </script>
 
