@@ -145,9 +145,9 @@ Not yet started. To be built from the brief and Extended once 3.0 is complete. K
 - Munich 1972 interview — LeftLion URL in brief, any other uses of the footage?
 
 ### Mike Conwill
-- Broadway Cinema first meeting brokered by Lavanya Sivakumaran — now in brief
 - Raleigh Interactive architecture mapped on Mike's kitchen table — now in brief
 - DSA Young Drivers 2008 — now in brief
+- Broadway Cinema first meeting brokered by Lavanya Sivakumaran (2010)— now in brief
 - StaffBay — now in brief
 - Full account of CHC creative output — more campaigns to document?
 

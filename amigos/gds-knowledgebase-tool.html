@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDS knowledge base triage | Thinkamigo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/chassis.css">
+  <link rel="stylesheet" href="../assets/css/destination.css">
+  <style>
+    /* ── Tool-specific styles ── */
+    .triage-intro {
+      margin: 0 0 2rem 0;
+      font-size: 18px;
+      font-weight: 300;
+      color: #333333;
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    .triage-section-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 10px 0;
+    }
+
+    .triage-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .triage-pill {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #333333;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 50px;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      line-height: 1.4;
+    }
+
+    .triage-pill:hover {
+      border-color: #0054dc;
+      color: #0054dc;
+    }
+
+    .triage-pill.active {
+      background: #0054dc;
+      border-color: #0054dc;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .triage-pill.active.orange {
+      background: #ff6600;
+      border-color: #ff6600;
+      color: #ffffff;
+    }
+
+    .triage-divider {
+      height: 1px;
+      background: #dddddd;
+      margin: 0.5rem 0 1.5rem 0;
+    }
+
+    .handover-sub {
+      display: none;
+      margin-bottom: 0;
+    }
+
+    .handover-sub.visible {
+      display: block;
+    }
+
+    /* Results panel */
+    .triage-results {
+      border: 1px solid #dddddd;
+      background: #ffffff;
+      margin-top: 0.5rem;
+    }
+
+    .triage-results-empty {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: #666666;
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    .triage-results-header {
+      background: #f5f5ef;
+      padding: 12px 20px;
+      border-bottom: 1px solid #dddddd;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stage-badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 14px;
+      border-radius: 50px;
+      background: #0054dc;
+      color: #ffffff;
+    }
+
+    .persona-badge {
+      font-size: 13px;
+      font-weight: 300;
+      color: #666666;
+    }
+
+    .triage-results-body {
+      padding: 20px;
+    }
+
+    .triage-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .triage-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .triage-block-label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666666;
+      margin-bottom: 8px;
+    }
+
+    .triage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .triage-tag {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      background: #f5f5ef;
+      color: #333333;
+      border: 1px solid #dddddd;
+      padding: 4px 10px;
+    }
+
+    .triage-tag.carry {
+      background: #e8f4e8;
+      color: #1a5c1a;
+      border-color: #a8d4a8;
+    }
+
+    .signal-box {
+      font-size: 15px;
+      font-weight: 300;
+      color: #333333;
+      line-height: 1.7;
+      padding: 12px 16px;
+      border-left: 4px solid #dddddd;
+      background: #f5f5ef;
+    }
+
+    .signal-box.carry {
+      border-left-color: #1a7c1a;
+      background: #e8f4e8;
+      color: #1a3c1a;
+    }
+
+    .signal-box.leave {
+      border-left-color: #cc3300;
+      background: #fdf0ed;
+      color: #5c1a0a;
+    }
+
+    /* Download button */
+    .triage-download-wrap {
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .triage-download-wrap.visible {
+      display: block;
+    }
+
+    .btn-download {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #0054dc;
+      background: #ffffff;
+      border: 1px solid #0054dc;
+      padding: 9px 22px;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-download:hover {
+      background: #0054dc;
+      color: #ffffff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .triage-pill {
+        font-size: 12px;
+        padding: 6px 14px;
+      }
+      .triage-results-body {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body class="content-page">
+
+  <header id="main-nav"></header>
+
+  <div class="paper-sheet">
+    <div class="text-rail">
+
+      <h1>GDS knowledge base triage</h1>
+      <div class="orange-rule"></div>
+      <h2>Document carry-forward tool</h2>
+
+      <p class="triage-intro">Select a developer persona and lifecycle stage to generate targeted search terms and document discrimination criteria. Use the carry-forward and leave-behind signals to identify durable guidance documents within an existing knowledge base.</p>
+
+      <!-- Persona selector -->
+      <p class="triage-section-label">Developer persona</p>
+      <div class="triage-pill-row" id="persona-row">
+        <button class="triage-pill" data-val="onboarder">Onboarder</button>
+        <button class="triage-pill" data-val="reboarder">Reboarder</button>
+        <button class="triage-pill" data-val="experienced">Experienced</button>
+      </div>
+
+      <!-- Stage selector -->
+      <p class="triage-section-label">Lifecycle stage</p>
+      <div class="triage-pill-row" id="stage-row">
+        <button class="triage-pill" data-val="discovery">Discovery</button>
+        <button class="triage-pill" data-val="alpha">Alpha</button>
+        <button class="triage-pill" data-val="alpha-assessment">Alpha assessment</button>
+        <button class="triage-pill" data-val="beta-private">Beta — private</button>
+        <button class="triage-pill" data-val="beta-public">Beta — public</button>
+        <button class="triage-pill" data-val="handover">Beta to Live handover</button>
+        <button class="triage-pill" data-val="live">Live service</button>
+        <button class="triage-pill" data-val="decommission">Decommissioning</button>
+      </div>
+
+      <!-- Handover context (conditional) -->
+      <div class="handover-sub" id="handover-sub">
+        <p class="triage-section-label">Handover context</p>
+        <div class="triage-pill-row" id="handover-row">
+          <button class="triage-pill" data-val="creating">Creating documentation</button>
+          <button class="triage-pill" data-val="consuming">Consuming documentation</button>
+          <button class="triage-pill" data-val="completing">Completing / signing off</button>
+          <button class="triage-pill" data-val="pra">Performance readiness assessment</button>
+        </div>
+      </div>
+
+      <div class="triage-divider"></div>
+
+      <!-- Results panel -->
+      <div class="triage-results" id="results">
+        <div class="triage-results-empty">Select a persona and stage above to generate results</div>
+      </div>
+
+      <!-- Download -->
+      <div class="triage-download-wrap" id="download-wrap">
+        <button class="btn-download" id="btn-download">Download results as markdown</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="main-footer"></footer>
+
+  <script>
+
+    const state = { persona: null, stage: null, handover: null };
+
+    const stageLabels = {
+      discovery: 'Discovery',
+      alpha: 'Alpha',
+      'alpha-assessment': 'Alpha assessment',
+      'beta-private': 'Beta — private',
+      'beta-public': 'Beta — public',
+      handover: 'Beta to Live handover',
+      live: 'Live service',
+      decommission: 'Decommissioning'
+    };
+
+    const personaLabels = {
+      onboarder: 'Onboarder',
+      reboarder: 'Reboarder',
+      experienced: 'Experienced'
+    };
+
+    const data = {
+      discovery: {
+        onboarder: {
+          terms: ['getting started','team setup','repo access','prototype kit','GOV.UK prototype kit','tech stack','tooling decisions','local environment'],
+          carry: ['How to set up the GOV.UK prototype kit','Team tooling and account access guide','Tech stack rationale','Repo structure guide'],
+          carrySignals: 'No dates or sprint references. Describes how to do something. Still valid on a different programme.',
+          leaveSignals: 'References named team members, specific sprint decisions, or "we decided to..." phrasing.'
+        },
+        reboarder: {
+          terms: ['repo structure','current tech stack','tooling changes','prototype kit version','what has changed','team contacts'],
+          carry: ['Tech stack rationale','Tooling and accounts guide','Repo structure guide'],
+          carrySignals: 'Explains why decisions were made, not just what was decided. Evergreen rationale survives team changes.',
+          leaveSignals: 'Status updates, named individuals, or decisions tied to a specific sprint or date.'
+        },
+        experienced: {
+          terms: ['ADR','architecture decision record','technical options','discovery outputs','prototype approach'],
+          carry: ['ADR template','Architecture options comparison','Technical spike findings'],
+          carrySignals: 'Structured decision record format. References external constraints or standards rather than internal preferences.',
+          leaveSignals: 'Captures a moment-in-time team view without transferable reasoning.'
+        }
+      },
+      alpha: {
+        onboarder: {
+          terms: ['getting started','Alpha overview','prototype','hosting options','open source','data handling','threat model','team norms'],
+          carry: ['Alpha phase explainer','Hosting options guide','Open source policy','Data handling baseline','Threat modelling introduction'],
+          carrySignals: 'Explains what Alpha is for and what is expected technically. No internal status or team-specific content.',
+          leaveSignals: 'Describes what this specific Alpha has done so far. Sprint recaps, named decisions, status updates.'
+        },
+        reboarder: {
+          terms: ['Alpha outputs','current prototype','technical decisions made','what changed since last time','architecture so far'],
+          carry: ['Technical options rationale','Architecture decision records','Hosting decision guide'],
+          carrySignals: 'Documents reasoning behind decisions in a reusable format. Could inform a future Alpha on a different service.',
+          leaveSignals: 'Progress updates, meeting notes, or documents that assume continuous context.'
+        },
+        experienced: {
+          terms: ['ADR','technical spike','threat model','security assurance','data model','API design'],
+          carry: ['Threat modelling guide','API design principles','Data model documentation','Security assurance process'],
+          carrySignals: 'References GDS standards or NCSC guidelines. Describes a process or principle rather than a specific outcome.',
+          leaveSignals: 'Documents a specific spike outcome or decision without the transferable principle behind it.'
+        }
+      },
+      'alpha-assessment': {
+        onboarder: {
+          terms: ['Alpha assessment','service standard','technical evidence','what assessors look for','accessibility statement','Alpha report'],
+          carry: ['Alpha assessment criteria guide','Service standard points explained','Accessibility statement template','What to prepare for Alpha assessment'],
+          carrySignals: 'Describes what the assessment requires and how to prepare. References the service standard directly.',
+          leaveSignals: 'Describes how a specific past assessment went. Panel feedback, outcome letters, named assessors.'
+        },
+        reboarder: {
+          terms: ['Alpha assessment criteria','service standard points','technical evidence','security assurance','accessibility'],
+          carry: ['Alpha assessment criteria guide','Technical evidence checklist','Accessibility statement template'],
+          carrySignals: 'Structured checklist or criteria reference. No programme-specific content.',
+          leaveSignals: 'Past assessment outcomes, feedback from a specific panel, internal prep notes.'
+        },
+        experienced: {
+          terms: ['service standard','technical evidence','WCAG','security assurance','accessibility audit','threat model','Alpha to Beta'],
+          carry: ['Service standard technical points','WCAG compliance guide','Security assurance checklist','Alpha to Beta transition guide'],
+          carrySignals: 'Criteria and standards are stable. Documents referencing GDS service manual or WCAG directly are durable.',
+          leaveSignals: 'Internal prep documents, panel correspondence, or assessment-specific notes from a past service.'
+        }
+      },
+      'beta-private': {
+        onboarder: {
+          terms: ['private Beta','getting started','feature flags','limited release','what is private Beta','deployment','CI pipeline','onboarding'],
+          carry: ['Private Beta explainer','Feature flags guide','CI/CD pipeline setup','Deployment process','Testing in private Beta'],
+          carrySignals: 'Explains the purpose and mechanics of private Beta. No status content, no named users or cohorts.',
+          leaveSignals: 'References specific user cohorts, named pilot organisations, or current release versions.'
+        },
+        reboarder: {
+          terms: ['private Beta status','what has changed','current architecture','known issues','performance metrics','KPIs'],
+          carry: ['Performance metrics framework','KPI definitions','Architecture overview','Known issues process'],
+          carrySignals: 'Defines what metrics mean and how they are collected. Transferable to other Beta services.',
+          leaveSignals: 'Current metric values, specific cohort feedback summaries, sprint velocity data.'
+        },
+        experienced: {
+          terms: ['performance baseline','KPIs','feedback loop','load testing','feature flags','technical debt','Beta arc position'],
+          carry: ['Performance baseline methodology','Load testing approach','Technical debt register template','Feature flag strategy'],
+          carrySignals: 'Methodology documents. Describes how to do something rather than the current state of it.',
+          leaveSignals: 'Current technical debt list, active feature flag states, live performance figures.'
+        }
+      },
+      'beta-public': {
+        onboarder: {
+          terms: ['public Beta','Beta assessment','WCAG 2.2','accessibility audit','pen test','DPIA','support model','getting started'],
+          carry: ['Public Beta assessment criteria','WCAG 2.2 compliance guide','Pen test process','DPIA guidance','Support model template'],
+          carrySignals: 'Explains what public Beta requires technically and legally. Standards-based, not programme-specific.',
+          leaveSignals: 'Past assessment feedback, specific DPIA outcomes, named pen test findings for this service.'
+        },
+        reboarder: {
+          terms: ['public Beta assessment','accessibility','DPIA','security','tech debt','Live readiness'],
+          carry: ['Public Beta assessment criteria','Accessibility audit process','Tech debt register template','Live readiness checklist'],
+          carrySignals: 'Criteria and process documents. Reusable on any government service approaching public Beta.',
+          leaveSignals: 'This service\'s specific audit results, outstanding issues list, named remediation actions.'
+        },
+        experienced: {
+          terms: ['WCAG 2.2','accessibility audit','pen test','DPIA','performance baseline','support model','operational handover','Live readiness'],
+          carry: ['WCAG 2.2 technical checklist','Pen test scope template','DPIA process guide','Operational handover framework'],
+          carrySignals: 'Process and criteria documents tied to external standards. Stable and reusable.',
+          leaveSignals: 'Specific audit findings, named vulnerabilities, DPIA outcomes for this data set.'
+        }
+      },
+      handover: {
+        creating: {
+          onboarder: {
+            terms: ['what documents to write','handover documentation','runbook','architecture record','support model','operational guide'],
+            carry: ['Runbook template','Architecture record template','Support model template','Handover documentation checklist'],
+            carrySignals: 'Templates and checklists with no programme-specific content. Describes what to include, not what this service contains.',
+            leaveSignals: 'Completed runbooks, filled-in templates, or any document with service-specific operational detail.'
+          },
+          reboarder: {
+            terms: ['handover checklist','what is needed for Live','documentation requirements','runbook','operational readiness'],
+            carry: ['Handover documentation checklist','Runbook template','Operational readiness criteria'],
+            carrySignals: 'Blank templates and criteria lists. Reusable structure with no current service state.',
+            leaveSignals: 'Partially completed handover documents, draft runbooks with service-specific content.'
+          },
+          experienced: {
+            terms: ['handover documentation standards','runbook completeness','architecture decision record','SLOs','incident response plan','data retention'],
+            carry: ['Runbook completeness criteria','ADR template','SLO definition guide','Incident response plan template','Data retention policy template'],
+            carrySignals: 'Templates and standards documents. Describes required content and structure without filling it in.',
+            leaveSignals: 'Completed versions of any of these documents containing live service detail.'
+          }
+        },
+        consuming: {
+          onboarder: {
+            terms: ['start here','what has been built','system overview','architecture','who owns what','support contacts','runbook'],
+            carry: ['System architecture overview','Runbook','Support model','Dependency map','Glossary'],
+            carrySignals: 'Orientation documents that explain the service in durable terms. No named individuals, no current status.',
+            leaveSignals: 'Status updates, named team members, sprint notes, anything describing current rather than established state.'
+          },
+          reboarder: {
+            terms: ['what changed','architecture updates','known issues','current runbook','support model','team structure'],
+            carry: ['Architecture overview','Runbook','Support model','Known issues process'],
+            carrySignals: 'Documents explaining how the service works and how it is supported. Stable structural content.',
+            leaveSignals: 'Change logs, incident reports, named contacts, anything time-stamped or version-specific.'
+          },
+          experienced: {
+            terms: ['runbook','SLOs','incident response','monitoring','architecture decisions','data flows','integration points'],
+            carry: ['Runbook','SLO definitions','Incident response plan','Architecture decision records','Data flow diagrams','Integration specifications'],
+            carrySignals: 'Operational reference documents that describe stable structure and process. No current state data.',
+            leaveSignals: 'Live monitoring dashboards, current incident tickets, named system states.'
+          }
+        },
+        completing: {
+          onboarder: {
+            terms: ['sign off','what needs to be approved','handover checklist','who approves','Live readiness','completion criteria'],
+            carry: ['Handover completion checklist','Live readiness criteria','Sign-off process guide'],
+            carrySignals: 'Process and criteria for what constitutes a complete handover. Transferable to any service.',
+            leaveSignals: 'Completed sign-off forms, named approvers, programme-specific gateway records.'
+          },
+          reboarder: {
+            terms: ['handover sign off','completion criteria','Live readiness','outstanding actions','acceptance criteria'],
+            carry: ['Handover completion criteria','Acceptance criteria template','Outstanding actions log template'],
+            carrySignals: 'Criteria and template documents. Reusable structure without service-specific content.',
+            leaveSignals: 'Named outstanding actions, specific approval records, programme correspondence.'
+          },
+          experienced: {
+            terms: ['Live readiness criteria','handover sign off','SLO agreement','support model sign off','DPIA sign off','security accreditation'],
+            carry: ['Live readiness criteria','SLO agreement template','Support model acceptance criteria','Security accreditation process'],
+            carrySignals: 'Standards-based criteria documents and blank templates. Referenced against external frameworks.',
+            leaveSignals: 'Completed sign-off records, named stakeholder approvals, programme-specific gateway correspondence.'
+          }
+        },
+        pra: {
+          onboarder: {
+            terms: ['performance readiness assessment','PRA','what is PRA','performance framework','4 KPIs','GOV.UK performance platform'],
+            carry: ['Performance readiness assessment guide','GOV.UK 4 KPIs explained','Performance platform setup','PRA criteria overview'],
+            carrySignals: 'Explains what the PRA is and what it measures. References GOV.UK performance framework directly.',
+            leaveSignals: 'Current KPI values, named dashboard links, specific data sources for this service.'
+          },
+          reboarder: {
+            terms: ['PRA criteria','performance metrics','GOV.UK performance platform','data collection','KPI evidence'],
+            carry: ['PRA criteria guide','KPI evidence template','Performance data collection approach'],
+            carrySignals: 'Structured criteria reference. Reusable evidence framework not tied to current figures.',
+            leaveSignals: 'Current performance snapshots, historic KPI reports, named analytics configurations.'
+          },
+          experienced: {
+            terms: ['PRA evidence','performance data','analytics','user satisfaction','completion rate','cost per transaction','uptake'],
+            carry: ['PRA evidence checklist','Analytics implementation guide','User satisfaction measurement approach'],
+            carrySignals: 'Implementation methodology for each KPI. Reusable across services.',
+            leaveSignals: 'Actual performance figures, benchmark comparisons, or PRA outcome correspondence.'
+          }
+        }
+      },
+      live: {
+        onboarder: {
+          terms: ['getting started','on call','runbook','monitoring','support','incident response','change management','CAB'],
+          carry: ['On call guide','Runbook','Monitoring setup guide','Incident response process','Change management process','CAB process'],
+          carrySignals: 'Describes how Live service operations work in durable process terms. No current state or named team.',
+          leaveSignals: 'Current on call rota, active incidents, named approvers, recent change records.'
+        },
+        reboarder: {
+          terms: ['current runbook','what changed','monitoring','SLOs','support model','patching schedule','dependency updates'],
+          carry: ['Runbook','SLO definitions','Support model','Patching policy','Dependency update process'],
+          carrySignals: 'Stable operational process and policy documents. Describes how things work, not their current state.',
+          leaveSignals: 'Current SLO performance figures, recent incident reports, named team contacts, live monitoring data.'
+        },
+        experienced: {
+          terms: ['SLOs','incident response','disaster recovery','monitoring','CAB','change management','service review','continuous improvement'],
+          carry: ['SLO definition guide','Disaster recovery plan template','Incident response plan','Change management process','Service review framework'],
+          carrySignals: 'Process and framework documents. Stable references tied to operational standards.',
+          leaveSignals: 'Active SLO dashboards, current DR test results, recent CAB minutes, named stakeholder contacts.'
+        }
+      },
+      decommission: {
+        onboarder: {
+          terms: ['decommission','service retirement','what happens next','data deletion','redirect','user comms','archiving'],
+          carry: ['Service retirement process','Data deletion policy','Redirect strategy guide','User comms template','Archiving approach'],
+          carrySignals: 'Process documents for retiring a service. Reusable across any decommissioning project.',
+          leaveSignals: 'Named data sets, specific redirect mappings, programme-specific user lists.'
+        },
+        reboarder: {
+          terms: ['decommission plan','data migration','dependency removal','retirement checklist','what still needs doing'],
+          carry: ['Decommission checklist','Data migration approach','Dependency removal process'],
+          carrySignals: 'Checklists and process guides with no service-specific content.',
+          leaveSignals: 'This service\'s specific decommission plan, named dependencies, active data migration records.'
+        },
+        experienced: {
+          terms: ['data retention','data deletion','GDPR obligations','service retirement','redirect strategy','archiving','dependency removal','user comms'],
+          carry: ['Data retention and deletion policy','GDPR decommission obligations guide','Redirect strategy template','Archiving standards'],
+          carrySignals: 'Policy and standards documents referenced against GDPR or ICO guidance. Stable and legally grounded.',
+          leaveSignals: 'Service-specific retention schedules, named data controllers, programme legal correspondence.'
+        }
+      }
+    };
+
+    function getResult() {
+      const { persona, stage, handover } = state;
+      if (!persona || !stage) return null;
+      if (stage === 'handover') {
+        if (!handover) return null;
+        return data.handover?.[handover]?.[persona] || null;
+      }
+      return data[stage]?.[persona] || null;
+    }
+
+    function render() {
+      const el = document.getElementById('results');
+      const dl = document.getElementById('download-wrap');
+      const r = getResult();
+
+      if (!r) {
+        const msg = (state.stage === 'handover' && !state.handover)
+          ? 'Select a handover context to generate results'
+          : 'Select a persona and stage above to generate results';
+        el.innerHTML = '<div class="triage-results-empty">' + msg + '</div>';
+        dl.classList.remove('visible');
+        return;
+      }
+
+      const stageLabel = stageLabels[state.stage] || state.stage;
+      const personaLabel = personaLabels[state.persona] || state.persona;
+      const handoverLabel = state.handover
+        ? { creating: ' — creating', consuming: ' — consuming', completing: ' — completing', pra: ' — performance readiness assessment' }[state.handover]
+        : '';
+
+      el.innerHTML = `
+        <div class="triage-results-header">
+          <span class="stage-badge">${stageLabel}${handoverLabel}</span>
+          <span class="persona-badge">${personaLabel}</span>
+        </div>
+        <div class="triage-results-body">
+          <div class="triage-block">
+            <p class="triage-block-label">Search terms</p>
+            <div class="triage-tags">
+              ${r.terms.map(t => `<span class="triage-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="triage-block">
+            <p class="triage-block-label">Likely carry-forward document types</p>
+            <div class="triage-tags">
+              ${r.carry.map(t => `<span class="triage-tag carry">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="triage-block">
+            <p class="triage-block-label">Carry-forward signals</p>
+            <div class="signal-box carry">${r.carrySignals}</div>
+          </div>
+          <div class="triage-block">
+            <p class="triage-block-label">Leave-behind signals</p>
+            <div class="signal-box leave">${r.leaveSignals}</div>
+          </div>
+        </div>
+      `;
+
+      dl.classList.add('visible');
+    }
+
+    function buildMarkdown() {
+      const r = getResult();
+      if (!r) return '';
+      const stageLabel = stageLabels[state.stage] || state.stage;
+      const personaLabel = personaLabels[state.persona] || state.persona;
+      const handoverLabel = state.handover
+        ? { creating: ' — creating', consuming: ' — consuming', completing: ' — completing', pra: ' — performance readiness assessment' }[state.handover]
+        : '';
+
+      return [
+        '# GDS knowledge base triage results',
+        '',
+        `**Stage:** ${stageLabel}${handoverLabel}`,
+        `**Persona:** ${personaLabel}`,
+        '',
+        '## Search terms',
+        '',
+        r.terms.map(t => '- `' + t + '`').join('\n'),
+        '',
+        '## Likely carry-forward document types',
+        '',
+        r.carry.map(t => '- ' + t).join('\n'),
+        '',
+        '## Carry-forward signals',
+        '',
+        r.carrySignals,
+        '',
+        '## Leave-behind signals',
+        '',
+        r.leaveSignals,
+        '',
+        '---',
+        '_Generated by the GDS knowledge base triage tool — Thinkamigo_'
+      ].join('\n');
+    }
+
+    function setupPills(rowId, key) {
+      document.getElementById(rowId).addEventListener('click', function(e) {
+        const pill = e.target.closest('.triage-pill');
+        if (!pill) return;
+        document.querySelectorAll('#' + rowId + ' .triage-pill').forEach(function(p) {
+          p.classList.remove('active', 'orange');
+        });
+        pill.classList.add('active');
+        state[key] = pill.dataset.val;
+        if (key === 'stage') {
+          const sub = document.getElementById('handover-sub');
+          if (pill.dataset.val === 'handover') {
+            sub.classList.add('visible');
+          } else {
+            sub.classList.remove('visible');
+            state.handover = null;
+            document.querySelectorAll('#handover-row .triage-pill').forEach(function(p) {
+              p.classList.remove('active');
+            });
+          }
+        }
+        render();
+      });
+    }
+
+    document.getElementById('btn-download').addEventListener('click', function() {
+      const md = buildMarkdown();
+      if (!md) return;
+      const stageSlug = (state.stage || 'stage').replace(/[^a-z0-9]/gi, '-');
+      const personaSlug = state.persona || 'persona';
+      const filename = 'kb-triage-' + stageSlug + '-' + personaSlug + '.md';
+      const blob = new Blob([md], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    setupPills('persona-row', 'persona');
+    setupPills('stage-row', 'stage');
+    setupPills('handover-row', 'handover');
+
+  </script>
+
+  <script src="../loader.js"></script>
+
+</body>
+</html>
