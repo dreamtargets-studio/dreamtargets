@@ -452,6 +452,66 @@
                     </div>
                 </div>
 
+
+                <!-- IMAGE MIGRATION -->
+                <div class="guide-stage">
+                    <div class="guide-stage-header">
+                        <span class="guide-stage-number">CONVENTION</span>
+                        <span class="guide-stage-title">Image migration</span>
+                        <span class="guide-stage-desc">Naming convention, spec and PDF workflow</span>
+                    </div>
+
+                    <div class="guide-note">
+                        <strong>Context:</strong> When migrating WordPress content via the PDF method, images need a consistent naming convention so that placeholder paths in the new HTML can be resolved quickly and without ambiguity.
+                    </div>
+
+                    <div class="guide-steps">
+                        <h4>Naming convention</h4>
+                        <p>Format: <code>[publication]-[page number]-image-[image number].jpg</code></p>
+                        <p>Examples for ThinkCREATE:</p>
+                        <ul>
+                            <li><code>thinkcreate-001-image-001.jpg</code></li>
+                            <li><code>thinkcreate-001-image-002.jpg</code></li>
+                            <li><code>thinkcreate-001-image-003.jpg</code></li>
+                            <li><code>thinkcreate-002-image-001.jpg</code></li>
+                        </ul>
+                        <p>The publication prefix prevents filename collisions when multiple migrations share the same assets folder. Page and image numbers increment from 001.</p>
+
+                        <h4>Image specification</h4>
+                        <ul>
+                            <li>Dimensions: 960×540px</li>
+                            <li>Format: JPG</li>
+                            <li>Inline images only — no gallery functionality</li>
+                            <li>Alt text required on every image</li>
+                        </ul>
+
+                        <h4>PDF migration workflow — per page</h4>
+                        <ol>
+                            <li>Export WordPress page as PDF</li>
+                            <li>Upload PDF plus HTML essay template to Claude</li>
+                            <li>Claude populates the template — image placeholders inserted automatically using the naming convention, incrementing as each image appears down the page</li>
+                            <li>Download images from the WordPress media library before decommissioning</li>
+                            <li>Resize each image to 960×540px</li>
+                            <li>Save with the matching filename from the convention</li>
+                            <li>Drop into <code>assets/img/</code> folder</li>
+                            <li>Verify all image paths resolve correctly in the browser</li>
+                        </ol>
+
+                        <h4>Example placeholder output from Claude</h4>
+                    </div>
+
+                    <div class="guide-template">
+                        <pre><span class="tpl-item">&lt;img src="assets/img/thinkcreate-001-image-001.jpg" 
+     alt="[description from PDF content]" 
+     width="960" 
+     height="540"&gt;</span></pre>
+                    </div>
+
+                    <div class="guide-note">
+                        <strong>Applies to:</strong> ThinkCREATE, case study pages, and any WordPress content migrated via the PDF method. Use the publication name as the prefix for each project.
+                    </div>
+                </div>
+
                 <!-- SNAG LIST TEMPLATE -->
                 <div class="guide-stage">
                     <div class="guide-stage-header">
