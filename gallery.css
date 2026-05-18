@@ -1,7 +1,9 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v9.0
+   THINKAMIGO GALLERY ENGINE v9.1
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Updates: Portrait Engine Restore | Full-Bleed Breakout | Mobile Maximizer
+   v9.1: Resource card action links pinned to bottom of card.
+         Description and publication-meta flow naturally above.
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -37,7 +39,7 @@
 
 /* Isolated Resource Grid with Alignment Protection */
 .resource-grid { 
-    align-items: start; 
+    align-items: stretch; 
 }
 
 .video-grid-4 { 
@@ -119,6 +121,7 @@
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .resource-grid .resource-desc { 
@@ -134,7 +137,7 @@
     display: flex; 
     gap: 18px; 
     align-items: center; 
-    margin-top: 5px;
+    margin-top: auto;
 }
 
 .resource-grid .res-link, 
