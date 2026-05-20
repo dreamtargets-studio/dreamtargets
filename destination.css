@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.29
+   THINKAMIGO DESTINATION ENGINE v4.30
    Architecture: 1250px Horizon | 960px Editorial Rail
    Updates: Refined Fixed-Width Form Sandbox (450px/750px)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
@@ -10,6 +10,8 @@
    v4.27: Breadcrumb chevron added via CSS ::before. Reverted.
    v4.28: Breadcrumb < character added via ::before, grey #888888. Reverted.
    v4.29: Breadcrumb < removed from CSS. Plain text in HTML only. Not a link.
+   v4.30: links-section-mesh added. Mesh texture as background-image,
+          no-repeat, anchored to bottom. Replaces inline mesh img element.
    ============================================================ */
 
 :root {
@@ -428,7 +430,7 @@ blockquote + p {
    Use on second-level pages and deeper with no cinematic hero.
    Do not use on top-level pages (Consulting, Storytelling etc)
    that use the panoramic hero image.
-   < is plain text in the HTML before the <a> tag. Not a link. No ::before needed.
+   Plain <a> tag only. No chevron character. No ::before.
    ============================================================ */
 
 p.breadcrumb {
@@ -442,7 +444,6 @@ p.breadcrumb a {
     color: var(--brand-blue);
     text-decoration: none;
 }
-
 
 p.breadcrumb a:hover {
     color: var(--brand-blue);
@@ -463,7 +464,6 @@ p.breadcrumb-white a {
     color: #ffffff;
     text-decoration: none;
 }
-
 
 p.breadcrumb-white a:hover,
 .text-rail p.breadcrumb-white a:hover {
@@ -632,4 +632,54 @@ p.breadcrumb-white a:hover,
     color: #888888;
     line-height: 1.7;
     margin: 6px 0 12px 0;
+}
+
+/* ============================================================
+   18. LINKS SECTION WITH MESH TEXTURE
+   For feature pages. Mesh background anchored to bottom,
+   fades to white at top. No repeat. Replaces inline mesh img.
+   paper-sheet padding-bottom: 0 not required with this approach.
+   Adjust padding-bottom to control how much mesh is visible.
+   ============================================================ */
+
+.links-section-mesh {
+    background-image: url('assets/img/mesh-texture.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100%;
+    padding: 40px 0 80px 0;
+}
+
+.links-section-mesh h2 {
+    color: var(--brand-blue);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.links-section-mesh ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-section-mesh ul li {
+    line-height: 2.2;
+}
+
+.links-section-mesh ul li a {
+    color: var(--brand-blue);
+    text-decoration: underline;
+    text-decoration-color: #bbbbbb;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+}
+
+.links-section-mesh ul li a:hover {
+    color: var(--brand-blue);
+    text-decoration-color: var(--brand-orange);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
 }
