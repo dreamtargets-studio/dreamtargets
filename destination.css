@@ -1,5 +1,5 @@
 /* ============================================================
-   THINKAMIGO DESTINATION ENGINE v4.30
+   THINKAMIGO DESTINATION ENGINE v4.31
    Architecture: 1250px Horizon | 960px Editorial Rail
    Updates: Refined Fixed-Width Form Sandbox (450px/750px)
    Features: SATURATION LOCK (#0054dc), Signature Style Sync
@@ -13,6 +13,8 @@
    v4.30: links-section-mesh added. Mesh texture as background-image,
           no-repeat, anchored to bottom, full paper-sheet width.
           Text rail sits inside for content alignment.
+   v4.31: paper-sheet-feature modifier added. Sets padding-bottom: 0
+          for feature pages using links-section-mesh.
    ============================================================ */
 
 :root {
@@ -64,6 +66,13 @@ body.content-page {
     min-height: 600px;
     padding-bottom: 80px;    
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+}
+
+/* 4b. PAPER SHEET FEATURE MODIFIER */
+/* Use on feature pages with links-section-mesh at the foot. */
+/* Removes default padding-bottom so mesh sits flush above footer. */
+.paper-sheet-feature {
+    padding-bottom: 0;
 }
 
 /* 5. THE TEXT RAIL */
