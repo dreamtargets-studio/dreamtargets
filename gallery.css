@@ -1,10 +1,12 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v9.2
+   THINKAMIGO GALLERY ENGINE v9.3
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Updates: Portrait Engine Restore | Full-Bleed Breakout | Mobile Maximizer
    v9.1: Resource card action links pinned to bottom of card.
          Description and publication-meta flow naturally above.
    v9.2: cursor: zoom-in moved to img[data-full] selector only.
+   v9.3: Border moved from .story-inline-image img to .story-inline-image wrapper.
+         Caption now aligns flush with image edge.
          Inline images without data-full now show cursor: default.
    ============================================================ */
 
@@ -262,14 +264,14 @@ img[data-full] {
     margin: 45px 0; 
     width: 100%;
     display: block;
-    line-height: 0; 
+    line-height: 0;
+    border: 1px solid #dddddd;
 }
 
 .story-inline-image img {
     width: 100%;
     height: auto;
     display: block; 
-    border: 1px solid #DDDDDD;
     cursor: default;
 }
 
