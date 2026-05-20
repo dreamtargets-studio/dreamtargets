@@ -11,7 +11,8 @@
    v4.28: Breadcrumb < character added via ::before, grey #888888. Reverted.
    v4.29: Breadcrumb < removed from CSS. Plain text in HTML only. Not a link.
    v4.30: links-section-mesh added. Mesh texture as background-image,
-          no-repeat, anchored to bottom. Replaces inline mesh img element.
+          no-repeat, anchored to bottom, full paper-sheet width.
+          Text rail sits inside for content alignment.
    ============================================================ */
 
 :root {
@@ -636,10 +637,12 @@ p.breadcrumb-white a:hover,
 
 /* ============================================================
    18. LINKS SECTION WITH MESH TEXTURE
-   For feature pages. Mesh background anchored to bottom,
-   fades to white at top. No repeat. Replaces inline mesh img.
-   paper-sheet padding-bottom: 0 not required with this approach.
+   For feature pages. Mesh background spans full paper-sheet
+   width. Text rail sits inside for content alignment.
+   Fades to white at top. No repeat. No inline mesh img needed.
+   No padding-bottom: 0 on paper-sheet needed.
    Adjust padding-bottom to control how much mesh is visible.
+   Structure: .links-section-mesh wraps .text-rail > .links-section
    ============================================================ */
 
 .links-section-mesh {
@@ -647,39 +650,6 @@ p.breadcrumb-white a:hover,
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: 100%;
-    padding: 40px 0 80px 0;
-}
-
-.links-section-mesh h2 {
-    color: var(--brand-blue);
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: 0;
-}
-
-.links-section-mesh ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.links-section-mesh ul li {
-    line-height: 2.2;
-}
-
-.links-section-mesh ul li a {
-    color: var(--brand-blue);
-    text-decoration: underline;
-    text-decoration-color: #bbbbbb;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
-}
-
-.links-section-mesh ul li a:hover {
-    color: var(--brand-blue);
-    text-decoration-color: var(--brand-orange);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+    width: 100%;
+    padding: 0 0 80px 0;
 }
