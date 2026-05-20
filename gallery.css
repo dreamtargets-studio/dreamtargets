@@ -1,9 +1,11 @@
 /* ============================================================
-   THINKAMIGO GALLERY ENGINE v9.1
+   THINKAMIGO GALLERY ENGINE v9.2
    Architecture: Triple-Slot Filmstrip (300vw Track)
    Updates: Portrait Engine Restore | Full-Bleed Breakout | Mobile Maximizer
    v9.1: Resource card action links pinned to bottom of card.
          Description and publication-meta flow naturally above.
+   v9.2: cursor: zoom-in moved to img[data-full] selector only.
+         Inline images without data-full now show cursor: default.
    ============================================================ */
 
 /* --- 0. UNIVERSAL RESET --- */
@@ -84,8 +86,13 @@
     display: block; 
     outline: 1px solid #DDDDDD;
     outline-offset: -1px;
-    cursor: zoom-in; 
+    cursor: default; 
     transition: none; 
+}
+
+/* Lightbox cursor -- only on images with a data-full target */
+img[data-full] {
+    cursor: zoom-in;
 }
 
 /* Force Portrait Consistency (Form and Function) */
@@ -263,7 +270,7 @@
     height: auto;
     display: block; 
     border: 1px solid #DDDDDD;
-    cursor: zoom-in;
+    cursor: default;
 }
 
 .stone-caption {
@@ -278,7 +285,7 @@
 }
 
 /* ============================================================
-   7. PEOPLE GRID — exclusive to people.html
+   7. PEOPLE GRID -- exclusive to people.html
    Self-contained. Does not inherit from gallery-grid-3.
    ============================================================ */
 
@@ -310,7 +317,7 @@
     margin-top: 0;
 }
 
-/* Paul Fillingham intro card — matches biog-collab-caption styling */
+/* Paul Fillingham intro card -- matches biog-collab-caption styling */
 .people-intro-grid .biog-collab-card {
     display: block;
     text-decoration: none;
