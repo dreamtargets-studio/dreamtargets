@@ -662,4 +662,6 @@ p.breadcrumb-white a:hover,
     width: 100%;
     min-height: 360px;
     padding: 0;
+    margin-bottom: -80px;
+
 }
